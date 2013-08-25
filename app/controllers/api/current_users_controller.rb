@@ -1,0 +1,58 @@
+class Api::CurrentUsersController < Api::BaseController
+  before_filter :set_user
+
+  # GET /api/current_user
+  # GET /api/current_user.json
+  def show
+    render_show @user
+  end
+
+  # GET /api/current_user/detail
+  # GET /api/current_user/detail.json
+  def detail
+    render_show @user.detail_hash
+  end
+
+  # PUT /api/current_user
+  # PUT /api/current_user.json
+  # We need to use a copy of the @user because we don't want to change
+  # the current user in place.
+  def update
+    if @user.update_without_password(params[:data])
+      render_update_success @user
+    else
+      render_failure @user
+    end
+  end
+
+  # PUT /api/current_user/password
+  # PUT /api/current_user/password.json
+  # We need to use a copy of the @user because we don't want to change
+  # the current user in place.
+  def password
+    if @user.update_with_password(params[:data])
+      render_update_success @user
+    else
+      render_failure @user
+    end
+  end
+
+  # PUT /api/current_user/detail
+  # PUT /api/current_user/detail.json
+  # We need to use a copy of the @user because we don't want to change
+  # the current user in place.
+  def update_detail
+    detail = @user.detail
+    if detail.update_attributes(params[:data])
+      render_update_success detail
+    else
+      render_failure detail
+    end
+  end
+
+  protected
+
+  def set_user
+    @user = current_base_user
+  end
+end
