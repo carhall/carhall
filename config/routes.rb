@@ -1,8 +1,11 @@
 Autozone::Application.routes.draw do
+  resources :dashboards
+  root to: 'dashboards#index'
+
   devise_for :base_users
   devise_scope :base_users do
     namespace :api do
-      resources :users, only: [:show, :create] do
+      resources :users, only: [:index, :show, :create] do
         get :detail, on: :member
         post :login, on: :collection
 

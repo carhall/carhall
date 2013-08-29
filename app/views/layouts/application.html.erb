@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Autozone</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <title>汽车堂公众平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<%= yield %>
+    <!-- Le styles -->
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= csrf_meta_tags %>
+    <style type="text/css">
 
-</body>
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag "html5shiv" %>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%= image_path 'ico/apple-touch-icon-144-precomposed.png' %>">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_path 'ico/apple-touch-icon-114-precomposed.png' %>">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_path 'ico/apple-touch-icon-72-precomposed.png' %>">
+    <link rel="apple-touch-icon-precomposed" href="<%= image_path 'ico/apple-touch-icon-57-precomposed.png' %>">
+    <link rel="shortcut icon" href="<%= image_path 'ico/favicon.png' %>">
+  </head>
+
+  <body>
+    
+    <div class="container">
+
+      <!-- Container -->
+      <%= yield %>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
+
+  </body>
 </html>
