@@ -11,7 +11,5 @@ class CreateMendingOrderInfos < ActiveRecord::Migration
     end
     
     add_index :mending_order_infos, :source_id
-
-    Mending.create!(dealer: Dealer.first)
   end
 end

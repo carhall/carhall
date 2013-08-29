@@ -14,7 +14,5 @@ class CreateUserInfos < ActiveRecord::Migration
 
     add_index :user_infos, [:area_id, :brand_id]
     add_index :user_infos, :source_id
-
-    User.create!(mobile: '12345678902', password: 'password', password_confirmation: 'password')
   end
 end

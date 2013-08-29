@@ -151,6 +151,8 @@ ActiveRecord::Schema.define(:version => 20130823085455) do
     t.string   "reg_img_content_type"
     t.integer  "reg_img_file_size"
     t.datetime "reg_img_updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "dealer_infos", ["source_id"], :name => "index_dealer_infos_on_source_id"

@@ -9,7 +9,5 @@ class CreateProviderInfos < ActiveRecord::Migration
     end
 
     add_index :provider_infos, :source_id
-
-    Provider.create!(mobile: '12345678901', password: 'password', password_confirmation: 'password')
   end
 end

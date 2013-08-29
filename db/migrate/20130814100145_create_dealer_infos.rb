@@ -10,11 +10,12 @@ class CreateDealerInfos < ActiveRecord::Migration
       t.boolean :accepted
       t.integer :balance, null: false, default: 0
       t.attachment :reg_img
+
+      t.float :latitude
+      t.float :longitude
       
     end
 
     add_index :dealer_infos, :source_id
-
-    Dealer.create!(mobile: '12345678900', password: 'password', password_confirmation: 'password')
   end
 end

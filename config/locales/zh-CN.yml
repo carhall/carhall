@@ -199,3 +199,9 @@ zh-CN:
   activerecord:
     errors:
       <<: *errors
+    models:
+      base_user: 用户
+    attributes:
+      base_user:
+        mobile: 手机号码
+        password: 密码
