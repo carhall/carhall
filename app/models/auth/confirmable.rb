@@ -19,6 +19,8 @@ module Devise
     #     db field to be setup (t.reconfirmable in migrations). Until confirmed new mobile is
     #     stored in unconfirmed mobile column, and copied to mobile column on successful
     #     confirmation.
+    #   * +confirm_within+: the time before a sent confirmation token becomes invalid.
+    #     You can use this to force the user to confirm within a set period of time.
     #
     # == Examples
     #
@@ -28,12 +30,26 @@ module Devise
     #
     module Confirmable
       extend ActiveSupport::Concern
+      include ActionView::Helpers::DateHelper
 
       included do
         before_create :generate_confirmation_token, :if => :confirmation_required?
-        after_create  :send_on_create_confirmation_instructions, :if => :confirmation_required?
-        before_update :postpone_mobile_change_until_confirmation, :if => :postpone_mobile_change?
-        after_update :send_confirmation_instructions, :if => :reconfirmation_required?
+        after_create  :send_on_create_confirmation_instructions, :if => :send_confirmation_notification?
+        before_update :postpone_mobile_change_until_confirmation_and_regenerate_confirmation_token, :if => :postpone_mobile_change?
+        after_update  :send_reconfirmation_instructions,  :if => :reconfirmation_required?
+      end
+
+      def initialize(*args, &block)
+        @bypass_postpone = false
+        @reconfirmation_required = false
+        @skip_confirmation_notification = false
+        super
+      end
+
+      def self.required_fields(klass)
+        required_methods = [:confirmation_token, :confirmed_at, :confirmation_sent_at]
+        required_methods << :unconfirmed_mobile if klass.reconfirmable
+        required_methods
       end
 
       # Confirm a user by setting it's confirmed_at to actual time. If the user
@@ -41,11 +57,17 @@ module Devise
       # add errors
       def confirm!
         pending_any_confirmation do
+          if confirmation_period_expired?
+            self.errors.add(:mobile, :confirmation_period_expired,
+              :period => Devise::TimeInflector.time_ago_in_words(self.class.confirm_within.ago))
+            return false
+          end
+
           self.confirmation_token = nil
           self.confirmed_at = Time.now.utc
 
-          if self.class.reconfirmable && unconfirmed_mobile.present?
-            @bypass_postpone = true
+          saved = if self.class.reconfirmable && unconfirmed_mobile.present?
+            skip_reconfirmation!
             self.mobile = unconfirmed_mobile
             self.unconfirmed_mobile = nil
 
@@ -54,6 +76,9 @@ module Devise
           else
             save(:validate => false)
           end
+
+          after_confirmation if saved
+          saved
         end
       end
 
@@ -68,17 +93,33 @@ module Devise
 
       # Send confirmation instructions by mobile
       def send_confirmation_instructions
-        self.confirmation_token = nil if reconfirmation_required?
+        ensure_confirmation_token!
+
+        opts = pending_reconfirmation? ? { :to => unconfirmed_mobile } : { }
+        send_devise_notification(:confirmation_instructions, opts)
+      end
+
+      def send_reconfirmation_instructions
         @reconfirmation_required = false
 
-        generate_confirmation_token! if self.confirmation_token.blank?
-        self.devise_mailer.confirmation_instructions(self).deliver
+        unless @skip_confirmation_notification
+          send_confirmation_instructions
+        end
       end
 
-      # Resend confirmation token. This method does not need to generate a new token.
+      # Resend confirmation token.
+      # Regenerates the token if the period is expired.
       def resend_confirmation_token
-        pending_any_confirmation { send_confirmation_instructions }
+        pending_any_confirmation do
+          regenerate_confirmation_token! if confirmation_period_expired?
+          send_confirmation_instructions
+        end
       end
+      
+      # Generate a confirmation token unless already exists and save the record.
+      def ensure_confirmation_token!
+        generate_confirmation_token! if should_generate_confirmation_token?
+      end 
 
       # Overwrites active_for_authentication? for confirmation
       # by verifying whether a user is active to sign in or not. If the user
@@ -99,21 +140,28 @@ module Devise
         self.confirmed_at = Time.now.utc
       end
 
-      def headers_for(action)
-        headers = super
-        if action == :confirmation_instructions && pending_reconfirmation?
-          headers[:to] = unconfirmed_mobile
-        end
-        headers
+      # Skips sending the confirmation/reconfirmation notification mobile after_create/after_update. Unlike
+      # #skip_confirmation!, record still requires confirmation.
+      def skip_confirmation_notification!
+        @skip_confirmation_notification = true
+      end
+
+      # If you don't want reconfirmation to be sent, neither a code
+      # to be generated, call skip_reconfirmation!
+      def skip_reconfirmation!
+        @bypass_postpone = true
       end
 
       protected
+        def should_generate_confirmation_token?
+          confirmation_token.nil? || confirmation_period_expired?
+        end
 
         # A callback method used to deliver confirmation
         # instructions on creation. This can be overriden
         # in models to map to a nice sign up e-mail.
         def send_on_create_confirmation_instructions
-          self.devise_mailer.confirmation_instructions(self).deliver
+          send_devise_notification(:confirmation_instructions)
         end
 
         # Callback to overwrite if confirmation is required or not.
@@ -140,13 +188,32 @@ module Devise
         #   # allow_unconfirmed_access_for = 0.days
         #   confirmation_period_valid?   # will always return false
         #
+        #   # allow_unconfirmed_access_for = nil
+        #   confirmation_period_valid?   # will always return true
+        #
         def confirmation_period_valid?
-          confirmation_sent_at && confirmation_sent_at.utc >= self.class.allow_unconfirmed_access_for.ago
+          self.class.allow_unconfirmed_access_for.nil? || (confirmation_sent_at && confirmation_sent_at.utc >= self.class.allow_unconfirmed_access_for.ago)
+        end
+
+        # Checks if the user confirmation happens before the token becomes invalid
+        # Examples:
+        #
+        #   # confirm_within = 3.days and confirmation_sent_at = 2.days.ago
+        #   confirmation_period_expired?  # returns false
+        #
+        #   # confirm_within = 3.days and confirmation_sent_at = 4.days.ago
+        #   confirmation_period_expired?  # returns true
+        #
+        #   # confirm_within = nil
+        #   confirmation_period_expired?  # will always return false
+        #
+        def confirmation_period_expired?
+          self.class.confirm_within && (Time.now > self.confirmation_sent_at + self.class.confirm_within )
         end
 
         # Checks whether the record requires any confirmation.
         def pending_any_confirmation
-          if !confirmed? || pending_reconfirmation?
+          if (!confirmed? || pending_reconfirmation?)
             yield
           else
             self.errors.add(:mobile, :already_confirmed)
@@ -165,25 +232,37 @@ module Devise
           generate_confirmation_token && save(:validate => false)
         end
 
-        def after_password_reset
-          super
-          confirm! unless confirmed?
+        # Regenerates a new token.
+        def regenerate_confirmation_token
+          generate_confirmation_token
         end
 
-        def postpone_mobile_change_until_confirmation
+        def regenerate_confirmation_token!
+          regenerate_confirmation_token && save(:validate => false)
+        end
+
+        def postpone_mobile_change_until_confirmation_and_regenerate_confirmation_token
           @reconfirmation_required = true
           self.unconfirmed_mobile = self.mobile
           self.mobile = self.mobile_was
+          regenerate_confirmation_token
         end
 
         def postpone_mobile_change?
-          postpone = self.class.reconfirmable && mobile_changed? && !@bypass_postpone
-          @bypass_postpone = nil
+          postpone = self.class.reconfirmable && mobile_changed? && !@bypass_postpone && !self.mobile.blank?
+          @bypass_postpone = false
           postpone
         end
 
         def reconfirmation_required?
-          self.class.reconfirmable && @reconfirmation_required
+          self.class.reconfirmable && @reconfirmation_required && !self.mobile.blank?
+        end
+
+        def send_confirmation_notification?
+          confirmation_required? && !@skip_confirmation_notification && !self.mobile.blank?
+        end
+
+        def after_confirmation
         end
 
       module ClassMethods
@@ -223,7 +302,7 @@ module Devise
           find_or_initialize_with_errors(unconfirmed_required_attributes, unconfirmed_attributes, :not_found)
         end
 
-        Devise::Models.config(self, :allow_unconfirmed_access_for, :confirmation_keys, :reconfirmable)
+        Devise::Models.config(self, :allow_unconfirmed_access_for, :confirmation_keys, :reconfirmable, :confirm_within)
       end
     end
   end

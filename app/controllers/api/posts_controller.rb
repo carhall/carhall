@@ -4,7 +4,7 @@ class Api::PostsController < Api::BaseController
   # GET /api/posts
   # GET /api/posts.json
   def index
-    render_show @user.posts
+    render_index @user.posts
   end
 
   def friends

@@ -5,7 +5,7 @@ class Api::OrdersController < Api::BaseController
   # GET /api/resources/1/orders
   # GET /api/resources/1/orders.json
   def index
-    render_show @parent.orders
+    render_index @parent.orders
   end
 
   # GET /api/resources/1/orders/1

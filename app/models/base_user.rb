@@ -27,7 +27,7 @@ class BaseUser < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :password, :password_confirmation, :remember_me
-  attr_accessible :username, :mobile, :destription, :avatar
+  attr_accessible :username, :mobile, :description, :avatar
   attr_accessible :detail
 
   def serializable_hash(options={})

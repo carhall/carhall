@@ -1,17 +1,7 @@
 class Api::UsersController < Api::BaseController
   skip_before_filter :authenticate_base_user!, only: [:login, :create]
 
-  # GET /api/users/1
-  # GET /api/users/1.json
-  def show
-    render_show BaseUser.find(params[:id])
-  end
-  
-  # GET /api/users/1/detail
-  # GET /api/users/1/detail.json
-  def detail
-    render_show BaseUser.find(params[:id]).detail_hash
-  end
+  set_resource_class BaseUser, detail: true
 
   # POST /api/users/login
   # POST /api/users/login.json

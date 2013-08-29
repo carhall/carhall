@@ -4,7 +4,7 @@ class Api::ReviewsController < Api::BaseController
   # GET /api/resources/1/reviews
   # GET /api/resources/1/reviews.json
   def index
-    render_show @parent.reviews
+    render_index @parent.reviews
   end
 
   # GET /api/resources/1/reviews/1

@@ -5,7 +5,7 @@ class Api::BaseController < ActionController::Base
     # GET /api/resources
     # GET /api/resources.json
     define_method :index do
-      render_show klass.all
+      render_index klass.all
     end
 
     # GET /api/resources/1
@@ -20,6 +20,12 @@ class Api::BaseController < ActionController::Base
       render_show klass.find(params[:id]).detail_hash
     end if options[:detail]
 
+  end
+
+  def render_index resources
+    resources = resources.page(params[:page]) if params[:page]
+    resources = resources.per(params[:per_page]) if params[:per_page]
+    render json: { data: resources, success: true }
   end
 
   def render_show resource

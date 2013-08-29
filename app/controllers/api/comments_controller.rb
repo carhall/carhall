@@ -4,7 +4,7 @@ class Api::CommentsController < Api::BaseController
   # GET /api/resources/1/comments
   # GET /api/resources/1/comments.json
   def index
-    render_show @parent.comments
+    render_index @parent.comments
   end
 
   # GET /api/resources/1/comments/1
