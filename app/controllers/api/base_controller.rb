@@ -57,11 +57,11 @@ class Api::BaseController < ActionController::Base
   end
 
   def render_errors errors, status
-    render json: { errors: errors, success: false }, status: status
+    render_error error.first, status
   end
 
   def render_error error, status
-    render_errors [error], status
+    render json: { error: error, success: false }, status: status
   end
 
   def render_accepted status = :no_content

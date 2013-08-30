@@ -1,13 +1,49 @@
-<h2>Sign up</h2>
-
+<div class="page-header">
+  <h1>公众号注册 <small></small></h1>
+</div>
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
-  <%= devise_error_messages! %>
+  <div class="row-fluid">
+    <div class="span6">
+      <%= devise_error_messages! %>
 
-  <%= f.input :mobile, :autofocus => true %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+      <%= f.input :mobile, autofocus: true %>
+      <%= f.input :username %>
+      <%= f.input :password %>
+      <%= f.input :password_confirmation %>
+      <%= f.input :avatar do %>
+        <div class="fileupload fileupload-new" data-provides="fileupload">
+          <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="http://www.placehold.it/150x150" /></div>
+          <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+          <div>
+            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" /></span>
+            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+          </div>
+        </div>
+      <% end %>
+      <%= f.input :user_type, collection: %w(媒体 汽车服务商).each_with_index %>
+      <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
+      <%= f.fields_for :detail do |ff| %>
+        <%= ff.input :dealer_type_id, required: false, collection: Auth::DealerInfo::DealerTypes.each_with_index %>
+        <%= ff.input :business_scope_ids, required: false, collection: Auth::DealerInfo::BusinessScopes.each_with_index,   as: :check_boxes %>
+        <%= ff.input :company, required: false, input_html: { class: 'input-xlarge' } %>
+        <%= ff.input :address, required: false, input_html: { class: 'input-xxlarge' } %>
+        <%= ff.input :phone, required: false %>
+        <%= ff.input :open, required: false, input_html: { data: { mask: '99:99 至 99:99' }}, hint: '例如：09:00 至 18:00' %>
+        <%= ff.input :reg_img, required: false do %>
+          <div class="fileupload fileupload-new" data-provides="fileupload">
+            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" /></span>
+            <span class="fileupload-preview"></span>
+            <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+          </div>
+        <% end %>
+      <% end %>
 
-  <%= f.submit "Sign up" %>
+    </div>
+
+    <div class="span6 right-box">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+  
+  <%= f.button :submit, class: 'btn-submit' %>
 <% end %>
-
-<%= render "devise/shared/links" %>

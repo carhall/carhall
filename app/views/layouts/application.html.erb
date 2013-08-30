@@ -30,10 +30,22 @@
   <body>
     
     <div class="container">
+      <header class="masthead">
+        <div class="pull-right user-actions">
+          <%= link_to "登陆", new_base_user_session_path %> | <%= link_to "注册", new_base_user_registration_path %>
+        </div>
+        <a href="/"><h3 class="muted">汽车堂 | 公众平台</h3></a>
+      </header>
 
       <!-- Container -->
       <%= yield %>
 
+      <hr>
+
+      <footer class="footer">
+        <p>Copyright &copy; 2013 汽车堂. All Rights Reserved.</p>
+      </footer>
+      
     </div> <!-- /container -->
 
     <!-- Le javascript

@@ -9,6 +9,14 @@ module Auth
     attr_accessible :dealer_type, :company, :address, 
       :phone, :open, :accepted, :reg_img
 
+    extend Share::Id2Key
+
+    DealerTypes = %w(洗车美容 专项服务 专修 4S店)
+    define_id2key_methods :dealer_type
+
+    BusinessScopes = %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险)
+    define_ids2keys_methods :business_scopes
+
     def serializable_hash(options={})
       options = { 
         only: [:dealer_type, :company, :address, 

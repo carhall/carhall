@@ -1,29 +1,27 @@
-<header class="masthead">
-  <div class="pull-right user-actions">
-    <%= link_to "登陆", new_base_user_session_path %> | <%= link_to "注册", new_base_user_registration_path %>
-  </div>
-  <h3 class="muted">汽车堂 | 公众平台</h3>
-  <div class="navbar">
-    <div class="navbar-inner">
-      <div class="container">
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Downloads</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <ul class="nav">
+        <li class="active"><a href="#">首页</a></li>
+        <li><a href="#">服务商合作</a></li>
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#">加入我们</a></li>
+        <li><a href="#">联系我们</a></li>
+      </ul>
     </div>
-  </div><!-- /.navbar -->
-</header>
+  </div>
+</div><!-- /.navbar -->
 
 <!-- Jumbotron -->
-<div class="jumbotron">
-  <h1>Marketing stuff!</h1>
-  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-  <a class="btn btn-large btn-success" href="#">立即注册</a>
+<div class="row-fluid jumbotron">
+  <div class="span5">
+    <img src="http://placehold.it/400x300" />
+  </div>
+  <div class="span7">
+    <h1>客户管理，我有一套！</h1>
+    <!-- <p class="lead"></p> -->
+    <%= link_to "立即注册", new_base_user_registration_path, class: "btn btn-large btn-success" %>
+  </div>
 </div>
 
 <hr>
@@ -32,24 +30,15 @@
 <div class="row-fluid">
 
   <div class="span4">
-    <h2>Heading</h2>
+    <h4>客户端下载</h4>
     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-    <p><a class="btn" href="#">View details &raquo;</a></p>
   </div>
   <div class="span4">
-    <h2>Heading</h2>
+    <h4>客户端管理</h4>
     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-    <p><a class="btn" href="#">View details &raquo;</a></p>
  </div>
   <div class="span4">
-    <h2>Heading</h2>
+    <h4>业务管理</h4>
     <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-    <p><a class="btn" href="#">View details &raquo;</a></p>
   </div>
 </div>
-
-<hr>
-
-<footer class="footer">
-  <p>Copyright &copy; 2013 Tencent. All Rights Reserved.</p>
-</footer>

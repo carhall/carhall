@@ -140,7 +140,8 @@ ActiveRecord::Schema.define(:version => 20130823085455) do
 
   create_table "dealer_infos", :force => true do |t|
     t.integer  "source_id"
-    t.string   "dealer_type"
+    t.integer  "dealer_type_id"
+    t.string   "business_scope_ids"
     t.string   "company"
     t.string   "address"
     t.string   "phone"
