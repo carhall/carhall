@@ -9,7 +9,13 @@ module Share
     end
 
     def detail_type_sym
-      @detail_typehood ||= (detail_type.demodulize.gsub('Info', '').underscore.to_sym rescue :admin)
+      @detail_typehood ||= if new_record?
+        :guest
+      elsif detail.nil?
+        :admin
+      else
+        detail_type.demodulize.gsub('Info', '').underscore.to_sym
+      end
     end
 
     def build_detail params = {}

@@ -15,6 +15,6 @@ class UsersAdditionalFields < ActiveRecord::Migration
 
     add_index :base_users, [:detail_type, :detail_id]
 
-    BaseUser.create!(mobile: '15901013540', password: 'password', password_confirmation: 'password')
+    BaseUser.create!(mobile: '15901013540', password: 'password', username: '汽车堂')
   end
 end

@@ -42,6 +42,8 @@ gem 'jasny_bootstrap_extension_rails'
 # gem 'debugger'
 
 gem 'devise'
+gem "cancan"
+
 gem 'kaminari'
 gem 'paperclip'
 gem 'simple_form'

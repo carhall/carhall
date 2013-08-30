@@ -2,7 +2,10 @@ Autozone::Application.routes.draw do
   resources :dashboards
   root to: 'dashboards#index'
 
-  devise_for :base_users
+  devise_for :base_users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions",
+  }
   devise_scope :base_users do
     namespace :api do
       resources :users, only: [:index, :show, :create] do
@@ -83,4 +86,6 @@ Autozone::Application.routes.draw do
       end
     end
   end
+
+  resources :inverse_friends
 end
