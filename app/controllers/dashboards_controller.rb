@@ -1,13 +1,10 @@
 class DashboardsController < ApplicationController
-  def index
+  def show
     if base_user_signed_in?
-      case current_base_user.user_type
-      when :provider
-        render layout: 'provider'
-      when :dealer
-        render layout: 'dealer'
-      when :admin
-        render layout: 'admin'
+      user_type = current_base_user.user_type
+      case user_type
+      when :provider, :dealer, :admin
+        render user_type, layout: user_type.to_s
       else
         raise CanCan::AccessDenied
       end

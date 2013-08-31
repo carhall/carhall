@@ -57,7 +57,7 @@ class Api::BaseController < ActionController::Base
   end
 
   def render_errors errors, status
-    render_error error.first, status
+    render_error errors.first, status
   end
 
   def render_error error, status

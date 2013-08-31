@@ -22,7 +22,7 @@
       <% end %>
       <%= f.input :user_type, collection: %w(媒体 汽车服务商).each_with_index %>
       <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
-      <%= f.fields_for :detail do |ff| %>
+      <%= f.simple_fields_for :detail do |ff| %>
         <%= ff.input :dealer_type_id, required: false, collection: Auth::DealerInfo::DealerTypes.each_with_index %>
         <%= ff.input :business_scope_ids, required: false, collection: Auth::DealerInfo::BusinessScopes.each_with_index,   as: :check_boxes %>
         <%= ff.input :company, required: false, input_html: { class: 'input-xlarge' } %>

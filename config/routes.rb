@@ -1,6 +1,6 @@
 Autozone::Application.routes.draw do
-  resources :dashboards
-  root to: 'dashboards#index'
+  resource :dashboard, only: :show
+  root to: 'dashboards#show'
 
   devise_for :base_users, controllers: {
     registrations: "users/registrations",

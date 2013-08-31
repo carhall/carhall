@@ -5,6 +5,7 @@ zh-CN:
       base_user: 用户
     attributes:
       base_user:
+        id: ID
         mobile: 手机号码
         username: 昵称
         password: 密码

@@ -36,7 +36,7 @@ module Share
         before_save do
           self.#{attr_ids_name} = @#{attrs_name}.map do |key|
             #{array_name}.index key
-          end
+          end if @#{attrs_name}
         end
       EOM
     end

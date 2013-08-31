@@ -35,6 +35,10 @@ body {
   padding-bottom: 60px;
 }
 
+p.indent {
+  text-indent: 2em;
+}
+
 /* Custom container */
 .container {
   margin: 0 auto;
@@ -46,7 +50,7 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  margin: 80px 0;
+  margin: 40px 0;
   text-align: center;
 
   h1 {
@@ -60,6 +64,10 @@ body {
     h1 {
       font-size: 32px;
     }
+  }
+
+  img {
+    min-height: 300px;
   }
 
   .lead {
@@ -93,10 +101,14 @@ body {
 
 /* Supporting marketing content */
 .marketing {
-  margin: 60px 0;
+  [class^="span"], [class*=" span"] {
+    min-height: 6em;
+  }
 
-  p + h4 {
-    margin-top: 28px;
+  [class^="icon-"], [class*=" icon-"] {
+    width: 1em;
+    display: inline-block;
+    text-align: center;
   }
 }
 

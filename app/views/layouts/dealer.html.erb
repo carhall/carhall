@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <%= render 'share/head' %>
+  <body>
+    <div class="container">
+      <%= render 'share/header' %>
+
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <ul class="nav">
+              <li<%= active? "dashboards" %>><a href="<%= dashboard_path %>">首页</a></li>
+              <li<%= active? "inverse_friends" %>><a href="<%= inverse_friends_path %>">客户管理</a></li>
+              <li<%= active? "business" %>><a href="#">业务管理</a></li>
+              <!-- <li><a href="#">广告模板</a></li> -->
+              <!-- <li><a href="#">在线教程</a></li> -->
+              <li<%= active? "settings" %>><a href="#">设置</a></li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- /.navbar -->
+
+      <!-- Container -->
+      <%= yield %>
+      
+      <%= render 'share/footer' %>
+    </div> <!-- /container -->
+    <%= render 'share/javascripts' %>
+  </body>
+</html>

@@ -20,7 +20,11 @@ class BaseUser < ActiveRecord::Base
   include Share::Friendshipable
 
   # For avatar
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }
+
+  def avatar_thumb
+    avatar.url(:thumb)
+  end
 
   # For posts
   has_many :posts, foreign_key: :user_id
