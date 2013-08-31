@@ -1,6 +1,8 @@
 module Auth
   class DealerInfo < ActiveRecord::Base
-    has_attached_file :reg_img, styles: { medium: "300x300>", thumb: "100x100>" }
+    extend Share::ImageFile
+    define_image_methods :reg_img
+    
     belongs_to :source, class_name: 'Dealer'
     alias_attribute :user, :source
     alias_attribute :dealer, :source
@@ -21,7 +23,7 @@ module Auth
       options = { 
         only: [:dealer_type, :company, :address, 
           :phone, :open, :accepted, :balance],
-        methods: [:reg_img]
+        # methods: [:reg_img],
       }.update(options)
       super(options)
     end

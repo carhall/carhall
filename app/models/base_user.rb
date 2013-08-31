@@ -20,11 +20,8 @@ class BaseUser < ActiveRecord::Base
   include Share::Friendshipable
 
   # For avatar
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }
-
-  def avatar_thumb
-    avatar.url(:thumb)
-  end
+  extend Share::ImageFile
+  define_image_methods :avatar
 
   # For posts
   has_many :posts, foreign_key: :user_id
@@ -37,7 +34,7 @@ class BaseUser < ActiveRecord::Base
   def serializable_hash(options={})
     options = { 
       only: [:id, :username, :mobile, :destription],
-      methods: [:avatar, :user_type],
+      methods: [:avatar_thumb_url, :avatar_url, :user_type],
       # include: [:detail],
     }.update(options)
     super(options)
