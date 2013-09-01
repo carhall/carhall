@@ -4,8 +4,8 @@ module Share
 
     included do
       belongs_to :detail, polymorphic: true, autosave: true, dependent: :destroy
-      # accepts_nested_attributes_for :detail, :allow_destroy => true
-      # attr_accessible :detail_attributes
+      accepts_nested_attributes_for :detail, :allow_destroy => true
+      attr_accessible :detail_attributes
     end
 
     def detail_type_sym
@@ -18,17 +18,9 @@ module Share
       end
     end
 
-    def build_detail params = {}
-      self.detail = detail_class.new(params)
-    end
-
     def detail= params
       if params.kind_of? Hash
-        if detail
-          self.detail.attributes = params
-        else
-          super detail_class.new(params.merge(source: self))
-        end
+        self.detail_attributes = params
       else
         super params
       end
@@ -36,13 +28,13 @@ module Share
 
     module ClassMethods
       def set_detail_class klass, options = {}
-        define_method :detail_class do
-          klass
+        define_method :build_detail do |params={}, assignment_options={}|
+          self.detail = klass.new params
         end
 
         default_scope { where(detail_type: klass) }
 
-        after_initialize do |params|
+        after_initialize do
           build_detail unless detail
         end
       end

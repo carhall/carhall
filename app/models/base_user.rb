@@ -11,10 +11,7 @@ class BaseUser < ActiveRecord::Base
   # For details
   include Share::Detailable
   alias_method :user_type, :detail_type_sym
-
-  def detail_class
-    Auth::UserInfo
-  end
+  attr_accessor :user_type_id
 
   # For friendships
   include Share::Friendshipable
@@ -29,7 +26,7 @@ class BaseUser < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :password, :password_confirmation, :remember_me
   attr_accessible :username, :mobile, :description, :avatar
-  attr_accessible :detail
+  attr_accessible :detail, :user_type_id
 
   def serializable_hash(options={})
     options = { 

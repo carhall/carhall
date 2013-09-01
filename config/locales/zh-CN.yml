@@ -12,6 +12,7 @@ zh-CN:
         password_confirmation: 确认密码
         avatar: 头像
         user_type: 用户类型
+        user_type_id: 用户类型
         description: 个人说明
   simple_form:
     labels:

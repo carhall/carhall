@@ -8,8 +8,9 @@ module Auth
     alias_attribute :dealer, :source
 
     attr_accessible :source
-    attr_accessible :dealer_type, :company, :address, 
-      :phone, :open, :accepted, :reg_img
+    attr_accessible :dealer_type, :business_scopes, :company, 
+      :address, :phone, :open, :accepted, :reg_img
+    attr_accessible :dealer_type_id, :business_scope_ids 
 
     extend Share::Id2Key
 
