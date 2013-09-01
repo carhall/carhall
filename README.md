@@ -1,22 +1,52 @@
 API说明
 ==========
 
+请求使用的动词
+----------
 所有新建使用POST提交表单，修改使用PUT提交表单，删除使用DELETE，具体查看RESTful规范
 
 PUT和DELETE可以使用POST模拟，需要额外添加_method=put/delete参数  
 参数放在URL或放在表单里是等价的  
 > 例如：PUT /api/current_user.json 等价于 POST /api/current_user.json?_method=put
 
-成功返回success: true  
-失败返回success: false, errors: [ 错误信息列表 ]
+返回的结果
+----------
+成功返回success: true, data: 返回数据  
+失败返回success: false, error: 错误信息
+
+分页
+---------
+当data为数组的时候支持分页，方法是在GET请求的URI后加参数page（第几页）和per_page（每页显示多少个）  
+> 例如：指每页显示5项，第2页，使用
+> 
+>     GET /api/posts?page=2&per_page=5
+
+关于字段
+----------
+提交表单数据名称使用：data[字段名]  
+> 例如：登录系统，使用
+> 
+>     POST /api/users/login
+>     表单
+>     data[mobie]       13323456787
+>     data[password]    password
+
+每章中的字段一节，就是创建，或编辑资源所需要提交的所有字段名  
+而GET请求返回的资源，字段名也是这些  
+但要对于图片资源，例如字段名为image，上传时使用data[image]提交表单，但GET请求返回的资源中，字段名会变成image_url和image_thumb_url，分别代表原始图片URL和缩略图URL，缩略图暂定为60x60像素  
+
+关于请求的URI
+----------
+每章中的API一节，给出的URI，例如：/api/users/:id/friends  
+其中:id是一个变量，代表用户的ID，这里:id跟在users/后面，因此代表用户ID，同理posts/:id代表帖子的ID  
+实际访问时，应该使用具体ID号代替:id，例如，要获取用户ID为1的用户的好友列表，应使用/api/users/1/friends  
 
 **注意：除了用户登录和新建用户外，所有API都需要加auth_token参数进行访问**  
 > 例如：获取好友列表 GET /api/friends.json?auth_token=AuthToken  
 > 其中，AuthToken在登录时返回
 
-提交表单数据名称使用：data[字段名]  
-> 例如：data[username]
-
+而请求以.json结尾，可以保证请求返回的数据格式为json，避免某些情况下出错打印HTML网页  
+或者使用HTTP头，Accept: application/json，效果相同
 
 User 用户
 ==========
@@ -26,7 +56,7 @@ User 用户
 
 其中  
 username是中文昵称  
-user_type可能为 admin, user, dealer, provider  
+user_type可能为 admin(管理员), user(普通用户), dealer(汽车服务商), provider(订阅号)  
 detail是附加字段的 **哈希表**  
 
 * 如果user_type是user，则detail包含以下附加字段  
@@ -44,10 +74,10 @@ detail是附加字段的 **哈希表**
   >     表单
   >     area_id    0
   > 
-  > 是等价的
+  > 是等价的,但是最好提交表单时用area_id和brand_id,数字更加简单方便.
 
 * 如果user_type是dealer，则detail包含以下附加字段  
-  :dealer_type（服务商类型）, :company, :address, :phone, :open（开店时间）, :accepted（是否通过审核）, :balance, :reg_img（注册上传的资质证明图片）
+  :dealer_type（服务商类型）, :company, :address, :phone, :open（开店时间）, :accepted（是否通过审核）, :balance（余额）, :reg_img（注册上传的资质证明图片）
 
 * 如果user_type是provider，则detail包含以下附加字段  
   :company, :phone, :reg_img
@@ -225,16 +255,16 @@ Order 订单
 :order_type（订单类型）, :detail  
 
 其中  
-user_type可能为 mending_order, cleaning_order, bulk_purchasing_order  
+order_type可能为 mending_order, cleaning_order, bulk_purchasing_order  
 detail是附加字段的 **哈希表**  
 
-* 如果user_type是mending_order，则detail包含以下附加字段  
+* 如果order_type是mending_order，则detail包含以下附加字段  
   :price（只读，总价）, :brand_id, :plate_num（车牌号）, :arrive_at（到达时间）, :mending_type（专修类型）, :brand（根据brand_id取得，string类型）
 
-* 如果user_type是cleaning_order，则detail包含以下附加字段  
+* 如果order_type是cleaning_order，则detail包含以下附加字段  
   :price（只读，总价）, :count（购买数量）, :used_count（只读，已使用数量）
 
-* 如果user_type是bulk_purchasing_order，则detail包含以下附加字段  
+* 如果order_type是bulk_purchasing_order，则detail包含以下附加字段  
   :price（只读，总价）, :count（购买数量）
 
 API
@@ -272,10 +302,10 @@ Method | URI                                                               | 说
 -------|-------------------------------------------------------------------|------------------------
 GET    | /api/tips/mendings/:mending_id/reviews                            | 查询指定保养专修的所有订单的评价  
 POST   | /api/tips/mendings/:mending_id/orders/:id/review                  | 提交指定保养专修的指定订单的评价  
-GET    | /api/tips/cleanings/:cleaning_id/reviews                          | 查询指定保养专修的所有订单的评价  
-POST   | /api/tips/cleanings/:cleaning_id/orders/:id/review                | 提交指定保养专修的指定订单的评价  
-GET    | /api/tips/bulk_purchasings/bulk_purchasing_id/reviews             | 查询指定保养专修的所有订单的评价  
-POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/review  | 提交指定保养专修的指定订单的评价  
+GET    | /api/tips/cleanings/:cleaning_id/reviews                          | 查询指定汽车美容的所有订单的评价  
+POST   | /api/tips/cleanings/:cleaning_id/orders/:id/review                | 提交指定汽车美容的指定订单的评价  
+GET    | /api/tips/bulk_purchasings/bulk_purchasing_id/reviews             | 查询指定团购的所有订单的评价  
+POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/review  | 提交指定团购的指定订单的评价  
 GET    | /api/dealers/:dealer_id/reviews                                   | 查询指定商家的所有订单的评价
 
 
@@ -296,4 +326,32 @@ Area对应表
 
 Brand对应表
 ==========
-暂无  
+
+    [
+      "阿斯顿·马丁", "奥迪", "巴博斯", "宝骏", 
+      "宝马", "保时捷", "北京汽车", "北汽威旺", "北汽制造", 
+      "奔驰", "奔腾", "本田", "比亚迪", "标致", "别克", 
+      "宾利", "布加迪", "昌河", "长安", "长安商用", "长城", 
+      "DS", "大众", "道奇", "东风", "东风风度", "东风风神", 
+      "东风小康", "东南", "法拉利", "菲亚特", "丰田", "风行", 
+      "福迪", "福特", "福田", "GMC", "光冈", "广汽传祺", 
+      "广汽吉奥", "哈飞", "哈弗", "海格", "海马", "悍马", 
+      "恒天", "红旗", "华泰", "黄海", "Jeep", "吉利帝豪", 
+      "吉利全球鹰", "吉利英伦", "江淮", "江铃", "捷豹", "金杯", 
+      "金旅", "九龙", "卡尔森", "开瑞", "凯迪拉克", "科尼赛克", 
+      "克莱斯勒", "兰博基尼", "劳伦士", "劳斯莱斯", "雷克萨斯", 
+      "雷诺", "理念", "力帆", "莲花汽车", "猎豹汽车", "林肯", 
+      "铃木", "陆风", "路虎", "路特斯", "MG", "MINI", 
+      "马自达", "玛莎拉蒂", "迈凯伦", "摩根", "纳智捷", "讴歌", 
+      "欧宝", "欧朗", "奇瑞", "启辰", "起亚", "日产", "荣威", 
+      "如虎", "瑞麒", "smart", "三菱", "陕汽通家", "上汽大通", 
+      "绅宝", "世爵", "双环", "双龙", "思铭", "斯巴鲁", 
+      "斯柯达", "威麟", "威兹曼", "沃尔沃", "五菱汽车", 
+      "五十铃", "西雅特", "现代", "新凯", "雪佛兰", "雪铁龙", 
+      "野马汽车", "一汽", "依维柯", "英菲尼迪", "永源", "中华", 
+      "中兴", "众泰", "其它", 
+    ]
+
+以0开头的数组，brand_id是数字的index  
+
+
