@@ -42,11 +42,12 @@ PUT和DELETE可以使用POST模拟，需要额外添加_method=put/delete参数
 实际访问时，应该使用具体ID号代替:id，例如，要获取用户ID为1的用户的好友列表，应使用/api/users/1/friends  
 
 **注意：除了用户登录和新建用户外，所有API都需要加auth_token参数进行访问**  
-> 例如：获取好友列表 GET /api/friends.json?auth_token=AuthToken  
+> 例如：获取好友列表 GET /api/friends ~~.json~~ ?auth_token=AuthToken  
 > 其中，AuthToken在登录时返回
 
-而请求以.json结尾，可以保证请求返回的数据格式为json，避免某些情况下出错打印HTML网页  
-或者使用HTTP头，Accept: application/json，效果相同
+~~而请求以.json结尾，可以保证请求返回的数据格式为json，避免某些情况下出错打印HTML网页~~  
+~~或者使用HTTP头，Accept: application/json，效果相同~~  
+目前应该已经解决了API打印HTML的问题，因此不需要再使用以上手段  
 
 User 用户
 ==========
