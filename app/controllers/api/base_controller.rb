@@ -68,13 +68,15 @@ class Api::BaseController < ActionController::Base
     render json: { success: true }, status: status
   end
 
-  def self.rescue_from_with exception_class, status
-    rescue_from exception_class do |exception|
-      render_error exception.to_s, status
-    end
+  rescue_from Exception do |exception|
+    exception_message = exception.message
+    exception_name = exception.class.name
+    rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[exception_name]
+    exception_message = I18n.t "#{exception_name.underscore}", 
+      default: I18n.t(:description, default: exception_message),
+      scope: [:exception, rescue_response], 
+      exception_name: exception_name, 
+      exception_message: exception_message
+    render_error exception_message, rescue_response
   end
-  rescue_from_with ActiveRecord::RecordNotFound, :not_found
-  rescue_from_with ActiveModel::MassAssignmentSecurity::Error, :unprocessable_entity
-  
-  rescue_from_with Exception, :internal_server_error
 end
