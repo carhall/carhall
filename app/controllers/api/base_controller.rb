@@ -75,4 +75,6 @@ class Api::BaseController < ActionController::Base
   end
   rescue_from_with ActiveRecord::RecordNotFound, :not_found
   rescue_from_with ActiveModel::MassAssignmentSecurity::Error, :unprocessable_entity
+  
+  rescue_from_with Exception, :internal_server_error
 end

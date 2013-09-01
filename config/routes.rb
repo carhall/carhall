@@ -1,12 +1,20 @@
 Autozone::Application.routes.draw do
+  # Frontend pages
+  # Dashboard
   resource :dashboard, only: :show
   root to: 'dashboards#show'
 
+  # Frontend sign_in/sing_up page
   devise_for :base_users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions",
   }
+
+  resources :inverse_friends
+  resources :settings
+
   devise_scope :base_users do
+    # APIs
     namespace :api do
       resources :users, only: [:index, :show, :create] do
         get :detail, on: :member
@@ -84,8 +92,13 @@ Autozone::Application.routes.draw do
         end
 
       end
+
+      # Need to return JSON-formatted 404 error in Rails
+      match '*foo', :to => lambda { |env| [404, {"Content-Type" => "application/json; charset=utf-8"}, [{
+        error: "No route matches [#{env["REQUEST_METHOD"]}] \"#{env["PATH_INFO"]}\"",
+        success: false
+      }.to_json]] }
     end
   end
 
-  resources :inverse_friends
 end
