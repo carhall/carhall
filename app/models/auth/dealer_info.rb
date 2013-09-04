@@ -8,9 +8,9 @@ module Auth
     alias_attribute :dealer, :source
 
     attr_accessible :source
-    attr_accessible :dealer_type, :business_scopes, :company, 
+    attr_accessible :dealer_type_id, :business_scope_ids, :company, 
       :address, :phone, :open, :accepted, :reg_img
-    attr_accessible :dealer_type_id, :business_scope_ids 
+    attr_accessible :dealer_type, :business_scopes 
 
     extend Share::Id2Key
 
@@ -22,9 +22,9 @@ module Auth
 
     def serializable_hash(options={})
       options = { 
-        only: [:dealer_type, :company, :address, 
-          :phone, :open, :accepted, :balance],
-        # methods: [:reg_img],
+        only: [:dealer_type_id, :business_scope_ids, :company, :address, 
+          :phone, :open, :accepted],
+        methods: [:dealer_type, :business_scopes],
       }.update(options)
       super(options)
     end

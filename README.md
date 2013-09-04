@@ -31,8 +31,8 @@ PUT和DELETE可以使用POST模拟，需要额外添加_method=put/delete参数
 >     data[mobie]       13323456787
 >     data[password]    password
 
-每章中的字段一节，就是创建，或编辑资源所需要提交的所有字段名  
-而GET请求返回的资源，字段名也是这些  
+如果没有特殊说明，每章中的字段一节，就是创建，或编辑资源所需要提交的所有字段名  
+而GET请求返回的资源，字段名也是这些，并包含一个ID，表示资源ID  
 但要对于图片资源，例如字段名为image，上传时使用data[image]提交表单，但GET请求返回的资源中，字段名会变成image_url和image_thumb_url，分别代表原始图片URL和缩略图URL，缩略图暂定为60x60像素  
 
 关于请求的URI
@@ -53,15 +53,28 @@ User 用户
 ==========
 字段
 ----------
-:id, :username, :mobile, :avatar, :user_type（只读，手机端只能注册普通用户）, :description（用户说明，个性签名）, :detail
-
-其中  
-username是中文昵称  
-user_type可能为 admin（管理员）, user（普通用户）, dealer（汽车服务商）, provider（订阅号）  
-detail是附加字段的 **哈希表**  
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+username        | 中文昵称                    |
+mobile          |                            |
+avatar          | 头像                       | 上传时使用图片附件，查询返回数据为avatar_url，avatar_thumb_url，分别代表头像原图链接和头像缩略图链接
+user_type       | 用户类型，可能为 admin（管理员）, user（普通用户）, dealer（汽车服务商）, provider（订阅号）| 只读，手机端只    能注册普通用户
+description     | 用户说明，个性签名           |
+detail          | 附加字段的 **哈希表**        |
 
 * 如果user_type是user，则detail包含以下附加字段  
-  :sex, :area_id, :brand_id, :series, :plate_num（车牌号）, :balance（余额）, :reg_img（注册上传的汽车图片）, :area（根据area_id取得，string类型）, :brand（根据brand_id取得，string类型）
+  
+  字段名称           | 详细描述                    | 限制条件
+  ------------------|----------------------------|--------------------------------
+  detail[sex]       |                            |
+  detail[area_id]   | 区域ID                     | area_id（integer）和area（string，根据area_id取得）指向同一个字段
+  detail[area]      | 区域                       | 
+  detail[brand_id]  | 品牌ID                     | 同area_id和area的关系
+  detail[brand]     | 品牌                       | 
+  detail[series]    | 型号                       |
+  detail[plate_num] | 车牌号                     |
+  detail[balance]   | 余额                       | 只读
+  detail[reg_img]   | 注册上传的汽车图片           |
 
   Area和Brand，ID与名称对应表，见最后一章  
   提交表单时，area_id或area，brand_id或brand都可以使用，但不能同时使用area_id和area，brand_id和brand  
@@ -76,16 +89,33 @@ detail是附加字段的 **哈希表**
   >     area_id    0
   > 
   > 是等价的,但是最好提交表单时用area_id和brand_id,数字更加简单方便.
+  
+  **注意：为了安全，balance字段只读**
 
 * 如果user_type是dealer，则detail包含以下附加字段  
-  :dealer_type（服务商类型）, :company, :address, :phone, :open（开店时间）, :accepted（是否通过审核）, :balance（余额）, :reg_img（注册上传的资质证明图片）
+
+  字段名称                    | 详细描述                    | 限制条件
+  ---------------------------|----------------------------|-----------------------
+  detail[dealer_type_id]     | 服务商类型ID                | 0-3，对应洗车美容、专项服务、专修、4S店，同area_id和area的关系，见User关于area的说明
+  detail[dealer_type]        | 服务商类型                  | 洗车美容、专项服务、专修、4S店，其中之一
+  detail[business_scope_ids] | 业务范围IDs（数组）          | [0-8, 0-8, ...]，对应洗车、美容、轮胎、换油、改装、钣喷、空调、专修、保险，同area_id和area的关系，见User关于area的说明，唯一不同是这里是ID的数组
+  detail[business_scopes]    | 业务范围（数组）             | 洗车、美容、轮胎、换油、改装、钣喷、空调、专修、保险，其中若干个
+  detail[company]            |                            |
+  detail[address]            |                            |
+  detail[phone]              | 型号                       |
+  detail[open]               | 开店时间                    |
+  detail[accepted]           | 是否通过审核                | 只读
+  detail[reg_img]            | 注册上传的资质证明图片        |
+
+  **建议：显示时使用dealer_type和business_scopes，因为后期可能会添加新的业务范围**
 
 * 如果user_type是provider，则detail包含以下附加字段  
-  :company, :phone, :reg_img
-
-
-**注意：为了安全，balance字段只读**
-
+  
+  字段名称                 | 详细描述                    | 限制条件
+  ------------------------|----------------------------|--------------------------
+  detail[company]         |                            |
+  detail[phone]           | 型号                       |
+  detail[reg_img]         | 注册上传的资质证明图片        |
 
 API
 ----------
@@ -164,7 +194,10 @@ Post 圈子随手拍
 ==========
 字段
 ----------
-:content, :image  
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+content         |                            |
+image           |                            |
 
 API
 ----------
@@ -196,7 +229,9 @@ Comments 圈子随手拍评论
 ==========
 字段
 ----------
-:content  
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+content         |                            |
 
 API
 ----------
@@ -231,7 +266,10 @@ ClubMaster 堂主
 ==========
 字段
 ----------
-:area_id, :brand_id  
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+area_id         |                            | 见User关于area_id的说明
+brand_id        |                            | 见User关于brand_id的说明
 
 API
 ----------
@@ -252,7 +290,10 @@ Mechanic 技师
 ==========
 字段
 ----------
-:area_id, :brand_id  
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+area_id         |                            | 见User关于area_id的说明
+brand_id        |                            | 见User关于brand_id的说明
 
 API
 ----------

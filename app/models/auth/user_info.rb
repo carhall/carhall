@@ -10,12 +10,12 @@ module Auth
     alias_attribute :user, :source
 
     attr_accessible :source
-    attr_accessible :sex, :area_id, :brand_id, :area, :brand,
-      :series, :plate_num, :reg_img
+    attr_accessible :sex, :area_id, :brand_id, :series, :plate_num, :reg_img
+    attr_accessible :area, :brand
 
     def serializable_hash(options={})
       options = { 
-        only: [:sex, :series, :plate_num, :balance],
+        only: [:sex, :area_id, :brand_id, :series, :plate_num, :balance],
         methods: [:reg_img_thumb_url, :reg_img_url, :area, :brand]
       }.update(options)
       super(options)
