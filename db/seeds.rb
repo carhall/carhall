@@ -14,7 +14,7 @@ def factory model, times = 1, &args
   end
 end
 
-factory User, 100 do
+factory User, 20 do
   {
     mobile: Faker::PhoneNumber.cell_phone,
     password: 'password',
@@ -55,3 +55,23 @@ factory Provider, 5 do
     }
   }
 end
+
+users = User.all
+
+factory Post, 100 do
+  {
+    content: Faker::Lorem.paragraph,
+    user: users.sample,
+  }
+end
+
+posts = Post.all
+
+factory Comment, 500 do
+  {
+    content: Faker::Lorem.paragraph,
+    source: posts.sample,
+    user: users.sample,
+  }
+end
+

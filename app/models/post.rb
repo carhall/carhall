@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   define_image_methods :image
 
   attr_accessible :content, :image
+  attr_accessible :user
 
   before_save do
     if user.user_type == :user

@@ -3,7 +3,8 @@ class Comment < ActiveRecord::Base
   
   belongs_to :source, polymorphic: true, counter_cache: true
 
-  attr_accessible :content, :user
+  attr_accessible :content
+  attr_accessible :user, :source
 
   def serializable_hash(options={})
     options = { 

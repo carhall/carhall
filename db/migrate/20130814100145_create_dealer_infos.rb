@@ -10,6 +10,7 @@ class CreateDealerInfos < ActiveRecord::Migration
       t.string  :open
       t.boolean :accepted, null: false, default: false
       t.integer :balance, null: false, default: 0
+      t.string  :rqrcode_token
       t.attachment :reg_img
 
       t.float :latitude

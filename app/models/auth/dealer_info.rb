@@ -8,9 +8,9 @@ module Auth
     alias_attribute :dealer, :source
 
     attr_accessible :source
-    attr_accessible :dealer_type, :business_scopes, :company, 
+    attr_accessible :dealer_type_id, :business_scope_ids, :company, 
       :address, :phone, :open, :accepted, :reg_img
-    attr_accessible :dealer_type_id, :business_scope_ids 
+    attr_accessible :dealer_type, :business_scopes 
 
     extend Share::Id2Key
 
@@ -20,11 +20,24 @@ module Auth
     BusinessScopes = %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险)
     define_ids2keys_methods :business_scopes
 
+    # Generate a token by looping and ensuring does not already exist.
+    def generate_rqrcode_token
+      loop do
+        token = Devise.friendly_token
+        break token unless self.class.where(rqrcode_token: token).any?
+        self.rqrcode_token = token
+      end
+    end
+
+    before_create do
+      generate_rqrcode_token
+    end
+
     def serializable_hash(options={})
       options = { 
-        only: [:dealer_type, :company, :address, 
-          :phone, :open, :accepted, :balance],
-        # methods: [:reg_img],
+        only: [:dealer_type_id, :business_scope_ids, :company, :address, 
+          :phone, :open, :accepted],
+        methods: [:dealer_type, :business_scopes],
       }.update(options)
       super(options)
     end

@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
     t.string   "detail_type"
     t.integer  "source_id"
     t.string   "source_type"
+    t.string   "title"
     t.integer  "state_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -57,6 +58,9 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.integer  "failed_attempts",        :default => 0
+    t.string   "unlock_token"
+    t.datetime "locked_at"
     t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
@@ -72,9 +76,11 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   end
 
   add_index "base_users", ["authentication_token"], :name => "index_base_users_on_authentication_token", :unique => true
+  add_index "base_users", ["confirmation_token"], :name => "index_base_users_on_confirmation_token", :unique => true
   add_index "base_users", ["detail_type", "detail_id"], :name => "index_base_users_on_detail_type_and_detail_id"
   add_index "base_users", ["mobile"], :name => "index_base_users_on_mobile"
   add_index "base_users", ["reset_password_token"], :name => "index_base_users_on_reset_password_token", :unique => true
+  add_index "base_users", ["unlock_token"], :name => "index_base_users_on_unlock_token", :unique => true
   add_index "base_users", ["username"], :name => "index_base_users_on_username"
 
   create_table "blocks", :force => true do |t|
@@ -168,8 +174,9 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
     t.string   "address"
     t.string   "phone"
     t.string   "open"
-    t.boolean  "accepted"
-    t.integer  "balance",              :default => 0, :null => false
+    t.boolean  "accepted",             :default => false, :null => false
+    t.integer  "balance",              :default => 0,     :null => false
+    t.string   "rqrcode_token"
     t.string   "reg_img_file_name"
     t.string   "reg_img_content_type"
     t.integer  "reg_img_file_size"
@@ -266,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   add_index "provider_infos", ["source_id"], :name => "index_provider_infos_on_source_id"
 
   create_table "reviews", :force => true do |t|
+    t.string   "title"
     t.string   "content"
     t.integer  "stars"
     t.datetime "created_at", :null => false

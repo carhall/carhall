@@ -6,7 +6,8 @@ class CreateBaseOrders < ActiveRecord::Migration
       t.references :review
       t.references :detail, polymorphic: true
       t.references :source, polymorphic: true
-      t.integer  :state_id
+      t.string  :title
+      t.integer :state_id
       
       t.timestamps
     end

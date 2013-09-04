@@ -1,6 +1,3 @@
-require_relative 'share/renders'
-require_relative 'share/filters'
-
 class Api::BaseController < ActionController::Base
   before_filter :authenticate_base_user!
 
