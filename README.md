@@ -57,7 +57,7 @@ User 用户
 
 其中  
 username是中文昵称  
-user_type可能为 admin(管理员), user(普通用户), dealer(汽车服务商), provider(订阅号)  
+user_type可能为 admin（管理员）, user（普通用户）, dealer（汽车服务商）, provider（订阅号）  
 detail是附加字段的 **哈希表**  
 
 * 如果user_type是user，则detail包含以下附加字段  
@@ -139,10 +139,25 @@ Method | URI                               | 说明
 GET    | /api/users/:id/friends            | 查询指定用户好友信息  
 GET    | /api/current_user/friends         | 查询当前用户好友信息  
 GET    | /api/friends                      | （同上）  
-POST   | /api/friends/:id                  | 添加好友  
-DELETE | /api/friends/:id                  | 删除好友  
+POST   | /api/friends/:user_id             | 添加好友  
+DELETE | /api/friends/:user_id             | 删除好友  
 
-新建好友、删除好友只需POST、DELETE /api/current_user/friends/好友ID，不需要提交表单  
+新建好友、删除好友只需POST、DELETE /api/friends/好友ID，不需要提交表单  
+
+
+Blacklist 黑名单
+==========
+API
+----------
+Method | URI                               | 说明
+-------|-----------------------------------|------------------------------------
+GET    | /api/current_user/blacklists      | 查询当前用户好友信息  
+GET    | /api/blacklists                   | （同上）  
+POST   | /api/blacklists/:user_id          | 添加黑名单  
+DELETE | /api/blacklists/:user_id          | 删除黑名单  
+
+同好友接口一样，新建好友、删除黑名单只需POST、DELETE /api/blacklists/用户ID，不需要提交表单  
+添加黑名单会删除好友关系，黑名单上的用户不能够被添加好友  
 
 
 Post 圈子随手拍
@@ -157,8 +172,8 @@ Method | URI                               | 说明
 -------|-----------------------------------|------------------------------------
 GET    | /api/users/:id/posts              | 查询指定用户发表的随手拍  
 GET    | /api/current_user/posts           | 查询当前用户发表的随手拍  
-GET    | /api/posts                        | 查询好友发表的随手拍  
-GET    | /api/posts/friends                | （同上）  
+GET    | /api/posts                        | （同上）  
+GET    | /api/posts/friends                | 查询好友发表的随手拍  
 GET    | /api/posts/top                    | 查询最热  
 GET    | /api/posts/club                   | 查询车友会  
 GET    | /api/posts/:id                    | 查询指定随手拍  
@@ -170,6 +185,11 @@ DELETE | /api/posts/:id                    | 删除随手拍
 >     POST /api/posts
 >     表单
 >     data[content]    Hello
+
+GET查询车友会时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的帖子  
+> 例如：
+> 
+>     GET /api/posts/club?filter[area_id]=1&filter[brand_id]=2
 
 
 Comments 圈子随手拍评论
@@ -191,6 +211,59 @@ DELETE | /api/posts/:post_id/comments/:id  | 删除随手拍评论
 >     POST /api/posts/2/comments
 >     表单
 >     data[content]    Hello
+
+
+PostBlacklist 圈子黑名单
+==========
+API
+----------
+Method | URI                               | 说明
+-------|-----------------------------------|------------------------------------
+GET    | /api/current_user/post_blacklists | 查询当前用户好友信息  
+GET    | /api/post_blacklists              | （同上）  
+POST   | /api/post_blacklists/:user_id     | 添加黑名单  
+DELETE | /api/post_blacklists/:user_id     | 删除黑名单  
+
+同好友接口一样，新建好友、删除圈子黑名单只需POST、DELETE /api/post_blacklists/用户ID，不需要提交表单  
+
+
+ClubMaster 堂主
+==========
+字段
+----------
+:area_id, :brand_id  
+
+API
+----------
+Method | URI                               | 说明
+-------|-----------------------------------|------------------------------------
+GET    | /api/club_master                  | 查询当前用户所在车友会的堂主信息  
+GET    | /api/club_master/detail           | 查询当前用户所在车友会的堂主的详细信息  
+POST   | /api/club_master                  | 申请成为车友会堂主  
+
+提交申请时需要带data[area_id]和data[brand_id]两个字段  
+GET查询时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的堂主  
+> 例如：
+> 
+>     GET /api/club_master?filter[area_id]=1&filter[brand_id]=2
+
+
+Mechanic 技师
+==========
+字段
+----------
+:area_id, :brand_id  
+
+API
+----------
+Method | URI                               | 说明
+-------|-----------------------------------|------------------------------------
+GET    | /api/mechanics                    | 查询当前用户所在车友会的所有技师信息  
+POST   | /api/mechanics                    | 申请成为在线技师  
+
+提交申请时需要带data[area_id]和data[brand_id]两个字段  
+查询在线技师详细资料，请使用用户接口  
+与堂主接口一样，GET查询时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的堂主  
 
 
 Mending 保养专修

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823085455) do
+ActiveRecord::Schema.define(:version => 20130904044821) do
 
   create_table "activities", :force => true do |t|
     t.integer  "dealer_id"
@@ -77,6 +77,16 @@ ActiveRecord::Schema.define(:version => 20130823085455) do
   add_index "base_users", ["reset_password_token"], :name => "index_base_users_on_reset_password_token", :unique => true
   add_index "base_users", ["username"], :name => "index_base_users_on_username"
 
+  create_table "blocks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "blacklist_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "blocks", ["blacklist_id"], :name => "index_blocks_on_blacklist_id"
+  add_index "blocks", ["user_id"], :name => "index_blocks_on_user_id"
+
   create_table "bulk_purchasing_order_infos", :force => true do |t|
     t.integer "source_id"
     t.integer "price"
@@ -127,6 +137,18 @@ ActiveRecord::Schema.define(:version => 20130823085455) do
     t.datetime "updated_at",            :null => false
   end
 
+  create_table "club_masters", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "area_id"
+    t.integer  "brand_id"
+    t.boolean  "accepted",   :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "club_masters", ["area_id", "brand_id"], :name => "index_club_masters_on_area_id_and_brand_id"
+  add_index "club_masters", ["user_id"], :name => "index_club_masters_on_user_id"
+
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "source_id"
@@ -168,6 +190,18 @@ ActiveRecord::Schema.define(:version => 20130823085455) do
   add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
+  create_table "mechanics", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "area_id"
+    t.integer  "brand_id"
+    t.boolean  "accepted",   :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "mechanics", ["area_id", "brand_id"], :name => "index_mechanics_on_area_id_and_brand_id"
+  add_index "mechanics", ["user_id"], :name => "index_mechanics_on_user_id"
+
   create_table "mending_order_infos", :force => true do |t|
     t.integer  "source_id"
     t.integer  "price"
@@ -187,6 +221,16 @@ ActiveRecord::Schema.define(:version => 20130823085455) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
+
+  create_table "post_blocks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "blacklist_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "post_blocks", ["blacklist_id"], :name => "index_post_blocks_on_blacklist_id"
+  add_index "post_blocks", ["user_id"], :name => "index_post_blocks_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"

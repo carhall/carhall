@@ -1,5 +1,6 @@
 class Api::PostsController < Api::BaseController
   before_filter :set_user, except: :show
+  before_filter :set_area_id_and_brand_id, except: :create
 
   # GET /api/posts
   # GET /api/posts.json
@@ -8,24 +9,24 @@ class Api::PostsController < Api::BaseController
   end
 
   def friends
-    render_show Post.user(@user.friend_ids)
+    render_index Post.friends(@user)
   end
 
   # GET /api/posts
   # GET /api/posts.json
   def top
-    render_show Post.order('comments_count DESC')
+    render_index Post.top
   end
 
   # GET /api/posts
   # GET /api/posts.json
   def club
-    condition = {
-      area_id: @user.detail.area_id,
-      brand_id: @user.detail.brand_id,
-    } if @user.user_type == :user
-    
-    render_show Post.where(condition)
+    if @user.user_type == :user
+      detail = @user.detail
+      render_index Post.club(detail.area_id, detail.brand_id)
+    else
+      render_index Post.all
+    end
   end
 
   # GET /api/posts/1
@@ -48,13 +49,4 @@ class Api::PostsController < Api::BaseController
     render_accepted
   end
 
-  protected
-
-  def set_user
-    if user_id = params[:user_id]
-      @user = BaseUser.find(user_id)
-    else
-      @user = current_base_user
-    end
-  end
 end

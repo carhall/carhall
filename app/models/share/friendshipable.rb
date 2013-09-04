@@ -4,10 +4,23 @@ module Share
       
     included do
       # For friendship, friends and inverse_friends
-      has_many :friendships, class_name: "Auth::Friendship", foreign_key: "user_id"
+      has_many :friendships, class_name: "Auth::Friendship", foreign_key: :user_id
       has_many :friends, through: :friendships
-      has_many :inverse_friendships, class_name: "Auth::Friendship", foreign_key: "friend_id"
+      has_many :inverse_friendships, class_name: "Auth::Friendship", foreign_key: :friend_id
       has_many :inverse_friends, through: :inverse_friendships, source: :user
+
+      # For blocks, blacklists and inverse_blacklists
+      has_many :blocks, class_name: "Auth::Block", foreign_key: :user_id
+      has_many :blacklists, through: :blocks
+      # has_many :inverse_blocks, class_name: "Auth::Block", foreign_key: :blacklist_id
+      # has_many :inverse_blacklists, through: :inverse_blocks, source: :user
+
+      # For blocks, blacklists and inverse_blacklists
+      has_many :post_blocks, class_name: "Auth::PostBlock", foreign_key: :user_id
+      has_many :post_blacklists, through: :post_blocks, source: :blacklist
+      # has_many :inverse_post_blocks, class_name: "Auth::PostBlock", foreign_key: :blacklist_id
+      # has_many :inverse_post_blacklists, through: :inverse_post_blocks, source: :user
+
     end
     
     def make_friend_with friend_id
@@ -17,6 +30,25 @@ module Share
     def break_with friend_id
       friendship = friendships.where(friend_id: friend_id).first
       friendship.destroy if friendship
+    end
+
+    def create_blacklist_with blacklist_id
+      break_with blacklist_id
+      blocks.where(blacklist_id: blacklist_id).first_or_initialize
+    end
+    
+    def create_post_blacklist_with blacklist_id
+      post_blocks.where(blacklist_id: blacklist_id).first_or_initialize
+    end
+
+    def remove_blacklist blacklist_id
+      block = blocks.where(blacklist_id: blacklist_id).first
+      block.destroy if block
+    end
+
+    def remove_post_blacklist blacklist_id
+      block = post_blocks.where(blacklist_id: blacklist_id).first
+      block.destroy if block
     end
 
   end

@@ -1,8 +1,10 @@
 zh-CN:
   unknown: 未知
+  in_blacklist: 在您的黑名单中
   activerecord:
     models:
       base_user: 用户
+      auth/friendship: 好友
     attributes:
       base_user:
         id: ID
@@ -14,6 +16,9 @@ zh-CN:
         user_type: 用户类型
         user_type_id: 用户类型
         description: 个人说明
+      auth/friendship:
+        friend_id: 该 用户
+        friend: 好友
   simple_form:
     labels:
       base_user:

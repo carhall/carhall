@@ -11,7 +11,7 @@ Autozone::Application.routes.draw do
   }
 
   resources :inverse_friends
-  resources :settings
+  resource :setting
 
   devise_scope :base_users do
     # APIs
@@ -30,32 +30,46 @@ Autozone::Application.routes.draw do
         put :detail, action: :update_detail
 
         resources :friends, only: [:index]
+        resources :blacklists, only: [:index]
+        resources :post_blacklists, only: [:index]
         resources :posts, only: [:index]
       end
 
       resources :dealers, only: [:index, :show] do
-        get :detail
+        get :detail, on: :member
 
         resources :orders, only: [:index, :show]
         resources :reviews, only: [:index, :show]
       end
 
       resources :providers, only: [:index, :show] do
-        get :detail
+        get :detail, on: :member
       end
 
       resources :friends, only: [:index, :destroy] do
         post ':id', action: :create, on: :collection
       end
 
-      resources :posts, only: [:show, :create, :destroy] do
-        get :index, action: :friends, on: :collection
+      resources :blacklists, only: [:index, :destroy] do
+        post ':id', action: :create, on: :collection
+      end
+
+      resources :post_blacklists, only: [:index, :destroy] do
+        post ':id', action: :create, on: :collection
+      end
+
+      resource :club_master, only: [:show, :create] do
+        get :detail
+      end
+
+      resources :mechanics, only: [:index, :create]
+
+      resources :posts, only: [:index, :show, :create, :destroy] do
         get :friends, on: :collection
         get :top, on: :collection
         get :club, on: :collection
 
         resources :comments, only: [:index, :show, :create, :destroy]
-
       end
 
       namespace :tips do

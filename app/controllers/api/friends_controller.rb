@@ -12,7 +12,7 @@ class Api::FriendsController < Api::BaseController
   def create
     friendship = @user.make_friend_with params[:id]
     if not friendship.new_record? or friendship.save
-      render_create_success friendship, { data: friendship.friend }
+      render_create_success friendship, { data: friendship }
     else
       render_failure friendship
     end
@@ -25,14 +25,5 @@ class Api::FriendsController < Api::BaseController
 
     render_accepted
   end
-
-  protected
-
-  def set_user
-    if user_id = params[:user_id]
-      @user = BaseUser.find(user_id)
-    else
-      @user = current_base_user
-    end
-  end
+  
 end

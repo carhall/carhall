@@ -1,5 +1,11 @@
+require_relative 'share/renders'
+require_relative 'share/filters'
+
 class Api::BaseController < ActionController::Base
   before_filter :authenticate_base_user!
+
+  include Api::RenderHelper
+  include Api::FilterHelper
 
   def self.set_resource_class klass, options = {}
     # GET /api/resources
@@ -20,52 +26,6 @@ class Api::BaseController < ActionController::Base
       render_show klass.find(params[:id]).detail_hash
     end if options[:detail]
 
-  end
-
-  def render_index resources
-    resources = resources.page(params[:page]) if params[:page]
-    resources = resources.per(params[:per_page]) if params[:per_page]
-    render json: { data: resources, success: true }
-  end
-
-  def render_show resource
-    render json: { data: resource, success: true }
-  end
-
-  def render_create resource, additional_data = nil
-    if resource.save
-      render_create_success resource, additional_data
-    else
-      render_failure resource
-    end
-  end
-
-  def render_create_success resource, additional_data = nil
-    data = { data: resource, success: true }
-    data.merge! additional_data if additional_data
-    render json: data, status: :created
-  end
-
-  def render_update_success resource, additional_data = nil
-    data = { data: resource, success: true }
-    data.merge! additional_data if additional_data
-    render json: data, status: :accepted
-  end
-
-  def render_failure resource, status = :unprocessable_entity
-    render_errors resource.errors.full_messages, status
-  end
-
-  def render_errors errors, status
-    render_error errors.first, status
-  end
-
-  def render_error error, status
-    render json: { error: error, success: false }, status: status
-  end
-
-  def render_accepted status = :no_content
-    render json: { success: true }, status: status
   end
 
   rescue_from Exception do |exception|

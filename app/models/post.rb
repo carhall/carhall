@@ -17,6 +17,10 @@ class Post < ActiveRecord::Base
     end
   end
 
+  scope :friends, ->(user) { with_user(user.friend_ids - user.blacklist_ids) }
+  scope :top, -> { order('comments_count DESC') }
+  scope :club, ->(area_id, brand_id) { where(area_id: area_id, brand_id: brand_id) }
+
   def self.view id
     post = find(id)
     post.increment!(:view_count)

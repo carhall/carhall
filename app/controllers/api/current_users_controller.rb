@@ -1,5 +1,5 @@
 class Api::CurrentUsersController < Api::BaseController
-  before_filter :set_user
+  before_filter :set_current_user
 
   # GET /api/current_user
   # GET /api/current_user.json
@@ -49,10 +49,5 @@ class Api::CurrentUsersController < Api::BaseController
       render_failure detail
     end
   end
-
-  protected
-
-  def set_user
-    @user = current_base_user
-  end
+  
 end

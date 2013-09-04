@@ -8,8 +8,16 @@ module Share
     end
 
     module ClassMethods
-      def user user_id
+      def with_user user_id
         where user_id: user_id
+      end
+
+      def first_user
+        User.where(id: first && first.user_id).first
+      end
+      
+      def all_users
+        User.where(id: pluck(:user_id))
       end
     end
 
