@@ -1,5 +1,5 @@
 module Auth
-  class DealerInfo < ActiveRecord::Base
+  class DealerInfo < ActiveRecord::Base    
     extend Share::ImageFile
     define_image_methods :reg_img
     
@@ -20,23 +20,10 @@ module Auth
     BusinessScopes = %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险)
     define_ids2keys_methods :business_scopes
 
-    # Generate a token by looping and ensuring does not already exist.
-    def generate_rqrcode_token
-      loop do
-        token = Devise.friendly_token
-        break token unless self.class.where(rqrcode_token: token).any?
-        self.rqrcode_token = token
-      end
-    end
-
-    before_create do
-      generate_rqrcode_token
-    end
-
     def serializable_hash(options={})
       options = { 
         only: [:dealer_type_id, :business_scope_ids, :company, :address, 
-          :phone, :open, :accepted],
+          :phone, :open],
         methods: [:dealer_type, :business_scopes],
       }.update(options)
       super(options)

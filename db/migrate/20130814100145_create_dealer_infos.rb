@@ -8,8 +8,7 @@ class CreateDealerInfos < ActiveRecord::Migration
       t.string  :address
       t.string  :phone
       t.string  :open
-      t.boolean :accepted, null: false, default: false
-      t.integer :balance, null: false, default: 0
+      # t.integer :balance, null: false, default: 0
       t.string  :rqrcode_token
       t.attachment :reg_img
 
