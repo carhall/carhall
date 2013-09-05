@@ -1,3 +1,9 @@
+<% if @user_type == :admin %>
+  <% content_for :title do %>
+    后台管理
+  <% end %>
+<% end %>
+
 <!DOCTYPE html>
 <html>
   <%= render 'share/head' %>
@@ -8,13 +14,12 @@
       <div class="navbar">
         <div class="navbar-inner">
           <div class="container">
-            <ul class="nav">
-              <li class="active"><a href="#">首页</a></li>
-              <li><a href="#">服务商合作</a></li>
-              <li><a href="#">关于我们</a></li>
-              <li><a href="#">加入我们</a></li>
-              <li><a href="#">联系我们</a></li>
-            </ul>
+            <% case @user_type %>
+            <% when :provider, :dealer, :admin %>
+              <%= render "share/nav/#{@user_type}" %>
+            <% else %>
+              <%= render 'share/nav/welcome' %>
+            <% end %>
           </div>
         </div>
       </div><!-- /.navbar -->

@@ -7,6 +7,7 @@ class Api::UsersController < Api::BaseController
   # POST /api/users/login.json
   def login
     @user = BaseUser.find_for_database_authentication(mobile: params[:data][:mobile])
+    # @user.reset_authentication_token!
 
     if @user && @user.valid_password?(params[:data][:password])
       @user.reset_authentication_token!  # make sure the user has a token generated      

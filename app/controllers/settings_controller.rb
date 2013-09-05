@@ -2,7 +2,6 @@ class SettingsController < ApplicationController
   ensure_base_user_type :provider, :dealer
 
   def show
-    render @user_type, layout: @user_type.to_s
   end
 
   def rqrcode

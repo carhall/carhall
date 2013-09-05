@@ -37,6 +37,7 @@ module Share
         after_initialize do
           build_detail unless detail
         end
+
       end
     end
     

@@ -1,0 +1,28 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th><%= translate_attribute_name :username, :base_user %></th>
+      <td><%= @user.username %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :user_type, :base_user %></th>
+      <td>媒体</td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :mobile, :base_user %></th>
+      <td><%= @user.mobile %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :company, :detail %></th>
+      <td><%= @user.detail.company %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :phone, :detail %></th>
+      <td><%= @user.detail.phone %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :description, :base_user %></th>
+      <td><%= @user.description %></td>
+    </tr>
+  </tbody>
+</table>

@@ -15,7 +15,7 @@ zh-CN:
         avatar: 头像
         user_type: 用户类型
         user_type_id: 用户类型
-        description: 个人说明
+        description: 用户说明
       detail:
         dealer_type_id: 服务商类型
         business_scope_ids: 业务范围

@@ -2,9 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   include Api::FilterHelper
+  before_filter :set_user_type
 
   def current_ability
-    @current_ability ||= Ability.new(current_base_user)
+    @current_ability ||= Ability.new(@user)
   end
 
   def self.ensure_base_user_type *user_types
