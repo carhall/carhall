@@ -5,7 +5,7 @@ class BaseUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :token_authenticatable,
-         :recoverable, :rememberable, :validatable#, :confirmable
+         :recoverable, :rememberable, :validatable, :lockable#, :confirmable
          #:trackable
 
   # For details
@@ -19,6 +19,8 @@ class BaseUser < ActiveRecord::Base
   # For avatar
   extend Share::ImageFile
   define_image_methods :avatar
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" },
+    path: ':rails_root/public/system/base_users/:attachment/:id_partition/:style/:filename'
 
   # For posts
   has_many :posts, foreign_key: :user_id

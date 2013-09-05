@@ -4,7 +4,7 @@ module Share
 
     included do
       belongs_to :detail, polymorphic: true, autosave: true, dependent: :destroy
-      accepts_nested_attributes_for :detail, :allow_destroy => true
+      accepts_nested_attributes_for :detail, allow_destroy: true, update_only: true
       attr_accessible :detail_attributes
     end
 

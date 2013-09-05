@@ -11,19 +11,34 @@
     <div class="page-header">
       <h3>编辑基本信息 <small></small></h3>
     </div>
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal'  }) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal', multipart: true }) do |f| %>
       <div class="row-fluid">
-        <div class="span6">
+        <div class="span12">
           <%= devise_error_messages! %>
+          
+          <%= f.input :mobile, autofocus: true, input_html: { disabled: true } %>
 
-          <%= f.input :mobile, autofocus: true %>
+          <hr>
+          <div class="control-group">
+            <label class="control-label" for="base_user_current_password"><strong>重设密码</strong></label>
+          </div>
+
+          <%= f.input :current_password %>
+          <%= f.input :password, label: '新密码' %>
+          <%= f.input :password_confirmation, hint: '重设密码，如不需重设请留空' %>
+
+          <hr>
+          <div class="control-group">
+            <label class="control-label" for="base_user_current_password"><strong>编辑基本信息</strong></label>
+          </div>
+
           <%= f.input :username %>
           <%= f.input :avatar do %>
             <div class="fileupload fileupload-new" data-provides="fileupload">
               <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= resource.avatar_url %>" /></div>
               <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
               <div>
-                <span class="btn btn-file"><span class="fileupload-new">更换图片</span><span class="fileupload-exists">更换</span><input type="file" /></span>
+                <span class="btn btn-file"><span class="fileupload-new">更换图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[avatar]" /></span>
                 <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
               </div>
             </div>
@@ -31,7 +46,7 @@
           
           <% if resource.user_type == :dealer %>
           
-            <%= f.input :user_type_id, collection: %w(媒体 汽车服务商).each_with_index, as: :hidden %>
+            <input name="base_user[user_type_id]" type="hidden" value="1">
             <%= f.simple_fields_for :detail do |ff| %>
               <%= ff.input :dealer_type_id, required: false, collection: Auth::DealerInfo::DealerTypes.each_with_index, wrapper_html: { class: "dealer" } %>
               <%= ff.input :business_scope_ids, collection: Auth::DealerInfo::BusinessScopes.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" } %>
@@ -41,7 +56,7 @@
               <%= ff.input :open, required: false, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '例如：09:00 至 18:00' %>
               <%= ff.input :reg_img, required: false, wrapper_html: { class: "dealer" } do %>
                 <div class="fileupload fileupload-new" data-provides="fileupload">
-                  <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" /></span>
+                  <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[detail][reg_img]" /></span>
                   <span class="fileupload-preview"></span>
                   <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
                 </div>
@@ -50,7 +65,7 @@
 
           <% elsif resource.user_type == :provider %>
 
-            <%= f.input :user_type_id, collection: %w(媒体 汽车服务商).each_with_index, as: :hidden %>
+            <input name="base_user[user_type_id]" type="hidden" value="0">
             <%= f.simple_fields_for :detail do |ff| %>
               <%= ff.input :company, required: false, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
               <%= ff.input :phone, required: false, wrapper_html: { class: "dealer provider" } %>

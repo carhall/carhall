@@ -12,7 +12,10 @@ Autozone::Application.routes.draw do
 
   resources :inverse_friends
   resource :setting do
-    get 'rqrcode'
+    get :template
+    get :finance
+    
+    get :rqrcode
   end
 
   devise_scope :base_users do

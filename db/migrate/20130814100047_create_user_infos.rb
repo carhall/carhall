@@ -13,6 +13,6 @@ class CreateUserInfos < ActiveRecord::Migration
     end
 
     add_index :user_infos, [:area_id, :brand_id]
-    add_index :user_infos, :source_id
+    # add_index :user_infos, :source_id
   end
 end

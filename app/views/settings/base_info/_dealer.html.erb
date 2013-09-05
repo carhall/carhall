@@ -1,0 +1,54 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= translate_attribute_name :username, :base_user %></th>
+      <td><%= @user.username %></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><%= translate_attribute_name :user_type, :base_user %></th>
+      <td>汽车服务商</td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :dealer_type, :detail %></th>
+      <td><%= @user.detail.dealer_type %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :business_scopes, :detail %></th>
+      <td><%= @user.detail.business_scopes.join('、') %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :mobile, :base_user %></th>
+      <td><%= @user.mobile %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :company, :detail %></th>
+      <td><%= @user.detail.company %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :address, :detail %></th>
+      <td><%= @user.detail.address %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :phone, :detail %></th>
+      <td><%= @user.detail.phone %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :open, :detail %></th>
+      <td><%= @user.detail.open %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :reg_img, :detail %></th>
+      <td><img src="<%= @user.detail.reg_img.url(:medium) %>"></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :accepted, :detail %></th>
+      <td><%= if @user.access_locked? then '未通过' else '已通过' end %></td>
+    </tr>
+    <tr>
+      <th><%= translate_attribute_name :description, :base_user %></th>
+      <td><%= @user.description %></td>
+    </tr>
+  </tbody>
+</table>

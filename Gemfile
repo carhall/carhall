@@ -55,4 +55,5 @@ group :development, :test do
   gem 'faker'
 	gem 'quiet_assets'
   gem 'pry-debugger'
+  gem 'rspec-rails', '~> 2.0'
 end

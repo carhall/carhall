@@ -24,6 +24,13 @@
         </div>
       </div><!-- /.navbar -->
 
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= { alert: :block, notice: :info }[type] || type.to_s %> fade in">
+          <button class="close" data-dismiss="alert">×</button>
+          <%= message %>
+        </div>
+      <% end %>
+
       <!-- Container -->
       <%= yield %>
       

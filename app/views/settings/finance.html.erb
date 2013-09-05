@@ -1,0 +1,48 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "settings/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span8">
+    <div class="page-header">
+      <h3>财务信息 <small></small></h3>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span3">
+        <img src="<%= @user.avatar_url %>">
+      </div>
+      <div class="span9">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>财务信息一览</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>广告基金</th>
+              <td><%= @user.inverse_friends.count * 3 %></td>
+            </tr>
+            <tr>
+              <th>已用金额</th>
+              <td><%= @user.detail.balance_used %></td>
+            </tr>
+            <tr>
+              <td class="blank">&nbsp;</td>
+            </tr>
+            <tr>
+              <th>应收款</th>
+              <td><a>提现</a></td>
+            </tr>
+            <tr>
+              <th>应付佣金</th>
+              <td><a>支付佣金</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

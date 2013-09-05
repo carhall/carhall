@@ -1,0 +1,62 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "settings/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span8">
+    <div class="page-header">
+      <h3>业务模板管理 <small></small></h3>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span3">
+        <img src="<%= @user.avatar_url %>">
+      </div>
+      <div class="span9">
+        <%= form_for(@user, url: registration_path(:base_user), html: { method: :put, class: 'form-horizontal' }) do |f| %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>业务模板管理</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>洗车美容</th>
+                <td><input class="check_boxes" id="base_user_detail_attributes_template_ids_0" name="base_user[detail_attributes][template_ids][]" type="checkbox" value="0"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 0 %>></td>
+              </tr>
+              <tr>
+                <th>保养专修</th>
+                <td><input class="check_boxes" id="base_user_detail_attributes_template_ids_1" name="base_user[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 1 %>></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>营销模块管理</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>团购</th>
+                <td><input class="check_boxes" id="base_user_detail_attributes_template_ids_2" name="base_user[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 2 %>></td>
+              </tr>
+              <tr>
+                <th>近期活动</th>
+                <td><input class="check_boxes" id="base_user_detail_attributes_template_ids_3" name="base_user[detail_attributes][template_ids][]" type="checkbox" value="3"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 3 %>></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <input name="base_user[detail_attributes][template_ids][]" type="hidden" value="">
+          <input name="base_user[user_type_id]" type="hidden" value="1">
+
+          <input class="btn btn-submit" name="commit" type="submit" value="更新">
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -167,14 +167,13 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   add_index "comments", ["source_type", "source_id"], :name => "index_comments_on_source_type_and_source_id"
 
   create_table "dealer_infos", :force => true do |t|
-    t.integer  "source_id"
     t.integer  "dealer_type_id"
     t.string   "business_scope_ids"
     t.string   "company"
     t.string   "address"
     t.string   "phone"
     t.string   "open"
-    t.boolean  "accepted",             :default => false, :null => false
+    t.integer  "balance",              :default => 0, :null => false
     t.string   "rqrcode_token"
     t.string   "reg_img_file_name"
     t.string   "reg_img_content_type"
@@ -182,9 +181,9 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
     t.datetime "reg_img_updated_at"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "template_ids"
+    t.integer  "balance_used",         :default => 0, :null => false
   end
-
-  add_index "dealer_infos", ["source_id"], :name => "index_dealer_infos_on_source_id"
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -260,13 +259,10 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   add_index "posts", ["view_count"], :name => "index_posts_on_view_count"
 
   create_table "provider_infos", :force => true do |t|
-    t.integer "source_id"
-    t.string  "company"
-    t.string  "phone"
-    t.string  "rqrcode_token"
+    t.string "company"
+    t.string "phone"
+    t.string "rqrcode_token"
   end
-
-  add_index "provider_infos", ["source_id"], :name => "index_provider_infos_on_source_id"
 
   create_table "reviews", :force => true do |t|
     t.string   "title"
@@ -277,7 +273,6 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   end
 
   create_table "user_infos", :force => true do |t|
-    t.integer  "source_id"
     t.string   "sex"
     t.integer  "area_id"
     t.integer  "brand_id"
@@ -291,6 +286,5 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   end
 
   add_index "user_infos", ["area_id", "brand_id"], :name => "index_user_infos_on_area_id_and_brand_id"
-  add_index "user_infos", ["source_id"], :name => "index_user_infos_on_source_id"
 
 end

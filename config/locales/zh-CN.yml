@@ -10,6 +10,7 @@ zh-CN:
         id: ID
         mobile: 手机号码
         username: 昵称
+        current_password: 当前密码
         password: 密码
         password_confirmation: 确认密码
         avatar: 头像
@@ -18,12 +19,15 @@ zh-CN:
         description: 用户说明
       detail:
         dealer_type_id: 服务商类型
+        dealer_type: 服务商类型
         business_scope_ids: 业务范围
+        business_scopes: 业务范围
         company: 单位名称
         address: 地址
         phone: 电话
         open: 营业时间
         reg_img: 营业执照认证资料
+        accepted: 服务商认证
       auth/friendship:
         friend_id: 该 用户
         friend: 好友

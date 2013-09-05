@@ -4,6 +4,14 @@ class SettingsController < ApplicationController
   def show
   end
 
+  def finance
+    ensure_base_user_type :dealer
+  end
+
+  def template
+    ensure_base_user_type :dealer
+  end
+
   def rqrcode
     respond_to do |format|
       format.svg  { render qrcode: @user.detail.rqrcode_token, level: :l, unit: 10 }

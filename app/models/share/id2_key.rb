@@ -29,7 +29,7 @@ module Share
       attr_ids_name = attrs_name.singularize+'_ids'
       array_name = attrs_name.camelcase
       class_eval <<-EOM
-        serialize :#{attr_ids_name}
+        serialize :#{attr_ids_name}, Array
 
         def #{attrs_name}
           @#{attrs_name} ||= (#{attr_ids_name}||[]).map do |id|

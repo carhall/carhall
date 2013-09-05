@@ -8,15 +8,18 @@ class CreateDealerInfos < ActiveRecord::Migration
       t.string  :address
       t.string  :phone
       t.string  :open
-      # t.integer :balance, null: false, default: 0
+      t.integer :balance, null: false, default: 0
       t.string  :rqrcode_token
       t.attachment :reg_img
 
       t.float :latitude
       t.float :longitude
+
+      t.string  :template_ids
+      t.integer :balance_used, null: false, default: 0
       
     end
 
-    add_index :dealer_infos, :source_id
+    # add_index :dealer_infos, :source_id
   end
 end

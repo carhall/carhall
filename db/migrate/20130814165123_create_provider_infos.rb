@@ -10,6 +10,6 @@ class CreateProviderInfos < ActiveRecord::Migration
 
     end
 
-    add_index :provider_infos, :source_id
+    # add_index :provider_infos, :source_id
   end
 end

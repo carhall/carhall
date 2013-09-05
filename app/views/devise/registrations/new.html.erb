@@ -1,7 +1,7 @@
 <div class="page-header">
   <h3>公众号注册 <small></small></h3>
 </div>
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal', multipart: true }) do |f| %>
   <div class="row-fluid">
     <div class="span6">
       <%= devise_error_messages! %>
@@ -15,7 +15,7 @@
           <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="http://www.placehold.it/175x175" /></div>
           <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
           <div>
-            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" /></span>
+            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[avatar]" /></span>
             <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
           </div>
         </div>
@@ -31,7 +31,7 @@
         <%= ff.input :open, required: false, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '例如：09:00 至 18:00' %>
         <%= ff.input :reg_img, required: false, wrapper_html: { class: "dealer" } do %>
           <div class="fileupload fileupload-new" data-provides="fileupload">
-            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" /></span>
+            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[detail][reg_img]" /></span>
             <span class="fileupload-preview"></span>
             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
           </div>

@@ -10,12 +10,9 @@
       <%= f.input :password %>
 
       <% if devise_mapping.rememberable? -%>
-        <%= f.input :remember_me, label: false do %>
-          <label class="checkbox">
-            <%= f.check_box :remember_me, as: :boolean %> 记住账号
-          </label>
-        <% end %>
+        <%= f.input :remember_me, label: false, inline_label: '记住账号', as: :boolean %>
       <% end %>
+      
       <div class="control-group">
         <div class="controls">
           <%= f.button :submit, "用户登入", class: 'btn-large btn-success' %>
