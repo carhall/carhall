@@ -48,6 +48,9 @@ gem 'kaminari'
 gem 'paperclip'
 gem 'simple_form'
 
+gem 'rqrcode-rails3'
+gem 'mini_magick'
+
 group :development, :test do
   gem 'faker'
 	gem 'quiet_assets'

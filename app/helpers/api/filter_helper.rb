@@ -25,5 +25,9 @@ module Api
       end
     end
 
+    def set_user_type
+      @user ||= current_base_user
+      @user_type ||= (@user || BaseUser.new).user_type
+    end
   end
 end

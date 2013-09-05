@@ -1,12 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  include Api::FilterHelper
+
   def current_ability
     @current_ability ||= Ability.new(current_base_user)
   end
 
   def self.ensure_base_user_type *user_types
     prepend_before_filter do
+      set_user_type
       raise_base_user_access_denied *user_types
     end
   end
@@ -16,10 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def raise_base_user_access_denied *user_types
-    raise CanCan::AccessDenied unless user_types.include? current_base_user_type
-  end
-
-  def current_base_user_type
-    @user_type ||= (current_base_user || BaseUser.new).user_type
+    raise CanCan::AccessDenied unless user_types.include? @user_type
   end
 end

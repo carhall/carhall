@@ -104,7 +104,6 @@ detail          | 附加字段的 **哈希表**        |
   detail[address]            |                            |
   detail[phone]              | 型号                       |
   detail[open]               | 开店时间                    |
-  detail[accepted]           | 是否通过审核                | 只读
   detail[reg_img]            | 注册上传的资质证明图片        |
 
   **建议：显示时使用dealer_type和business_scopes，因为后期可能会添加新的业务范围**

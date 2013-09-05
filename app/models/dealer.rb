@@ -1,4 +1,6 @@
 class Dealer < BaseUser
+  include Auth::RqrcodeToken
+
   set_detail_class Auth::DealerInfo
 
   has_one :mending

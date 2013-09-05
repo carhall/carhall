@@ -11,7 +11,9 @@ Autozone::Application.routes.draw do
   }
 
   resources :inverse_friends
-  resource :setting
+  resource :setting do
+    get 'rqrcode'
+  end
 
   devise_scope :base_users do
     # APIs

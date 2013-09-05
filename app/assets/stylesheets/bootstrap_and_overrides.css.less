@@ -155,7 +155,7 @@ table.table {
 
 .sidenav {
   width: 228px;
-  // margin: 30px 0 0;
+  margin: 30px 0 0;
   padding: 0;
   background-color: #fff;
   .border-radius(6px);
@@ -184,6 +184,17 @@ table.table {
        -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
             box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
   }
+  & > li > span {
+    display: block;
+    width: 190px \9;
+    margin: 0 0 -1px;
+    padding: 8px 14px;
+    border: 1px solid #e5e5e5;
+
+    img {
+      padding-top: 8px; 
+    }
+  }
 
   /* Chevrons */
   .icon-chevron-right {
@@ -200,7 +211,7 @@ table.table {
   }
   .active .icon-chevron-right,
   .active a:hover .icon-chevron-right {
-    background-image: image-url("glyphicons-halflings-white.png");
+    // background-image: image-url("glyphicons-halflings-white.png");
     opacity: 1;
   }
   &.affix {
