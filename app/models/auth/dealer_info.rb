@@ -3,11 +3,11 @@ module Auth
     extend Share::ImageFile
     define_image_methods :reg_img
     
-    belongs_to :source, class_name: 'Dealer'
-    alias_attribute :user, :source
-    alias_attribute :dealer, :source
+    # belongs_to :source, class_name: 'Dealer'
+    # alias_attribute :user, :source
+    # alias_attribute :dealer, :source
 
-    attr_accessible :source
+    # attr_accessible :source
     attr_accessible :dealer_type_id, :business_scope_ids, :company, 
       :address, :phone, :open, :accepted, :reg_img
     attr_accessible :dealer_type, :business_scopes 

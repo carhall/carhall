@@ -1,7 +1,7 @@
 class CreateUserInfos < ActiveRecord::Migration
   def change
     create_table :user_infos do |t|
-      t.references :source
+      # t.references :source
       t.string  :sex
       t.integer :area_id
       t.integer :brand_id

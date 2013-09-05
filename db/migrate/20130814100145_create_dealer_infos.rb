@@ -1,7 +1,7 @@
 class CreateDealerInfos < ActiveRecord::Migration
   def change
     create_table :dealer_infos do |t|
-      t.references :source
+      # t.references :source
       t.integer :dealer_type_id
       t.string  :business_scope_ids
       t.string  :company
