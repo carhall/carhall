@@ -1,12 +1,14 @@
+require_relative 'auth/authenticatable'
+require_relative 'auth/acceptable'
 require_relative 'auth/confirmable'
 require_relative 'auth/validatable'
+require_relative 'auth/lockable'
 
 class BaseUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :token_authenticatable,
-         :recoverable, :rememberable, :validatable, :lockable#, :confirmable
-         #:trackable
+         :recoverable, :rememberable, :validatable, :confirmable, :acceptable#, :lockable#, :trackable
 
   # For details
   include Share::Detailable

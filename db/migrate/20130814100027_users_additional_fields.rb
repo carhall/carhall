@@ -7,6 +7,8 @@ class UsersAdditionalFields < ActiveRecord::Migration
       t.text    :description
       t.attachment :avatar
 
+      t.datetime :accepted_at
+
       t.references :detail, polymorphic: true
     end
 
