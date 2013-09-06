@@ -28,7 +28,7 @@
         <%= ff.input :company, required: false, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
         <%= ff.input :address, required: false, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" } %>
         <%= ff.input :phone, required: false, wrapper_html: { class: "dealer provider" } %>
-        <%= ff.input :open, required: false, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '例如：09:00 至 18:00' %>
+        <%= ff.input :open_during, required: false, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00' %>
         <%= ff.input :reg_img, required: false, wrapper_html: { class: "dealer" } do %>
           <div class="fileupload fileupload-new" data-provides="fileupload">
             <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[detail][reg_img]" /></span>

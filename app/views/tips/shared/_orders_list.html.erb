@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= translate_attribute_name :id, :base_user %></th>
+      <th><%= translate_attribute_name :avatar, :base_user %></th>
+      <th><%= translate_attribute_name :username, :base_user %></th>
+      <th><%= translate_attribute_name :description, :base_user %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @inverse_friends.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><img src="<%= user.avatar.url(:thumb) %>" /></td>
+        <td><%= user.username %></td>
+        <td><%= user.description %></td>
+      </tr>
+    <% end %>
+    <% if @inverse_friends.empty? %>
+      <tr>
+        <td colspan="100">
+          <strong>还没有用户关注您！</strong>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -7,7 +7,7 @@ class CreateDealerInfos < ActiveRecord::Migration
       t.string  :company
       t.string  :address
       t.string  :phone
-      t.string  :open
+      t.string  :open_during
       t.integer :balance, null: false, default: 0
       t.string  :rqrcode_token
       t.attachment :reg_img

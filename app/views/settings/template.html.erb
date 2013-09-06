@@ -29,16 +29,12 @@
                 <th>保养专修</th>
                 <td><input class="check_boxes" id="base_user_detail_attributes_template_ids_1" name="base_user[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 1 %>></td>
               </tr>
-            </tbody>
-          </table>
-
-          <table class="table">
-            <thead>
               <tr>
-                <th>营销模块管理</th>
+                <td class="blank">&nbsp;</td>
               </tr>
-            </thead>
-            <tbody>
+              <tr>
+                <th class="blank">营销模块管理</th>
+              </tr>
               <tr>
                 <th>团购</th>
                 <td><input class="check_boxes" id="base_user_detail_attributes_template_ids_2" name="base_user[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 2 %>></td>

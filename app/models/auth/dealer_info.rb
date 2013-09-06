@@ -9,7 +9,7 @@ module Auth
 
     # attr_accessible :source
     attr_accessible :dealer_type_id, :business_scope_ids, :template_ids, 
-      :company, :address, :phone, :open, :accepted, :reg_img
+      :company, :address, :phone, :open_during, :accepted, :reg_img
     attr_accessible :dealer_type, :business_scopes, :templates 
 
     extend Share::Id2Key
@@ -26,7 +26,7 @@ module Auth
     def serializable_hash(options={})
       options = { 
         only: [:dealer_type_id, :business_scope_ids, :company, :address, 
-          :phone, :open],
+          :phone, :open_during],
         methods: [:dealer_type, :business_scopes],
       }.update(options)
       super(options)

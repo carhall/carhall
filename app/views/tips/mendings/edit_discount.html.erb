@@ -1,0 +1,50 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/shared/sidenav/dealer" %>
+  </div>
+  
+  <div class="span8">
+    <div class="page-header">
+      <h3>预约独享优惠信息管理 <small></small></h3>
+    </div>
+
+    <%= simple_form_for([:tips, @tip], html: { class: 'form-horizontal' }) do |f| %>
+      <%= devise_error_messages! @tip %>
+
+        <%= f.fields_for :discount do |ff| %>
+          <% (0..6).each do |day| %>
+
+            <div class="control-group">
+              <label class="control-label" for="base_user_current_password"><strong>周<%= t('date.abbr_day_names')[day] %></strong></label>
+            </div>
+
+            <%= ff.fields_for day.to_s do |fff| %>
+              <% fff.object = OpenStruct.new @tip.discount[day.to_s] %>
+
+              <%= fff.input :discount_during, required: false, input_html: { data: { mask: '99:99 至 99:99' }}, hint: ('填数字即可，例如：09:00 至 18:00' if day == 0) %>
+              <%= fff.input :man_hours_discount, required: false, input_html: { data: { mask: '9.9 折' }} %>
+              <%= fff.input :spare_parts_discount, required: false, input_html: { data: { mask: '9.9 折' }}, hint: ('填数字即可，例如：9.0 折' if day == 0) %>
+              
+            <% end %>
+
+            <% if day != 6 %>
+              <hr>
+            <% end %>
+
+          <% end %>
+        <% end %>
+      
+
+      <%= f.button :submit, "更新专修品牌", class: 'btn-submit' %>
+    <% end %>
+
+  </div>
+</div>
+
+<% content_for :stylesheets do %>
+  <style type="text/css">
+    .checkbox {
+      min-width: 100px;
+    }
+  </style>
+<% end %>

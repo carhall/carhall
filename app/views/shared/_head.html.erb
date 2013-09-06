@@ -8,9 +8,9 @@
   <!-- Le styles -->
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
-  <style type="text/css">
-
-  </style>
+  <% if content_for? :stylesheets %>
+    <%= content_for :stylesheets %>
+  <% end %>
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>

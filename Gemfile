@@ -22,6 +22,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-migrate-rails'
 # gem 'bootstrap-sass'
 gem "twitter-bootstrap-rails"
 gem 'jasny_bootstrap_extension_rails'

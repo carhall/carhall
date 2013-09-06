@@ -1,10 +1,13 @@
 zh-CN:
   unknown: 未知
   in_blacklist: 在您的黑名单中
+  unaccepted: 您的账号还没有被激活，请联系管理员为您激活帐户。在账户被激活之前，您不能进行业务管理。
+  update_success: 成功更新%{model}信息。
   activerecord:
     models:
       base_user: 用户
       auth/friendship: 好友
+      mending: 保养专修
     attributes:
       base_user:
         id: ID
@@ -26,12 +29,14 @@ zh-CN:
         company: 单位名称
         address: 地址
         phone: 电话
-        open: 营业时间
+        open_during: 营业时间
         reg_img: 营业执照认证资料
         accepted: 服务商认证
       auth/friendship:
         friend_id: 该 用户
         friend: 好友
+      mending:
+        brand_ids: 专修品牌
   simple_form:
     labels:
       base_user:
@@ -41,6 +46,11 @@ zh-CN:
           company: 单位名称
           address: 地址
           phone: 电话
-          open: 营业时间
+          open_during: 营业时间
           reg_img: 营业执照认证资料
+      mending:
+        discount:
+          discount_during: 优惠时段
+          man_hours_discount: 工时优惠
+          spare_parts_discount: 零件优惠
 

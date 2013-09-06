@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     raise CanCan::AccessDenied unless user_types.include? @user_type
   end
 
-  def self.ensure_base_user_accepted *user_types
+  def self.ensure_base_user_accepted
     prepend_before_filter do
       set_user_type
       raise CanCan::AccessDenied unless @user.accepted?

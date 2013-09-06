@@ -1,0 +1,77 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/shared/sidenav/dealer" %>
+  </div>
+  
+  <div class="span8">
+    <div class="page-header">
+      <h3>业务信息 <small></small></h3>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>上月交易动态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>上月完成订单</th>
+          <td><%= 1 %>笔</td>
+        </tr>
+        <tr>
+          <th>总成交额</th>
+          <td><%= 1 %>元</td>
+        </tr>
+        <tr>
+          <th>交易用户</th>
+          <td><%= 1 %>个</td>
+        </tr>
+        <tr>
+          <th>本月综合评分</th>
+          <td>
+            <% stars = 1 %>
+            <% stars.times do %>
+              <i class="icon-star"></i>
+            <% end %>
+            <% (5 - stars).times do %>
+              <i class="icon-star-empty"></i>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td class="blank">&nbsp;</td>
+        </tr>
+        <tr>
+          <th class="blank">综合数据</th>
+        </tr>
+        <tr>
+          <th>交易达成率</th>
+          <td><%= 1 %>笔</td>
+        </tr>
+        <tr>
+          <th>店铺总评分</th>
+          <td>
+            <% stars = 1 %>
+            <% stars.times do %>
+              <i class="icon-star"></i>
+            <% end %>
+            <% (5 - stars).times do %>
+              <i class="icon-star-empty"></i>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>应收款</th>
+          <td><%= 1 %>元</td>
+        </tr>
+        <tr>
+          <th>应付佣金</th>
+          <td><%= 1 %>元</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

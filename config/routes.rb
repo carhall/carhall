@@ -25,6 +25,30 @@ Autozone::Application.routes.draw do
     get :rqrcode
   end
 
+  namespace :tips do
+    resource :dashboard, only: :show
+    root to: 'dashboards#show'
+
+    resource :mending do
+      get :orders
+      get :edit_discount
+      get :edit_brands
+    end
+
+    resources :cleanings do
+      get :orders, on: :collection
+    end
+    
+    resources :activities do
+      get :expired, on: :collection
+    end
+    
+    resources :bulk_purchasings do
+      get :orders, on: :collection
+      get :expired, on: :collection
+    end    
+  end
+
   devise_scope :base_users do
     # APIs
     namespace :api do

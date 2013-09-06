@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
     t.string   "company"
     t.string   "address"
     t.string   "phone"
-    t.string   "open"
+    t.string   "open_during"
     t.integer  "balance",              :default => 0, :null => false
     t.string   "rqrcode_token"
     t.string   "reg_img_file_name"
@@ -223,6 +223,7 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   create_table "mendings", :force => true do |t|
     t.integer  "dealer_id"
     t.text     "discount"
+    t.text     "brand_ids"
     t.text     "description"
     t.integer  "mending_orders_count"
     t.datetime "created_at",           :null => false

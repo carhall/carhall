@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-migrate
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jasny-bootstrap

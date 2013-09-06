@@ -1,6 +1,6 @@
 module ApplicationHelper
   def active? name
-    if controller_name == name or "#{controller_name}##{action_name}" == name
+    if "#{controller_path}##{action_name}".start_with? name
       " class=\"active\"".html_safe
     end
   end

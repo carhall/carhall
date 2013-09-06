@@ -1,0 +1,29 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/shared/sidenav/dealer" %>
+  </div>
+  
+  <div class="span8">
+    <div class="page-header">
+      <h3>专修品牌管理 <small></small></h3>
+    </div>
+
+    <%= simple_form_for([:tips, @tip], html: { class: 'form-horizontal' }) do |f| %>
+      <%= devise_error_messages! @tip %>
+
+        <%= f.input :brand_ids, collection: Share::Brandable::Brands.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" } %>
+      
+
+      <%= f.button :submit, "更新专修品牌", class: 'btn-submit' %>
+    <% end %>
+
+  </div>
+</div>
+
+<% content_for :stylesheets do %>
+  <style type="text/css">
+    .checkbox {
+      min-width: 100px;
+    }
+  </style>
+<% end %>
