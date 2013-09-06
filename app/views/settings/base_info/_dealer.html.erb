@@ -44,7 +44,7 @@
     </tr>
     <tr>
       <th><%= translate_attribute_name :accepted, :detail %></th>
-      <td><%= if @user.access_locked? then '未通过' else '已通过' end %></td>
+      <td><label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label></td>
     </tr>
     <tr>
       <th><%= translate_attribute_name :description, :base_user %></th>

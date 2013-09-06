@@ -8,7 +8,9 @@ class BaseUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :token_authenticatable,
-         :recoverable, :rememberable, :validatable, :confirmable, :acceptable#, :lockable#, :trackable
+         :recoverable, :rememberable, :validatable, :confirmable#, :lockable#, :trackable
+
+  include Auth::Acceptable
 
   # For details
   include Share::Detailable

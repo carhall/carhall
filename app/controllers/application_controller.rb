@@ -11,15 +11,18 @@ class ApplicationController < ActionController::Base
   def self.ensure_base_user_type *user_types
     prepend_before_filter do
       set_user_type
-      raise_base_user_access_denied *user_types
+      raise CanCan::AccessDenied unless user_types.include? @user_type
     end
   end
 
   def ensure_base_user_type *user_types
-    raise_base_user_access_denied *user_types
+    raise CanCan::AccessDenied unless user_types.include? @user_type
   end
 
-  def raise_base_user_access_denied *user_types
-    raise CanCan::AccessDenied unless user_types.include? @user_type
+  def self.ensure_base_user_accepted *user_types
+    prepend_before_filter do
+      set_user_type
+      raise CanCan::AccessDenied unless @user.accepted?
+    end
   end
 end

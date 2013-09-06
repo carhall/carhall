@@ -3,15 +3,15 @@ module Api
     protected
 
     def set_user
-      if user_id = params[:user_id]
-        @user = BaseUser.find(user_id)
+      @user ||= if user_id = params[:user_id]
+        BaseUser.find(user_id)
       else
-        @user = current_base_user
+        current_base_user
       end
     end
 
     def set_current_user
-      @user = current_base_user
+      @user ||= current_base_user
     end
 
     def set_area_id_and_brand_id
