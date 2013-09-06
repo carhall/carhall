@@ -1,4 +1,4 @@
-class Api::CommentsController < Api::BaseController
+class Api::CommentsController < Api::ApplicationController
   before_filter :set_parent
 
   # GET /api/resources/1/comments

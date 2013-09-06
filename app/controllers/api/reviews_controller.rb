@@ -1,4 +1,4 @@
-class Api::ReviewsController < Api::BaseController
+class Api::ReviewsController < Api::ApplicationController
   before_filter :set_parent
 
   # GET /api/resources/1/reviews

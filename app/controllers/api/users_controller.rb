@@ -1,4 +1,4 @@
-class Api::UsersController < Api::BaseController
+class Api::UsersController < Api::ApplicationController
   skip_before_filter :authenticate_base_user!, only: [:login, :create]
 
   set_resource_class BaseUser, detail: true

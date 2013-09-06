@@ -1,4 +1,4 @@
-class Api::MechanicsController < Api::BaseController
+class Api::MechanicsController < Api::ApplicationController
   before_filter :set_current_user
   before_filter :set_area_id_and_brand_id, except: :create
 

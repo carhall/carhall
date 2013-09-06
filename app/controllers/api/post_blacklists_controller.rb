@@ -1,4 +1,4 @@
-class Api::PostBlacklistsController < Api::BaseController
+class Api::PostBlacklistsController < Api::ApplicationController
   before_filter :set_user
 
   # GET /api/post_blacklists

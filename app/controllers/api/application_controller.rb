@@ -1,4 +1,4 @@
-class Api::BaseController < ActionController::Base
+class Api::ApplicationController < ActionController::Base
   before_filter :authenticate_base_user!
 
   include Api::RenderHelper

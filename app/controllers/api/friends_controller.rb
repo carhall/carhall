@@ -1,4 +1,4 @@
-class Api::FriendsController < Api::BaseController
+class Api::FriendsController < Api::ApplicationController
   before_filter :set_user
 
   # GET /api/friends

@@ -1,4 +1,4 @@
-class Api::OrdersController < Api::BaseController
+class Api::OrdersController < Api::ApplicationController
   before_filter :set_parent
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
