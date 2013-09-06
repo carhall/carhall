@@ -1,4 +1,4 @@
-class Users::RegistrationsController < Devise::RegistrationsController
+class BaseUsers::RegistrationsController < Devise::RegistrationsController
   def resource_class
     if @resource_class
       @resource_class
@@ -7,6 +7,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       user_type = params[:base_user][:user_type_id]
       @resource_class = [Provider, Dealer][user_type.to_i]
+    end
+  end
+
+  # POST /resource
+  def create
+    build_resource(sign_up_params)
+
+    if resource.save
+      if resource.active_for_authentication?
+        set_flash_message :notice, :signed_up if is_navigational_format?
+        sign_up(resource_name, resource)
+        respond_with resource, :location => after_sign_up_path_for(resource)
+      else
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
+        expire_session_data_after_sign_in!
+        respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      respond_with resource
     end
   end
 
@@ -38,8 +58,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def confirm
+    resource_class.send_confirmation_instructions(resource_params)
+
+    if successfully_sent?(resource)
+      respond_with({}, :location => after_resending_confirmation_instructions_path_for(resource_name))
+    else
+      respond_with(resource)
+    end
+  end
+
   def after_update_path_for resource
     setting_path
+  end
+
+  def after_inactive_sign_up_path_for resource
+    return { action: :edit, controller: :'base_users/confirmations' } unless resource.confirmed?
+    dashboard_path
+  end
+
+  def after_resending_confirmation_instructions_path_for resource
+    new_base_user_confirmation_path
   end
 
 end 
