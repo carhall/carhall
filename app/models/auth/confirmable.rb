@@ -291,7 +291,10 @@ module Devise
 
         # Generate a token checking if one does not already exist in the database.
         def confirmation_token
-          generate_token(:confirmation_token)
+          loop do
+            token = "%06d" % SecureRandom.random_number(1000000)
+            break token unless to_adapter.find_first({ :confirmation_token => token })
+          end
         end
 
         # Find a record for confirmation by unconfirmed mobile field

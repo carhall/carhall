@@ -11,7 +11,7 @@
 <% end %>
 
 <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <strong><p><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %></p></strong>
+  <strong><p><%= link_to "没有收到验证短信？", new_confirmation_path(resource_name) %></p></strong>
 <% end %>
 
 <%# if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>

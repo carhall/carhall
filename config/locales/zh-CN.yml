@@ -17,6 +17,7 @@ zh-CN:
         user_type: 用户类型
         user_type_id: 用户类型
         description: 用户说明
+        confirmation_token: 手机验证码
       detail:
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型

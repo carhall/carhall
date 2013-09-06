@@ -1,12 +1,14 @@
-<h2>Resend confirmation instructions</h2>
-
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+<div class="page-header">
+  <h3>公众号验证 <small></small></h3>
+</div>
+<%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { class: 'form-horizontal', method: :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <%= f.input :mobile, autofocus: true %>
 
-  <div><%= f.submit "Resend confirmation instructions" %></div>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.button :submit, "重新发送验证码", class: 'btn-large btn-success' %>
+    </div>
+  </div>
 <% end %>
-
-<%= render "devise/shared/links" %>

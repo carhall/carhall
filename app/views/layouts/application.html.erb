@@ -6,36 +6,31 @@
 
 <!DOCTYPE html>
 <html>
-  <%= render 'share/head' %>
+  <%= render 'shared/head' %>
   <body>
     <div class="container">
-      <%= render 'share/header' %>
+      <%= render 'shared/header' %>
 
       <div class="navbar">
         <div class="navbar-inner">
           <div class="container">
             <% case @user_type %>
             <% when :provider, :dealer, :admin %>
-              <%= render "share/nav/#{@user_type}" %>
+              <%= render "shared/nav/#{@user_type}" %>
             <% else %>
-              <%= render 'share/nav/welcome' %>
+              <%= render 'shared/nav/welcome' %>
             <% end %>
           </div>
         </div>
       </div><!-- /.navbar -->
 
-      <% flash.each do |type, message| %>
-        <div class="alert alert-<%= { alert: :block, notice: :info }[type] || type.to_s %> fade in">
-          <button class="close" data-dismiss="alert">×</button>
-          <%= message %>
-        </div>
-      <% end %>
+      <%= render 'shared/notices' %>
 
       <!-- Container -->
       <%= yield %>
       
-      <%= render 'share/footer' %>
+      <%= render 'shared/footer' %>
     </div> <!-- /container -->
-    <%= render 'share/javascripts' %>
+    <%= render 'shared/javascripts' %>
   </body>
 </html>
