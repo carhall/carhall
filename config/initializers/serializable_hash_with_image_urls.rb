@@ -1,0 +1,55 @@
+ActiveModel::Serialization.module_eval do
+  def serializable_hash(options = nil)
+    options ||= {}
+
+    attribute_names = attributes.keys.sort
+    if only = options[:only]
+      attribute_names &= Array.wrap(only).map(&:to_s)
+    elsif except = options[:except]
+      attribute_names -= Array.wrap(except).map(&:to_s)
+    end
+
+    hash = {}
+    attribute_names.each { |n| hash[n] = read_attribute_for_serialization(n) }
+
+    Array.wrap(options[:methods]).each { |n| hash[n] = send(n) if respond_to?(n) }
+
+    request = options[:request] if options[:images]
+    absolute_url_prefix = "#{request.protocol}#{request.host_with_port}"if request
+
+    Array.wrap(options[:images]).each do |n| 
+      if respond_to?(n) and (image = send(n)).kind_of? Paperclip::Attachment
+        hash["#{n}_url"] = "#{absolute_url_prefix}#{image.url(:original)}"
+        hash["#{n}_medium_url"] = "#{absolute_url_prefix}#{image.url(:medium)}"
+        hash["#{n}_thumb_url"] = "#{absolute_url_prefix}#{image.url(:thumb)}"
+      end
+    end
+
+    serializable_add_includes(options) do |association, records, opts|
+      hash[association] = if records.is_a?(Enumerable)
+        records.map { |a| a.serializable_hash(opts) }
+      else
+        records.serializable_hash(opts)
+      end
+    end
+
+    hash
+  end
+
+  private
+
+  def serializable_add_includes(options = {}) #:nodoc:
+    return unless include = options[:include]
+
+    unless include.is_a?(Hash)
+      include = Hash[Array.wrap(include).map { |n| n.is_a?(Hash) ? n.to_a.first : [n, {}] }]
+    end
+
+    include.each do |association, opts|
+      if records = send(association)
+        yield association, records, opts.merge(request: options[:request])
+      end
+    end
+  end
+
+end

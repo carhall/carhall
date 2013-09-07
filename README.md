@@ -33,7 +33,7 @@ PUT和DELETE可以使用POST模拟，需要额外添加_method=put/delete参数
 
 如果没有特殊说明，每章中的字段一节，就是创建，或编辑资源所需要提交的所有字段名  
 而GET请求返回的资源，字段名也是这些，并包含一个ID，表示资源ID  
-但要对于图片资源，例如字段名为image，上传时使用data[image]提交表单，但GET请求返回的资源中，字段名会变成image_url和image_thumb_url，分别代表原始图片URL和缩略图URL，缩略图暂定为60x60像素  
+但要对于图片资源，例如字段名为image，上传时使用data[image]提交表单，但GET请求返回的资源中，字段名会变成image_url、image_medium_url和image_thumb_url，分别代表原始图片URL、中等尺寸图片URL和缩略图URL，缩略图暂定为60x60像素  
 
 关于请求的URI
 ----------

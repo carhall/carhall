@@ -1,30 +1,53 @@
-<ul class="nav nav-list sidenav affix-top">
-  <li><span><strong>交易管理</strong></span></li>
-  <li<%= active? 'tips/bulk_purchasings#orders' %>><a href="<%= orders_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 团购订单</a></li>
-  <li<%= active? 'tips/cleanings#orders' %>><a href="<%= orders_tips_cleanings_path %>"><i class="icon-chevron-right"></i> 洗车美容订单</a></li>
-  <li<%= active? 'tips/mendings#orders' %>><a href="<%= orders_tips_mending_path %>"><i class="icon-chevron-right"></i> 保养专修订单</a></li>
-</ul>
+<% if @dealer.has_template? :bulk_purchasing or @dealer.has_template? :cleaning or @dealer.has_template? :mending %>
+  <ul class="nav nav-list sidenav affix-top">
+    <li><span><strong>交易管理</strong></span></li>
 
-<ul class="nav nav-list sidenav">
-  <li><span><strong>业务管理</strong></span></li>
-  <li><span>洗车美容</span></li>
-  <li<%= active? 'tips/cleanings#new' %>><a href="<%= new_tips_cleaning_path %>"><i class="icon-chevron-right"></i> 发布服务项目</a></li>
-  <li<%= active? 'tips/cleanings#index' %>><a href="<%= tips_cleanings_path %>"><i class="icon-chevron-right"></i> 管理服务项目</a></li>
+    <% if @dealer.has_template? :bulk_purchasing %>
+      <li<%= active? 'tips/bulk_purchasings#orders' %>><a href="<%= orders_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 团购订单</a></li>
+    <% end %>
 
-  <li><span>保养专修</span></li>
-  <li<%= active? 'tips/mendings#edit_brands' %>><a href="<%= edit_brands_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理专修品牌</a></li>
-  <li<%= active? 'tips/mendings#edit_discount' %>><a href="<%= edit_discount_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理预约优惠信息</a></li>
-</ul>
+    <% if @dealer.has_template? :cleaning %>
+      <li<%= active? 'tips/cleanings#orders' %>><a href="<%= orders_tips_cleanings_path %>"><i class="icon-chevron-right"></i> 洗车美容订单</a></li>
+    <% end %>
+    
+    <% if @dealer.has_template? :mending %>
+      <li<%= active? 'tips/mendings#orders' %>><a href="<%= orders_tips_mending_path %>"><i class="icon-chevron-right"></i> 保养专修订单</a></li>
+    <% end %>
+  </ul>
+<% end %>
 
-<ul class="nav nav-list sidenav">
-  <li><span><strong>营销管理</strong></span></li>
-  <li><span>活动</span></li>
-  <li<%= active? 'tips/activities#new' %>><a href="<%= new_tips_activity_path %>"><i class="icon-chevron-right"></i> 发布活动</a></li>
-  <li<%= active? 'tips/activities#index' %>><a href="<%= tips_activities_path %>"><i class="icon-chevron-right"></i> 进行中的活动</a></li>
-  <li<%= active? 'tips/activities#expired' %>><a href="<%= expired_tips_activities_path %>"><i class="icon-chevron-right"></i> 已结束的活动</a></li>
+<% if @dealer.has_template? :cleaning or @dealer.has_template? :mending %>
+  <ul class="nav nav-list sidenav">
+    <li><span><strong>业务管理</strong></span></li>
+    <% if @dealer.has_template? :cleaning %>
+      <li><span>洗车美容</span></li>
+      <li<%= active? 'tips/cleanings#new' %>><a href="<%= new_tips_cleaning_path %>"><i class="icon-chevron-right"></i> 发布服务项目</a></li>
+      <li<%= active? 'tips/cleanings#index' %>><a href="<%= tips_cleanings_path %>"><i class="icon-chevron-right"></i> 管理服务项目</a></li>
+    <% end %>
 
-  <li><span>团购</span></li>
-  <li<%= active? 'tips/bulk_purchasings#new' %>><a href="<%= new_tips_bulk_purchasing_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
-  <li<%= active? 'tips/bulk_purchasings#index' %>><a href="<%= tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
-  <li<%= active? 'tips/bulk_purchasings#expired' %>><a href="<%= expired_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 已结束的团购</a></li>
-</ul>
+    <% if @dealer.has_template? :mending %>
+      <li><span>保养专修</span></li>
+      <li<%= active? 'tips/mendings#edit_brands' %>><a href="<%= edit_brands_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理专修品牌</a></li>
+      <li<%= active? 'tips/mendings#edit_discount' %>><a href="<%= edit_discount_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理预约优惠信息</a></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @dealer.has_template? :bulk_purchasing or @dealer.has_template? :activity %>
+  <ul class="nav nav-list sidenav">
+    <li><span><strong>营销管理</strong></span></li>
+    <% if @dealer.has_template? :activity %>
+      <li><span>活动</span></li>
+      <li<%= active? 'tips/activities#new' %>><a href="<%= new_tips_activity_path %>"><i class="icon-chevron-right"></i> 发布活动</a></li>
+      <li<%= active? 'tips/activities#index' %>><a href="<%= tips_activities_path %>"><i class="icon-chevron-right"></i> 进行中的活动</a></li>
+      <li<%= active? 'tips/activities#expired' %>><a href="<%= expired_tips_activities_path %>"><i class="icon-chevron-right"></i> 已结束的活动</a></li>
+    <% end %>
+
+    <% if @dealer.has_template? :bulk_purchasing %>
+      <li><span>团购</span></li>
+      <li<%= active? 'tips/bulk_purchasings#new' %>><a href="<%= new_tips_bulk_purchasing_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
+      <li<%= active? 'tips/bulk_purchasings#index' %>><a href="<%= tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
+      <li<%= active? 'tips/bulk_purchasings#expired' %>><a href="<%= expired_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 已结束的团购</a></li>
+    <% end %>
+  </ul>
+<% end %>

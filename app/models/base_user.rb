@@ -8,7 +8,7 @@ class BaseUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :token_authenticatable,
-         :recoverable, :rememberable, :validatable, :confirmable#, :lockable#, :trackable
+         :recoverable, :rememberable, :validatable#, :confirmable#, :lockable#, :trackable
 
   include Auth::Acceptable
 
@@ -21,8 +21,6 @@ class BaseUser < ActiveRecord::Base
   include Share::Friendshipable
 
   # For avatar
-  extend Share::ImageFile
-  define_image_methods :avatar
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" },
     path: ':rails_root/public/system/base_users/:attachment/:id_partition/:style/:filename'
 
@@ -35,9 +33,10 @@ class BaseUser < ActiveRecord::Base
   attr_accessible :detail, :user_type_id
 
   def serializable_hash(options={})
-    options = { 
+    options = {
       only: [:id, :username, :mobile, :destription],
-      methods: [:avatar_thumb_url, :avatar_url, :user_type],
+      methods: [:user_type],
+      images: [:avatar]
       # include: [:detail],
     }.update(options)
     super(options)

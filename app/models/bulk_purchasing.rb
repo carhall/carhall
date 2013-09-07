@@ -4,14 +4,13 @@ class BulkPurchasing < ActiveRecord::Base
   alias_attribute :orders, :bulk_purchasing_orders
   has_many :reviews, through: :bulk_purchasing_orders
 
-  extend Share::ImageFile
-  define_image_methods :image
+  has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60>" }
 
   def serializable_hash(options={})
     options = { 
       only: [:id, :title, :expire_at, :typehood, 
         :price, :vip_price, :description, :bulk_purchasing_orders_count],
-      methods: [:image_thumb_url, :image_url],
+      images: [:image],
       include: [:dealer],
     }.update(options)
     super(options)

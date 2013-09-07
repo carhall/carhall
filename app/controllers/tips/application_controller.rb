@@ -64,9 +64,4 @@ class Tips::ApplicationController < ApplicationController
     I18n.t(message_type, model: I18n.t(model, scope: 'activerecord.models'))
   end
 
-  protected
-  
-  def set_dealer
-    @dealer = Dealer.find(@user.id)
-  end
 end

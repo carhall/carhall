@@ -1,7 +1,6 @@
 module Auth
   class DealerInfo < ActiveRecord::Base    
-    extend Share::ImageFile
-    define_image_methods :reg_img
+    has_attached_file :reg_img, styles: { medium: "300x200>", thumb: "60x60>" }
     
     # belongs_to :source, class_name: 'Dealer'
     # alias_attribute :user, :source
@@ -22,6 +21,13 @@ module Auth
 
     Templates = %w(洗车美容 保养专修 团购 近期活动)
     define_ids2keys_methods :templates
+
+    TemplateSyms = %i(cleaning mending bulk_purchasing activity)
+    def template_syms
+      @template_syms ||= template_ids.map do |id|
+        TemplateSyms[id]
+      end
+    end
 
     def serializable_hash(options={})
       options = { 

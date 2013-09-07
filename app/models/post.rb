@@ -4,8 +4,7 @@ class Post < ActiveRecord::Base
   include Share::Areable
   include Share::Brandable
 
-  extend Share::ImageFile
-  define_image_methods :image
+  has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60>" }
 
   attr_accessible :content, :image
   attr_accessible :user
@@ -31,8 +30,9 @@ class Post < ActiveRecord::Base
   def serializable_hash(options={})
     options = { 
       only: [:id, :content, :view_count, :comments_count, :created_at],
-      methods: [:image_thumb_url, :image_url, :area, :brand],
-      include: [:user]
+      methods: [:area, :brand],
+      images: [:image],
+      include: [:user],
     }.update(options)
     super(options)
   end

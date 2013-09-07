@@ -16,4 +16,8 @@ class Dealer < BaseUser
   has_many :orders, class_name: 'BaseOrder'
   has_many :reviews, through: :orders
 
+  def has_template? template
+    detail.template_syms.include? template
+  end
+
 end

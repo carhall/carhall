@@ -2,7 +2,7 @@ class Api::ApplicationController < ActionController::Base
   before_filter :authenticate_base_user!
 
   include Api::RenderHelper
-  include Api::FilterHelper
+  include FilterHelper
 
   def self.set_resource_class klass, options = {}
     # GET /api/resources

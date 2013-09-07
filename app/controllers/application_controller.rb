@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  include Api::FilterHelper
+  include FilterHelper
   before_filter :set_user_type
 
   def current_ability

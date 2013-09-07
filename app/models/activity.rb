@@ -1,13 +1,12 @@
 class Activity < ActiveRecord::Base
   belongs_to :dealer
 
-  extend Share::ImageFile
-  define_image_methods :image
+  has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60>" }
 
   def serializable_hash(options={})
     options = { 
       only: [:title, :expire_at, :description],
-      methods: [:image_thumb_url, :image_url],
+      images: [:image],
       include: [:dealer],
     }.update(options)
     super(options)

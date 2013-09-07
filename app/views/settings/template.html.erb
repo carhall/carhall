@@ -13,7 +13,7 @@
         <img src="<%= @user.avatar_url %>">
       </div>
       <div class="span9">
-        <%= form_for(@user, url: registration_path(:base_user), html: { method: :put, class: 'form-horizontal' }) do |f| %>
+        <%= simple_form_for(@user, url: registration_path(:base_user), html: { method: :put, class: 'form-horizontal' }) do |f| %>
           <table class="table">
             <thead>
               <tr>

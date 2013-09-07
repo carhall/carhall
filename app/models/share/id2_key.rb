@@ -32,23 +32,20 @@ module Share
         serialize :#{attr_ids_name}, Array
 
         def #{attrs_name}
-          @#{attrs_name} ||= (#{attr_ids_name}||[]).map do |id|
+          @#{attrs_name} ||= #{attr_ids_name}.map do |id|
             #{array_name}[id]
           end
         end
 
         def #{attrs_name}= #{attrs_name}
           @#{attrs_name} = #{attrs_name}
+          self.#{attr_ids_name} = #{attrs_name}.map do |key|
+            #{array_name}.index key
+          end
         end
 
         def #{attr_ids_name}= #{attr_ids_name}
           super Share::Id2Key.clean_up_ids #{attr_ids_name}
-        end
-
-        before_save do
-          self.#{attr_ids_name} = @#{attrs_name}.map do |key|
-            #{array_name}.index key
-          end if @#{attrs_name}
         end
       EOM
     end

@@ -3,11 +3,11 @@ module Api
     def render_index resources
       resources = resources.page(params[:page]) if params[:page]
       resources = resources.per(params[:per_page]) if params[:per_page]
-      render json: { data: resources, success: true }
+      render json: { data: resources.serializable_hash(request: request), success: true }
     end
 
     def render_show resource
-      render json: { data: resource, success: true }
+      render json: { data: resource.serializable_hash(request: request), success: true }
     end
 
     def render_create resource, additional_data = nil
@@ -19,15 +19,15 @@ module Api
     end
 
     def render_create_success resource, additional_data = nil
-      data = { data: resource, success: true }
-      data.merge! additional_data if additional_data
-      render json: data, status: :created
+      json = { data: resource.serializable_hash(request: request), success: true }
+      json.merge! additional_data if additional_data
+      render json: json, status: :created
     end
 
     def render_update_success resource, additional_data = nil
-      data = { data: resource, success: true }
-      data.merge! additional_data if additional_data
-      render json: data, status: :accepted
+      json = { data: resource.serializable_hash(request: request), success: true }
+      json.merge! additional_data if additional_data
+      render json: json, status: :accepted
     end
 
     def render_failure resource, status = :unprocessable_entity
