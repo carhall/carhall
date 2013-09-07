@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= translate_attribute_name :id, :activity %></th>
+      <th><%= translate_attribute_name :image, :activity %></th>
+      <th><%= translate_attribute_name :title, :activity %></th>
+      <th><%= translate_attribute_name :expire_at, :activity %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tips.each do |tip| %>
+      <tr>
+        <td><%= tip.id %></td>
+        <td><img src="<%= tip.image.url(:thumb) %>"></td>
+        <td><%= tip.title %></td>
+        <td><%= tip.expire_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

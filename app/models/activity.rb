@@ -3,6 +3,10 @@ class Activity < ActiveRecord::Base
 
   has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60>" }
 
+  attr_accessible :title, :expire_at, :description
+
+  include Share::Expiredable
+
   def serializable_hash(options={})
     options = { 
       only: [:title, :expire_at, :description],

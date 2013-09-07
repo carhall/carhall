@@ -8,7 +8,9 @@
       <h3>已结束的活动列表 <small></small></h3>
     </div>
 
+    <%= render 'shared/alert', message: '您还没有已结束的活动！' if @tips.empty? %>
 
+    <%= render 'list' %>
 
   </div>
 </div>

@@ -8,7 +8,32 @@
       <h3>服务项目管理 <small></small></h3>
     </div>
 
+    <%= render 'shared/alert', message: '您还没有创建任何服务项目！' if @tips.empty? %>
 
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= translate_attribute_name :id, :cleaning %></th>
+          <th><%= translate_attribute_name :image, :cleaning %></th>
+          <th><%= translate_attribute_name :title, :cleaning %></th>
+          <th><%= translate_attribute_name :cleaning_type, :cleaning %></th>
+          <th><%= translate_attribute_name :vip_price, :cleaning %></th>
+          <th><%= translate_attribute_name :price, :cleaning %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tips.each do |tip| %>
+          <tr>
+            <td><%= tip.id %></td>
+            <td><%= tip.image %></td>
+            <td><%= tip.title %></td>
+            <td><%= tip.cleaning_type %></td>
+            <td><%= tip.vip_price %></td>
+            <td><%= tip.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
   </div>
 </div>

@@ -4,9 +4,9 @@ class CreateBulkPurchasings < ActiveRecord::Migration
       t.references :dealer
       t.string   :title
       t.datetime :expire_at
-      t.string   :typehood
-      t.integer  :price
-      t.integer  :vip_price
+      t.integer  :bulk_purchasing_type_id
+      t.float    :price
+      t.float    :vip_price
       t.text     :description
       t.integer  :bulk_purchasing_orders_count
       t.attachment :image

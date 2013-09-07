@@ -2,7 +2,7 @@ class CreateCleaningOrderInfos < ActiveRecord::Migration
   def change
     create_table :cleaning_order_infos do |t|
       t.references :source
-      t.integer :price
+      t.float   :price
       t.integer :count
       t.integer :used_count
 

@@ -10,7 +10,7 @@
 
     <div class="row-fluid">
       <div class="span3">
-        <img src="<%= @user.avatar_url %>">
+        <img src="<%= @user.avatar.url %>">
       </div>
       <div class="span9">
         <%= simple_form_for(@user, url: registration_path(:base_user), html: { method: :put, class: 'form-horizontal' }) do |f| %>

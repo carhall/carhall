@@ -5,10 +5,12 @@
   
   <div class="span8">
     <div class="page-header">
-      <h3>进行中的团购列表 <small></small></h3>
+      <h3>团购项目管理 <small></small></h3>
     </div>
 
+    <%= render 'shared/alert', message: '您还没有创建任何团购！' if @tips.empty? %>
 
+    <%= render 'list' %>
 
   </div>
 </div>

@@ -324,7 +324,7 @@ Cleaning 洗车美容
 ==========
 字段
 ----------
-:title, :typehood（类型，因为我用的框架type是保留字，所以用了typehood）, :price（原价）, :vip_price（优惠价）, :description, :image, :cleaning_orders_count（洗车美容订单数）  
+:title, :cleaning_type（类型）, :price（原价）, :vip_price（优惠价）, :description, :image, :cleaning_orders_count（洗车美容订单数）  
 
 API
 ----------
@@ -352,7 +352,7 @@ BulkPurchasing 团购
 ==========
 字段
 ----------
-:title, :expire_at（过期时间）:typehood, :price（原价）, :vip_price（团购价）, :description, :image, :bulk_purchasing_orders_count（团购订单数）  
+:title, :expire_at（过期时间）:bulk_purchasing_type, :price（原价）, :vip_price（团购价）, :description, :image, :bulk_purchasing_orders_count（团购订单数）  
 
 API
 ----------

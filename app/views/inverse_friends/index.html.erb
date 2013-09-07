@@ -2,6 +2,8 @@
   <h3>客户列表 <small></small></h3>
 </div>
 
+<%= render 'shared/alert', message: '还没有用户关注您！' if @inverse_friends.empty? %>
+
 <table class="table">
   <thead>
     <tr>
@@ -18,13 +20,6 @@
         <td><img src="<%= user.avatar.url(:thumb) %>" /></td>
         <td><%= user.username %></td>
         <td><%= user.description %></td>
-      </tr>
-    <% end %>
-    <% if @inverse_friends.empty? %>
-      <tr>
-        <td colspan="100">
-          <strong>还没有用户关注您！</strong>
-        </td>
       </tr>
     <% end %>
   </tbody>

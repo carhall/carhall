@@ -39,15 +39,22 @@
     <% if @dealer.has_template? :activity %>
       <li><span>活动</span></li>
       <li<%= active? 'tips/activities#new' %>><a href="<%= new_tips_activity_path %>"><i class="icon-chevron-right"></i> 发布活动</a></li>
-      <li<%= active? 'tips/activities#index' %>><a href="<%= tips_activities_path %>"><i class="icon-chevron-right"></i> 进行中的活动</a></li>
+      <li<%= active? 'tips/activities#in_progress' %>><a href="<%= in_progress_tips_activities_path %>"><i class="icon-chevron-right"></i> 进行中的活动</a></li>
       <li<%= active? 'tips/activities#expired' %>><a href="<%= expired_tips_activities_path %>"><i class="icon-chevron-right"></i> 已结束的活动</a></li>
     <% end %>
 
     <% if @dealer.has_template? :bulk_purchasing %>
       <li><span>团购</span></li>
       <li<%= active? 'tips/bulk_purchasings#new' %>><a href="<%= new_tips_bulk_purchasing_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
-      <li<%= active? 'tips/bulk_purchasings#index' %>><a href="<%= tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
+      <li<%= active? 'tips/bulk_purchasings#in_progress' %>><a href="<%= in_progress_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
       <li<%= active? 'tips/bulk_purchasings#expired' %>><a href="<%= expired_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 已结束的团购</a></li>
     <% end %>
   </ul>
+<% end %>
+
+<% unless @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :bulk_purchasing or @dealer.has_template? :activity %>
+  <div class="alert alert-error fade in">
+    <button class="close" data-dismiss="alert">×</button>
+    您还没有添加任何业务模板，请在 <a href="<%= template_setting_path %>">业务模板管理</a> 中添加模板。
+  </div>
 <% end %>

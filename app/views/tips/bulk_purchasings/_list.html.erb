@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= translate_attribute_name :id, :bulk_purchasing %></th>
+      <th><%= translate_attribute_name :image, :bulk_purchasing %></th>
+      <th><%= translate_attribute_name :title, :bulk_purchasing %></th>
+      <th><%= translate_attribute_name :expire_at, :bulk_purchasing %></th>
+      <th><%= translate_attribute_name :bulk_purchasing_type, :bulk_purchasing %></th>
+      <th><%= translate_attribute_name :vip_price, :bulk_purchasing %></th>
+      <th><%= translate_attribute_name :price, :bulk_purchasing %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tips.each do |tip| %>
+      <tr>
+        <td><%= tip.id %></td>
+        <td><%= tip.image %></td>
+        <td><%= tip.title %></td>
+        <td><%= tip.expire_at %></td>
+        <td><%= tip.bulk_purchasing_type %></td>
+        <td><%= tip.vip_price %></td>
+        <td><%= tip.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

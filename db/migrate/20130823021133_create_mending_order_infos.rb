@@ -2,11 +2,12 @@ class CreateMendingOrderInfos < ActiveRecord::Migration
   def change
     create_table :mending_order_infos do |t|
       t.references :source
-      t.integer  :price
+      t.float    :price
       t.integer  :brand_id
+      t.string   :series
       t.string   :plate_num
       t.datetime :arrive_at
-      t.integer  :mending_type
+      t.text     :description
       
     end
     

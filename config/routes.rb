@@ -40,10 +40,12 @@ Autozone::Application.routes.draw do
     end
     
     resources :activities do
+      get :in_progress, on: :collection
       get :expired, on: :collection
     end
     
     resources :bulk_purchasings do
+      get :in_progress, on: :collection
       get :orders, on: :collection
       get :expired, on: :collection
     end    
@@ -146,6 +148,7 @@ Autozone::Application.routes.draw do
       # Need to return JSON-formatted 404 error in Rails
       match '*foo', :to => ->(env) { [404, {"Content-Type" => "application/json; charset=utf-8"}, [{
         error: "No route matches [#{env["REQUEST_METHOD"]}] \"#{env["PATH_INFO"]}\"",
+        error_code: :not_found,
         success: false
       }.to_json]] }
     end

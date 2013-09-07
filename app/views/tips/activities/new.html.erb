@@ -8,7 +8,26 @@
       <h3>发布新的活动 <small></small></h3>
     </div>
 
+    <%= simple_form_for([:tips, @tip], html: { class: 'form-horizontal', multipart: true }) do |f| %>
+      <%= devise_error_messages! @tip %>
 
+      <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
+      <%= f.input :expire_at, as: :string, input_html: { data: { mask: '9999-99-99 99:99' }}, hint: '团购截止时间，填数字即可，例如：2013-01-01 12:00' %>
+      <%= f.input :image do %>
+        <div class="fileupload fileupload-new" data-provides="fileupload">
+          <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="http://www.placehold.it/175x175" /></div>
+          <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+          <div>
+            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="activity[image]" /></span>
+            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+          </div>
+        </div>
+      <% end %>
+
+      <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
+
+      <%= f.button :submit, "发布服务项目", class: 'btn-submit' %>
+    <% end %>
 
   </div>
 </div>

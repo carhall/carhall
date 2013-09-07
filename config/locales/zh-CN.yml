@@ -3,11 +3,16 @@ zh-CN:
   in_blacklist: 在您的黑名单中
   unaccepted: 您的账号还没有被激活，请联系管理员为您激活帐户。在账户被激活之前，您不能进行业务管理。
   update_success: 成功更新%{model}信息。
+  mending: "%{brand} 保养专修"
+  times:  " %{count} 份"
   activerecord:
     models:
       base_user: 用户
       auth/friendship: 好友
       mending: 保养专修
+      cleaning: 洗车美容
+      activity: 活动
+      bulk_purchasing: 团购
     attributes:
       base_user:
         id: ID
@@ -21,7 +26,6 @@ zh-CN:
         user_type_id: 用户类型
         description: 用户说明
         confirmation_token: 手机验证码
-      detail:
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型
         business_scope_ids: 业务范围
@@ -37,6 +41,43 @@ zh-CN:
         friend: 好友
       mending:
         brand_ids: 专修品牌
+      cleaning:
+        id: ID
+        title: 项目名称
+        cleaning_type_id: 类型
+        cleaning_type: 类型
+        image: 图片
+        vip_price: 会员价
+        price: 原价
+        description: 项目介绍
+      activity:
+        id: ID
+        title: 项目名称
+        expire_at: 活动期限
+        image: 图片
+        description: 项目介绍
+      bulk_purchasing:
+        id: ID
+        title: 项目名称
+        expire_at: 活动期限
+        bulk_purchasing_type_id: 类型
+        bulk_purchasing_type: 类型
+        image: 图片
+        vip_price: 会员价
+        price: 原价
+        description: 项目介绍
+      order:
+        id: ID
+        title: 名称
+        count: 购买份数
+        used_count: 已使用份数
+        price: 订单总价
+        state: 订单状态
+        brand: 汽车品牌
+        series: 汽车型号
+        plate_num: 车牌号
+        arrive_at: 到店时间
+        description: 预约项目
   simple_form:
     labels:
       base_user:

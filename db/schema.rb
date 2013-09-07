@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
 
   create_table "bulk_purchasing_order_infos", :force => true do |t|
     t.integer "source_id"
-    t.integer "price"
+    t.float   "price"
     t.integer "count"
   end
 
@@ -107,9 +107,9 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
     t.integer  "dealer_id"
     t.string   "title"
     t.datetime "expire_at"
-    t.string   "typehood"
-    t.integer  "price"
-    t.integer  "vip_price"
+    t.integer  "bulk_purchasing_type_id"
+    t.float    "price"
+    t.float    "vip_price"
     t.text     "description"
     t.integer  "bulk_purchasing_orders_count"
     t.string   "image_file_name"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
 
   create_table "cleaning_order_infos", :force => true do |t|
     t.integer "source_id"
-    t.integer "price"
+    t.float   "price"
     t.integer "count"
     t.integer "used_count"
   end
@@ -132,9 +132,9 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   create_table "cleanings", :force => true do |t|
     t.integer  "dealer_id"
     t.string   "title"
-    t.string   "typehood"
-    t.integer  "price"
-    t.integer  "vip_price"
+    t.integer  "cleaning_type_id"
+    t.float    "price"
+    t.float    "vip_price"
     t.text     "description"
     t.integer  "cleaning_orders_count"
     t.string   "image_file_name"
@@ -211,11 +211,12 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
 
   create_table "mending_order_infos", :force => true do |t|
     t.integer  "source_id"
-    t.integer  "price"
+    t.float    "price"
     t.integer  "brand_id"
+    t.string   "series"
     t.string   "plate_num"
     t.datetime "arrive_at"
-    t.integer  "mending_type"
+    t.text     "description"
   end
 
   add_index "mending_order_infos", ["source_id"], :name => "index_mending_order_infos_on_source_id"

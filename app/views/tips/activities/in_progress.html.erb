@@ -5,10 +5,10 @@
   
   <div class="span8">
     <div class="page-header">
-      <h3>活动项目管理 <small></small></h3>
+      <h3>进行中的活动列表 <small></small></h3>
     </div>
 
-    <%= render 'shared/alert', message: '您还没有创建任何活动！' if @tips.empty? %>
+    <%= render 'shared/alert', message: '您还没有进行中的活动！' if @tips.empty? %>
     
     <%= render 'list' %>
 

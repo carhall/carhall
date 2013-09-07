@@ -35,7 +35,7 @@
           <%= f.input :username %>
           <%= f.input :avatar do %>
             <div class="fileupload fileupload-new" data-provides="fileupload">
-              <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= resource.avatar_url %>" /></div>
+              <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= resource.avatar.url %>" /></div>
               <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
               <div>
                 <span class="btn btn-file"><span class="fileupload-new">更换图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[avatar]" /></span>

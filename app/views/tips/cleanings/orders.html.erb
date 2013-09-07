@@ -8,7 +8,32 @@
       <h3>洗车美容订单列表 <small></small></h3>
     </div>
 
+    <%= render 'shared/alert', message: '您还没有收到洗车美容订单！' if @orders.empty? %>
 
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= translate_attribute_name :id, :order %></th>
+          <th><%= translate_attribute_name :title, :order %></th>
+          <th><%= translate_attribute_name :count, :order %></th>
+          <th><%= translate_attribute_name :used_count, :order %></th>
+          <th><%= translate_attribute_name :price, :order %></th>
+          <th><%= translate_attribute_name :state, :order %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.title %></td>
+            <td><%= order.detail.count %></td>
+            <td><%= order.detail.used_count %></td>
+            <td><%= order.detail.price %></td>
+            <td><%= order.state %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
   </div>
 </div>

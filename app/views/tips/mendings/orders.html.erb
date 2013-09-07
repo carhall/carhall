@@ -8,7 +8,36 @@
       <h3>保养专修订单列表 <small></small></h3>
     </div>
 
+    <%= render 'shared/alert', message: '您还没有收到保养专修订单！' if @orders.empty? %>
 
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= translate_attribute_name :id, :order %></th>
+          <th><%= translate_attribute_name :title, :order %></th>
+          <th><%= translate_attribute_name :brand, :order %></th>
+          <th><%= translate_attribute_name :series, :order %></th>
+          <th><%= translate_attribute_name :plate_num, :order %></th>
+          <th><%= translate_attribute_name :arrive_at, :order %></th>
+          <th><%= translate_attribute_name :price, :order %></th>
+          <th><%= translate_attribute_name :state, :order %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.title %></td>
+            <td><%= order.detail.brand %></td>
+            <td><%= order.detail.series %></td>
+            <td><%= order.detail.plate_num %></td>
+            <td><%= order.detail.arrive_at %></td>
+            <td><%= order.detail.price %></td>
+            <td><%= order.state %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
   </div>
 </div>

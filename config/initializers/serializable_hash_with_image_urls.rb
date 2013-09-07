@@ -19,9 +19,13 @@ ActiveModel::Serialization.module_eval do
 
     Array.wrap(options[:images]).each do |n| 
       if respond_to?(n) and (image = send(n)).kind_of? Paperclip::Attachment
-        hash["#{n}_url"] = "#{absolute_url_prefix}#{image.url(:original)}"
-        hash["#{n}_medium_url"] = "#{absolute_url_prefix}#{image.url(:medium)}"
-        hash["#{n}_thumb_url"] = "#{absolute_url_prefix}#{image.url(:thumb)}"
+        if image.present?
+          hash["#{n}_url"] = "#{absolute_url_prefix}#{image.url(:original)}"
+          hash["#{n}_medium_url"] = "#{absolute_url_prefix}#{image.url(:medium)}"
+          hash["#{n}_thumb_url"] = "#{absolute_url_prefix}#{image.url(:thumb)}"
+        else
+          hash["#{n}_url"] = hash["#{n}_medium_url"] = hash["#{n}_thumb_url"] = nil
+        end
       end
     end
 

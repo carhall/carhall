@@ -18,8 +18,8 @@ module Share
           #{array_name}[#{attr_id_name}]
         end
 
-        def #{attr_name}= #{attr_name}
-          self.#{attr_id_name} = #{array_name}.index #{attr_name}
+        def #{attr_name}= name
+          self.#{attr_id_name} = #{array_name}.index name
         end
       EOM
     end
@@ -37,15 +37,15 @@ module Share
           end
         end
 
-        def #{attrs_name}= #{attrs_name}
-          @#{attrs_name} = #{attrs_name}
-          self.#{attr_ids_name} = #{attrs_name}.map do |key|
+        def #{attrs_name}= names
+          @#{attrs_name} = names
+          self.#{attr_ids_name} = names.map do |key|
             #{array_name}.index key
           end
         end
 
-        def #{attr_ids_name}= #{attr_ids_name}
-          super Share::Id2Key.clean_up_ids #{attr_ids_name}
+        def #{attr_ids_name}= ids
+          super Share::Id2Key.clean_up_ids ids
         end
       EOM
     end

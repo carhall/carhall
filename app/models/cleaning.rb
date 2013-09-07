@@ -6,9 +6,13 @@ class Cleaning < ActiveRecord::Base
 
   has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60>" }
 
+  extend Share::Id2Key
+  CleaningTypes = %w(洗车 漆面养护 清洁护理)
+  define_id2key_methods :cleaning_type
+
   def serializable_hash(options={})
     options = { 
-      only: [:id, :title, :typehood, :price, :vip_price, :description, :cleaning_orders_count],
+      only: [:id, :title, :cleaning_type, :price, :vip_price, :description, :cleaning_orders_count],
       images: [:image],
       include: [:dealer],
     }.update(options)

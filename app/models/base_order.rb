@@ -7,13 +7,22 @@ class BaseOrder < ActiveRecord::Base
   include Tips::Statable
   include Share::Userable
 
-  belongs_to :source, polymorphic: true
+  belongs_to :source, polymorphic: true, counter_cache: true
   belongs_to :dealer
   belongs_to :review
 
   before_save do
     self.dealer_id = source.dealer_id
+    self.title = set_title
   end
+
+  def set_title
+    "#{source.title}#{I18n.t(".times", count: detail.count) if detail.respond_to? :count}" 
+  end
+
+  extend Share::Id2Key
+  States = %i(finished canceled)
+  define_id2key_methods :state
 
   validates_presence_of :source
 

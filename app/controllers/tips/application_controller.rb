@@ -36,8 +36,33 @@ class Tips::ApplicationController < ApplicationController
         @tips = @parent
       end
 
+      if options[:expiredable]
+        # GET /api/resources/expired
+        # GET /api/resources/expired.json
+        define_method :expired do
+          @tips = @parent.expired
+        end
+
+        # GET /api/resources/in_progress
+        # GET /api/resources/in_progress.json
+        define_method :in_progress do
+          @tips = @parent.in_progress
+        end
+      end
+
       define_method :new do
         @tip = @parent.new
+      end
+
+      define_method :create do
+        @tip = @parent.new params[klass.name.underscore]
+
+        if @tip.save
+          index_path = { action: :index }
+          redirect_to index_path, flash: { success: i18n_message(:update_success, klass.name.underscore) }
+        else
+          render :new
+        end
       end
 
       # GET /api/resources/1
@@ -55,7 +80,7 @@ class Tips::ApplicationController < ApplicationController
     # GET /api/resources/orders
     # GET /api/resources/orders.json
     define_method :orders do
-      @parent = @dealer.send("#{klass.name.underscore}_orders")
+      @orders = @dealer.send("#{klass.name.underscore}_orders")
     end if options[:orders]
 
   end

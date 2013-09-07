@@ -38,8 +38,8 @@ module Api
       render_error errors.first, status
     end
 
-    def render_error error, status
-      render json: { error: error, success: false }, status: status
+    def render_error error, status, error_code = nil
+      render json: { error: error, error_code: error_code || status, success: false }, status: status
     end
 
     def render_accepted status = :accepted
