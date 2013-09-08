@@ -1,5 +1,5 @@
 module Tips
-  class BulkPurchasingOrderInfo < ActiveRecord::Base
+  class BulkPurchasingOrderDetail < ActiveRecord::Base
     # belongs_to :source, class_name: 'BulkPurchasingOrder'
     # alias_attribute :bulk_purchasing_order, :source
     # alias_attribute :order, :source

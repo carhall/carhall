@@ -1,5 +1,5 @@
 module Tips
-  class CleaningOrderInfo < ActiveRecord::Base
+  class CleaningOrderDetail < ActiveRecord::Base
     # belongs_to :source, class_name: 'CleaningOrder'
     # alias_attribute :cleaning_order, :source
     # alias_attribute :order, :source

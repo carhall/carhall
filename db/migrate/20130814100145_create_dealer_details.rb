@@ -1,6 +1,6 @@
-class CreateDealerInfos < ActiveRecord::Migration
+class CreateDealerDetails < ActiveRecord::Migration
   def change
-    create_table :dealer_infos do |t|
+    create_table :dealer_details do |t|
       # t.references :source
       t.integer :dealer_type_id
       t.string  :business_scope_ids
@@ -20,6 +20,6 @@ class CreateDealerInfos < ActiveRecord::Migration
       
     end
 
-    # add_index :dealer_infos, :source_id
+    # add_index :dealer_details, :source_id
   end
 end

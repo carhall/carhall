@@ -1,7 +1,7 @@
 class Dealer < BaseUser
   include Auth::RqrcodeToken
 
-  set_detail_class Auth::DealerInfo
+  set_detail_class Auth::DealerDetail
 
   has_one :mending
   has_many :cleanings

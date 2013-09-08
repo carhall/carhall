@@ -1,5 +1,5 @@
 module Auth
-  class ProviderInfo < ActiveRecord::Base    
+  class ProviderDetail < ActiveRecord::Base    
     # belongs_to :source, class_name: 'Provider'
     # alias_attribute :user, :source
     # alias_attribute :provider, :source

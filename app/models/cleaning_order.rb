@@ -1,5 +1,5 @@
 class CleaningOrder < BaseOrder
-  set_detail_class Tips::CleaningOrderInfo
+  set_detail_class Tips::CleaningOrderDetail
 
   belongs_to :source, class_name: 'Cleaning', counter_cache: true
 

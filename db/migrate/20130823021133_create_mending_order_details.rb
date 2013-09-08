@@ -1,6 +1,6 @@
-class CreateMendingOrderInfos < ActiveRecord::Migration
+class CreateMendingOrderDetails < ActiveRecord::Migration
   def change
-    create_table :mending_order_infos do |t|
+    create_table :mending_order_details do |t|
       # t.references :source
       t.float    :price
       t.integer  :brand_id
@@ -11,6 +11,6 @@ class CreateMendingOrderInfos < ActiveRecord::Migration
       
     end
     
-    # add_index :mending_order_infos, :source_id
+    # add_index :mending_order_details, :source_id
   end
 end

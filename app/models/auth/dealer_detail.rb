@@ -1,5 +1,5 @@
 module Auth
-  class DealerInfo < ActiveRecord::Base    
+  class DealerDetail < ActiveRecord::Base    
     has_attached_file :reg_img, styles: { medium: "300x200>", thumb: "60x60>" }
     
     # belongs_to :source, class_name: 'Dealer'

@@ -48,8 +48,8 @@
           
             <input name="base_user[user_type_id]" type="hidden" value="1">
             <%= f.simple_fields_for :detail do |ff| %>
-              <%= ff.input :dealer_type_id, required: false, collection: Auth::DealerInfo::DealerTypes.each_with_index, wrapper_html: { class: "dealer" } %>
-              <%= ff.input :business_scope_ids, collection: Auth::DealerInfo::BusinessScopes.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" } %>
+              <%= ff.input :dealer_type_id, required: false, collection: Auth::DealerDetail::DealerTypes.each_with_index, wrapper_html: { class: "dealer" } %>
+              <%= ff.input :business_scope_ids, collection: Auth::DealerDetail::BusinessScopes.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" } %>
               <%= ff.input :company, required: false, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
               <%= ff.input :address, required: false, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" } %>
               <%= ff.input :phone, required: false, wrapper_html: { class: "dealer provider" } %>

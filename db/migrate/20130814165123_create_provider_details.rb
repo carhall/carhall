@@ -1,6 +1,6 @@
-class CreateProviderInfos < ActiveRecord::Migration
+class CreateProviderDetails < ActiveRecord::Migration
   def change
-    create_table :provider_infos do |t|
+    create_table :provider_details do |t|
       # t.references :source
       t.string  :company
       t.string  :phone
@@ -10,6 +10,6 @@ class CreateProviderInfos < ActiveRecord::Migration
 
     end
 
-    # add_index :provider_infos, :source_id
+    # add_index :provider_details, :source_id
   end
 end

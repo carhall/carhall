@@ -1,5 +1,5 @@
 module Tips
-  class MendingOrderInfo < ActiveRecord::Base
+  class MendingOrderDetail < ActiveRecord::Base
     include Share::Brandable
 
     # belongs_to :source, class_name: 'MendingOrder'

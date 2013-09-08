@@ -1,5 +1,5 @@
 module Auth
-  class UserInfo < ActiveRecord::Base
+  class UserDetail < ActiveRecord::Base
     include Share::Areable
     include Share::Brandable
 

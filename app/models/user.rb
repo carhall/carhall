@@ -1,4 +1,4 @@
 class User < BaseUser
-  set_detail_class Auth::UserInfo
+  set_detail_class Auth::UserDetail
 
 end

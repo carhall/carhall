@@ -14,7 +14,7 @@ module Share
       elsif detail.nil?
         :admin
       else
-        detail_type.demodulize.gsub('Info', '').underscore.to_sym
+        detail_type.demodulize.gsub('Detail', '').underscore.to_sym
       end
     end
 

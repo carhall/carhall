@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   add_index "blocks", ["blacklist_id"], :name => "index_blocks_on_blacklist_id"
   add_index "blocks", ["user_id"], :name => "index_blocks_on_user_id"
 
-  create_table "bulk_purchasing_order_infos", :force => true do |t|
+  create_table "bulk_purchasing_order_details", :force => true do |t|
     t.float   "price"
     t.integer "count"
   end
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.datetime "updated_at",                   :null => false
   end
 
-  create_table "cleaning_order_infos", :force => true do |t|
+  create_table "cleaning_order_details", :force => true do |t|
     t.float   "price"
     t.integer "count"
     t.integer "used_count"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
 
   add_index "comments", ["source_type", "source_id"], :name => "index_comments_on_source_type_and_source_id"
 
-  create_table "dealer_infos", :force => true do |t|
+  create_table "dealer_details", :force => true do |t|
     t.integer  "dealer_type_id"
     t.string   "business_scope_ids"
     t.string   "company"
@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
-  create_table "mending_order_infos", :force => true do |t|
+  create_table "mending_order_details", :force => true do |t|
     t.float    "price"
     t.integer  "brand_id"
     t.string   "series"
@@ -247,7 +247,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
   add_index "posts", ["view_count"], :name => "index_posts_on_view_count"
 
-  create_table "provider_infos", :force => true do |t|
+  create_table "provider_details", :force => true do |t|
     t.string "company"
     t.string "phone"
     t.string "rqrcode_token"
@@ -261,7 +261,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "user_infos", :force => true do |t|
+  create_table "user_details", :force => true do |t|
     t.string   "sex"
     t.integer  "area_id"
     t.integer  "brand_id"
@@ -274,6 +274,6 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.datetime "reg_img_updated_at"
   end
 
-  add_index "user_infos", ["area_id", "brand_id"], :name => "index_user_infos_on_area_id_and_brand_id"
+  add_index "user_details", ["area_id", "brand_id"], :name => "index_user_details_on_area_id_and_brand_id"
 
 end
