@@ -23,28 +23,27 @@ module Api
       end
     end
 
-    def render_create_success resource, additional_data = nil
+    def render_create_success resource, additional_data = {}
       json = { data: resource.serializable_hash(request: request), success: true }
-      json.merge! additional_data if additional_data
-      render json: json, status: :created
+      render json: json.merge(additional_data), status: :created
     end
 
-    def render_update_success resource, additional_data = nil
+    def render_update_success resource, additional_data = {}
       json = { data: resource.serializable_hash(request: request), success: true }
-      json.merge! additional_data if additional_data
-      render json: json, status: :accepted
+      render json: json.merge(additional_data), status: :accepted
     end
 
     def render_failure resource, status = :unprocessable_entity
       render_errors resource.errors.full_messages, status
     end
 
-    def render_errors errors, status
-      render_error errors.first, status
+    def render_errors errors, status, additional_data = {}
+      render_error errors.first, status, additional_data
     end
 
-    def render_error error, status, error_code = nil
-      render json: { error: error, error_code: error_code || status, success: false }, status: status
+    def render_error error, status, additional_data = {}
+      json = { error: error, error_code: status, success: false }
+      render json: json.merge(additional_data), status: status
     end
 
     def render_accepted status = :accepted

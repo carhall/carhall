@@ -10,7 +10,7 @@ class Api::CurrentUsersController < Api::ApplicationController
   # GET /api/current_user/detail
   # GET /api/current_user/detail.json
   def detail
-    render_show @user.detail_hash request: request
+    render_data @user.detail_hash request: request
   end
 
   # PUT /api/current_user

@@ -51,7 +51,7 @@ ActiveModel::Serialization.module_eval do
 
     include.each do |association, opts|
       if records = send(association)
-        yield association, records, opts.merge(request: options[:request])
+        yield association, records, opts.merge(request: options[:request], source: self)
       end
     end
   end

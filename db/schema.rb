@@ -96,12 +96,9 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   add_index "blocks", ["user_id"], :name => "index_blocks_on_user_id"
 
   create_table "bulk_purchasing_order_infos", :force => true do |t|
-    t.integer "source_id"
     t.float   "price"
     t.integer "count"
   end
-
-  add_index "bulk_purchasing_order_infos", ["source_id"], :name => "index_bulk_purchasing_order_infos_on_source_id"
 
   create_table "bulk_purchasings", :force => true do |t|
     t.integer  "dealer_id"
@@ -121,13 +118,10 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   end
 
   create_table "cleaning_order_infos", :force => true do |t|
-    t.integer "source_id"
     t.float   "price"
     t.integer "count"
     t.integer "used_count"
   end
-
-  add_index "cleaning_order_infos", ["source_id"], :name => "index_cleaning_order_infos_on_source_id"
 
   create_table "cleanings", :force => true do |t|
     t.integer  "dealer_id"
@@ -205,7 +199,6 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
   create_table "mending_order_infos", :force => true do |t|
-    t.integer  "source_id"
     t.float    "price"
     t.integer  "brand_id"
     t.string   "series"
@@ -213,8 +206,6 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.datetime "arrive_at"
     t.text     "description"
   end
-
-  add_index "mending_order_infos", ["source_id"], :name => "index_mending_order_infos_on_source_id"
 
   create_table "mendings", :force => true do |t|
     t.integer  "dealer_id"

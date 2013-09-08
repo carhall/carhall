@@ -5,12 +5,19 @@ module Auth
 
     has_attached_file :reg_img, styles: { medium: "300x200>", thumb: "60x60>" }
     
-    # belongs_to :source, class_name: 'User'
     # alias_attribute :user, :source
 
     # attr_accessible :source
     attr_accessible :sex, :area_id, :brand_id, :series, :plate_num, :reg_img
     attr_accessible :area, :brand
+
+    def posts_count user
+      user.posts.count
+    end
+
+    def last_n_posts user, n = 3
+      user.posts.last(n)
+    end
 
     def serializable_hash(options={})
       options = { 
@@ -18,7 +25,10 @@ module Auth
         methods: [:area, :brand],
         images: [:reg_img],
       }.update(options)
-      super(options)
+      super(options).merge(
+        posts_count: posts_count(options[:source]), 
+        last_3_posts: last_n_posts(options[:source])
+      )
     end
 
   end

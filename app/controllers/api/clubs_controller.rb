@@ -1,4 +1,4 @@
-class Api::ClubMastersController < Api::ApplicationController
+class Api::ClubsController < Api::ApplicationController
   before_filter :set_current_user
   before_filter :set_area_id_and_brand_id, only: :show
 
@@ -35,6 +35,7 @@ class Api::ClubMastersController < Api::ApplicationController
       render_created
     else
       render_failure club
+    end
   end
 
 end

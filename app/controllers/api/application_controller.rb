@@ -34,6 +34,8 @@ class Api::ApplicationController < ActionController::Base
       scope: [:exception, rescue_response], 
       exception_name: exception_name, 
       exception_message: exception_message
-    render_error exception_message, rescue_response, exception_name.demodulize.underscore
+    render_error exception_message, rescue_response, 
+      error_code: exception_name.demodulize.underscore, 
+      backtrace: exception.backtrace
   end
 end

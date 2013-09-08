@@ -1,6 +1,7 @@
 zh-CN:
   unknown: 未知
-  in_blacklist: 在您的黑名单中
+  in_blacklist: 该用户在您的黑名单中。
+  can_not_add_self: 您不能把自己加为好友。
   unaccepted: 您的账号还没有被激活，请联系管理员为您激活帐户。在账户被激活之前，您不能进行业务管理。
   update_success: 成功更新%{model}信息。
   mending: "%{brand} 保养专修"
@@ -36,9 +37,6 @@ zh-CN:
         open_during: 营业时间
         reg_img: 营业执照认证资料
         accepted: 服务商认证
-      auth/friendship:
-        friend_id: 该 用户
-        friend: 好友
       mending:
         brand_ids: 专修品牌
       cleaning:

@@ -23,13 +23,15 @@ class Club < ActiveRecord::Base
   end
 
   def apply_president user
-    club.president_candidate_ids << user.id
-    club.president_candidate_ids.unique!
+    president_candidate_ids << user.id
+    president_candidate_ids.uniq!
+    save
   end
 
   def apply_mechanic user
-    club.mechanic_candidate_ids << user.id
-    club.mechanic_candidate_ids.unique!
+    mechanic_candidate_ids << user.id
+    mechanic_candidate_ids.uniq!
+    save
   end
 
   def serializable_hash(options={})
