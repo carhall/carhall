@@ -12,7 +12,7 @@ class Api::FriendsController < Api::ApplicationController
   def create
     friendship = @user.make_friend_with params[:id]
     if not friendship.new_record? or friendship.save
-      render_create_success friendship, { data: friendship }
+      render_created
     else
       render_failure friendship
     end

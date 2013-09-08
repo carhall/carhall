@@ -12,7 +12,7 @@ PUT和DELETE可以使用POST模拟，需要额外添加_method=put/delete参数
 返回的结果
 ----------
 成功返回success: true, data: 返回数据  
-失败返回success: false, error: 错误信息
+失败返回success: false, error: 错误信息, error_code: 错误类型，string类型
 
 分页
 ---------
@@ -218,7 +218,7 @@ DELETE | /api/posts/:id                    | 删除随手拍
 >     表单
 >     data[content]    Hello
 
-GET查询车友会时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的帖子  
+GET查询车友会时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的帖子，，如果不填，默认返回用户所在的车友会信息（即根据用户的area_id, brand_id来查询），如果不填，默认返回用户所在的车友会帖子（即根据用户的area_id, brand_id来查询）  
 > 例如：
 > 
 >     GET /api/posts/club?filter[area_id]=1&filter[brand_id]=2
@@ -261,7 +261,7 @@ DELETE | /api/post_blacklists/:user_id     | 删除黑名单
 同好友接口一样，新建好友、删除圈子黑名单只需POST、DELETE /api/post_blacklists/用户ID，不需要提交表单  
 
 
-ClubMaster 堂主
+Club 车友会
 ==========
 字段
 ----------
@@ -269,41 +269,26 @@ ClubMaster 堂主
 ----------------|----------------------------|----------------------------------
 area_id         |                            | 见User关于area_id的说明
 brand_id        |                            | 见User关于brand_id的说明
+president       | 堂主                       |
+mechanics       | 在线技师                    |
+announcement    | 公告                       |
+avatar          | LOGO                       |
 
 API
 ----------
 Method | URI                               | 说明
 -------|-----------------------------------|------------------------------------
-GET    | /api/club_master                  | 查询当前用户所在车友会的堂主信息  
-GET    | /api/club_master/detail           | 查询当前用户所在车友会的堂主的详细信息  
-POST   | /api/club_master                  | 申请成为车友会堂主  
+GET    | /api/current_user/club            | 查询当前用户所在车友会的信息  
+GET    | /api/club                         | （同上）  
+POST   | /api/club/president               | 申请成为车友会堂主  
+POST   | /api/club/mechanics               | 申请成为车友会在线技师  
+PUT    | /api/club                         | 修改车友会信息（包括公告和LOGO，只有堂主可用）  
 
 提交申请时需要带data[area_id]和data[brand_id]两个字段  
-GET查询时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的堂主  
+GET查询时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的车友会信息，如果不填，默认返回用户所在的车友会信息（即根据用户的area_id, brand_id来查询）  
 > 例如：
 > 
->     GET /api/club_master?filter[area_id]=1&filter[brand_id]=2
-
-
-Mechanic 技师
-==========
-字段
-----------
-字段名称         | 详细描述                    | 限制条件
-----------------|----------------------------|----------------------------------
-area_id         |                            | 见User关于area_id的说明
-brand_id        |                            | 见User关于brand_id的说明
-
-API
-----------
-Method | URI                               | 说明
--------|-----------------------------------|------------------------------------
-GET    | /api/mechanics                    | 查询当前用户所在车友会的所有技师信息  
-POST   | /api/mechanics                    | 申请成为在线技师  
-
-提交申请时需要带data[area_id]和data[brand_id]两个字段  
-查询在线技师详细资料，请使用用户接口  
-与堂主接口一样，GET查询时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的堂主  
+>     GET /api/club?filter[area_id]=1&filter[brand_id]=2
 
 
 Mending 保养专修

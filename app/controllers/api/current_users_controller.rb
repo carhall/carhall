@@ -10,7 +10,7 @@ class Api::CurrentUsersController < Api::ApplicationController
   # GET /api/current_user/detail
   # GET /api/current_user/detail.json
   def detail
-    render_show @user.detail_hash
+    render_show @user.detail_hash request: request
   end
 
   # PUT /api/current_user
@@ -37,17 +37,4 @@ class Api::CurrentUsersController < Api::ApplicationController
     end
   end
 
-  # PUT /api/current_user/detail
-  # PUT /api/current_user/detail.json
-  # We need to use a copy of the @user because we don't want to change
-  # the current user in place.
-  def update_detail
-    detail = @user.detail
-    if detail.update_attributes(params[:data])
-      render_update_success detail
-    else
-      render_failure detail
-    end
-  end
-  
 end

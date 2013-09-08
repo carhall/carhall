@@ -1,13 +1,18 @@
 module Api
   module RenderHelper
+
     def render_index resources
       resources = resources.page(params[:page]) if params[:page]
       resources = resources.per(params[:per_page]) if params[:per_page]
-      render json: { data: resources.serializable_hash(request: request), success: true }
+      render_data resource.serializable_hash(request: request)
     end
 
     def render_show resource
-      render json: { data: resource.serializable_hash(request: request), success: true }
+      render_data resource.serializable_hash(request: request)
+    end
+
+    def render_data json_data
+      render json: { data: json_data, success: true }
     end
 
     def render_create resource, additional_data = nil
@@ -44,6 +49,10 @@ module Api
 
     def render_accepted status = :accepted
       render json: { success: true }, status: status
+    end
+
+    def render_created
+      render_accepted :created
     end
   end
 end

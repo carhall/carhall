@@ -9,7 +9,7 @@ class Api::PostsController < Api::ApplicationController
   end
 
   def friends
-    render_index Post.friends(@user)
+    render_index Post.with_friends(@user)
   end
 
   # GET /api/posts
@@ -21,12 +21,7 @@ class Api::PostsController < Api::ApplicationController
   # GET /api/posts
   # GET /api/posts.json
   def club
-    if @user.user_type == :user
-      detail = @user.detail
-      render_index Post.club(detail.area_id, detail.brand_id)
-    else
-      render_index Post.all
-    end
+    render_index @user.club.posts
   end
 
   # GET /api/posts/1

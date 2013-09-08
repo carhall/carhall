@@ -10,16 +10,12 @@ class Post < ActiveRecord::Base
   attr_accessible :user
 
   before_save do
-    if user.user_type == :user
-      user_detail = user.detail
-      self.area_id = user_detail.area_id
-      self.brand_id = user.detail.brand_id
-    end
+    raise CanCan::AccessDenied unless user.user_type == :user
+    self.club = user.club
   end
 
-  scope :friends, ->(user) { with_user(user.friend_ids - user.blacklist_ids) }
+  scope :with_friends, ->(user) { with_user(user.friend_ids - user.blacklist_ids) }
   scope :top, -> { order('comments_count DESC') }
-  scope :club, ->(area_id, brand_id) { where(area_id: area_id, brand_id: brand_id) }
 
   def self.view id
     post = find(id)

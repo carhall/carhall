@@ -8,7 +8,7 @@ class BaseUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :token_authenticatable,
-         :recoverable, :rememberable, :validatable, :confirmable#, :lockable#, :trackable
+         :recoverable, :rememberable, :validatable#, :confirmable#, :lockable#, :trackable
 
   include Auth::Acceptable
 
@@ -32,20 +32,22 @@ class BaseUser < ActiveRecord::Base
   attr_accessible :username, :mobile, :description, :avatar
   attr_accessible :detail, :user_type_id
 
+  def club
+    Club.with_user self
+  end
+
   def serializable_hash(options={})
     options = {
-      only: [:id, :username, :mobile, :destription],
+      only: [:id, :username, :mobile, :description],
       methods: [:user_type],
       images: [:avatar]
-      # include: [:detail],
     }.update(options)
     super(options)
   end
 
-  def detail_hash
-    serializable_hash(include: [:detail])
+  def detail_hash(options={})
+    serializable_hash options.merge(include: :detail)
   end
-
 end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130904044821) do
+ActiveRecord::Schema.define(:version => 20130908053422) do
 
   create_table "activities", :force => true do |t|
     t.integer  "dealer_id"
@@ -145,17 +145,24 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
     t.datetime "updated_at",            :null => false
   end
 
-  create_table "club_masters", :force => true do |t|
-    t.integer  "user_id"
+  create_table "clubs", :force => true do |t|
+    t.integer  "president_id"
+    t.string   "president_candidate_ids"
+    t.string   "mechanic_ids"
+    t.string   "mechanic_candidate_ids"
+    t.string   "title"
+    t.string   "announcement"
     t.integer  "area_id"
     t.integer  "brand_id"
-    t.boolean  "accepted",   :default => false, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
-  add_index "club_masters", ["area_id", "brand_id"], :name => "index_club_masters_on_area_id_and_brand_id"
-  add_index "club_masters", ["user_id"], :name => "index_club_masters_on_user_id"
+  add_index "clubs", ["area_id", "brand_id"], :name => "index_clubs_on_area_id_and_brand_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -197,18 +204,6 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
   add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
-  create_table "mechanics", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "area_id"
-    t.integer  "brand_id"
-    t.boolean  "accepted",   :default => false, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  add_index "mechanics", ["area_id", "brand_id"], :name => "index_mechanics_on_area_id_and_brand_id"
-  add_index "mechanics", ["user_id"], :name => "index_mechanics_on_user_id"
-
   create_table "mending_order_infos", :force => true do |t|
     t.integer  "source_id"
     t.float    "price"
@@ -243,9 +238,8 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "club_id"
     t.string   "content"
-    t.integer  "area_id"
-    t.integer  "brand_id"
     t.integer  "view_count",         :default => 0
     t.integer  "comments_count",     :default => 0
     t.float    "weight",             :default => 0.0
@@ -257,7 +251,7 @@ ActiveRecord::Schema.define(:version => 20130904044821) do
     t.datetime "updated_at",                          :null => false
   end
 
-  add_index "posts", ["area_id", "brand_id"], :name => "index_posts_on_area_id_and_brand_id"
+  add_index "posts", ["club_id"], :name => "index_posts_on_club_id"
   add_index "posts", ["comments_count"], :name => "index_posts_on_comments_count"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
   add_index "posts", ["view_count"], :name => "index_posts_on_view_count"

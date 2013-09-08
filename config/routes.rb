@@ -65,12 +65,12 @@ Autozone::Application.routes.draw do
       resource :current_user, only: [:show, :update] do
         get :detail
         put :password
-        put :detail, action: :update_detail
 
         resources :friends, only: [:index]
         resources :blacklists, only: [:index]
         resources :post_blacklists, only: [:index]
         resources :posts, only: [:index]
+        resource :club, only: [:show]
       end
 
       resources :dealers, only: [:index, :show] do
@@ -96,11 +96,10 @@ Autozone::Application.routes.draw do
         post ':id', action: :create, on: :collection
       end
 
-      resource :club_master, only: [:show, :create] do
-        get :detail
+      resource :club, only: [:show, :update] do
+        post :president
+        post :mechanics
       end
-
-      resources :mechanics, only: [:index, :create]
 
       resources :posts, only: [:index, :show, :create, :destroy] do
         get :friends, on: :collection
