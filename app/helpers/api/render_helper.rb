@@ -15,7 +15,7 @@ module Api
       render json: { data: json_data, success: true }
     end
 
-    def render_create resource, additional_data = nil
+    def render_create resource, additional_data={}
       if resource.save
         render_create_success resource, additional_data
       else
@@ -23,12 +23,12 @@ module Api
       end
     end
 
-    def render_create_success resource, additional_data = {}
+    def render_create_success resource, additional_data={}
       json = { data: resource.serializable_hash(request: request), success: true }
       render json: json.merge(additional_data), status: :created
     end
 
-    def render_update_success resource, additional_data = {}
+    def render_update_success resource, additional_data={}
       json = { data: resource.serializable_hash(request: request), success: true }
       render json: json.merge(additional_data), status: :accepted
     end
@@ -37,11 +37,11 @@ module Api
       render_errors resource.errors.full_messages, status
     end
 
-    def render_errors errors, status, additional_data = {}
+    def render_errors errors, status, additional_data={}
       render_error errors.first, status, additional_data
     end
 
-    def render_error error, status, additional_data = {}
+    def render_error error, status, additional_data={}
       json = { error: error, error_code: status, success: false }
       render json: json.merge(additional_data), status: status
     end
