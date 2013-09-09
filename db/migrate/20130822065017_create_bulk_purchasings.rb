@@ -3,8 +3,8 @@ class CreateBulkPurchasings < ActiveRecord::Migration
     create_table :bulk_purchasings do |t|
       t.references :dealer
       t.string   :title
-      t.datetime :expire_at
       t.integer  :bulk_purchasing_type_id
+      t.datetime :expire_at
       t.float    :price
       t.float    :vip_price
       t.text     :description

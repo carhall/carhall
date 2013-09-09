@@ -6,9 +6,9 @@ class BulkPurchasing < ActiveRecord::Base
 
   has_attached_file :image, styles: { medium: "300x200#", thumb: "60x60#" }
 
-  attr_accessible :title, :expire_at, :bulk_purchasing_type_id, :price, :vip_price, :description, :image
+  attr_accessible :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price, :description, :image
 
-  validates_presence_of :title, :expire_at, :bulk_purchasing_type_id, :price, :vip_price
+  validates_presence_of :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price
 
   def expire_at_before_type_cast
     expire_at.strftime("%Y-%m-%d %H:%M")

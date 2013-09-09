@@ -4,8 +4,8 @@
       <th><%= translate_attribute_name :id, :bulk_purchasing %></th>
       <th><%= translate_attribute_name :image, :bulk_purchasing %></th>
       <th><%= translate_attribute_name :title, :bulk_purchasing %></th>
-      <th><%= translate_attribute_name :expire_at, :bulk_purchasing %></th>
       <th><%= translate_attribute_name :bulk_purchasing_type, :bulk_purchasing %></th>
+      <th><%= translate_attribute_name :expire_at, :bulk_purchasing %></th>
       <th><%= translate_attribute_name :vip_price, :bulk_purchasing %></th>
       <th><%= translate_attribute_name :price, :bulk_purchasing %></th>
     </tr>
@@ -16,8 +16,8 @@
         <td><%= tip.id %></td>
         <td><img src="<%= tip.image.url(:thumb) %>"></td>
         <td><%= tip.title %></td>
-        <td><%= l tip.expire_at, format: :short %></td>
         <td><%= tip.bulk_purchasing_type %></td>
+        <td><%= l tip.expire_at, format: :short %></td>
         <td><%= tip.vip_price %></td>
         <td><%= tip.price %></td>
         <td class="actions">
