@@ -5,7 +5,7 @@
   <%= f.input :cleaning_type_id, collection: Cleaning::CleaningTypes.each_with_index %>
   <%= f.input :image do %>
     <div class="fileupload fileupload-new" data-provides="fileupload">
-      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="http://www.placehold.it/175x175" /></div>
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @tip.image.url(:medium) %>" /></div>
       <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
       <div>
         <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="cleaning[image]" /></span>
@@ -19,5 +19,5 @@
 
   <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
 
-  <%= f.button :submit, "发布服务项目", class: 'btn-submit' %>
+  <%= f.button :submit, class: 'btn-submit' %>
 <% end %>

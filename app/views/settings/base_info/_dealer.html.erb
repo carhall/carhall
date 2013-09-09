@@ -39,8 +39,8 @@
       <td><%= @user.detail.open_during %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :reg_img, :'base_user/detail' %></th>
-      <td><img src="<%= @user.detail.reg_img.url(:medium) %>"></td>
+      <th><%= translate_attribute_name :authentication_image, :'base_user/detail' %></th>
+      <td><img src="<%= @user.detail.authentication_image.url(:medium) %>"></td>
     </tr>
     <tr>
       <th><%= translate_attribute_name :accepted, :'base_user/detail' %></th>

@@ -1,0 +1,44 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/shared/sidenav/dealer" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%= @tip.title %> <small><a href="<%= edit_tips_cleaning_path(@tip) %>">编辑</a></small></h3>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span3">
+        <img src="<%= @tip.image.url(:medium) %>">
+      </div>
+      <div class="span9">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><%= translate_attribute_name :cleaning_type, :cleaning %></th>
+              <td><%= @tip.cleaning_type %></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            </tr>
+            <tr>
+              <th><%= translate_attribute_name :vip_price, :cleaning %></th>
+              <td><%= @tip.vip_price %></td>
+            </tr>
+            <tr>
+              <th><%= translate_attribute_name :price, :cleaning %></th>
+              <td><%= @tip.price %></td>
+            </tr>
+            <tr>
+              <th><%= translate_attribute_name :description, :cleaning %></th>
+              <td><%= @tip.description %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

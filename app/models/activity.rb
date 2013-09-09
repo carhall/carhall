@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
   validates_presence_of :title, :expire_at
 
   def expire_at_before_type_cast
-    expire_at.strftime("%Y-%m-%d %H:%M")
+    expire_at.strftime("%Y-%m-%d %H:%M") if expire_at
   end
 
   include Share::Expiredable

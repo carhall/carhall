@@ -12,7 +12,7 @@ class BulkPurchasing < ActiveRecord::Base
   validates_presence_of :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price
 
   def expire_at_before_type_cast
-    expire_at.strftime("%Y-%m-%d %H:%M")
+    expire_at.strftime("%Y-%m-%d %H:%M") if expire_at
   end
 
   extend Share::Id2Key

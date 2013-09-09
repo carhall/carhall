@@ -5,7 +5,7 @@ module Share
     end
 
     def define_image_method options={}
-      has_attached_file :image, { styles: { medium: "300x200#", thumb: "60x60#" }}.merge(options)
+      has_attached_file :image, { styles: { medium: "300x300>", thumb: "60x60#" }}.merge(options)
     end
   end
 end

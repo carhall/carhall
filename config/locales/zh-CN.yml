@@ -17,9 +17,9 @@ zh-CN:
       provider: 媒体
       auth/friendship: 好友
       mending: 保养专修
-      cleaning: 洗车美容
+      cleaning: 服务项目
       activity: 活动
-      bulk_purchasing: 团购
+      bulk_purchasing: 团购项目
     attributes:
       base_user:
         id: ID
@@ -42,7 +42,7 @@ zh-CN:
         address: 地址
         phone: 电话
         open_during: 营业时间
-        reg_img: 营业执照认证资料
+        authentication_image: 营业执照认证资料
         accepted: 服务商认证
       mending:
         brand_ids: 专修品牌
@@ -93,7 +93,7 @@ zh-CN:
           address: 地址
           phone: 电话
           open_during: 营业时间
-          reg_img: 营业执照认证资料
+          authentication_image: 营业执照认证资料
       mending:
         discount:
           discount_during: 优惠时段
