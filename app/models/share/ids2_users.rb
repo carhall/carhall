@@ -1,6 +1,6 @@
 module Share
   module Ids2Users
-    def define_ids_2_users_methods attrs_name
+    def define_ids2users_methods attrs_name
       attrs_name = attrs_name.to_s
       attr_ids_name = attrs_name.singularize+'_ids'
       class_eval <<-EOM

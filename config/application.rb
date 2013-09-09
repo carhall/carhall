@@ -65,5 +65,7 @@ module Autozone
     
     config.active_record.default_timezone = :local  
     config.time_zone = 'Beijing'  
+
+    config.action_dispatch.rescue_responses["CanCan::AccessDenied"] = :forbidden
   end
 end

@@ -32,6 +32,9 @@ class BaseUser < ActiveRecord::Base
   attr_accessible :username, :mobile, :description, :avatar
   attr_accessible :detail, :user_type_id
 
+  validates_presence_of :username
+  validates_length_of :username, :within => 3..20, :allow_blank => true
+
   def club
     Club.with_user self
   end

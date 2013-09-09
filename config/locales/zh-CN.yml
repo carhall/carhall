@@ -2,13 +2,17 @@ zh-CN:
   unknown: 未知
   in_blacklist: 该用户在您的黑名单中。
   can_not_add_self: 您不能把自己加为好友。
-  unaccepted: 您的账号还没有被激活，请联系管理员为您激活帐户。在账户被激活之前，您不能进行业务管理。
+  unaccepted: 您的账号还没有被激活，请联系管理员为您激活帐户。
+  can_not_use_tips: 在账户被激活之前，您不能进行业务管理。
   update_success: 成功更新%{model}信息。
   mending: "%{brand} 保养专修"
   times:  " %{count} 份"
   activerecord:
     models:
       base_user: 用户
+      user: 普通用户
+      dealer: 汽车服务商
+      provider: 媒体
       auth/friendship: 好友
       mending: 保养专修
       cleaning: 洗车美容

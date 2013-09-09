@@ -1,4 +1,5 @@
 class Api::PostsController < Api::ApplicationController
+  ensure_base_user_type :user
   before_filter :set_user, except: :show
   before_filter :set_area_id_and_brand_id, except: :create
 
@@ -39,7 +40,9 @@ class Api::PostsController < Api::ApplicationController
   # DELETE /api/posts/1
   # DELETE /api/posts/1.json
   def destroy
-    @user.posts.find(params[:id]).destroy
+    post = Post.find(params[:id])
+    authorize! :destroy, post
+    post.destroy
 
     render_accepted
   end

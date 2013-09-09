@@ -10,7 +10,7 @@ class Api::BlacklistsController < Api::ApplicationController
   # POST /api/blacklists/1
   # POST /api/blacklists/1.json
   def create
-    block = @user.create_blacklist_with params[:id]
+    block = @user.add_to_blacklist params[:id]
     if not block.new_record? or block.save
       render_create_success block, { data: block }
     else
@@ -21,7 +21,7 @@ class Api::BlacklistsController < Api::ApplicationController
   # DELETE /api/blacklists/1
   # DELETE /api/blacklists/1.json
   def destroy
-    @user.remove_blacklist params[:id]
+    @user.remove_from_blacklist params[:id]
 
     render_accepted
   end

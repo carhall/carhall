@@ -262,7 +262,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   end
 
   create_table "user_details", :force => true do |t|
-    t.string   "sex"
+    t.integer  "sex_id"
     t.integer  "area_id"
     t.integer  "brand_id"
     t.string   "series"

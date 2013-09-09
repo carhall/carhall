@@ -4,7 +4,7 @@ module Api
     def render_index resources
       resources = resources.page(params[:page]) if params[:page]
       resources = resources.per(params[:per_page]) if params[:per_page]
-      render_data resource.serializable_hash(request: request)
+      render_data resources.map { |r| r.serializable_hash(request: request) }
     end
 
     def render_show resource

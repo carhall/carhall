@@ -186,7 +186,7 @@ POST   | /api/blacklists/:user_id          | 添加黑名单
 DELETE | /api/blacklists/:user_id          | 删除黑名单  
 
 同好友接口一样，新建好友、删除黑名单只需POST、DELETE /api/blacklists/用户ID，不需要提交表单  
-添加黑名单会删除好友关系，黑名单上的用户不能够被添加好友  
+添加黑名单会删除好友关系，黑名单上的用户不能够被添加好友
 
 
 Post 圈子随手拍
@@ -211,6 +211,7 @@ GET    | /api/posts/club                   | 查询车友会
 GET    | /api/posts/:id                    | 查询指定随手拍  
 POST   | /api/posts                        | 新建随手拍  
 DELETE | /api/posts/:id                    | 删除随手拍  
+**注意：只有普通用户能访问该接口**    
 
 > 例如：  
 > 
@@ -239,6 +240,7 @@ Method | URI                               | 说明
 GET    | /api/posts/:post_id/comments      | 查询指定随手拍评论  
 POST   | /api/posts/:post_id/comments      | 新建随手拍评论  
 DELETE | /api/posts/:post_id/comments/:id  | 删除随手拍评论  
+**注意：只有普通用户能访问该接口**    
 
 > 例如：  
 > 
@@ -257,6 +259,8 @@ GET    | /api/current_user/post_blacklists | 查询当前用户好友信息
 GET    | /api/post_blacklists              | （同上）  
 POST   | /api/post_blacklists/:user_id     | 添加黑名单  
 DELETE | /api/post_blacklists/:user_id     | 删除黑名单  
+
+**注意：只有普通用户能访问该接口**    
 
 同好友接口一样，新建好友、删除圈子黑名单只需POST、DELETE /api/post_blacklists/用户ID，不需要提交表单  
 
@@ -283,6 +287,8 @@ GET    | /api/club                         | （同上）
 POST   | /api/club/president               | 申请成为车友会堂主  
 POST   | /api/club/mechanics               | 申请成为车友会在线技师  
 PUT    | /api/club                         | 修改车友会信息（包括公告和LOGO，只有堂主可用）  
+
+**注意：只有普通用户能访问该接口**    
 
 提交申请时需要带data[area_id]和data[brand_id]两个字段  
 GET查询时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的车友会信息，如果不填，默认返回用户所在的车友会信息（即根据用户的area_id, brand_id来查询）  

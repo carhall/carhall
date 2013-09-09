@@ -15,7 +15,7 @@ class Ability
     when :dealer
 
     when :user
-
+      can :destroy, [Post, Comment], user_id: user.id
     when :provider, :dealer, :user
       can :read, :all
     end

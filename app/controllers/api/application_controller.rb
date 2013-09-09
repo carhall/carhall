@@ -8,7 +8,7 @@ class Api::ApplicationController < ActionController::Base
     # GET /api/resources
     # GET /api/resources.json
     define_method :index do
-      render_index klass.all
+      render_index klass.scoped
     end
 
     # GET /api/resources/1
@@ -34,8 +34,9 @@ class Api::ApplicationController < ActionController::Base
       scope: [:exception, rescue_response], 
       exception_name: exception_name, 
       exception_message: exception_message
-    render_error exception_message, rescue_response, 
+    render_error exception_message, rescue_response, {
       error_code: exception_name.demodulize.underscore, 
-      backtrace: exception.backtrace
+      backtrace: exception.backtrace[0..2],
+    }
   end
 end

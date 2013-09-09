@@ -9,7 +9,8 @@ Autozone::Application.routes.draw do
     registrations: "base_users/registrations",
     sessions: "base_users/sessions",
     confirmations: "base_users/confirmations",
-  } do
+  } 
+  devise_scope :base_users do
     namespace :base_users do
       resource :confirmation do
         get :resend
@@ -54,7 +55,7 @@ Autozone::Application.routes.draw do
   devise_scope :base_users do
     # APIs
     namespace :api do
-      resources :users, only: [:index, :show, :create] do
+      resources :users, only: [:show, :create] do
         get :detail, on: :member
         post :login, on: :collection
 

@@ -60,6 +60,11 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (2.0.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     faker (1.2.0)
       i18n (~> 0.5)
     hike (1.2.3)
@@ -182,6 +187,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   devise
+  factory_girl_rails
   faker
   jasny_bootstrap_extension_rails
   jquery-migrate-rails
@@ -194,7 +200,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.14)
   rqrcode-rails3
-  rspec-rails (~> 2.0)
+  rspec-rails
   simple_form
   sqlite3
   therubyracer

@@ -9,12 +9,13 @@ class Post < ActiveRecord::Base
   attr_accessible :content, :image
   attr_accessible :user
 
+  validates_presence_of :user, :content
+
   before_save do
-    raise CanCan::AccessDenied unless user.user_type == :user
     self.club = user.club
   end
 
-  scope :with_friends, ->(user) { with_user(user.friend_ids - user.blacklist_ids) }
+  scope :with_friends, ->(user) { with_user(user.friend_ids - user.post_blacklist_ids) }
   scope :top, -> { order('comments_count DESC') }
 
   def self.view id

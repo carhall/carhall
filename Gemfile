@@ -54,7 +54,10 @@ gem 'mini_magick'
 
 group :development, :test do
   gem 'faker'
-	gem 'quiet_assets'
+  gem 'factory_girl_rails'
+
+  gem 'quiet_assets'
   gem 'pry-debugger'
-  gem 'rspec-rails', '~> 2.0'
+  
+  gem 'rspec-rails'
 end

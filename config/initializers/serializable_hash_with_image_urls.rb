@@ -1,7 +1,6 @@
 ActiveModel::Serialization.module_eval do
-  def serializable_hash(options = nil)
-    options ||= {}
 
+  def serializable_hash(options={})
     attribute_names = attributes.keys.sort
     if only = options[:only]
       attribute_names &= Array.wrap(only).map(&:to_s)

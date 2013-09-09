@@ -8,8 +8,12 @@ module Auth
     # alias_attribute :user, :source
 
     # attr_accessible :source
-    attr_accessible :sex, :area_id, :brand_id, :series, :plate_num, :reg_img
-    attr_accessible :area, :brand
+    attr_accessible :sex_id, :area_id, :brand_id, :series, :plate_num, :reg_img
+    attr_accessible :sex, :area, :brand
+
+    extend Share::Id2Key
+    Sexes = %w(男 女)
+    define_id2key_methods :sex
 
     def posts_count user
       user.posts.count

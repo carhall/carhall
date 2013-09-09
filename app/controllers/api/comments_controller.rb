@@ -1,4 +1,5 @@
 class Api::CommentsController < Api::ApplicationController
+  ensure_base_user_type :user
   before_filter :set_parent
 
   # GET /api/resources/1/comments
@@ -22,7 +23,9 @@ class Api::CommentsController < Api::ApplicationController
   # DELETE /api/resources/1/comments/1
   # DELETE /api/resources/1/comments/1.json
   def destroy
-    @parent.comments.user(current_base_user).find(params[:id]).destroy
+    comment = @parent.comments.find(params[:id])
+    authorize! :destroy, comment
+    comment.destroy
 
     render_accepted
   end

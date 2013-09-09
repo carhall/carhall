@@ -6,9 +6,9 @@ class Club < ActiveRecord::Base
   has_many :posts
 
   extend Share::Ids2Users
-  define_ids_2_users_methods :president_candidates
-  define_ids_2_users_methods :mechanics
-  define_ids_2_users_methods :mechanic_candidates
+  define_ids2users_methods :president_candidates
+  define_ids2users_methods :mechanics
+  define_ids2users_methods :mechanic_candidates
   
   attr_accessible :area_id, :brand_id, :announcement, :avatar
 
@@ -17,7 +17,6 @@ class Club < ActiveRecord::Base
   end
 
   def self.with_user user
-    raise CanCan::AccessDenied unless user.user_type == :user
     detail = user.detail
     with_club detail.area_id, detail.brand_id
   end

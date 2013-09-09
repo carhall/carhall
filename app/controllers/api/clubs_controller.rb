@@ -1,4 +1,5 @@
 class Api::ClubsController < Api::ApplicationController
+  ensure_base_user_type :user
   before_filter :set_current_user
   before_filter :set_area_id_and_brand_id, only: :show
 

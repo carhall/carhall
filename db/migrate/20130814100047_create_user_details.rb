@@ -2,7 +2,7 @@ class CreateUserDetails < ActiveRecord::Migration
   def change
     create_table :user_details do |t|
       # t.references :source
-      t.string  :sex
+      t.integer :sex_id
       t.integer :area_id
       t.integer :brand_id
       t.string  :series
