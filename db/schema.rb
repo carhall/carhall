@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   create_table "bulk_purchasings", :force => true do |t|
     t.integer  "dealer_id"
     t.string   "title"
-    t.datetime "expire_at"
     t.integer  "bulk_purchasing_type_id"
+    t.datetime "expire_at"
     t.float    "price"
     t.float    "vip_price"
     t.text     "description"
@@ -176,16 +176,16 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.string   "address"
     t.string   "phone"
     t.string   "open_during"
-    t.integer  "balance",              :default => 0, :null => false
+    t.integer  "balance",            :default => 0, :null => false
     t.string   "rqrcode_token"
-    t.string   "reg_img_file_name"
-    t.string   "reg_img_content_type"
-    t.integer  "reg_img_file_size"
-    t.datetime "reg_img_updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "template_ids"
-    t.integer  "balance_used",         :default => 0, :null => false
+    t.integer  "balance_used",       :default => 0, :null => false
   end
 
   create_table "friendships", :force => true do |t|
@@ -267,11 +267,11 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.integer  "brand_id"
     t.string   "series"
     t.string   "plate_num"
-    t.integer  "balance",              :default => 0, :null => false
-    t.string   "reg_img_file_name"
-    t.string   "reg_img_content_type"
-    t.integer  "reg_img_file_size"
-    t.datetime "reg_img_updated_at"
+    t.integer  "balance",            :default => 0, :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "user_details", ["area_id", "brand_id"], :name => "index_user_details_on_area_id_and_brand_id"

@@ -21,8 +21,8 @@ class BaseUser < ActiveRecord::Base
   include Share::Friendshipable
 
   # For avatar
-  has_attached_file :avatar, styles: { medium: "300x300#", thumb: "60x60#" },
-    path: ':rails_root/public/system/base_users/:attachment/:id_partition/:style/:filename'
+  extend Share::ImageAttachments
+  define_avatar_method path: ':rails_root/public/system/base_users/:attachment/:id_partition/:style/:filename'
 
   # For posts
   has_many :posts, foreign_key: :user_id

@@ -4,7 +4,8 @@ class BulkPurchasing < ActiveRecord::Base
   alias_attribute :orders, :bulk_purchasing_orders
   has_many :reviews, through: :bulk_purchasing_orders
 
-  has_attached_file :image, styles: { medium: "300x200#", thumb: "60x60#" }
+  extend Share::ImageAttachments
+  define_image_method
 
   attr_accessible :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price, :description, :image
 

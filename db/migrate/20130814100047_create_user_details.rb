@@ -8,7 +8,7 @@ class CreateUserDetails < ActiveRecord::Migration
       t.string  :series
       t.string  :plate_num
       t.integer :balance, null: false, default: 0
-      t.attachment :reg_img
+      t.attachment :image
 
     end
 

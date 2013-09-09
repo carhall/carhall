@@ -18,8 +18,12 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
+    user_type_id { 0 }
     detail do
       {
+        company: Faker::Lorem.sentence,
+        address: Faker::Lorem.sentence,
+        phone: Faker::PhoneNumber.phone_number,
       }
     end
   end
@@ -29,10 +33,16 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
+    user_type_id { 1 }
     detail do
       {
+        company: Faker::Lorem.sentence,
+        address: Faker::Lorem.sentence,
+        phone: Faker::PhoneNumber.phone_number,
+        open_during: Faker::Lorem.sentence,
         dealer_type: Auth::DealerDetail::DealerTypes.sample,
         business_scopes: Auth::DealerDetail::BusinessScopes.sample(3),
+        authentication_image: File.open("public/images/thumb/missing.png"),
       }
     end
   end

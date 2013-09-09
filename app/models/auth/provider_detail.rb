@@ -1,17 +1,12 @@
 module Auth
   class ProviderDetail < ActiveRecord::Base    
-    # belongs_to :source, class_name: 'Provider'
-    # alias_attribute :user, :source
-    # alias_attribute :provider, :source
+    attr_accessible :company, :phone
 
-    # attr_accessible :source
-    attr_accessible :company, :phone, :reg_img
-
-    validates_presence_of :company, :phone, :reg_img
+    validates_presence_of :company, :phone
     
     # Fake attributes
-    attr_accessor :dealer_type_id, :business_scope_ids, :address, :open_during
-    attr_accessible :dealer_type_id, :business_scope_ids, :address, :open_during
+    attr_accessor :dealer_type_id, :business_scope_ids, :address, :open_during, :reg_img
+    attr_accessible :dealer_type_id, :business_scope_ids, :address, :open_during, :reg_img
 
     def serializable_hash(options={})
       options = { 

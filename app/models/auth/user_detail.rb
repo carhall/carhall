@@ -3,12 +3,11 @@ module Auth
     include Share::Areable
     include Share::Brandable
 
-    has_attached_file :reg_img, styles: { medium: "300x200#", thumb: "60x60#" }
+    extend Share::ImageAttachments
+    define_image_method
+    alias_attribute :car_image, :image
     
-    # alias_attribute :user, :source
-
-    # attr_accessible :source
-    attr_accessible :sex_id, :area_id, :brand_id, :series, :plate_num, :reg_img
+    attr_accessible :sex_id, :area_id, :brand_id, :series, :plate_num, :car_image
     attr_accessible :sex, :area, :brand
 
     extend Share::Id2Key
@@ -27,7 +26,7 @@ module Auth
       options = { 
         only: [:sex, :area_id, :brand_id, :series, :plate_num, :balance],
         methods: [:area, :brand],
-        images: [:reg_img],
+        images: [:car_image],
       }.update(options)
       super(options).merge(
         posts_count: posts_count(options[:source]), 

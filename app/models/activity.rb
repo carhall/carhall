@@ -1,7 +1,8 @@
 class Activity < ActiveRecord::Base
   belongs_to :dealer
 
-  has_attached_file :image, styles: { medium: "300x200#", thumb: "60x60#" }
+  extend Share::ImageAttachments
+  define_image_method
 
   attr_accessible :title, :expire_at, :description, :image
 

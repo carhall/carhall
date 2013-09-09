@@ -74,7 +74,7 @@ detail          | 附加字段的 **哈希表**        |
   detail[series]    | 型号                       |
   detail[plate_num] | 车牌号                     |
   detail[balance]   | 余额                       | 只读
-  detail[reg_img]   | 注册上传的汽车图片           |
+  detail[car_image] | 注册上传的汽车图片           |
 
   Area和Brand，ID与名称对应表，见最后一章  
   提交表单时，area_id或area，brand_id或brand都可以使用，但不能同时使用area_id和area，brand_id和brand  
@@ -102,9 +102,8 @@ detail          | 附加字段的 **哈希表**        |
   detail[business_scopes]    | 业务范围（数组）             | 洗车、美容、轮胎、换油、改装、钣喷、空调、专修、保险，其中若干个
   detail[company]            |                            |
   detail[address]            |                            |
-  detail[phone]              | 型号                       |
+  detail[phone]              |                            |
   detail[open_during]        | 开店时间                    |
-  detail[reg_img]            | 注册上传的资质证明图片        |
 
   **建议：显示时使用dealer_type和business_scopes，因为后期可能会添加新的业务范围**
 
@@ -113,8 +112,7 @@ detail          | 附加字段的 **哈希表**        |
   字段名称                 | 详细描述                    | 限制条件
   ------------------------|----------------------------|--------------------------
   detail[company]         |                            |
-  detail[phone]           | 型号                       |
-  detail[reg_img]         | 注册上传的资质证明图片        |
+  detail[phone]           |                            |
 
 API
 ----------
@@ -271,8 +269,6 @@ Club 车友会
 ----------
 字段名称         | 详细描述                    | 限制条件
 ----------------|----------------------------|----------------------------------
-area_id         |                            | 见User关于area_id的说明
-brand_id        |                            | 见User关于brand_id的说明
 president       | 堂主                       |
 mechanics       | 在线技师                    |
 announcement    | 公告                       |
@@ -301,7 +297,7 @@ Mending 保养专修
 ==========
 字段
 ----------
-:discount（哈希，优惠信息，哈希内的字段名待定）, :description, :mending_orders_count（保养专修订单数）  
+:discount（哈希，优惠信息，~~哈希内的字段名待定~~）, brands, :description, :mending_orders_count（保养专修订单数）  
 
 API
 ----------
@@ -343,7 +339,7 @@ BulkPurchasing 团购
 ==========
 字段
 ----------
-:title, :expire_at（过期时间）:bulk_purchasing_type, :price（原价）, :vip_price（团购价）, :description, :image, :bulk_purchasing_orders_count（团购订单数）  
+:title, :bulk_purchasing_type, :expire_at（过期时间）, :price（原价）, :vip_price（团购价）, :description, :image, :bulk_purchasing_orders_count（团购订单数）  
 
 API
 ----------

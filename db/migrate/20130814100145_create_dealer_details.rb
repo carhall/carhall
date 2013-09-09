@@ -10,7 +10,7 @@ class CreateDealerDetails < ActiveRecord::Migration
       t.string  :open_during
       t.integer :balance, null: false, default: 0
       t.string  :rqrcode_token
-      t.attachment :reg_img
+      t.attachment :image
 
       t.float :latitude
       t.float :longitude

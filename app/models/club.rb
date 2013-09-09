@@ -4,6 +4,9 @@ class Club < ActiveRecord::Base
 
   belongs_to :president, class_name: "BaseUser"
   has_many :posts
+  
+  extend Share::ImageAttachments
+  define_avatar_method
 
   extend Share::Ids2Users
   define_ids2users_methods :president_candidates
