@@ -6,8 +6,17 @@ API说明
 所有新建使用POST提交表单，修改使用PUT提交表单，删除使用DELETE，具体查看RESTful规范
 
 PUT和DELETE可以使用POST模拟，需要额外添加_method=put/delete参数  
-参数放在URL或放在表单里是等价的  
-> 例如：PUT /api/current_user.json 等价于 POST /api/current_user.json?_method=put
+> 例如：
+> 
+>     PUT /api/current_user 
+> 
+> 等价于 
+> 
+>     POST /api/current_user 
+>     表单
+>     _method       put
+> 
+参数放在URL或放在表单里是等价的， **但_method是例外，必须放在POST表单中！**  
 
 返回的结果
 ----------
