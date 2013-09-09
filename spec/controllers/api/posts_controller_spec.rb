@@ -16,7 +16,7 @@ describe Api::PostsController do
   include_examples "resources#index"
   include_examples "resources#show"
   include_examples "resources#create"
-  include_examples "resources#delete"
+  include_examples "resources#destroy"
 
   describe "GET friends" do
     let(:collection_name) { :friends }
@@ -58,7 +58,7 @@ describe Api::CommentsController do
     include_examples "resources#index"
     include_examples "resources#show"
     include_examples "resources#create"
-    include_examples "resources#delete"
+    include_examples "resources#destroy"
   end
 
   describe "when post belongs to himself" do
@@ -90,5 +90,36 @@ describe Api::PostBlacklistsController do
     let(:reset_args) {{ id: id }}
     include_examples "resources#create"
   end
-  include_examples "resources#delete"
+  include_examples "resources#destroy"
+end
+
+describe Api::ClubsController do
+  include_context "for devise"
+
+  let(:resource_name) { :club }
+
+  include_examples "resource#show"
+  describe "POST president" do
+    let(:post_name) { :president }
+    include_examples "resources#post"
+  end
+  describe "POST president" do
+    let(:post_name) { :mechanics }
+    include_examples "resources#post"
+  end
+  describe "when user isn't president" do
+    it "doesn't edit" do
+      put :update
+      response.status.should eq(403), error_messages
+    end
+  end
+  describe "when user is president" do
+    before do 
+      club = Club.with_user(user)
+      club.president = user
+      club.save
+    end
+    include_examples "resource#update"
+  end
+
 end

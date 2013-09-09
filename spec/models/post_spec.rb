@@ -24,6 +24,10 @@ end
 describe Comment do
   subject { create :comment }
   it_behaves_like "valid record" 
-
 end
 
+describe Club do
+  subject { Club.with_user(user) }
+  let(:user) { create :user }
+  it_behaves_like "valid record"
+end

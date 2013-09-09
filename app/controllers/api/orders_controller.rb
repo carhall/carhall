@@ -25,7 +25,7 @@ class Api::OrdersController < Api::ApplicationController
   def finish
     @order.find(params[:id]).finish!
 
-    render_accepted :accepted
+    render_accepted
   end
 
   # PUT /api/resources/1/orders/1/use
@@ -33,7 +33,7 @@ class Api::OrdersController < Api::ApplicationController
   def use
     @order.use! params[:count]
 
-    render_accepted :accepted
+    render_accepted
   end
   
   # PUT /api/resources/1/orders/1/cancel
@@ -41,13 +41,14 @@ class Api::OrdersController < Api::ApplicationController
   def cancel
     @order.cancel!
 
-    render_accepted :accepted
+    render_accepted
   end
 
   # POST /api/resources/1/orders/1/review
   # POST /api/resources/1/orders/1/review.json
   def review
-    render_create Review.create (params[:data]||{}).merge(order: @order)
+    @order.review_attributes = params[:data]
+    render_create @order.review
   end
 
   protected
@@ -70,6 +71,7 @@ class Api::OrdersController < Api::ApplicationController
   end
 
   def set_order
-    @order = @parent.orders.user(current_base_user).find(params[:id])
+    @order = @parent.orders.find(params[:id])
+    authorize! :write, @order
   end
 end

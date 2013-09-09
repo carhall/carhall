@@ -11,4 +11,8 @@ FactoryGirl.define do
     association :source, factory: :post
     user
   end
+
+  factory :club do
+    announcement { Faker::Lorem.sentence }
+  end
 end

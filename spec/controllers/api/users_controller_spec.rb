@@ -78,7 +78,7 @@ describe Api::FriendsController do
     let(:reset_args) {{ id: id }}
     include_examples "resources#create"
   end
-  include_examples "resources#delete"
+  include_examples "resources#destroy"
 end
 
 describe Api::BlacklistsController do
@@ -93,5 +93,5 @@ describe Api::BlacklistsController do
     let(:reset_args) {{ id: id }}
     include_examples "resources#create"
   end
-  include_examples "resources#delete"
+  include_examples "resources#destroy"
 end

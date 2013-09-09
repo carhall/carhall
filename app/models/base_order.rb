@@ -9,7 +9,9 @@ class BaseOrder < ActiveRecord::Base
 
   belongs_to :source, polymorphic: true, counter_cache: true
   belongs_to :dealer
-  belongs_to :review
+  belongs_to :review, autosave: true, dependent: :destroy
+  accepts_nested_attributes_for :review, allow_destroy: true, update_only: true
+
 
   before_save do
     self.dealer_id = source.dealer_id

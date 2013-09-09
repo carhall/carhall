@@ -13,7 +13,7 @@ class Api::ClubsController < Api::ApplicationController
   # PUT /api/club.json
   def update
     club = Club.with_user(@user)
-    raise CanCan::AccessDenied unless club.president == @user
+    raise CanCan::AccessDenied unless club.president_id == @user.id
     if club.update_attributes(params[:data])
       render_update_success club
     else

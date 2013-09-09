@@ -20,5 +20,6 @@ EOM
   }}
 
   let(:attach_args) { {} }
-  let(:reset_args) { nil }
+  let(:default_args) { {} }
+  let(:reset_args) { default_args.merge attach_args }
 end
