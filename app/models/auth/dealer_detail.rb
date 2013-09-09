@@ -1,6 +1,6 @@
 module Auth
   class DealerDetail < ActiveRecord::Base    
-    has_attached_file :reg_img, styles: { medium: "300x200>", thumb: "60x60>" }
+    has_attached_file :reg_img, styles: { medium: "300x200#", thumb: "60x60#" }
     
     # belongs_to :source, class_name: 'Dealer'
     # alias_attribute :user, :source
@@ -10,6 +10,9 @@ module Auth
     attr_accessible :dealer_type_id, :business_scope_ids, :template_ids, 
       :company, :address, :phone, :open_during, :accepted, :reg_img
     attr_accessible :dealer_type, :business_scopes, :templates 
+
+    validates_presence_of :dealer_type_id, :business_scope_ids,
+      :company, :address, :phone, :open_during, :reg_img
 
     extend Share::Id2Key
 

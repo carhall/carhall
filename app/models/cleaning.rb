@@ -4,7 +4,11 @@ class Cleaning < ActiveRecord::Base
   alias_attribute :orders, :cleaning_orders
   has_many :reviews, through: :cleaning_orders
 
-  has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60>" }
+  has_attached_file :image, styles: { medium: "300x200#", thumb: "60x60#" }
+
+  attr_accessible :title, :cleaning_type_id, :price, :vip_price, :description, :image
+
+  validates_presence_of :title, :cleaning_type_id, :price, :vip_price
 
   extend Share::Id2Key
   CleaningTypes = %w(洗车 漆面养护 清洁护理)

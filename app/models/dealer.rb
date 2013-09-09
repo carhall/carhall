@@ -16,6 +16,8 @@ class Dealer < BaseUser
   has_many :orders, class_name: 'BaseOrder'
   has_many :reviews, through: :orders
 
+  validates_presence_of :user_type_id
+
   def has_template? template
     detail.template_syms.include? template
   end

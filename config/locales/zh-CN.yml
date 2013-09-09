@@ -4,7 +4,9 @@ zh-CN:
   can_not_add_self: 您不能把自己加为好友。
   unaccepted: 您的账号还没有被激活，请联系管理员为您激活帐户。
   can_not_use_tips: 在账户被激活之前，您不能进行业务管理。
-  update_success: 成功更新%{model}信息。
+  create_success: 成功发布一个新的 %{model} “%{title}”。
+  update_success: 成功更新 %{model} “%{title}” 信息。
+  update_success_without_title: 成功更新 %{model} 信息。
   mending: "%{brand} 保养专修"
   times:  " %{count} 份"
   activerecord:
@@ -31,6 +33,7 @@ zh-CN:
         user_type_id: 用户类型
         description: 用户说明
         confirmation_token: 手机验证码
+      base_user/detail:
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型
         business_scope_ids: 业务范围

@@ -21,7 +21,7 @@ class BaseUser < ActiveRecord::Base
   include Share::Friendshipable
 
   # For avatar
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" },
+  has_attached_file :avatar, styles: { medium: "300x300#", thumb: "60x60#" },
     path: ':rails_root/public/system/base_users/:attachment/:id_partition/:style/:filename'
 
   # For posts
@@ -33,7 +33,7 @@ class BaseUser < ActiveRecord::Base
   attr_accessible :detail, :user_type_id
 
   validates_presence_of :username
-  validates_length_of :username, :within => 3..20, :allow_blank => true
+  validates_length_of :username, :within => 2..20, :allow_blank => true
 
   def club
     Club.with_user self

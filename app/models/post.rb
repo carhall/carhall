@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :club
   
-  has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60>" }
+  has_attached_file :image, styles: { medium: "300x200#", thumb: "60x60#" }
 
   attr_accessible :content, :image
   attr_accessible :user

@@ -11,11 +11,11 @@
       <td>汽车服务商</td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :dealer_type, :base_user %></th>
+      <th><%= translate_attribute_name :dealer_type, :'base_user/detail' %></th>
       <td><%= @user.detail.dealer_type %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :business_scopes, :base_user %></th>
+      <th><%= translate_attribute_name :business_scopes, :'base_user/detail' %></th>
       <td><%= @user.detail.business_scopes.join('、') %></td>
     </tr>
     <tr>
@@ -23,27 +23,27 @@
       <td><%= @user.mobile %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :company, :base_user %></th>
+      <th><%= translate_attribute_name :company, :'base_user/detail' %></th>
       <td><%= @user.detail.company %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :address, :base_user %></th>
+      <th><%= translate_attribute_name :address, :'base_user/detail' %></th>
       <td><%= @user.detail.address %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :phone, :base_user %></th>
+      <th><%= translate_attribute_name :phone, :'base_user/detail' %></th>
       <td><%= @user.detail.phone %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :open_during, :base_user %></th>
+      <th><%= translate_attribute_name :open_during, :'base_user/detail' %></th>
       <td><%= @user.detail.open_during %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :reg_img, :base_user %></th>
+      <th><%= translate_attribute_name :reg_img, :'base_user/detail' %></th>
       <td><img src="<%= @user.detail.reg_img.url(:medium) %>"></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :accepted, :base_user %></th>
+      <th><%= translate_attribute_name :accepted, :'base_user/detail' %></th>
       <td><label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label></td>
     </tr>
     <tr>

@@ -3,4 +3,6 @@ class Provider < BaseUser
 
   set_detail_class Auth::ProviderDetail
 
+  validates_presence_of :user_type_id
+
 end

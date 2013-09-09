@@ -22,7 +22,7 @@ class Tips::ApplicationController < ApplicationController
         @tip = @parent || klass.new(dealer: @dealer)
 
         if @tip.update_attributes(params[klass.name.underscore])
-          redirect_to tips_root_path, flash: { success: i18n_message(:update_success, klass.name.underscore) }
+          redirect_to tips_root_path, flash: { success: i18n_message(:update_success_without_title, klass.name.underscore) }
         else
           render :edit
         end
@@ -30,21 +30,15 @@ class Tips::ApplicationController < ApplicationController
 
     else # singletion
 
-      # GET /api/resources
-      # GET /api/resources.json
       define_method :index do
         @tips = @parent
       end
 
       if options[:expiredable]
-        # GET /api/resources/expired
-        # GET /api/resources/expired.json
         define_method :expired do
           @tips = @parent.expired
         end
 
-        # GET /api/resources/in_progress
-        # GET /api/resources/in_progress.json
         define_method :in_progress do
           @tips = @parent.in_progress
         end
@@ -59,14 +53,27 @@ class Tips::ApplicationController < ApplicationController
 
         if @tip.save
           index_path = { action: :index }
+          redirect_to index_path, flash: { success: i18n_message(:create_success, klass.name.underscore) }
+        else
+          render :new
+        end
+      end
+
+      define_method :update do
+        @tip = @parent.find(params[:id])
+
+        if @tip.update_attributes(params[klass.name.underscore])
+          index_path = { action: :index }
           redirect_to index_path, flash: { success: i18n_message(:update_success, klass.name.underscore) }
         else
           render :new
         end
       end
 
-      # GET /api/resources/1
-      # GET /api/resources/1.json
+      define_method :edit do
+        @tip = @parent.find(params[:id])
+      end
+
       define_method :show do
         @tip = @parent.find(params[:id])
       end
@@ -86,7 +93,9 @@ class Tips::ApplicationController < ApplicationController
   end
 
   def i18n_message message_type, model
-    I18n.t(message_type, model: I18n.t(model, scope: 'activerecord.models'))
+    options = { model: I18n.t(model, scope: 'activerecord.models') }
+    options[:title] = @tip.title if @tip.respond_to? :title
+    I18n.t(message_type, options)
   end
 
 end

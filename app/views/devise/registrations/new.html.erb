@@ -6,10 +6,10 @@
     <div class="span6">
       <%= devise_error_messages! %>
 
-      <%= f.input :mobile, autofocus: true %>
+      <%= f.input :mobile, autofocus: true, required: true %>
       <%= f.input :username %>
-      <%= f.input :password %>
-      <%= f.input :password_confirmation %>
+      <%= f.input :password, required: true %>
+      <%= f.input :password_confirmation, required: true %>
       <%= f.input :avatar do %>
         <div class="fileupload fileupload-new" data-provides="fileupload">
           <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="http://www.placehold.it/175x175" /></div>
@@ -23,13 +23,13 @@
       <%= f.input :user_type_id, collection: %w(媒体 汽车服务商).each_with_index %>
 
       <%= f.simple_fields_for :detail do |ff| %>
-        <%= ff.input :dealer_type_id, required: false, collection: Auth::DealerDetail::DealerTypes.each_with_index, wrapper_html: { class: "dealer" } %>
+        <%= ff.input :dealer_type_id, collection: Auth::DealerDetail::DealerTypes.each_with_index, wrapper_html: { class: "dealer" } %>
         <%= ff.input :business_scope_ids, collection: Auth::DealerDetail::BusinessScopes.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" } %>
-        <%= ff.input :company, required: false, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
-        <%= ff.input :address, required: false, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" } %>
-        <%= ff.input :phone, required: false, wrapper_html: { class: "dealer provider" } %>
-        <%= ff.input :open_during, required: false, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00' %>
-        <%= ff.input :reg_img, required: false, wrapper_html: { class: "dealer" } do %>
+        <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
+        <%= ff.input :address, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" } %>
+        <%= ff.input :phone, wrapper_html: { class: "dealer provider" } %>
+        <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00' %>
+        <%= ff.input :reg_img, wrapper_html: { class: "dealer" } do %>
           <div class="fileupload fileupload-new" data-provides="fileupload">
             <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[detail][reg_img]" /></span>
             <span class="fileupload-preview"></span>

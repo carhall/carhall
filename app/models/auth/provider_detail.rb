@@ -7,6 +7,8 @@ module Auth
     # attr_accessible :source
     attr_accessible :company, :phone, :reg_img
 
+    validates_presence_of :company, :phone, :reg_img
+    
     # Fake attributes
     attr_accessor :dealer_type_id, :business_scope_ids, :address, :open_during
     attr_accessible :dealer_type_id, :business_scope_ids, :address, :open_during

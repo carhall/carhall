@@ -4,7 +4,15 @@ class BulkPurchasing < ActiveRecord::Base
   alias_attribute :orders, :bulk_purchasing_orders
   has_many :reviews, through: :bulk_purchasing_orders
 
-  has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60>" }
+  has_attached_file :image, styles: { medium: "300x200#", thumb: "60x60#" }
+
+  attr_accessible :title, :expire_at, :bulk_purchasing_type_id, :price, :vip_price, :description, :image
+
+  validates_presence_of :title, :expire_at, :bulk_purchasing_type_id, :price, :vip_price
+
+  def expire_at_before_type_cast
+    expire_at.strftime("%Y-%m-%d %H:%M")
+  end
 
   extend Share::Id2Key
   BulkPurchasingTypes = %w(洗车 漆面养护 清洁护理)

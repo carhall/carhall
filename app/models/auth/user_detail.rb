@@ -3,7 +3,7 @@ module Auth
     include Share::Areable
     include Share::Brandable
 
-    has_attached_file :reg_img, styles: { medium: "300x200>", thumb: "60x60>" }
+    has_attached_file :reg_img, styles: { medium: "300x200#", thumb: "60x60#" }
     
     # alias_attribute :user, :source
 
