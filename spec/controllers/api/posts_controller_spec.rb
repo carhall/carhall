@@ -103,7 +103,7 @@ describe Api::ClubsController do
     let(:post_name) { :president }
     include_examples "resources#post"
   end
-  describe "POST president" do
+  describe "POST mechanics" do
     let(:post_name) { :mechanics }
     include_examples "resources#post"
   end

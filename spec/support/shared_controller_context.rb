@@ -10,13 +10,16 @@ shared_context "for devise" do
   let(:attributes) { attributes_for resource_name }
 
   let(:response_body) { JSON.parse(response.body) }
-  let(:error_messages) { -> { if response.status == 500 then <<-EOM
+  let(:error_messages) { -> { 
+    begin <<-EOM
 #{response_body['error_code'].camelize}: #{response_body['error']} (#{response.status})
   from #{response_body['backtrace'][0]}"
   from #{response_body['backtrace'][1]}"
   from #{response_body['backtrace'][2]}"
 EOM
-    else "unexpected response status, got #{response.status}" end
+    rescue 
+      response_body
+    end
   }}
 
   let(:attach_args) { {} }
