@@ -489,8 +489,12 @@ GET    | /api/dealers/:dealer_id/reviews                                   | 查
 
 API
 ----------
-提供一个API借口来查询服务器定义的API  
-GET /api/constants/:constant_name  
+提供一个API借口来查询服务器定义的常量  
+
+Method | URI                               | 说明
+-------|-----------------------------------|----------------------------------
+GET    | /api/constants                    | 查询所有常量  
+GET    | /api/constants/:constant_name     | 查询指定常量
 
 其中，constant_name即为上表所列的常数名，小写
 例如：获取所有的Area
