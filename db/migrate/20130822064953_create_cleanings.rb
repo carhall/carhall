@@ -7,11 +7,13 @@ class CreateCleanings < ActiveRecord::Migration
       t.float   :price
       t.float   :vip_price
       t.text    :description
-      t.integer :cleaning_orders_count
+      t.integer :orders_count, default: 0
       t.attachment :image
       
       t.timestamps
     end
 
+   add_index :cleanings, :orders_count
+   
   end
 end

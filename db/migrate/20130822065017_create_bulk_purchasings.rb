@@ -8,11 +8,13 @@ class CreateBulkPurchasings < ActiveRecord::Migration
       t.float    :price
       t.float    :vip_price
       t.text     :description
-      t.integer  :bulk_purchasing_orders_count
+      t.integer  :orders_count, default: 0
       t.attachment :image
       
       t.timestamps
     end
+
+   add_index :bulk_purchasings, :orders_count
 
   end
 end

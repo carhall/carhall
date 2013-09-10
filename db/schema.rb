@@ -108,14 +108,16 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.float    "price"
     t.float    "vip_price"
     t.text     "description"
-    t.integer  "bulk_purchasing_orders_count"
+    t.integer  "orders_count",            :default => 0
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
+
+  add_index "bulk_purchasings", ["orders_count"], :name => "index_bulk_purchasings_on_orders_count"
 
   create_table "cleaning_order_details", :force => true do |t|
     t.float   "price"
@@ -130,14 +132,16 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.float    "price"
     t.float    "vip_price"
     t.text     "description"
-    t.integer  "cleaning_orders_count"
+    t.integer  "orders_count",       :default => 0
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
+
+  add_index "cleanings", ["orders_count"], :name => "index_cleanings_on_orders_count"
 
   create_table "clubs", :force => true do |t|
     t.integer  "president_id"
@@ -212,10 +216,12 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.text     "discount"
     t.text     "brand_ids"
     t.text     "description"
-    t.integer  "mending_orders_count"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.integer  "orders_count", :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
+
+  add_index "mendings", ["orders_count"], :name => "index_mendings_on_orders_count"
 
   create_table "post_blocks", :force => true do |t|
     t.integer  "user_id"

@@ -24,8 +24,8 @@ module Auth
 
     def serializable_hash(options={})
       options = { 
-        only: [:sex, :area_id, :brand_id, :series, :plate_num, :balance],
-        methods: [:area, :brand],
+        only: [:sex_id, :area_id, :brand_id, :series, :plate_num, :balance],
+        methods: [:sex, :area, :brand],
         images: [:car_image],
       }.update(options)
       super(options).merge(

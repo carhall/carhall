@@ -17,7 +17,8 @@ class Api::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
   def create
-    render_create @parent.orders.create (params[:data]||{}).merge(user: current_base_user)
+    data_params = params.fetch(:data, {}).merge(user: current_base_user)
+    render_create @parent.orders.new data_params
   end
 
   # PUT /api/resources/1/orders/1/finish

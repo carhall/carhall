@@ -17,7 +17,8 @@ class Cleaning < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:id, :title, :cleaning_type, :price, :vip_price, :description, :cleaning_orders_count],
+      only: [:id, :title, :cleaning_type_id, :price, :vip_price, :description, :orders_count],
+      methods: [:cleaning_type],
       images: [:image],
       include: [:dealer],
     }.update(options)
