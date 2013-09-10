@@ -16,7 +16,7 @@ class BulkPurchasing < ActiveRecord::Base
   end
 
   extend Share::Id2Key
-  BulkPurchasingTypes = %w(洗车 漆面养护 清洁护理)
+  BulkPurchasingTypes = %w(洗车美容 保养专修 汽车装饰 其他)
   define_id2key_methods :bulk_purchasing_type
 
   include Share::Expiredable
