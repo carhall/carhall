@@ -5,7 +5,7 @@ API说明
 ----------
 所有新建使用POST提交表单，修改使用PUT提交表单，删除使用DELETE，具体查看RESTful规范
 
-PUT和DELETE可以使用POST模拟，需要额外添加_method=put/delete参数  
+GET、PUT和DELETE都可以使用POST模拟，需要额外添加_method=get/put/delete参数  
 > 例如：
 > 
 >     PUT /api/current_user 
