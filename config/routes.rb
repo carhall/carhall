@@ -55,6 +55,8 @@ Autozone::Application.routes.draw do
   devise_scope :base_users do
     # APIs
     namespace :api do
+      resources :constants, only: [:index, :show]
+
       resources :users, only: [:show, :create] do
         get :detail, on: :member
         post :login, on: :collection
