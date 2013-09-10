@@ -499,7 +499,7 @@ GET    | /api/constants/:constant_name     | 查询指定常量
 其中，constant_name即为上表所列的常数名，小写
 例如：获取所有的Area
 
-    GET /api/contants/areas
+    GET /api/constants/areas
 
 
 
