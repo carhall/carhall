@@ -280,7 +280,9 @@ Club 车友会
 ----------
 字段名称         | 详细描述                    | 限制条件
 ----------------|----------------------------|----------------------------------
+president_id    | 堂主ID                     |
 president       | 堂主                       |
+mechanic_ids    | 在线技师IDs                 |
 mechanics       | 在线技师                    |
 announcement    | 公告                       |
 avatar          | LOGO                       |
@@ -308,7 +310,13 @@ Mending 保养专修
 ==========
 字段
 ----------
-:discount（哈希，优惠信息，~~哈希内的字段名待定~~）, brands, :description, :mending_orders_count（保养专修订单数）  
+字段名称              | 详细描述                    | 限制条件
+---------------------|----------------------------|-----------------------------
+discount             | 优惠信息                    | 返回哈希表，key是0-6，分别代表周日、周一到周六，value是优惠信息的哈希表，包含discount_during（优惠时段）、man_hours_discount（工时优惠）、spare_parts_discount（零件优惠）三个字段，例如：{0: {discount_during: '10:00 到 15:00', man_houts_discount: '7折'}, 6: {discount_during: '10:00 到 15:00', spare_parts_discount: '7折'}}
+brand_ids            | 专修车型IDs                 |
+brands               | 专修车型                    |
+description          | 描述                       |
+orders_count         | 保养专修订单数               |
 
 API
 ----------
@@ -322,7 +330,16 @@ Cleaning 洗车美容
 ==========
 字段
 ----------
-:title, :cleaning_type（类型）, :price（原价）, :vip_price（优惠价）, :description, :image, :cleaning_orders_count（洗车美容订单数）  
+字段名称              | 详细描述                    | 限制条件
+---------------------|----------------------------|-----------------------------
+title                |                            | 
+cleaning_type_id     | 洗车美容类型ID              | 0-2
+cleaning_type        | 洗车美容类型                | 洗车、漆面养护、清洁护理，其中之一
+price                | 原价                       |
+vip_price            | 会员价                      |
+description          |                            |
+image                |                            |
+orders_count         | 洗车美容订单数               |
 
 API
 ----------
@@ -336,7 +353,12 @@ Activity 活动
 ==========
 字段
 ----------
-:title, :expire_at（过期时间）, :description, :image
+字段名称              | 详细描述                    | 限制条件
+---------------------|----------------------------|-----------------------------
+title                |                            | 
+expire_at            | 过期时间                    |
+description          |                            |
+image                |                            |
 
 API
 ----------
@@ -350,7 +372,17 @@ BulkPurchasing 团购
 ==========
 字段
 ----------
-:title, :bulk_purchasing_type, :expire_at（过期时间）, :price（原价）, :vip_price（团购价）, :description, :image, :bulk_purchasing_orders_count（团购订单数）  
+字段名称                 | 详细描述                    | 限制条件
+------------------------|----------------------------|--------------------------
+title                   |                            | 
+bulk_purchasing_type_id | 洗车美容类型ID              | 0-3
+bulk_purchasing_type    | 洗车美容类型                | 洗车美容、保养专修、汽车装饰、其他，其中之一
+expire_at               | 过期时间                    |
+price                   | 原价                       |
+vip_price               | 团购价                      |
+description             |                            |
+image                   |                            |
+orders_count            | 团购订单数                  |
 
 API
 ----------
@@ -364,20 +396,38 @@ Order 订单
 ==========
 字段
 ----------
-:order_type（订单类型）, :detail  
-
-其中  
-order_type可能为 mending_order, cleaning_order, bulk_purchasing_order  
-detail是附加字段的 **哈希表**  
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+title           |                            | 只读，由服务器端生成，例如：“美容洗车 1 份”
+order_type      | 订单类型，可能为 mending_order, cleaning_order, bulk_purchasing_order | 只读，提交时通过不同的url区分订单类型
+detail          | 附加字段的 **哈希表**        |
 
 * 如果order_type是mending_order，则detail包含以下附加字段  
-  :price（只读，总价）, :brand_id, :plate_num（车牌号）, :arrive_at（到达时间）, :mending_type（专修类型）, :brand（根据brand_id取得，string类型）
+  
+  字段名称             | 详细描述                    | 限制条件
+  --------------------|----------------------------|--------------------------------
+  detail[price]       | 总价                       | 只读，由服务器端计算得出
+  detail[brand_id]    | 品牌ID                     | 
+  detail[brand]       | 品牌                       | 
+  detail[series]      | 型号                       |
+  detail[plate_num]   | 车牌号                     |
+  detail[arrive_at]   | 到达时间                    | 
+  detail[description] | 预约项目                    |
 
 * 如果order_type是cleaning_order，则detail包含以下附加字段  
-  :price（只读，总价）, :count（购买数量）, :used_count（只读，已使用数量）
+  
+  字段名称             | 详细描述                    | 限制条件
+  --------------------|----------------------------|--------------------------------
+  detail[price]       | 总价                       | 只读，由服务器端计算得出
+  detail[count]       | 购买数量                    | 
+  detail[used_count]  | 已使用数量                  | 只读，由服务器计算得出
 
 * 如果order_type是bulk_purchasing_order，则detail包含以下附加字段  
-  :price（只读，总价）, :count（购买数量）
+
+  字段名称             | 详细描述                    | 限制条件
+  --------------------|----------------------------|--------------------------------
+  detail[price]       | 总价                       | 只读，由服务器端计算得出
+  detail[count]       | 购买数量                    | 
 
 API
 ----------
@@ -406,7 +456,10 @@ Review 订单评价
 ==========
 字段
 ----------
-:content, :stars（评价等级，几颗星）  
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+content         |                            | 
+stars           | 评价等级                    | 0-5
 
 API
 ----------
@@ -421,8 +474,33 @@ POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/review  | 提
 GET    | /api/dealers/:dealer_id/reviews                                   | 查询指定商家的所有订单的评价
 
 
-Area对应表
+常量表
 ==========
+字段
+----------
+
+    sexes = ["男", "女"]
+    areas = Area对应表
+    brands = Brand对应表
+    dealer_types = ["洗车美容", "专项服务", "专修", "4S店"]
+    business_scopes = ["洗车", "美容", "轮胎", "换油", "改装", "钣喷", "空调", "专修", "保险"]
+    cleaning_types = ["洗车", "漆面养护", "清洁护理"]
+    bulk_purchasing_types = ["洗车美容", "保养专修", "汽车装饰", "其他"]
+
+API
+----------
+提供一个API借口来查询服务器定义的API  
+GET /api/constants/:constant_name  
+
+其中，constant_name即为上表所列的常数名，小写
+例如：获取所有的Area
+
+    GET /api/contants/area
+
+
+
+Area对应表
+----------
 
     [
       "北京市", "天津市", "上海市", "重庆市", "香港特别行政区", "澳门特别行政区", 
@@ -437,7 +515,7 @@ Area对应表
 
 
 Brand对应表
-==========
+----------
 
     [
       "阿斯顿·马丁", "奥迪", "巴博斯", "宝骏", 
