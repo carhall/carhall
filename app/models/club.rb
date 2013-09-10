@@ -25,15 +25,42 @@ class Club < ActiveRecord::Base
   end
 
   def apply_president user
-    president_candidate_ids << user.id
+    user_id = Share::Userable.get_id user
+    president_candidate_ids << user_id
     president_candidate_ids.uniq!
-    save
   end
 
   def apply_mechanic user
-    mechanic_candidate_ids << user.id
+    user_id = Share::Userable.get_id user
+    mechanic_candidate_ids << user_id
     mechanic_candidate_ids.uniq!
-    save
+  end
+
+  def appoint_president user
+    user_id = Share::Userable.get_id user
+    president_id = user_id
+  end
+
+  def appoint_mechanic user
+    user_id = Share::Userable.get_id user
+    mechanic_ids << user_id
+    mechanic_ids.uniq!
+  end
+
+  def apply_president! user
+    apply_president user && save(validate: false)
+  end
+
+  def apply_mechanic! user
+    apply_mechanic user && save(validate: false)
+  end
+
+  def appoint_president! user
+    appoint_president user && save(validate: false)
+  end
+
+  def appoint_mechanic! user
+    appoint_mechanic user && save(validate: false)
   end
 
   def serializable_hash(options={})

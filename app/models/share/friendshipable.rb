@@ -22,43 +22,49 @@ module Share
       # has_many :inverse_post_blacklists, through: :inverse_post_blocks, source: :user
 
     end
-    
-    def self.get_id user
-      if user.kind_of? BaseUser then user.id else user end
-    end
 
     def make_friend_with friend
-      friend_id = Friendshipable.get_id friend
+      friend_id = Userable.get_id friend
       friendships.where(friend_id: friend_id).first_or_initialize
     end
 
     def break_with friend
-      friend_id = Friendshipable.get_id friend
+      friend_id = Userable.get_id friend
       friendship = friendships.where(friend_id: friend_id).first
       friendship.destroy if friendship
     end
 
     def add_to_blacklist blacklist
-      blacklist_id = Friendshipable.get_id blacklist
+      blacklist_id = Userable.get_id blacklist
       break_with blacklist_id
       blocks.where(blacklist_id: blacklist_id).first_or_initialize
     end
     
     def add_to_post_blacklist blacklist
-      blacklist_id = Friendshipable.get_id blacklist
+      blacklist_id = Userable.get_id blacklist
       post_blocks.where(blacklist_id: blacklist_id).first_or_initialize
     end
 
     def remove_from_blacklist blacklist
-      blacklist_id = Friendshipable.get_id blacklist
+      blacklist_id = Userable.get_id blacklist
       block = blocks.where(blacklist_id: blacklist_id).first
       block.destroy if block
     end
 
     def remove_from_post_blacklist blacklist
-      blacklist_id = Friendshipable.get_id blacklist
+      blacklist_id = Userable.get_id blacklist
       block = post_blocks.where(blacklist_id: blacklist_id).first
       block.destroy if block
+    end
+
+    def make_friend_with! friend
+      make_friend_with(friend).save(validate: false)
+    end
+    def add_to_blacklist! blacklist
+      add_to_blacklist(friend).save(validate: false)
+    end
+    def add_to_post_blacklist! blacklist
+      add_to_post_blacklist(friend).save(validate: false)
     end
 
   end

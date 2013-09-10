@@ -23,7 +23,9 @@ class Api::ClubsController < Api::ApplicationController
 
   def president
     club = Club.with_user(@user)
-    if club.apply_president @user
+    # club.apply_president @user
+    club.appoint_president @user
+    if club.save
       render_created
     else
       render_failure club
@@ -32,7 +34,9 @@ class Api::ClubsController < Api::ApplicationController
 
   def mechanics
     club = Club.with_user(@user)
-    if club.apply_mechanic @user
+    # club.apply_mechanic @user
+    club.appoint_mechanic @user
+    if club.save
       render_created
     else
       render_failure club
