@@ -495,7 +495,7 @@ GET /api/constants/:constant_name
 其中，constant_name即为上表所列的常数名，小写
 例如：获取所有的Area
 
-    GET /api/contants/area
+    GET /api/contants/areas
 
 
 
