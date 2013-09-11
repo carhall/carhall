@@ -1,6 +1,6 @@
 class BulkPurchasing < ActiveRecord::Base
   belongs_to :dealer
-  has_many :bulk_purchasing_orders, as: :source
+  has_many :bulk_purchasing_orders, foreign_key: :source_id
   alias_attribute :orders, :bulk_purchasing_orders
   has_many :reviews, through: :bulk_purchasing_orders
 

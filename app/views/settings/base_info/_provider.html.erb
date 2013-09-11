@@ -1,29 +1,29 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%= translate_attribute_name :username, :base_user %></th>
+      <th><%= translate_attribute_name :username, :user %></th>
       <td><%= @user.username %></td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><%= translate_attribute_name :user_type, :base_user %></th>
+      <th><%= translate_attribute_name :user_type, :user %></th>
       <td>媒体</td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :mobile, :base_user %></th>
+      <th><%= translate_attribute_name :mobile, :user %></th>
       <td><%= @user.mobile %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :company, :'base_user/detail' %></th>
+      <th><%= translate_attribute_name :company, :'user/detail' %></th>
       <td><%= @user.detail.company %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :phone, :'base_user/detail' %></th>
+      <th><%= translate_attribute_name :phone, :'user/detail' %></th>
       <td><%= @user.detail.phone %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :description, :base_user %></th>
+      <th><%= translate_attribute_name :description, :user %></th>
       <td><%= @user.description %></td>
     </tr>
   </tbody>

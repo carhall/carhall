@@ -4,22 +4,22 @@ module FilterHelper
   extend ActiveSupport::Concern
 
   def current_ability
-    @current_ability ||= Ability.new(current_base_user)
+    @current_ability ||= Ability.new(current_user)
   end
 
-  def ensure_base_user_type *user_types
+  def ensure_user_type *user_types
     raise CanCan::AccessDenied unless user_types.include? @user_type
   end
 
   module ClassMethods
-    def ensure_base_user_type *user_types
+    def ensure_user_type *user_types
       prepend_before_filter do
         set_user_type
         raise CanCan::AccessDenied unless user_types.include? @user_type
       end
     end
 
-    def ensure_base_user_accepted
+    def ensure_user_accepted
       prepend_before_filter do
         set_user_type
         raise CanCan::AccessDenied unless @user.accepted?
@@ -29,14 +29,14 @@ module FilterHelper
 
   def set_user
     @user ||= if user_id = params[:user_id]
-      BaseUser.find(user_id)
+      User.find(user_id)
     else
-      current_base_user
+      current_user
     end
   end
 
   def set_current_user
-    @user ||= current_base_user
+    @user ||= current_user
   end
 
   def set_area_id_and_brand_id
@@ -51,8 +51,8 @@ module FilterHelper
   end
 
   def set_user_type
-    @user ||= current_base_user
-    @user_type ||= (@user || BaseUser.new).user_type
+    @user ||= current_user
+    @user_type ||= (@user || User.new).user_type
   end
   
   def set_dealer

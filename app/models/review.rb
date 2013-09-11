@@ -1,5 +1,5 @@
 class Review < ActiveRecord::Base
-  belongs_to :order, class_name: 'BaseOrder'
+  belongs_to :order, class_name: 'Order'
 
   attr_accessible :content, :stars
   attr_accessible :order

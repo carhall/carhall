@@ -5,13 +5,13 @@ Autozone::Application.routes.draw do
   root to: 'dashboards#show'
 
   # Frontend sign_in/sing_up page
-  devise_for :base_users, controllers: { 
-    registrations: "base_users/registrations",
-    sessions: "base_users/sessions",
-    confirmations: "base_users/confirmations",
+  devise_for :users, controllers: { 
+    registrations: "users/registrations",
+    sessions: "users/sessions",
+    confirmations: "users/confirmations",
   } 
-  devise_scope :base_users do
-    namespace :base_users do
+  devise_scope :users do
+    namespace :users do
       resource :confirmation do
         get :resend
       end
@@ -60,7 +60,7 @@ Autozone::Application.routes.draw do
     post :list_users
   end
 
-  devise_scope :base_users do
+  devise_scope :users do
     # APIs
     namespace :api do
       resources :constants, only: [:index, :show]

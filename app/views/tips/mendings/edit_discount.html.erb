@@ -15,7 +15,7 @@
           <% (0..6).each do |day| %>
 
             <div class="control-group">
-              <label class="control-label" for="base_user_current_password"><strong>周<%= t('date.abbr_day_names')[day] %></strong></label>
+              <label class="control-label" for="user_current_password"><strong>周<%= t('date.abbr_day_names')[day] %></strong></label>
             </div>
 
             <%= ff.fields_for day.to_s do |fff| %>

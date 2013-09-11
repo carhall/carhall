@@ -1,5 +1,5 @@
 class Api::PostsController < Api::ApplicationController
-  ensure_base_user_type :user
+  ensure_user_type :user
   before_filter :set_user, except: :show
   before_filter :set_area_id_and_brand_id, except: :create
 

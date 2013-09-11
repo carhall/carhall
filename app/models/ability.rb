@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     
-    user ||= BaseUser.new # guest user (not logged in)
+    user ||= User.new # guest user (not logged in)
     case user.user_type
     when :admin
       can :manage, :all
@@ -16,7 +16,7 @@ class Ability
 
     when :user
       can :destroy, [Post, Comment], user_id: user.id
-      can :update, BaseOrder, user_id: user.id
+      can :update, Order, user_id: user.id
     when :provider, :dealer, :user
       can :read, :all
     end

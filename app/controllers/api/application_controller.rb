@@ -1,5 +1,5 @@
 class Api::ApplicationController < ActionController::Base
-  before_filter :authenticate_base_user!
+  before_filter :authenticate_user!
 
   include Api::RenderHelper
   include FilterHelper

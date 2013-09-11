@@ -1,4 +1,4 @@
-class Dealer < BaseUser
+class Dealer < User
   include Auth::RqrcodeToken
 
   set_detail_class Auth::DealerDetail
@@ -13,7 +13,7 @@ class Dealer < BaseUser
   has_many :bulk_purchasing_orders, through: :bulk_purchasings
 
 
-  has_many :orders, class_name: 'BaseOrder'
+  has_many :orders, class_name: 'Order'
   has_many :reviews, through: :orders
 
   validates_presence_of :user_type_id

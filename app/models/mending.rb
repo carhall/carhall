@@ -1,6 +1,6 @@
 class Mending < ActiveRecord::Base
   belongs_to :dealer
-  has_many :mending_orders, as: :source
+  has_many :mending_orders, foreign_key: :source_id
   alias_attribute :orders, :mending_orders
 
   has_many :reviews, through: :mending_orders

@@ -4,11 +4,11 @@ module Share
       
     included do
       default_scope { includes(:user) }
-      belongs_to :user, class_name: 'BaseUser'
+      belongs_to :user, class_name: 'User'
     end
 
     def self.get_id user
-      if user.kind_of? BaseUser then user.id else user end
+      if user.kind_of? User then user.id else user end
     end
 
     module ClassMethods

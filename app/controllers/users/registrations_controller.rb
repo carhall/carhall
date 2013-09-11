@@ -1,11 +1,11 @@
-class BaseUsers::RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
   def resource_class
     if @resource_class
       @resource_class
-    elsif params[:base_user].nil?
+    elsif params[:user].nil?
       @resource_class = Provider
     else
-      user_type = params[:base_user][:user_type_id]
+      user_type = params[:user][:user_type_id]
       @resource_class = [Provider, Dealer][user_type.to_i]
     end
   end
@@ -63,12 +63,12 @@ class BaseUsers::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_inactive_sign_up_path_for resource
-    return { action: :edit, controller: :'base_users/confirmations' } unless resource.confirmed?
+    return { action: :edit, controller: :'users/confirmations' } unless resource.confirmed?
     dashboard_path
   end
 
   def after_resending_confirmation_instructions_path_for resource
-    new_base_user_confirmation_path
+    new_user_confirmation_path
   end
 
 end 

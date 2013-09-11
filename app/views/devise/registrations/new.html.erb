@@ -15,7 +15,7 @@
           <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="/images/medium/missing.png" /></div>
           <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
           <div>
-            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[avatar]" /></span>
+            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="user[avatar]" /></span>
             <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
           </div>
         </div>
@@ -31,7 +31,7 @@
         <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00', required: true %>
         <%= ff.input :authentication_image, wrapper_html: { class: "dealer" }, required: true do %>
           <div class="fileupload fileupload-new" data-provides="fileupload">
-            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="base_user[detail_attributes][authentication_image]" /></span>
+            <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="user[detail_attributes][authentication_image]" /></span>
             <span class="fileupload-preview"></span>
             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
           </div>
@@ -52,7 +52,7 @@
 
 <% content_for :javascripts do %>
   <script type="text/javascript">
-  $user_type = $("#base_user_user_type_id")
+  $user_type = $("#user_user_type_id")
   function prepare_detail_inputs() {
     $(".control-group").filter(".provider, .dealer").hide()
     if($user_type.val() === "0") {

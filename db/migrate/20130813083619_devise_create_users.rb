@@ -1,6 +1,6 @@
 class DeviseCreateUsers < ActiveRecord::Migration
   def change
-    create_table(:base_users) do |t|
+    create_table(:users) do |t|
       ## Database authenticatable
       # t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -43,10 +43,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
     # Create a default user
     # BaseUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
-    # add_index :base_users, :email,                unique: true
-    add_index :base_users, :reset_password_token, unique: true
-    add_index :base_users, :confirmation_token,   unique: true
-    add_index :base_users, :unlock_token,         unique: true
-    add_index :base_users, :authentication_token, unique: true
+    # add_index :users, :email,                unique: true
+    add_index :users, :reset_password_token, unique: true
+    add_index :users, :confirmation_token,   unique: true
+    add_index :users, :unlock_token,         unique: true
+    add_index :users, :authentication_token, unique: true
   end
 end

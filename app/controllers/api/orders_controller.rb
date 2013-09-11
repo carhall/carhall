@@ -1,5 +1,5 @@
 class Api::OrdersController < Api::ApplicationController
-  ensure_base_user_type :user
+  ensure_user_type :user
   before_filter :set_parent
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
@@ -18,7 +18,7 @@ class Api::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
   def create
-    data_params = params.fetch(:data, {}).merge(user: current_base_user)
+    data_params = params.fetch(:data, {}).merge(user: current_user)
     render_create @parent.orders.new data_params
   end
 

@@ -1,15 +1,15 @@
 class SettingsController < ApplicationController
-  ensure_base_user_type :provider, :dealer
+  ensure_user_type :provider, :dealer
 
   def show
   end
 
   def finance
-    ensure_base_user_type :dealer
+    ensure_user_type :dealer
   end
 
   def template
-    ensure_base_user_type :dealer
+    ensure_user_type :dealer
   end
 
   def rqrcode

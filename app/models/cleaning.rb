@@ -1,6 +1,6 @@
 class Cleaning < ActiveRecord::Base
   belongs_to :dealer
-  has_many :cleaning_orders, as: :source
+  has_many :cleaning_orders, foreign_key: :source_id
   alias_attribute :orders, :cleaning_orders
   has_many :reviews, through: :cleaning_orders
 

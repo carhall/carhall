@@ -1,12 +1,12 @@
 class Api::UsersController < Api::ApplicationController
-  skip_before_filter :authenticate_base_user!, only: [:login, :create]
+  skip_before_filter :authenticate_user!, only: [:login, :create]
 
-  set_resource_class BaseUser, detail: true
+  set_resource_class User, detail: true
 
   # POST /api/users/login
   # POST /api/users/login.json
   def login
-    @user = BaseUser.find_for_database_authentication(mobile: params[:data][:mobile])
+    @user = User.find_for_database_authentication(mobile: params[:data][:mobile])
 
     if @user && @user.valid_password?(params[:data][:password])
       @user.reset_authentication_token!  # make sure the user has a token generated

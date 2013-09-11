@@ -1,15 +1,14 @@
-class BaseOrder < ActiveRecord::Base
+class Order < ActiveRecord::Base
 
   # For details
   include Share::Detailable
-  alias_method :order_type, :detail_type_sym
+  alias_method :order_type, :type_sym
 
   include Tips::Statable
   include Share::Userable
 
-  belongs_to :source, polymorphic: true, counter_cache: :orders_count
   belongs_to :dealer
-  has_one :review, foreign_key: :order_id
+  has_one :review
 
   before_save do
     self.dealer_id = source.dealer_id

@@ -1,4 +1,4 @@
-class Provider < BaseUser
+class Provider < User
   include Auth::RqrcodeToken
 
   set_detail_class Auth::ProviderDetail

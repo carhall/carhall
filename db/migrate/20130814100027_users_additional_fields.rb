@@ -1,6 +1,9 @@
 class UsersAdditionalFields < ActiveRecord::Migration
   def change
-    change_table(:base_users) do |t|
+    change_table(:users) do |t|
+      # For STI
+      t.string  :type
+
       t.string  :username, null: false, default: ""
       # t.string  :nickname, null: false, default: ""
       t.string  :mobile, null: false, default: "", unique: true
@@ -9,14 +12,14 @@ class UsersAdditionalFields < ActiveRecord::Migration
 
       t.datetime :accepted_at
 
-      t.references :detail, polymorphic: true
+      t.references :detail
     end
 
-    add_index :base_users, :username
-    add_index :base_users, :mobile
+    add_index :users, :username
+    add_index :users, :mobile
 
-    add_index :base_users, [:detail_type, :detail_id]
+    add_index :users, :detail_id
 
-    BaseUser.create!(mobile: '15901013540', password: 'password', username: '汽车堂')
+    # User.create!(mobile: '15901013540', password: 'password', username: '汽车堂')
   end
 end
