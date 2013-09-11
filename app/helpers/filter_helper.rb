@@ -6,7 +6,7 @@ module FilterHelper
   end
 
   def ensure_user_type
-    can? :use, self
+    authorize! :use, self
   end
 
   def set_user
@@ -18,7 +18,7 @@ module FilterHelper
   end
 
   def set_current_user
-    @user = current_account
+    @user ||= @current_user = current_account
   end
 
   def set_area_id_and_brand_id
@@ -33,8 +33,7 @@ module FilterHelper
   end
 
   def set_user_type
-    @user ||= current_account
-    @user_type ||= (@user || User.new).user_type
+    @user_type = (current_account || User.new).user_type
   end
   
   def set_dealer

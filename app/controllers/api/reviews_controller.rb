@@ -16,9 +16,9 @@ class Api::ReviewsController < Api::ApplicationController
   protected
 
   AccreditedKeys = {
-    'mending_id' => ::Tips::Mending,
-    'cleaning_id' => ::Tips::Cleaning,
-    'bulk_purchasing_id' => ::Tips::BulkPurchasing,
+    'mending_id' => Mending,
+    'cleaning_id' => Cleaning,
+    'bulk_purchasing_id' => BulkPurchasing,
     'dealer_id' => Dealer,
   }
 

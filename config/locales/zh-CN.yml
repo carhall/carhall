@@ -13,7 +13,7 @@ zh-CN:
   times:  " %{count} 份"
   activerecord:
     models:
-      base_user: 用户
+      account: 用户
       user: 普通用户
       dealer: 汽车服务商
       provider: 媒体
@@ -23,7 +23,7 @@ zh-CN:
       activity: 活动
       bulk_purchasing: 团购项目
     attributes:
-      base_user:
+      account: &account
         id: ID
         mobile: 手机号码
         username: 昵称
@@ -32,10 +32,10 @@ zh-CN:
         password_confirmation: 确认密码
         avatar: 头像
         user_type: 用户类型
-        user_type_id: 用户类型
+        type: 用户类型
         description: 用户说明
         confirmation_token: 手机验证码
-      base_user/detail:
+      account/detail: &detail
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型
         business_scope_ids: 业务范围
@@ -46,6 +46,8 @@ zh-CN:
         open_during: 营业时间
         authentication_image: 营业执照认证资料
         accepted: 服务商认证
+      user: 
+        <<: *account
       mending:
         brand_ids: 专修品牌
       cleaning:
@@ -87,15 +89,9 @@ zh-CN:
         description: 预约项目
   simple_form:
     labels:
-      base_user:
+      account:
         detail:
-          dealer_type_id: 服务商类型
-          business_scope_ids: 业务范围
-          company: 单位名称
-          address: 地址
-          phone: 电话
-          open_during: 营业时间
-          authentication_image: 营业执照认证资料
+          <<: *detail
       mending:
         discount:
           discount_during: 优惠时段

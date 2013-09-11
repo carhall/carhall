@@ -1,4 +1,4 @@
-class Tips::Order < ActiveRecord::Base
+class Order < ActiveRecord::Base
   # For details
   include Share::Detailable
   alias_method :order_type, :type_sym
@@ -9,6 +9,9 @@ class Tips::Order < ActiveRecord::Base
   belongs_to :dealer
   has_one :review
 
+  attr_accessible :user, :detail
+  attr_accessible :detail_attributes
+  
   before_save do
     self.dealer_id = source.dealer_id
     self.title = set_title
@@ -21,8 +24,6 @@ class Tips::Order < ActiveRecord::Base
   extend Share::Id2Key
   States = %i(finished canceled)
   define_id2key_methods :state
-
-  attr_accessible :user, :detail
 
   def serializable_hash(options={})
     options = { 

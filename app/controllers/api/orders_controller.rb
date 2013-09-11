@@ -18,7 +18,7 @@ class Api::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
   def create
-    data_params = params.fetch(:data, {}).merge(user: @user)
+    data_params = params.fetch(:data, {}).merge(user: @current_user)
     render_create @parent.orders.new data_params
   end
 
@@ -47,15 +47,15 @@ class Api::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders/1/review.json
   def review
     data_params = params.fetch(:data, {}).merge(order: @order)
-    render_create ::Tips::Review.new data_params
+    render_create Review.new data_params
   end
 
   protected
 
   AccreditedKeys = {
-    'mending_id' => ::Tips::Mending,
-    'cleaning_id' => ::Tips::Cleaning,
-    'bulk_purchasing_id' => ::Tips::BulkPurchasing,
+    'mending_id' => Mending,
+    'cleaning_id' => Cleaning,
+    'bulk_purchasing_id' => BulkPurchasing,
     'dealer_id' => Dealer,
   }
 

@@ -5,8 +5,8 @@ class Api::ConstantsController < Api::ApplicationController
     brands: Share::Brandable::Brands,
     dealer_types: Accounts::DealerDetail::DealerTypes,
     business_scopes: Accounts::DealerDetail::BusinessScopes,
-    cleaning_types: ::Tips::Cleaning::CleaningTypes,
-    bulk_purchasing_types: ::Tips::BulkPurchasing::BulkPurchasingTypes,
+    cleaning_types: Cleaning::CleaningTypes,
+    bulk_purchasing_types: BulkPurchasing::BulkPurchasingTypes,
   }
 
   def index

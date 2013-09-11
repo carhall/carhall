@@ -3,22 +3,22 @@ require 'spec_helper'
 describe "Tips" do
   let(:dealer) { create :dealer }
 
-  describe Tips::Mending do
+  describe Mending do
     subject { create :mending, dealer: dealer }
     include_examples "valid record"
   end
 
-  describe Tips::Cleaning do
+  describe Cleaning do
     subject { create :cleaning, dealer: dealer }
     include_examples "valid record"
   end
 
-  describe Tips::Activity do
+  describe Activity do
     subject { create :activity, dealer: dealer }
     include_examples "valid record"
   end
 
-  describe Tips::BulkPurchasing do
+  describe BulkPurchasing do
     subject { create :bulk_purchasing, dealer: dealer }
     include_examples "valid record"
   end
@@ -67,14 +67,14 @@ describe "Tips" do
     end
   end
 
-  describe Tips::MendingOrder do
+  describe MendingOrder do
     subject { create :mending_order, source: create(:mending, dealer: dealer)}
     include_examples "valid record"
     include_examples "orders#finish"
     include_examples "orders#cancel"
   end
 
-  describe Tips::CleaningOrder do
+  describe CleaningOrder do
     subject { create :cleaning_order, source: create(:cleaning, dealer: dealer)}
     include_examples "valid record"
     include_examples "orders#use"
@@ -82,14 +82,14 @@ describe "Tips" do
     include_examples "orders#cancel"
   end
 
-  describe Tips::MendingOrder do
+  describe MendingOrder do
     subject { create :bulk_purchasing_order, source: create(:bulk_purchasing, dealer: dealer)}
     include_examples "valid record"
     include_examples "orders#finish"
     include_examples "orders#cancel"
   end
 
-  describe Tips::Review do
+  describe Review do
     subject { create :review }
     include_examples "valid record"
   end

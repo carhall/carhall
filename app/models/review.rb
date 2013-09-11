@@ -1,5 +1,5 @@
-class Tips::Review < ActiveRecord::Base
-  belongs_to :order, class_name: Tips::Order
+class Review < ActiveRecord::Base
+  belongs_to :order
 
   attr_accessible :content, :stars
   attr_accessible :order

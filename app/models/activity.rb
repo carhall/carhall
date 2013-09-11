@@ -1,4 +1,4 @@
-class Tips::Activity < ActiveRecord::Base
+class Activity < ActiveRecord::Base
   belongs_to :dealer
 
   extend Share::ImageAttachments

@@ -12,9 +12,10 @@ class Dealer < Account
   has_many :cleaning_orders, through: :cleanings
   has_many :bulk_purchasing_orders, through: :bulk_purchasings
 
+  has_many :orders
+  has_many :reviews
 
-  has_many :orders, class_name: Tips::Order
-  has_many :reviews, through: :orders
+  validates_presence_of :type
 
   def has_template? template
     detail.template_syms.include? template

@@ -24,8 +24,9 @@ class Account < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :password, :password_confirmation, :remember_me
-  attr_accessible :username, :mobile, :description, :avatar
+  attr_accessible :username, :mobile, :description, :avatar, :type
   attr_accessible :detail
+  attr_accessible :detail_attributes
 
   validates_presence_of :username
   validates_length_of :username, :within => 2..20, :allow_blank => true

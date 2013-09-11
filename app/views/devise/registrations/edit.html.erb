@@ -16,13 +16,11 @@
         <div class="span12">
           <%= devise_error_messages! %>
           
-          <%= f.input :mobile, autofocus: true do %>
-            <label><%= resource.mobile %></label>
-          <% end %>
+          <%= f.input :mobile, input_html: { readonly: true } %>
 
           <hr>
           <div class="control-group">
-            <label class="control-label" for="user_current_password"><strong>重设密码</strong></label>
+            <label class="control-label" for="account_current_password"><strong>重设密码</strong></label>
           </div>
 
           <%= f.input :current_password %>
@@ -31,7 +29,7 @@
 
           <hr>
           <div class="control-group">
-            <label class="control-label" for="user_current_password"><strong>编辑基本信息</strong></label>
+            <label class="control-label" for="account_username"><strong>编辑基本信息</strong></label>
           </div>
 
           <%= f.input :username, required: true %>
@@ -40,7 +38,7 @@
               <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= resource.avatar.url(:medium) %>" /></div>
               <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
               <div>
-                <span class="btn btn-file"><span class="fileupload-new">更换图片</span><span class="fileupload-exists">更换</span><input type="file" name="user[avatar]" /></span>
+                <span class="btn btn-file"><span class="fileupload-new">更换图片</span><span class="fileupload-exists">更换</span><input type="file" name="account[avatar]" /></span>
                 <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
               </div>
             </div>
@@ -48,17 +46,17 @@
           
           <% if resource.user_type == :dealer %>
           
-            <input name="user[user_type_id]" type="hidden" value="1">
+            <%= f.hidden_field :type, value: "Dealer" %>
             <%= f.simple_fields_for :detail do |ff| %>
-              <%= ff.input :dealer_type_id, collection: Auth::DealerDetail::DealerTypes.each_with_index, wrapper_html: { class: "dealer" } %>
-              <%= ff.input :business_scope_ids, collection: Auth::DealerDetail::BusinessScopes.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" } %>
+              <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerTypes.each_with_index, wrapper_html: { class: "dealer" } %>
+              <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScopes.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" } %>
               <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
               <%= ff.input :address, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" } %>
               <%= ff.input :phone, wrapper_html: { class: "dealer provider" } %>
               <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00' %>
               <%= ff.input :authentication_image, wrapper_html: { class: "dealer" } do %>
                 <div class="fileupload fileupload-new" data-provides="fileupload">
-                  <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="user[detail_attributes][authentication_image]" /></span>
+                  <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="account[detail_attributes][authentication_image]" /></span>
                   <span class="fileupload-preview"></span>
                   <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
                 </div>
@@ -67,7 +65,7 @@
 
           <% elsif resource.user_type == :provider %>
 
-            <input name="user[user_type_id]" type="hidden" value="0">
+            <%= f.hidden_field :type, value: "Provider" %>
             <%= f.simple_fields_for :detail do |ff| %>
               <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
               <%= ff.input :phone, wrapper_html: { class: "dealer provider" } %>

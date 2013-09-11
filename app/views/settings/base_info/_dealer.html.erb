@@ -1,53 +1,53 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%= translate_attribute_name :username, :user %></th>
+      <th><%= translate_attribute_name :username, :account %></th>
       <td><%= @user.username %></td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><%= translate_attribute_name :user_type, :user %></th>
+      <th><%= translate_attribute_name :user_type, :account %></th>
       <td>汽车服务商</td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :dealer_type, :'user/detail' %></th>
+      <th><%= translate_attribute_name :dealer_type, :'account/detail' %></th>
       <td><%= @user.detail.dealer_type %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :business_scopes, :'user/detail' %></th>
+      <th><%= translate_attribute_name :business_scopes, :'account/detail' %></th>
       <td><%= @user.detail.business_scopes.join('、') %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :mobile, :user %></th>
+      <th><%= translate_attribute_name :mobile, :account %></th>
       <td><%= @user.mobile %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :company, :'user/detail' %></th>
+      <th><%= translate_attribute_name :company, :'account/detail' %></th>
       <td><%= @user.detail.company %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :address, :'user/detail' %></th>
+      <th><%= translate_attribute_name :address, :'account/detail' %></th>
       <td><%= @user.detail.address %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :phone, :'user/detail' %></th>
+      <th><%= translate_attribute_name :phone, :'account/detail' %></th>
       <td><%= @user.detail.phone %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :open_during, :'user/detail' %></th>
+      <th><%= translate_attribute_name :open_during, :'account/detail' %></th>
       <td><%= @user.detail.open_during %></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :authentication_image, :'user/detail' %></th>
+      <th><%= translate_attribute_name :authentication_image, :'account/detail' %></th>
       <td><img src="<%= @user.detail.authentication_image.url(:medium) %>"></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :accepted, :'user/detail' %></th>
+      <th><%= translate_attribute_name :accepted, :'account/detail' %></th>
       <td><label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label></td>
     </tr>
     <tr>
-      <th><%= translate_attribute_name :description, :user %></th>
+      <th><%= translate_attribute_name :description, :account %></th>
       <td><%= @user.description %></td>
     </tr>
   </tbody>

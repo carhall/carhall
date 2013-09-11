@@ -11,14 +11,24 @@ class Ability
     when :guest
 
     when :provider
+      can :use, SettingsController
+      can :use, InverseFriendsController
 
     when :dealer
+      can :use, SettingsController
+      can :use, Tips::DashboardsController
+      can :use, InverseFriendsController
 
+      # if user.accepted?
+        can :use, Tips::CleaningsController
+        can :use, Tips::MendingsController
+        can :use, Tips::ActivitiesController
+        can :use, Tips::BulkPurchasingsController
+      # end
+      
     when :user
       can :destroy, [Post, Comment], user_id: user.id
-      can :update, Tips::Order, user_id: user.id
-    when :provider, :dealer, :user
-      can :read, :all
+      can :update, Order, user_id: user.id
     end
     
     # The first argument to `can` is the action you are giving the user 

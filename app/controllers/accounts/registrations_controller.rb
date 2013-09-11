@@ -1,12 +1,12 @@
-class Users::RegistrationsController < Devise::RegistrationsController
+class Accounts::RegistrationsController < Devise::RegistrationsController
   def resource_class
     if @resource_class
       @resource_class
-    elsif params[:user].nil?
+    elsif params[:account].nil? or params[:account][:type].blank?
       @resource_class = Provider
     else
-      user_type = params[:user][:user_type_id]
-      @resource_class = [Provider, Dealer][user_type.to_i]
+      user_type = params[:account][:type]
+      @resource_class = user_type.constantize
     end
   end
 

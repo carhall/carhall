@@ -17,7 +17,7 @@ class Api::CommentsController < Api::ApplicationController
   # POST /api/resources/1/comments
   # POST /api/resources/1/comments.json
   def create
-    data_params = params.fetch(:data, {}).merge(user: @user)
+    data_params = params.fetch(:data, {}).merge(user: @current_user)
     render_create @parent.comments.new data_params
   end
 
