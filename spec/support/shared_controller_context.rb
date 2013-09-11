@@ -1,6 +1,6 @@
 shared_context "for devise" do
-  before { controller.stub(:authenticate_user!).and_return true }
-  before { controller.stub(:current_user).and_return user  }
+  before { controller.stub(:authenticate_account!).and_return true }
+  before { controller.stub(:current_account).and_return user  }
   before { controller.stub(:sign_in).and_return nil }
 
   let(:user) { create :user }

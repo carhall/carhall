@@ -4,7 +4,7 @@ module Share
       
     included do
       default_scope { includes(:user) }
-      belongs_to :user, class_name: 'User'
+      belongs_to :user
     end
 
     def self.get_id user

@@ -1,6 +1,6 @@
 class Accounts::Friendship < ActiveRecord::Base
-  belongs_to :user, class_name: "User"
-  belongs_to :friend, class_name: "User"
+  belongs_to :user
+  belongs_to :friend, class_name: Account
 
   attr_accessible :friend_id, :user_id
 

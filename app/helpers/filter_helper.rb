@@ -2,7 +2,7 @@ module FilterHelper
   protected
 
   def current_ability
-    @current_ability ||= Ability.new(current_user)
+    @current_ability ||= Ability.new(current_account)
   end
 
   def ensure_user_type
@@ -13,12 +13,12 @@ module FilterHelper
     @user = if user_id = params[:user_id]
       User.find(user_id)
     else
-      current_user
+      current_account
     end
   end
 
   def set_current_user
-    @user ||= current_user
+    @user = current_account
   end
 
   def set_area_id_and_brand_id
@@ -33,7 +33,7 @@ module FilterHelper
   end
 
   def set_user_type
-    @user ||= current_user
+    @user ||= current_account
     @user_type ||= (@user || User.new).user_type
   end
   

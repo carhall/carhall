@@ -1,12 +1,12 @@
 FactoryGirl.define do 
-  factory :user, class: Consumer do
+  factory :user do
     mobile { Faker::PhoneNumber.cell_phone }
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
     detail_attributes do
       {
-        sex: Accounts::ConsumerDetail::Sexes.sample,
+        sex: Accounts::UserDetail::Sexes.sample,
         area: Share::Areable::Areas.sample,
         brand: Share::Brandable::Brands.sample,
       }
@@ -18,7 +18,6 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
-    user_type_id { 0 }
     detail_attributes do
       {
         company: Faker::Lorem.sentence,
@@ -33,7 +32,6 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
-    user_type_id { 1 }
     detail_attributes do
       {
         company: Faker::Lorem.sentence,

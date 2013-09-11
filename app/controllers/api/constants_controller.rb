@@ -1,6 +1,6 @@
 class Api::ConstantsController < Api::ApplicationController
   Constants = {
-    sexes: Accounts::ConsumerDetail::Sexes,
+    sexes: Accounts::UserDetail::Sexes,
     areas: Share::Areable::Areas,
     brands: Share::Brandable::Brands,
     dealer_types: Accounts::DealerDetail::DealerTypes,

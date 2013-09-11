@@ -1,6 +1,6 @@
-class UsersAdditionalFields < ActiveRecord::Migration
+class AccountsAdditionalFields < ActiveRecord::Migration
   def change
-    change_table(:users) do |t|
+    change_table(:accounts) do |t|
       # For STI
       t.string  :type
 
@@ -15,10 +15,10 @@ class UsersAdditionalFields < ActiveRecord::Migration
       t.references :detail
     end
 
-    add_index :users, :username
-    add_index :users, :mobile
+    add_index :accounts, :username
+    add_index :accounts, :mobile
 
-    add_index :users, :detail_id
+    add_index :accounts, :detail_id
 
     # User.create!(mobile: '15901013540', password: 'password', username: '汽车堂')
   end

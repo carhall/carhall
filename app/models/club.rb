@@ -2,7 +2,7 @@ class Club < ActiveRecord::Base
   include Share::Areable
   include Share::Brandable
 
-  belongs_to :president, class_name: "User"
+  belongs_to :president, class_name: User
   has_many :posts
   
   extend Share::ImageAttachments

@@ -1,4 +1,4 @@
-class Dealer < User
+class Dealer < Account
   include Share::RqrcodeToken
 
   set_detail_class Accounts::DealerDetail
@@ -15,8 +15,6 @@ class Dealer < User
 
   has_many :orders, class_name: Tips::Order
   has_many :reviews, through: :orders
-
-  validates_presence_of :user_type_id
 
   def has_template? template
     detail.template_syms.include? template

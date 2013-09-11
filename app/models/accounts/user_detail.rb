@@ -1,4 +1,4 @@
-class Accounts::ConsumerDetail < ActiveRecord::Base
+class Accounts::UserDetail < ActiveRecord::Base
   include Share::Areable
   include Share::Brandable
 

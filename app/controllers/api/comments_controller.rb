@@ -1,4 +1,5 @@
 class Api::CommentsController < Api::ApplicationController
+  before_filter :set_current_user, only: :create
   before_filter :set_parent
 
   # GET /api/resources/1/comments
@@ -16,7 +17,7 @@ class Api::CommentsController < Api::ApplicationController
   # POST /api/resources/1/comments
   # POST /api/resources/1/comments.json
   def create
-    data_params = params.fetch(:data, {}).merge(user: current_user)
+    data_params = params.fetch(:data, {}).merge(user: @user)
     render_create @parent.comments.new data_params
   end
 

@@ -5,13 +5,13 @@ Autozone::Application.routes.draw do
   root to: 'dashboards#show'
 
   # Frontend sign_in/sing_up page
-  devise_for :users, controllers: { 
-    registrations: "users/registrations",
-    sessions: "users/sessions",
-    confirmations: "users/confirmations",
+  devise_for :accounts, controllers: { 
+    registrations: "accounts/registrations",
+    sessions: "accounts/sessions",
+    confirmations: "accounts/confirmations",
   } 
-  devise_scope :users do
-    namespace :users do
+  devise_scope :accounts do
+    namespace :accounts do
       resource :confirmation do
         get :resend
       end
@@ -60,11 +60,11 @@ Autozone::Application.routes.draw do
     post :list_users
   end
 
-  devise_scope :users do
-    # APIs
-    namespace :api do
-      resources :constants, only: [:index, :show]
+  # APIs
+  namespace :api do
+    resources :constants, only: [:index, :show]
 
+    devise_scope :accounts do
       resources :users, only: [:show, :create] do
         get :detail, on: :member
         post :login, on: :collection
@@ -72,97 +72,97 @@ Autozone::Application.routes.draw do
         resources :friends, only: [:index]
         resources :posts, only: [:index]
       end
+    end
 
-      resource :current_user, only: [:show, :update] do
-        get :detail
-        put :password
+    resource :current_user, only: [:show, :update] do
+      get :detail
+      put :password
 
-        resources :friends, only: [:index]
-        resources :blacklists, only: [:index]
-        resources :post_blacklists, only: [:index]
-        resources :posts, only: [:index]
-        resource :club, only: [:show]
-      end
+      resources :friends, only: [:index]
+      resources :blacklists, only: [:index]
+      resources :post_blacklists, only: [:index]
+      resources :posts, only: [:index]
+      resource :club, only: [:show]
+    end
 
-      resources :dealers, only: [:index, :show] do
-        get :detail, on: :member
+    resources :dealers, only: [:index, :show] do
+      get :detail, on: :member
 
-        resources :orders, only: [:index, :show]
+      resources :orders, only: [:index, :show]
+      resources :reviews, only: [:index, :show]
+    end
+
+    resources :providers, only: [:index, :show] do
+      get :detail, on: :member
+    end
+
+    resources :friends, only: [:index, :destroy] do
+      post ':id', action: :create, on: :collection
+    end
+
+    resources :blacklists, only: [:index, :destroy] do
+      post ':id', action: :create, on: :collection
+    end
+
+    resources :post_blacklists, only: [:index, :destroy] do
+      post ':id', action: :create, on: :collection
+    end
+
+    resource :club, only: [:show, :update] do
+      post :president
+      post :mechanics
+    end
+
+    resources :posts, only: [:index, :show, :create, :destroy] do
+      get :friends, on: :collection
+      get :top, on: :collection
+      get :club, on: :collection
+
+      resources :comments, only: [:index, :show, :create, :destroy]
+    end
+
+    namespace :tips do
+      resources :mendings, only: [:index, :show] do
+        resources :orders, only: [:index, :show, :create] do
+          put :finish, on: :member
+          post :review, on: :member
+          delete :cancel, on: :member
+        end
+
         resources :reviews, only: [:index, :show]
       end
 
-      resources :providers, only: [:index, :show] do
-        get :detail, on: :member
-      end
-
-      resources :friends, only: [:index, :destroy] do
-        post ':id', action: :create, on: :collection
-      end
-
-      resources :blacklists, only: [:index, :destroy] do
-        post ':id', action: :create, on: :collection
-      end
-
-      resources :post_blacklists, only: [:index, :destroy] do
-        post ':id', action: :create, on: :collection
-      end
-
-      resource :club, only: [:show, :update] do
-        post :president
-        post :mechanics
-      end
-
-      resources :posts, only: [:index, :show, :create, :destroy] do
-        get :friends, on: :collection
-        get :top, on: :collection
-        get :club, on: :collection
-
-        resources :comments, only: [:index, :show, :create, :destroy]
-      end
-
-      namespace :tips do
-        resources :mendings, only: [:index, :show] do
-          resources :orders, only: [:index, :show, :create] do
-            put :finish, on: :member
-            post :review, on: :member
-            delete :cancel, on: :member
-          end
-
-          resources :reviews, only: [:index, :show]
+      resources :cleanings, only: [:index, :show] do
+        resources :orders, only: [:index, :show, :create] do
+          put "use/:count", action: :use, on: :member
+          put :use, on: :member
+          post :review, on: :member
+          delete :cancel, on: :member
         end
 
-        resources :cleanings, only: [:index, :show] do
-          resources :orders, only: [:index, :show, :create] do
-            put "use/:count", action: :use, on: :member
-            put :use, on: :member
-            post :review, on: :member
-            delete :cancel, on: :member
-          end
-
-          resources :reviews, only: [:index, :show]
+        resources :reviews, only: [:index, :show]
+      end
+      
+      resources :activities, only: [:index, :show]
+      
+      resources :bulk_purchasings, only: [:index, :show] do
+        resources :orders, only: [:index, :show, :create] do
+          put :finish, on: :member
+          post :review, on: :member
+          delete :cancel, on: :member
         end
         
-        resources :activities, only: [:index, :show]
-        
-        resources :bulk_purchasings, only: [:index, :show] do
-          resources :orders, only: [:index, :show, :create] do
-            put :finish, on: :member
-            post :review, on: :member
-            delete :cancel, on: :member
-          end
-          
-          resources :reviews, only: [:index, :show]
-        end
-
+        resources :reviews, only: [:index, :show]
       end
 
-      # Need to return JSON-formatted 404 error in Rails
-      match '*foo', :to => ->(env) { [404, {"Content-Type" => "application/json; charset=utf-8"}, [{
-        error: "No route matches [#{env["REQUEST_METHOD"]}] \"#{env["PATH_INFO"]}\"",
-        error_code: :not_found,
-        success: false
-      }.to_json]] }
     end
+
+    # Need to return JSON-formatted 404 error in Rails
+    match '*foo', :to => ->(env) { [404, {"Content-Type" => "application/json; charset=utf-8"}, [{
+      error: "No route matches [#{env["REQUEST_METHOD"]}] \"#{env["PATH_INFO"]}\"",
+      error_code: :not_found,
+      success: false
+    }.to_json]] }
   end
 
 end

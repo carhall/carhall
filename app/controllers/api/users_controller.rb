@@ -1,12 +1,12 @@
 class Api::UsersController < Api::ApplicationController
-  skip_before_filter :authenticate_user!, only: [:login, :create]
+  skip_before_filter :authenticate_account!, only: [:login, :create]
 
-  set_resource_class User, detail: true
+  set_resource_class Account, detail: true
 
   # POST /api/users/login
   # POST /api/users/login.json
   def login
-    @user = User.find_for_database_authentication(mobile: params[:data][:mobile])
+    @user = Account.find_for_database_authentication(mobile: params[:data][:mobile])
 
     if @user && @user.valid_password?(params[:data][:password])
       @user.reset_authentication_token!  # make sure the user has a token generated
@@ -29,7 +29,7 @@ class Api::UsersController < Api::ApplicationController
   # POST /api/users
   # POST /api/users.json
   def create
-    @user = Consumer.new params[:data]
+    @user = User.new params[:data]
     @user.reset_authentication_token
 
     render_create @user, { auth_token: @user.authentication_token }
