@@ -52,6 +52,14 @@ Autozone::Application.routes.draw do
     end    
   end
 
+  # For openfire
+  resource :openfire, only: [] do
+    post :login
+    post :login_by_token
+    post :get_user
+    post :list_users
+  end
+
   devise_scope :base_users do
     # APIs
     namespace :api do

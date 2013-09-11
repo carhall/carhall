@@ -7,7 +7,7 @@ module Share
         serialize :#{attr_ids_name}, Array
 
         def #{attrs_name}
-          @#{attrs_name} ||= User.where(id: #{attr_ids_name})
+          @#{attrs_name} ||= User.find(#{attr_ids_name})
         end
 
         def #{attrs_name}= users
