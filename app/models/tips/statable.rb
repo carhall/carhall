@@ -13,12 +13,20 @@ module Tips
       self.state_id = States.index state
     end
 
+    def cancel
+      self.state_id = States.index("canceled")
+    end
+
+    def finish
+      self.state_id = States.index("finished")
+    end
+
     def cancel!
-      update_attributes! state_id: States.index("canceled")
+      cancel && save(validate: false)
     end
 
     def finish!
-      update_attributes! state_id: States.index("finished")
+      finish && save(validate: false)
     end
   end
 end

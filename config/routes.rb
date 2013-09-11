@@ -126,6 +126,7 @@ Autozone::Application.routes.draw do
         resources :cleanings, only: [:index, :show] do
           resources :orders, only: [:index, :show, :create] do
             put "use/:count", action: :use, on: :member
+            put :use, on: :member
             post :review, on: :member
             delete :cancel, on: :member
           end

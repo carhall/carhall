@@ -1,4 +1,5 @@
 class Api::OrdersController < Api::ApplicationController
+  ensure_base_user_type :user
   before_filter :set_parent
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
@@ -24,7 +25,7 @@ class Api::OrdersController < Api::ApplicationController
   # PUT /api/resources/1/orders/1/finish
   # PUT /api/resources/1/orders/1/finish.json
   def finish
-    @order.find(params[:id]).finish!
+    @order.finish!
 
     render_accepted
   end
@@ -32,7 +33,7 @@ class Api::OrdersController < Api::ApplicationController
   # PUT /api/resources/1/orders/1/use
   # PUT /api/resources/1/orders/1/use.json
   def use
-    @order.use! params[:count]
+    @order.use! params.fetch(:count, 1)
 
     render_accepted
   end
@@ -73,6 +74,6 @@ class Api::OrdersController < Api::ApplicationController
 
   def set_order
     @order = @parent.orders.find(params[:id])
-    authorize! :write, @order
+    authorize! :update, @order
   end
 end

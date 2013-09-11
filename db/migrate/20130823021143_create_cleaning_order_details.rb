@@ -3,8 +3,8 @@ class CreateCleaningOrderDetails < ActiveRecord::Migration
     create_table :cleaning_order_details do |t|
       # t.references :source
       t.float   :price
-      t.integer :count
-      t.integer :used_count
+      t.integer :count, default: 0
+      t.integer :used_count, default: 0
 
     end
 
