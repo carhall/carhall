@@ -38,7 +38,7 @@ class Club < ActiveRecord::Base
 
   def appoint_president user
     user_id = Share::Userable.get_id user
-    president_id = user_id
+    self.president_id = user_id
   end
 
   def appoint_mechanic user

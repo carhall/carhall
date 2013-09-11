@@ -28,7 +28,7 @@ module FilterHelper
   end
 
   def set_user
-    @user ||= if user_id = params[:user_id]
+    @user = if user_id = params[:user_id]
       User.find(user_id)
     else
       current_user
