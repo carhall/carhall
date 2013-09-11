@@ -437,17 +437,17 @@ GET    | /api/tips/mendings/:mending_id/orders                             | 查
 GET    | /api/tips/mendings/:mending_id/orders/:id                         | 查询指定保养专修的指定订单  
 POST   | /api/tips/mendings/:mending_id/orders                             | 新建指定保养专修订单  
 PUT    | /api/tips/mendings/:mending_id/orders/:id/finish                  | 标记指定保养专修已完成  
-PUT    | /api/tips/mendings/:mending_id/orders/:id/cancel                  | 标记指定保养专修已取消  
+DELETE | /api/tips/mendings/:mending_id/orders/:id/cancel                  | 标记指定保养专修已取消  
 GET    | /api/tips/cleanings/:cleaning_id/orders                           | 查询指定洗车美容的所有订单  
 GET    | /api/tips/cleanings/:cleaning_id/orders/:id                       | 查询指定洗车美容的指定订单  
 POST   | /api/tips/cleanings/:cleaning_id/orders                           | 新建指定洗车美容订单  
 PUT    | /api/tips/cleanings/:cleaning_id/orders/:id/use/:count            | 标记指定洗车美容已使用count次  
-PUT    | /api/tips/cleanings/:cleaning_id/orders/:id/cancel                | 标记指定洗车美容已取消  
+DELETE | /api/tips/cleanings/:cleaning_id/orders/:id/cancel                | 标记指定洗车美容已取消  
 GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders             | 查询指定团购的所有订单  
 GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id         | 查询指定团购的指定订单  
 POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders             | 新建指定团购订单  
 PUT    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/finish  | 标记指定团购已完成  
-PUT    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/cancel  | 标记指定团购已取消  
+DELETE | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/cancel  | 标记指定团购已取消  
 GET    | /api/dealers/:dealer_id/orders                                    | 查询指定商家的所有订单  
 GET    | /api/dealers/:dealer_id/orders/:id                                | 查询指定商家的指定订单  
 

@@ -32,7 +32,7 @@ class BaseOrder < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:id],
+      only: [:id, :title],
       methods: [:order_type],
       include: [:detail],
     }.update(options)

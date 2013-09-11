@@ -1,6 +1,8 @@
 module Tips
   class CleaningOrderDetail < ActiveRecord::Base
-    attr_accessible :count, :used_count
+    attr_accessible :count
+
+    validates_presence_of :count
 
     def serializable_hash(options={})
       options = { 
