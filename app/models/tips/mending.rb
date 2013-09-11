@@ -1,4 +1,4 @@
-class Mending < ActiveRecord::Base
+class Tips::Mending < ActiveRecord::Base
   belongs_to :dealer
   has_many :mending_orders, foreign_key: :source_id
   alias_attribute :orders, :mending_orders

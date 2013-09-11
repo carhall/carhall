@@ -1,5 +1,5 @@
-module Auth
-  module BaseBlock
+module Share
+  module Blockable
     extend ActiveSupport::Concern
 
     included do

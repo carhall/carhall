@@ -4,21 +4,21 @@ module Share
       
     included do
       # For friendship, friends and inverse_friends
-      has_many :friendships, class_name: "Auth::Friendship", foreign_key: :user_id
+      has_many :friendships, class_name: Accounts::Friendship, foreign_key: :user_id
       has_many :friends, through: :friendships
-      has_many :inverse_friendships, class_name: "Auth::Friendship", foreign_key: :friend_id
+      has_many :inverse_friendships, class_name: Accounts::Friendship, foreign_key: :friend_id
       has_many :inverse_friends, through: :inverse_friendships, source: :user
 
       # For blocks, blacklists and inverse_blacklists
-      has_many :blocks, class_name: "Auth::Block", foreign_key: :user_id
+      has_many :blocks, class_name: Accounts::Block, foreign_key: :user_id
       has_many :blacklists, through: :blocks
-      # has_many :inverse_blocks, class_name: "Auth::Block", foreign_key: :blacklist_id
+      # has_many :inverse_blocks, class_name: Accounts::Block, foreign_key: :blacklist_id
       # has_many :inverse_blacklists, through: :inverse_blocks, source: :user
 
       # For blocks, blacklists and inverse_blacklists
-      has_many :post_blocks, class_name: "Auth::PostBlock", foreign_key: :user_id
+      has_many :post_blocks, class_name: Accounts::PostBlock, foreign_key: :user_id
       has_many :post_blacklists, through: :post_blocks, source: :blacklist
-      # has_many :inverse_post_blocks, class_name: "Auth::PostBlock", foreign_key: :blacklist_id
+      # has_many :inverse_post_blocks, class_name: Accounts::PostBlock, foreign_key: :blacklist_id
       # has_many :inverse_post_blacklists, through: :inverse_post_blocks, source: :user
 
     end

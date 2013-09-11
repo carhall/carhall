@@ -1,10 +1,9 @@
-class Order < ActiveRecord::Base
-
+class Tips::Order < ActiveRecord::Base
   # For details
   include Share::Detailable
   alias_method :order_type, :type_sym
 
-  include Tips::Statable
+  include Share::Statable
   include Share::Userable
 
   belongs_to :dealer
@@ -33,7 +32,4 @@ class Order < ActiveRecord::Base
     }.update(options)
     super(options)
   end
-
 end
-
-

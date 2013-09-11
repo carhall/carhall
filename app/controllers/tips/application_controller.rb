@@ -1,6 +1,5 @@
 class Tips::ApplicationController < ApplicationController
-  ensure_user_type :dealer
-  # ensure_user_accepted
+  prepend_before_filter :ensure_user_type
 
   def self.set_resource_class klass, options = {}
     before_filter :set_dealer

@@ -1,8 +1,7 @@
-require_relative 'auth/authenticatable'
-require_relative 'auth/acceptable'
-require_relative 'auth/confirmable'
-require_relative 'auth/validatable'
-require_relative 'auth/lockable'
+require_relative 'accounts/share/authenticatable'
+require_relative 'accounts/share/confirmable'
+require_relative 'accounts/share/validatable'
+require_relative 'accounts/share/lockable'
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -10,11 +9,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :token_authenticatable,
          :recoverable, :rememberable, :validatable#, :confirmable#, :lockable#, :trackable
 
-  include Auth::Acceptable
+  include Share::Acceptable
 
   # For details
   include Share::Detailable
-  set_detail_class Auth::UserDetail
   alias_method :user_type, :type_sym
   attr_accessor :user_type_id
 

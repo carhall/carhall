@@ -1,7 +1,7 @@
 class Dealer < User
-  include Auth::RqrcodeToken
+  include Share::RqrcodeToken
 
-  set_detail_class Auth::DealerDetail
+  set_detail_class Accounts::DealerDetail
 
   has_one :mending
   has_many :cleanings
@@ -13,7 +13,7 @@ class Dealer < User
   has_many :bulk_purchasing_orders, through: :bulk_purchasings
 
 
-  has_many :orders, class_name: 'Order'
+  has_many :orders, class_name: Tips::Order
   has_many :reviews, through: :orders
 
   validates_presence_of :user_type_id

@@ -1,5 +1,4 @@
 class Api::CommentsController < Api::ApplicationController
-  ensure_user_type :user
   before_filter :set_parent
 
   # GET /api/resources/1/comments

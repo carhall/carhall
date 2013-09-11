@@ -1,4 +1,4 @@
-class Activity < ActiveRecord::Base
+class Tips::Activity < ActiveRecord::Base
   belongs_to :dealer
 
   extend Share::ImageAttachments
@@ -22,5 +22,5 @@ class Activity < ActiveRecord::Base
     }.update(options)
     super(options)
   end
-
+  
 end

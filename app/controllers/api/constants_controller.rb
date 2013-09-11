@@ -1,12 +1,12 @@
 class Api::ConstantsController < Api::ApplicationController
   Constants = {
-    sexes: Auth::UserDetail::Sexes,
+    sexes: Accounts::ConsumerDetail::Sexes,
     areas: Share::Areable::Areas,
     brands: Share::Brandable::Brands,
-    dealer_types: Auth::DealerDetail::DealerTypes,
-    business_scopes: Auth::DealerDetail::BusinessScopes,
-    cleaning_types: Cleaning::CleaningTypes,
-    bulk_purchasing_types: BulkPurchasing::BulkPurchasingTypes,
+    dealer_types: Accounts::DealerDetail::DealerTypes,
+    business_scopes: Accounts::DealerDetail::BusinessScopes,
+    cleaning_types: ::Tips::Cleaning::CleaningTypes,
+    bulk_purchasing_types: ::Tips::BulkPurchasing::BulkPurchasingTypes,
   }
 
   def index

@@ -1,5 +1,4 @@
 class Api::PostBlacklistsController < Api::ApplicationController
-  ensure_user_type :user
   before_filter :set_user
 
   # GET /api/post_blacklists

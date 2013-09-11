@@ -1,4 +1,4 @@
-class Review < ActiveRecord::Base
+class Tips::Review < ActiveRecord::Base
   belongs_to :order, class_name: 'Order'
 
   attr_accessible :content, :stars

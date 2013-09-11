@@ -1,4 +1,4 @@
-module Tips
+module Share
   module Statable
     extend ActiveSupport::Concern
       

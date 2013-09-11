@@ -1,4 +1,4 @@
 class Tips::ActivitiesController < Tips::ApplicationController
-  set_resource_class Activity, expiredable: true
+  set_resource_class ::Tips::Activity, expiredable: true
 
 end

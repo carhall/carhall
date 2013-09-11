@@ -1,4 +1,4 @@
-module Auth
+module Share
   module RqrcodeToken
     extend ActiveSupport::Concern
 

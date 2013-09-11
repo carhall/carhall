@@ -14,10 +14,10 @@ class Ability
 
     when :dealer
 
-    when :user
+    when :consumer
       can :destroy, [Post, Comment], user_id: user.id
-      can :update, Order, user_id: user.id
-    when :provider, :dealer, :user
+      can :update, Tips::Order, user_id: user.id
+    when :provider, :dealer, :consumer
       can :read, :all
     end
     

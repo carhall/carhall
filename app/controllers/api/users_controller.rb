@@ -29,7 +29,7 @@ class Api::UsersController < Api::ApplicationController
   # POST /api/users
   # POST /api/users.json
   def create
-    @user = User.new params[:data]
+    @user = Consumer.new params[:data]
     @user.reset_authentication_token
 
     render_create @user, { auth_token: @user.authentication_token }

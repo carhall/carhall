@@ -1,5 +1,5 @@
 class Tips::DashboardsController < ApplicationController
-  ensure_user_type :dealer
+  prepend_before_filter :ensure_user_type
   before_filter :set_dealer
 
   def show

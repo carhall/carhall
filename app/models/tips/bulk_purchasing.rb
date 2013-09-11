@@ -1,4 +1,4 @@
-class BulkPurchasing < ActiveRecord::Base
+class Tips::BulkPurchasing < ActiveRecord::Base
   belongs_to :dealer
   has_many :bulk_purchasing_orders, foreign_key: :source_id
   alias_attribute :orders, :bulk_purchasing_orders
@@ -31,5 +31,5 @@ class BulkPurchasing < ActiveRecord::Base
     }.update(options)
     super(options)
   end
-
+  
 end

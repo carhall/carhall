@@ -1,15 +1,13 @@
 class SettingsController < ApplicationController
-  ensure_user_type :provider, :dealer
+  prepend_before_filter :ensure_user_type
 
   def show
   end
 
   def finance
-    ensure_user_type :dealer
   end
 
   def template
-    ensure_user_type :dealer
   end
 
   def rqrcode

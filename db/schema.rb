@@ -114,6 +114,21 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
 
   add_index "comments", ["source_type", "source_id"], :name => "index_comments_on_source_type_and_source_id"
 
+  create_table "consumer_details", :force => true do |t|
+    t.integer  "sex_id"
+    t.integer  "area_id"
+    t.integer  "brand_id"
+    t.string   "series"
+    t.string   "plate_num"
+    t.integer  "balance",            :default => 0, :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "consumer_details", ["area_id", "brand_id"], :name => "index_consumer_details_on_area_id_and_brand_id"
+
   create_table "dealer_details", :force => true do |t|
     t.integer  "dealer_type_id"
     t.string   "business_scope_ids"
@@ -227,21 +242,6 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   end
 
   add_index "reviews", ["order_id"], :name => "index_reviews_on_order_id"
-
-  create_table "user_details", :force => true do |t|
-    t.integer  "sex_id"
-    t.integer  "area_id"
-    t.integer  "brand_id"
-    t.string   "series"
-    t.string   "plate_num"
-    t.integer  "balance",            :default => 0, :null => false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-  end
-
-  add_index "user_details", ["area_id", "brand_id"], :name => "index_user_details_on_area_id_and_brand_id"
 
   create_table "users", :force => true do |t|
     t.string   "encrypted_password",     :default => "", :null => false

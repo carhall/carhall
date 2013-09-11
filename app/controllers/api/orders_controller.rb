@@ -1,5 +1,4 @@
 class Api::OrdersController < Api::ApplicationController
-  ensure_user_type :user
   before_filter :set_parent
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
@@ -47,15 +46,15 @@ class Api::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders/1/review.json
   def review
     data_params = params.fetch(:data, {}).merge(order: @order)
-    render_create Review.new data_params
+    render_create ::Tips::Review.new data_params
   end
 
   protected
 
   AccreditedKeys = {
-    'mending_id' => Mending,
-    'cleaning_id' => Cleaning,
-    'bulk_purchasing_id' => BulkPurchasing,
+    'mending_id' => ::Tips::Mending,
+    'cleaning_id' => ::Tips::Cleaning,
+    'bulk_purchasing_id' => ::Tips::BulkPurchasing,
     'dealer_id' => Dealer,
   }
 

@@ -1,30 +1,12 @@
 module FilterHelper
   protected
 
-  extend ActiveSupport::Concern
-
   def current_ability
     @current_ability ||= Ability.new(current_user)
   end
 
-  def ensure_user_type *user_types
-    raise CanCan::AccessDenied unless user_types.include? @user_type
-  end
-
-  module ClassMethods
-    def ensure_user_type *user_types
-      prepend_before_filter do
-        set_user_type
-        raise CanCan::AccessDenied unless user_types.include? @user_type
-      end
-    end
-
-    def ensure_user_accepted
-      prepend_before_filter do
-        set_user_type
-        raise CanCan::AccessDenied unless @user.accepted?
-      end
-    end
+  def ensure_user_type
+    can? :use, self
   end
 
   def set_user
