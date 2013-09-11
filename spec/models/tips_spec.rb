@@ -88,4 +88,9 @@ describe "Tips" do
     include_examples "orders#finish"
     include_examples "orders#cancel"
   end
+
+  describe Review do
+    subject { create :review }
+    include_examples "valid record"
+  end
 end

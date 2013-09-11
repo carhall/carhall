@@ -9,9 +9,7 @@ class BaseOrder < ActiveRecord::Base
 
   belongs_to :source, polymorphic: true, counter_cache: :orders_count
   belongs_to :dealer
-  belongs_to :review, autosave: true, dependent: :destroy
-  accepts_nested_attributes_for :review, allow_destroy: true, update_only: true
-
+  has_one :review, foreign_key: :order_id
 
   before_save do
     self.dealer_id = source.dealer_id
@@ -25,8 +23,6 @@ class BaseOrder < ActiveRecord::Base
   extend Share::Id2Key
   States = %i(finished canceled)
   define_id2key_methods :state
-
-  validates_presence_of :source
 
   attr_accessible :user, :detail
 

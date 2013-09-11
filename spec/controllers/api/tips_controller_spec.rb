@@ -99,4 +99,67 @@ describe "Tips" do
       include_examples "resources#index base"
     end
   end
+
+  describe "Riviews" do
+    let(:resource_name) { :review }
+    let(:parent) { create parent_name, dealer: dealer }
+    let(:order_name) { :"#{parent_name}_order" }
+    let(:order) { create order_name, source: parent }
+
+    shared_examples "reviews resources" do
+      let(:attach_attrs) {{ order: order }}
+      let(:attach_args) {{ :"#{parent_name}_id" => parent.id }}
+      before { 3.times { create :review, order: create(order_name, source: parent) } }
+
+      include_examples "resources#index base"
+      include_examples "resources#show"
+    end
+
+    shared_examples "orders#review" do
+      describe "POST review" do
+        let(:attach_args) {{ :"#{parent_name}_id" => parent.id }}
+
+        let(:post_name) { :review }
+        let(:default_args) {{ id: order.id, data: attributes_for(:review) }}
+        include_examples "resources#post"
+      end
+    end
+
+    describe Api::Tips::ReviewsController do
+
+      describe "mending_orders" do
+        let(:parent_name) { :mending }
+        include_examples "reviews resources"
+      end
+
+      describe "cleaning_orders" do
+        let(:parent_name) { :cleaning }
+        include_examples "reviews resources"
+      end
+
+      describe "bulk_purchasing_orders" do
+        let(:parent_name) { :bulk_purchasing }
+        include_examples "reviews resources"
+      end
+    end
+
+    describe Api::Tips::OrdersController do
+      let(:order) { create order_name, user: user, source: parent }
+
+      describe "mending_orders" do
+        let(:parent_name) { :mending }
+        include_examples "orders#review"
+      end
+
+      describe "cleaning_orders" do
+        let(:parent_name) { :cleaning }
+        include_examples "orders#review"
+      end
+
+      describe "bulk_purchasing_orders" do
+        let(:parent_name) { :bulk_purchasing }
+        include_examples "orders#review"
+      end
+    end
+  end
 end

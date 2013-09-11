@@ -46,8 +46,8 @@ class Api::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders/1/review
   # POST /api/resources/1/orders/1/review.json
   def review
-    @order.review_attributes = params[:data]
-    render_create @order.review
+    data_params = params.fetch(:data, {}).merge(order: @order)
+    render_create Review.new data_params
   end
 
   protected

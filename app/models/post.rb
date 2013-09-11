@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   attr_accessible :content, :image
   attr_accessible :user
 
-  validates_presence_of :user, :content
+  validates_presence_of :content
 
   before_save do
     self.club = user.club

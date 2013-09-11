@@ -1,15 +1,15 @@
 class Review < ActiveRecord::Base
-  include Share::Userable
-  
-  has_one :order, class_name: 'BaseOrder'
-  # has_one :user, through: :order
+  belongs_to :order, class_name: 'BaseOrder'
 
-  attr_accessible :content, :stars, :user, :order
+  attr_accessible :content, :stars
+  attr_accessible :order
+
+  validates_presence_of :content, :stars
+  validates_numericality_of :stars, greater_than_or_equal_to: 0, less_than_or_equal_to: 5, allow_nil: true
 
   def serializable_hash(options={})
     options = { 
       only: [:id, :content, :stars],
-      include: [:order]
     }.update(options)
     super(options)
   end

@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   create_table "base_orders", :force => true do |t|
     t.integer  "user_id"
     t.integer  "dealer_id"
-    t.integer  "review_id"
     t.integer  "detail_id"
     t.string   "detail_type"
     t.integer  "source_id"
@@ -97,7 +96,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
 
   create_table "bulk_purchasing_order_details", :force => true do |t|
     t.float   "price"
-    t.integer "count"
+    t.integer "count", :default => 0
   end
 
   create_table "bulk_purchasings", :force => true do |t|
@@ -121,8 +120,8 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
 
   create_table "cleaning_order_details", :force => true do |t|
     t.float   "price"
-    t.integer "count"
-    t.integer "used_count"
+    t.integer "count",      :default => 0
+    t.integer "used_count", :default => 0
   end
 
   create_table "cleanings", :force => true do |t|
@@ -260,6 +259,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   end
 
   create_table "reviews", :force => true do |t|
+    t.integer  "order_id"
     t.string   "title"
     t.string   "content"
     t.integer  "stars"

@@ -37,6 +37,7 @@ FactoryGirl.define do
         arrive_at: Time.now,
       }
     end
+    association :source, factory: :mending
     user
   end
 
@@ -46,6 +47,7 @@ FactoryGirl.define do
         count: rand(10),
       }
     end
+    association :source, factory: :cleaning
     user
   end
 
@@ -55,6 +57,13 @@ FactoryGirl.define do
         count: rand(10),
       }
     end
+    association :source, factory: :bulk_purchasing
     user
+  end
+
+  factory :review do
+    content { Faker::Lorem.sentence }
+    stars { rand(5) }
+    association :order, factory: :mending_order
   end
 end

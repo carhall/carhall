@@ -3,7 +3,6 @@ class CreateBaseOrders < ActiveRecord::Migration
     create_table :base_orders do |t|
       t.references :user
       t.references :dealer
-      t.references :review
       t.references :detail, polymorphic: true
       t.references :source, polymorphic: true
       t.string  :title
