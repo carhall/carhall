@@ -57,15 +57,10 @@ module Share
       block.destroy if block
     end
 
-    def make_friend_with! friend
-      make_friend_with(friend).save(validate: false)
-    end
-    def add_to_blacklist! blacklist
-      add_to_blacklist(friend).save(validate: false)
-    end
-    def add_to_post_blacklist! blacklist
-      add_to_post_blacklist(friend).save(validate: false)
-    end
-
+    extend Share::Exclamation
+    define_exclamation_method :make_friend_with
+    define_exclamation_method :add_to_blacklist
+    define_exclamation_method :add_to_post_blacklist
+    
   end
 end

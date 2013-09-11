@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   subject { create :user }
-  it_behaves_like "valid record"
+  include_examples "valid record"
 
   let(:other) { create :user }
 
@@ -67,12 +67,12 @@ end
 
 describe Dealer do
   subject { create :dealer }
-  it_behaves_like "valid record" 
+  include_examples "valid record" 
 
 end
 
 describe Provider do
   subject { create :provider }
-  it_behaves_like "valid record" 
+  include_examples "valid record" 
 
 end

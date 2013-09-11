@@ -23,6 +23,14 @@ module Api
       end
     end
 
+    def render_update resource, additional_data={}
+      if resource.save
+        render_update_success resource, additional_data
+      else
+        render_failure resource
+      end
+    end
+
     def render_create_success resource, additional_data={}
       json = { data: resource.serializable_hash(request: request), success: true }
       render json: json.merge(additional_data), status: :created

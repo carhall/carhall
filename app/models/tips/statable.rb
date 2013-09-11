@@ -2,31 +2,42 @@ module Tips
   module Statable
     extend ActiveSupport::Concern
       
-    States = %(finished canceled)
+    extend Share::Id2Key
+    States = %i(finished canceled)
+    define_id2key_methods :state
 
-    def state
-      return I18n.t('.unknown') unless state_id
-      States[state_id]
-    end
-
-    def state= state
-      self.state_id = States.index state
+    included do
+      validates_each :state_id do |record, attr, value|
+        if record.state_id_was == States.index(:canceled)
+          record.errors.add(attr, I18n.t('order_canceled'))
+        end
+      end
     end
 
     def cancel
-      self.state_id = States.index("canceled")
+      self.state = :canceled
     end
 
     def finish
-      self.state_id = States.index("finished")
+      self.state = :finished
     end
 
-    def cancel!
-      cancel && save(validate: false)
+    def canceled?
+      self.state == :canceled
     end
 
-    def finish!
-      finish && save(validate: false)
+    def finished?
+      self.state == :finished
     end
+
+    def reset
+      self.state_id = nil
+    end
+  
+    extend Share::Exclamation
+    define_exclamation_method :cancel
+    define_exclamation_method :finish
+    define_exclamation_method :reset
+
   end
 end

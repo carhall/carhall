@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Post do
   subject { create :post, user: other }
-  it_behaves_like "valid record" 
+  include_examples "valid record" 
   let(:other) { create :user }
   let(:user) { create :user }
 
@@ -23,11 +23,11 @@ end
 
 describe Comment do
   subject { create :comment }
-  it_behaves_like "valid record" 
+  include_examples "valid record" 
 end
 
 describe Club do
   subject { Club.with_user(user) }
   let(:user) { create :user }
-  it_behaves_like "valid record"
+  include_examples "valid record"
 end

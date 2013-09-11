@@ -25,25 +25,22 @@ class Api::OrdersController < Api::ApplicationController
   # PUT /api/resources/1/orders/1/finish
   # PUT /api/resources/1/orders/1/finish.json
   def finish
-    @order.finish!
-
-    render_accepted
+    @order.finish
+    render_update @order
   end
 
   # PUT /api/resources/1/orders/1/use
   # PUT /api/resources/1/orders/1/use.json
   def use
-    @order.use! params.fetch(:count, 1)
-
-    render_accepted
+    @order.use params.fetch(:count, 1)
+    render_update @order
   end
   
   # PUT /api/resources/1/orders/1/cancel
   # PUT /api/resources/1/orders/1/cancel.json
   def cancel
-    @order.cancel!
-
-    render_accepted
+    @order.cancel
+    render_update @order
   end
 
   # POST /api/resources/1/orders/1/review

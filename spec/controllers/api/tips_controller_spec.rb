@@ -63,7 +63,6 @@ describe "Tips" do
 
       include_examples "resources#index"
       include_examples "resources#show"
-      include_examples "orders#cancel"
     end
 
     describe Api::Tips::OrdersController do
@@ -71,18 +70,21 @@ describe "Tips" do
         let(:parent_name) { :mending }
         include_examples "orders resources"
         include_examples "orders#finish"
+        include_examples "orders#cancel"
       end
 
       describe "cleaning_orders" do
         let(:parent_name) { :cleaning }
         include_examples "orders resources"
         include_examples "orders#use"
+        include_examples "orders#cancel"
       end
 
       describe "bulk_purchasing_orders" do
         let(:parent_name) { :bulk_purchasing }
         include_examples "orders resources"
         include_examples "orders#finish"
+        include_examples "orders#cancel"
       end
     end
 
