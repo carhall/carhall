@@ -1,17 +1,21 @@
 require 'spec_helper'
 
 describe Mending do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { create :mending }
+  it_behaves_like "valid record"
 end
 
 describe Cleaning do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { create :cleaning }
+  it_behaves_like "valid record"
 end
 
 describe Activity do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { create :activity }
+  it_behaves_like "valid record"
 end
 
 describe BulkPurchasing do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { create :bulk_purchasing }
+  it_behaves_like "valid record"
 end
