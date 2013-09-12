@@ -6,9 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-me = User.where(mobile: '13112345678', username: 'user').first_or_initialize
-me.password = 'password' && me.save! if me.new_record?
+Account.where(mobile: '13112345678').destroy_all
+me = FactoryGirl.create :user, mobile: '13112345678'
 
 3.times do 
   u = FactoryGirl.create :user

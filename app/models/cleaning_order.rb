@@ -14,6 +14,6 @@ class CleaningOrder < Order
   end
 
   extend Share::Exclamation
-  define_exclamation_method :use
+  define_exclamation_and_method :use
 
 end

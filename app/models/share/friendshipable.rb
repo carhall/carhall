@@ -58,9 +58,9 @@ module Share
     end
 
     extend Share::Exclamation
-    define_exclamation_method :make_friend_with
-    define_exclamation_method :add_to_blacklist
-    define_exclamation_method :add_to_post_blacklist
+    define_exclamation_dot_method :make_friend_with
+    define_exclamation_dot_method :add_to_blacklist
+    define_exclamation_dot_method :add_to_post_blacklist
     
   end
 end

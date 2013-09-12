@@ -35,9 +35,9 @@ module Share
     end
   
     extend Share::Exclamation
-    define_exclamation_method :cancel
-    define_exclamation_method :finish
-    define_exclamation_method :reset
+    define_exclamation_and_method :cancel
+    define_exclamation_and_method :finish
+    define_exclamation_and_method :reset
 
   end
 end
