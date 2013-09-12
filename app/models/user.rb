@@ -7,4 +7,5 @@
   def club
     Club.with_user self
   end
- end
+
+end
