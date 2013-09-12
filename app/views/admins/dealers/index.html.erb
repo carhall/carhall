@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3>车主管理 <small></small></h3>
+  <h3>汽车服务商管理 <small></small></h3>
 </div>
 
 <table class="table">
@@ -20,10 +20,10 @@
         <td><%= user.username %></td>
         <td><%= user.description %></td>
         <td class="actions">
-          <%= link_to content_tag(:i, '', class: 'icon-search'), admin_user_path(user), title: '查看详情', rel: 'tooltip' %>
-          <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_admin_user_path(user), title: '编辑', rel: 'tooltip' %>
+          <%= link_to content_tag(:i, '', class: 'icon-search'), admins_dealer_path(user), title: '查看详情', rel: 'tooltip' %>
+          <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_admins_dealer_path(user), title: '编辑', rel: 'tooltip' %>
           <% if can? :destroy, user %>
-            <%= link_to content_tag(:i, '', class: 'icon-remove'), admin_user_path(user), data: { method: :delete, confirm: '您确定要删除这个用户？' }, title: '删除', rel: 'tooltip' %>
+            <%= link_to content_tag(:i, '', class: 'icon-remove'), admins_dealer_path(user), data: { method: :delete, confirm: '您确定要删除这个用户？' }, title: '删除', rel: 'tooltip' %>
           <% end %>
         </td>
       </tr>

@@ -12,9 +12,9 @@ class Ability
         # can :manage, :all
       end
 
-      can :use, Admin::AdminsController
-      can :use, Admin::UsersController
-      can :use, Admin::DealersController
+      can :use, Admins::AdminsController
+      can :use, Admins::UsersController
+      can :use, Admins::DealersController
 
       can :manage, Admin, id: user.id
       can :manage, [Dealer, Provider, User]
