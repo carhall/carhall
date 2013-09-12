@@ -7,7 +7,7 @@
       <%= devise_error_messages! %>
 
       <%= f.input :mobile, autofocus: true, required: true %>
-      <%= f.input :username %>
+      <%= f.input :username, required: true %>
       <%= f.input :password, required: true %>
       <%= f.input :password_confirmation, required: true %>
       <%= f.input :avatar do %>
@@ -20,7 +20,7 @@
           </div>
         </div>
       <% end %>
-      <%= f.input :type, collection: [['媒体', 'Provider'], ['汽车服务商', 'Dealer']] %>
+      <%= f.input :type, collection: [['媒体', 'Provider'], ['汽车服务商', 'Dealer']], required: true %>
 
       <%= f.simple_fields_for :detail do |ff| %>
         <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerTypes.each_with_index, wrapper_html: { class: "dealer" }, required: true %>

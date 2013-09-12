@@ -17,7 +17,7 @@ zh-CN:
       user: 普通用户
       dealer: 汽车服务商
       provider: 媒体
-      auth/friendship: 好友
+      accounts/friendship: 好友
       mending: 保养专修
       cleaning: 服务项目
       activity: 活动
@@ -90,6 +90,7 @@ zh-CN:
   simple_form:
     labels:
       account:
+        <<: *account
         detail:
           <<: *detail
       mending:

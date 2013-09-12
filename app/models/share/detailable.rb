@@ -13,10 +13,6 @@ module Share
         belongs_to :detail, class_name: klass, dependent: :destroy
         accepts_nested_attributes_for :detail, allow_destroy: true, update_only: true
 
-        after_initialize do
-          build_detail unless detail
-        end
-
       end
     end
   end

@@ -1,17 +1,28 @@
 class Accounts::RegistrationsController < Devise::RegistrationsController
-  def resource_class
-    if @resource_class
-      @resource_class
-    elsif params[:account].nil? or params[:account][:type].blank?
-      @resource_class = Provider
+  def build_resource hash=nil
+    self.resource = if params[:account] and params[:account][:type].present?
+      sign_up_params[:type].constantize.new hash
     else
-      user_type = params[:account][:type]
-      @resource_class = user_type.constantize
+      Account.new
     end
+  end
+
+  def sign_up_params
+    return @sign_up_params if @sign_up_params
+    @sign_up_params = params[:account].dup
+    case @sign_up_params[:type]
+    when "", nil
+      @sign_up_params.delete :detail_attributes
+    when "Provider"
+      @sign_up_params[:detail_attributes].slice! :company, :phone
+    else
+    end
+    @sign_up_params
   end
 
   # POST /resource
   def create
+    # p params, sign_up_params, resource_class
     build_resource(sign_up_params)
 
     if resource.save

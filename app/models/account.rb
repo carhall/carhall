@@ -28,7 +28,7 @@ class Account < ActiveRecord::Base
   attr_accessible :detail
   attr_accessible :detail_attributes
 
-  validates_presence_of :username
+  validates_presence_of :username, :type
   validates_length_of :username, :within => 2..20, :allow_blank => true
 
   def serializable_hash(options={})
@@ -42,5 +42,13 @@ class Account < ActiveRecord::Base
 
   def detail_hash(options={})
     serializable_hash options.merge(include: :detail)
+  end
+
+  # Fake detail
+  attr_accessor :detail
+  def detail
+    @detail ||= account.build_detail rescue OpenStruct.new
+  end
+  def detail_attributes= hash=nil
   end
 end
