@@ -4,7 +4,7 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
-    detail_attributes do
+    detail do
       {
         sex: Accounts::UserDetail::Sexes.sample,
         area: Share::Areable::Areas.sample,
@@ -18,7 +18,7 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
-    detail_attributes do
+    detail do
       {
         company: Faker::Lorem.sentence,
         address: Faker::Lorem.sentence,
@@ -32,7 +32,7 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
-    detail_attributes do
+    detail do
       {
         company: Faker::Lorem.sentence,
         address: Faker::Lorem.sentence,

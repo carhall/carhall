@@ -29,7 +29,7 @@ FactoryGirl.define do
   end
 
   factory :mending_order do
-    detail_attributes do
+    detail do
       {
         brand_id: Share::Brandable::Brands.sample, 
         series: Faker::Lorem.sentence, 
@@ -42,7 +42,7 @@ FactoryGirl.define do
   end
 
   factory :cleaning_order do
-    detail_attributes do
+    detail do
       {
         count: rand(9)+1,
       }
@@ -52,7 +52,7 @@ FactoryGirl.define do
   end
 
   factory :bulk_purchasing_order do
-    detail_attributes do
+    detail do
       {
         count: rand(9)+1,
       }
