@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h3>编辑汽车服务商信息 <small></small></h3>
+</div>
+<%= simple_form_for([:admin, @user], html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @user %>
+  
+  <%= f.input :mobile, input_html: { readonly: true } %>
+
+  <hr>
+  <div class="control-group">
+    <label class="control-label" for="admin_current_password"><strong>重设密码</strong></label>
+  </div>
+
+  <%= f.input :current_password %>
+  <%= f.input :password, label: '新密码' %>
+  <%= f.input :password_confirmation, hint: '重设密码，如不需重设请留空' %>
+
+  <hr>
+  <div class="control-group">
+    <label class="control-label" for="admin_username"><strong>编辑基本信息</strong></label>
+  </div>
+
+  <%= f.input :username, required: true %>
+  <%= f.input :avatar do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @user.avatar.url(:medium) %>" /></div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+      <div>
+        <span class="btn btn-file"><span class="fileupload-new">更换图片</span><span class="fileupload-exists">更换</span><input type="file" name="admin[avatar]" /></span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+      </div>
+    </div>
+  <% end %>
+  
+  <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>

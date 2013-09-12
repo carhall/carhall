@@ -3,7 +3,7 @@ module Share
     extend ActiveSupport::Concern
       
     included do
-      has_many :comments, as: :source
+      has_many :comments
     end
 
   end

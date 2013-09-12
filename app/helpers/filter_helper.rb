@@ -37,6 +37,10 @@ module FilterHelper
   end
   
   def set_dealer
-    @dealer = Dealer.find(@user.id)
+    @dealer = current_account
+  end
+
+  def set_admin
+    @admin = current_account
   end
 end

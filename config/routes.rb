@@ -52,6 +52,24 @@ Autozone::Application.routes.draw do
     end    
   end
 
+  namespace :admins do
+    resources :admins
+    resources :dealers
+    resources :users
+
+    resources :advertisements
+
+    namespace :tips do
+      resource :dashboard, only: :show
+      root to: 'dashboards#show'
+      
+      resources :mendings
+      resources :cleanings
+      resources :activities
+      resources :bulk_purchasings
+    end
+  end
+
   # For openfire
   resource :openfire, only: [] do
     post :login

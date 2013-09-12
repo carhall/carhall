@@ -20,6 +20,8 @@ class AccountsAdditionalFields < ActiveRecord::Migration
 
     add_index :accounts, :detail_id
 
+    add_index :accounts, [:type, :id]
+
     # User.create!(mobile: '15901013540', password: 'password', username: '汽车堂')
   end
 end

@@ -1,8 +1,8 @@
 <ul class="nav">
-  <li class="active"><a href="#">首页</a></li>
-  <li><a href="#">广告位管理</a></li>
-  <li><a href="#">服务商管理</a></li>
-  <li><a href="#">服务商项目管理</a></li>
-  <li><a href="#">车主管理</a></li>
-  <li><a href="#">管理员管理</a></li>
+  <li<%= active? "dashboards" %>><a href="<%= dashboard_path %>">首页</a></li>
+  <li<%= active? "admin/advertisements" %>><a href="<%= admin_advertisements_path %>">广告位管理</a></li>
+  <li<%= active? "admin/dealers" %>><a href="<%= admin_dealers_path %>">服务商管理</a></li>
+  <li<%= active? "admin/tips" %>><a href="<%= admin_tips_root_path %>">服务商项目管理</a></li>
+  <li<%= active? "admin/users" %>><a href="<%= admin_users_path %>">车主管理</a></li>
+  <li<%= active? "admin/admins" %>><a href="<%= admin_admins_path %>">管理员管理</a></li>
 </ul>

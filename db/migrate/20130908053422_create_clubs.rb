@@ -2,9 +2,7 @@ class CreateClubs < ActiveRecord::Migration
   def change
     create_table :clubs do |t|
       t.references :president
-      t.string  :president_candidate_ids
       t.string  :mechanic_ids
-      t.string  :mechanic_candidate_ids
       t.string  :title
       t.string  :announcement
       t.integer :area_id

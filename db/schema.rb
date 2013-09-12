@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908053422) do
+ActiveRecord::Schema.define(:version => 20130912095849) do
 
   create_table "accounts", :force => true do |t|
     t.string   "encrypted_password",     :default => "", :null => false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   add_index "accounts", ["detail_id"], :name => "index_accounts_on_detail_id"
   add_index "accounts", ["mobile"], :name => "index_accounts_on_mobile"
   add_index "accounts", ["reset_password_token"], :name => "index_accounts_on_reset_password_token", :unique => true
+  add_index "accounts", ["type", "id"], :name => "index_accounts_on_type_and_id"
   add_index "accounts", ["unlock_token"], :name => "index_accounts_on_unlock_token", :unique => true
   add_index "accounts", ["username"], :name => "index_accounts_on_username"
 
@@ -126,9 +127,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
 
   create_table "clubs", :force => true do |t|
     t.integer  "president_id"
-    t.string   "president_candidate_ids"
     t.string   "mechanic_ids"
-    t.string   "mechanic_candidate_ids"
     t.string   "title"
     t.string   "announcement"
     t.integer  "area_id"
@@ -137,22 +136,21 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "clubs", ["area_id", "brand_id"], :name => "index_clubs_on_area_id_and_brand_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "source_id"
-    t.string   "source_type"
+    t.integer  "post_id"
     t.string   "content"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "comments", ["source_type", "source_id"], :name => "index_comments_on_source_type_and_source_id"
+  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "dealer_details", :force => true do |t|
     t.integer  "dealer_type_id"
@@ -189,6 +187,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
     t.string   "series"
     t.string   "plate_num"
     t.datetime "arrive_at"
+    t.integer  "mending_type_id"
     t.text     "description"
   end
 
@@ -203,6 +202,19 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   end
 
   add_index "mendings", ["orders_count"], :name => "index_mendings_on_orders_count"
+
+  create_table "open_database_structs", :force => true do |t|
+    t.string   "type"
+    t.integer  "user_id"
+    t.integer  "source_id"
+    t.string   "source_type"
+    t.string   "content"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "open_database_structs", ["source_type", "source_id"], :name => "index_open_database_structs_on_source_type_and_source_id"
+  add_index "open_database_structs", ["type", "id"], :name => "index_open_database_structs_on_type_and_id"
 
   create_table "orders", :force => true do |t|
     t.string   "type"
@@ -219,6 +231,7 @@ ActiveRecord::Schema.define(:version => 20130908053422) do
   add_index "orders", ["detail_id"], :name => "index_orders_on_detail_id"
   add_index "orders", ["source_id"], :name => "index_orders_on_source_id"
   add_index "orders", ["state_id"], :name => "index_orders_on_state_id"
+  add_index "orders", ["type", "id"], :name => "index_orders_on_type_and_id"
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "post_blocks", :force => true do |t|

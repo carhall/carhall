@@ -280,10 +280,10 @@ Club 车友会
 ----------
 字段名称         | 详细描述                    | 限制条件
 ----------------|----------------------------|----------------------------------
-president_id    | 堂主ID                     |
-president       | 堂主                       |
-mechanic_ids    | 在线技师IDs                 |
-mechanics       | 在线技师                    |
+president_id    | 堂主ID                     | 只读
+president       | 堂主                       | 只读
+mechanic_ids    | 在线技师IDs                 | 只读
+mechanics       | 在线技师                    | 只读
 announcement    | 公告                       |
 avatar          | LOGO                       |
 
@@ -305,6 +305,9 @@ GET查询时，可以在URI中使用两个附加字段作为条件，filter[area
 > 
 >     GET /api/club?filter[area_id]=1&filter[brand_id]=2
 
+
+两种申请时，表单附加字段都为data[description]
+修改车友会信息时，表单附加字段包括data[announcement]和data[avatar]，其他字段只读
 
 Mending 保养专修
 ==========

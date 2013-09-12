@@ -28,6 +28,7 @@ class Tips::ApplicationController < ApplicationController
       end
 
     else # singletion
+      before_filter :set_resource, only: [:show, :edit, :update, :destroy]
 
       define_method :index do
         @tips = @parent
@@ -41,6 +42,9 @@ class Tips::ApplicationController < ApplicationController
         define_method :in_progress do
           @tips = @parent.in_progress
         end
+      end
+
+      define_method :show do
       end
 
       define_method :new do
@@ -58,27 +62,31 @@ class Tips::ApplicationController < ApplicationController
         end
       end
 
-      define_method :update do
-        @tip = @parent.find(params[:id])
+      define_method :edit do
+      end
 
+      define_method :update do
         if @tip.update_attributes(params[klass.name.underscore])
           index_path = { action: :index }
           redirect_to index_path, flash: { success: i18n_message(:update_success, klass.name.underscore) }
         else
-          render :new
+          render :edit
         end
       end
 
-      define_method :edit do
-        @tip = @parent.find(params[:id])
-      end
+      define_method :destroy do
+        @tip.destroy
 
-      define_method :show do
-        @tip = @parent.find(params[:id])
+        index_path = { action: :index }
+        redirect_to index_path, flash: { success: i18n_message(:destroy_success, klass.name.underscore) }
       end
 
       define_method :set_parent do
         @parent = @dealer.send(klass.name.tableize)
+      end
+
+      define_method :set_resource do
+        @tip = @parent.find(params[:id])
       end
 
     end # singletion

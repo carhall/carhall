@@ -7,6 +7,7 @@ class CreateMendingOrderDetails < ActiveRecord::Migration
       t.string   :series
       t.string   :plate_num
       t.datetime :arrive_at
+      t.integer  :mending_type_id
       t.text     :description
       
     end

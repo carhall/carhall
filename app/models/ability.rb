@@ -7,7 +7,21 @@ class Ability
     user ||= User.new # guest user (not logged in)
     case user.user_type
     when :admin
-      can :manage, :all
+      # superadmin
+      if user.id == 1
+        # can :manage, :all
+      end
+
+      can :use, Admin::AdminsController
+      can :use, Admin::UsersController
+      can :use, Admin::DealersController
+
+      can :manage, Admin, id: user.id
+      can :manage, [Dealer, Provider, User]
+      
+      # no one can destroy superadmin
+      cannot :manage, Admin, id: 1
+
     when :guest
 
     when :provider

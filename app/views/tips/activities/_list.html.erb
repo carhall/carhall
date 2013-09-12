@@ -5,7 +5,7 @@
       <th><%= translate_attribute_name :image, :activity %></th>
       <th><%= translate_attribute_name :title, :activity %></th>
       <th><%= translate_attribute_name :expire_at, :activity %></th>
-      <th>操作</th>    
+      <th>操作</th>
     </tr>
   </thead>
   <tbody>
@@ -16,9 +16,9 @@
         <td><%= tip.title %></td>
         <td><%= l tip.expire_at, format: :short %></td>
         <td class="actions">
-          <%= link_to content_tag(:i, '', class: 'icon-search'), tips_activity_path(tip) %>
-          <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_tips_activity_path(tip) %>
-          <%= link_to content_tag(:i, '', class: 'icon-remove'), tips_activity_path(tip), data: { method: :delete, confirm: '您确定要删除这个项目？' } %>
+          <%= link_to content_tag(:i, '', class: 'icon-search'), tips_activity_path(tip), title: '查看详情', rel: 'tooltip' %>
+          <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_tips_activity_path(tip), title: '编辑', rel: 'tooltip' %>
+          <%= link_to content_tag(:i, '', class: 'icon-remove'), tips_activity_path(tip), data: { method: :delete, confirm: '您确定要删除这个项目？' }, title: '删除', rel: 'tooltip' %>
         </td>
       </tr>
     <% end %>

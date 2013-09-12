@@ -1,20 +1,9 @@
 module Share
   module Ids2Users
+    include Ids2Resources
+
     def define_ids2users_methods attrs_name
-      attrs_name = attrs_name.to_s
-      attr_ids_name = attrs_name.singularize+'_ids'
-      class_eval <<-EOM
-        serialize :#{attr_ids_name}, Array
-
-        def #{attrs_name}
-          @#{attrs_name} ||= User.find(#{attr_ids_name})
-        end
-
-        def #{attrs_name}= users
-          @#{attrs_name} = users
-          #{attr_ids_name} = users.pluck(:id)
-        end
-      EOM
+      define_ids2resources_methods User, attrs_name
     end
   end
 end

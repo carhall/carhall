@@ -8,7 +8,7 @@ FactoryGirl.define do
 
   factory :comment do
     content { Faker::Lorem.sentence }
-    association :source, factory: :post
+    post
     user
   end
 
