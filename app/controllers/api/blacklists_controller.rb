@@ -12,7 +12,7 @@ class Api::BlacklistsController < Api::ApplicationController
   def create
     block = @user.add_to_blacklist params[:id]
     if not block.new_record? or block.save
-      render_create_success block, { data: block }
+      render_created
     else
       render_failure block
     end
