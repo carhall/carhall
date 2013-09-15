@@ -9,6 +9,7 @@ class BulkPurchasing < ActiveRecord::Base
 
   attr_accessible :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price, :description, :image
 
+  validates_presence_of :dealer
   validates_presence_of :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price
 
   def expire_at_before_type_cast

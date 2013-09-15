@@ -11,10 +11,15 @@ class Order < ActiveRecord::Base
 
   attr_accessible :user, :detail
   attr_accessible :detail_attributes
+
+  validates_presence_of :source, :user 
   
   before_save do
     self.dealer_id = source.dealer_id
     self.title = set_title
+
+    user.detail.last_order_at = Time.now
+    user.detail.save(validate: false)
   end
 
   def set_title

@@ -6,6 +6,7 @@ class Comment < ActiveRecord::Base
   attr_accessible :content
   attr_accessible :user, :post
 
+  validates_presence_of :user
   validates_presence_of :content
   
   def serializable_hash(options={})

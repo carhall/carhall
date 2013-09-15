@@ -6,6 +6,7 @@ class Activity < ActiveRecord::Base
 
   attr_accessible :title, :expire_at, :description, :image
 
+  validates_presence_of :dealer
   validates_presence_of :title, :expire_at
 
   def expire_at_before_type_cast

@@ -9,6 +9,7 @@ class Cleaning < ActiveRecord::Base
 
   attr_accessible :title, :cleaning_type_id, :price, :vip_price, :description, :image
 
+  validates_presence_of :dealer
   validates_presence_of :title, :cleaning_type_id, :price, :vip_price
 
   extend Share::Id2Key

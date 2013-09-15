@@ -4,6 +4,7 @@ class Review < ActiveRecord::Base
   attr_accessible :content, :stars
   attr_accessible :order
 
+  validates_presence_of :order
   validates_presence_of :content, :stars
   validates_numericality_of :stars, greater_than_or_equal_to: 0, less_than_or_equal_to: 5, allow_nil: true
 

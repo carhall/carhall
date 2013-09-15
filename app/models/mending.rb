@@ -7,6 +7,8 @@ class Mending < ActiveRecord::Base
 
   serialize :discount, Hash
 
+  validates_presence_of :dealer
+
   extend Share::Id2Key
   Brands = Share::Brandable::Brands
   define_ids2keys_methods :brands
