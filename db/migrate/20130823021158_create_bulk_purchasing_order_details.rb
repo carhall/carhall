@@ -2,7 +2,6 @@ class CreateBulkPurchasingOrderDetails < ActiveRecord::Migration
     def change
     create_table :bulk_purchasing_order_details do |t|
       # t.references :source
-      t.float    :price
       t.integer  :count, default: 0
 
     end

@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :content
 
-  before_save do
+  before_create do
     self.club = user.club
   end
 

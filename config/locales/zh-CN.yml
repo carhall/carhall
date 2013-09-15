@@ -49,8 +49,19 @@ zh-CN:
         accepted: 服务商认证
       user: 
         <<: *account
+        created_at: 加入时间
+        total_cost: 总消费额
+        last_ordered_at: 最近消费时间
+        last_stars: 最近满意度
+      user/detail:
+        brand: 车型品牌
       mending:
         brand_ids: 专修品牌
+        brands: 专修品牌
+        mending_type: 类型
+        orders_count: 预约次数
+        stars: 满意度
+        trend_stars: 满意度趋势
       cleaning:
         id: ID
         title: 项目名称
@@ -60,6 +71,10 @@ zh-CN:
         vip_price: 会员价
         price: 原价
         description: 项目介绍
+        orders_count: 购买次数
+        stars: 满意度
+        total_sale: 总销售额
+        trend_stars: 满意度趋势
       activity:
         id: ID
         title: 项目名称

@@ -31,8 +31,8 @@
             <td><%= order.detail.brand %></td>
             <td><%= order.detail.series %></td>
             <td><%= order.detail.plate_num %></td>
-            <td><%= order.detail.arrive_at %></td>
-            <td><%= order.detail.price %></td>
+            <td><%= l order.detail.arrive_at, format: :short %></td>
+            <td><%= order.cost %></td>
             <td><%= order.state %></td>
           </tr>
         <% end %>

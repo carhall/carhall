@@ -1,0 +1,45 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "users/inverse_friends/sidenav/dealer" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>洗车美容评价列表 <small></small></h3>
+    </div>
+
+    <%= render 'shared/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= translate_attribute_name :id, :cleaning %></th>
+          <th><%= translate_attribute_name :image, :cleaning %></th>
+          <th><%= translate_attribute_name :title, :cleaning %></th>
+          <th><%= translate_attribute_name :cleaning_type, :cleaning %></th>
+          <th><%= translate_attribute_name :vip_price, :cleaning %></th>
+          <th><%= translate_attribute_name :orders_count, :cleaning %></th>
+          <th><%= translate_attribute_name :stars, :cleaning %></th>
+          <th><%= translate_attribute_name :total_sale, :cleaning %></th>
+          <th><%= translate_attribute_name :trend_stars, :cleaning %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cleanings.each do |cleaning| %>
+          <tr>
+            <td><%= cleaning.id %></td>
+            <td><img src="<%= cleaning.image.url(:thumb) %>" /></td>
+            <td><%= cleaning.title %></td>
+            <td><%= cleaning.cleaning_type %></td>
+            <td><%= cleaning.vip_price %></td>
+            <td><%= cleaning.orders_count %></td>
+            <td><%= cleaning.reviews.stars %></td>
+            <td><%= cleaning.orders.total_cost %></td>
+            <td><%= cleaning.reviews.trend_stars %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

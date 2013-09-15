@@ -15,4 +15,16 @@ class Review < ActiveRecord::Base
     super(options)
   end
 
+  def self.stars
+    average(:stars)
+  end
+
+  def self.trend_stars
+    where("reviews.created_at > ?", 1.month.ago).average(:stars)
+  end
+
+  def self.last_stars
+    last.stars if any?
+  end
+
 end

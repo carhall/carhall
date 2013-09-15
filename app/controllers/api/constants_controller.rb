@@ -6,6 +6,7 @@ class Api::ConstantsController < Api::ApplicationController
     dealer_types: Accounts::DealerDetail::DealerTypes,
     business_scopes: Accounts::DealerDetail::BusinessScopes,
     cleaning_types: Cleaning::CleaningTypes,
+    mending_types: Tips::MendingOrderDetail::MendingTypes,
     bulk_purchasing_types: BulkPurchasing::BulkPurchasingTypes,
   }
 

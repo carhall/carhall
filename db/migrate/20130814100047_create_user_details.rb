@@ -10,8 +10,6 @@ class CreateUserDetails < ActiveRecord::Migration
       t.integer :balance, null: false, default: 0
       t.attachment :image
 
-      t.datetime :last_order_at
-
     end
 
     add_index :user_details, [:area_id, :brand_id]

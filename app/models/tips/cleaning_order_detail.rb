@@ -9,7 +9,7 @@ class Tips::CleaningOrderDetail < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:price, :count, :used_count],
+      only: [:count, :used_count],
     }.update(options)
     super(options)
   end

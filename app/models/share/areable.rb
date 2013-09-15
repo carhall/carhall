@@ -12,6 +12,10 @@ module Share
       "宁夏回族自治区", "新疆维吾尔自治区", "台湾省",
     ]
 
+    def self.get_id area
+      if area.kind_of? Integer then area else Areas.index area end
+    end
+
     define_id2key_methods :area
   end
 end

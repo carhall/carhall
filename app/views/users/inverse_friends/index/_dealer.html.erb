@@ -1,0 +1,45 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "users/inverse_friends/sidenav/dealer" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>客户列表 <small></small></h3>
+    </div>
+
+    <%= render 'shared/alert', message: '还没有用户关注您！' if @inverse_friends.empty? %>
+    
+    <% @inverse_friends = @inverse_friends.includes(:detail, :orders, :reviews) %>
+    <table class="table table-striped datatable">
+      <thead>
+        <tr>
+          <th><%= translate_attribute_name :id, :user %></th>
+          <th><%= translate_attribute_name :avatar, :user %></th>
+          <th><%= translate_attribute_name :username, :user %></th>
+          <th><%= translate_attribute_name :brand, :'user/detail' %></th>
+          <th><%= translate_attribute_name :created_at, :user %></th>
+          <th><%= translate_attribute_name :total_cost, :user %></th>
+          <th><%= translate_attribute_name :last_ordered_at, :user %></th>
+          <th><%= translate_attribute_name :last_stars, :user %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @inverse_friends.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><img src="<%= user.avatar.url(:thumb) %>" /></td>
+            <td><%= user.username %></td>
+            <td><%= user.detail.brand %></td>
+            <td><%= l user.created_at, format: :short %></td>
+            <td><%= user.orders.total_cost %></td>
+            <% last_ordered_at = user.orders.last_ordered_at %>
+            <td><%= l last_ordered_at, format: :short if last_ordered_at %></td>
+            <td><%= user.reviews.last_stars %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

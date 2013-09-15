@@ -10,6 +10,7 @@ class CreateOrders < ActiveRecord::Migration
       t.references :source
       t.string  :title
       t.integer :state_id
+      t.float   :cost
       
       t.timestamps
     end

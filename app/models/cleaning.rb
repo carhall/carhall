@@ -25,4 +25,5 @@ class Cleaning < ActiveRecord::Base
     }.update(options)
     super(options)
   end
+
 end

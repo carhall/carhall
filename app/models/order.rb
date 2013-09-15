@@ -14,16 +14,19 @@ class Order < ActiveRecord::Base
 
   validates_presence_of :source, :user 
   
-  before_save do
+  before_create do
     self.dealer_id = source.dealer_id
     self.title = set_title
-
-    user.detail.last_order_at = Time.now
-    user.detail.save(validate: false)
+    self.cost = set_cost
   end
 
   def set_title
     "#{source.title}#{I18n.t(".times", count: detail.count) if detail.respond_to? :count}" 
+  end
+
+  def set_cost
+    cost = source.price if source.respond_to? :price
+    cost *= detail.count if detail.respond_to? :count
   end
 
   extend Share::Id2Key
@@ -38,4 +41,17 @@ class Order < ActiveRecord::Base
     }.update(options)
     super(options)
   end
+
+  def self.total_cost
+    sum(:cost)
+  end
+
+  def self.last_ordered_at
+    last.created_at if any?
+  end
+
+  def self.reviews
+    Review.where(order_id: pluck(:id))
+  end
+
 end

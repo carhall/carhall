@@ -11,7 +11,7 @@ gem 'sqlite3'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  # gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails',   '~> 3.2.3'
   gem "less-rails"
   gem 'coffee-rails', '~> 3.2.1'
 
@@ -23,6 +23,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-migrate-rails'
+gem 'jquery-datatables-rails'
 # gem 'bootstrap-sass'
 gem "twitter-bootstrap-rails"
 gem 'jasny_bootstrap_extension_rails'

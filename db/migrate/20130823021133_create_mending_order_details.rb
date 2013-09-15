@@ -2,7 +2,6 @@ class CreateMendingOrderDetails < ActiveRecord::Migration
   def change
     create_table :mending_order_details do |t|
       # t.references :source
-      t.float    :price
       t.integer  :brand_id
       t.string   :series
       t.string   :plate_num

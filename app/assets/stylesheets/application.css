@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require jasny-bootstrap
+ *= require dataTables/jquery.dataTables.bootstrap
  *= require_self
  *= require_tree .
  */

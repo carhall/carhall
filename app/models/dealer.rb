@@ -13,7 +13,12 @@ class Dealer < Account
   has_many :bulk_purchasing_orders, through: :bulk_purchasings
 
   has_many :orders
-  has_many :reviews
+
+  has_many :mending_reviews, source: :reviews, through: :mending
+  has_many :cleaning_reviews, source: :reviews, through: :cleanings
+  has_many :bulk_purchasing_reviews, source: :reviews, through: :bulk_purchasings
+
+  has_many :reviews, through: :orders
 
   validates_presence_of :type
 

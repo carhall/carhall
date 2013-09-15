@@ -27,6 +27,10 @@ module Share
       "中兴", "众泰", "其它", 
     ]
 
+    def self.get_id brand
+      if brand.kind_of? Integer then brand else Brands.index brand end
+    end
+
     define_id2key_methods :brand
   end
 end

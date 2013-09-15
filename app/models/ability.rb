@@ -26,12 +26,13 @@ class Ability
 
     when :provider
       can :use, SettingsController
-      can :use, InverseFriendsController
+      can :use, Users::InverseFriendsController
 
     when :dealer
       can :use, SettingsController
       can :use, Tips::DashboardsController
-      can :use, InverseFriendsController
+      can :use, Users::InverseFriendsController
+      can :use, Users::ReviewsController
 
       # if user.accepted?
         can :use, Tips::CleaningsController

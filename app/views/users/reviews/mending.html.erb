@@ -1,0 +1,42 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "users/inverse_friends/sidenav/dealer" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>保养专修评价列表 <small></small></h3>
+    </div>
+
+    <%= render 'shared/alert', message: '您还没有设置专修车型！' if @mending.brands.empty? %>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= translate_attribute_name :brands, :mending %></th>
+          <th><%= translate_attribute_name :mending_type, :mending %></th>
+          <th><%= translate_attribute_name :orders_count, :mending %></th>
+          <th><%= translate_attribute_name :stars, :mending %></th>
+          <th><%= translate_attribute_name :trend_stars, :mending %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @mending.brand_ids.each do |brand_id| %>
+          <% @types.each_with_index do |type, type_id| %>
+            <% orders = @orders.with_brand(brand_id).with_type(type_id).includes(:review) %>
+            <tr>
+              <% if type_id == 0 %>
+                <td rowspan="<%= @types.count %>"><%= Share::Brandable::Brands[brand_id] %></td>
+              <% end %>
+              <td><%= type %></td>
+              <td><%= orders.count %></td>
+              <td><%= orders.reviews.stars %></td>
+              <td><%= orders.reviews.trend_stars %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

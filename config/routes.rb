@@ -18,12 +18,19 @@ Autozone::Application.routes.draw do
     end
   end
 
-  resources :inverse_friends
   resource :setting do
     get :template
     get :finance
     
     get :rqrcode
+  end
+
+  namespace :users do
+    resources :inverse_friends
+    resources :reviews do
+      get :cleaning, on: :collection
+      get :mending, on: :collection
+    end
   end
 
   namespace :tips do

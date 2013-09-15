@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery-migrate
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jasny-bootstrap

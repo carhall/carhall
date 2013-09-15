@@ -5,7 +5,7 @@ class Tips::BulkPurchasingOrderDetail < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:price, :count],
+      only: [:count],
     }.update(options)
     super(options)
   end

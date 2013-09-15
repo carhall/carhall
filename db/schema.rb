@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20130912095849) do
   add_index "blocks", ["user_id"], :name => "index_blocks_on_user_id"
 
   create_table "bulk_purchasing_order_details", :force => true do |t|
-    t.float   "price"
     t.integer "count", :default => 0
   end
 
@@ -102,7 +101,6 @@ ActiveRecord::Schema.define(:version => 20130912095849) do
   add_index "bulk_purchasings", ["orders_count"], :name => "index_bulk_purchasings_on_orders_count"
 
   create_table "cleaning_order_details", :force => true do |t|
-    t.float   "price"
     t.integer "count",      :default => 0
     t.integer "used_count", :default => 0
   end
@@ -182,7 +180,6 @@ ActiveRecord::Schema.define(:version => 20130912095849) do
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
   create_table "mending_order_details", :force => true do |t|
-    t.float    "price"
     t.integer  "brand_id"
     t.string   "series"
     t.string   "plate_num"
@@ -224,6 +221,7 @@ ActiveRecord::Schema.define(:version => 20130912095849) do
     t.integer  "source_id"
     t.string   "title"
     t.integer  "state_id"
+    t.float    "cost"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
