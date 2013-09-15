@@ -407,15 +407,17 @@ detail          | 附加字段的 **哈希表**        |
 
 * 如果order_type是mending_order，则detail包含以下附加字段  
   
-  字段名称             | 详细描述                    | 限制条件
-  --------------------|----------------------------|--------------------------------
-  detail[price]       | 总价                       | 只读，由服务器端计算得出
-  detail[brand_id]    | 品牌ID                     | 
-  detail[brand]       | 品牌                       | 
-  detail[series]      | 型号                       |
-  detail[plate_num]   | 车牌号                     |
-  detail[arrive_at]   | 到达时间                    | 
-  detail[description] | 预约项目                    |
+  字段名称                 | 详细描述                | 限制条件
+  ------------------------|------------------------|--------------------------------
+  detail[price]           | 总价                   | 只读，由服务器端计算得出
+  detail[brand_id]        | 品牌ID                 | 
+  detail[brand]           | 品牌                   | 
+  detail[series]          | 型号                   |
+  detail[plate_num]       | 车牌号                  |
+  detail[arrive_at]       | 到达时间                | 
+  detail[mending_type_id] | 预约项目ID              | 
+  detail[mending_type]    | 预约项目                | 
+  detail[description]     | 预约内容                |
 
 * 如果order_type是cleaning_order，则detail包含以下附加字段  
   
