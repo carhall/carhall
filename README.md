@@ -306,7 +306,14 @@ GET查询时，可以在URI中使用两个附加字段作为条件，filter[area
 >     GET /api/club?filter[area_id]=1&filter[brand_id]=2
 
 
-两种申请时，表单附加字段都为data[description]
+申请堂主或申请在线技师时，表单附加字段都为data[description]，表示个人信息  
+> 例如：
+> 
+>     POST /api/club/president
+>     表单
+>     data[description]    我叫xxx
+> 
+
 修改车友会信息时，表单附加字段包括data[announcement]和data[avatar]，其他字段只读
 
 Mending 保养专修
