@@ -42,14 +42,12 @@ class Mending < ActiveRecord::Base
   end
 
   def reviews_group_by_brand_and_type
-    orders = self.orders.includes(:detail)
-    reviews = self.reviews.preload
-    grouped_orders = init_grouped_array_by_brand_and_type
-    orders.each do |order|
-      review = reviews.select{|r|r.order_id = order.id}
-      grouped_orders[order.detail.brand_id][order.detail.mending_type_id] += review
+    reviews = self.reviews.includes(order: :detail)
+    grouped_reviews = init_grouped_array_by_brand_and_type
+    reviews.each do |review|
+      grouped_reviews[review.order.detail.brand_id][review.order.detail.mending_type_id] << review
     end
-    grouped_orders
+    grouped_reviews
   end
 
 end
