@@ -10,6 +10,7 @@
 
     <%= render 'shared/alert', message: '您还没有收到保养专修订单！' if @orders.empty? %>
 
+    <% @orders = @orders.includes(:detail) %>
     <table class="table">
       <thead>
         <tr>
