@@ -3,7 +3,6 @@ module Share
     extend ActiveSupport::Concern
       
     included do
-      default_scope { includes(:user) }
       belongs_to :user
     end
 

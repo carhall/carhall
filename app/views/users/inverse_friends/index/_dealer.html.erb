@@ -10,7 +10,7 @@
 
     <%= render 'shared/alert', message: '还没有用户关注您！' if @inverse_friends.empty? %>
     
-    <% @inverse_friends = @inverse_friends.includes(:detail, :orders, :reviews) %>
+    <% @inverse_friends = @inverse_friends.includes :detail, :orders, :reviews %>
     <table class="table table-striped datatable">
       <thead>
         <tr>
@@ -32,10 +32,10 @@
             <td><%= user.username %></td>
             <td><%= user.detail.brand %></td>
             <td><%= l user.created_at, format: :short %></td>
-            <td><%= user.orders.total_cost %></td>
-            <% last_ordered_at = user.orders.last_ordered_at %>
+            <td><%= total_cost user.orders %></td>
+            <% last_ordered_at = last_ordered_at user.orders %>
             <td><%= l last_ordered_at, format: :short if last_ordered_at %></td>
-            <td><%= user.reviews.last_stars %></td>
+            <td><%= last_stars user.reviews %></td>
           </tr>
         <% end %>
       </tbody>

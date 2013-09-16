@@ -10,6 +10,7 @@
 
     <%= render 'shared/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
     
+    <% @cleanings = @cleanings.includes :cleaning_orders, :reviews %>
     <table class="table">
       <thead>
         <tr>
@@ -33,9 +34,9 @@
             <td><%= cleaning.cleaning_type %></td>
             <td><%= cleaning.vip_price %></td>
             <td><%= cleaning.orders_count %></td>
-            <td><%= cleaning.reviews.stars %></td>
-            <td><%= cleaning.orders.total_cost %></td>
-            <td><%= cleaning.reviews.trend_stars %></td>
+            <td><%= stars cleaning.reviews %></td>
+            <td><%= total_cost cleaning.orders %></td>
+            <td><%= trend_stars cleaning.reviews %></td>
           </tr>
         <% end %>
       </tbody>

@@ -26,4 +26,30 @@ class Mending < ActiveRecord::Base
     super(options)
   end
 
+  def init_grouped_array_by_brand_and_type
+    brands_count = Share::Brandable::Brands.count
+    types_count = Tips::MendingOrderDetail::MendingTypes.count
+    Array.new(brands_count) { Array.new(types_count) { [] }}
+  end
+
+  def orders_group_by_brand_and_type
+    orders = self.orders.includes(:detail)
+    grouped_orders = init_grouped_array_by_brand_and_type
+    orders.each do |order|
+      grouped_orders[order.detail.brand_id][order.detail.mending_type_id] << order
+    end
+    grouped_orders
+  end
+
+  def reviews_group_by_brand_and_type
+    orders = self.orders.includes(:detail)
+    reviews = self.reviews.preload
+    grouped_orders = init_grouped_array_by_brand_and_type
+    orders.each do |order|
+      review = reviews.select{|r|r.order_id = order.id}
+      grouped_orders[order.detail.brand_id][order.detail.mending_type_id] += review
+    end
+    grouped_orders
+  end
+
 end

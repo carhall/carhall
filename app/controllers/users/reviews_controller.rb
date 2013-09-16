@@ -8,7 +8,8 @@ class Users::ReviewsController < ApplicationController
   
   def mending
     @mending = @dealer.mending
-    @orders = @mending.orders
     @types = Tips::MendingOrderDetail::MendingTypes
+    @grouped_orders = @mending.orders_group_by_brand_and_type
+    @grouped_reviews = @mending.reviews_group_by_brand_and_type
   end
 end

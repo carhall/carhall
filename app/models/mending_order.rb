@@ -10,14 +10,4 @@ class MendingOrder < Order
     0
   end
 
-  def self.with_brand brand
-    brand_id = Share::Brandable.get_id brand
-    joins(:detail).where("mending_order_details.brand_id == ?", brand_id)
-  end
-
-  def self.with_type type
-    type_id = if type.is_a? Integer then type else Tips::MendingOrderDetail::MendingTypes.index type end
-    joins(:detail).where("mending_order_details.mending_type_id == ?", type_id)
-  end
-
 end

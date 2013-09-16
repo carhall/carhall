@@ -42,16 +42,4 @@ class Order < ActiveRecord::Base
     super(options)
   end
 
-  def self.total_cost
-    sum(:cost)
-  end
-
-  def self.last_ordered_at
-    last.created_at if any?
-  end
-
-  def self.reviews
-    Review.where(order_id: pluck(:id))
-  end
-
 end
