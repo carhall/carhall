@@ -20,7 +20,7 @@ class Api::ApplicationController < ActionController::Base
     # GET /api/resources/1/detail
     # GET /api/resources/1/detail.json
     define_method :detail do
-      render_data klass.find(params[:id]).detail_hash request: request
+      render_data klass.find(params[:id]).detail_hash
     end if options[:detail]
 
   end

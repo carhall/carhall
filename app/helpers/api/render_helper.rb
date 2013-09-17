@@ -4,11 +4,11 @@ module Api
     def render_index resources
       resources = resources.page(params[:page]) if params[:page]
       resources = resources.per(params[:per_page]) if params[:per_page]
-      render_data resources.map { |r| r.serializable_hash(request: request) }
+      render_data resources.map { |r| r.serializable_hash }
     end
 
     def render_show resource
-      render_data resource.serializable_hash(request: request)
+      render_data resource.serializable_hash
     end
 
     def render_data json_data
@@ -32,12 +32,12 @@ module Api
     end
 
     def render_create_success resource, additional_data={}
-      json_data = resource.serializable_hash(request: request).merge additional_data
+      json_data = resource.serializable_hash.merge additional_data
       render json: { data: json_data, success: true }, status: :created
     end
 
     def render_update_success resource, additional_data={}
-      json_data = resource.serializable_hash(request: request).merge additional_data
+      json_data = resource.serializable_hash.merge additional_data
       render json: { data: json_data, success: true }, status: :accepted
     end
 

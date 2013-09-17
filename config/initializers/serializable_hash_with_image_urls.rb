@@ -13,9 +13,7 @@ ActiveModel::Serialization.module_eval do
 
     Array.wrap(options[:methods]).each { |n| hash[n] = send(n) if respond_to?(n) }
 
-    request = options[:request] if options[:images]
     absolute_url_prefix = Autozone::AbsoluteUrlPrefix 
-    absolute_url_prefix ||= "#{request.protocol}#{request.host_with_port}"if request
 
     Array.wrap(options[:images]).each do |n| 
       if respond_to?(n) and (image = send(n)).kind_of? Paperclip::Attachment
@@ -51,7 +49,7 @@ ActiveModel::Serialization.module_eval do
 
     include.each do |association, opts|
       if records = send(association)
-        yield association, records, opts.merge(request: options[:request], source: self)
+        yield association, records, opts.merge(source: self)
       end
     end
   end
