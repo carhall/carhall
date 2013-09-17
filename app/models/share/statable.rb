@@ -33,7 +33,11 @@ module Share
     def reset
       self.state_id = nil
     end
-  
+
+    def self.get_id state
+      if state.kind_of? Integer then state else States.index state end
+    end
+
     extend Share::Exclamation
     define_exclamation_and_method :cancel
     define_exclamation_and_method :finish

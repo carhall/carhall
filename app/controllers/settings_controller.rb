@@ -1,5 +1,6 @@
 class SettingsController < ApplicationController
   prepend_before_filter :ensure_user_type
+  before_filter :set_dealer, only: [:finance, :template]
 
   def show
   end

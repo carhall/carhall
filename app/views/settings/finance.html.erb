@@ -10,7 +10,7 @@
 
     <div class="row-fluid">
       <div class="span3">
-        <img src="<%= @user.avatar.url(:medium) %>">
+        <img src="<%= @dealer.avatar.url(:medium) %>">
       </div>
       <div class="span9">
         <table class="table">
@@ -22,11 +22,11 @@
           <tbody>
             <tr>
               <th>广告基金</th>
-              <td><%= @user.inverse_friends.count * 3 %></td>
+              <td><%= @dealer.inverse_friends.count * 3 %></td>
             </tr>
             <tr>
               <th>已用金额</th>
-              <td><%= @user.detail.balance_used %></td>
+              <td><%= @dealer.detail.balance_used %></td>
             </tr>
             <tr>
               <td class="blank">&nbsp;</td>

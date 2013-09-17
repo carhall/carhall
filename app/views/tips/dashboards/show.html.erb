@@ -17,26 +17,20 @@
       <tbody>
         <tr>
           <th>上月完成订单</th>
-          <td><%= 1 %>笔</td>
+          <td><%= trend(@dealer.orders).count %> 笔</td>
         </tr>
         <tr>
           <th>总成交额</th>
-          <td><%= 1 %>元</td>
+          <td><%= total_cost trend @dealer.orders %> 元</td>
         </tr>
         <tr>
           <th>交易用户</th>
-          <td><%= 1 %>个</td>
+          <td><%= users_count(trend @dealer.orders) %> 个</td>
         </tr>
         <tr>
           <th>本月综合评分</th>
           <td>
-            <% stars = 1 %>
-            <% stars.times do %>
-              <i class="icon-star"></i>
-            <% end %>
-            <% (5 - stars).times do %>
-              <i class="icon-star-empty"></i>
-            <% end %>
+            <%= print_stars @dealer.reviews %>
           </td>
         </tr>
         <tr>
@@ -47,27 +41,21 @@
         </tr>
         <tr>
           <th>交易达成率</th>
-          <td><%= 1 %>笔</td>
+          <td><%= goal_attainment @dealer.orders %> %</td>
         </tr>
         <tr>
           <th>店铺总评分</th>
           <td>
-            <% stars = 1 %>
-            <% stars.times do %>
-              <i class="icon-star"></i>
-            <% end %>
-            <% (5 - stars).times do %>
-              <i class="icon-star-empty"></i>
-            <% end %>
+            <%= print_stars @dealer.reviews %>
           </td>
         </tr>
         <tr>
           <th>应收款</th>
-          <td><%= 1 %>元</td>
+          <td><%= 0 %> 元</td>
         </tr>
         <tr>
           <th>应付佣金</th>
-          <td><%= 1 %>元</td>
+          <td><%= 0 %> 元</td>
         </tr>
       </tbody>
     </table>

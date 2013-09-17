@@ -10,6 +10,8 @@
 
     <%= render 'shared/alert', message: '您还没有设置专修车型！' if @mending.brands.empty? %>
     
+    <% @grouped_orders = @mending.orders_group_by_brand_and_type %>
+    <% @grouped_reviews = @mending.reviews_group_by_brand_and_type %>
     <table class="table">
       <thead>
         <tr>
@@ -23,15 +25,15 @@
       <tbody>
         <% @mending.brand_ids.each do |brand_id| %>
           <% @types.each_with_index do |type, type_id| %>
-          <tr>
-            <% if type_id == 0 %>
-              <td rowspan="<%= @types.count %>"><%= Share::Brandable::Brands[brand_id] %></td>
-            <% end %>
-            <td><%= type %></td>
-            <td><%= @grouped_orders[brand_id][type_id].count %></td>
-            <td><%= stars @grouped_reviews[brand_id][type_id] %></td>
-            <td><%= trend_stars @grouped_reviews[brand_id][type_id] %></td>
-          </tr>
+            <tr>
+              <% if type_id == 0 %>
+                <td rowspan="<%= @types.count %>"><%= Share::Brandable::Brands[brand_id] %></td>
+              <% end %>
+              <td><%= type %></td>
+              <td><%= @grouped_orders[brand_id][type_id].count %></td>
+              <td><%= stars @grouped_reviews[brand_id][type_id] %></td>
+              <td><%= stars trend @grouped_reviews[brand_id][type_id] %></td>
+            </tr>
           <% end %>
         <% end %>
       </tbody>

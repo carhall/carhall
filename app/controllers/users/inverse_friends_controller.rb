@@ -1,6 +1,8 @@
 class Users::InverseFriendsController < ApplicationController
   prepend_before_filter :ensure_user_type
   before_filter :set_current_user
+  
+  helper StatisticsHelper
     
   def index
     @inverse_friends = @user.inverse_friends

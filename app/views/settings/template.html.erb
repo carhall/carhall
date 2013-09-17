@@ -10,10 +10,10 @@
 
     <div class="row-fluid">
       <div class="span3">
-        <img src="<%= @user.avatar.url(:medium) %>">
+        <img src="<%= @dealer.avatar.url(:medium) %>">
       </div>
       <div class="span9">
-        <%= simple_form_for(@user, url: account_registration_path, html: { method: :put, class: 'form-horizontal' }) do |f| %>
+        <%= simple_form_for(@dealer, url: account_registration_path, html: { method: :put, class: 'form-horizontal' }) do |f| %>
           <table class="table">
             <thead>
               <tr>
@@ -23,11 +23,11 @@
             <tbody>
               <tr>
                 <th>洗车美容</th>
-                <td><input class="check_boxes" id="account_detail_attributes_template_ids_0" name="account[detail_attributes][template_ids][]" type="checkbox" value="0"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 0 %>></td>
+                <td><input class="check_boxes" id="account_detail_attributes_template_ids_0" name="account[detail_attributes][template_ids][]" type="checkbox" value="0"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 0 %>></td>
               </tr>
               <tr>
                 <th>保养专修</th>
-                <td><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 1 %>></td>
+                <td><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 1 %>></td>
               </tr>
               <tr>
                 <td class="blank">&nbsp;</td>
@@ -37,11 +37,11 @@
               </tr>
               <tr>
                 <th>团购</th>
-                <td><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 2 %>></td>
+                <td><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 2 %>></td>
               </tr>
               <tr>
                 <th>近期活动</th>
-                <td><input class="check_boxes" id="account_detail_attributes_template_ids_3" name="account[detail_attributes][template_ids][]" type="checkbox" value="3"<%= "checked=\"checked\"" if @user.detail.template_ids.include? 3 %>></td>
+                <td><input class="check_boxes" id="account_detail_attributes_template_ids_3" name="account[detail_attributes][template_ids][]" type="checkbox" value="3"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 3 %>></td>
               </tr>
             </tbody>
           </table>
