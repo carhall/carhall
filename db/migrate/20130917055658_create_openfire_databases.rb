@@ -6,14 +6,15 @@ class CreateOpenfireDatabases < ActiveRecord::Migration
       t.string :udid
       t.string :client_token
       
-      t.timestamps
+      t.integer :created_at
+      t.integer :updated_at
     end
 
     create_table :offline_message do |t|
       t.references :user
       t.string :content
       
-      t.timestamps
+      t.integer :created_at
     end
 
     create_table :apply do |t|
@@ -21,7 +22,7 @@ class CreateOpenfireDatabases < ActiveRecord::Migration
       t.references :to_user
       t.string :content
       
-      t.timestamps
+      t.integer :created_at
     end
 
     add_index :user_device, :user_id
