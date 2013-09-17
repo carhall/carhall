@@ -54,12 +54,16 @@ module Api
       render json: json.merge(additional_data), status: status
     end
 
-    def render_accepted status = :accepted
+    def render_ok status = :ok
       render json: { success: true }, status: status
     end
 
+    def render_accepted
+      render_ok :accepted
+    end
+
     def render_created
-      render_accepted :created
+      render_ok :created
     end
   end
 end
