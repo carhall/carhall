@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912095849) do
+ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "accounts", :force => true do |t|
     t.string   "encrypted_password",     :default => "", :null => false
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(:version => 20130912095849) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  create_table "apply", :force => true do |t|
+    t.integer "from_user_id"
+    t.integer "to_user_id"
+    t.string  "content"
+    t.integer "created_at",   :limit => 8
+  end
+
+  add_index "apply", ["from_user_id"], :name => "index_apply_on_from_user_id"
+  add_index "apply", ["to_user_id"], :name => "index_apply_on_to_user_id"
 
   create_table "blocks", :force => true do |t|
     t.integer  "user_id"
@@ -169,6 +179,15 @@ ActiveRecord::Schema.define(:version => 20130912095849) do
     t.integer  "balance_used",       :default => 0, :null => false
   end
 
+  create_table "friend", :force => true do |t|
+    t.integer "user_id"
+    t.integer "friend_user_id"
+    t.integer "created_at",     :limit => 8
+  end
+
+  add_index "friend", ["friend_user_id"], :name => "index_friend_on_friend_user_id"
+  add_index "friend", ["user_id"], :name => "index_friend_on_user_id"
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -199,6 +218,14 @@ ActiveRecord::Schema.define(:version => 20130912095849) do
   end
 
   add_index "mendings", ["orders_count"], :name => "index_mendings_on_orders_count"
+
+  create_table "offline_message", :force => true do |t|
+    t.integer "user_id"
+    t.string  "content"
+    t.integer "created_at", :limit => 8
+  end
+
+  add_index "offline_message", ["user_id"], :name => "index_offline_message_on_user_id"
 
   create_table "open_database_structs", :force => true do |t|
     t.string   "type"
@@ -293,5 +320,16 @@ ActiveRecord::Schema.define(:version => 20130912095849) do
   end
 
   add_index "user_details", ["area_id", "brand_id"], :name => "index_user_details_on_area_id_and_brand_id"
+
+  create_table "user_device", :force => true do |t|
+    t.integer "user_id"
+    t.string  "sys"
+    t.string  "udid"
+    t.string  "client_token"
+    t.integer "created_at",   :limit => 8
+    t.integer "updated_at",   :limit => 8
+  end
+
+  add_index "user_device", ["user_id"], :name => "index_user_device_on_user_id"
 
 end

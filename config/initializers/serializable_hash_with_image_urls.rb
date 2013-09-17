@@ -14,7 +14,8 @@ ActiveModel::Serialization.module_eval do
     Array.wrap(options[:methods]).each { |n| hash[n] = send(n) if respond_to?(n) }
 
     request = options[:request] if options[:images]
-    absolute_url_prefix = "#{request.protocol}#{request.host_with_port}"if request
+    absolute_url_prefix = Autozone::AbsoluteUrlPrefix 
+    absolute_url_prefix ||= "#{request.protocol}#{request.host_with_port}"if request
 
     Array.wrap(options[:images]).each do |n| 
       if respond_to?(n) and (image = send(n)).kind_of? Paperclip::Attachment

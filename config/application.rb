@@ -68,4 +68,6 @@ module Autozone
 
     config.action_dispatch.rescue_responses["CanCan::AccessDenied"] = :forbidden
   end
+
+  AbsoluteUrlPrefix = ENV['AUTOZONE_URL_PREFIX']
 end
