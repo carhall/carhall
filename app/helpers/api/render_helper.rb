@@ -38,7 +38,7 @@ module Api
 
     def render_update_success resource, additional_data={}
       json_data = resource.serializable_hash(request: request).merge additional_data
-      render json: { data: json_data, success: true }, status: :created
+      render json: { data: json_data, success: true }, status: :accepted
     end
 
     def render_failure resource, status = :unprocessable_entity
