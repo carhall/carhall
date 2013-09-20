@@ -26,4 +26,9 @@ class Dealer < Account
     detail.template_syms.include? template
   end
 
+  def self.with_location lat, lng
+    detail_ids = Accounts::DealerDetail.where(latitude: (lat-0.1..lat+0.1), longitude: (lng-0.1..lng+0.1)).pluck(:id)
+    Dealer.where(detail_id: detail_ids)
+  end
+
 end

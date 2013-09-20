@@ -21,3 +21,4 @@ jQuery ->
           sPrevious: "上页",  
           sNext:     "下页",  
           sLast:     "末页"  
+

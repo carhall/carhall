@@ -13,6 +13,8 @@ class Mending < ActiveRecord::Base
   Brands = Share::Brandable::Brands
   define_ids2keys_methods :brands
 
+  include Share::Localizable
+
   attr_accessible :dealer
   attr_accessible :discount, :brand_ids
   attr_accessible :brands

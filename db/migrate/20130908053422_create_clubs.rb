@@ -4,7 +4,7 @@ class CreateClubs < ActiveRecord::Migration
       t.references :president
       t.string  :mechanic_ids
       t.string  :title
-      t.string  :announcement
+      t.text    :announcement
       t.integer :area_id
       t.integer :brand_id
       t.attachment :avatar

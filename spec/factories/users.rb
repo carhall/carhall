@@ -1,3 +1,5 @@
+Address = ['搜狐网络大厦', '百度大厦', '北京航空航天大学']
+
 FactoryGirl.define do 
   factory :user do
     mobile { Faker::PhoneNumber.cell_phone }
@@ -21,7 +23,6 @@ FactoryGirl.define do
     detail do
       {
         company: Faker::Lorem.sentence,
-        address: Faker::Lorem.sentence,
         phone: Faker::PhoneNumber.phone_number,
       }
     end
@@ -35,7 +36,7 @@ FactoryGirl.define do
     detail do
       {
         company: Faker::Lorem.sentence,
-        address: Faker::Lorem.sentence,
+        address: Address.sample,
         phone: Faker::PhoneNumber.phone_number,
         open_during: Faker::Lorem.sentence,
         dealer_type: Accounts::DealerDetail::DealerTypes.sample,

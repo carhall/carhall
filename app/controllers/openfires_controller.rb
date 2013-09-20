@@ -46,7 +46,7 @@ class OpenfiresController < ActionController::Base
     sex_id = u.detail.sex_id rescue nil
     { 
       id: u.id, username: u.username, mobile: u.mobile, 
-      avatar_thumb_url: avatar_thumb_url, sex_id: sex_id
+      avatar_thumb_url: avatar_thumb_url, sex_id: sex_id || 2
     }
   end
 end

@@ -50,6 +50,7 @@
             <%= f.simple_fields_for :detail do |ff| %>
               <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerTypes.each_with_index, wrapper_html: { class: "dealer" } %>
               <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScopes.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" } %>
+              <%#= ff.input :area_id, collection: Share::Areable::Areas.each_with_index, wrapper_html: { class: "dealer" }, required: true %>
               <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
               <%= ff.input :address, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" } %>
               <%= ff.input :phone, wrapper_html: { class: "dealer provider" } %>
@@ -82,3 +83,15 @@
     <% end %>
   </div>
 </div>
+
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    ac = new BMap.Autocomplete({'input': 'account_detail_attributes_address'}) // # 建立一个自动完成的对象 
+    ac.setInputValue($('#account_detail_attributes_address').val())
+    // $('#account_detail_attributes_area_id').change(function() {
+    //   ac.setLocation($(this).find('option:selected').text());
+    // })
+  })
+  </script>
+<% end %>

@@ -3,7 +3,7 @@ class CreateMendings < ActiveRecord::Migration
     create_table :mendings do |t|
       t.references :dealer
       t.text    :discount
-      t.text    :brand_ids
+      t.string  :brand_ids
       t.text    :description
       t.integer :orders_count, default: 0
       

@@ -12,7 +12,7 @@ class CreateOpenfireDatabases < ActiveRecord::Migration
 
     create_table :offline_message do |t|
       t.references :user
-      t.string :content
+      t.text :content
       
       t.integer :created_at, :limit => 8
     end
@@ -20,7 +20,7 @@ class CreateOpenfireDatabases < ActiveRecord::Migration
     create_table :apply do |t|
       t.references :from_user
       t.references :to_user
-      t.string :content
+      t.text :content
       
       t.integer :created_at, :limit => 8
     end

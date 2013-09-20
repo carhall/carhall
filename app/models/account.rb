@@ -20,7 +20,7 @@ class Account < ActiveRecord::Base
 
   # For avatar
   extend Share::ImageAttachments
-  define_avatar_method path: ':rails_root/public/system/users/:attachment/:id_partition/:style/:filename'
+  define_avatar_method
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :password, :password_confirmation, :remember_me

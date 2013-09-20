@@ -2,6 +2,8 @@ class CreateDealerDetails < ActiveRecord::Migration
   def change
     create_table :dealer_details do |t|
       # t.references :source
+      t.integer :area_id
+      
       t.integer :dealer_type_id
       t.string  :business_scope_ids
       t.string  :company
@@ -12,8 +14,8 @@ class CreateDealerDetails < ActiveRecord::Migration
       t.string  :rqrcode_token
       t.attachment :image
 
-      t.float :latitude
-      t.float :longitude
+      t.float :latitude, limit: 32
+      t.float :longitude, limit: 32
 
       t.string  :template_ids
       t.integer :balance_used, null: false, default: 0

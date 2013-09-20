@@ -25,8 +25,9 @@
       <%= f.simple_fields_for :detail do |ff| %>
         <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerTypes.each_with_index, wrapper_html: { class: "dealer" }, required: true %>
         <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScopes.each_with_index, as: :check_boxes, wrapper_html: { class: "dealer" }, required: true %>
+        <%#= ff.input :area_id, collection: Share::Areable::Areas.each_with_index, wrapper_html: { class: "dealer" }, required: true %>
         <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" }, required: true %>
-        <%= ff.input :address, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" }, required: true %>
+        <%= ff.input :address, input_html: { class: 'input-xxlarge address' }, wrapper_html: { class: "dealer" }, required: true %>
         <%= ff.input :phone, wrapper_html: { class: "dealer provider" }, required: true %>
         <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00', required: true %>
         <%= ff.input :authentication_image, wrapper_html: { class: "dealer" }, required: true do %>
@@ -36,6 +37,7 @@
             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
           </div>
         <% end %>
+
       <% end %>
       
       <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
@@ -52,19 +54,26 @@
 
 <% content_for :javascripts do %>
   <script type="text/javascript">
-  $user_type = $("#account_type")
-  function prepare_detail_inputs() {
-    console.log($user_type.val());
-    $(".control-group").filter(".provider, .dealer").hide()
-    if($user_type.val() == "Provider") {
-      $(".control-group").filter(".provider").show()
-    } else if($user_type.val() == "Dealer") {
-      $(".control-group").filter(".dealer").show()
-    }
-  }
+  var ac;
   $(document).ready(function() {
+    $user_type = $("#account_type")
+    function prepare_detail_inputs() {
+      $(".control-group").filter(".provider, .dealer").hide()
+      if($user_type.val() == "Provider") {
+        $(".control-group").filter(".provider").show()
+      } else if($user_type.val() == "Dealer") {
+        $(".control-group").filter(".dealer").show()
+      }
+    }
+
     prepare_detail_inputs()
     $user_type.change(prepare_detail_inputs)
+
+    ac = new BMap.Autocomplete({'input': 'account_detail_attributes_address'}) // # 建立一个自动完成的对象 
+    ac.setInputValue($('#account_detail_attributes_address').val())
+    // $('#account_detail_attributes_area_id').change(function() {
+    //  ac.setLocation($(this).find('option:selected').text());
+    // })
   })
   </script>
 <% end %>

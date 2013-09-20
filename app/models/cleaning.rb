@@ -7,6 +7,8 @@ class Cleaning < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
 
+  include Share::Localizable
+  
   attr_accessible :title, :cleaning_type_id, :price, :vip_price, :description, :image
 
   validates_presence_of :dealer

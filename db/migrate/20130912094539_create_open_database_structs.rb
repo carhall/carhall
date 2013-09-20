@@ -5,7 +5,7 @@ class CreateOpenDatabaseStructs < ActiveRecord::Migration
       
       t.references :user
       t.references :source, polymorphic: true
-      t.string :content
+      t.text :content
       
       t.timestamps
     end

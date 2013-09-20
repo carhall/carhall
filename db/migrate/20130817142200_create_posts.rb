@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.references :user
       t.references :club
-      t.string :content
+      t.text :content
       t.integer :view_count, default: 0 
       t.integer :comments_count, default: 0 
       t.float :weight, default: 0 

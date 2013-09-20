@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   create_table "apply", :force => true do |t|
     t.integer "from_user_id"
     t.integer "to_user_id"
-    t.string  "content"
+    t.text    "content"
     t.integer "created_at",   :limit => 8
   end
 
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.integer  "president_id"
     t.string   "mechanic_ids"
     t.string   "title"
-    t.string   "announcement"
+    t.text     "announcement"
     t.integer  "area_id"
     t.integer  "brand_id"
     t.string   "avatar_file_name"
@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "dealer_details", :force => true do |t|
+    t.integer  "area_id"
     t.integer  "dealer_type_id"
     t.string   "business_scope_ids"
     t.string   "company"
@@ -210,7 +211,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   create_table "mendings", :force => true do |t|
     t.integer  "dealer_id"
     t.text     "discount"
-    t.text     "brand_ids"
+    t.string   "brand_ids"
     t.text     "description"
     t.integer  "orders_count", :default => 0
     t.datetime "created_at",                  :null => false
@@ -221,7 +222,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "offline_message", :force => true do |t|
     t.integer "user_id"
-    t.string  "content"
+    t.text    "content"
     t.integer "created_at", :limit => 8
   end
 
@@ -232,7 +233,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.integer  "user_id"
     t.integer  "source_id"
     t.string   "source_type"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -272,7 +273,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "club_id"
-    t.string   "content"
+    t.text     "content"
     t.integer  "view_count",         :default => 0
     t.integer  "comments_count",     :default => 0
     t.float    "weight",             :default => 0.0
@@ -298,7 +299,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   create_table "reviews", :force => true do |t|
     t.integer  "order_id"
     t.string   "title"
-    t.string   "content"
+    t.text     "content"
     t.integer  "stars"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
