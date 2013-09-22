@@ -469,7 +469,7 @@ GET    | /api/tips/bulk_purchasings/hot        | 查询所有团购信息（购�
 GET    | /api/tips/bulk_purchasings/:id        | 查询指定团购信息  
 GET    | /api/tips/bulk_purchasings/:id/detail | 查询指定团购详细信息  
 
-GET查询时，可以在URI中使用一个附加字段filter[bulk_purchasing_type_id]作为条件，来查询指定类别的洗车美容信息  
+GET查询时，可以在URI中使用一个附加字段filter[bulk_purchasing_type_id]作为条件，来查询指定类别的团购信息  
 查询相关参数，参见 Mending 保养专修  
 
 
