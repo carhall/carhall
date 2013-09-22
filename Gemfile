@@ -60,4 +60,6 @@ group :development, :test do
   gem 'pry-debugger'
   
   gem 'rspec-rails'
+
+  gem 'yaml_db'
 end
