@@ -360,7 +360,6 @@ Method | URI                               | 说明
 -------|-----------------------------------|------------------------------------
 GET    | /api/tips/mendings                | 查询所有保养专修信息（默认排序）   
 GET    | /api/tips/mendings/nearby         | 查询所有保养专修信息（离我最近）  
-GET    | /api/tips/mendings/cheapie        | 查询所有保养专修信息（价格最低）  
 GET    | /api/tips/mendings/favorite       | 查询所有保养专修信息（评分最高）
 GET    | /api/tips/mendings/hot            | 查询所有保养专修信息（购买最多）
 GET    | /api/tips/mendings/:id            | 查询指定保养专修信息  
@@ -430,9 +429,6 @@ Method | URI                               | 说明
 -------|-----------------------------------|------------------------------------
 GET    | /api/tips/activities              | 查询所有活动信息（默认排序）   
 GET    | /api/tips/activities/nearby       | 查询所有活动信息（离我最近）  
-GET    | /api/tips/activities/cheapie      | 查询所有活动信息（价格最低）  
-GET    | /api/tips/activities/favorite     | 查询所有活动信息（评分最高）
-GET    | /api/tips/activities/hot          | 查询所有活动信息（购买最多）
 GET    | /api/tips/activities/:id          | 查询指定活动信息  
 GET    | /api/tips/activities/:id/detail   | 查询指定活动详细信息  
 

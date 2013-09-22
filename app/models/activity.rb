@@ -26,4 +26,7 @@ class Activity < ActiveRecord::Base
     super(options)
   end
   
+  def detail_hash
+    serializable_hash(include: {dealer: {include: :detail}})
+  end
 end

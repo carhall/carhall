@@ -5,29 +5,72 @@ describe "Tips" do
   let(:dealer) { create :dealer }
   let(:attach_attrs) {{ dealer: dealer }}
 
-  shared_examples "tips resources" do  
+  shared_examples "tips#nearby" do  
+    describe "GET nearby" do
+      let(:default_args) {{ lat: 40, lng: 116.3 }}
+      let(:collection_name) { :nearby }
+      include_examples "resources#collection"
+    end
+  end
+    
+  shared_examples "tips#cheapie" do  
+    describe "GET cheapie" do
+      let(:collection_name) { :cheapie }
+      include_examples "resources#collection"
+    end
+  end
+    
+  shared_examples "tips#favorite" do  
+    describe "GET favorite" do
+      let(:collection_name) { :favorite }
+      include_examples "resources#collection"
+    end
+  end
+    
+  shared_examples "tips#hot" do  
+    describe "GET hot" do
+      let(:collection_name) { :hot }
+      include_examples "resources#collection"
+    end
+  end
+
+  shared_examples "tips#resources" do  
     include_examples "resources#index"
+
     include_examples "resources#show"
+    include_examples "resources#detail"
   end
 
   describe Api::Tips::MendingsController do
     let(:resource_name) { :mending }
-    include_examples "tips resources"
+    include_examples "tips#resources"
+    include_examples "tips#nearby"
+    include_examples "tips#favorite"
+    include_examples "tips#hot"
   end
 
   describe Api::Tips::CleaningsController do
     let(:resource_name) { :cleaning }
-    include_examples "tips resources"
+    include_examples "tips#resources"
+    include_examples "tips#nearby"
+    include_examples "tips#cheapie"
+    include_examples "tips#favorite"
+    include_examples "tips#hot"
   end
 
   describe Api::Tips::ActivitiesController do
     let(:resource_name) { :activity }
-    include_examples "tips resources"
+    include_examples "tips#resources"
+    include_examples "tips#nearby"
   end
 
   describe Api::Tips::BulkPurchasingsController do
     let(:resource_name) { :bulk_purchasing }
-    include_examples "tips resources"
+    include_examples "tips#resources"
+    include_examples "tips#nearby"
+    include_examples "tips#cheapie"
+    include_examples "tips#favorite"
+    include_examples "tips#hot"
   end
 
   describe "Orders" do
@@ -55,7 +98,7 @@ describe "Tips" do
       end
     end
 
-    shared_examples "orders resources" do
+    shared_examples "orders#resources" do
       let(:parent) { create parent_name, dealer: dealer }
       let(:resource_name) { :"#{parent_name}_order" }
       let(:attach_attrs) {{ user: user, source: parent }}
@@ -68,21 +111,21 @@ describe "Tips" do
     describe Api::Tips::OrdersController do
       describe "mending_orders" do
         let(:parent_name) { :mending }
-        include_examples "orders resources"
+        include_examples "orders#resources"
         include_examples "orders#finish"
         include_examples "orders#cancel"
       end
 
       describe "cleaning_orders" do
         let(:parent_name) { :cleaning }
-        include_examples "orders resources"
+        include_examples "orders#resources"
         include_examples "orders#use"
         include_examples "orders#cancel"
       end
 
       describe "bulk_purchasing_orders" do
         let(:parent_name) { :bulk_purchasing }
-        include_examples "orders resources"
+        include_examples "orders#resources"
         include_examples "orders#finish"
         include_examples "orders#cancel"
       end
@@ -106,7 +149,7 @@ describe "Tips" do
     let(:order_name) { :"#{parent_name}_order" }
     let(:order) { create order_name, source: parent }
 
-    shared_examples "reviews resources" do
+    shared_examples "reviews#resources" do
       let(:attach_attrs) {{ order: order }}
       let(:attach_args) {{ :"#{parent_name}_id" => parent.id }}
       before { 3.times { create :review, order: create(order_name, source: parent) } }
@@ -129,17 +172,17 @@ describe "Tips" do
 
       describe "mending_orders" do
         let(:parent_name) { :mending }
-        include_examples "reviews resources"
+        include_examples "reviews#resources"
       end
 
       describe "cleaning_orders" do
         let(:parent_name) { :cleaning }
-        include_examples "reviews resources"
+        include_examples "reviews#resources"
       end
 
       describe "bulk_purchasing_orders" do
         let(:parent_name) { :bulk_purchasing }
-        include_examples "reviews resources"
+        include_examples "reviews#resources"
       end
     end
 

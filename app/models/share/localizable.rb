@@ -40,7 +40,7 @@ module Share
       end
 
       def cheapie
-        order('cost ASC')
+        order('vip_price ASC')
       end
 
       def favorite

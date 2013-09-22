@@ -149,7 +149,6 @@ Autozone::Application.routes.draw do
     namespace :tips do
       resources :mendings, only: [:index, :show] do
         get :nearby, on: :collection
-        get :cheapie, on: :collection
         get :favorite, on: :collection
         get :hot, on: :collection
   
@@ -184,9 +183,6 @@ Autozone::Application.routes.draw do
       
       resources :activities, only: [:index, :show] do
         get :nearby, on: :collection
-        get :cheapie, on: :collection
-        get :favorite, on: :collection
-        get :hot, on: :collection
   
         get :detail, on: :member        
         
