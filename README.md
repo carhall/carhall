@@ -331,13 +331,28 @@ Mending 保养专修
 ----------
 字段名称                 | 详细描述                    | 限制条件
 ------------------------|----------------------------|--------------------------
-discount                | 优惠信息                    | 返回哈希表，key是0-6，分别代表周日、周一到周六，value是优惠信息的哈希表，包含discount_during（优惠时段）、man_hours_discount（工时优惠）、spare_parts_discount（零件优惠）三个字段，例如：{0: {discount_during: '10:00 到 15:00', man_houts_discount: '7折'}, 6: {discount_during: '10:00 到 15:00', spare_parts_discount: '7折'}}
+discount                | 优惠信息                    | 哈希表
 brand_ids               | 专修车型IDs                 |
 brands                  | 专修车型                    |
 description             | 描述                       |
 orders_count            | 保养专修订单数               |
 stars                   | 评价等级                    | 浮点型，0-5，只读
 detail[goal_attainment] | 交易达成率                  | 只读
+
+其中discount是一个哈希表，key是0-6，分别代表周日、周一到周六，value是优惠信息的哈希表，包含discount_during（优惠时段）、man_hours_discount（工时优惠）、spare_parts_discount（零件优惠）三个字段  
+> 例如：
+> 
+>     {
+>       0: {
+>            discount_during: '10:00 到 15:00', 
+>            man_houts_discount: '7折'
+>          }, 
+>       6: {
+>            discount_during: '10:00 到 15:00', 
+>            spare_parts_discount: '7折'
+>          }
+>     }  
+>
 
 API
 ----------
