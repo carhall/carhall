@@ -10,7 +10,7 @@
 
     <%= render 'shared/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
     
-    <% @cleanings = @cleanings.includes :cleaning_orders, :reviews %>
+    <% @cleanings = @cleanings.includes :orders, :reviews %>
     <table class="table">
       <thead>
         <tr>
