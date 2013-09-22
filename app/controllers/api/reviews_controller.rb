@@ -1,17 +1,8 @@
 class Api::ReviewsController < Api::ApplicationController
   before_filter :set_parent
 
-  # GET /api/resources/1/reviews
-  # GET /api/resources/1/reviews.json
-  def index
-    render_index @parent.reviews
-  end
-
-  # GET /api/resources/1/reviews/1
-  # GET /api/resources/1/reviews/1.json
-  def show
-    render_show @parent.reviews.find(params[:id])
-  end
+  set_resource_class Review
+  attr_reader :parent
 
   protected
 
@@ -26,7 +17,7 @@ class Api::ReviewsController < Api::ApplicationController
     params.each do |key, value|
       if AccreditedKeys.keys.include? key
         parent_class = AccreditedKeys[key]
-        @parent = parent_class.find(value)
+        @parent = parent_class.find(value).reviews
         return
       end
     end

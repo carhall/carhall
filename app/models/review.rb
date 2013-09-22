@@ -11,6 +11,7 @@ class Review < ActiveRecord::Base
   def serializable_hash(options={})
     options = { 
       only: [:id, :content, :stars],
+      include: [:order]
     }.update(options)
     super(options)
   end

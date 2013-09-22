@@ -1,13 +1,12 @@
 class Mending < ActiveRecord::Base
   belongs_to :dealer
-  has_many :mending_orders, foreign_key: :source_id
+  has_many :orders, class_name: MendingOrder, foreign_key: :source_id
   has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 
     class_name: MendingOrder, foreign_key: :source_id
-  alias_attribute :orders, :mending_orders
 
-  has_many :reviews, through: :mending_orders
-  has_many :recent_reviews, source: :review, through: :recent_orders
-
+  has_many :reviews, through: :orders
+  has_many :recent_reviews, through: :recent_orders, class_name: Review
+  
   serialize :discount, Hash
 
   validates_presence_of :dealer
@@ -54,6 +53,11 @@ class Mending < ActiveRecord::Base
       grouped_reviews[review.order.detail.brand_id][review.order.detail.mending_type_id] << review
     end
     grouped_reviews
+  end
+
+  def self.with_brand brand
+    brand_id = Share::Brandable.get_id brand
+    where('mendings.brand_ids LIKE \'%- ?\n%\'', brand_id)
   end
 
 end

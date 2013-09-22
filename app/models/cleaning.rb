@@ -1,13 +1,12 @@
 class Cleaning < ActiveRecord::Base
   belongs_to :dealer
-  has_many :cleaning_orders, foreign_key: :source_id
+  has_many :orders, class_name: CleaningOrder, foreign_key: :source_id
   has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 
     class_name: CleaningOrder, foreign_key: :source_id
-  alias_attribute :orders, :cleaning_orders
 
-  has_many :reviews, through: :cleaning_orders
-  has_many :recent_reviews, source: :review, through: :recent_orders
-
+  has_many :reviews, through: :orders
+  has_many :recent_reviews, through: :recent_orders, class_name: Review
+  
   extend Share::ImageAttachments
   define_image_method
 
@@ -26,7 +25,7 @@ class Cleaning < ActiveRecord::Base
   def serializable_hash(options={})
     options = { 
       only: [:id, :title, :cleaning_type_id, :price, :vip_price, :description, :orders_count],
-      methods: [:cleaning_type],
+      methods: [:cleaning_type, :stars],
       images: [:image],
       include: [:dealer],
     }.update(options)

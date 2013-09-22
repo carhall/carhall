@@ -3,30 +3,14 @@ class Api::OrdersController < Api::ApplicationController
   before_filter :set_parent
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
-  # GET /api/resources/1/orders
-  # GET /api/resources/1/orders.json
-  def index
-    render_index @parent.orders
-  end
-
-  # GET /api/resources/1/orders/1
-  # GET /api/resources/1/orders/1.json
-  def show
-    render_show @parent.orders.find(params[:id])
-  end
-
-  # GET /api/resources/1/orders/1/detail
-  # GET /api/resources/1/orders/1/detail.json
-  def detail
-    render_data @parent.orders.find(params[:id]).detail_hash
-  end
-
+  set_resource_class Order, detail: true
+  attr_reader :parent
 
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
   def create
     data_params = params.fetch(:data, {}).merge(user: @current_user)
-    render_create @parent.orders.new data_params
+    render_create @parent.new data_params
   end
 
   # PUT /api/resources/1/orders/1/finish
@@ -70,14 +54,14 @@ class Api::OrdersController < Api::ApplicationController
     params.each do |key, value|
       if AccreditedKeys.keys.include? key
         parent_class = AccreditedKeys[key]
-        @parent = parent_class.find(value)
+        @parent = parent_class.find(value).orders
         return
       end
     end
   end
 
   def set_order
-    @order = @parent.orders.find(params[:id])
+    @order = @parent.find(params[:id])
     authorize! :update, @order
   end
 end

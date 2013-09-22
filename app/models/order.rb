@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
     options = { 
       only: [:id, :title],
       methods: [:order_type],
-      # include: [:detail],
+      include: [:user]
     }.update(options)
     super(options)
   end

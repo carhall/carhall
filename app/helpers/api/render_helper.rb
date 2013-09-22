@@ -2,6 +2,7 @@ module Api
   module RenderHelper
 
     def render_index resources
+      resources = Kaminari.paginate_array(resources) if resources.kind_of? Array
       resources = resources.page(params[:page]) if params[:page]
       resources = resources.per(params[:per_page]) if params[:per_page]
       render_data resources.map { |r| r.serializable_hash }

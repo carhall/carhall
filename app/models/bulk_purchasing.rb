@@ -1,13 +1,17 @@
 class BulkPurchasing < ActiveRecord::Base
   belongs_to :dealer
-  has_many :bulk_purchasing_orders, foreign_key: :source_id
-  alias_attribute :orders, :bulk_purchasing_orders
-  has_many :reviews, through: :bulk_purchasing_orders
+  has_many :orders, class_name: BulkPurchasingOrder, foreign_key: :source_id
+  has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 
+    class_name: BulkPurchasingOrder, foreign_key: :source_id
 
+  has_many :reviews, through: :orders
+  has_many :recent_reviews, through: :recent_orders, class_name: Review
+  
   extend Share::ImageAttachments
   define_image_method
 
   include Share::Localizable
+  include Share::Statisticable
   
   attr_accessible :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price, :description, :image
 

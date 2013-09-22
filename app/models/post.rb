@@ -17,9 +17,13 @@ class Post < ActiveRecord::Base
     self.club = user.club
   end
 
-  scope :with_friends, ->(user) { with_user(user.friend_ids - user.post_blacklist_ids) }
-  scope :top, -> { order('comments_count DESC') }
-  default_scope { order('id DESC') }
+  def self.with_friends user
+    with_user(user.friend_ids - user.post_blacklist_ids)
+  end
+
+  def self.top
+    unscoped.order('comments_count DESC, id DESC')
+  end
 
   def self.view id
     post = find(id)

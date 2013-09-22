@@ -16,6 +16,7 @@ class CreateBulkPurchasings < ActiveRecord::Migration
     end
 
    add_index :bulk_purchasings, :orders_count
+   add_index :bulk_purchasings, :bulk_purchasing_type_id
 
   end
 end

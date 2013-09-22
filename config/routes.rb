@@ -158,6 +158,13 @@ Autozone::Application.routes.draw do
       end
 
       resources :cleanings, only: [:index, :show] do
+        get :nearby, on: :collection
+        get :cheapie, on: :collection
+        get :favorite, on: :collection
+        get :hot, on: :collection
+  
+        get :detail, on: :member
+
         resources :orders, only: [:index, :show, :create] do
           put "use/:count", action: :use, on: :member
           put :use, on: :member

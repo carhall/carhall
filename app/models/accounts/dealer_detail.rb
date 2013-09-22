@@ -44,7 +44,7 @@ class Accounts::DealerDetail < ActiveRecord::Base
   def serializable_hash(options={})
     options = { 
       only: [:dealer_type_id, :business_scope_ids, :company, :address, 
-        :phone, :open_during, :latitude, :longitude],
+        :phone, :open_during, :latitude, :longitude, :rqrcode_token],
       methods: [:dealer_type, :business_scopes],
     }.update(options)
     super(options)

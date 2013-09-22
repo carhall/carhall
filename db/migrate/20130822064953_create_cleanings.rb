@@ -15,6 +15,7 @@ class CreateCleanings < ActiveRecord::Migration
     end
 
    add_index :cleanings, :orders_count
+   add_index :cleanings, :cleaning_type_id
    
   end
 end

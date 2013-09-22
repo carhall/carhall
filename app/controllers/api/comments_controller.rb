@@ -2,29 +2,20 @@ class Api::CommentsController < Api::ApplicationController
   before_filter :set_current_user, only: :create
   before_filter :set_parent
 
-  # GET /api/resources/1/comments
-  # GET /api/resources/1/comments.json
-  def index
-    render_index @parent.comments
-  end
-
-  # GET /api/resources/1/comments/1
-  # GET /api/resources/1/comments/1.json
-  def show
-    render_show @parent.comments.find(params[:id])
-  end
+  set_resource_class Comment
+  attr_reader :parent
 
   # POST /api/resources/1/comments
   # POST /api/resources/1/comments.json
   def create
     data_params = params.fetch(:data, {}).merge(user: @current_user)
-    render_create @parent.comments.new data_params
+    render_create @parent.new data_params
   end
 
   # DELETE /api/resources/1/comments/1
   # DELETE /api/resources/1/comments/1.json
   def destroy
-    comment = @parent.comments.find(params[:id])
+    comment = @parent.find(params[:id])
     authorize! :destroy, comment
     comment.destroy
 
@@ -41,7 +32,7 @@ class Api::CommentsController < Api::ApplicationController
     params.each do |key, value|
       if AccreditedKeys.keys.include? key
         parent_class = AccreditedKeys[key]
-        @parent = parent_class.find(value)
+        @parent = parent_class.find(value).comments
         return
       end
     end

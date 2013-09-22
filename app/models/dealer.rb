@@ -9,19 +9,11 @@ class Dealer < Account
   has_many :activities
   has_many :bulk_purchasings
 
-  has_many :mending_orders, through: :mending
-  has_many :cleaning_orders, through: :cleanings
-  has_many :bulk_purchasing_orders, through: :bulk_purchasings
-
   has_many :orders
   has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], class_name: Order
 
-  has_many :mending_reviews, source: :reviews, through: :mending
-  has_many :cleaning_reviews, source: :reviews, through: :cleanings
-  has_many :bulk_purchasing_reviews, source: :reviews, through: :bulk_purchasings
-
   has_many :reviews, through: :orders
-  has_many :recent_reviews, source: :review, through: :recent_orders
+  has_many :recent_reviews, through: :recent_orders, class_name: Review
   
   validates_presence_of :type
 
@@ -40,6 +32,13 @@ class Dealer < Account
     area_id = Share::Areable.get_id area
     detail_ids = Accounts::DealerDetail.where(area_id: area_id).pluck(:id)
     where(detail_id: detail_ids)
+  end
+
+  def detail_hash
+    detail_hash = detail.serializable_hash
+    detail_hash[:last_3_orders] = orders.includes(:user).last(3)
+    detail_hash[:last_3_reviews] = reviews.includes(order: :user).last(3)
+    serializable_hash.merge(detail: detail_hash)
   end
 
 end

@@ -31,10 +31,14 @@ class Account < ActiveRecord::Base
   validates_presence_of :username, :type
   validates_length_of :username, :within => 2..20, :allow_blank => true
 
+  def accepted
+    accepted?
+  end
+
   def serializable_hash(options={})
     options = {
       only: [:id, :username, :mobile, :description],
-      methods: [:user_type],
+      methods: [:user_type, :accepted],
       images: [:avatar]
     }.update(options)
     super(options)

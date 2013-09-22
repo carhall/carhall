@@ -2,6 +2,10 @@ class Api::PostsController < Api::ApplicationController
   before_filter :set_user, except: :show
   before_filter :set_area_id_and_brand_id, except: :create
 
+  def render_index posts
+    super posts.includes(:user).order('id DESC')
+  end
+
   # GET /api/posts
   # GET /api/posts.json
   def index
@@ -12,14 +16,10 @@ class Api::PostsController < Api::ApplicationController
     render_index Post.with_friends(@user)
   end
 
-  # GET /api/posts
-  # GET /api/posts.json
   def top
     render_index Post.top
   end
 
-  # GET /api/posts
-  # GET /api/posts.json
   def club
     render_index @user.club.posts
   end

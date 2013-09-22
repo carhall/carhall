@@ -19,11 +19,7 @@ class Accounts::UserDetail < ActiveRecord::Base
       methods: [:sex, :area, :brand],
       images: [:car_image],
     }.update(options)
-    consumer = options[:source]
-    super(options).merge(
-      posts_count: consumer.posts.count, 
-      last_3_posts: consumer.posts.last(3)
-    )
+    super(options)
   end
 
 end

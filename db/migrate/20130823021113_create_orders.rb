@@ -16,6 +16,7 @@ class CreateOrders < ActiveRecord::Migration
     end
 
     add_index :orders, :user_id
+    add_index :orders, :dealer_id
     add_index :orders, :detail_id
     add_index :orders, :source_id
     add_index :orders, :state_id

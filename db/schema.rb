@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.datetime "updated_at",                             :null => false
   end
 
+  add_index "bulk_purchasings", ["bulk_purchasing_type_id"], :name => "index_bulk_purchasings_on_bulk_purchasing_type_id"
   add_index "bulk_purchasings", ["orders_count"], :name => "index_bulk_purchasings_on_orders_count"
 
   create_table "cleaning_order_details", :force => true do |t|
@@ -134,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.datetime "updated_at",                        :null => false
   end
 
+  add_index "cleanings", ["cleaning_type_id"], :name => "index_cleanings_on_cleaning_type_id"
   add_index "cleanings", ["orders_count"], :name => "index_cleanings_on_orders_count"
 
   create_table "clubs", :force => true do |t|
@@ -263,6 +265,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "orders", ["dealer_id"], :name => "index_orders_on_dealer_id"
   add_index "orders", ["detail_id"], :name => "index_orders_on_detail_id"
   add_index "orders", ["source_id"], :name => "index_orders_on_source_id"
   add_index "orders", ["state_id"], :name => "index_orders_on_state_id"
@@ -307,7 +310,6 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "reviews", :force => true do |t|
     t.integer  "order_id"
-    t.string   "title"
     t.text     "content"
     t.integer  "stars"
     t.datetime "created_at", :null => false

@@ -9,7 +9,7 @@ class Accounts::ProviderDetail < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:company, :phone],
+      only: [:company, :phone, :rqrcode_token],
     }.update(options)
     super(options)
   end
