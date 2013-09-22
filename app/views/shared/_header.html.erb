@@ -1,4 +1,4 @@
 <header class="masthead">
   <%= render 'shared/user_actions' %>
-  <a href="/"><h3 class="muted">汽车堂 | <%= if content_for? :title then yield :title else "公众平台" end %></h3></a>
+  <a href="/"><h3 class="muted"><%= image_tag 'logo.png' %> | <%= if content_for? :title then yield :title else "公众平台" end %></h3></a>
 </header>
