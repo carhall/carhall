@@ -17,7 +17,7 @@ GET、PUT和DELETE都可以使用POST模拟，需要额外添加_method=get/put/
 >     _method       put
 > 
 
-参数放在URL或放在表单里是等价的，**但_method是例外，必须放在POST表单中！**  
+参数放在URL或放在表单里是等价的， **但_method是例外，必须放在POST表单中！**  
 
 返回的结果
 ----------
