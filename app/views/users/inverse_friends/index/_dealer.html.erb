@@ -32,10 +32,10 @@
             <td><%= user.username %></td>
             <td><%= user.detail.brand %></td>
             <td><%= l user.created_at, format: :short %></td>
-            <td><%= total_cost user.orders %></td>
-            <% last_ordered_at = last_ordered_at user.orders %>
+            <td><%= user.total_cost %></td>
+            <% last_ordered_at = user.last_ordered_at %>
             <td><%= l last_ordered_at, format: :short if last_ordered_at %></td>
-            <td><%= last_stars user.reviews %></td>
+            <td><%= user.last_stars %></td>
           </tr>
         <% end %>
       </tbody>

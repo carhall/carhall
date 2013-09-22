@@ -27,9 +27,10 @@ class CreateOpenfireDatabases < ActiveRecord::Migration
 
     create_table :friend do |t|
       t.references :user
-      t.references :friend_user
+      t.references :friend
       
       t.integer :created_at, :limit => 8
+      t.integer :updated_at, :limit => 8
     end
 
     add_index :user_device, :user_id
@@ -37,7 +38,7 @@ class CreateOpenfireDatabases < ActiveRecord::Migration
     add_index :apply, :from_user_id
     add_index :apply, :to_user_id
     add_index :friend, :user_id
-    add_index :friend, :friend_user_id
+    add_index :friend, :friend_id
     
   end
 end

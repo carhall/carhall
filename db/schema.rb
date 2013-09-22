@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "activities", :force => true do |t|
     t.integer  "dealer_id"
+    t.integer  "dealer_detail_id"
     t.string   "title"
     t.datetime "expire_at"
     t.text     "description"
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "bulk_purchasings", :force => true do |t|
     t.integer  "dealer_id"
+    t.integer  "dealer_detail_id"
     t.string   "title"
     t.integer  "bulk_purchasing_type_id"
     t.datetime "expire_at"
@@ -117,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "cleanings", :force => true do |t|
     t.integer  "dealer_id"
+    t.integer  "dealer_detail_id"
     t.string   "title"
     t.integer  "cleaning_type_id"
     t.float    "price"
@@ -161,7 +164,6 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "dealer_details", :force => true do |t|
-    t.integer  "area_id"
     t.integer  "dealer_type_id"
     t.string   "business_scope_ids"
     t.string   "company"
@@ -174,19 +176,25 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "area_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "template_ids"
     t.integer  "balance_used",       :default => 0, :null => false
   end
 
+  add_index "dealer_details", ["area_id"], :name => "index_dealer_details_on_area_id"
+  add_index "dealer_details", ["latitude"], :name => "index_dealer_details_on_latitude"
+  add_index "dealer_details", ["longitude"], :name => "index_dealer_details_on_longitude"
+
   create_table "friend", :force => true do |t|
     t.integer "user_id"
-    t.integer "friend_user_id"
-    t.integer "created_at",     :limit => 8
+    t.integer "friend_id"
+    t.integer "created_at", :limit => 8
+    t.integer "updated_at", :limit => 8
   end
 
-  add_index "friend", ["friend_user_id"], :name => "index_friend_on_friend_user_id"
+  add_index "friend", ["friend_id"], :name => "index_friend_on_friend_id"
   add_index "friend", ["user_id"], :name => "index_friend_on_user_id"
 
   create_table "friendships", :force => true do |t|
@@ -210,12 +218,13 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "mendings", :force => true do |t|
     t.integer  "dealer_id"
+    t.integer  "dealer_detail_id"
     t.text     "discount"
     t.string   "brand_ids"
     t.text     "description"
-    t.integer  "orders_count", :default => 0
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.integer  "orders_count",     :default => 0
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   add_index "mendings", ["orders_count"], :name => "index_mendings_on_orders_count"

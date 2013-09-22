@@ -1,15 +1,15 @@
 class Accounts::DealerDetail < ActiveRecord::Base
-  # include Share::Areable
+  include Share::Areable
   
   extend Share::ImageAttachments
   define_image_method
   alias_attribute :authentication_image, :image
   
-  attr_accessible :dealer_type_id, :business_scope_ids, :template_ids, 
+  attr_accessible :area_id, :dealer_type_id, :business_scope_ids, :template_ids, 
     :company, :address, :phone, :open_during, :accepted, :authentication_image
-  attr_accessible :dealer_type, :business_scopes, :templates 
+  attr_accessible :area, :dealer_type, :business_scopes, :templates 
 
-  validates_presence_of :dealer_type_id, :business_scope_ids,
+  validates_presence_of :area_id, :dealer_type_id, :business_scope_ids,
     :company, :address, :phone, :open_during, :authentication_image
 
   validates_each :address do |record, attr, value|

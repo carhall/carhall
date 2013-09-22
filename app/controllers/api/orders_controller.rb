@@ -15,6 +15,13 @@ class Api::OrdersController < Api::ApplicationController
     render_show @parent.orders.find(params[:id])
   end
 
+  # GET /api/resources/1/orders/1/detail
+  # GET /api/resources/1/orders/1/detail.json
+  def detail
+    render_data @parent.orders.find(params[:id]).detail_hash
+  end
+
+
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
   def create

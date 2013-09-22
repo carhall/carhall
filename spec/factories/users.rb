@@ -35,6 +35,7 @@ FactoryGirl.define do
     description { Faker::Lorem.sentence }
     detail do
       {
+        area: Share::Areable::Areas.sample,
         company: Faker::Lorem.sentence,
         address: Address.sample,
         phone: Faker::PhoneNumber.phone_number,

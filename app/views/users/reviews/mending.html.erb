@@ -31,8 +31,8 @@
               <% end %>
               <td><%= type %></td>
               <td><%= @grouped_orders[brand_id][type_id].count %></td>
-              <td><%= stars @grouped_reviews[brand_id][type_id] %></td>
-              <td><%= stars trend @grouped_reviews[brand_id][type_id] %></td>
+              <td><%= mean_stars @grouped_reviews[brand_id][type_id] %></td>
+              <td><%= mean_stars recent @grouped_reviews[brand_id][type_id] %></td>
             </tr>
           <% end %>
         <% end %>

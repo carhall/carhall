@@ -332,7 +332,7 @@ API
 ----------
 Method | URI                               | 说明
 -------|-----------------------------------|------------------------------------
-GET    | /api/tips/mendings                | 查询所有保养专修信息  
+GET    | /api/tips/mendings                | 查询所有保养专修信息（默认排序）    
 GET    | /api/tips/mendings/:id            | 查询指定保养专修信息  
 
 
@@ -355,7 +355,11 @@ API
 ----------
 Method | URI                               | 说明
 -------|-----------------------------------|------------------------------------
-GET    | /api/tips/cleanings               | 查询所有洗车美容信息  
+GET    | /api/tips/cleanings               | 查询所有洗车美容信息（默认排序）   
+GET    | /api/tips/cleanings/nearby        | 查询所有洗车美容信息（离我最近）  
+GET    | /api/tips/cleanings/cheapie       | 查询所有洗车美容信息（价格最低）  
+GET    | /api/tips/cleanings/favorite      | 查询所有洗车美容信息（评分最高）
+GET    | /api/tips/cleanings/hot           | 查询所有洗车美容信息（购买最多）
 GET    | /api/tips/cleanings/:id           | 查询指定洗车美容信息  
 
 
@@ -445,21 +449,25 @@ Method | URI                                                               | 说
 -------|-------------------------------------------------------------------|------------------------
 GET    | /api/tips/mendings/:mending_id/orders                             | 查询指定保养专修的所有订单  
 GET    | /api/tips/mendings/:mending_id/orders/:id                         | 查询指定保养专修的指定订单  
+GET    | /api/tips/mendings/:mending_id/orders/:id/detail                  | 查询指定保养专修的指定订单详情  
 POST   | /api/tips/mendings/:mending_id/orders                             | 新建指定保养专修订单  
 PUT    | /api/tips/mendings/:mending_id/orders/:id/finish                  | 标记指定保养专修已完成  
 DELETE | /api/tips/mendings/:mending_id/orders/:id/cancel                  | 标记指定保养专修已取消  
 GET    | /api/tips/cleanings/:cleaning_id/orders                           | 查询指定洗车美容的所有订单  
 GET    | /api/tips/cleanings/:cleaning_id/orders/:id                       | 查询指定洗车美容的指定订单  
+GET    | /api/tips/cleanings/:cleaning_id/orders/:id/detail                | 查询指定洗车美容的指定订单详情  
 POST   | /api/tips/cleanings/:cleaning_id/orders                           | 新建指定洗车美容订单  
 PUT    | /api/tips/cleanings/:cleaning_id/orders/:id/use/:count            | 标记指定洗车美容已使用count次  
 DELETE | /api/tips/cleanings/:cleaning_id/orders/:id/cancel                | 标记指定洗车美容已取消  
 GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders             | 查询指定团购的所有订单  
 GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id         | 查询指定团购的指定订单  
+GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/detail  | 查询指定团购的指定订单详情  
 POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders             | 新建指定团购订单  
 PUT    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/finish  | 标记指定团购已完成  
 DELETE | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/cancel  | 标记指定团购已取消  
 GET    | /api/dealers/:dealer_id/orders                                    | 查询指定商家的所有订单  
 GET    | /api/dealers/:dealer_id/orders/:id                                | 查询指定商家的指定订单  
+GET    | /api/dealers/:dealer_id/orders/:id/detail                         | 查询指定商家的指定订单详情  
 
 
 Review 订单评价

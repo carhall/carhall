@@ -8,6 +8,7 @@
       <h3>业务信息 <small></small></h3>
     </div>
 
+    <% @dealer.reviews.load_target %>
     <table class="table">
       <thead>
         <tr>
@@ -17,20 +18,20 @@
       <tbody>
         <tr>
           <th>上月完成订单</th>
-          <td><%= trend(@dealer.orders).count %> 笔</td>
+          <td><%= @dealer.recent_orders_count %> 笔</td>
         </tr>
         <tr>
           <th>总成交额</th>
-          <td><%= total_cost trend @dealer.orders %> 元</td>
+          <td><%= @dealer.recent_total_cost %> 元</td>
         </tr>
         <tr>
           <th>交易用户</th>
-          <td><%= users_count(trend @dealer.orders) %> 个</td>
+          <td><%= @dealer.recent_ordered_users_count %> 个</td>
         </tr>
         <tr>
           <th>本月综合评分</th>
           <td>
-            <%= print_stars @dealer.reviews %>
+            <%= print_stars @dealer.recent_stars %>
           </td>
         </tr>
         <tr>
@@ -41,12 +42,12 @@
         </tr>
         <tr>
           <th>交易达成率</th>
-          <td><%= goal_attainment @dealer.orders %> %</td>
+          <td><%= @dealer.goal_attainment %> %</td>
         </tr>
         <tr>
           <th>店铺总评分</th>
           <td>
-            <%= print_stars @dealer.reviews %>
+            <%= print_stars @dealer.stars %>
           </td>
         </tr>
         <tr>

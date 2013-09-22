@@ -2,6 +2,7 @@ class CreateCleanings < ActiveRecord::Migration
   def change
     create_table :cleanings do |t|
       t.references :dealer
+      t.references :dealer_detail
       t.string  :title
       t.integer :cleaning_type_id
       t.float   :price

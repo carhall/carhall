@@ -2,6 +2,7 @@ class CreateActivities < ActiveRecord::Migration
   def change
     create_table :activities do |t|
       t.references :dealer
+      t.references :dealer_detail
       t.string   :title
       t.datetime :expire_at
       t.text     :description

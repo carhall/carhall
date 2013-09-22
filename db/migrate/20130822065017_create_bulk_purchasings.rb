@@ -2,6 +2,7 @@ class CreateBulkPurchasings < ActiveRecord::Migration
   def change
     create_table :bulk_purchasings do |t|
       t.references :dealer
+      t.references :dealer_detail
       t.string   :title
       t.integer  :bulk_purchasing_type_id
       t.datetime :expire_at

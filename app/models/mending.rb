@@ -1,9 +1,15 @@
 class Mending < ActiveRecord::Base
   belongs_to :dealer
   has_many :mending_orders, foreign_key: :source_id
+  has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 
+    class_name: MendingOrder, foreign_key: :source_id
+  has_many :last_order, order: 'orders.id DESC', limit: 1,
+    class_name: MendingOrder, foreign_key: :source_id
   alias_attribute :orders, :mending_orders
 
   has_many :reviews, through: :mending_orders
+  has_many :recent_reviews, source: :review, through: :recent_orders
+  has_many :last_review, source: :review, through: :last_order
 
   serialize :discount, Hash
 
@@ -14,6 +20,7 @@ class Mending < ActiveRecord::Base
   define_ids2keys_methods :brands
 
   include Share::Localizable
+  include Share::Statisticable
 
   attr_accessible :dealer
   attr_accessible :discount, :brand_ids

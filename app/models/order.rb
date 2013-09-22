@@ -37,9 +37,13 @@ class Order < ActiveRecord::Base
     options = { 
       only: [:id, :title],
       methods: [:order_type],
-      include: [:detail],
+      # include: [:detail],
     }.update(options)
     super(options)
+  end
+
+  def detail_hash(options={})
+    serializable_hash options.merge(include: :detail)
   end
 
 end
