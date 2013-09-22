@@ -14,11 +14,13 @@ class Accounts::DealerDetail < ActiveRecord::Base
     :company, :address, :phone, :open_during, :authentication_image
 
   validates_each :address do |record, attr, value|
-    bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value}"
-    unless record.latitude and record.longitude
+    if record.address_changed?
+      bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value}"
       begin
         result = JSON.parse(open(URI::encode(bmap_geocoding_url)).read)
         if result['status'] == 0 and result['result'] and result['result'].any?
+          logger.info("  Requested BMap API #{bmap_geocoding_url}")
+          logger.info("  Result: #{result['result']}")
           record.latitude = result['result']['location']['lat']
           record.longitude = result['result']['location']['lng']
         else
