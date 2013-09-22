@@ -20,3 +20,9 @@ module Paperclip
     end
   end
 end
+
+Accounts::DealerDetail.class_eval do
+  def address_changed?
+    false
+  end
+end
