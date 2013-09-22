@@ -16,7 +16,7 @@ module Share
       elsif recent_reviews.loaded?
         recent_reviews.last
       else
-        last_review.last
+        reviews.last
       end
       review.stars if review
     end
@@ -56,7 +56,7 @@ module Share
       elsif recent_orders.loaded?
         recent_orders.last
       else
-        last_order.last
+        orders.last
       end
       order.created_at if order
     end

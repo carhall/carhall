@@ -3,13 +3,10 @@ class Mending < ActiveRecord::Base
   has_many :mending_orders, foreign_key: :source_id
   has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 
     class_name: MendingOrder, foreign_key: :source_id
-  has_many :last_order, order: 'orders.id DESC', limit: 1,
-    class_name: MendingOrder, foreign_key: :source_id
   alias_attribute :orders, :mending_orders
 
   has_many :reviews, through: :mending_orders
   has_many :recent_reviews, source: :review, through: :recent_orders
-  has_many :last_review, source: :review, through: :last_order
 
   serialize :discount, Hash
 

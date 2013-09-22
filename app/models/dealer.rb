@@ -15,7 +15,6 @@ class Dealer < Account
 
   has_many :orders
   has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], class_name: Order
-  has_many :last_order, order: 'orders.id DESC', limit: 1, class_name: Order
 
   has_many :mending_reviews, source: :reviews, through: :mending
   has_many :cleaning_reviews, source: :reviews, through: :cleanings
@@ -23,7 +22,6 @@ class Dealer < Account
 
   has_many :reviews, through: :orders
   has_many :recent_reviews, source: :review, through: :recent_orders
-  has_many :last_review, source: :review, through: :last_order
   
   validates_presence_of :type
 

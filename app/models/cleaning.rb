@@ -3,13 +3,10 @@ class Cleaning < ActiveRecord::Base
   has_many :cleaning_orders, foreign_key: :source_id
   has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 
     class_name: CleaningOrder, foreign_key: :source_id
-  has_many :last_order, order: 'orders.id DESC', limit: 1,
-    class_name: CleaningOrder, foreign_key: :source_id
   alias_attribute :orders, :cleaning_orders
 
   has_many :reviews, through: :cleaning_orders
   has_many :recent_reviews, source: :review, through: :recent_orders
-  has_many :last_review, source: :review, through: :last_order
 
   extend Share::ImageAttachments
   define_image_method
