@@ -17,7 +17,7 @@ GET、PUT和DELETE都可以使用POST模拟，需要额外添加_method=get/put/
 >     _method       put
 > 
 
-参数放在URL或放在表单里是等价的， **但_method是例外，必须放在POST表单中！**  
+参数放在URL或放在表单里是等价的，**但_method是例外，必须放在POST表单中！**  
 
 返回的结果
 ----------
@@ -409,7 +409,7 @@ GET    | /api/tips/cleanings/:id           | 查询指定洗车美容信息
 GET    | /api/tips/cleanings/:id/detail    | 查询指定洗车美容详细信息  
 
 GET查询时，可以在URI中使用一个附加字段filter[cleaning_type_id]作为条件，来查询指定类别的洗车美容信息  
-** 注意：会员洗车即filter[cleaning_type_id]=0 **
+**注意：会员洗车即filter[cleaning_type_id]=0**
 查询相关参数，参见 Mending 保养专修  
 
 
