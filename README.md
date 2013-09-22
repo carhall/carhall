@@ -324,6 +324,7 @@ GET查询时，可以在URI中使用两个附加字段作为条件，filter[area
 
 修改车友会信息时，表单附加字段包括data[announcement]和data[avatar]，其他字段只读
 
+
 Mending 保养专修
 ==========
 字段
@@ -349,6 +350,18 @@ GET    | /api/tips/mendings/favorite       | 查询所有保养专修信息（�
 GET    | /api/tips/mendings/hot            | 查询所有保养专修信息（购买最多）
 GET    | /api/tips/mendings/:id            | 查询指定保养专修信息  
 GET    | /api/tips/mendings/:id/detail     | 查询指定保养专修详细信息  
+
+使用nearby，离我最近时，需要附加参数lat（经度）和lng（纬度）
+> 例如：
+> 
+>    GET /api/tips/cleanings/nearby?lat=40.0&lng=116.6
+> 
+
+GET查询时，可以在URI中使用一个附加字段filter[brand_id]作为条件，来查询指定车型的保养专修信息  
+> 例如，查询奥迪维修信息：
+> 
+>    GET /api/tips/cleanings?filter[brand_id]=2
+> 
 
 
 Cleaning 洗车美容
@@ -380,18 +393,10 @@ GET    | /api/tips/cleanings/hot           | 查询所有洗车美容信息（�
 GET    | /api/tips/cleanings/:id           | 查询指定洗车美容信息  
 GET    | /api/tips/cleanings/:id/detail    | 查询指定洗车美容详细信息  
 
-使用nearby，离我最近时，需要附加参数lat（经度）和lng（纬度）
-> 例如：
-> 
->    GET /api/tips/cleanings/nearby?lat=40.0&lng=116.6
-> 
-
 GET查询时，可以在URI中使用一个附加字段filter[cleaning_type_id]作为条件，来查询指定类别的洗车美容信息  
 ** 注意：会员洗车即filter[cleaning_type_id]=0 **
-> 例如，查询会员洗车服务：
-> 
->    GET /api/tips/cleanings?filter[cleaning_type_id]=0
-> 
+查询相关参数，参见 Mending 保养专修  
+
 
 Activity 活动
 ==========
@@ -408,8 +413,15 @@ API
 ----------
 Method | URI                               | 说明
 -------|-----------------------------------|------------------------------------
-GET    | /api/tips/activities              | 查询所有活动信息  
+GET    | /api/tips/activities              | 查询所有活动信息（默认排序）   
+GET    | /api/tips/activities/nearby       | 查询所有活动信息（离我最近）  
+GET    | /api/tips/activities/cheapie      | 查询所有活动信息（价格最低）  
+GET    | /api/tips/activities/favorite     | 查询所有活动信息（评分最高）
+GET    | /api/tips/activities/hot          | 查询所有活动信息（购买最多）
 GET    | /api/tips/activities/:id          | 查询指定活动信息  
+GET    | /api/tips/activities/:id/detail   | 查询指定活动详细信息  
+
+查询相关参数，参见 Mending 保养专修  
 
 
 BulkPurchasing 团购
@@ -441,6 +453,9 @@ GET    | /api/tips/bulk_purchasings/favorite   | 查询所有团购信息（评�
 GET    | /api/tips/bulk_purchasings/hot        | 查询所有团购信息（购买最多）
 GET    | /api/tips/bulk_purchasings/:id        | 查询指定团购信息  
 GET    | /api/tips/bulk_purchasings/:id/detail | 查询指定团购详细信息  
+
+GET查询时，可以在URI中使用一个附加字段filter[bulk_purchasing_type_id]作为条件，来查询指定类别的洗车美容信息  
+查询相关参数，参见 Mending 保养专修  
 
 
 Order 订单

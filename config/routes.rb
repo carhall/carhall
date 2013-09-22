@@ -148,6 +148,13 @@ Autozone::Application.routes.draw do
 
     namespace :tips do
       resources :mendings, only: [:index, :show] do
+        get :nearby, on: :collection
+        get :cheapie, on: :collection
+        get :favorite, on: :collection
+        get :hot, on: :collection
+  
+        get :detail, on: :member
+
         resources :orders, only: [:index, :show, :create] do
           put :finish, on: :member
           post :review, on: :member
@@ -175,9 +182,24 @@ Autozone::Application.routes.draw do
         resources :reviews, only: [:index, :show]
       end
       
-      resources :activities, only: [:index, :show]
+      resources :activities, only: [:index, :show] do
+        get :nearby, on: :collection
+        get :cheapie, on: :collection
+        get :favorite, on: :collection
+        get :hot, on: :collection
+  
+        get :detail, on: :member        
+        
+      end
       
       resources :bulk_purchasings, only: [:index, :show] do
+        get :nearby, on: :collection
+        get :cheapie, on: :collection
+        get :favorite, on: :collection
+        get :hot, on: :collection
+  
+        get :detail, on: :member
+
         resources :orders, only: [:index, :show, :create] do
           put :finish, on: :member
           post :review, on: :member
