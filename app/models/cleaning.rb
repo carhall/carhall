@@ -1,15 +1,10 @@
 class Cleaning < ActiveRecord::Base
-  belongs_to :dealer
-  has_many :orders, class_name: CleaningOrder, foreign_key: :source_id
-  has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 
-    class_name: CleaningOrder, foreign_key: :source_id
+  include Share::Servicable
+  set_order_class CleaningOrder
 
-  has_many :reviews, through: :orders
-  has_many :recent_reviews, through: :recent_orders, class_name: Review
-  
   extend Share::ImageAttachments
   define_image_method
-
+  
   include Share::Localizable
   include Share::Statisticable
   

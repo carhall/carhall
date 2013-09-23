@@ -1,7 +1,6 @@
 module Share
   module Areable 
     extend ActiveSupport::Concern
-    extend Share::Id2Key
 
     Areas = [
       "北京市", "天津市", "上海市", "重庆市", "香港特别行政区", "澳门特别行政区", 
@@ -12,10 +11,14 @@ module Share
       "宁夏回族自治区", "新疆维吾尔自治区", "台湾省",
     ]
 
+    included do
+      extend Share::Id2Key
+      define_id2key_methods :area
+    end
+    
     def self.get_id area
       if area.kind_of? Integer then area else Areas.index area end
     end
 
-    define_id2key_methods :area
   end
 end

@@ -4,11 +4,14 @@ class Accounts::DealerDetail < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
   alias_attribute :authentication_image, :image
+
+  belongs_to :location, class_name: Share::Location
+  belongs_to :rating_cache, class_name: Share::RatingCache
   
   attr_accessible :area_id, :dealer_type_id, :business_scope_ids, :template_ids, 
     :company, :address, :phone, :open_during, :accepted, :authentication_image
   attr_accessible :area, :dealer_type, :business_scopes, :templates 
-  attr_accessible :latitude, :longitude
+  attr_accessible :location
 
   validates_presence_of :area_id, :dealer_type_id, :business_scope_ids,
     :company, :address, :phone, :open_during, :authentication_image
@@ -21,8 +24,10 @@ class Accounts::DealerDetail < ActiveRecord::Base
         if result['status'] == 0 and result['result'] and result['result'].any?
           logger.info("  Requested BMap API #{bmap_geocoding_url}")
           logger.info("  Result: #{result['result']}")
-          record.latitude = result['result']['location']['lat']
-          record.longitude = result['result']['location']['lng']
+          record.location = Share::Location.new(
+            latitude: result['result']['location']['lat'],
+            longitude: result['result']['location']['lng']
+          )
         else
           record.errors.add(attr, :invalid)
         end

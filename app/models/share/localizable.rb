@@ -3,13 +3,16 @@ module Share
     extend ActiveSupport::Concern
       
     included do
-      belongs_to :dealer_detail, class_name: Accounts::DealerDetail
+      include Share::Areable
+      belongs_to :location, class_name: Share::Location
+
       before_save do
-        self.dealer_detail_id = dealer.detail_id
+        self.area_id = dealer.detail.area_id
+        self.location_id = dealer.detail.location_id
       end
 
-      default_scope { order('id DESC') }
       attr_accessor :distance
+
     end
       
     def detail_hash
@@ -31,12 +34,6 @@ module Share
           distance[r.dealer_detail] ||= Math.sqrt((r.dealer_detail.latitude-lat)**2 + (r.dealer_detail.longitude-lng)**2)
           r.distance = distance[r.dealer_detail]
         end
-      end
-
-      def with_area area
-        area_id = Share::Areable.get_id area
-        detail_ids = Accounts::DealerDetail.where(area_id: area_id).pluck(:id)
-        where(dealer_detail_id: detail_ids)
       end
 
       def cheapie

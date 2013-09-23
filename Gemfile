@@ -3,7 +3,7 @@ source 'http://ruby.taobao.org'
 gem 'rails', '3.2.14'
 
 # Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+# gem 'rails', github: 'rails/rails'
 
 gem 'mysql2'
 

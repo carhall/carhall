@@ -21,12 +21,18 @@ module Share
         def #{attr_name}= name
           self.#{attr_id_name} = #{array_name}.index name
         end
+
+        def self.with_#{attr_name} name
+          id = if name.kind_of? Integer then name else #{array_name}.index name end
+          where(#{attr_id_name}: id)
+        end
       EOM
     end
 
     def define_ids2keys_methods attrs_name
       attrs_name = attrs_name.to_s
-      attr_ids_name = attrs_name.singularize+'_ids'
+      attr_name = attrs_name.singularize
+      attr_ids_name = attr_name+'_ids'
       array_name = attrs_name.camelcase
       class_eval <<-EOM
         serialize :#{attr_ids_name}, Array
@@ -47,6 +53,12 @@ module Share
         def #{attr_ids_name}= ids
           super Share::Id2Key.clean_up_ids ids
         end
+
+        def self.with_#{attr_name} name
+          id = if name.kind_of? Integer then name else #{array_name}.index name end
+          where('#{attr_ids_name} LIKE \\'%- ?\\n%\\'', id)
+        end
+
       EOM
     end
   end

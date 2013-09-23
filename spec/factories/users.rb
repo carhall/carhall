@@ -43,9 +43,13 @@ FactoryGirl.define do
         dealer_type: Accounts::DealerDetail::DealerTypes.sample,
         business_scopes: Accounts::DealerDetail::BusinessScopes.sample(3),
         authentication_image: File.open("public/images/thumb/missing.png"),
-        latitude: 40,
-        longitude: 116.3,
+        location: create(:location),
       }
     end
+  end
+
+  factory :location, class: Share::Location do
+    latitude { 40 }
+    longitude { 116.3 }
   end
 end

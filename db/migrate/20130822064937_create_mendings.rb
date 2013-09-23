@@ -9,8 +9,13 @@ class CreateMendings < ActiveRecord::Migration
       t.text    :discount
       t.string  :brand_ids, limit: 1024
       t.text    :description
-      t.integer :orders_count, default: 0
       
+      t.float   :stars_average
+      t.float   :total_sale
+
+      t.integer :orders_count, default: 0
+      t.integer :reviews_count, default: 0
+
       t.timestamps
     end
 
@@ -20,7 +25,11 @@ class CreateMendings < ActiveRecord::Migration
       t.index :rating_cache_id
       t.index :area_id
 
+      t.index :stars_average
+      t.index :total_sale
+
       t.index :orders_count
+      t.index :reviews_count
 
     end
 

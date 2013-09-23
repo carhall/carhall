@@ -6,8 +6,10 @@ class CreateOrders < ActiveRecord::Migration
 
       t.references :user
       t.references :dealer
+      t.references :dealer_detail
       t.references :detail
       t.references :source
+
       t.string  :title
       t.integer :state_id
       t.float   :cost

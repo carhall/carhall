@@ -1,7 +1,6 @@
 module Share
   module Brandable
     extend ActiveSupport::Concern
-    extend Share::Id2Key
 
     Brands = ["阿斯顿·马丁", "奥迪", "巴博斯", "宝骏", 
       "宝马", "保时捷", "北京汽车", "北汽威旺", "北汽制造", 
@@ -27,10 +26,14 @@ module Share
       "中兴", "众泰", "其它", 
     ]
 
+    included do
+      extend Share::Id2Key
+      define_id2key_methods :brand
+    end
+
     def self.get_id brand
       if brand.kind_of? Integer then brand else Brands.index brand end
     end
 
-    define_id2key_methods :brand
   end
 end

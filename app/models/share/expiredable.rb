@@ -10,5 +10,9 @@ module Share
       scope :in_progress, -> { where("expire_at > ?", Time.now) }
     end
 
+    def expire_at_before_type_cast
+      expire_at.strftime("%Y-%m-%d %H:%M") if expire_at
+    end
+
   end
 end

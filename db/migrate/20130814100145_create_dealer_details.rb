@@ -2,7 +2,6 @@ class CreateDealerDetails < ActiveRecord::Migration
   def change
     create_table :dealer_details do |t|
       t.references :location
-      t.references :rating_cache
       t.integer :area_id
 
       t.integer :dealer_type_id
@@ -18,15 +17,25 @@ class CreateDealerDetails < ActiveRecord::Migration
       t.string  :template_ids
       t.integer :balance_used, null: false, default: 0
 
+      t.float   :stars_average
+      t.float   :total_sale
+
+      t.integer :orders_count, default: 0
+      t.integer :reviews_count, default: 0
     end
 
     change_table :dealer_details do |t|
       t.index :location_id
-      t.index :rating_cache_id
       t.index :area_id
 
       t.index :dealer_type_id
       t.index :rqrcode_token, unique: true
+
+      t.index :stars_average
+      t.index :total_sale
+
+      t.index :orders_count
+      t.index :reviews_count
 
     end
 

@@ -1,8 +1,8 @@
 class Post < ActiveRecord::Base
   include Share::Userable
-  include Share::Commentable
-
+  
   belongs_to :club
+  has_many :comments
   
   extend Share::ImageAttachments
   define_image_method

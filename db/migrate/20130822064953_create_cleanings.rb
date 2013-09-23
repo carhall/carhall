@@ -11,9 +11,14 @@ class CreateCleanings < ActiveRecord::Migration
       t.float   :price
       t.float   :vip_price
       t.text    :description
-      t.integer :orders_count, default: 0
       t.attachment :image
       
+      t.float   :stars_average
+      t.float   :total_sale
+
+      t.integer :orders_count, default: 0
+      t.integer :reviews_count, default: 0
+
       t.timestamps
     end
 
@@ -23,11 +28,16 @@ class CreateCleanings < ActiveRecord::Migration
       t.index :rating_cache_id
       t.index :area_id
 
-      t.index :orders_count
       t.index :cleaning_type_id
 
       t.index :price
       t.index :vip_price
+      
+      t.index :stars_average
+      t.index :total_sale
+
+      t.index :orders_count
+      t.index :reviews_count
       
     end
 

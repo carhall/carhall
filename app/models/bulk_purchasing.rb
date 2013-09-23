@@ -1,11 +1,6 @@
 class BulkPurchasing < ActiveRecord::Base
-  belongs_to :dealer
-  has_many :orders, class_name: BulkPurchasingOrder, foreign_key: :source_id
-  has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 
-    class_name: BulkPurchasingOrder, foreign_key: :source_id
-
-  has_many :reviews, through: :orders
-  has_many :recent_reviews, through: :recent_orders, class_name: Review
+  include Share::Servicable
+  set_order_class BulkPurchasingOrder
   
   extend Share::ImageAttachments
   define_image_method
@@ -17,10 +12,6 @@ class BulkPurchasing < ActiveRecord::Base
 
   validates_presence_of :dealer
   validates_presence_of :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price
-
-  def expire_at_before_type_cast
-    expire_at.strftime("%Y-%m-%d %H:%M") if expire_at
-  end
 
   extend Share::Id2Key
   BulkPurchasingTypes = %w(洗车美容 保养专修 汽车装饰 其他)
