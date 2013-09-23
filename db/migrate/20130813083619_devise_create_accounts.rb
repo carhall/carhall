@@ -20,7 +20,7 @@ class DeviseCreateAccounts < ActiveRecord::Migration
       t.string   :last_sign_in_ip
 
       ## Encryptable
-      # t.string :password_salt
+      t.string :password_salt
 
       ## Confirmable
       t.string   :confirmation_token
@@ -43,10 +43,12 @@ class DeviseCreateAccounts < ActiveRecord::Migration
     # Create a default user
     # BaseUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
-    # add_index :accounts, :email,                unique: true
-    add_index :accounts, :reset_password_token, unique: true
-    add_index :accounts, :confirmation_token,   unique: true
-    add_index :accounts, :unlock_token,         unique: true
-    add_index :accounts, :authentication_token, unique: true
+    change_table :accounts do |t|
+      # t.index :email,                unique: true
+      t.index :reset_password_token, unique: true
+      t.index :confirmation_token,   unique: true
+      t.index :unlock_token,         unique: true
+      t.index :authentication_token, unique: true
+    end
   end
 end

@@ -7,8 +7,10 @@ class CreateBlocks < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :blocks, :user_id
-    add_index :blocks, :blacklist_id
+    change_table :blocks do |t|
+      t.index :user_id
+      t.index :blacklist_id
+    end
 
   end
 end

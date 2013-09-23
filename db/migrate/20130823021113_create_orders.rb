@@ -15,13 +15,17 @@ class CreateOrders < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :orders, :user_id
-    add_index :orders, :dealer_id
-    add_index :orders, :detail_id
-    add_index :orders, :source_id
-    add_index :orders, :state_id
+    change_table :orders do |t|
+      t.index [:type, :id]
+      
+      t.index :user_id
+      t.index :dealer_id
+      t.index :detail_id
+      t.index :source_id
+      
+      t.index :state_id
 
-    add_index :orders, [:type, :id]
+    end
 
   end
 end

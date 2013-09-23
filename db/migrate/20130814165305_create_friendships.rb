@@ -7,8 +7,10 @@ class CreateFriendships < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :friendships, :user_id
-    add_index :friendships, :friend_id
+    change_table :friendships do |t|
+      t.index :user_id
+      t.index :friend_id
+    end
 
   end
 end

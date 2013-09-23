@@ -7,8 +7,10 @@ class CreatePostBlocks < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :post_blocks, :user_id
-    add_index :post_blocks, :blacklist_id
+    change_table :post_blocks do |t|
+      t.index :user_id
+      t.index :blacklist_id
+    end
 
   end
 end

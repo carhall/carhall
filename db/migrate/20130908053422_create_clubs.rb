@@ -12,7 +12,9 @@ class CreateClubs < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :clubs, [:area_id, :brand_id]
+    change_table :clubs do |t|
+      t.index [:area_id, :brand_id]
+    end
 
   end
 end

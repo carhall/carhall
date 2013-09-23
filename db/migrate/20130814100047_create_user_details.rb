@@ -1,7 +1,6 @@
 class CreateUserDetails < ActiveRecord::Migration
   def change
     create_table :user_details do |t|
-      # t.references :source
       t.integer :sex_id
       t.integer :area_id
       t.integer :brand_id
@@ -12,7 +11,9 @@ class CreateUserDetails < ActiveRecord::Migration
 
     end
 
-    add_index :user_details, [:area_id, :brand_id]
-    # add_index :user_details, :source_id
+    change_table :user_details do |t|
+      t.index [:area_id, :brand_id]
+    end
+    
   end
 end

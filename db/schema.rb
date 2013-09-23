@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130917055658) do
+ActiveRecord::Schema.define(:version => 20130923124233) do
 
   create_table "accounts", :force => true do |t|
     t.string   "encrypted_password",     :default => "", :null => false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "password_salt"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "type"
+    t.integer  "detail_id"
     t.string   "username",               :default => "", :null => false
     t.string   "mobile",                 :default => "", :null => false
     t.text     "description"
@@ -42,13 +44,13 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.datetime "accepted_at"
-    t.integer  "detail_id"
   end
 
+  add_index "accounts", ["accepted_at"], :name => "index_accounts_on_accepted_at"
   add_index "accounts", ["authentication_token"], :name => "index_accounts_on_authentication_token", :unique => true
   add_index "accounts", ["confirmation_token"], :name => "index_accounts_on_confirmation_token", :unique => true
   add_index "accounts", ["detail_id"], :name => "index_accounts_on_detail_id"
-  add_index "accounts", ["mobile"], :name => "index_accounts_on_mobile"
+  add_index "accounts", ["mobile"], :name => "index_accounts_on_mobile", :unique => true
   add_index "accounts", ["reset_password_token"], :name => "index_accounts_on_reset_password_token", :unique => true
   add_index "accounts", ["type", "id"], :name => "index_accounts_on_type_and_id"
   add_index "accounts", ["unlock_token"], :name => "index_accounts_on_unlock_token", :unique => true
@@ -56,7 +58,8 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "activities", :force => true do |t|
     t.integer  "dealer_id"
-    t.integer  "dealer_detail_id"
+    t.integer  "location_id"
+    t.integer  "area_id"
     t.string   "title"
     t.datetime "expire_at"
     t.text     "description"
@@ -67,6 +70,10 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  add_index "activities", ["area_id"], :name => "index_activities_on_area_id"
+  add_index "activities", ["dealer_id"], :name => "index_activities_on_dealer_id"
+  add_index "activities", ["location_id"], :name => "index_activities_on_location_id"
 
   create_table "apply", :force => true do |t|
     t.integer "from_user_id"
@@ -94,7 +101,9 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "bulk_purchasings", :force => true do |t|
     t.integer  "dealer_id"
-    t.integer  "dealer_detail_id"
+    t.integer  "location_id"
+    t.integer  "rating_cache_id"
+    t.integer  "area_id"
     t.string   "title"
     t.integer  "bulk_purchasing_type_id"
     t.datetime "expire_at"
@@ -110,8 +119,14 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.datetime "updated_at",                             :null => false
   end
 
+  add_index "bulk_purchasings", ["area_id"], :name => "index_bulk_purchasings_on_area_id"
   add_index "bulk_purchasings", ["bulk_purchasing_type_id"], :name => "index_bulk_purchasings_on_bulk_purchasing_type_id"
+  add_index "bulk_purchasings", ["dealer_id"], :name => "index_bulk_purchasings_on_dealer_id"
+  add_index "bulk_purchasings", ["location_id"], :name => "index_bulk_purchasings_on_location_id"
   add_index "bulk_purchasings", ["orders_count"], :name => "index_bulk_purchasings_on_orders_count"
+  add_index "bulk_purchasings", ["price"], :name => "index_bulk_purchasings_on_price"
+  add_index "bulk_purchasings", ["rating_cache_id"], :name => "index_bulk_purchasings_on_rating_cache_id"
+  add_index "bulk_purchasings", ["vip_price"], :name => "index_bulk_purchasings_on_vip_price"
 
   create_table "cleaning_order_details", :force => true do |t|
     t.integer "count",      :default => 0
@@ -120,7 +135,9 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
 
   create_table "cleanings", :force => true do |t|
     t.integer  "dealer_id"
-    t.integer  "dealer_detail_id"
+    t.integer  "location_id"
+    t.integer  "rating_cache_id"
+    t.integer  "area_id"
     t.string   "title"
     t.integer  "cleaning_type_id"
     t.float    "price"
@@ -135,8 +152,14 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.datetime "updated_at",                        :null => false
   end
 
+  add_index "cleanings", ["area_id"], :name => "index_cleanings_on_area_id"
   add_index "cleanings", ["cleaning_type_id"], :name => "index_cleanings_on_cleaning_type_id"
+  add_index "cleanings", ["dealer_id"], :name => "index_cleanings_on_dealer_id"
+  add_index "cleanings", ["location_id"], :name => "index_cleanings_on_location_id"
   add_index "cleanings", ["orders_count"], :name => "index_cleanings_on_orders_count"
+  add_index "cleanings", ["price"], :name => "index_cleanings_on_price"
+  add_index "cleanings", ["rating_cache_id"], :name => "index_cleanings_on_rating_cache_id"
+  add_index "cleanings", ["vip_price"], :name => "index_cleanings_on_vip_price"
 
   create_table "clubs", :force => true do |t|
     t.integer  "president_id"
@@ -166,6 +189,9 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "dealer_details", :force => true do |t|
+    t.integer  "location_id"
+    t.integer  "rating_cache_id"
+    t.integer  "area_id"
     t.integer  "dealer_type_id"
     t.string   "business_scope_ids"
     t.string   "company"
@@ -178,16 +204,15 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "area_id"
-    t.float    "latitude"
-    t.float    "longitude"
     t.string   "template_ids"
     t.integer  "balance_used",       :default => 0, :null => false
   end
 
   add_index "dealer_details", ["area_id"], :name => "index_dealer_details_on_area_id"
-  add_index "dealer_details", ["latitude"], :name => "index_dealer_details_on_latitude"
-  add_index "dealer_details", ["longitude"], :name => "index_dealer_details_on_longitude"
+  add_index "dealer_details", ["dealer_type_id"], :name => "index_dealer_details_on_dealer_type_id"
+  add_index "dealer_details", ["location_id"], :name => "index_dealer_details_on_location_id"
+  add_index "dealer_details", ["rating_cache_id"], :name => "index_dealer_details_on_rating_cache_id"
+  add_index "dealer_details", ["rqrcode_token"], :name => "index_dealer_details_on_rqrcode_token", :unique => true
 
   create_table "friend", :force => true do |t|
     t.integer "user_id"
@@ -209,6 +234,14 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
   add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
+  create_table "locations", :force => true do |t|
+    t.float  "latitude"
+    t.float  "longitude"
+    t.string "geohash"
+  end
+
+  add_index "locations", ["geohash"], :name => "index_locations_on_geohash"
+
   create_table "mending_order_details", :force => true do |t|
     t.integer  "brand_id"
     t.string   "series"
@@ -218,18 +251,27 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.text     "description"
   end
 
+  add_index "mending_order_details", ["brand_id"], :name => "index_mending_order_details_on_brand_id"
+  add_index "mending_order_details", ["mending_type_id"], :name => "index_mending_order_details_on_mending_type_id"
+
   create_table "mendings", :force => true do |t|
     t.integer  "dealer_id"
-    t.integer  "dealer_detail_id"
+    t.integer  "location_id"
+    t.integer  "rating_cache_id"
+    t.integer  "area_id"
     t.text     "discount"
-    t.string   "brand_ids"
+    t.string   "brand_ids",       :limit => 1024
     t.text     "description"
-    t.integer  "orders_count",     :default => 0
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.integer  "orders_count",                    :default => 0
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
   end
 
+  add_index "mendings", ["area_id"], :name => "index_mendings_on_area_id"
+  add_index "mendings", ["dealer_id"], :name => "index_mendings_on_dealer_id"
+  add_index "mendings", ["location_id"], :name => "index_mendings_on_location_id"
   add_index "mendings", ["orders_count"], :name => "index_mendings_on_orders_count"
+  add_index "mendings", ["rating_cache_id"], :name => "index_mendings_on_rating_cache_id"
 
   create_table "offline_message", :force => true do |t|
     t.integer "user_id"
@@ -288,13 +330,12 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.text     "content"
     t.integer  "view_count",         :default => 0
     t.integer  "comments_count",     :default => 0
-    t.float    "weight",             :default => 0.0
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   add_index "posts", ["club_id"], :name => "index_posts_on_club_id"
@@ -307,6 +348,16 @@ ActiveRecord::Schema.define(:version => 20130917055658) do
     t.string "phone"
     t.string "rqrcode_token"
   end
+
+  create_table "rating_caches", :force => true do |t|
+    t.float    "stars_average", :null => false
+    t.integer  "reviews_count", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "rating_caches", ["reviews_count"], :name => "index_rating_caches_on_reviews_count"
+  add_index "rating_caches", ["stars_average"], :name => "index_rating_caches_on_stars_average"
 
   create_table "reviews", :force => true do |t|
     t.integer  "order_id"

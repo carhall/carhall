@@ -1,7 +1,6 @@
 class CreateMendingOrderDetails < ActiveRecord::Migration
   def change
     create_table :mending_order_details do |t|
-      # t.references :source
       t.integer  :brand_id
       t.string   :series
       t.string   :plate_num
@@ -11,6 +10,10 @@ class CreateMendingOrderDetails < ActiveRecord::Migration
       
     end
     
-    # add_index :mending_order_details, :source_id
+    change_table :mending_order_details do |t|
+      t.index :brand_id
+      t.index :mending_type_id
+    end
+    
   end
 end

@@ -10,8 +10,10 @@ class CreateOpenDatabaseStructs < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :open_database_structs, [:source_type, :source_id]
-    add_index :open_database_structs, [:type, :id]
-
+    change_table :open_database_structs do |t|
+      t.index [:type, :id]
+      t.index [:source_type, :source_id]
+    end
+    
   end
 end

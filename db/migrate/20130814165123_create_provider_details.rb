@@ -1,7 +1,6 @@
 class CreateProviderDetails < ActiveRecord::Migration
   def change
     create_table :provider_details do |t|
-      # t.references :source
       t.string  :company
       t.string  :phone
       # t.integer :balance, null: false, default: 0
@@ -10,6 +9,5 @@ class CreateProviderDetails < ActiveRecord::Migration
 
     end
 
-    # add_index :provider_details, :source_id
   end
 end

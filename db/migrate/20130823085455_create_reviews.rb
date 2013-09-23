@@ -9,7 +9,9 @@ class CreateReviews < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :reviews, :order_id
-
+    change_table :reviews do |t|
+      t.index :order_id
+    end
+    
   end
 end
