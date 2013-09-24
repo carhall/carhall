@@ -1,13 +1,11 @@
 class Accounts::DealerDetail < ActiveRecord::Base
-  include Share::Areable
+  include Share::Localizable
+  include Share::RatingCachable
   
   extend Share::ImageAttachments
   define_image_method
   alias_attribute :authentication_image, :image
 
-  belongs_to :location, class_name: Share::Location
-  belongs_to :rating_cache, class_name: Share::RatingCache
-  
   attr_accessible :area_id, :dealer_type_id, :business_scope_ids, :template_ids, 
     :company, :address, :phone, :open_during, :accepted, :authentication_image
   attr_accessible :area, :dealer_type, :business_scopes, :templates 
@@ -58,7 +56,8 @@ class Accounts::DealerDetail < ActiveRecord::Base
   def serializable_hash(options={})
     options = { 
       only: [:dealer_type_id, :business_scope_ids, :company, :address, 
-        :phone, :open_during, :latitude, :longitude, :rqrcode_token],
+        :phone, :open_during, :latitude, :longitude, :rqrcode_token, 
+        :orders_count, :reviews_count],
       methods: [:dealer_type, :business_scopes],
     }.update(options)
     super(options)

@@ -5,47 +5,42 @@ module Share
     included do
       include Share::Areable
       belongs_to :location, class_name: Share::Location
-
-      before_save do
-        self.area_id = dealer.detail.area_id
-        self.location_id = dealer.detail.location_id
-      end
-
-      attr_accessor :distance
-
-    end
-      
-    def detail_hash
-      detail_hash = {}
-      detail_hash[:goal_attainment] = goal_attainment
-      detail_hash[:last_3_orders] = orders.includes(:user).last(3)
-      detail_hash[:last_3_reviews] = reviews.includes(order: :user).last(3)
-      serializable_hash(include: {dealer: {include: :detail}}).merge(detail: detail_hash)
     end
 
     module ClassMethods
-      def with_location lat, lng
-        lat_range = (lat.to_f-0.1)..(lat.to_f+0.1)
-        lng_range = (lng.to_f-0.1)..(lng.to_f+0.1)
+      def with_location lat, lng, set_location=false, locations={}
+        lat = lat.to_f
+        lng = lng.to_f
+
+        geo_hash = Geohash.encode(lat, lng, 5)
+        geo_bbox = Geohash.neighbors(geo_hash) << geo_hash
+        sql_where_query = geo_bbox.map{|g|"locations.geohash LIKE '#{g}%'"}.join(' or ')
         
-        distance = {}
-        detail_ids = Accounts::DealerDetail.where(latitude: lat_range, longitude: lng_range).pluck(:id)
-        includes(:dealer_detail).where(dealer_detail_id: detail_ids).sort do |r|
-          distance[r.dealer_detail] ||= Math.sqrt((r.dealer_detail.latitude-lat)**2 + (r.dealer_detail.longitude-lng)**2)
-          r.distance = distance[r.dealer_detail]
+        Share::Location.where(sql_where_query).each do |location|
+          location.set_distance lat, lng
+        end.sort do |location|
+          location.distance
+        end.each do |location|
+          locations[location.id] = location
         end
+
+        records = where(location_id: locations.keys)
+        records = records.order("FIELD(location_id, #{locations.keys.join(',')})") if locations.any?
+        
+        if set_location
+          records.includes_values.delete :location
+          set_location locations
+        end
+        
+        records
       end
 
-      def cheapie
-        order('vip_price ASC')
-      end
-
-      def favorite
-        scoped.sort{|s|s.stars}
-      end
-
-      def hot
-        order('orders_count DESC')
+      def set_location locations
+        records = scoped
+        records.each do |record|
+          record.location = locations[record.location_id]
+        end
+        records
       end
     end
   end

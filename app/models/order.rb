@@ -18,6 +18,46 @@ class Order < ActiveRecord::Base
     self.dealer_id = source.dealer_id
     self.title = set_title
     self.cost = set_cost
+
+    user.detail.increment(:orders_count)
+    dealer.detail.increment(:orders_count)
+    user.detail.increment(:total_spend, cost)
+    dealer.detail.increment(:total_sale, cost)
+    source.increment(:total_sale, cost)
+
+    if type == 'MendingOrder'
+      source.orders_counts[detail.brand_id] ||= {}
+      source.orders_counts[detail.brand_id][detail.mending_type_id] ||= 0
+      source.orders_counts[detail.brand_id][detail.mending_type_id] += 1
+      source.total_sales[detail.brand_id] ||= {}
+      source.total_sales[detail.brand_id][detail.mending_type_id] ||= 0
+      source.total_sales[detail.brand_id][detail.mending_type_id] += cost
+    end
+
+    user.detail.save(validate: false)
+    dealer.detail.save(validate: false)
+    source.save(validate: false)
+
+  end
+
+  before_destroy do
+    user.detail.decrement(:orders_count)
+    dealer.detail.decrement(:orders_count)
+    user.detail.decrement(:total_spend, cost)
+    dealer.detail.decrement(:total_sale, cost)
+    source.decrement(:total_sale, cost)
+
+    if type == 'MendingOrder'
+      source.orders_counts[detail.brand_id] ||= {}
+      source.orders_counts[detail.brand_id][detail.mending_type_id] -= 1
+      source.total_sales[detail.brand_id] ||= {}
+      source.total_sales[detail.brand_id][detail.mending_type_id] -= cost
+    end
+
+    user.detail.save(validate: false)
+    dealer.detail.save(validate: false)
+    source.save(validate: false)
+
   end
 
   def set_title

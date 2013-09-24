@@ -26,15 +26,18 @@ class Dealer < Account
   end
 
   def self.with_location lat, lng
-    detail_ids = Accounts::DealerDetail.where(latitude: (lat-0.1..lat+0.1), longitude: (lng-0.1..lng+0.1)).pluck(:id)
-    where(detail_id: detail_ids).sort do |resource|
-      dealer_detail.latitude**2 + dealer_detail.longitude**2
+    distances = {}
+    detail_ids = Accounts::DealerDetail.with_location(lat, lng, distances, false).pluck(:id)
+    records = where(detail_id: detail_ids)
+    records = records.order("FIELD(detail_id, #{detail_ids.join(',')})") if detail_ids.any?
+    records = records.each do |r|
+      
     end
+    records
   end
 
   def self.with_area area
-    area_id = Share::Areable.get_id area
-    detail_ids = Accounts::DealerDetail.where(area_id: area_id).pluck(:id)
+    detail_ids = Accounts::DealerDetail.with_area(area).pluck(:id)
     where(detail_id: detail_ids)
   end
 

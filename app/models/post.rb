@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   include Share::Userable
+  belongs_to :user
   
   belongs_to :club
   has_many :comments
@@ -15,6 +16,11 @@ class Post < ActiveRecord::Base
 
   before_create do
     self.club = user.club
+    user.detail.increment!(:posts_count)
+  end
+
+  before_destroy do
+    user.detail.decrement!(:posts_count)
   end
 
   def self.with_friends user

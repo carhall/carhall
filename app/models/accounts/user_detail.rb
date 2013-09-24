@@ -15,7 +15,7 @@ class Accounts::UserDetail < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:sex_id, :area_id, :brand_id, :series, :plate_num, :balance],
+      only: [:sex_id, :area_id, :brand_id, :series, :plate_num, :balance, :posts_count],
       methods: [:sex, :area, :brand],
       images: [:car_image],
     }.update(options)

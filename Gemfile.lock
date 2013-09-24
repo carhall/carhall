@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/RyanNaughton/geohash.git
+  revision: b00ce414ae88f122272df8f52d0fd3dc71139fc7
+  specs:
+    geohash (0.0.1.alpha)
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -197,6 +203,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
+  geohash!
   jasny_bootstrap_extension_rails
   jquery-datatables-rails
   jquery-migrate-rails

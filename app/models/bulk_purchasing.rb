@@ -21,8 +21,8 @@ class BulkPurchasing < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:id, :title, :expire_at, :bulk_purchasing_type_id, 
-        :price, :vip_price, :description, :orders_count],
+      only: [:id, :title, :expire_at, :bulk_purchasing_type_id, :price, :vip_price, 
+        :description, :orders_count, :reviews_count],
       methods: [:bulk_purchasing_type],
       images: [:image],
       include: [:dealer],

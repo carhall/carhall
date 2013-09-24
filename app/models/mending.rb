@@ -6,6 +6,12 @@ class Mending < ActiveRecord::Base
 
   validates_presence_of :dealer
 
+  serialize :total_sales, Hash
+
+  serialize :orders_counts, Hash
+  serialize :reviews_counts, Hash
+  serialize :stars_counts, Hash
+
   extend Share::Id2Key
   Brands = Share::Brandable::Brands
   define_ids2keys_methods :brands
@@ -19,7 +25,7 @@ class Mending < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:id, :brand_ids, :description, :orders_count],
+      only: [:id, :brand_ids, :description, :orders_count, :reviews_count],
       methods: [:brands, :discount],
       include: [:dealer],
     }.update(options)

@@ -19,7 +19,8 @@ class Cleaning < ActiveRecord::Base
 
   def serializable_hash(options={})
     options = { 
-      only: [:id, :title, :cleaning_type_id, :price, :vip_price, :description, :orders_count],
+      only: [:id, :title, :cleaning_type_id, :price, :vip_price, :description, 
+        :orders_count, :reviews_count],
       methods: [:cleaning_type, :stars],
       images: [:image],
       include: [:dealer],

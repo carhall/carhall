@@ -52,6 +52,8 @@ gem 'simple_form'
 gem 'rqrcode-rails3'
 gem 'mini_magick'
 
+gem 'geohash', github: 'RyanNaughton/geohash'
+
 group :development, :test do
   gem 'faker'
   gem 'factory_girl_rails'

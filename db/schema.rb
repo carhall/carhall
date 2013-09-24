@@ -102,7 +102,6 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
   create_table "bulk_purchasings", :force => true do |t|
     t.integer  "dealer_id"
     t.integer  "location_id"
-    t.integer  "rating_cache_id"
     t.integer  "area_id"
     t.string   "title"
     t.integer  "bulk_purchasing_type_id"
@@ -114,10 +113,10 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.float    "stars_average"
     t.float    "total_sale"
     t.integer  "orders_count",            :default => 0
     t.integer  "reviews_count",           :default => 0
+    t.integer  "stars_count",             :default => 0
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
@@ -128,9 +127,8 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
   add_index "bulk_purchasings", ["location_id"], :name => "index_bulk_purchasings_on_location_id"
   add_index "bulk_purchasings", ["orders_count"], :name => "index_bulk_purchasings_on_orders_count"
   add_index "bulk_purchasings", ["price"], :name => "index_bulk_purchasings_on_price"
-  add_index "bulk_purchasings", ["rating_cache_id"], :name => "index_bulk_purchasings_on_rating_cache_id"
   add_index "bulk_purchasings", ["reviews_count"], :name => "index_bulk_purchasings_on_reviews_count"
-  add_index "bulk_purchasings", ["stars_average"], :name => "index_bulk_purchasings_on_stars_average"
+  add_index "bulk_purchasings", ["stars_count"], :name => "index_bulk_purchasings_on_stars_count"
   add_index "bulk_purchasings", ["total_sale"], :name => "index_bulk_purchasings_on_total_sale"
   add_index "bulk_purchasings", ["vip_price"], :name => "index_bulk_purchasings_on_vip_price"
 
@@ -142,7 +140,6 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
   create_table "cleanings", :force => true do |t|
     t.integer  "dealer_id"
     t.integer  "location_id"
-    t.integer  "rating_cache_id"
     t.integer  "area_id"
     t.string   "title"
     t.integer  "cleaning_type_id"
@@ -153,10 +150,10 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.float    "stars_average"
     t.float    "total_sale"
     t.integer  "orders_count",       :default => 0
     t.integer  "reviews_count",      :default => 0
+    t.integer  "stars_count",        :default => 0
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
@@ -167,9 +164,8 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
   add_index "cleanings", ["location_id"], :name => "index_cleanings_on_location_id"
   add_index "cleanings", ["orders_count"], :name => "index_cleanings_on_orders_count"
   add_index "cleanings", ["price"], :name => "index_cleanings_on_price"
-  add_index "cleanings", ["rating_cache_id"], :name => "index_cleanings_on_rating_cache_id"
   add_index "cleanings", ["reviews_count"], :name => "index_cleanings_on_reviews_count"
-  add_index "cleanings", ["stars_average"], :name => "index_cleanings_on_stars_average"
+  add_index "cleanings", ["stars_count"], :name => "index_cleanings_on_stars_count"
   add_index "cleanings", ["total_sale"], :name => "index_cleanings_on_total_sale"
   add_index "cleanings", ["vip_price"], :name => "index_cleanings_on_vip_price"
 
@@ -218,10 +214,10 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
     t.datetime "image_updated_at"
     t.string   "template_ids"
     t.integer  "balance_used",       :default => 0, :null => false
-    t.float    "stars_average"
     t.float    "total_sale"
     t.integer  "orders_count",       :default => 0
     t.integer  "reviews_count",      :default => 0
+    t.integer  "stars_count",        :default => 0
   end
 
   add_index "dealer_details", ["area_id"], :name => "index_dealer_details_on_area_id"
@@ -230,7 +226,7 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
   add_index "dealer_details", ["orders_count"], :name => "index_dealer_details_on_orders_count"
   add_index "dealer_details", ["reviews_count"], :name => "index_dealer_details_on_reviews_count"
   add_index "dealer_details", ["rqrcode_token"], :name => "index_dealer_details_on_rqrcode_token", :unique => true
-  add_index "dealer_details", ["stars_average"], :name => "index_dealer_details_on_stars_average"
+  add_index "dealer_details", ["stars_count"], :name => "index_dealer_details_on_stars_count"
   add_index "dealer_details", ["total_sale"], :name => "index_dealer_details_on_total_sale"
 
   create_table "friend", :force => true do |t|
@@ -276,26 +272,28 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
   create_table "mendings", :force => true do |t|
     t.integer  "dealer_id"
     t.integer  "location_id"
-    t.integer  "rating_cache_id"
     t.integer  "area_id"
     t.text     "discount"
-    t.string   "brand_ids",       :limit => 1024
+    t.string   "brand_ids",      :limit => 1024
     t.text     "description"
-    t.float    "stars_average"
     t.float    "total_sale"
-    t.integer  "orders_count",                    :default => 0
-    t.integer  "reviews_count",                   :default => 0
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.integer  "orders_count",                   :default => 0
+    t.integer  "reviews_count",                  :default => 0
+    t.integer  "stars_count",                    :default => 0
+    t.text     "total_sales"
+    t.text     "orders_counts"
+    t.text     "reviews_counts"
+    t.text     "stars_counts"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   add_index "mendings", ["area_id"], :name => "index_mendings_on_area_id"
   add_index "mendings", ["dealer_id"], :name => "index_mendings_on_dealer_id"
   add_index "mendings", ["location_id"], :name => "index_mendings_on_location_id"
   add_index "mendings", ["orders_count"], :name => "index_mendings_on_orders_count"
-  add_index "mendings", ["rating_cache_id"], :name => "index_mendings_on_rating_cache_id"
   add_index "mendings", ["reviews_count"], :name => "index_mendings_on_reviews_count"
-  add_index "mendings", ["stars_average"], :name => "index_mendings_on_stars_average"
+  add_index "mendings", ["stars_count"], :name => "index_mendings_on_stars_count"
   add_index "mendings", ["total_sale"], :name => "index_mendings_on_total_sale"
 
   create_table "offline_message", :force => true do |t|
@@ -375,11 +373,6 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
     t.string "rqrcode_token"
   end
 
-  create_table "rating_caches", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "reviews", :force => true do |t|
     t.integer  "order_id"
     t.text     "content"
@@ -403,12 +396,14 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
     t.datetime "image_updated_at"
     t.float    "total_spend"
     t.integer  "orders_count",       :default => 0
+    t.integer  "reviews_count",      :default => 0
     t.integer  "posts_count",        :default => 0
   end
 
   add_index "user_details", ["area_id", "brand_id"], :name => "index_user_details_on_area_id_and_brand_id"
   add_index "user_details", ["orders_count"], :name => "index_user_details_on_orders_count"
   add_index "user_details", ["posts_count"], :name => "index_user_details_on_posts_count"
+  add_index "user_details", ["reviews_count"], :name => "index_user_details_on_reviews_count"
   add_index "user_details", ["total_spend"], :name => "index_user_details_on_total_spend"
 
   create_table "user_device", :force => true do |t|

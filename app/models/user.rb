@@ -17,7 +17,6 @@ class User < Account
 
   def detail_hash
     detail_hash = detail.serializable_hash
-    detail_hash[:posts_count] = posts.count
     detail_hash[:last_3_posts] = posts.includes(:user).last(3)
     serializable_hash.merge(detail: detail_hash)
   end

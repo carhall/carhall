@@ -5,7 +5,12 @@ module Api
       resources = Kaminari.paginate_array(resources) if resources.kind_of? Array
       resources = resources.page(params[:page]) if params[:page]
       resources = resources.per(params[:per_page]) if params[:per_page]
-      render_data resources.map { |r| r.serializable_hash }
+      resources = after_pagerize resources
+      render_data resources
+    end
+
+    def after_pagerize resources
+      resources
     end
 
     def render_show resource
