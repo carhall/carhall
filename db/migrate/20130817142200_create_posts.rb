@@ -5,7 +5,6 @@ class CreatePosts < ActiveRecord::Migration
       t.references :club
       t.text :content
 
-      t.integer :view_count, default: 0 
       t.integer :comments_count, default: 0 
 
       t.attachment :image
@@ -17,7 +16,6 @@ class CreatePosts < ActiveRecord::Migration
       t.index :user_id
       t.index :club_id
 
-      t.index :view_count
       t.index :comments_count
 
     end

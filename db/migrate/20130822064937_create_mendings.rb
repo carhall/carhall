@@ -9,17 +9,17 @@ class CreateMendings < ActiveRecord::Migration
       t.string  :brand_ids, limit: 1024
       t.text    :description
       
-      t.float   :total_sale
+      # t.float   :total_sale
 
       t.integer :orders_count, default: 0
-      t.integer :reviews_count, default: 0
-      t.integer :stars_count, default: 0
+      # t.integer :reviews_count, default: 0
+      # t.integer :stars_count, default: 0
 
-      t.text :total_sales
+      # t.text :total_sales
       
-      t.text :orders_counts
-      t.text :reviews_counts
-      t.text :stars_counts
+      # t.text :orders_counts
+      # t.text :reviews_counts
+      # t.text :stars_counts
 
       t.timestamps
     end
@@ -29,11 +29,11 @@ class CreateMendings < ActiveRecord::Migration
       t.index :location_id
       t.index :area_id
 
-      t.index :total_sale
+      # t.index :total_sale
 
       t.index :orders_count
-      t.index :reviews_count
-      t.index :stars_count
+      # t.index :reviews_count
+      # t.index :stars_count
 
     end
 

@@ -13,11 +13,11 @@ class CreateBulkPurchasings < ActiveRecord::Migration
       t.text     :description
       t.attachment :image
       
-      t.float   :total_sale
+      # t.float   :total_sale
 
       t.integer :orders_count, default: 0
-      t.integer :reviews_count, default: 0
-      t.integer :stars_count, default: 0
+      # t.integer :reviews_count, default: 0
+      # t.integer :stars_count, default: 0
 
       t.timestamps
 
@@ -33,11 +33,11 @@ class CreateBulkPurchasings < ActiveRecord::Migration
       t.index :price
       t.index :vip_price
       
-      t.index :total_sale
+      # t.index :total_sale
 
       t.index :orders_count
-      t.index :reviews_count
-      t.index :stars_count
+      # t.index :reviews_count
+      # t.index :stars_count
       
     end
 

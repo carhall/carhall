@@ -27,7 +27,7 @@ class Api::PostsController < Api::ApplicationController
   # GET /api/posts/1
   # GET /api/posts/1.json
   def show
-    render_show Post.view(params[:id])
+    render_show Post.find(params[:id])
   end
 
   # POST /api/posts

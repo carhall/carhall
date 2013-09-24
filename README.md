@@ -120,6 +120,10 @@ detail          | 附加字段的 **哈希表**        |
   detail[rqrcode_token]      | 校验码，用于二维码扫描时校验  | 只读
   detail[latitude]           | 经度                       | 只读
   detail[longitude]          | 纬度                       | 只读
+  detail[mending_goal_attainment]         | 保养专修交易达成率      | 只读
+  detail[cleaning_goal_attainment]        | 洗车美容交易达成率      | 只读
+  detail[bulk_purchasing_goal_attainment] | 团购交易达成率          | 只读
+  detail[orders_count]       | 订单总数                    | 只读
 
   **建议：显示时使用dealer_type和business_scopes，因为后期可能会添加新的业务范围**
 
@@ -249,6 +253,8 @@ Comments 圈子随手拍评论
 ----------------|----------------------------|----------------------------------
 content         |                            | 必须
 user            | 发表评论用户信息             | 哈希，只读
+at_user         | 回复用户信息                | 哈希，只读
+at_user_id      | 回复用户ID                  | 
 
 API
 ----------
@@ -263,7 +269,8 @@ DELETE | /api/posts/:post_id/comments/:id  | 删除随手拍评论
 > 
 >     POST /api/posts/2/comments
 >     表单
->     data[content]    Hello
+>     data[content]      Hello
+>     data[at_user_id]   1
 
 
 PostBlacklist 圈子黑名单

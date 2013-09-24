@@ -1,6 +1,5 @@
 class Accounts::DealerDetail < ActiveRecord::Base
   include Share::Localizable
-  include Share::RatingCachable
   
   extend Share::ImageAttachments
   define_image_method

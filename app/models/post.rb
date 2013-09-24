@@ -31,12 +31,6 @@ class Post < ActiveRecord::Base
     unscoped.order('comments_count DESC, id DESC')
   end
 
-  def self.view id
-    post = find(id)
-    post.increment!(:view_count)
-    post
-  end
-
   def serializable_hash(options={})
     options = { 
       only: [:id, :content, :view_count, :comments_count, :created_at],
