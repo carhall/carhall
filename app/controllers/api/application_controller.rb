@@ -5,26 +5,28 @@ class Api::ApplicationController < ActionController::Base
   include FilterHelper
 
   def self.set_resource_class klass, options = {}
-    define_method :parent do
-      klass
+    before_filter :set_parent
+
+    define_method :set_parent do
+      @parent = klass
     end
     
     # GET /api/resources
     # GET /api/resources.json
     define_method :index do
-      render_index parent.scoped
+      render_index @parent.scoped
     end
 
     # GET /api/resources/1
     # GET /api/resources/1.json
     define_method :show do
-      render_show parent.find(params[:id])
+      render_show @parent.find(params[:id])
     end
 
     # GET /api/resources/1
     # GET /api/resources/1.json
     define_method :detail do
-      render_data parent.find(params[:id]).detail_hash
+      render_data @parent.find(params[:id]).detail_hash
     end if options[:detail]
     
   end

@@ -3,7 +3,7 @@ class Api::Tips::CleaningsController < Api::Tips::ApplicationController
   before_filter :set_filter
 
   def set_filter
-    @parent = @parent.where(params[:filter].slice(:cleaning_type_id)) if params[:filter]
+    @parent = @parent.with_cleaning_type(params[:filter][:cleaning_type_id].to_i) if params[:filter]
   end
 
 end

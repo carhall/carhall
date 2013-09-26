@@ -22,7 +22,7 @@ end
 end
 
 30.times do
-  FactoryGirl.create :comment, post: Post.all.sample, user: User.all.sample
+  FactoryGirl.create :comment, source: Post.all.sample, user: User.all.sample
 end
 
 100.times do

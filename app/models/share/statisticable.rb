@@ -61,5 +61,21 @@ module Share
       order.created_at if order
     end
 
+    module ClassMethods
+
+      def cheapie
+        order('vip_price ASC')
+      end
+
+      def favorite
+        scoped.sort{|s|s.stars}
+      end
+
+      def hot
+        order('orders_count DESC')
+      end
+      
+    end
+
   end
 end

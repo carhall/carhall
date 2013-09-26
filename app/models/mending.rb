@@ -16,6 +16,7 @@ class Mending < ActiveRecord::Base
   Brands = Share::Brandable::Brands
   define_ids2keys_methods :brands
 
+  include Share::Areable
   include Share::Localizable
   include Share::Statisticable
 

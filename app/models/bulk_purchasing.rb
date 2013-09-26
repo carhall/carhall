@@ -5,6 +5,7 @@ class BulkPurchasing < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
 
+  include Share::Areable
   include Share::Localizable
   include Share::Statisticable
   

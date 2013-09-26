@@ -1,10 +1,7 @@
 class Api::OrdersController < Api::ApplicationController
-  before_filter :set_current_user, only: :create
-  before_filter :set_parent
-  before_filter :set_order, only: [:finish, :use, :cancel, :review]
-
   set_resource_class Order, detail: true
-  attr_reader :parent
+  before_filter :set_current_user, only: :create
+  before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json

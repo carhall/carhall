@@ -20,6 +20,24 @@ shared_examples_for "resources#collection" do
   include_examples "resources#collection base"
 end
 
+shared_examples_for "resources#collection filter" do
+  before { 3.times { create resource_name, attach_attrs }}
+  it "has a 200 status code, and return a array" do
+    get collection_name, filter_args
+    response.status.should eq(200), error_messages
+
+    response_body['data'].should be_kind_of Array
+    response_body['data'].should have(3).items
+  end
+  it "has a 200 status code, and return a empty array" do
+    get collection_name, empty_filter_args
+    response.status.should eq(200), error_messages
+
+    response_body['data'].should be_kind_of Array
+    response_body['data'].should have(0).items
+  end
+end
+
 shared_examples_for "resources#member" do
   it "has a 200 status code, and return a object" do
     get member_name, reset_args
@@ -62,6 +80,13 @@ shared_examples_for "resources#index" do
   describe "GET index" do
     let(:collection_name) { :index }
     include_examples "resources#collection"
+  end
+end
+
+shared_examples_for "resources#index filter" do
+  describe "GET index" do
+    let(:collection_name) { :index }
+    include_examples "resources#collection filter"
   end
 end
 

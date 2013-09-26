@@ -51,7 +51,7 @@ describe "Posts" do
     let(:other_post) { create :post, user: other }
 
     shared_examples "comments" do
-      let(:attach_attrs) {{ user: user, post: source }}
+      let(:attach_attrs) {{ user: user, source: source }}
       let(:attach_args) {{ post_id: source.id }}
 
       include_examples "resources#index"
@@ -69,7 +69,7 @@ describe "Posts" do
       include_examples "comments"
     end
     describe "when comment belongs to other" do
-      let(:attach_attrs) {{ user: other, post: other_post }}
+      let(:attach_attrs) {{ user: other, source: other_post }}
       it "doesn't delete" do
         delete :destroy, id: resource.id, post_id: other_post.id
         response.status.should eq(403), error_messages

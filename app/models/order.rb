@@ -5,8 +5,9 @@ class Order < ActiveRecord::Base
 
   include Share::Statable
   include Share::Userable
+  belongs_to :user, counter_cache: true
 
-  belongs_to :dealer
+  belongs_to :dealer, counter_cache: true
   has_one :review
 
   attr_accessible :user, :detail

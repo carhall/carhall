@@ -56,6 +56,13 @@ describe "Tips" do
     include_examples "tips#cheapie"
     include_examples "tips#favorite"
     include_examples "tips#hot"
+
+    context "with cleaning_type_id" do
+      let(:attach_attrs) {{ cleaning_type_id: 1 }}
+      let(:filter_args) {{ filter: { cleaning_type_id: 1 }}}
+      let(:empty_filter_args) {{ filter: { cleaning_type_id: 2 }}}
+      include_examples "resources#index filter"
+    end
   end
 
   describe Api::Tips::ActivitiesController do
@@ -71,6 +78,13 @@ describe "Tips" do
     include_examples "tips#cheapie"
     include_examples "tips#favorite"
     include_examples "tips#hot"
+
+    context "with bulk_purchasing_type_id" do
+      let(:attach_attrs) {{ bulk_purchasing_type_id: 1 }}
+      let(:filter_args) {{ filter: { bulk_purchasing_type_id: 1 }}}
+      let(:empty_filter_args) {{ filter: { bulk_purchasing_type_id: 2 }}}
+      include_examples "resources#index filter"
+    end
   end
 
   describe "Orders" do

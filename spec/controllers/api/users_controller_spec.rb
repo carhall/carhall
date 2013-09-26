@@ -47,6 +47,36 @@ describe "Users" do
     include_examples "resources#index"
     include_examples "resources#show"
     include_examples "resources#detail"
+
+    describe "GET nearby" do
+      let(:default_args) {{ lat: 40, lng: 116.3 }}
+      let(:collection_name) { :nearby }
+      include_examples "resources#collection"
+    end
+
+    describe "GET favorite" do
+      let(:collection_name) { :favorite }
+      include_examples "resources#collection"
+    end
+    
+    describe "GET hot" do
+      let(:collection_name) { :hot }
+      include_examples "resources#collection"
+    end
+
+    context "with dealer_type_id" do
+      let(:attach_attrs) {{ detail: attributes_for(:dealer)[:detail].merge(dealer_type_id: 1) }}
+      let(:filter_args) {{ filter: { dealer_type_id: 1 }}}
+      let(:empty_filter_args) {{ filter: { dealer_type_id: 2 }}}
+      include_examples "resources#index filter"
+    end
+
+    context "with bussiness_scope_id" do
+      let(:attach_attrs) {{ detail: attributes_for(:dealer)[:detail].merge(business_scope_ids: [1]) }}
+      let(:filter_args) {{ filter: { business_scope_id: 1 }}}
+      let(:empty_filter_args) {{ filter: { business_scope_id: 2 }}}
+      include_examples "resources#index filter"
+    end
   end
 
   describe Api::ProvidersController do

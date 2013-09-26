@@ -43,9 +43,9 @@ FactoryGirl.define do
         dealer_type: Accounts::DealerDetail::DealerTypes.sample,
         business_scopes: Accounts::DealerDetail::BusinessScopes.sample(3),
         authentication_image: File.open("public/images/thumb/missing.png"),
-        location: create(:location),
       }
     end
+    location
   end
 
   factory :location, class: Share::Location do

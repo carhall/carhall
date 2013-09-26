@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130923120029) do
+ActiveRecord::Schema.define(:version => 20130926072821) do
 
   create_table "accounts", :force => true do |t|
     t.string   "encrypted_password",     :default => "", :null => false
@@ -44,13 +44,19 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.datetime "accepted_at"
+    t.integer  "orders_count",           :default => 0
+    t.integer  "posts_count",            :default => 0
+    t.integer  "location_id"
   end
 
   add_index "accounts", ["accepted_at"], :name => "index_accounts_on_accepted_at"
   add_index "accounts", ["authentication_token"], :name => "index_accounts_on_authentication_token", :unique => true
   add_index "accounts", ["confirmation_token"], :name => "index_accounts_on_confirmation_token", :unique => true
   add_index "accounts", ["detail_id"], :name => "index_accounts_on_detail_id"
+  add_index "accounts", ["location_id"], :name => "index_accounts_on_location_id"
   add_index "accounts", ["mobile"], :name => "index_accounts_on_mobile", :unique => true
+  add_index "accounts", ["orders_count"], :name => "index_accounts_on_orders_count"
+  add_index "accounts", ["posts_count"], :name => "index_accounts_on_posts_count"
   add_index "accounts", ["reset_password_token"], :name => "index_accounts_on_reset_password_token", :unique => true
   add_index "accounts", ["type", "id"], :name => "index_accounts_on_type_and_id"
   add_index "accounts", ["unlock_token"], :name => "index_accounts_on_unlock_token", :unique => true
@@ -177,16 +183,16 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "at_user_id"
-    t.integer  "post_id"
+    t.integer  "source_id"
+    t.string   "source_type"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+  add_index "comments", ["source_type", "source_id"], :name => "index_comments_on_source_type_and_source_id"
 
   create_table "dealer_details", :force => true do |t|
-    t.integer  "location_id"
     t.integer  "area_id"
     t.integer  "dealer_type_id"
     t.string   "business_scope_ids"
@@ -206,7 +212,6 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
 
   add_index "dealer_details", ["area_id"], :name => "index_dealer_details_on_area_id"
   add_index "dealer_details", ["dealer_type_id"], :name => "index_dealer_details_on_dealer_type_id"
-  add_index "dealer_details", ["location_id"], :name => "index_dealer_details_on_location_id"
   add_index "dealer_details", ["rqrcode_token"], :name => "index_dealer_details_on_rqrcode_token", :unique => true
 
   create_table "friend", :force => true do |t|
@@ -362,11 +367,9 @@ ActiveRecord::Schema.define(:version => 20130923120029) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "posts_count",        :default => 0
   end
 
   add_index "user_details", ["area_id", "brand_id"], :name => "index_user_details_on_area_id_and_brand_id"
-  add_index "user_details", ["posts_count"], :name => "index_user_details_on_posts_count"
 
   create_table "user_device", :force => true do |t|
     t.integer "user_id"

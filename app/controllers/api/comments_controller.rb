@@ -1,9 +1,6 @@
 class Api::CommentsController < Api::ApplicationController
-  before_filter :set_current_user, only: :create
-  before_filter :set_parent
-
   set_resource_class Comment
-  attr_reader :parent
+  before_filter :set_current_user, only: :create
 
   # POST /api/resources/1/comments
   # POST /api/resources/1/comments.json

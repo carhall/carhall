@@ -3,12 +3,11 @@ module Share
     extend ActiveSupport::Concern
       
     included do
-      include Share::Areable
       belongs_to :location, class_name: Share::Location
     end
 
     module ClassMethods
-      def with_location lat, lng, set_location=false, locations={}
+      def with_location lat, lng, set_location=true, locations={}
         lat = lat.to_f
         lng = lng.to_f
 

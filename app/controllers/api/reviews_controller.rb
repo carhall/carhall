@@ -1,8 +1,5 @@
 class Api::ReviewsController < Api::ApplicationController
-  before_filter :set_parent
-
   set_resource_class Review
-  attr_reader :parent
 
   protected
 

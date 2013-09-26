@@ -1,12 +1,12 @@
 class Comment < ActiveRecord::Base
   include Share::Userable
   
-  belongs_to :post, counter_cache: true
+  belongs_to :source, polymorphic: true
   belongs_to :at_user
 
   attr_accessible :content
-  attr_accessible :user, :post, :at_user
-  attr_accessible :at_user_id
+  attr_accessible :user, :source, :at_user
+  attr_accessible :source, :at_user_id
 
   validates_presence_of :user
   validates_presence_of :content

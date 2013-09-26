@@ -8,7 +8,7 @@ module Share
       
       before_save do
         self.area_id = dealer.detail.area_id
-        self.location_id = dealer.detail.location_id
+        self.location_id = dealer.location_id
       end
 
     end
@@ -31,19 +31,6 @@ module Share
         has_many :recent_reviews, through: :recent_orders, class_name: Review
 
       end
-
-      def cheapie
-        order('vip_price ASC')
-      end
-
-      def favorite
-        scoped.sort{|s|s.stars}
-      end
-
-      def hot
-        order('orders_count DESC')
-      end
-
     end
   end
 end

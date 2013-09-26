@@ -6,9 +6,9 @@ FactoryGirl.define do
     user
   end
 
-  factory :comment do
+  factory :comment, class: CommentCounterCached do
     content { Faker::Lorem.sentence }
-    post
+    association :source, factory: :post
     user
   end
 

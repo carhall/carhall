@@ -3,7 +3,7 @@ class Api::Tips::BulkPurchasingsController < Api::Tips::ApplicationController
   before_filter :set_filter
 
   def set_filter
-    @parent = @parent.where(params[:filter].slice(:bulk_purchasing_type_id)) if params[:filter]
+    @parent = @parent.with_bulk_purchasing_type(params[:filter][:bulk_purchasing_type_id].to_i) if params[:filter]
   end
 
 end

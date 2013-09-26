@@ -1,5 +1,7 @@
 class Dealer < Account
   include Share::RqrcodeToken
+
+  include Share::Localizable
   include Share::Statisticable
 
   set_detail_class Accounts::DealerDetail
@@ -21,41 +23,43 @@ class Dealer < Account
   
   validates_presence_of :type
 
+  validates_each :detail do |record, attr, value|
+    if value.address_changed?
+      bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value}"
+      begin
+        result = JSON.parse(open(URI::encode(bmap_geocoding_url)).read)
+        if result['status'] == 0 and result['result'] and result['result'].any?
+          logger.info("  Requested BMap API #{bmap_geocoding_url}")
+          logger.info("  Result: #{result['result']}")
+          record.location = Share::Location.new(
+            latitude: result['result']['location']['lat'],
+            longitude: result['result']['location']['lng']
+          )
+        else
+          value.errors.add(:address, :invalid)
+        end
+      rescue Exception => e
+        record.errors.add(:base, e.message)
+      end
+    end
+  end
+
   def has_template? template
     detail.template_syms.include? template
   end
 
-  def self.with_location lat, lng, set_detail=false, details={}
-    if set_detail
-      Accounts::DealerDetail.with_location(lat, lng, false).each do |detail|
-        details[detail.id] = detail
-      end
-      detail_ids = details.keys
-    else
-      detail_ids = Accounts::DealerDetail.with_location(lat, lng, false).pluck(:id)
-    end
-
-    records = where(detail_id: detail_ids)
-    records = records.order("FIELD(detail_id, #{detail_ids.join(',')})") if detail_ids.any?
- 
-    if set_detail
-      records.includes_values.delete :detail
-      set_location locations
-    end
-
-    records
-  end
-
-  def set_detail details
-    records = scoped
-    records.each do |record|
-      record.detail = details[record.detail_id]
-    end
-    records
-  end
-
   def self.with_area area
     detail_ids = Accounts::DealerDetail.with_area(area).pluck(:id)
+    where(detail_id: detail_ids)
+  end
+
+  def self.with_dealer_type dealer_type
+    detail_ids = Accounts::DealerDetail.with_dealer_type(dealer_type).pluck(:id)
+    where(detail_id: detail_ids)
+  end
+  
+  def self.with_business_scope business_scope
+    detail_ids = Accounts::DealerDetail.with_business_scope(business_scope).pluck(:id)
     where(detail_id: detail_ids)
   end
 

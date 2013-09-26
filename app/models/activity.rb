@@ -4,6 +4,7 @@ class Activity < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
 
+  include Share::Areable
   include Share::Localizable
   
   attr_accessible :title, :expire_at, :description, :image

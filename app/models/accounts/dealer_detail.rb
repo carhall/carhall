@@ -1,6 +1,6 @@
 class Accounts::DealerDetail < ActiveRecord::Base
-  include Share::Localizable
-  
+  include Share::Areable
+
   extend Share::ImageAttachments
   define_image_method
   alias_attribute :authentication_image, :image
@@ -12,27 +12,6 @@ class Accounts::DealerDetail < ActiveRecord::Base
 
   validates_presence_of :area_id, :dealer_type_id, :business_scope_ids,
     :company, :address, :phone, :open_during, :authentication_image
-
-  validates_each :address do |record, attr, value|
-    if record.address_changed?
-      bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value}"
-      begin
-        result = JSON.parse(open(URI::encode(bmap_geocoding_url)).read)
-        if result['status'] == 0 and result['result'] and result['result'].any?
-          logger.info("  Requested BMap API #{bmap_geocoding_url}")
-          logger.info("  Result: #{result['result']}")
-          record.location = Share::Location.new(
-            latitude: result['result']['location']['lat'],
-            longitude: result['result']['location']['lng']
-          )
-        else
-          record.errors.add(attr, :invalid)
-        end
-      rescue Exception => e
-        record.errors.add(:base, e.message)
-      end
-    end
-  end
 
   extend Share::Id2Key
 

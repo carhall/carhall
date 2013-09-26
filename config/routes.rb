@@ -111,8 +111,12 @@ Autozone::Application.routes.draw do
     end
 
     resources :dealers, only: [:index, :show] do
-      get :detail, on: :member
+      get :nearby, on: :collection
+      get :favorite, on: :collection
+      get :hot, on: :collection
 
+      get :detail, on: :member
+      
       resources :orders, only: [:index, :show]
       resources :reviews, only: [:index, :show]
     end
