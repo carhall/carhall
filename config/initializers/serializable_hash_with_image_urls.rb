@@ -13,7 +13,7 @@ ActiveModel::Serialization.module_eval do
 
     Array.wrap(options[:methods]).each { |n| hash[n] = send(n) if respond_to?(n) }
 
-    absolute_url_prefix = Autozone::AbsoluteUrlPrefix 
+    absolute_url_prefix = Carhall::AbsoluteUrlPrefix 
 
     Array.wrap(options[:images]).each do |n| 
       if respond_to?(n) and (image = send(n)).kind_of? Paperclip::Attachment

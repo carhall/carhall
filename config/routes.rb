@@ -1,4 +1,4 @@
-Autozone::Application.routes.draw do
+Carhall::Application.routes.draw do
   # Frontend pages
   # Dashboard
   resource :dashboard, only: :show

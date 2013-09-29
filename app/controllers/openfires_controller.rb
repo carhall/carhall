@@ -42,7 +42,7 @@ class OpenfiresController < ActionController::Base
   end
 
   def openfire_user_detail u
-    avatar_thumb_url = if u.avatar.present? then Autozone::AbsoluteUrlPrefix + u.avatar.url(:thumb) end
+    avatar_thumb_url = if u.avatar.present? then Carhall::AbsoluteUrlPrefix + u.avatar.url(:thumb) end
     sex_id = u.detail.sex_id rescue nil
     { 
       id: u.id, username: u.username, mobile: u.mobile, 

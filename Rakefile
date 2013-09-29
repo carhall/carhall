@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Autozone::Application.load_tasks
+Carhall::Application.load_tasks
