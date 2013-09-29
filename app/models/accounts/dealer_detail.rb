@@ -1,5 +1,5 @@
 class Accounts::DealerDetail < ActiveRecord::Base
-  include Share::Areable
+  enumerate :area, with: Share::Area
 
   extend Share::ImageAttachments
   define_image_method
@@ -13,32 +13,29 @@ class Accounts::DealerDetail < ActiveRecord::Base
   validates_presence_of :area_id, :dealer_type_id, :business_scope_ids,
     :company, :address, :phone, :open_during, :authentication_image
 
-  extend Share::Id2Key
+  enumerate :dealer_type, with: %w(洗车美容 专项服务 专修 4S店)
 
-  DealerTypes = %w(洗车美容 专项服务 专修 4S店)
-  define_id2key_methods :dealer_type
+  serialize :business_scope_ids
+  enumerate :business_scopes, with: %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险), multiple: true
 
-  BusinessScopes = %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险)
-  define_ids2keys_methods :business_scopes
-
-  Templates = %w(洗车美容 保养专修 团购 近期活动)
-  define_ids2keys_methods :templates
-
-  TemplateSyms = %i(cleaning mending bulk_purchasing activity)
-  def template_syms
-    @template_syms ||= template_ids.map do |id|
-      TemplateSyms[id]
-    end
+  def self.with_business_scope name
+    id = active_enum_get_id_for_business_scopes(name)
+    where('business_scope_ids LIKE \'%- ?\n%\'', id)
   end
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:dealer_type_id, :business_scope_ids, :company, :address, 
+  serialize :template_ids
+  enumerate :templates, with: %w(洗车美容 保养专修 团购 近期活动), multiple: true
+
+  enumerate :template_syms, with: %i(cleaning mending bulk_purchasing activity), 
+    column: :template_ids, multiple: true
+
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :area_id, :dealer_type_id, :business_scope_ids, :company, :address, 
         :phone, :open_during, :latitude, :longitude, :rqrcode_token, 
-        :orders_count, :reviews_count],
-      methods: [:dealer_type, :business_scopes],
-    }.update(options)
-    super(options)
+        :orders_count, :reviews_count
+    t.methods :area, :dealer_type, :business_scopes
   end
 
 end

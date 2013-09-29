@@ -5,7 +5,7 @@ class Cleaning < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
   
-  include Share::Areable
+  enumerate :area, with: Share::Area
   include Share::Localizable
   include Share::Statisticable
   
@@ -14,11 +14,7 @@ class Cleaning < ActiveRecord::Base
   validates_presence_of :dealer
   validates_presence_of :title, :cleaning_type_id, :price, :vip_price
 
-  extend Share::Id2Key
-  CleaningTypes = %w(洗车 漆面养护 清洁护理)
-  define_id2key_methods :cleaning_type
-
-  acts_as_api
+  enumerate :cleaning_type, with: %w(洗车 漆面养护 清洁护理)
 
   api_accessible :base do |t|
     t.only :id, :title, :cleaning_type_id, :price, :vip_price, :description, 

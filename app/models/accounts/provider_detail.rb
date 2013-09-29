@@ -7,11 +7,10 @@ class Accounts::ProviderDetail < ActiveRecord::Base
   attr_accessor :area_id, :dealer_type_id, :business_scope_ids, :address, :open_during, :authentication_image
   attr_accessible :area_id, :dealer_type_id, :business_scope_ids, :address, :open_during, :authentication_image
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:company, :phone, :rqrcode_token],
-    }.update(options)
-    super(options)
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :company, :phone, :rqrcode_token
   end
 
 end

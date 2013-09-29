@@ -5,7 +5,7 @@ class BulkPurchasing < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
 
-  include Share::Areable
+  enumerate :area, with: Share::Area
   include Share::Localizable
   include Share::Statisticable
   
@@ -14,13 +14,9 @@ class BulkPurchasing < ActiveRecord::Base
   validates_presence_of :dealer
   validates_presence_of :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price
 
-  extend Share::Id2Key
-  BulkPurchasingTypes = %w(洗车美容 保养专修 汽车装饰 其他)
-  define_id2key_methods :bulk_purchasing_type
+  enumerate :bulk_purchasing_type, with: %w(洗车美容 保养专修 汽车装饰 其他)
 
   include Share::Expiredable
-
-  acts_as_api
 
   api_accessible :base do |t|
     t.only :id, :title, :expire_at, :bulk_purchasing_type_id, :price, :vip_price, 

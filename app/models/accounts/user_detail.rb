@@ -1,6 +1,6 @@
 class Accounts::UserDetail < ActiveRecord::Base
-  include Share::Areable
-  include Share::Brandable
+  enumerate :area, with: Share::Area
+  enumerate :brand, with: Share::Brand
 
   extend Share::ImageAttachments
   define_image_method
@@ -9,17 +9,14 @@ class Accounts::UserDetail < ActiveRecord::Base
   attr_accessible :sex_id, :area_id, :brand_id, :series, :plate_num, :car_image
   attr_accessible :sex, :area, :brand
 
-  extend Share::Id2Key
-  Sexes = %w(男 女)
-  define_id2key_methods :sex
+  enumerate :sex, with: %w(男 女)
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:sex_id, :area_id, :brand_id, :series, :plate_num, :balance, :posts_count],
-      methods: [:sex, :area, :brand],
-      images: [:car_image],
-    }.update(options)
-    super(options)
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :sex_id, :area_id, :brand_id, :series, :plate_num, :balance, :posts_count
+    t.methods :sex, :area, :brand
+    t.images :car_image
   end
 
 end

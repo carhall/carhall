@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
 
-  include Share::Areable
+  enumerate :area, with: Share::Area
   include Share::Localizable
   
   attr_accessible :title, :expire_at, :description, :image
@@ -13,15 +13,14 @@ class Activity < ActiveRecord::Base
 
   include Share::Expiredable
 
-  acts_as_api
-
   api_accessible :base do |t|
     t.only :id, :title, :expire_at, :description
     t.images :image
     t.add :dealer, template: :base
   end 
 
-  def detail_hash
-    serializable_hash(include: {dealer: {include: :detail}})
-  end
+  api_accessible :detail, extend: :base do |t|
+    t.add :dealer, template: :detail
+  end 
+
 end

@@ -1,10 +1,16 @@
 class Api::Tips::ApplicationController < Api::ApplicationController
+  before_filter :set_dealer
+
+  def set_dealer
+    @dealer = Dealer.find(params[:dealer_id]) if params[:dealer_id]
+  end
 
   def self.set_resource_class klass, options = {}
     before_filter :set_parent
 
     define_method :set_parent do
       @parent = klass.includes(:dealer, :reviews)
+      @parent = @parent.with_dealer @dealer if @dealer
     end
 
     # GET /api/resources
@@ -36,7 +42,7 @@ class Api::Tips::ApplicationController < Api::ApplicationController
     end
     
     define_method :detail do
-      render_data klass.find(params[:id]).detail_hash
+      render_show klass.find(params[:id]), :detail
     end
   end
   

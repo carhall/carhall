@@ -119,6 +119,37 @@ Carhall::Application.routes.draw do
       
       resources :orders, only: [:index, :show]
       resources :reviews, only: [:index, :show]
+
+      namespace :tips, path: '' do
+        resource :mending, only: [:show] do
+          get :detail
+        end
+
+        resources :cleanings, only: [:index, :show] do
+          get :nearby, on: :collection
+          get :cheapie, on: :collection
+          get :favorite, on: :collection
+          get :hot, on: :collection
+    
+          get :detail, on: :member
+        end
+        
+        resources :activities, only: [:index, :show] do
+          get :nearby, on: :collection
+    
+          get :detail, on: :member        
+        end
+        
+        resources :bulk_purchasings, only: [:index, :show] do
+          get :nearby, on: :collection
+          get :cheapie, on: :collection
+          get :favorite, on: :collection
+          get :hot, on: :collection
+    
+          get :detail, on: :member
+        end
+
+      end
     end
 
     resources :providers, only: [:index, :show] do

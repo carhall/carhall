@@ -1,4 +1,27 @@
 module ActsAsApi
+  module Base
+    ClassMethods.module_eval do
+      # Determines the attributes, methods of the model that are accessible in the api response.
+      # *Note*: There is only whitelisting for api accessible attributes.
+      # So once the model acts as api, you have to determine all attributes here that should
+      # be contained in the api responses.
+      def api_accessible(api_template, options = {}, &block)
+
+        attributes = ApiTemplate.new(api_template)
+
+        attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
+
+        if block_given?
+          yield attributes
+        end
+
+        class_attribute "api_accessible_#{api_template}".to_sym
+        send "api_accessible_#{api_template}=", attributes
+      end
+      
+    end
+  end
+
   ApiTemplate.class_eval do
     attr_reader :serializable_options
 
@@ -45,7 +68,7 @@ module ActsAsApi
       @serializable_options[:images] += array
     end
 
-    def serializable key, value
+    def serializable(key, value)
       @serializable_options[key] ||= []
       @serializable_options[key] += value
     end
@@ -66,10 +89,24 @@ module ActsAsApi
           out = out.as_api_response(sub_template, options)
         end
 
-        api_output[field] = out
+        set_value(api_output, fieldset, field, out, options)
       end
 
       api_output
+    end
+
+  private
+    
+    def set_value(api_output, fieldset, field, out, options)
+      fieldset_options = fieldset.options_for(field)
+
+      unless fieldset_options[:append_to]
+        api_output[field] = out
+      else
+        fieldset_options[:append_to].to_s.split('.').reduce(api_output) do |sub_output, key|
+          sub_output[key.to_sym] ||= {}
+        end[field] = out
+      end
     end
   end
 end

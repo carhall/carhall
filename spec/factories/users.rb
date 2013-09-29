@@ -8,9 +8,9 @@ FactoryGirl.define do
     description { Faker::Lorem.sentence }
     detail do
       {
-        sex: Accounts::UserDetail::Sexes.sample,
-        area: Share::Areable::Areas.sample,
-        brand: Share::Brandable::Brands.sample,
+        sex: Accounts::UserDetail::Sexes.names.sample,
+        area: Share::Area::Areas.sample,
+        brand: Share::Brand::Brands.sample,
       }
     end
   end
@@ -35,13 +35,13 @@ FactoryGirl.define do
     description { Faker::Lorem.sentence }
     detail do
       {
-        area: Share::Areable::Areas.sample,
+        area: Share::Area::Areas.sample,
         company: Faker::Lorem.sentence,
         address: Address.sample,
         phone: Faker::PhoneNumber.phone_number,
         open_during: Faker::Lorem.sentence,
-        dealer_type: Accounts::DealerDetail::DealerTypes.sample,
-        business_scopes: Accounts::DealerDetail::BusinessScopes.sample(3),
+        dealer_type: Accounts::DealerDetail::DealerTypes.names.sample,
+        business_scopes: Accounts::DealerDetail::BusinessScopes.names.sample(3),
         authentication_image: File.open("public/images/thumb/missing.png"),
       }
     end

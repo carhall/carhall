@@ -70,10 +70,6 @@ class Order < ActiveRecord::Base
     cost *= detail.count if detail.respond_to? :count
   end
 
-  extend Share::Id2Key
-  States = %i(finished canceled)
-  define_id2key_methods :state
-
   acts_as_api
 
   api_accessible :base do |t|

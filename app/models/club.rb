@@ -1,6 +1,6 @@
 class Club < ActiveRecord::Base
-  include Share::Areable
-  include Share::Brandable
+  enumerate :area, with: Share::Area
+  enumerate :brand, with: Share::Brand
 
   belongs_to :president, class_name: User
   has_many :posts

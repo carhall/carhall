@@ -1,3 +1,15 @@
+# ActiveRecord::Base.connection.execute <<-EOF
+# CREATE OR REPLACE FUNCTION field(int, variadic int[])
+# RETURNS int AS $$
+#   SELECT i
+#      FROM generate_subscripts($2,1) g(i)
+#     WHERE $1 = $2[i]
+#     UNION ALL
+#     SELECT 0
+#     LIMIT 1
+# $$ LANGUAGE sql STRICT;
+# EOF
+
 AbsoluteUrlPrefix = ENV['CARHALL_URL_PREFIX']
 
 ActiveModel::Serialization.module_eval do

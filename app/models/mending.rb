@@ -12,20 +12,18 @@ class Mending < ActiveRecord::Base
   serialize :reviews_counts, Hash
   serialize :stars_counts, Hash
 
-  extend Share::Id2Key
-  Brands = Share::Brandable::Brands
-  define_ids2keys_methods :brands
+  serialize :brand_ids
+  enumerate :brands, with: Share::Brand, multiple: true
 
-  include Share::Areable
+  enumerate :area, with: Share::Area
+  
   include Share::Localizable
   include Share::Statisticable
 
   attr_accessible :dealer
   attr_accessible :discount, :brand_ids
   attr_accessible :brands
-
-  acts_as_api
-
+  
   api_accessible :base do |t|
     t.only :id, :brand_ids, :description, :orders_count, :reviews_count
     t.methods :brands, :discount

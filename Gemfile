@@ -5,7 +5,7 @@ gem 'rails', '3.2.14'
 # Bundle edge Rails instead:
 # gem 'rails', github: 'rails/rails'
 
-gem 'pg'
+gem 'mysql2'
 
 # Gems used only for assets and not required
 # in production environments by default.

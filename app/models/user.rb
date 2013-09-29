@@ -15,10 +15,9 @@ class User < Account
     Club.with_user self
   end
 
-  def detail_hash
-    detail_hash = detail.serializable_hash
-    detail_hash[:last_3_posts] = posts.includes(:user).last(3)
-    serializable_hash.merge(detail: detail_hash)
+  api_accessible :detail, extend: :detail do |t|
+    t.add ->(u) { u.posts.includes(:user).last(3) }, as: :last_3_posts, append_to: :detail
+    t.add :posts_count, append_to: :detail, template: :base
   end
 
 end

@@ -11,17 +11,24 @@ module Share
         self.location_id = dealer.location_id
       end
 
-    end
+      acts_as_api
 
-    def detail_hash
-      detail_hash = {}
-      detail_hash[:goal_attainment] = goal_attainment
-      detail_hash[:last_3_orders] = orders.includes(:user).last(3)
-      detail_hash[:last_3_reviews] = reviews.includes(order: :user).last(3)
-      serializable_hash(include: {dealer: {include: :detail}}).merge(detail: detail_hash)
+      api_accessible :detail do |t|
+        t.add :goal_attainment, append_to: :detail
+        t.add ->(s) { s.orders.includes(:user).last(3) }, 
+          as: :last_3_orders, append_to: :detail, template: :base
+        t.add ->(s) { s.reviews.includes(order: :user).last(3) }, 
+          as: :last_3_reviews, append_to: :detail, template: :base
+        t.add :dealer, template: :detail
+      end
     end
     
     module ClassMethods 
+      def with_dealer dealer
+        dealer_id = if dealer.is_a? Integer then dealer else dealer.id end
+        where(dealer_id: dealer_id)
+      end
+
       def set_order_class klass
         has_many :orders, class_name: klass, foreign_key: :source_id
         has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], 

@@ -63,16 +63,18 @@ class Dealer < Account
     where(detail_id: detail_ids)
   end
 
-  def detail_hash
-    detail_hash = detail.serializable_hash
-    detail_hash[:mending_goal_attainment] = Share::Statisticable.goal_attainment mending_orders
-    detail_hash[:cleaning_goal_attainment] = Share::Statisticable.goal_attainment cleaning_orders
-    detail_hash[:bulk_purchasing_goal_attainment] = Share::Statisticable.goal_attainment bulk_purchasing_orders
-    detail_hash[:orders_count] = orders.count
-
-    detail_hash[:last_3_orders] = orders.includes(:user).last(3)
-    detail_hash[:last_3_reviews] = reviews.includes(order: :user).last(3)
-    serializable_hash.merge(detail: detail_hash)
+  api_accessible :detail, extend: :detail do |t|
+    t.add ->(d) { Share::Statisticable.goal_attainment d.mending_orders }, 
+      as: :mending_goal_attainment, append_to: :detail
+    t.add ->(d) { Share::Statisticable.goal_attainment d.cleaning_orders }, 
+      as: :cleaning_goal_attainment, append_to: :detail
+    t.add ->(d) { Share::Statisticable.goal_attainment d.bulk_purchasing_orders }, 
+      as: :bulk_purchasing_goal_attainment, append_to: :detail
+    t.add :orders_count, append_to: :detail
+    t.add ->(d) { d.orders.includes(:user).last(3) }, as: :last_3_orders, 
+      append_to: :detail, template: :base
+    t.add ->(d) { d.reviews.includes(order: :user).last(3) }, as: :last_3_reviews,
+      append_to: :detail, template: :base
   end
 
 end
