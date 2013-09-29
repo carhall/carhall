@@ -18,15 +18,14 @@ class Cleaning < ActiveRecord::Base
   CleaningTypes = %w(洗车 漆面养护 清洁护理)
   define_id2key_methods :cleaning_type
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:id, :title, :cleaning_type_id, :price, :vip_price, :description, 
-        :orders_count, :reviews_count],
-      methods: [:cleaning_type, :stars],
-      images: [:image],
-      include: [:dealer],
-    }.update(options)
-    super(options)
-  end
+  acts_as_api
 
+  api_accessible :base do |t|
+    t.only :id, :title, :cleaning_type_id, :price, :vip_price, :description, 
+        :orders_count, :reviews_count
+    t.methods :cleaning_type, :stars
+    t.images :image
+    t.add :dealer, template: :base
+  end
+  
 end

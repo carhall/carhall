@@ -1,50 +1,43 @@
 module Api
   module RenderHelper
 
-    def render_index resources
+    def render_index resources, api_template=:base
       resources = Kaminari.paginate_array(resources) if resources.kind_of? Array
       resources = resources.page(params[:page]) if params[:page]
       resources = resources.per(params[:per_page]) if params[:per_page]
-      resources = after_pagerize resources
-      render_data resources
+      render_data resources.as_api_response api_template
     end
 
-    def after_pagerize resources
-      resources
+    def render_show resource, api_template=:base
+      render_data resource.as_api_response api_template
     end
 
-    def render_show resource
-      render_data resource.serializable_hash
+    def render_data json_data, status=:ok
+      render json: { data: json_data, success: true }, status: status
     end
 
-    def render_data json_data
-      render json: { data: json_data, success: true }
-    end
-
-    def render_create resource, additional_data={}
+    def render_create resource, api_template=:base
       if resource.save
-        render_create_success resource, additional_data
+        render_create_success resource, api_template
       else
         render_failure resource
       end
     end
 
-    def render_update resource, additional_data={}
+    def render_update resource, api_template=:base
       if resource.save
-        render_update_success resource, additional_data
+        render_update_success resource, api_template
       else
         render_failure resource
       end
     end
 
-    def render_create_success resource, additional_data={}
-      json_data = resource.serializable_hash.merge additional_data
-      render json: { data: json_data, success: true }, status: :created
+    def render_create_success resource, api_template=:base
+      render_data resource.as_api_response(api_template), :created
     end
 
-    def render_update_success resource, additional_data={}
-      json_data = resource.serializable_hash.merge additional_data
-      render json: { data: json_data, success: true }, status: :accepted
+    def render_update_success resource, api_template=:base
+      render_data resource.as_api_response(api_template), :accepted
     end
 
     def render_failure resource, status = :unprocessable_entity

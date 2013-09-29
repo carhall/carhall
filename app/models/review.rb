@@ -50,12 +50,11 @@ class Review < ActiveRecord::Base
 
   # end
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:id, :content, :stars],
-      include: [:order]
-    }.update(options)
-    super(options)
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :id, :content, :stars
+    t.add :order, template: :base
   end
 
 end

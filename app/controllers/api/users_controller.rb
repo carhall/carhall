@@ -11,7 +11,7 @@ class Api::UsersController < Api::ApplicationController
     if @user && @user.valid_password?(params[:data][:password])
       @user.reset_authentication_token!  # make sure the user has a token generated
       sign_in(@user)  
-      render_create_success @user, { auth_token: @user.authentication_token }
+      render_create_success @user, :with_token
     else
       warden.custom_failure!
       render_error t('devise.failure.invalid'), :unauthorized
@@ -32,6 +32,6 @@ class Api::UsersController < Api::ApplicationController
     @user = User.new params[:data]
     @user.reset_authentication_token
 
-    render_create @user, { auth_token: @user.authentication_token }
+    render_create @user, :with_token
   end
 end

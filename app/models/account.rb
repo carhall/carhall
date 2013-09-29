@@ -1,22 +1,17 @@
-require_relative 'accounts/share/authenticatable'
-require_relative 'accounts/share/confirmable'
-require_relative 'accounts/share/validatable'
-require_relative 'accounts/share/lockable'
-
 class Account < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :token_authenticatable,
          :recoverable, :rememberable, :validatable#, :confirmable#, :lockable#, :trackable
 
-  include Share::Acceptable
+  include Accounts::Acceptable
 
   # For details
   include Share::Detailable
   alias_method :user_type, :type_sym
 
   # For friendships
-  include Share::Friendshipable
+  include Accounts::Friendshipable
 
   # For avatar
   extend Share::ImageAttachments
@@ -35,17 +30,20 @@ class Account < ActiveRecord::Base
     accepted?
   end
 
-  def serializable_hash(options={})
-    options = {
-      only: [:id, :username, :mobile, :description],
-      methods: [:user_type, :accepted],
-      images: [:avatar]
-    }.update(options)
-    super(options)
-  end
+  acts_as_api
 
-  def detail_hash(options={})
-    serializable_hash options.merge(include: :detail)
+  api_accessible :base do |t|
+    t.only :id, :username, :mobile, :description
+    t.methods :user_type, :accepted
+    t.images :avatar
+  end 
+
+  api_accessible :with_token, extend: :base do |t|
+    t.only :authentication_token
+  end 
+
+  api_accessible :detail, extend: :base do |t|
+    t.add :detail, template: :base
   end
 
   # Fake detail

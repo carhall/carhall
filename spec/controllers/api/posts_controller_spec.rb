@@ -3,47 +3,6 @@ require 'spec_helper'
 describe "Posts" do
   include_context "shared context"
 
-  describe Api::PostsController do
-    let(:resource_name) { :post }
-    let(:attach_attrs) {{ user: user }}
-    let(:other) { create :user }
-
-    before do
-      user.make_friend_with(other).save
-    end 
-
-    include_examples "resources#show"
-    include_examples "resources#create"
-    include_examples "resources#destroy"
-
-    describe "when posts belongs to himself" do
-      let(:attach_attrs) {{ user: user }}
-
-      include_examples "resources#index"
-      describe "GET top" do
-        let(:collection_name) { :top }
-        include_examples "resources#collection"
-      end
-      describe "GET club" do
-        let(:collection_name) { :club }
-        include_examples "resources#collection"
-      end
-    end
-
-    describe "when posts belongs to other" do
-      let(:attach_attrs) {{ user: other }}
-
-      describe "GET friends" do
-        let(:collection_name) { :friends }
-        include_examples "resources#collection"
-      end
-      it "doesn't delete" do
-        delete :destroy, id: resource.id
-        response.status.should eq(403), error_messages
-      end
-    end
-  end
-
   describe Api::CommentsController do
     let(:resource_name) { :comment }
     let(:user_post) { create :post, user: user }

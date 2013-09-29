@@ -52,12 +52,12 @@ class Club < ActiveRecord::Base
   define_exclamation_and_method :appoint_president
   define_exclamation_and_method :appoint_mechanic
 
-  def serializable_hash(options={})
-    options = {
-      only: [:id, :announcement],
-      methods: [:president, :mechanics],
-      images: [:avatar]
-    }.update(options)
-    super(options)
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :id, :announcement
+    t.methods :president, :mechanics
+    t.images :avatar
   end
+  
 end

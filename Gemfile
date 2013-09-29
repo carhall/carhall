@@ -27,6 +27,8 @@ gem 'jquery-datatables-rails'
 gem "twitter-bootstrap-rails"
 gem 'jasny_bootstrap_extension_rails'
 
+gem 'simple_form'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -42,12 +44,16 @@ gem 'unicorn'
 # To use debugger
 # gem 'debugger'
 
+# For Apis
+gem 'acts_as_api'
+
+# For Authentication
 gem 'devise'
 gem "cancan"
 
+gem 'active_enum', path: '..'
 gem 'kaminari'
 gem 'paperclip'
-gem 'simple_form'
 
 gem 'rqrcode-rails3'
 gem 'mini_magick'

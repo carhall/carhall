@@ -13,15 +13,14 @@ class Activity < ActiveRecord::Base
 
   include Share::Expiredable
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:title, :expire_at, :description],
-      images: [:image],
-      include: [:dealer],
-    }.update(options)
-    super(options)
-  end
-  
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :id, :title, :expire_at, :description
+    t.images :image
+    t.add :dealer, template: :base
+  end 
+
   def detail_hash
     serializable_hash(include: {dealer: {include: :detail}})
   end

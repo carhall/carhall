@@ -26,7 +26,7 @@ class Api::ApplicationController < ActionController::Base
     # GET /api/resources/1
     # GET /api/resources/1.json
     define_method :detail do
-      render_data @parent.find(params[:id]).detail_hash
+      render_show @parent.find(params[:id]), :detail
     end if options[:detail]
     
   end

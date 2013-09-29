@@ -11,12 +11,13 @@ class Comment < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :content
   
-  def serializable_hash(options={})
-    options = { 
-      only: [:id, :content],
-      include: [:user, :at_user]
-    }.update(options)
-    super(options)
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :id, :content
+    t.methods :user, :at_user
+    t.add :user, template: :base
+    t.add :at_user, template: :base
   end
 
 end

@@ -74,17 +74,16 @@ class Order < ActiveRecord::Base
   States = %i(finished canceled)
   define_id2key_methods :state
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:id, :title],
-      methods: [:order_type],
-      include: [:user]
-    }.update(options)
-    super(options)
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :id, :title
+    t.methods :order_type
+    t.add :user, template: :base
   end
 
-  def detail_hash(options={})
-    serializable_hash options.merge(include: :detail)
+  api_accessible :detail do |t|
+    t.add :detail, template: :base
   end
-
+  
 end

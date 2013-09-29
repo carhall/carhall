@@ -1,4 +1,4 @@
 class Accounts::PostBlock < ActiveRecord::Base
-  include Share::Blockable
+  include Accounts::Blockable
 
 end

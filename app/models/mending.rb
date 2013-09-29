@@ -24,15 +24,14 @@ class Mending < ActiveRecord::Base
   attr_accessible :discount, :brand_ids
   attr_accessible :brands
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:id, :brand_ids, :description, :orders_count, :reviews_count],
-      methods: [:brands, :discount],
-      include: [:dealer],
-    }.update(options)
-    super(options)
-  end
+  acts_as_api
 
+  api_accessible :base do |t|
+    t.only :id, :brand_ids, :description, :orders_count, :reviews_count
+    t.methods :brands, :discount
+    t.add :dealer, template: :base
+  end
+  
   def init_grouped_array_by_brand_and_type
     brands_count = Share::Brandable::Brands.count
     types_count = Tips::MendingOrderDetail::MendingTypes.count

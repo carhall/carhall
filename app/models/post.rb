@@ -26,13 +26,12 @@ class Post < ActiveRecord::Base
     unscoped.order('comments_count DESC, id DESC')
   end
 
-  def serializable_hash(options={})
-    options = { 
-      only: [:id, :content, :view_count, :comments_count, :created_at],
-      images: [:image],
-      include: [:user],
-    }.update(options)
-    super(options)
+  acts_as_api
+
+  api_accessible :base do |t|
+    t.only :id, :content, :view_count, :comments_count, :created_at
+    t.images :image
+    t.add :user, template: :base
   end
 
 end

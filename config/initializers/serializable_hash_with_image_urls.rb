@@ -1,3 +1,5 @@
+AbsoluteUrlPrefix = ENV['CARHALL_URL_PREFIX']
+
 ActiveModel::Serialization.module_eval do
 
   def serializable_hash(options={})
@@ -13,14 +15,12 @@ ActiveModel::Serialization.module_eval do
 
     Array.wrap(options[:methods]).each { |n| hash[n] = send(n) if respond_to?(n) }
 
-    absolute_url_prefix = Carhall::AbsoluteUrlPrefix 
-
     Array.wrap(options[:images]).each do |n| 
       if respond_to?(n) and (image = send(n)).kind_of? Paperclip::Attachment
         if image.present?
-          hash["#{n}_url"] = "#{absolute_url_prefix}#{image.url(:original)}"
-          hash["#{n}_medium_url"] = "#{absolute_url_prefix}#{image.url(:medium)}"
-          hash["#{n}_thumb_url"] = "#{absolute_url_prefix}#{image.url(:thumb)}"
+          hash["#{n}_url"] = "#{AbsoluteUrlPrefix}#{image.url(:original)}"
+          hash["#{n}_medium_url"] = "#{AbsoluteUrlPrefix}#{image.url(:medium)}"
+          hash["#{n}_thumb_url"] = "#{AbsoluteUrlPrefix}#{image.url(:thumb)}"
         else
           hash["#{n}_url"] = hash["#{n}_medium_url"] = hash["#{n}_thumb_url"] = nil
         end
