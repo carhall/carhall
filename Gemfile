@@ -51,7 +51,8 @@ gem 'acts_as_api'
 gem 'devise'
 gem "cancan"
 
-gem 'active_enum', path: '..'
+gem 'active_enum', github: 'bbtfr/active_enum'
+# gem 'active_enum', path: '..'
 gem 'kaminari'
 gem 'paperclip'
 
