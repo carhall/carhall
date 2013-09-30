@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130930092302) do
+ActiveRecord::Schema.define(version: 20130930124116) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "", null: false
@@ -247,6 +247,21 @@ ActiveRecord::Schema.define(version: 20130930092302) do
   add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
   add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
 
+  create_table "hosts", force: true do |t|
+    t.integer  "provider_id"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "programme_ids"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hosts", ["provider_id"], name: "index_hosts_on_provider_id", using: :btree
+
   create_table "locations", force: true do |t|
     t.float  "latitude"
     t.float  "longitude"
@@ -364,6 +379,30 @@ ActiveRecord::Schema.define(version: 20130930092302) do
   add_index "posts", ["club_id"], name: "index_posts_on_club_id", using: :btree
   add_index "posts", ["comments_count"], name: "index_posts_on_comments_count", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "programme_lists", force: true do |t|
+    t.integer  "provider_id"
+    t.text     "list"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "programme_lists", ["provider_id"], name: "index_programme_lists_on_provider_id", using: :btree
+
+  create_table "programmes", force: true do |t|
+    t.integer  "provider_id"
+    t.string   "title"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "host_ids"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "programmes", ["provider_id"], name: "index_programmes_on_provider_id", using: :btree
 
   create_table "provider_details", force: true do |t|
     t.string   "company"

@@ -8,6 +8,7 @@ Carhall::Application.routes.draw do
     registrations: "accounts/registrations",
     sessions: "accounts/sessions",
     confirmations: "accounts/confirmations",
+    passwords: "accounts/passwords",
   }
   devise_scope :account do
     namespace :accounts do

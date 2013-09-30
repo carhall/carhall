@@ -72,6 +72,8 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+protected
+
   def after_update_path_for resource
     setting_path
   end

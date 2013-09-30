@@ -36,6 +36,7 @@ zh-CN:
         type: 用户类型
         description: 用户说明
         confirmation_token: 手机验证码
+        reset_password_token: 手机验证码
       account/detail: &detail
         area_id: 地区
         area: 地区
