@@ -4,10 +4,6 @@ class Comment < ActiveRecord::Base
   belongs_to :source, polymorphic: true
   belongs_to :at_user
 
-  # attr_accessible :content
-  # attr_accessible :user, :source, :at_user
-  # attr_accessible :source, :at_user_id
-
   validates_presence_of :user
   validates_presence_of :content
   

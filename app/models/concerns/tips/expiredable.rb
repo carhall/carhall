@@ -10,6 +10,7 @@ module Tips::Expiredable
   end
 
   def expire_at_before_type_cast
+    p expire_at
     expire_at.strftime("%Y-%m-%d %H:%M") if expire_at
   end
 

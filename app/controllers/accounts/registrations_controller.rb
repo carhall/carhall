@@ -1,29 +1,31 @@
 class Accounts::RegistrationsController < Devise::RegistrationsController
   def build_resource hash=nil
-    self.resource = if params[:account] and params[:account][:type].present?
-      sign_up_params[:type].constantize.new hash
+    self.resource = if params[resource_name] and params[resource_name][:type].present?
+      params[resource_name][:type].constantize.new hash
     else
       Account.new
     end
   end
 
-  def sign_up_params
-    return @sign_up_params if @sign_up_params
-    @sign_up_params = params[:account].dup
-    case @sign_up_params[:type]
-    when "", nil
-      @sign_up_params.delete :detail_attributes
+  def account_params
+    return @account_params if @account_params
+    @account_params = params.require(resource_name).permit!
+    permit = [:type, :mobile, :current_password, :password, :password_confirmation, 
+      :username, :description, :avatar]
+    case @account_params[:type]
     when "Provider"
-      @sign_up_params[:detail_attributes].slice! :company, :phone
+      permit << {detail_attributes: [:id, :company, :phone]}
+    when "Dealer"
+      permit << {detail_attributes: [:id, :dealer_type_id, :business_scope_ids, :area_id, 
+        :company, :address, :phone, :open_during, {template_ids: [], business_scope_ids: []}]}
     else
     end
-    @sign_up_params
+    @account_params = @account_params.permit(permit)
   end
 
   # POST /resource
   def create
-    # p params, sign_up_params, resource_class
-    build_resource(sign_up_params)
+    build_resource(account_params)
 
     if resource.save
       if resource.active_for_authentication?
@@ -48,11 +50,11 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_mobile = resource.unconfirmed_mobile if resource.respond_to?(:unconfirmed_mobile)
 
-    if account_update_params[:current_password].present?
-      result = resource.update_with_password(account_update_params)
+    if account_params[:current_password].present?
+      result = resource.update_with_password(account_params)
     else
-      account_update_params.delete :current_password
-      result = resource.update_without_password(account_update_params)
+      account_params.delete :current_password
+      result = resource.update_without_password(account_params)
     end
 
     if result
@@ -74,7 +76,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_inactive_sign_up_path_for resource
-    return { action: :edit, controller: :'users/confirmations' } unless resource.confirmed?
+    return { action: :edit, controller: :'accounts/confirmations' } unless resource.confirmed?
     dashboard_path
   end
 

@@ -3,18 +3,15 @@ Carhall::Application.routes.draw do
   # Dashboard
   resource :dashboard, only: :show
   root to: 'dashboards#show'
-
   # Frontend sign_in/sing_up page
   devise_for :accounts, controllers: { 
     registrations: "accounts/registrations",
     sessions: "accounts/sessions",
     confirmations: "accounts/confirmations",
-  } 
-  devise_scope :accounts do
+  }
+  devise_scope :account do
     namespace :accounts do
-      resource :confirmation do
-        get :resend
-      end
+      resource :confirmation
     end
   end
 
@@ -89,19 +86,17 @@ Carhall::Application.routes.draw do
   namespace :api do
     resources :constants, only: [:index, :show]
 
-    devise_scope :accounts do
-      resources :users, only: [:show, :create] do
-        get :detail, on: :member
+    resources :users, only: [:show, :create] do
+      get :detail, on: :member
 
-        resources :friends, only: [:index]
-        resources :posts, only: [:index]
-      end
+      resources :friends, only: [:index]
+      resources :posts, only: [:index]
+    end
+    
+    resources :accounts, only: [:show] do
+      get :detail, on: :member
+      post :login, on: :collection
       
-      resources :accounts, only: [:show] do
-        get :detail, on: :member
-        post :login, on: :collection
-        
-      end
     end
 
     resource :current_user, only: [:show, :update] do

@@ -9,9 +9,6 @@ class Order < ActiveRecord::Base
   belongs_to :dealer, counter_cache: true
   has_one :review
 
-  # attr_accessible :user, :detail
-  # attr_accessible :detail_attributes
-
   validates_presence_of :source, :user 
   
   before_create do

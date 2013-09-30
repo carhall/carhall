@@ -17,12 +17,6 @@ class Account < ActiveRecord::Base
   extend Share::ImageAttachments
   define_avatar_method
 
-  # Setup accessible (or protected) attributes for your model
-  # attr_accessible :password, :password_confirmation, :remember_me
-  # attr_accessible :username, :mobile, :description, :avatar, :type
-  # attr_accessible :detail
-  # attr_accessible :detail_attributes
-
   validates_presence_of :username, :type
   validates_length_of :username, :within => 2..20, :allow_blank => true
 

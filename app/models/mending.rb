@@ -12,7 +12,7 @@ class Mending < ActiveRecord::Base
   serialize :reviews_counts, Hash
   serialize :stars_counts, Hash
 
-  serialize :brand_ids
+  serialize :brand_ids, Array
   enumerate :brands, with: Share::Brand, multiple: true
 
   enumerate :area, with: Share::Area
@@ -20,10 +20,6 @@ class Mending < ActiveRecord::Base
   include Share::Localizable
   include Share::Statisticable
 
-  # attr_accessible :dealer
-  # attr_accessible :discount, :brand_ids
-  # attr_accessible :brands
-  
   api_accessible :base do |t|
     t.only :id, :brand_ids, :description, :orders_count, :reviews_count
     t.methods :brands, :discount

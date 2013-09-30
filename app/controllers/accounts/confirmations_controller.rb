@@ -22,7 +22,7 @@ class Accounts::ConfirmationsController < Devise::ConfirmationsController
 
   # GET /resource/confirmation?confirmation_token=abcdef
   def update
-    self.resource = resource_class.confirm_by_token(params[:user][:confirmation_token])
+    self.resource = resource_class.confirm_by_token(params[resource_name][:confirmation_token])
 
     if resource.errors.empty?
       set_flash_message(:notice, :confirmed) if is_navigational_format?
@@ -35,6 +35,7 @@ class Accounts::ConfirmationsController < Devise::ConfirmationsController
 
   # The path used after resending confirmation instructions.
   def after_resending_confirmation_instructions_path_for(resource_name)
-    edit_users_confirmation_path if is_navigational_format?
+    edit_accounts_confirmation_path if is_navigational_format?
   end
+
 end 

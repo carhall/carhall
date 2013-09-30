@@ -55,10 +55,10 @@ module Devise
     module Authenticatable
       extend ActiveSupport::Concern
 
-      # BLACKLIST_FOR_SERIALIZATION = [:encrypted_password, :reset_password_token, :reset_password_sent_at,
-      #   :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip,
-      #   :last_sign_in_ip, :password_salt, :confirmation_token, :confirmed_at, :confirmation_sent_at,
-      #   :remember_token, :unconfirmed_mobile, :failed_attempts, :unlock_token, :locked_at, :authentication_token]
+      BLACKLIST_FOR_SERIALIZATION = [:encrypted_password, :reset_password_token, :reset_password_sent_at,
+        :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip,
+        :last_sign_in_ip, :password_salt, :confirmation_token, :confirmed_at, :confirmation_sent_at,
+        :remember_token, :unconfirmed_mobile, :failed_attempts, :unlock_token, :locked_at, :authentication_token]
 
       included do
         class_attribute :devise_modules, :instance_writer => false
@@ -144,20 +144,20 @@ module Devise
       #
       #       protected
       #
-      #       def send_devise_notification(notification, opts = {})
-      #         # if the record is new or changed then delay the
+      #       def send_devise_notification(notification, *args)
+      #         # If the record is new or changed then delay the
       #         # delivery until the after_commit callback otherwise
       #         # send now because after_commit will not be called.
       #         if new_record? || changed?
-      #           pending_notifications << [notification, opts]
+      #           pending_notifications << [notification, args]
       #         else
-      #           devise_mailer.send(notification, self, opts).deliver
+      #           devise_mailer.send(notification, self, *args).deliver
       #         end
       #       end
       #
       #       def send_pending_notifications
-      #         pending_notifications.each do |n, opts|
-      #           devise_mailer.send(n, self, opts).deliver
+      #         pending_notifications.each do |notification, args|
+      #           devise_mailer.send(notification, self, *args).deliver
       #         end
       #
       #         # Empty the pending notifications array because the
@@ -171,8 +171,8 @@ module Devise
       #       end
       #     end
       #
-      def send_devise_notification(notification, opts={})
-        devise_mailer.send(notification, self, opts).deliver
+      def send_devise_notification(notification, *args)
+        devise_mailer.send(notification, self, *args).deliver
       end
 
       def downcase_keys
@@ -278,14 +278,6 @@ module Devise
 
         def devise_parameter_filter
           @devise_parameter_filter ||= Devise::ParameterFilter.new(case_insensitive_keys, strip_whitespace_keys)
-        end
-
-        # Generate a token by looping and ensuring does not already exist.
-        def generate_token(column)
-          loop do
-            token = Devise.friendly_token
-            break token unless to_adapter.find_first({ column => token })
-          end
         end
       end
     end

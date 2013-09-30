@@ -7,7 +7,7 @@ module Devise
     #
     # == Options
     #
-    # Confirmable adds the following options to devise_for:
+    # Confirmable adds the following options to +devise+:
     #
     #   * +allow_unconfirmed_access_for+: the time you want to allow the user to access his account
     #     before confirming it. After this period, the user access is denied. You can
@@ -40,9 +40,10 @@ module Devise
       end
 
       def initialize(*args, &block)
-        @bypass_postpone = false
+        @bypass_confirmation_postpone = false
         @reconfirmation_required = false
         @skip_confirmation_notification = false
+        @raw_confirmation_token = nil
         super
       end
 
@@ -93,10 +94,12 @@ module Devise
 
       # Send confirmation instructions by mobile
       def send_confirmation_instructions
-        ensure_confirmation_token!
+        unless @raw_confirmation_token
+          generate_confirmation_token!
+        end
 
         opts = pending_reconfirmation? ? { :to => unconfirmed_mobile } : { }
-        send_devise_notification(:confirmation_instructions, opts)
+        send_devise_notification(:confirmation_instructions, @raw_confirmation_token, opts)
       end
 
       def send_reconfirmation_instructions
@@ -109,17 +112,11 @@ module Devise
 
       # Resend confirmation token.
       # Regenerates the token if the period is expired.
-      def resend_confirmation_token
+      def resend_confirmation_instructions
         pending_any_confirmation do
-          regenerate_confirmation_token! if confirmation_period_expired?
           send_confirmation_instructions
         end
       end
-      
-      # Generate a confirmation token unless already exists and save the record.
-      def ensure_confirmation_token!
-        generate_confirmation_token! if should_generate_confirmation_token?
-      end 
 
       # Overwrites active_for_authentication? for confirmation
       # by verifying whether a user is active to sign in or not. If the user
@@ -149,19 +146,16 @@ module Devise
       # If you don't want reconfirmation to be sent, neither a code
       # to be generated, call skip_reconfirmation!
       def skip_reconfirmation!
-        @bypass_postpone = true
+        @bypass_confirmation_postpone = true
       end
 
       protected
-        def should_generate_confirmation_token?
-          confirmation_token.nil? || confirmation_period_expired?
-        end
 
         # A callback method used to deliver confirmation
         # instructions on creation. This can be overriden
         # in models to map to a nice sign up e-mail.
         def send_on_create_confirmation_instructions
-          send_devise_notification(:confirmation_instructions)
+          send_confirmation_instructions
         end
 
         # Callback to overwrite if confirmation is required or not.
@@ -221,10 +215,12 @@ module Devise
           end
         end
 
-        # Generates a new random token for confirmation, and stores the time
-        # this token is being generated
+        # Generates a new random token for confirmation, and stores
+        # the time this token is being generated
         def generate_confirmation_token
-          self.confirmation_token = self.class.confirmation_token
+          raw, enc = Devise.token_generator.generate_number(self.class, :confirmation_token)
+          @raw_confirmation_token   = raw
+          self.confirmation_token   = enc
           self.confirmation_sent_at = Time.now.utc
         end
 
@@ -232,25 +228,16 @@ module Devise
           generate_confirmation_token && save(:validate => false)
         end
 
-        # Regenerates a new token.
-        def regenerate_confirmation_token
-          generate_confirmation_token
-        end
-
-        def regenerate_confirmation_token!
-          regenerate_confirmation_token && save(:validate => false)
-        end
-
         def postpone_mobile_change_until_confirmation_and_regenerate_confirmation_token
           @reconfirmation_required = true
           self.unconfirmed_mobile = self.mobile
           self.mobile = self.mobile_was
-          regenerate_confirmation_token
+          generate_confirmation_token
         end
 
         def postpone_mobile_change?
-          postpone = self.class.reconfirmable && mobile_changed? && !@bypass_postpone && !self.mobile.blank?
-          @bypass_postpone = false
+          postpone = self.class.reconfirmable && mobile_changed? && !@bypass_confirmation_postpone && !self.mobile.blank?
+          @bypass_confirmation_postpone = false
           postpone
         end
 
@@ -275,7 +262,7 @@ module Devise
           unless confirmable.try(:persisted?)
             confirmable = find_or_initialize_with_errors(confirmation_keys, attributes, :not_found)
           end
-          confirmable.resend_confirmation_token if confirmable.persisted?
+          confirmable.resend_confirmation_instructions if confirmable.persisted?
           confirmable
         end
 
@@ -284,17 +271,17 @@ module Devise
         # If the user is already confirmed, create an error for the user
         # Options must have the confirmation_token
         def confirm_by_token(confirmation_token)
-          confirmable = find_or_initialize_with_error_by(:confirmation_token, confirmation_token)
-          confirmable.confirm! if confirmable.persisted?
-          confirmable
-        end
+          original_token     = confirmation_token
+          confirmation_token = Devise.token_generator.digest(self, :confirmation_token, confirmation_token)
 
-        # Generate a token checking if one does not already exist in the database.
-        def confirmation_token
-          loop do
-            token = "%06d" % SecureRandom.random_number(1000000)
-            break token unless to_adapter.find_first({ :confirmation_token => token })
+          confirmable = find_or_initialize_with_error_by(:confirmation_token, confirmation_token)
+          if !confirmable.persisted? && Devise.allow_insecure_token_lookup
+            confirmable = find_or_initialize_with_error_by(:confirmation_token, original_token)
           end
+
+          confirmable.confirm! if confirmable.persisted?
+          confirmable.confirmation_token = original_token
+          confirmable
         end
 
         # Find a record for confirmation by unconfirmed mobile field

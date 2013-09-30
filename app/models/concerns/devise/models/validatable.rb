@@ -59,7 +59,7 @@ module Devise
       end
 
       module ClassMethods
-        Devise::Models.config(self, :password_length)
+        Devise::Models.config(self, :mobile_regexp, :password_length)
 
         def mobile_regexp 
           /\d{11}/

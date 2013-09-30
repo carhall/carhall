@@ -10,7 +10,6 @@
 
     <%= render 'shared/alert', message: '您还没有收到团购订单！' if @orders.empty? %>
 
-    <% @orders = @orders.includes(:detail) %>
     <table class="table">
       <thead>
         <tr>
@@ -26,7 +25,7 @@
           <tr>
             <td><%= order.id %></td>
             <td><%= order.title %></td>
-            <td><%= order.detail.count %></td>
+            <td><%= order.count %></td>
             <td><%= order.cost %></td>
             <td><%= order.state %></td>
           </tr>

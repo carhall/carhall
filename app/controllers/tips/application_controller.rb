@@ -20,7 +20,7 @@ class Tips::ApplicationController < ApplicationController
       define_method :update do
         @tip = @parent || klass.new(dealer: @dealer)
 
-        if @tip.update_attributes(params[klass.name.underscore])
+        if @tip.update_attributes(data_params)
           redirect_to tips_root_path, flash: { success: i18n_message(:update_success_without_title, klass.name.underscore) }
         else
           render :edit
@@ -52,7 +52,7 @@ class Tips::ApplicationController < ApplicationController
       end
 
       define_method :create do
-        @tip = @parent.new params[klass.name.underscore]
+        @tip = @parent.new data_params
 
         if @tip.save
           index_path = { action: :index }
@@ -66,7 +66,7 @@ class Tips::ApplicationController < ApplicationController
       end
 
       define_method :update do
-        if @tip.update_attributes(params[klass.name.underscore])
+        if @tip.update_attributes(data_params)
           index_path = { action: :index }
           redirect_to index_path, flash: { success: i18n_message(:update_success, klass.name.underscore) }
         else
