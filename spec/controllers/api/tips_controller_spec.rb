@@ -47,6 +47,12 @@ describe "Tips" do
     include_examples "tips#nearby"
     include_examples "tips#favorite"
     include_examples "tips#hot"
+
+    context "with dealer_id" do
+      let(:attach_args) {{ dealer_id: dealer.id }}
+      include_examples "resources#show"
+      include_examples "resources#detail"
+    end
   end
 
   describe Api::Tips::CleaningsController do
@@ -63,12 +69,27 @@ describe "Tips" do
       let(:empty_filter_args) {{ filter: { cleaning_type_id: 2 }}}
       include_examples "resources#index filter"
     end
+
+    context "with dealer_id" do
+      let(:attach_args) {{ dealer_id: dealer.id }}
+      include_examples "tips#resources"
+      include_examples "tips#nearby"
+      include_examples "tips#cheapie"
+      include_examples "tips#favorite"
+      include_examples "tips#hot"
+    end
   end
 
   describe Api::Tips::ActivitiesController do
     let(:resource_name) { :activity }
     include_examples "tips#resources"
     include_examples "tips#nearby"
+
+    context "with dealer_id" do
+      let(:attach_args) {{ dealer_id: dealer.id }}
+      include_examples "tips#resources"
+      include_examples "tips#nearby"
+    end
   end
 
   describe Api::Tips::BulkPurchasingsController do
@@ -84,6 +105,15 @@ describe "Tips" do
       let(:filter_args) {{ filter: { bulk_purchasing_type_id: 1 }}}
       let(:empty_filter_args) {{ filter: { bulk_purchasing_type_id: 2 }}}
       include_examples "resources#index filter"
+    end
+
+    context "with dealer_id" do
+      let(:attach_args) {{ dealer_id: dealer.id }}
+      include_examples "tips#resources"
+      include_examples "tips#nearby"
+      include_examples "tips#cheapie"
+      include_examples "tips#favorite"
+      include_examples "tips#hot"
     end
   end
 

@@ -5,13 +5,13 @@ shared_examples_for "resources#collection base" do
     response.status.should eq(200), error_messages
 
     response_body['data'].should be_kind_of Array
-    response_body['data'].should have_at_least(3).items
+    response_body['data'].should have_at_least(3).items, error_messages
   end
   it "when per_page=1, pagerizes has a 200 status code, and return a array of size 1" do
     get collection_name, { page: 1, per_page: 1 }.merge(reset_args)
     response.status.should eq(200)
 
-    response_body['data'].should have(1).items
+    response_body['data'].should have(1).items, error_messages
   end
 end
 

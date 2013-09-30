@@ -28,8 +28,8 @@ shared_context "errors display for debugging" do
   from #{response_body['backtrace'][2]}"
 EOM
     rescue 
-      response_body
-    end
+      "#{response_body}"
+    end << "\nWith params: #{reset_args rescue nil}"
   }}
 end
 

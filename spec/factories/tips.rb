@@ -19,7 +19,7 @@ FactoryGirl.define do
 
   factory :cleaning do
     title { Faker::Lorem.sentence }
-    cleaning_type { Cleaning::CleaningTypes.names.sample }
+    cleaning_type { Cleaning::CleaningType.names.sample }
     price { rand(100) }
     vip_price { rand(100) }
     dealer
@@ -33,7 +33,7 @@ FactoryGirl.define do
 
   factory :bulk_purchasing do
     title { Faker::Lorem.sentence }
-    bulk_purchasing_type { BulkPurchasing::BulkPurchasingTypes.names.sample }
+    bulk_purchasing_type { BulkPurchasing::BulkPurchasingType.names.sample }
     expire_at { rand_time(3.months.ago, 3.months.since) }
     price { rand(100) }
     vip_price { rand(100) }
@@ -46,7 +46,7 @@ FactoryGirl.define do
         brand_id: [0,1,2,3].sample, 
         series: Faker::Lorem.word, 
         plate_num: generate(:plate_num),
-        mending_type: Tips::MendingOrderDetail::MendingTypes.names.sample,
+        mending_type: Tips::MendingOrderDetail::MendingType.names.sample,
         arrive_at: rand_time(3.months.ago, 3.months.since),
       }
     end

@@ -1,22 +1,22 @@
 class Api::ConstantsController < Api::ApplicationController
   def constants
     {
-      sexes: Accounts::UserDetail::Sexes,
-      areas: Share::Area.names,
-      brands: Share::Brand.names,
-      dealer_types: Accounts::DealerDetail::DealerTypes,
-      business_scopes: Accounts::DealerDetail::BusinessScopes,
-      cleaning_types: Cleaning::CleaningTypes,
-      mending_types: ::Tips::MendingOrderDetail::MendingTypes,
-      bulk_purchasing_types: ::BulkPurchasing::BulkPurchasingTypes,
+      sexes: Accounts::UserDetail::Sex.all,
+      areas: Share::Area.all,
+      brands: Share::Brand.all,
+      dealer_types: Accounts::DealerDetail::DealerType.all,
+      business_scopes: Accounts::DealerDetail::BusinessScope.all,
+      cleaning_types: Cleaning::CleaningType.all,
+      mending_types: ::Tips::MendingOrderDetail::MendingType.all,
+      bulk_purchasing_types: ::BulkPurchasing::BulkPurchasingType.all,
     }
   end
 
   def index
-    render_data Constants
+    render_data constants
   end
 
   def show
-    render_data Constants[params[:id].to_sym]
+    render_data constants[params[:id].to_sym]
   end
 end
