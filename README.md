@@ -36,7 +36,8 @@ GET、PUT和DELETE都可以使用POST模拟，需要额外添加_method=get/put/
 提交表单数据名称使用：data[字段名]  
 > 例如：登录系统，使用
 > 
->     POST /api/users/login
+>     ~~POST /api/users/login~~
+>     POST /api/accounts/login
 >     表单
 >     data[mobie]       13323456787
 >     data[password]    password
@@ -139,6 +140,8 @@ API
 ----------
 Method | URI                               | 说明
 -------|-----------------------------------|------------------------------------
+GET    | /api/accounts/:id                 | 查询指定账户信息  
+GET    | /api/accounts/:id/detail          | 查询指定账户详细信息  
 GET    | /api/users/:id                    | 查询指定用户信息  
 GET    | /api/users/:id/detail             | 查询指定用户详细信息  
 GET    | /api/dealers                      | 查询所有商家信息  
@@ -147,7 +150,7 @@ GET    | /api/dealers/:id/detail           | 查询指定商家详细信息
 GET    | /api/providers                    | 查询所有订阅号信息  
 GET    | /api/providers/:id                | 查询指定订阅号信息  
 GET    | /api/providers/:id/detail         | 查询指定订阅号详细信息  
-POST   | /api/users/login                  | 用户登录  
+POST   | /api/accounts/login               | 用户登录  
 POST   | /api/users                        | 新建用户，user_type默认为user  
 GET    | /api/current_user                 | 查询当前用户信息  
 GET    | /api/current_user/detail          | 查询当前用户详细信息  
@@ -363,14 +366,16 @@ detail[goal_attainment] | 交易达成率                  | 只读
 
 API
 ----------
-Method | URI                               | 说明
--------|-----------------------------------|------------------------------------
-GET    | /api/tips/mendings                | 查询所有保养专修信息（默认排序）   
-GET    | /api/tips/mendings/nearby         | 查询所有保养专修信息（离我最近）  
-GET    | /api/tips/mendings/favorite       | 查询所有保养专修信息（评分最高）
-GET    | /api/tips/mendings/hot            | 查询所有保养专修信息（购买最多）
-GET    | /api/tips/mendings/:id            | 查询指定保养专修信息  
-GET    | /api/tips/mendings/:id/detail     | 查询指定保养专修详细信息  
+Method | URI                                         | 说明
+-------|---------------------------------------------|--------------------------
+GET    | /api/tips/mendings                          | 查询所有保养专修信息（默认排序）   
+GET    | /api/tips/mendings/nearby                   | 查询所有保养专修信息（离我最近）  
+GET    | /api/tips/mendings/favorite                 | 查询所有保养专修信息（评分最高）
+GET    | /api/tips/mendings/hot                      | 查询所有保养专修信息（购买最多）
+GET    | /api/tips/mendings/:id                      | 查询指定保养专修信息  
+GET    | /api/tips/mendings/:id/detail               | 查询指定保养专修详细信息  
+GET    | /api/tips/dealers/:dealer_id/mending        | 查询指定商户的保养专修信息  
+GET    | /api/tips/dealers/:dealer_id/mending/detail | 查询指定商户的保养专修详细信息  
 
 使用nearby，离我最近时，需要附加参数lat（经度）和lng（纬度）
 > 例如：
@@ -404,15 +409,20 @@ detail[goal_attainment] | 交易达成率                  | 只读
 
 API
 ----------
-Method | URI                               | 说明
--------|-----------------------------------|------------------------------------
-GET    | /api/tips/cleanings               | 查询所有洗车美容信息（默认排序）   
-GET    | /api/tips/cleanings/nearby        | 查询所有洗车美容信息（离我最近）  
-GET    | /api/tips/cleanings/cheapie       | 查询所有洗车美容信息（价格最低）  
-GET    | /api/tips/cleanings/favorite      | 查询所有洗车美容信息（评分最高）
-GET    | /api/tips/cleanings/hot           | 查询所有洗车美容信息（购买最多）
-GET    | /api/tips/cleanings/:id           | 查询指定洗车美容信息  
-GET    | /api/tips/cleanings/:id/detail    | 查询指定洗车美容详细信息  
+Method | URI                                        | 说明
+-------|--------------------------------------------|---------------------------
+GET    | /api/tips/cleanings                        | 查询所有洗车美容信息（默认排序）  
+GET    | /api/tips/cleanings/nearby                 | 查询所有洗车美容信息（离我最近）  
+GET    | /api/tips/cleanings/cheapie                | 查询所有洗车美容信息（价格最低）  
+GET    | /api/tips/cleanings/favorite               | 查询所有洗车美容信息（评分最高）
+GET    | /api/tips/cleanings/hot                    | 查询所有洗车美容信息（购买最多）
+GET    | /api/tips/cleanings/:id                    | 查询指定洗车美容信息  
+GET    | /api/tips/cleanings/:id/detail             | 查询指定洗车美容详细信息  
+GET    | /api/dealers/:dealer_id/cleanings          | 查询指定商户的洗车美容信息（默认排序）  
+GET    | /api/dealers/:dealer_id/cleanings/nearby   | 查询指定商户的洗车美容信息（离我最近）  
+GET    | /api/dealers/:dealer_id/cleanings/cheapie  | 查询指定商户的洗车美容信息（价格最低）  
+GET    | /api/dealers/:dealer_id/cleanings/favorite | 查询指定商户的洗车美容信息（评分最高）  
+GET    | /api/dealers/:dealer_id/cleanings/hot      | 查询指定商户的洗车美容信息（购买最多）  
 
 GET查询时，可以在URI中使用一个附加字段filter[cleaning_type_id]作为条件，来查询指定类别的洗车美容信息  
 **注意：会员洗车即filter[cleaning_type_id]=0**  
@@ -432,12 +442,14 @@ image                |                            |
 
 API
 ----------
-Method | URI                               | 说明
--------|-----------------------------------|------------------------------------
-GET    | /api/tips/activities              | 查询所有活动信息（默认排序）   
-GET    | /api/tips/activities/nearby       | 查询所有活动信息（离我最近）  
-GET    | /api/tips/activities/:id          | 查询指定活动信息  
-GET    | /api/tips/activities/:id/detail   | 查询指定活动详细信息  
+Method | URI                                       | 说明
+-------|-------------------------------------------|----------------------------
+GET    | /api/tips/activities                      | 查询所有活动信息（默认排序）   
+GET    | /api/tips/activities/nearby               | 查询所有活动信息（离我最近）  
+GET    | /api/tips/activities/:id                  | 查询指定活动信息  
+GET    | /api/tips/activities/:id/detail           | 查询指定活动详细信息   
+GET    | /api/dealers/:dealer_id/activities        | 查询指定商户的活动信息（默认排序）  
+GET    | /api/dealers/:dealer_id/activities/nearby | 查询指定商户的活动信息（离我最近）  
 
 查询相关参数，参见 Mending 保养专修  
 
@@ -462,15 +474,20 @@ detail[goal_attainment] | 交易达成率                  | 只读
 
 API
 ----------
-Method | URI                                   | 说明
--------|---------------------------------------|--------------------------------
-GET    | /api/tips/bulk_purchasings            | 查询所有团购信息（默认排序）   
-GET    | /api/tips/bulk_purchasings/nearby     | 查询所有团购信息（离我最近）  
-GET    | /api/tips/bulk_purchasings/cheapie    | 查询所有团购信息（价格最低）  
-GET    | /api/tips/bulk_purchasings/favorite   | 查询所有团购信息（评分最高）
-GET    | /api/tips/bulk_purchasings/hot        | 查询所有团购信息（购买最多）
-GET    | /api/tips/bulk_purchasings/:id        | 查询指定团购信息  
-GET    | /api/tips/bulk_purchasings/:id/detail | 查询指定团购详细信息  
+Method | URI                                               | 说明
+-------|---------------------------------------------------|--------------------
+GET    | /api/tips/bulk_purchasings                        | 查询所有团购信息（默认排序）   
+GET    | /api/tips/bulk_purchasings/nearby                 | 查询所有团购信息（离我最近）  
+GET    | /api/tips/bulk_purchasings/cheapie                | 查询所有团购信息（价格最低）  
+GET    | /api/tips/bulk_purchasings/favorite               | 查询所有团购信息（评分最高）
+GET    | /api/tips/bulk_purchasings/hot                    | 查询所有团购信息（购买最多）
+GET    | /api/tips/bulk_purchasings/:id                    | 查询指定团购信息  
+GET    | /api/tips/bulk_purchasings/:id/detail             | 查询指定团购详细信息  
+GET    | /api/dealers/:dealer_id/bulk_purchasings          | 查询指定商户的团购信息（默认排序）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings/nearby   | 查询指定商户的团购信息（离我最近）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings/cheapie  | 查询指定商户的团购信息（价格最低）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings/favorite | 查询指定商户的团购信息（评分最高）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings/hot      | 查询指定商户的团购信息（购买最多）  
 
 GET查询时，可以在URI中使用一个附加字段filter[bulk_purchasing_type_id]作为条件，来查询指定类别的团购信息  
 查询相关参数，参见 Mending 保养专修  

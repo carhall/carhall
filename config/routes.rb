@@ -127,28 +127,22 @@ Carhall::Application.routes.draw do
           get :detail
         end
 
-        resources :cleanings, only: [:index, :show] do
+        resources :cleanings, only: [:index] do
           get :nearby, on: :collection
           get :cheapie, on: :collection
           get :favorite, on: :collection
           get :hot, on: :collection
-    
-          get :detail, on: :member
         end
         
-        resources :activities, only: [:index, :show] do
+        resources :activities, only: [:index] do
           get :nearby, on: :collection
-    
-          get :detail, on: :member        
         end
         
-        resources :bulk_purchasings, only: [:index, :show] do
+        resources :bulk_purchasings, only: [:index] do
           get :nearby, on: :collection
           get :cheapie, on: :collection
           get :favorite, on: :collection
           get :hot, on: :collection
-    
-          get :detail, on: :member
         end
 
         resources :orders, only: [:index, :show]
