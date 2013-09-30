@@ -4,8 +4,9 @@ GIT
   specs:
     geohash (0.0.1.alpha)
 
-PATH
-  remote: ..
+GIT
+  remote: git://github.com/bbtfr/active_enum.git
+  revision: 55657d4d0c05f5667c2b374516ae13aab230c038
   specs:
     active_enum (0.9.12)
       activesupport (>= 3.0)
