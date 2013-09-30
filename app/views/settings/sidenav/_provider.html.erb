@@ -3,6 +3,6 @@
 </ul>
 <ul class="nav nav-list sidenav">
   <li>
-    <span>商家二维码：<img src="<%= rqrcode_setting_path(format: :png) %>"></span>
+    <span>媒体二维码：<%= image_tag @user.detail.rqrcode_image.url %></span>
   </li>
 </ul>

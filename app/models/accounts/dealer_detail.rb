@@ -5,6 +5,8 @@ class Accounts::DealerDetail < ActiveRecord::Base
   define_image_method
   alias_attribute :authentication_image, :image
 
+  define_rqrcode_image_method
+  
   validates_presence_of :area_id, :dealer_type_id, :business_scope_ids,
     :company, :address, :phone, :open_during, :authentication_image
 

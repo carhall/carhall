@@ -1,5 +1,5 @@
 class Dealer < Account
-  include Accounts::RqrcodeToken
+  include Accounts::RqrcodeTokenable
 
   include Share::Localizable
   include Share::Statisticable

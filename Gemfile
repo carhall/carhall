@@ -77,6 +77,7 @@ group :development, :test do
 
   gem 'quiet_assets'
   gem 'pry-debugger'
+  gem 'pry-rails'
   
   gem 'rspec-rails'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130926072821) do
+ActiveRecord::Schema.define(version: 20130930092302) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "", null: false
@@ -209,14 +209,18 @@ ActiveRecord::Schema.define(version: 20130926072821) do
     t.string   "address"
     t.string   "phone"
     t.string   "open_during"
-    t.integer  "balance",            default: 0, null: false
+    t.integer  "balance",                    default: 0, null: false
     t.string   "rqrcode_token"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "template_ids"
-    t.integer  "balance_used",       default: 0, null: false
+    t.integer  "balance_used",               default: 0, null: false
+    t.string   "rqrcode_image_file_name"
+    t.string   "rqrcode_image_content_type"
+    t.integer  "rqrcode_image_file_size"
+    t.datetime "rqrcode_image_updated_at"
   end
 
   add_index "dealer_details", ["area_id"], name: "index_dealer_details_on_area_id", using: :btree
@@ -362,9 +366,13 @@ ActiveRecord::Schema.define(version: 20130926072821) do
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "provider_details", force: true do |t|
-    t.string "company"
-    t.string "phone"
-    t.string "rqrcode_token"
+    t.string   "company"
+    t.string   "phone"
+    t.string   "rqrcode_token"
+    t.string   "rqrcode_image_file_name"
+    t.string   "rqrcode_image_content_type"
+    t.integer  "rqrcode_image_file_size"
+    t.datetime "rqrcode_image_updated_at"
   end
 
   create_table "reviews", force: true do |t|

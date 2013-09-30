@@ -1,6 +1,11 @@
 class SettingsController < ApplicationController
   prepend_before_filter :ensure_user_type
   before_filter :set_dealer, only: [:finance, :template]
+  before_filter :ensure_rqrcode_image
+
+  def ensure_rqrcode_image
+    @user.ensure_rqrcode_image!
+  end
 
   def show
   end
@@ -9,14 +14,5 @@ class SettingsController < ApplicationController
   end
 
   def template
-  end
-
-  def rqrcode
-    respond_to do |format|
-      format.svg  { render qrcode: @user.detail.rqrcode_token, level: :l, unit: 10 }
-      format.png  { render qrcode: @user.detail.rqrcode_token }
-      format.gif  { render qrcode: @user.detail.rqrcode_token }
-      format.jpeg { render qrcode: @user.detail.rqrcode_token }
-    end
   end
 end
