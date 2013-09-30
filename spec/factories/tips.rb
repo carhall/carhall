@@ -68,7 +68,7 @@ FactoryGirl.define do
 
   factory :review do
     content { Faker::Lorem.sentence }
-    stars { rand(5) }
+    stars { rand(5)+1 }
     association :order, factory: :mending_order
   end
 end

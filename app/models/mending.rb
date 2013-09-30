@@ -27,9 +27,9 @@ class Mending < ActiveRecord::Base
   end
   
   def init_grouped_array_by_brand_and_type
-    brands_count = Share::Brandable::Brands.count
-    types_count = Tips::MendingOrderDetail::MendingTypes.count
-    Array.new(brands_count) { Array.new(types_count) { [] }}
+    brands_count = Share::Brand.all.count
+    types_count = Tips::MendingOrderDetail::MendingType.all.count
+    Array.new(brands_count+1) { Array.new(types_count+1) { [] }}
   end
 
   def orders_group_by_brand_and_type
