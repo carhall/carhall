@@ -1,5 +1,5 @@
 class Cleaning < ActiveRecord::Base
-  include Share::Servicable
+  include Tips::Servicable
   set_order_class CleaningOrder
 
   extend Share::ImageAttachments
@@ -9,7 +9,7 @@ class Cleaning < ActiveRecord::Base
   include Share::Localizable
   include Share::Statisticable
   
-  attr_accessible :title, :cleaning_type_id, :price, :vip_price, :description, :image
+  # attr_accessible :title, :cleaning_type_id, :price, :vip_price, :description, :image
 
   validates_presence_of :dealer
   validates_presence_of :title, :cleaning_type_id, :price, :vip_price

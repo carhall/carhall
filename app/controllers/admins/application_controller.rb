@@ -6,7 +6,7 @@ class Admins::ApplicationController < ApplicationController
     before_filter :set_user, only: [:show, :edit, :update, :destroy]
 
     define_method :index do
-      @users = klass.scoped.page params[:page]
+      @users = klass.all.page params[:page]
     end
 
     define_method :show do

@@ -3,9 +3,9 @@ module Accounts::Blockable
 
   included do
     belongs_to :user
-    belongs_to :blacklist, class_name: Account
+    belongs_to :blacklist, class_name: 'Account'
 
-    attr_accessible :blacklist_id, :user_id
+    # attr_accessible :blacklist_id, :user_id
   end
 
 end

@@ -1,5 +1,5 @@
 class Share::Location < ActiveRecord::Base
-  attr_accessible :latitude, :longitude
+  # attr_accessible :latitude, :longitude
 
   validates_presence_of :latitude, :longitude
   

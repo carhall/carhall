@@ -18,7 +18,7 @@ class Api::CurrentUsersController < Api::ApplicationController
   # We need to use a copy of the @user because we don't want to change
   # the current user in place.
   def update
-    if @user.update_without_password(params[:data])
+    if @user.update_without_password(update_params)
       render_update_success @user
     else
       render_failure @user
@@ -30,11 +30,22 @@ class Api::CurrentUsersController < Api::ApplicationController
   # We need to use a copy of the @user because we don't want to change
   # the current user in place.
   def password
-    if @user.update_with_password(params[:data])
+    if @user.update_with_password(password_params)
       render_update_success @user
     else
       render_failure @user
     end
+  end
+
+private
+
+  def update_params
+    params.require(:data).permit(:username, :mobile, :description, :avatar, :detail_attributes)
+  end
+
+  def password_params
+    params.require(:data).permit(:username, :mobile, :description, :avatar, 
+        :password, :password_confirmation, :current_password, :detail_attributes)
   end
 
 end

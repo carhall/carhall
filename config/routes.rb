@@ -92,10 +92,15 @@ Carhall::Application.routes.draw do
     devise_scope :accounts do
       resources :users, only: [:show, :create] do
         get :detail, on: :member
-        post :login, on: :collection
 
         resources :friends, only: [:index]
         resources :posts, only: [:index]
+      end
+      
+      resources :accounts, only: [:show] do
+        get :detail, on: :member
+        post :login, on: :collection
+        
       end
     end
 
@@ -117,9 +122,6 @@ Carhall::Application.routes.draw do
 
       get :detail, on: :member
       
-      resources :orders, only: [:index, :show]
-      resources :reviews, only: [:index, :show]
-
       namespace :tips, path: '' do
         resource :mending, only: [:show] do
           get :detail
@@ -149,6 +151,9 @@ Carhall::Application.routes.draw do
           get :detail, on: :member
         end
 
+        resources :orders, only: [:index, :show]
+        resources :reviews, only: [:index, :show]
+        
       end
     end
 
@@ -243,11 +248,11 @@ Carhall::Application.routes.draw do
     end
 
     # Need to return JSON-formatted 404 error in Rails
-    match '*foo', :to => ->(env) { [404, {"Content-Type" => "application/json; charset=utf-8"}, [{
+    match '*foo', to: ->(env) { [404, {"Content-Type" => "application/json; charset=utf-8"}, [{
       error: "No route matches [#{env["REQUEST_METHOD"]}] \"#{env["PATH_INFO"]}\"",
       error_code: :not_found,
       success: false
-    }.to_json]] }
+    }.to_json]] }, via: :all
   end
 
 end

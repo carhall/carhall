@@ -1,37 +1,23 @@
 class Api::UsersController < Api::ApplicationController
   skip_before_filter :authenticate_account!, only: [:login, :create]
 
-  set_resource_class Account, detail: true
-
-  # POST /api/users/login
-  # POST /api/users/login.json
-  def login
-    @user = Account.find_for_database_authentication(mobile: params[:data][:mobile])
-
-    if @user && @user.valid_password?(params[:data][:password])
-      @user.reset_authentication_token!  # make sure the user has a token generated
-      sign_in(@user)  
-      render_create_success @user, :with_token
-    else
-      warden.custom_failure!
-      render_error t('devise.failure.invalid'), :unauthorized
-    end
-  end
-
-  # GET /api/users/logout
-  # GET /api/users/logout.json
-  # DELETE /api/users/logout
-  # DELETE /api/users/logout.json
-  def logout
-    sign_out(resource_name)
-  end
+  set_resource_class User, detail: true
 
   # POST /api/users
   # POST /api/users.json
   def create
-    @user = User.new params[:data]
+    @user = User.new data_params
     @user.reset_authentication_token
 
     render_create @user, :with_token
   end
+
+  private
+    # Using a private method to encapsulate the permissible parameters is just a good pattern
+    # since you'll be able to reuse the same permit list between create and update. Also, you
+    # can specialize this method with per-user checking of permissible attributes.
+    def data_params
+      params.require(:data).permit(:username, :mobile, :description, :avatar, 
+        :password, :password_confirmation, :detail_attributes)
+    end
 end

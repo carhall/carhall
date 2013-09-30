@@ -3,13 +3,13 @@ class Post < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   
   belongs_to :club
-  has_many :comments, as: :source, class_name: CommentCounterCached
+  has_many :comments, as: :source, class_name: 'CommentCounterCached'
   
   extend Share::ImageAttachments
   define_image_method
 
-  attr_accessible :content, :image
-  attr_accessible :user
+  # attr_accessible :content, :image
+  # attr_accessible :user
 
   validates_presence_of :user
   validates_presence_of :content

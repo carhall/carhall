@@ -55,21 +55,13 @@ FactoryGirl.define do
   end
 
   factory :cleaning_order do
-    detail do
-      {
-        count: rand(9)+1,
-      }
-    end
+    count { rand(9)+1 }
     association :source, factory: :cleaning
     user
   end
 
   factory :bulk_purchasing_order do
-    detail do
-      {
-        count: rand(9)+1,
-      }
-    end
+    count { rand(9)+1 }
     association :source, factory: :bulk_purchasing
     user
   end

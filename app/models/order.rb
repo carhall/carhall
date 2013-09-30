@@ -1,17 +1,16 @@
 class Order < ActiveRecord::Base
   # For details
   include Share::Detailable
-  alias_method :order_type, :type_sym
 
-  include Share::Statable
+  include Tips::Statable
   include Share::Userable
   belongs_to :user, counter_cache: true
 
   belongs_to :dealer, counter_cache: true
   has_one :review
 
-  attr_accessible :user, :detail
-  attr_accessible :detail_attributes
+  # attr_accessible :user, :detail
+  # attr_accessible :detail_attributes
 
   validates_presence_of :source, :user 
   
@@ -62,12 +61,17 @@ class Order < ActiveRecord::Base
   # end
 
   def set_title
-    "#{source.title}#{I18n.t(".times", count: detail.count) if detail.respond_to? :count}" 
+    "#{source.title}#{I18n.t(".times", count: count) if count}" 
   end
 
   def set_cost
     cost = source.price if source.respond_to? :price
-    cost *= detail.count if detail.respond_to? :count
+    cost *= count if count
+  end
+
+  def order_type
+    return :order unless type
+    type.underscore.to_sym
   end
 
   acts_as_api
@@ -76,10 +80,6 @@ class Order < ActiveRecord::Base
     t.only :id, :title
     t.methods :order_type
     t.add :user, template: :base
-  end
-
-  api_accessible :detail do |t|
-    t.add :detail, template: :base
   end
   
 end

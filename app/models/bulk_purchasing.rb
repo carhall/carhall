@@ -1,5 +1,5 @@
 class BulkPurchasing < ActiveRecord::Base
-  include Share::Servicable
+  include Tips::Servicable
   set_order_class BulkPurchasingOrder
   
   extend Share::ImageAttachments
@@ -9,14 +9,14 @@ class BulkPurchasing < ActiveRecord::Base
   include Share::Localizable
   include Share::Statisticable
   
-  attr_accessible :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price, :description, :image
+  # attr_accessible :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price, :description, :image
 
   validates_presence_of :dealer
   validates_presence_of :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price
 
   enumerate :bulk_purchasing_type, with: %w(洗车美容 保养专修 汽车装饰 其他)
 
-  include Share::Expiredable
+  include Tips::Expiredable
 
   api_accessible :base do |t|
     t.only :id, :title, :expire_at, :bulk_purchasing_type_id, :price, :vip_price, 

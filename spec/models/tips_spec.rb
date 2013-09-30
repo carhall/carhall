@@ -34,12 +34,12 @@ describe "Tips" do
       subject.should_not be_valid
     end
     it do
-      count = subject.detail.count
+      count = subject.count
       subject.use(count)
       subject.should be_finished
     end
     it do
-      count = subject.detail.count
+      count = subject.count
       subject.use(count + 1)
       subject.should_not be_valid
     end

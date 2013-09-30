@@ -175,7 +175,7 @@ describe "Tips" do
       end
     end
 
-    describe Api::OrdersController do
+    describe Api::Tips::OrdersController do
       let(:attach_args) {{ dealer_id: dealer.id }}
       before do
         create :mending_order, dealer: dealer, source: create(:mending, dealer: dealer)

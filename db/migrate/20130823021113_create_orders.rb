@@ -14,6 +14,9 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :state_id
       t.float   :cost
       
+      t.integer :count, default: 0
+      t.integer :used_count, default: 0
+      
       t.timestamps
     end
 

@@ -5,8 +5,7 @@ class Api::CommentsController < Api::ApplicationController
   # POST /api/resources/1/comments
   # POST /api/resources/1/comments.json
   def create
-    data_params = params.fetch(:data, {}).merge(user: @current_user)
-    render_create @parent.new data_params
+    render_create @parent.new data_params.merge(user: @current_user)
   end
 
   # DELETE /api/resources/1/comments/1
@@ -19,7 +18,7 @@ class Api::CommentsController < Api::ApplicationController
     render_accepted
   end
 
-  protected
+protected
 
   AccreditedKeys = {
     'post_id' => Post,
@@ -34,5 +33,11 @@ class Api::CommentsController < Api::ApplicationController
       end
     end
   end
+
+private
   
+  def data_params
+    params.require(:data).permit(:content, :at_user_id)
+  end
+
 end

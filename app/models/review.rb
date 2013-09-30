@@ -1,8 +1,8 @@
 class Review < ActiveRecord::Base
   belongs_to :order
 
-  attr_accessible :content, :stars
-  attr_accessible :order
+  # attr_accessible :content, :stars
+  # attr_accessible :order
 
   validates_presence_of :order
   validates_presence_of :stars

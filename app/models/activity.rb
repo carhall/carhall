@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  include Share::Servicable
+  include Tips::Servicable
 
   extend Share::ImageAttachments
   define_image_method
@@ -7,11 +7,11 @@ class Activity < ActiveRecord::Base
   enumerate :area, with: Share::Area
   include Share::Localizable
   
-  attr_accessible :title, :expire_at, :description, :image
+  # attr_accessible :title, :expire_at, :description, :image
 
   validates_presence_of :title, :expire_at
 
-  include Share::Expiredable
+  include Tips::Expiredable
 
   api_accessible :base do |t|
     t.only :id, :title, :expire_at, :description

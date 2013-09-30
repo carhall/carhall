@@ -6,8 +6,7 @@ class Api::Tips::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
   def create
-    data_params = params.fetch(:data, {}).merge(user: @current_user)
-    render_create @parent.new data_params
+    render_create @parent.new order_params.merge(user: @current_user)
   end
 
   # PUT /api/resources/1/orders/1/finish
@@ -34,10 +33,10 @@ class Api::Tips::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders/1/review
   # POST /api/resources/1/orders/1/review.json
   def review
-    render_create @order.create_review params[:data]
+    render_create @order.create_review review_params
   end
 
-  protected
+protected
 
   AccreditedKeys = {
     'mending_id' => Mending,
@@ -60,4 +59,16 @@ class Api::Tips::OrdersController < Api::ApplicationController
     @order = @parent.find(params[:id])
     authorize! :update, @order
   end
+
+
+private
+  
+  def order_params
+    params.require(:data).permit(:count, :detail_attributes)
+  end
+
+  def review_params
+    params.require(:data).permit(:content, :stars)
+  end
+
 end

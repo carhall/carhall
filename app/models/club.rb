@@ -2,11 +2,11 @@ class Club < ActiveRecord::Base
   enumerate :area, with: Share::Area
   enumerate :brand, with: Share::Brand
 
-  belongs_to :president, class_name: User
+  belongs_to :president, class_name: 'User'
   has_many :posts
 
-  has_many :mechanic_candidates, class_name: Posts::MechanicCandidate, as: :source
-  has_many :president_candidates, class_name: Posts::PresidentCandidate, as: :source
+  has_many :mechanic_candidates, class_name: 'Posts::MechanicCandidate', as: :source
+  has_many :president_candidates, class_name: 'Posts::PresidentCandidate', as: :source
   
   extend Share::ImageAttachments
   define_avatar_method
@@ -14,7 +14,7 @@ class Club < ActiveRecord::Base
   extend Share::Ids2Users
   define_ids2users_methods :mechanics
   
-  attr_accessible :area_id, :brand_id, :announcement, :avatar
+  # attr_accessible :area_id, :brand_id, :announcement, :avatar
 
   def self.with_club area_id, brand_id
     where(area_id: area_id, brand_id: brand_id).first_or_create

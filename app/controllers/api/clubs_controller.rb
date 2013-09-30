@@ -13,7 +13,7 @@ class Api::ClubsController < Api::ApplicationController
   def update
     club = Club.with_user(@user)
     raise CanCan::AccessDenied unless club.president_id == @user.id
-    if club.update_attributes(params[:data])
+    if club.update_attributes(data_params)
       render_update_success club
     else
       render_failure club
@@ -23,7 +23,7 @@ class Api::ClubsController < Api::ApplicationController
   def president
     club = Club.with_user(@user)
     club.appoint_president @user
-    # if club.appoint_president(@user, params[:data][:description]).save
+    # if club.apply_president(@user, params[:data][:description]).save
     if club.save
       render_created
     else
@@ -40,6 +40,12 @@ class Api::ClubsController < Api::ApplicationController
     else
       render_failure club
     end
+  end
+
+private
+
+  def data_params
+    params.require(:data).permit(:area_id, :brand_id, :announcement, :avatar)
   end
 
 end

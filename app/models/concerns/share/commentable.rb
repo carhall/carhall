@@ -1,10 +1,8 @@
-module Share
-  module Commentable
-    extend ActiveSupport::Concern
+module Share::Commentable
+  extend ActiveSupport::Concern
 
-    included do
-      has_many :comments, as: :source
-    end
-
+  included do
+    has_many :comments, as: :source
   end
+
 end

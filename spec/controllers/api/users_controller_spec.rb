@@ -9,11 +9,18 @@ describe "Users" do
     include_examples "resources#show"
     include_examples "resources#detail"
     include_examples "resources#create"
+  end
+
+  describe Api::AccountsController do
+    let(:resource_name) { :user }
+
+    include_examples "resources#show"
+    include_examples "resources#detail"
 
     describe "POST login" do
       it "has a 201 status code" do
         post :login, data: { mobile: user.mobile, password: user.password }
-        expect(response.status).to eq(201)
+        expect(response.status).to eq(201), error_messages
       end
     end
   end
@@ -29,13 +36,13 @@ describe "Users" do
       describe "without current_password" do
         it "has a 422 status code" do
           put :password, data: attributes
-          expect(response.status).to eq(422)
+          expect(response.status).to eq(422), error_messages
         end
       end
       describe "with current_password" do
         it "has a 202 status code" do
           put :password, data: attributes.merge(current_password: "password")
-          expect(response.status).to eq(202)
+          expect(response.status).to eq(202), error_messages
         end
       end
     end

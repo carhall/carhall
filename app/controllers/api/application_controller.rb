@@ -8,13 +8,13 @@ class Api::ApplicationController < ActionController::Base
     before_filter :set_parent
 
     define_method :set_parent do
-      @parent = klass
+      @parent = klass.all
     end
     
     # GET /api/resources
     # GET /api/resources.json
     define_method :index do
-      render_index @parent.scoped
+      render_index @parent
     end
 
     # GET /api/resources/1

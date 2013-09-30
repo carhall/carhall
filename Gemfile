@@ -1,25 +1,25 @@
 source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.14'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.0'
 
-# Bundle edge Rails instead:
-# gem 'rails', github: 'rails/rails'
-
+# Use postgresql as the database for Active Record
+# gem 'pg'
 gem 'mysql2'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem "less-rails"
-  gem 'coffee-rails', '~> 3.2.1'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
 
-  gem 'uglifier', '>= 1.0.3'
-end
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
 
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+# Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-migrate-rails'
 gem 'jquery-datatables-rails'
@@ -27,39 +27,48 @@ gem 'jquery-datatables-rails'
 gem "twitter-bootstrap-rails"
 gem 'jasny_bootstrap_extension_rails'
 
+# For frontend
 gem 'simple_form'
 
-# To use ActiveModel has_secure_password
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
+
+# Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# To use Jbuilder templates for JSON
-gem 'jbuilder'
-
 # Use unicorn as the app server
-gem 'unicorn'
+# gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
 
-# To use debugger
-# gem 'debugger'
+# Use debugger
+# gem 'debugger', group: [:development, :test]
+
+# Authentication
+gem 'devise', '~> 3.1'
+gem 'cancan'
 
 # For Apis
 gem 'acts_as_api'
 
-# For Authentication
-gem 'devise'
-gem "cancan"
-
-gem 'active_enum', github: 'bbtfr/active_enum'
-# gem 'active_enum', path: '..'
+# Basic
 gem 'kaminari'
 gem 'paperclip'
-
 gem 'rqrcode-rails3'
 gem 'mini_magick'
-
 gem 'geohash', github: 'RyanNaughton/geohash'
+# gem 'active_enum', github: 'bbtfr/active_enum'
+gem 'active_enum', path: '..'
+gem 'inherited_resources'
 
 group :development, :test do
   gem 'faker'

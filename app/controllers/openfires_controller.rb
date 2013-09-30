@@ -32,7 +32,7 @@ class OpenfiresController < ActionController::Base
 
   def list_users
     @users = Account.find(params[:ids].split(','))
-    render_data users: @users.map {|u| openfire_user_detail(u) }
+    render_data users: @users.includes(:detail).map {|u| openfire_user_detail(u) }
   end
 
   protected

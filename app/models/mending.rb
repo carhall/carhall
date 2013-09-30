@@ -1,5 +1,5 @@
 class Mending < ActiveRecord::Base
-  include Share::Servicable
+  include Tips::Servicable
   set_order_class MendingOrder
   
   serialize :discount, Hash
@@ -20,9 +20,9 @@ class Mending < ActiveRecord::Base
   include Share::Localizable
   include Share::Statisticable
 
-  attr_accessible :dealer
-  attr_accessible :discount, :brand_ids
-  attr_accessible :brands
+  # attr_accessible :dealer
+  # attr_accessible :discount, :brand_ids
+  # attr_accessible :brands
   
   api_accessible :base do |t|
     t.only :id, :brand_ids, :description, :orders_count, :reviews_count

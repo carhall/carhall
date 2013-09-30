@@ -1,14 +1,14 @@
 class Account < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :token_authenticatable,
-         :recoverable, :rememberable, :validatable#, :confirmable#, :lockable#, :trackable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, 
+    :validatable#, :confirmable#, :lockable#, :trackable
 
   include Accounts::Acceptable
+  include Accounts::TokenAuthenticatable
 
   # For details
   include Share::Detailable
-  alias_method :user_type, :type_sym
 
   # For friendships
   include Accounts::Friendshipable
@@ -18,16 +18,22 @@ class Account < ActiveRecord::Base
   define_avatar_method
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :password, :password_confirmation, :remember_me
-  attr_accessible :username, :mobile, :description, :avatar, :type
-  attr_accessible :detail
-  attr_accessible :detail_attributes
+  # attr_accessible :password, :password_confirmation, :remember_me
+  # attr_accessible :username, :mobile, :description, :avatar, :type
+  # attr_accessible :detail
+  # attr_accessible :detail_attributes
 
   validates_presence_of :username, :type
   validates_length_of :username, :within => 2..20, :allow_blank => true
 
   def accepted
     accepted?
+  end
+
+  def user_type
+    return :guest if new_record?
+    return :account unless type
+    type.underscore.to_sym
   end
 
   acts_as_api

@@ -16,7 +16,7 @@ class Api::Tips::ApplicationController < Api::ApplicationController
     # GET /api/resources
     # GET /api/resources.json
     define_method :index do
-      render_index @parent.scoped
+      render_index @parent
     end
 
     define_method :nearby do

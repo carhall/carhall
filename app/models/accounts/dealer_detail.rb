@@ -5,10 +5,10 @@ class Accounts::DealerDetail < ActiveRecord::Base
   define_image_method
   alias_attribute :authentication_image, :image
 
-  attr_accessible :area_id, :dealer_type_id, :business_scope_ids, :template_ids, 
-    :company, :address, :phone, :open_during, :accepted, :authentication_image
-  attr_accessible :area, :dealer_type, :business_scopes, :templates 
-  attr_accessible :location
+  # attr_accessible :area_id, :dealer_type_id, :business_scope_ids, :template_ids, 
+  #   :company, :address, :phone, :open_during, :accepted, :authentication_image
+  # attr_accessible :area, :dealer_type, :business_scopes, :templates 
+  # attr_accessible :location
 
   validates_presence_of :area_id, :dealer_type_id, :business_scope_ids,
     :company, :address, :phone, :open_during, :authentication_image

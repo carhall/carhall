@@ -12,14 +12,14 @@ class Dealer < Account
   has_many :bulk_purchasings
 
   has_many :orders
-  has_many :recent_orders, conditions: ["orders.created_at > ?", 1.month.ago], class_name: Order
+  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Order'
 
-  has_many :mending_orders, class_name: MendingOrder
-  has_many :cleaning_orders, class_name: CleaningOrder
-  has_many :bulk_purchasing_orders, class_name: BulkPurchasingOrder
+  has_many :mending_orders, class_name: 'MendingOrder'
+  has_many :cleaning_orders, class_name: 'CleaningOrder'
+  has_many :bulk_purchasing_orders, class_name: 'BulkPurchasingOrder'
 
   has_many :reviews, through: :orders
-  has_many :recent_reviews, through: :recent_orders, class_name: Review
+  has_many :recent_reviews, through: :recent_orders, class_name: 'Review'
   
   validates_presence_of :type
 

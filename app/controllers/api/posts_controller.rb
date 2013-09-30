@@ -33,7 +33,7 @@ class Api::PostsController < Api::ApplicationController
   # POST /api/posts
   # POST /api/posts.json
   def create
-    render_create @user.posts.create params[:data]
+    render_create @user.posts.create data_params
   end
 
   # DELETE /api/posts/1
@@ -44,6 +44,12 @@ class Api::PostsController < Api::ApplicationController
     post.destroy
 
     render_accepted
+  end
+
+private
+  
+  def data_params
+    params.require(:data).permit(:content, :image)
   end
 
 end
