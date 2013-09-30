@@ -64,7 +64,7 @@ private
   
   def order_params
     params.require(:data).permit(:count, 
-      detail_attributes: [:id, :brand_id, :brand, :series, :plate_num, 
+      detail: [:id, :brand_id, :brand, :series, :plate_num, 
         :arrive_at, :description, :mending_type_id, :mending_type]
     )
   end

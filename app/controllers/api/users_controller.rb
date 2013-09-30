@@ -19,7 +19,7 @@ class Api::UsersController < Api::ApplicationController
     def data_params
       params.require(:data).permit(:username, :mobile, :description, :avatar, 
         :password, :password_confirmation, 
-        detail_attributes: [:id, :sex_id, :sex, :area_id, :area, :brand_id, :brand, 
+        detail: [:id, :sex_id, :sex, :area_id, :area, :brand_id, :brand, 
           :series, :plate_num, :car_image]
       )
     end

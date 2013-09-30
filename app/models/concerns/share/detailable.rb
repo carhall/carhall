@@ -16,4 +16,5 @@ module Share::Detailable
 
     end
   end
+  
 end
