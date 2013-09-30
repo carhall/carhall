@@ -25,16 +25,16 @@ class Dealer < Account
 
   validates_each :detail do |record, attr, value|
     if value.address_changed?
-      bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value}"
+      bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value.address}"
       begin
         result = JSON.parse(open(URI::encode(bmap_geocoding_url)).read)
         if result['status'] == 0 and result['result'] and result['result'].any?
           logger.info("  Requested BMap API #{bmap_geocoding_url}")
           logger.info("  Result: #{result['result']}")
-          record.location = Share::Location.new(
+          record.location_attributes = {
             latitude: result['result']['location']['lat'],
             longitude: result['result']['location']['lng']
-          )
+          }
         else
           value.errors.add(:address, :invalid)
         end

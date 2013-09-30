@@ -2,7 +2,8 @@ module Share::Localizable
   extend ActiveSupport::Concern
     
   included do
-    belongs_to :location, class_name: 'Share::Location'
+    belongs_to :location, class_name: 'Share::Location', autosave: true
+    accepts_nested_attributes_for :location, allow_destroy: false, update_only: true
   end
 
   module ClassMethods
