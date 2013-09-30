@@ -1,5 +1,5 @@
 class Api::UsersController < Api::ApplicationController
-  skip_before_filter :authenticate_account!, only: [:login, :create]
+  skip_before_filter :authenticate_account!, only: [:create]
 
   set_resource_class User, detail: true
 
