@@ -2,7 +2,7 @@ class Api::Tips::ApplicationController < Api::ApplicationController
   before_filter :set_dealer
 
   def set_dealer
-    @dealer = Dealer.find(params[:dealer_id]) if params[:dealer_id]
+    @dealer = Accounts::Dealer.find(params[:dealer_id]) if params[:dealer_id]
   end
 
   def self.set_resource_class klass, options = {}

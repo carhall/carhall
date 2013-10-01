@@ -1,12 +1,12 @@
-class Api::UsersController < Api::ApplicationController
+class Api::Accounts::UsersController < Api::Accounts::ApplicationController
   skip_before_filter :authenticate_account!, only: [:create]
 
-  set_resource_class User, detail: true
+  set_resource_class Accounts::User, detail: true
 
   # POST /api/users
   # POST /api/users.json
   def create
-    @user = User.new data_params
+    @user = Accounts::User.new data_params
     @user.reset_authentication_token
 
     render_create @user, :with_token

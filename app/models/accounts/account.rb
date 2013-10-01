@@ -1,4 +1,4 @@
-class Account < ActiveRecord::Base
+class Accounts::Account < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, 
@@ -27,7 +27,7 @@ class Account < ActiveRecord::Base
   def user_type
     return :guest if new_record?
     return :account unless type
-    type.underscore.to_sym
+    type.demodulize.underscore.to_sym
   end
 
   acts_as_api

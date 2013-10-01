@@ -1,4 +1,4 @@
-class Api::CurrentUsersController < Api::ApplicationController
+class Api::Accounts::CurrentUsersController < Api::Accounts::ApplicationController
   before_filter :set_current_user
 
   # GET /api/current_user

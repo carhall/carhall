@@ -6,10 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Account.where(mobile: '13112345678').destroy_all
+Accounts::Account.where(mobile: '13112345678').destroy_all
 me = FactoryGirl.create :user, mobile: '13112345678'
 
-Account.where(mobile: '13212345678').destroy_all
+Accounts::Account.where(mobile: '13212345678').destroy_all
 dealer = FactoryGirl.create :dealer, mobile: '13212345678'
 
 3.times do 
@@ -22,7 +22,7 @@ end
 end
 
 30.times do
-  FactoryGirl.create :comment, source: Post.all.sample, user: User.all.sample
+  FactoryGirl.create :comment, source: Posts::Post.all.sample, user: Accounts::User.all.sample
 end
 
 100.times do

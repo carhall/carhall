@@ -1,7 +1,7 @@
 Address = ['搜狐网络大厦', '百度大厦', '北京航空航天大学']
 
 FactoryGirl.define do 
-  factory :user do
+  factory :user, class: Accounts::User do
     mobile { Faker::PhoneNumber.cell_phone }
     password { 'password' }
     username { Faker::Name.name }
@@ -15,7 +15,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :provider do
+  factory :provider, class: Accounts::Provider do
     mobile { Faker::PhoneNumber.cell_phone }
     password { 'password' }
     username { Faker::Name.name }
@@ -28,7 +28,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :dealer do
+  factory :dealer, class: Accounts::Dealer do
     mobile { Faker::PhoneNumber.cell_phone }
     password { 'password' }
     username { Faker::Name.name }

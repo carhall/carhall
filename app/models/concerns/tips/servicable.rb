@@ -2,7 +2,7 @@ module Tips::Servicable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :dealer
+    belongs_to :dealer, class_name: 'Accounts::Dealer'
     default_scope { order('id DESC') }
     
     before_save do

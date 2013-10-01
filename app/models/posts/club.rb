@@ -2,7 +2,7 @@ class Posts::Club < ActiveRecord::Base
   enumerate :area, with: Share::Area
   enumerate :brand, with: Share::Brand
 
-  belongs_to :president, class_name: 'User'
+  belongs_to :president, class_name: 'Accounts::User'
   has_many :posts
 
   has_many :mechanic_candidates, class_name: 'Posts::MechanicCandidate', as: :source

@@ -1,4 +1,4 @@
-class Api::Posts::ClubsController < Api::ApplicationController
+class Api::Posts::ClubsController < Api::Posts::ApplicationController
   before_filter :set_current_user
   before_filter :set_area_id_and_brand_id, only: :show
 

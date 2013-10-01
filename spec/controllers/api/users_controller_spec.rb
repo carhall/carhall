@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Users" do
   include_context "shared context"
 
-  describe Api::AccountsController do
+  describe Api::Accounts::AccountsController do
     let(:resource) { :user }
 
     include_examples "resources#show"
@@ -17,7 +17,7 @@ describe "Users" do
     end
   end
 
-  describe Api::UsersController do
+  describe Api::Accounts::UsersController do
     let(:resource) { :user }
 
     include_examples "resources#show"
@@ -25,7 +25,7 @@ describe "Users" do
     include_examples "resources#create"
   end
 
-  describe Api::CurrentUsersController do
+  describe Api::Accounts::CurrentUsersController do
     let(:resource) { :user }
 
     include_examples "resource#show"
@@ -49,7 +49,7 @@ describe "Users" do
     end
   end
 
-  describe Api::DealersController do
+  describe Api::Accounts::DealersController do
     let(:resource) { :dealer }
 
     include_examples "resources#index"
@@ -77,7 +77,7 @@ describe "Users" do
     end
   end
 
-  describe Api::ProvidersController do
+  describe Api::Accounts::ProvidersController do
     let(:resource) { :provider }
 
     include_examples "resources#index"
@@ -85,7 +85,7 @@ describe "Users" do
     include_examples "resources#detail"
   end
 
-  describe Api::FriendsController do
+  describe Api::Accounts::FriendsController do
     context do
       before { 3.times { user.make_friend_with(create(:user)).save }}
 
@@ -105,7 +105,7 @@ describe "Users" do
     end
   end
 
-  describe Api::BlacklistsController do
+  describe Api::Accounts::BlacklistsController do
     context do
       before { 3.times { user.add_to_blacklist(create(:user)).save }}
 

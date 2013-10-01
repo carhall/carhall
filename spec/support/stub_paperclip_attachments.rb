@@ -21,7 +21,7 @@ module Paperclip
   end
 end
 
-Dealer.class_eval do
+Accounts::Dealer.class_eval do
   def generate_rqrcode_image *args
   end
 end

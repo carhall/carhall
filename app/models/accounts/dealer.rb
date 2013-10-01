@@ -1,4 +1,4 @@
-class Dealer < Account
+class Accounts::Dealer < Accounts::Account
   include Accounts::RqrcodeTokenable
 
   include Share::Localizable

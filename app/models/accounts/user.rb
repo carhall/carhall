@@ -1,4 +1,4 @@
-class User < Account
+class Accounts::User < Accounts::Account
   include Share::Statisticable
   
   set_detail_class Accounts::UserDetail

@@ -1,4 +1,4 @@
-class Provider < Account
+class Accounts::Provider < Accounts::Account
   include Accounts::RqrcodeTokenable
   set_detail_class Accounts::ProviderDetail
 

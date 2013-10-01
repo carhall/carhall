@@ -11,7 +11,7 @@ module FilterHelper
 
   def set_user
     @user = if user_id = params[:user_id]
-      User.find(user_id)
+      Accounts::User.find(user_id)
     else
       current_account
     end
@@ -33,7 +33,7 @@ module FilterHelper
   end
 
   def set_user_type
-    @user_type = (current_account || User.new).user_type
+    @user_type = (current_account || Accounts::User.new).user_type
   end
   
   def set_dealer

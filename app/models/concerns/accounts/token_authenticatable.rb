@@ -21,7 +21,7 @@ module Accounts::TokenAuthenticatable
   def generate_authentication_token
     loop do
       token = Devise.friendly_token
-      break token unless Account.where("authentication_token" => token).exists?
+      break token unless self.class.where("authentication_token" => token).exists?
     end
   end
 end

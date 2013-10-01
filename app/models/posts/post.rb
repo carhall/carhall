@@ -1,6 +1,6 @@
 class Posts::Post < ActiveRecord::Base
   include Share::Userable
-  belongs_to :user, counter_cache: true
+  belongs_to :user, counter_cache: true, class_name: 'Accounts::User'
   
   belongs_to :club
   has_many :comments, as: :source, class_name: 'Posts::Comment'

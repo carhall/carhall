@@ -1,5 +1,5 @@
-class Api::DealersController < Api::ApplicationController
-  set_resource_class Dealer, detail: true
+class Api::Accounts::DealersController < Api::Accounts::ApplicationController
+  set_resource_class Accounts::Dealer, detail: true
   before_filter :set_filter
 
   def nearby

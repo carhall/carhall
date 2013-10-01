@@ -1,4 +1,4 @@
-class Api::BlacklistsController < Api::ApplicationController
+class Api::Accounts::BlacklistsController < Api::Accounts::ApplicationController
   before_filter :set_user
 
   # GET /api/blacklists

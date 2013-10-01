@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Accounts" do
-  describe User do
+  describe Accounts::User do
     subject { create :user }
     include_examples "valid record"
 
@@ -66,13 +66,13 @@ describe "Accounts" do
     end
   end
 
-  describe Dealer do
+  describe Accounts::Dealer do
     subject { create :dealer }
     include_examples "valid record" 
 
   end
 
-  describe Provider do
+  describe Accounts::Provider do
     subject { create :provider }
     include_examples "valid record" 
 

@@ -42,7 +42,7 @@ protected
     'mending_id' => Mending,
     'cleaning_id' => Cleaning,
     'bulk_purchasing_id' => BulkPurchasing,
-    'dealer_id' => Dealer,
+    'dealer_id' => Accounts::Dealer,
   }
 
   def set_parent

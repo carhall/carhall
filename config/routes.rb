@@ -4,7 +4,7 @@ Carhall::Application.routes.draw do
   resource :dashboard, only: :show
   root to: 'dashboards#show'
   # Frontend sign_in/sing_up page
-  devise_for :accounts, controllers: { 
+  devise_for :accounts, :class_name => "Accounts::Account", controllers: { 
     registrations: "accounts/registrations",
     sessions: "accounts/sessions",
     confirmations: "accounts/confirmations",
@@ -87,84 +87,96 @@ Carhall::Application.routes.draw do
     post :list_users
   end
 
+
+  ############################
   # APIs
   namespace :api do
     resources :constants, only: [:index, :show]
 
-    resources :users, only: [:show, :create] do
-      get :detail, on: :member
+    # Accounts
+    namespace :accounts, path: '' do
+      resources :users, only: [:show, :create] do
+        get :detail, on: :member
 
-      resources :friends, only: [:index]
-      resources :posts, only: [:index]
-    end
-    
-    resources :accounts, only: [:show] do
-      get :detail, on: :member
-      post :login, on: :collection
+        resources :friends, only: [:index]
+
+        namespace :posts, path: '' do
+          resources :posts, only: [:index]
+        end
+      end
       
-    end
-
-    resource :current_user, only: [:show, :update] do
-      get :detail
-      put :password
-
-      resources :friends, only: [:index]
-      resources :blacklists, only: [:index]
-      resources :post_blacklists, only: [:index]
-      resources :posts, only: [:index]
-      resource :club, only: [:show]
-    end
-
-    resources :dealers, only: [:index, :show] do
-      get :nearby, on: :collection
-      get :favorite, on: :collection
-      get :hot, on: :collection
-
-      get :detail, on: :member
-      
-      namespace :tips, path: '' do
-        resource :mending, only: [:show] do
-          get :detail
-        end
-
-        resources :cleanings, only: [:index] do
-          get :nearby, on: :collection
-          get :cheapie, on: :collection
-          get :favorite, on: :collection
-          get :hot, on: :collection
-        end
+      resources :accounts, only: [:show] do
+        get :detail, on: :member
+        post :login, on: :collection
         
-        resources :activities, only: [:index] do
-          get :nearby, on: :collection
-        end
-        
-        resources :bulk_purchasings, only: [:index] do
-          get :nearby, on: :collection
-          get :cheapie, on: :collection
-          get :favorite, on: :collection
-          get :hot, on: :collection
-        end
+      end
 
-        resources :orders, only: [:index, :show]
-        resources :reviews, only: [:index, :show]
+      resource :current_user, only: [:show, :update] do
+        get :detail
+        put :password
+
+        resources :friends, only: [:index]
+        resources :blacklists, only: [:index]
+
+        namespace :posts, path: '' do
+          resources :post_blacklists, only: [:index]
+          resources :posts, only: [:index]
+          resource :club, only: [:show]
+        end
+      end
+
+      resources :dealers, only: [:index, :show] do
+        get :nearby, on: :collection
+        get :favorite, on: :collection
+        get :hot, on: :collection
+
+        get :detail, on: :member
         
+        namespace :tips, path: '' do
+          resource :mending, only: [:show] do
+            get :detail
+          end
+
+          resources :cleanings, only: [:index] do
+            get :nearby, on: :collection
+            get :cheapie, on: :collection
+            get :favorite, on: :collection
+            get :hot, on: :collection
+          end
+          
+          resources :activities, only: [:index] do
+            get :nearby, on: :collection
+          end
+          
+          resources :bulk_purchasings, only: [:index] do
+            get :nearby, on: :collection
+            get :cheapie, on: :collection
+            get :favorite, on: :collection
+            get :hot, on: :collection
+          end
+
+          resources :orders, only: [:index, :show]
+          resources :reviews, only: [:index, :show]
+        end
+      end
+
+      resources :providers, only: [:index, :show] do
+        get :detail, on: :member
+      end
+
+      resources :friends, only: [:index, :destroy] do
+        post ':id', action: :create, on: :collection
+      end
+
+      resources :blacklists, only: [:index, :destroy] do
+        post ':id', action: :create, on: :collection
       end
     end
 
-    resources :providers, only: [:index, :show] do
-      get :detail, on: :member
-    end
-
-    resources :friends, only: [:index, :destroy] do
-      post ':id', action: :create, on: :collection
-    end
-
-    resources :blacklists, only: [:index, :destroy] do
-      post ':id', action: :create, on: :collection
-    end
-
+    # Share::Comment
     resources :comments, only: [:index, :show, :create, :destroy]
 
+    # Posts
     namespace :posts, path: '' do
       resources :posts, only: [:index, :show, :create, :destroy] do
         get :friends, on: :collection
@@ -184,6 +196,7 @@ Carhall::Application.routes.draw do
       end
     end
 
+    # Tips
     namespace :tips do
       resources :mendings, only: [:index, :show] do
         get :nearby, on: :collection
@@ -243,6 +256,7 @@ Carhall::Application.routes.draw do
         resources :reviews, only: [:index, :show]
       end
 
+      resources :orders, only: [:index, :show]
     end
 
     # Need to return JSON-formatted 404 error in Rails

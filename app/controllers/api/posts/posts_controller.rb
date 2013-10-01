@@ -1,4 +1,4 @@
-class Api::Posts::PostsController < Api::ApplicationController
+class Api::Posts::PostsController < Api::Posts::ApplicationController
   before_filter :set_user, except: :show
   before_filter :set_area_id_and_brand_id, except: :create
 

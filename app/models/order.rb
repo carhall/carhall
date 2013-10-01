@@ -4,9 +4,9 @@ class Order < ActiveRecord::Base
 
   include Tips::Statable
   include Share::Userable
-  belongs_to :user, counter_cache: true
+  belongs_to :user, counter_cache: true, class_name: 'Accounts::User'
 
-  belongs_to :dealer, counter_cache: true
+  belongs_to :dealer, counter_cache: true, class_name: 'Accounts::Dealer'
   has_one :review
 
   validates_presence_of :source, :user 
@@ -68,7 +68,7 @@ class Order < ActiveRecord::Base
 
   def order_type
     return :order unless type
-    type.underscore.to_sym
+    type.demodulize.underscore.to_sym
   end
 
   acts_as_api

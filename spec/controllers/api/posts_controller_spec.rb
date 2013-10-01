@@ -85,7 +85,7 @@ describe "Posts" do
     end
   end
 
-  describe Api::Posts::BlacklistsController do
+  describe Api::Posts::PostBlacklistsController do
 
     describe "GET index" do
       before { 3.times { user.add_to_post_blacklist(create(:user)).save }}
