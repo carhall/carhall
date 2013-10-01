@@ -24,7 +24,7 @@ class Ability
     when :provider
       can :use, SettingsController
       can :use, Users::InverseFriendsController
-      can :use, Tips::DashboardsController
+      can :use, Bcst::DashboardsController
 
     when :dealer
       can :use, SettingsController

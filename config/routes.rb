@@ -55,16 +55,21 @@ Carhall::Application.routes.draw do
       get :orders, on: :collection
       get :expired, on: :collection
     end
-
-    resources :hosts
-    resource :programme_list
-    resources :programmes
   end
 
   namespace :bcst do
     resource :dashboard, only: :show
     root to: 'dashboards#show'
     
+
+    resources :hosts
+    resource :programme_list
+    resources :programmes do
+      resources :comments
+    end
+
+    resources :exposures
+    resources :traffic_reports
   end
 
   namespace :admins do
