@@ -18,5 +18,6 @@ class Api::Tips::ReviewsController < Api::ApplicationController
         return
       end
     end
+    @parent = current_user.reviews
   end
 end

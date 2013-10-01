@@ -1,12 +1,11 @@
 class Api::Tips::OrdersController < Api::ApplicationController
   set_resource_class Order, detail: true
-  before_filter :set_current_user, only: :create
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
   def create
-    render_create @parent.new order_params.merge(user: @current_user)
+    render_create @parent.new order_params.merge(user: current_user)
   end
 
   # PUT /api/resources/1/orders/1/finish
@@ -53,6 +52,7 @@ protected
         return
       end
     end
+    @parent = current_user.orders
   end
 
   def set_order

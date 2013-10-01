@@ -45,6 +45,8 @@ class Ability
     when :user
       can :destroy, [Posts::Post, Share::Comment], user_id: user.id
       can :update, Order, user_id: user.id
+      can :update, Posts::Club, president_id: user.id
+      
     end
     
     # The first argument to `can` is the action you are giving the user 

@@ -1,4 +1,7 @@
 class Api::ApplicationController < ActionController::Base
+  # This is our new function that comes before Devise's one
+  before_filter :authenticate_account_from_token!
+  # This is Devise's authentication
   before_filter :authenticate_account!
 
   include Api::RenderHelper
@@ -44,5 +47,23 @@ class Api::ApplicationController < ActionController::Base
       error_code: exception_name.demodulize.underscore, 
       backtrace: exception.backtrace[0..2],
     }
+  end
+
+private
+  
+  # For this example, we are simply using token authentication
+  # via parameters. However, anyone could use Rails's token
+  # authentication features to get the token from a header.
+  def authenticate_account_from_token!
+    auth_token = params[:auth_token].presence
+    account    = auth_token && Accounts::Account.find_by(authentication_token: auth_token)
+ 
+    if account
+      # Notice we are passing store false, so the user is not
+      # actually stored in the session and a token is needed
+      # for every request. If you want the token to work as a
+      # sign in token, you can simply remove store: false.
+      sign_in account, store: false
+    end
   end
 end

@@ -5,6 +5,10 @@ module FilterHelper
     @current_ability ||= Ability.new(current_account)
   end
 
+  def current_user
+    current_account
+  end
+
   def ensure_user_type
     authorize! :use, self
   end

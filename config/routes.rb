@@ -99,10 +99,6 @@ Carhall::Application.routes.draw do
         get :detail, on: :member
 
         resources :friends, only: [:index]
-
-        namespace :posts, path: '' do
-          resources :posts, only: [:index]
-        end
       end
       
       resources :accounts, only: [:show] do
@@ -117,12 +113,6 @@ Carhall::Application.routes.draw do
 
         resources :friends, only: [:index]
         resources :blacklists, only: [:index]
-
-        namespace :posts, path: '' do
-          resources :post_blacklists, only: [:index]
-          resources :posts, only: [:index]
-          resource :club, only: [:show]
-        end
       end
 
       resources :dealers, only: [:index, :show] do
@@ -131,33 +121,6 @@ Carhall::Application.routes.draw do
         get :hot, on: :collection
 
         get :detail, on: :member
-        
-        namespace :tips, path: '' do
-          resource :mending, only: [:show] do
-            get :detail
-          end
-
-          resources :cleanings, only: [:index] do
-            get :nearby, on: :collection
-            get :cheapie, on: :collection
-            get :favorite, on: :collection
-            get :hot, on: :collection
-          end
-          
-          resources :activities, only: [:index] do
-            get :nearby, on: :collection
-          end
-          
-          resources :bulk_purchasings, only: [:index] do
-            get :nearby, on: :collection
-            get :cheapie, on: :collection
-            get :favorite, on: :collection
-            get :hot, on: :collection
-          end
-
-          resources :orders, only: [:index, :show]
-          resources :reviews, only: [:index, :show]
-        end
       end
 
       resources :providers, only: [:index, :show] do
@@ -193,6 +156,16 @@ Carhall::Application.routes.draw do
       resource :club, only: [:show, :update] do
         post :president
         post :mechanics
+      end
+
+      resources :current_user do
+        resources :post_blacklists, only: [:index]
+        resources :posts, only: [:index]
+        resource :club, only: [:show]
+      end
+
+      resources :users do
+        resources :posts, only: [:index]
       end
     end
 
@@ -255,8 +228,35 @@ Carhall::Application.routes.draw do
         
         resources :reviews, only: [:index, :show]
       end
+    end
 
-      resources :orders, only: [:index, :show]
+    namespace :tips, path: '' do
+      resources :dealers do
+        resource :mending, only: [:show] do
+          get :detail
+        end
+
+        resources :cleanings, only: [:index] do
+          get :nearby, on: :collection
+          get :cheapie, on: :collection
+          get :favorite, on: :collection
+          get :hot, on: :collection
+        end
+        
+        resources :activities, only: [:index] do
+          get :nearby, on: :collection
+        end
+        
+        resources :bulk_purchasings, only: [:index] do
+          get :nearby, on: :collection
+          get :cheapie, on: :collection
+          get :favorite, on: :collection
+          get :hot, on: :collection
+        end
+
+        resources :orders, only: [:index, :show]
+        resources :reviews, only: [:index, :show]
+      end
     end
 
     # Need to return JSON-formatted 404 error in Rails
