@@ -1,8 +1,8 @@
-<%= simple_form_for([:tips, @tip], html: { class: 'form-horizontal', multipart: true }) do |f| %>
+<%= simple_form_for(@tip, html: { class: 'form-horizontal', multipart: true }) do |f| %>
   <%= devise_error_messages! @tip %>
 
   <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
-  <%= f.input :bulk_purchasing_type_id, collection: BulkPurchasing::BulkPurchasingType.to_select %>
+  <%= f.input :bulk_purchasing_type_id, collection: Tips::BulkPurchasing::BulkPurchasingType.to_select %>
   <%= f.input :expire_at, as: :string, input_html: { data: { mask: '9999-99-99 99:99' }}, hint: '团购截止时间，填数字即可，例如：2013-01-01 12:00' %>
   <%= f.input :image do %>
     <div class="fileupload fileupload-new" data-provides="fileupload">

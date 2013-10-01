@@ -17,6 +17,8 @@
             <% case @user_type %>
             <% when :provider, :dealer, :admin %>
               <%= render "share/nav/#{@user_type}" %>
+            <% when :superadmin %>
+              <%= render 'share/nav/admin' %>
             <% else %>
               <%= render 'share/nav/welcome' %>
             <% end %>

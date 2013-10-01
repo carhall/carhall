@@ -1,4 +1,4 @@
-<%= simple_form_for([:tips, @tip], html: { class: 'form-horizontal', multipart: true }) do |f| %>
+<%= simple_form_for(@tip, html: { class: 'form-horizontal', multipart: true }) do |f| %>
   <%= devise_error_messages! @tip %>
 
   <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>

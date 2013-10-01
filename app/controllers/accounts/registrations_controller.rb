@@ -3,7 +3,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     self.resource = if params[resource_name] and params[resource_name][:type].present?
       params[resource_name][:type].constantize.new hash
     else
-      Account.new
+      Accounts::Account.new
     end
   end
 
@@ -13,12 +13,12 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     permit = [:type, :mobile, :current_password, :password, :password_confirmation, 
       :username, :description, :avatar]
     case @account_params[:type]
-    when "Provider"
+    when "Accounts::Provider"
       permit << {detail_attributes: [:id, :company, :phone]}
-    when "Dealer"
+    when "Accounts::Dealer"
       permit << {detail_attributes: [:id, :dealer_type_id, :business_scope_ids, :area_id, 
         :company, :address, :phone, :open_during, :authentication_image, 
-        {template_ids: [], business_scope_ids: []}]}
+        {template_ids: []}, {business_scope_ids: []}]}
     else
     end
     @account_params = @account_params.permit(permit)

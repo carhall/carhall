@@ -1,4 +1,4 @@
-class CleaningOrder < Order
+class Tips::CleaningOrder < Tips::Order
   belongs_to :source, class_name: 'Cleaning', counter_cache: :orders_count
 
   validates_presence_of :count

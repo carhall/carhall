@@ -27,6 +27,7 @@ class Accounts::Account < ActiveRecord::Base
   def user_type
     return :guest if new_record?
     return :account unless type
+    return :superadmin if id == 1
     type.demodulize.underscore.to_sym
   end
 

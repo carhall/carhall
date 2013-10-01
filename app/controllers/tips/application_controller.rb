@@ -13,10 +13,6 @@ class Tips::ApplicationController < ApplicationController
         @tip = @parent || klass.create(dealer: @dealer)
       end
 
-      define_method :set_parent do
-        @parent = @dealer.send(klass.name.underscore)
-      end
-
       define_method :update do
         @tip = @parent || klass.new(dealer: @dealer)
 
@@ -25,6 +21,10 @@ class Tips::ApplicationController < ApplicationController
         else
           render :edit
         end
+      end
+
+      define_method :set_parent do
+        @parent = @dealer.send(klass.name.demodulize.underscore)
       end
 
     else # singletion
@@ -82,7 +82,7 @@ class Tips::ApplicationController < ApplicationController
       end
 
       define_method :set_parent do
-        @parent = @dealer.send(klass.name.tableize)
+        @parent = @dealer.send(klass.name.demodulize.tableize)
       end
 
       define_method :set_resource do
@@ -94,7 +94,7 @@ class Tips::ApplicationController < ApplicationController
     # GET /api/resources/orders
     # GET /api/resources/orders.json
     define_method :orders do
-      @orders = @dealer.send("#{klass.name.underscore}_orders")
+      @orders = @dealer.send("#{klass.name.demodulize.underscore}_orders")
     end if options[:orders]
 
   end

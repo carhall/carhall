@@ -6,12 +6,9 @@ class Ability
     
     user ||= Accounts::User.new # guest user (not logged in)
     case user.user_type
+    when :superadmin
+      can :manage, :all
     when :admin
-      # superadmin
-      if user.id == 1
-        # can :manage, :all
-      end
-
       can :use, Admins::AdminsController
       can :use, Admins::UsersController
       can :use, Admins::DealersController
@@ -44,7 +41,7 @@ class Ability
       
     when :user
       can :destroy, [Posts::Post, Share::Comment], user_id: user.id
-      can :update, Order, user_id: user.id
+      can :update, Tips::Order, user_id: user.id
       can :update, Posts::Club, president_id: user.id
       
     end

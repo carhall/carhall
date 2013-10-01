@@ -1,4 +1,4 @@
-class Activity < ActiveRecord::Base
+class Tips::Activity < ActiveRecord::Base
   include Tips::Servicable
 
   extend Share::ImageAttachments

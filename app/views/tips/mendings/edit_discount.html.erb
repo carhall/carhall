@@ -8,7 +8,7 @@
       <h3>预约独享优惠信息管理 <small></small></h3>
     </div>
 
-    <%= simple_form_for([:tips, @tip], html: { class: 'form-horizontal' }) do |f| %>
+    <%= simple_form_for(@tip, html: { class: 'form-horizontal' }) do |f| %>
       <%= devise_error_messages! @tip %>
 
         <%= f.fields_for :discount do |ff| %>
@@ -35,7 +35,7 @@
         <% end %>
       
 
-      <%= f.button :submit, "更新专修品牌", class: 'btn-submit' %>
+      <%= f.button :submit, "更新预约优惠信息", class: 'btn-submit' %>
     <% end %>
 
   </div>

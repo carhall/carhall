@@ -6,9 +6,9 @@ class Api::ConstantsController < Api::ApplicationController
       brands: Share::Brand.all,
       dealer_types: Accounts::DealerDetail::DealerType.all,
       business_scopes: Accounts::DealerDetail::BusinessScope.all,
-      cleaning_types: Cleaning::CleaningType.all,
-      mending_types: ::Tips::MendingOrderDetail::MendingType.all,
-      bulk_purchasing_types: ::BulkPurchasing::BulkPurchasingType.all,
+      cleaning_types: Tips::Cleaning::CleaningType.all,
+      mending_types: Tips::MendingOrderDetail::MendingType.all,
+      bulk_purchasing_types: Tips::BulkPurchasing::BulkPurchasingType.all,
     }
   end
 

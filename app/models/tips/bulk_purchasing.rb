@@ -1,11 +1,12 @@
-class BulkPurchasing < ActiveRecord::Base
+class Tips::BulkPurchasing < ActiveRecord::Base
   include Tips::Servicable
-  set_order_class BulkPurchasingOrder
+  set_order_class Tips::BulkPurchasingOrder
   
   extend Share::ImageAttachments
   define_image_method
 
   enumerate :area, with: Share::Area
+  
   include Share::Localizable
   include Share::Statisticable
   

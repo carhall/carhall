@@ -61,6 +61,12 @@ Carhall::Application.routes.draw do
     resources :programmes
   end
 
+  namespace :bcst do
+    resource :dashboard, only: :show
+    root to: 'dashboards#show'
+    
+  end
+
   namespace :admins do
     resources :admins
     resources :dealers

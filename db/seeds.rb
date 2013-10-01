@@ -12,13 +12,16 @@ me = FactoryGirl.create :user, mobile: '13112345678'
 Accounts::Account.where(mobile: '13212345678').destroy_all
 dealer = FactoryGirl.create :dealer, mobile: '13212345678'
 
+Accounts::Account.where(mobile: '13312345678').destroy_all
+provider = FactoryGirl.create :provider, mobile: '13312345678'
+
 3.times do 
   u = FactoryGirl.create :user
   me.make_friend_with! u
 end
 
 10.times do
-  FactoryGirl.create :post, user: me.friends.sample
+  FactoryGirl.create :post, user: me.user_friends.sample
 end
 
 30.times do

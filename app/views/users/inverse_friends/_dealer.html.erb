@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div class="span3">
-    <%= render "users/inverse_friends/sidenav/dealer" %>
+    <%= render "users/share/sidenav/dealer" %>
   </div>
   
   <div class="span9">
@@ -14,14 +14,14 @@
     <table class="table table-striped datatable">
       <thead>
         <tr>
-          <th><%= translate_attribute_name :id, :user %></th>
-          <th><%= translate_attribute_name :avatar, :user %></th>
-          <th><%= translate_attribute_name :username, :user %></th>
-          <th><%= translate_attribute_name :brand, :'user/detail' %></th>
-          <th><%= translate_attribute_name :created_at, :user %></th>
-          <th><%= translate_attribute_name :total_cost, :user %></th>
-          <th><%= translate_attribute_name :last_ordered_at, :user %></th>
-          <th><%= translate_attribute_name :last_stars, :user %></th>
+          <th><%= translate_attribute_name :id, :'accounts/user' %></th>
+          <th><%= translate_attribute_name :avatar, :'accounts/user' %></th>
+          <th><%= translate_attribute_name :username, :'accounts/user' %></th>
+          <th><%= translate_attribute_name :brand, :'accounts/user/detail' %></th>
+          <th><%= translate_attribute_name :created_at, :'accounts/user' %></th>
+          <th><%= translate_attribute_name :total_cost, :'accounts/user' %></th>
+          <th><%= translate_attribute_name :last_ordered_at, :'accounts/user' %></th>
+          <th><%= translate_attribute_name :last_stars, :'accounts/user' %></th>
         </tr>
       </thead>
       <tbody>

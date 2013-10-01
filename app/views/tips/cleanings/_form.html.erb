@@ -1,8 +1,8 @@
-<%= simple_form_for([:tips, @tip], html: { class: 'form-horizontal', multipart: true }) do |f| %>
+<%= simple_form_for(@tip, html: { class: 'form-horizontal', multipart: true }) do |f| %>
   <%= devise_error_messages! @tip %>
 
   <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
-  <%= f.input :cleaning_type_id, collection: Cleaning::CleaningType.to_select %>
+  <%= f.input :cleaning_type_id, collection: Tips::Cleaning::CleaningType.to_select %>
   <%= f.input :image do %>
     <div class="fileupload fileupload-new" data-provides="fileupload">
       <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @tip.image.url(:medium) %>" /></div>

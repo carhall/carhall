@@ -14,17 +14,17 @@ zh-CN:
   times:  " %{count} 份"
   activerecord:
     models:
-      account: 用户
-      user: 普通用户
-      dealer: 汽车服务商
-      provider: 媒体
+      accounts/account: 用户
+      accounts/user: 普通用户
+      accounts/dealer: 汽车服务商
+      accounts/provider: 媒体
       accounts/friendship: 好友
-      mending: 保养专修
-      cleaning: 服务项目
-      activity: 活动
-      bulk_purchasing: 团购项目
+      tips/mending: 保养专修
+      tips/cleaning: 服务项目
+      tips/activity: 活动
+      tips/bulk_purchasing: 团购项目
     attributes:
-      account: &account
+      accounts/account: &account
         id: ID
         mobile: 手机号码
         username: 昵称
@@ -37,7 +37,7 @@ zh-CN:
         description: 用户说明
         confirmation_token: 手机验证码
         reset_password_token: 手机验证码
-      account/detail: &detail
+      accounts/account/detail: &detail
         area_id: 地区
         area: 地区
         dealer_type_id: 服务商类型
@@ -50,22 +50,26 @@ zh-CN:
         open_during: 营业时间
         authentication_image: 营业执照认证资料
         accepted: 服务商认证
-      user: 
+      accounts/user: 
         <<: *account
         created_at: 加入时间
         total_cost: 总消费额
         last_ordered_at: 最近消费时间
         last_stars: 最近满意度
-      user/detail:
+      accounts/user/detail:
         brand: 车型品牌
-      mending:
+      accounts/dealer: 
+        <<: *account
+      accounts/provider: 
+        <<: *account
+      tips/mending:
         brand_ids: 专修品牌
         brands: 专修品牌
         mending_type: 类型
         orders_count: 预约次数
         stars: 满意度
         trend_stars: 满意度趋势
-      cleaning:
+      tips/cleaning:
         id: ID
         title: 项目名称
         cleaning_type_id: 类型
@@ -78,13 +82,13 @@ zh-CN:
         stars: 满意度
         total_sale: 总销售额
         trend_stars: 满意度趋势
-      activity:
+      tips/activity:
         id: ID
         title: 项目名称
         expire_at: 活动期限
         image: 图片
         description: 项目介绍
-      bulk_purchasing:
+      tips/bulk_purchasing:
         id: ID
         title: 项目名称
         expire_at: 活动期限
@@ -94,7 +98,7 @@ zh-CN:
         vip_price: 会员价
         price: 原价
         description: 项目介绍
-      order:
+      tips/order:
         id: ID
         title: 名称
         count: 购买份数
@@ -112,7 +116,7 @@ zh-CN:
         <<: *account
         detail:
           <<: *detail
-      mending:
+      tips_mending:
         discount:
           discount_during: 优惠时段
           man_hours_discount: 工时优惠

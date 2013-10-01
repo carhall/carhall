@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Tips::Order < ActiveRecord::Base
   # For details
   include Share::Detailable
 

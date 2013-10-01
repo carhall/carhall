@@ -5,11 +5,11 @@ class Accounts::User < Accounts::Account
    
   # For posts
   has_many :posts, class_name: 'Posts::Post'
-  has_many :orders
-  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Order'
+  has_many :orders, class_name: 'Tips::Order'
+  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Tips::Order'
 
-  has_many :reviews, through: :orders
-  has_many :recent_reviews, through: :recent_orders, class_name: 'Review'
+  has_many :reviews, through: :orders, class_name: 'Tips::Review'
+  has_many :recent_reviews, through: :recent_orders, class_name: 'Tips::Review'
   
   def club
     Posts::Club.with_user self

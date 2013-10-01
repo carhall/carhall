@@ -9,7 +9,7 @@ class Users::ReviewsController < ApplicationController
   end
   
   def mending
-    @mending = @dealer.mending || Mending.create(dealer: @dealer)
+    @mending = @dealer.mending || Tips::Mending.create(dealer: @dealer)
     @types = Tips::MendingOrderDetail::MendingType.all
   end
 end

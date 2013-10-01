@@ -1,4 +1,4 @@
-class MendingOrder < Order
+class Tips::MendingOrder < Tips::Order
   set_detail_class Tips::MendingOrderDetail
   belongs_to :source, class_name: 'Mending', counter_cache: :orders_count
 

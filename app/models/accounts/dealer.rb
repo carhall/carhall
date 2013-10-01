@@ -6,25 +6,25 @@ class Accounts::Dealer < Accounts::Account
 
   set_detail_class Accounts::DealerDetail
 
-  has_one :mending
-  has_many :cleanings
-  has_many :activities
-  has_many :bulk_purchasings
+  has_one :mending, class_name: 'Tips::Mending'
+  has_many :cleanings, class_name: 'Tips::Cleaning'
+  has_many :activities, class_name: 'Tips::Activity'
+  has_many :bulk_purchasings, class_name: 'Tips::BulkPurchasing'
 
-  has_many :orders
-  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Order'
+  has_many :orders, class_name: 'Tips::Order'
+  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Tips::Order'
 
-  has_many :mending_orders, class_name: 'MendingOrder'
-  has_many :cleaning_orders, class_name: 'CleaningOrder'
-  has_many :bulk_purchasing_orders, class_name: 'BulkPurchasingOrder'
+  has_many :mending_orders, class_name: 'Tips::MendingOrder'
+  has_many :cleaning_orders, class_name: 'Tips::CleaningOrder'
+  has_many :bulk_purchasing_orders, class_name: 'Tips::BulkPurchasingOrder'
 
-  has_many :reviews, through: :orders
-  has_many :recent_reviews, through: :recent_orders, class_name: 'Review'
+  has_many :reviews, through: :orders, class_name: 'Tips::Review'
+  has_many :recent_reviews, through: :recent_orders, class_name: 'Tips::Review'
   
   validates_presence_of :type
 
   validates_each :detail do |record, attr, value|
-    if value.address_changed?
+    if value and value.address_changed?
       bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value.address}"
       begin
         result = JSON.parse(open(URI::encode(bmap_geocoding_url)).read)

@@ -20,7 +20,7 @@
           </div>
         </div>
       <% end %>
-      <%= f.input :type, collection: [['媒体', 'Provider'], ['汽车服务商', 'Dealer']], required: true %>
+      <%= f.input :type, collection: [['媒体', 'Accounts::Provider'], ['汽车服务商', 'Accounts::Dealer']], required: true %>
 
       <%= f.simple_fields_for :detail do |ff| %>
         <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerType.to_select, wrapper_html: { class: "dealer" }, required: true %>
@@ -59,9 +59,9 @@
     $user_type = $("#account_type")
     function prepare_detail_inputs() {
       $(".control-group").filter(".provider, .dealer").hide()
-      if($user_type.val() == "Provider") {
+      if($user_type.val() == "Accounts::Provider") {
         $(".control-group").filter(".provider").show()
-      } else if($user_type.val() == "Dealer") {
+      } else if($user_type.val() == "Accounts::Dealer") {
         $(".control-group").filter(".dealer").show()
       }
     }

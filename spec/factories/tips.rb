@@ -13,34 +13,34 @@ FactoryGirl.define do
     "京#{('A'..'G').to_a.sample}#{"%05d" % rand(100000)}"
   end
 
-  factory :mending do
+  factory :mending, class: Tips::Mending do
     dealer
   end
 
-  factory :cleaning do
+  factory :cleaning, class: Tips::Cleaning do
     title { Faker::Lorem.sentence }
-    cleaning_type { Cleaning::CleaningType.names.sample }
+    cleaning_type { Tips::Cleaning::CleaningType.names.sample }
     price { rand(100) }
     vip_price { rand(100) }
     dealer
   end
 
-  factory :activity do
+  factory :activity, class: Tips::Activity do
     title { Faker::Lorem.sentence }
     expire_at { rand_time(3.months.ago, 3.months.since) }
     dealer
   end
 
-  factory :bulk_purchasing do
+  factory :bulk_purchasing, class: Tips::BulkPurchasing do
     title { Faker::Lorem.sentence }
-    bulk_purchasing_type { BulkPurchasing::BulkPurchasingType.names.sample }
+    bulk_purchasing_type { Tips::BulkPurchasing::BulkPurchasingType.names.sample }
     expire_at { rand_time(3.months.ago, 3.months.since) }
     price { rand(100) }
     vip_price { rand(100) }
     dealer
   end
 
-  factory :mending_order do
+  factory :mending_order, class: Tips::MendingOrder do
     detail do
       {
         brand_id: [0,1,2,3].sample, 
@@ -54,19 +54,19 @@ FactoryGirl.define do
     user
   end
 
-  factory :cleaning_order do
+  factory :cleaning_order, class: Tips::CleaningOrder do
     count { rand(9)+1 }
     association :source, factory: :cleaning
     user
   end
 
-  factory :bulk_purchasing_order do
+  factory :bulk_purchasing_order, class: Tips::BulkPurchasingOrder do
     count { rand(9)+1 }
     association :source, factory: :bulk_purchasing
     user
   end
 
-  factory :review do
+  factory :review, class: Tips::Review do
     content { Faker::Lorem.sentence }
     stars { rand(5)+1 }
     association :order, factory: :mending_order

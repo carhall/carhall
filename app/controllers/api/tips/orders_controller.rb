@@ -1,5 +1,5 @@
 class Api::Tips::OrdersController < Api::ApplicationController
-  set_resource_class Order, detail: true
+  set_resource_class Tips::Order, detail: true
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
   # POST /api/resources/1/orders
@@ -38,9 +38,9 @@ class Api::Tips::OrdersController < Api::ApplicationController
 protected
 
   AccreditedKeys = {
-    'mending_id' => Mending,
-    'cleaning_id' => Cleaning,
-    'bulk_purchasing_id' => BulkPurchasing,
+    'mending_id' => Tips::Mending,
+    'cleaning_id' => Tips::Cleaning,
+    'bulk_purchasing_id' => Tips::BulkPurchasing,
     'dealer_id' => Accounts::Dealer,
   }
 

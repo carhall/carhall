@@ -306,7 +306,7 @@ accounts:
   - - 10
     - 杨俊
     - '13212345678'
-    - Accounts::User
+    - Accounts::Dealer
     - 8
     - 
     - 
@@ -336,7 +336,7 @@ accounts:
   - - 11
     - 李小新
     - '13312345678'
-    - Accounts::User
+    - Accounts::Provider
     - 9
     - 
     - 
@@ -366,7 +366,7 @@ accounts:
   - - 12
     - 陈仙萍
     - '13412345678'
-    - Accounts::User
+    - Accounts::Admin
     - 10
     - 
     - 

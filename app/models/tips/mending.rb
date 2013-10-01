@@ -1,10 +1,8 @@
-class Mending < ActiveRecord::Base
+class Tips::Mending < ActiveRecord::Base
   include Tips::Servicable
-  set_order_class MendingOrder
+  set_order_class Tips::MendingOrder
   
   serialize :discount, Hash
-
-  validates_presence_of :dealer
 
   serialize :total_sales, Hash
 
@@ -16,6 +14,9 @@ class Mending < ActiveRecord::Base
   enumerate :brands, with: Share::Brand, multiple: true
 
   enumerate :area, with: Share::Area
+
+  validates_presence_of :dealer
+  validates_length_of :brand_ids, :maximum => 5
   
   include Share::Localizable
   include Share::Statisticable
