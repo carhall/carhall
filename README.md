@@ -144,7 +144,10 @@ GET    | /api/accounts/:id                 | 查询指定账户信息
 GET    | /api/accounts/:id/detail          | 查询指定账户详细信息  
 GET    | /api/users/:id                    | 查询指定用户信息  
 GET    | /api/users/:id/detail             | 查询指定用户详细信息  
-GET    | /api/dealers                      | 查询所有商家信息  
+GET    | /api/dealers                      | 查询所有商家信息（默认排序）
+GET    | /api/dealers/nearby               | 查询所有商家信息（离我最近）（周边网店）  
+GET    | /api/dealers/favorite             | 查询所有商家信息（评分最高）  
+GET    | /api/dealers/hot                  | 查询所有商家信息（购买最多）    
 GET    | /api/dealers/:id                  | 查询指定商家信息  
 GET    | /api/dealers/:id/detail           | 查询指定商家详细信息  
 GET    | /api/providers                    | 查询所有订阅号信息  
@@ -156,6 +159,12 @@ GET    | /api/current_user                 | 查询当前用户信息
 GET    | /api/current_user/detail          | 查询当前用户详细信息  
 PUT    | /api/current_user                 | 修改当前用户信息  
 PUT    | /api/current_user/password        | 修改当前用户密码  
+
+GET查询汽车服务商时，可以在URI中使用两个附加字段filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的汽车服务商信息  
+> 例如，查询4S店汽车服务商信息：
+> 
+>    GET /api/tips/cleanings?filter[dealer_type_id]=4
+> 
 
 用户登录使用data[mobile]和data[password]进行登录，返回AuthToken和用户信息  
 **注意：每次登陆会重新生成auth_token，原来auth_token的作废，但重新访问登陆接口前，auth_token一直有效，即使重设密码**
@@ -592,6 +601,8 @@ GET    | /api/dealers/:dealer_id/reviews                                   | 查
     cleaning_types = ["洗车", "漆面养护", "清洁护理"]
     mending_types = ["标准保养", "维修"]
     bulk_purchasing_types = ["洗车美容", "保养专修", "汽车装饰", "其他"]
+    
+以1开头的数组  
 
 API
 ----------
@@ -621,7 +632,7 @@ Area对应表
       "宁夏回族自治区", "新疆维吾尔自治区", "台湾省",
     ]  
 
-以0开头的数组，area_id是数字的index  
+以1开头的数组，area_id是数字的index  
 
 
 Brand对应表
@@ -652,6 +663,6 @@ Brand对应表
       "中兴", "众泰", "其它", 
     ]
 
-以0开头的数组，brand_id是数字的index  
+以1开头的数组，brand_id是数字的index  
 
 
