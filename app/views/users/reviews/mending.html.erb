@@ -8,7 +8,7 @@
       <h3>保养专修评价列表 <small></small></h3>
     </div>
 
-    <%= render 'shared/alert', message: '您还没有设置专修车型！' if @mending.brands.empty? %>
+    <%= render 'share/alert', message: '您还没有设置专修车型！' if @mending.brands.empty? %>
     
     <% @grouped_orders = @mending.orders_group_by_brand_and_type %>
     <% @grouped_reviews = @mending.reviews_group_by_brand_and_type %>

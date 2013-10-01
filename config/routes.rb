@@ -54,7 +54,11 @@ Carhall::Application.routes.draw do
       get :in_progress, on: :collection
       get :orders, on: :collection
       get :expired, on: :collection
-    end    
+    end
+
+    resources :hosts
+    resource :programme_list
+    resources :programmes
   end
 
   namespace :admins do
@@ -159,21 +163,25 @@ Carhall::Application.routes.draw do
       post ':id', action: :create, on: :collection
     end
 
-    resources :post_blacklists, only: [:index, :destroy] do
-      post ':id', action: :create, on: :collection
-    end
+    resources :comments, only: [:index, :show, :create, :destroy]
 
-    resource :club, only: [:show, :update] do
-      post :president
-      post :mechanics
-    end
+    namespace :posts, path: '' do
+      resources :posts, only: [:index, :show, :create, :destroy] do
+        get :friends, on: :collection
+        get :top, on: :collection
+        get :club, on: :collection
+        
+        resources :comments, only: [:index, :show, :create, :destroy]
+      end
 
-    resources :posts, only: [:index, :show, :create, :destroy] do
-      get :friends, on: :collection
-      get :top, on: :collection
-      get :club, on: :collection
+      resources :post_blacklists, only: [:index, :destroy] do
+        post ':id', action: :create, on: :collection
+      end
 
-      resources :comments, only: [:index, :show, :create, :destroy]
+      resource :club, only: [:show, :update] do
+        post :president
+        post :mechanics
+      end
     end
 
     namespace :tips do

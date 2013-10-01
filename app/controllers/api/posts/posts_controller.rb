@@ -1,4 +1,4 @@
-class Api::PostsController < Api::ApplicationController
+class Api::Posts::PostsController < Api::ApplicationController
   before_filter :set_user, except: :show
   before_filter :set_area_id_and_brand_id, except: :create
 
@@ -13,11 +13,11 @@ class Api::PostsController < Api::ApplicationController
   end
 
   def friends
-    render_index Post.with_friends(@user)
+    render_index Posts::Post.with_friends(@user)
   end
 
   def top
-    render_index Post.top
+    render_index Posts::Post.top
   end
 
   def club
@@ -27,7 +27,7 @@ class Api::PostsController < Api::ApplicationController
   # GET /api/posts/1
   # GET /api/posts/1.json
   def show
-    render_show Post.find(params[:id])
+    render_show Posts::Post.find(params[:id])
   end
 
   # POST /api/posts
@@ -39,7 +39,7 @@ class Api::PostsController < Api::ApplicationController
   # DELETE /api/posts/1
   # DELETE /api/posts/1.json
   def destroy
-    post = Post.find(params[:id])
+    post = Posts::Post.find(params[:id])
     authorize! :destroy, post
     post.destroy
 

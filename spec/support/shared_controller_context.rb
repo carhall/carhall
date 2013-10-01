@@ -4,18 +4,16 @@ shared_context "for devise" do
   before { controller.stub(:sign_in).and_return nil }
 
   let(:user) { create :user }
+  let(:other) { create :user }
 end
 
 shared_context "resource" do
-  let(:attach_attrs) {{}}
-  let(:resource) { create resource_name, attach_attrs }
-  let(:id) { resource.id }
-  let(:attributes) { attributes_for resource_name, attach_attrs }
+  let(:append_args) {{}}
+  let(:append_attrs_when_build) {{}}
 
-  let(:attach_args) {{}}
-  let(:default_args) {{}}
-  let(:reset_args) { default_args.merge attach_args }
-
+  let(:args) { append_args }
+  let(:data) { attributes_for(resource) }
+  let(:id) { @id }
 end
 
 shared_context "errors display for debugging" do
@@ -29,7 +27,7 @@ shared_context "errors display for debugging" do
 EOM
     rescue 
       "#{response_body}"
-    end << "\nWith params: #{reset_args rescue nil}"
+    end << "\nWith params: #{args rescue nil}, append attrs: #{append_attrs_when_build}, user: #{user.id}"
   }}
 end
 

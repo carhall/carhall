@@ -1,4 +1,4 @@
-class Club < ActiveRecord::Base
+class Posts::Club < ActiveRecord::Base
   enumerate :area, with: Share::Area
   enumerate :brand, with: Share::Brand
 

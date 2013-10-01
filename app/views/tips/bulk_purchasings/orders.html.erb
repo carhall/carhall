@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div class="span3">
-    <%= render "tips/shared/sidenav/dealer" %>
+    <%= render "tips/share/sidenav/dealer" %>
   </div>
   
   <div class="span9">
@@ -8,7 +8,7 @@
       <h3>团购订单列表 <small></small></h3>
     </div>
 
-    <%= render 'shared/alert', message: '您还没有收到团购订单！' if @orders.empty? %>
+    <%= render 'share/alert', message: '您还没有收到团购订单！' if @orders.empty? %>
 
     <table class="table">
       <thead>

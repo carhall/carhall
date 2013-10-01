@@ -1,8 +1,8 @@
-class Comment < ActiveRecord::Base
+class Share::Comment < ActiveRecord::Base
   include Share::Userable
   
   belongs_to :source, polymorphic: true
-  belongs_to :at_user
+  belongs_to :at_user, class_name: 'User'
 
   validates_presence_of :user
   validates_presence_of :content

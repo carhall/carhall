@@ -4,7 +4,7 @@ class User < Account
   set_detail_class Accounts::UserDetail
    
   # For posts
-  has_many :posts
+  has_many :posts, class_name: 'Posts::Post'
   has_many :orders
   has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Order'
 
@@ -12,7 +12,7 @@ class User < Account
   has_many :recent_reviews, through: :recent_orders, class_name: 'Review'
   
   def club
-    Club.with_user self
+    Posts::Club.with_user self
   end
 
   api_accessible :detail, extend: :detail do |t|

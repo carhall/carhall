@@ -27,6 +27,7 @@ class Ability
     when :provider
       can :use, SettingsController
       can :use, Users::InverseFriendsController
+      can :use, Tips::DashboardsController
 
     when :dealer
       can :use, SettingsController
@@ -42,7 +43,7 @@ class Ability
       # end
       
     when :user
-      can :destroy, [Post, Comment], user_id: user.id
+      can :destroy, [Posts::Post, Share::Comment], user_id: user.id
       can :update, Order, user_id: user.id
     end
     

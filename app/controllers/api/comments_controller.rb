@@ -1,5 +1,5 @@
 class Api::CommentsController < Api::ApplicationController
-  set_resource_class Comment
+  set_resource_class Share::Comment
   before_filter :set_current_user, only: :create
 
   # POST /api/resources/1/comments
@@ -21,7 +21,7 @@ class Api::CommentsController < Api::ApplicationController
 protected
 
   AccreditedKeys = {
-    'post_id' => Post,
+    'post_id' => Posts::Post,
   }
 
   def set_parent

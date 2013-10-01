@@ -8,7 +8,7 @@
       <h3>洗车美容评价列表 <small></small></h3>
     </div>
 
-    <%= render 'shared/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
+    <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
     
     <% @cleanings = @cleanings.includes :orders, :reviews %>
     <table class="table">

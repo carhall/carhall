@@ -22,3 +22,4 @@ jQuery ->
           sNext:     "下页",  
           sLast:     "末页"  
 
+  $('.select2').select2

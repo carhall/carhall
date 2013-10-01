@@ -1,9 +1,9 @@
-class Post < ActiveRecord::Base
+class Posts::Post < ActiveRecord::Base
   include Share::Userable
   belongs_to :user, counter_cache: true
   
   belongs_to :club
-  has_many :comments, as: :source, class_name: 'CommentCounterCached'
+  has_many :comments, as: :source, class_name: 'Posts::Comment'
   
   extend Share::ImageAttachments
   define_image_method

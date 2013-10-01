@@ -6,31 +6,31 @@
 
 <!DOCTYPE html>
 <html>
-  <%= render 'shared/head' %>
+  <%= render 'share/head' %>
   <body>
     <div class="container">
-      <%= render 'shared/header' %>
+      <%= render 'share/header' %>
 
       <div class="navbar">
         <div class="navbar-inner">
           <div class="container">
             <% case @user_type %>
             <% when :provider, :dealer, :admin %>
-              <%= render "shared/nav/#{@user_type}" %>
+              <%= render "share/nav/#{@user_type}" %>
             <% else %>
-              <%= render 'shared/nav/welcome' %>
+              <%= render 'share/nav/welcome' %>
             <% end %>
           </div>
         </div>
       </div><!-- /.navbar -->
 
-      <%= render 'shared/notices' %>
+      <%= render 'share/notices' %>
 
       <!-- Container -->
       <%= yield %>
       
-      <%= render 'shared/footer' %>
+      <%= render 'share/footer' %>
     </div> <!-- /container -->
-    <%= render 'shared/javascripts' %>
+    <%= render 'share/javascripts' %>
   </body>
 </html>

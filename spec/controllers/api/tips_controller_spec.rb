@@ -2,36 +2,24 @@ require 'spec_helper'
 
 describe "Tips" do
   include_context "shared context"
-  let(:dealer) { create :dealer }
-  let(:attach_attrs) {{ dealer: dealer }}
 
-  shared_examples "tips#nearby" do  
-    describe "GET nearby" do
-      let(:default_args) {{ lat: 40, lng: 116.3 }}
-      let(:collection_name) { :nearby }
-      include_examples "resources#collection"
-    end
+  let(:dealer) { create :dealer }
+  let(:append_attrs_when_build) {{ dealer: dealer }}
+
+  shared_examples "tips#nearby" do 
+    include_examples "resources#list", :nearby, lat: 40, lng: 116.3
   end
     
   shared_examples "tips#cheapie" do  
-    describe "GET cheapie" do
-      let(:collection_name) { :cheapie }
-      include_examples "resources#collection"
-    end
+    include_examples "resources#list", :cheapie
   end
     
   shared_examples "tips#favorite" do  
-    describe "GET favorite" do
-      let(:collection_name) { :favorite }
-      include_examples "resources#collection"
-    end
+    include_examples "resources#list", :favorite
   end
     
   shared_examples "tips#hot" do  
-    describe "GET hot" do
-      let(:collection_name) { :hot }
-      include_examples "resources#collection"
-    end
+    include_examples "resources#list", :hot
   end
 
   shared_examples "tips#resources" do  
@@ -42,21 +30,21 @@ describe "Tips" do
   end
 
   describe Api::Tips::MendingsController do
-    let(:resource_name) { :mending }
+    let(:resource) { :mending }
     include_examples "tips#resources"
     include_examples "tips#nearby"
     include_examples "tips#favorite"
     include_examples "tips#hot"
 
     context "with dealer_id" do
-      let(:attach_args) {{ dealer_id: dealer.id }}
+      let(:append_args) {{ dealer_id: dealer.id }}
       include_examples "resources#show"
       include_examples "resources#detail"
     end
   end
 
   describe Api::Tips::CleaningsController do
-    let(:resource_name) { :cleaning }
+    let(:resource) { :cleaning }
     include_examples "tips#resources"
     include_examples "tips#nearby"
     include_examples "tips#cheapie"
@@ -64,14 +52,14 @@ describe "Tips" do
     include_examples "tips#hot"
 
     context "with cleaning_type_id" do
-      let(:attach_attrs) {{ cleaning_type_id: 1 }}
-      let(:filter_args) {{ filter: { cleaning_type_id: 1 }}}
-      let(:empty_filter_args) {{ filter: { cleaning_type_id: 2 }}}
-      include_examples "resources#index filter"
+      let(:append_attrs_when_build) {{ cleaning_type_id: 1 }}
+      let(:args) {{ filter: { cleaning_type_id: 1 }}}
+      let(:other_args) {{ filter: { cleaning_type_id: 2 }}}
+      include_examples "resources#index filtered"
     end
 
     context "with dealer_id" do
-      let(:attach_args) {{ dealer_id: dealer.id }}
+      let(:append_args) {{ dealer_id: dealer.id }}
       include_examples "tips#resources"
       include_examples "tips#nearby"
       include_examples "tips#cheapie"
@@ -81,19 +69,19 @@ describe "Tips" do
   end
 
   describe Api::Tips::ActivitiesController do
-    let(:resource_name) { :activity }
+    let(:resource) { :activity }
     include_examples "tips#resources"
     include_examples "tips#nearby"
 
     context "with dealer_id" do
-      let(:attach_args) {{ dealer_id: dealer.id }}
+      let(:append_args) {{ dealer_id: dealer.id }}
       include_examples "tips#resources"
       include_examples "tips#nearby"
     end
   end
 
   describe Api::Tips::BulkPurchasingsController do
-    let(:resource_name) { :bulk_purchasing }
+    let(:resource) { :bulk_purchasing }
     include_examples "tips#resources"
     include_examples "tips#nearby"
     include_examples "tips#cheapie"
@@ -101,14 +89,14 @@ describe "Tips" do
     include_examples "tips#hot"
 
     context "with bulk_purchasing_type_id" do
-      let(:attach_attrs) {{ bulk_purchasing_type_id: 1 }}
-      let(:filter_args) {{ filter: { bulk_purchasing_type_id: 1 }}}
-      let(:empty_filter_args) {{ filter: { bulk_purchasing_type_id: 2 }}}
-      include_examples "resources#index filter"
+      let(:append_attrs_when_build) {{ bulk_purchasing_type_id: 1 }}
+      let(:args) {{ filter: { bulk_purchasing_type_id: 1 }}}
+      let(:other_args) {{ filter: { bulk_purchasing_type_id: 2 }}}
+      include_examples "resources#index filtered"
     end
 
     context "with dealer_id" do
-      let(:attach_args) {{ dealer_id: dealer.id }}
+      let(:append_args) {{ dealer_id: dealer.id }}
       include_examples "tips#resources"
       include_examples "tips#nearby"
       include_examples "tips#cheapie"
@@ -117,36 +105,38 @@ describe "Tips" do
     end
   end
 
+
+
   describe "Orders" do
     shared_examples "orders#use" do
       describe "PUT use" do
-        let(:put_name) { :use }
-        let(:default_args) {{ id: id }}
-        include_examples "resources#put"
+        include_context "create one"
+        let(:args) {{ id: id }.merge(append_args) }
+        include_examples "resources#put", :use
       end
     end
 
     shared_examples "orders#finish" do
       describe "PUT finish" do
-        let(:put_name) { :finish }
-        let(:default_args) {{ id: id }}
-        include_examples "resources#put"
+        include_context "create one"
+        let(:args) {{ id: id }.merge(append_args) }
+        include_examples "resources#put", :finish
       end
     end
 
     shared_examples "orders#cancel" do
       describe "DELETE cancel" do
-        let(:delete_name) { :cancel }
-        let(:default_args) {{ id: id }}
-        include_examples "resources#delete"
+        include_context "create one"
+        let(:args) {{ id: id }.merge(append_args) }
+        include_examples "resources#delete", :cancel
       end
     end
 
     shared_examples "orders#resources" do
       let(:parent) { create parent_name, dealer: dealer }
-      let(:resource_name) { :"#{parent_name}_order" }
-      let(:attach_attrs) {{ user: user, source: parent }}
-      let(:attach_args) {{ :"#{parent_name}_id" => parent.id }}
+      let(:resource) { :"#{parent_name}_order" }
+      let(:append_attrs_when_build) {{ user: user, source: parent }}
+      let(:append_args) {{ :"#{parent_name}_id" => parent.id }}
 
       include_examples "resources#index"
       include_examples "resources#show"
@@ -176,39 +166,38 @@ describe "Tips" do
     end
 
     describe Api::Tips::OrdersController do
-      let(:attach_args) {{ dealer_id: dealer.id }}
+      let(:append_args) {{ dealer_id: dealer.id }}
       before do
         create :mending_order, dealer: dealer, source: create(:mending, dealer: dealer)
         create :cleaning_order, dealer: dealer, source: create(:cleaning, dealer: dealer)
         create :bulk_purchasing_order, dealer: dealer, source: create(:bulk_purchasing, dealer: dealer)
       end
 
-      include_examples "resources#index base"
+      include_examples "resources#collection", :index
     end
   end
 
+
+
   describe "Riviews" do
-    let(:resource_name) { :review }
+    let(:resource) { :review }
     let(:parent) { create parent_name, dealer: dealer }
     let(:order_name) { :"#{parent_name}_order" }
     let(:order) { create order_name, source: parent }
 
     shared_examples "reviews#resources" do
-      let(:attach_attrs) {{ order: order }}
-      let(:attach_args) {{ :"#{parent_name}_id" => parent.id }}
-      before { 3.times { create :review, order: create(order_name, source: parent) } }
+      let(:append_attrs_when_build) {{ order: create(order_name, source: parent) }}
+      let(:append_args) {{ :"#{parent_name}_id" => parent.id }}
 
-      include_examples "resources#index base"
+      include_examples "resources#index"
       include_examples "resources#show"
     end
 
     shared_examples "orders#review" do
       describe "POST review" do
-        let(:attach_args) {{ :"#{parent_name}_id" => parent.id }}
-
-        let(:post_name) { :review }
-        let(:default_args) {{ id: order.id, data: attributes_for(:review) }}
-        include_examples "resources#post"
+        let(:append_args) {{ :"#{parent_name}_id" => parent.id }}
+        let(:args) {{ id: order.id, data: attributes_for(:review) }.merge(append_args) }
+        include_examples "resources#post", :review
       end
     end
 

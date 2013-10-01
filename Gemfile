@@ -24,6 +24,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'jquery-migrate-rails'
 gem 'jquery-datatables-rails'
+gem "select2-rails", '~> 3.5.0'
 # gem 'bootstrap-sass'
 gem "twitter-bootstrap-rails"
 gem 'jasny_bootstrap_extension_rails'

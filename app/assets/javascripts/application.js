@@ -14,6 +14,8 @@
 //= require jquery-migrate
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
+//= require select2
+//= require select2_locale_zh-CN
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jasny-bootstrap

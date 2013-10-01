@@ -3,76 +3,129 @@ require 'spec_helper'
 describe "Posts" do
   include_context "shared context"
 
+  describe Api::Posts::PostsController do
+    let(:resource) { :post }
+
+    context do
+      before { 3.times { create resource, user: user }}
+      include_examples "resources#index"
+
+      describe "GET club" do
+        include_examples "resources#collection", :club
+      end
+
+      describe "GET top" do
+        include_examples "resources#collection", :top
+      end
+
+      describe "with user_id" do
+        let(:args) {{ user_id: user.id }}
+        include_examples "resources#collection", :index
+      end
+    end
+
+
+    describe "GET friends" do
+      before { user.make_friend_with(other).save }
+      before { 3.times { create resource, user: other }}
+      include_examples "resources#collection", :friends
+    end
+
+    include_examples "resources#show"
+    include_examples "resources#create"
+
+    describe "when post belongs to self" do
+      let(:append_attrs_when_build) {{ user: user }}
+      include_examples "resources#destroy"
+    end
+
+    describe "when comment belongs to other" do
+      let(:append_attrs_when_build) {{ user: other }}
+      include_examples "resources#destroy failed"
+    end
+
+    describe "when other in post blacklist" do
+      before { user.add_to_post_blacklist(other).save }
+
+      describe "GET friends" do
+        before { user.make_friend_with(other).save }
+        before { 3.times { create resource, user: other }}
+        include_examples "resources#collection empty", :friends
+      end
+    end
+  end
+
   describe Api::CommentsController do
-    let(:resource_name) { :comment }
+    let(:resource) { :comment }
     let(:user_post) { create :post, user: user }
-    let(:other) { create :user }
-    let(:other_post) { create :post, user: other }
+    let(:other_post) { create :post, user: user }
 
-    shared_examples "comments" do
-      let(:attach_attrs) {{ user: user, source: source }}
-      let(:attach_args) {{ post_id: source.id }}
-
+    describe "when post belongs to self" do
+      let(:append_args) {{ post_id: user_post.id }}
+      let(:append_attrs_when_build) {{ source: user_post, user: user }}
       include_examples "resources#index"
       include_examples "resources#show"
       include_examples "resources#create"
       include_examples "resources#destroy"
     end
 
-    describe "when post belongs to himself" do
-      let(:source) { user_post }
-      include_examples "comments"
-    end
     describe "when post belongs to other" do
-      let(:source) { other_post }
-      include_examples "comments"
+      let(:append_args) {{ post_id: other_post.id }}
+      let(:append_attrs_when_build) {{ source: other_post, user: user }}
+      include_examples "resources#index"
+      include_examples "resources#show"
+      include_examples "resources#create"
+      include_examples "resources#destroy"
     end
+
     describe "when comment belongs to other" do
-      let(:attach_attrs) {{ user: other, source: other_post }}
-      it "doesn't delete" do
-        delete :destroy, id: resource.id, post_id: other_post.id
-        response.status.should eq(403), error_messages
+      let(:append_args) {{ post_id: other_post.id }}
+      let(:append_attrs_when_build) {{ source: other_post, user: other }}
+      include_examples "resources#destroy failed"
+    end
+  end
+
+  describe Api::Posts::BlacklistsController do
+
+    describe "GET index" do
+      before { 3.times { user.add_to_post_blacklist(create(:user)).save }}
+      include_examples "resources#collection", :index
+    end
+    
+    describe "POST create" do
+      let(:args) {{ id: other.id }}
+      include_examples "resources#post", :create
+    end
+    
+    describe "when other in post blacklist" do
+      before { user.add_to_post_blacklist(other).save }
+
+      describe "DELETE destroy" do
+        let(:args) {{ id: other.id }}
+        include_examples "resources#delete", :destroy
       end
     end
   end
 
-  describe Api::PostBlacklistsController do
-    let(:resource_name) { :user }
-
-    before { 3.times { user.add_to_post_blacklist(create(:user)).save }}
-
-    include_examples "resources#index base"
-    context do
-      let(:reset_args) {{ id: id }}
-      include_examples "resources#create"
-    end
-    include_examples "resources#destroy"
-  end
-
-  describe Api::ClubsController do
-    let(:resource_name) { :club }
+  describe Api::Posts::ClubsController do
+    let(:resource) { :club }
 
     include_examples "resource#show"
+
     describe "POST president" do
-      let(:post_name) { :president }
-      include_examples "resources#post"
+      include_examples "resources#post", :president
     end
+    
     describe "POST mechanics" do
-      let(:post_name) { :mechanics }
-      include_examples "resources#post"
+      include_examples "resources#post", :mechanics
     end
+    
     describe "when user isn't president" do
-      it "doesn't edit" do
-        put :update
-        response.status.should eq(403), error_messages
-      end
+      include_examples "resources#update failed"
     end
+    
     describe "when user is president" do
-      before do 
-        club = Club.with_user(user)
-        club.president = user
-        club.save
-      end
+      before { user.club.appoint_president! user }
       include_examples "resource#update"
     end
   end

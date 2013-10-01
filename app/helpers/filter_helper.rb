@@ -40,6 +40,10 @@ module FilterHelper
     @dealer = current_account
   end
 
+  def set_provider
+    @provider = current_account
+  end
+
   def set_admin
     @admin = current_account
   end

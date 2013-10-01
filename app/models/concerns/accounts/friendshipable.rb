@@ -15,9 +15,9 @@ module Accounts::Friendshipable
     # has_many :inverse_blacklists, through: :inverse_blocks, source: :user
 
     # For blocks, blacklists and inverse_blacklists
-    has_many :post_blocks, class_name: 'Accounts::PostBlock', foreign_key: :user_id
+    has_many :post_blocks, class_name: 'Posts::Block', foreign_key: :user_id
     has_many :post_blacklists, through: :post_blocks, source: :blacklist
-    # has_many :inverse_post_blocks, class_name: 'Accounts::PostBlock', foreign_key: :blacklist_id
+    # has_many :inverse_post_blocks, class_name: 'Posts::Block', foreign_key: :blacklist_id
     # has_many :inverse_post_blacklists, through: :inverse_post_blocks, source: :user
 
   end

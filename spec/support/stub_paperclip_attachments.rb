@@ -21,6 +21,11 @@ module Paperclip
   end
 end
 
+Dealer.class_eval do
+  def generate_rqrcode_image *args
+  end
+end
+
 Accounts::DealerDetail.class_eval do
   def address_changed?
     false

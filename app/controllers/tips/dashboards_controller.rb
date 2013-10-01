@@ -1,6 +1,7 @@
 class Tips::DashboardsController < ApplicationController
   prepend_before_filter :ensure_user_type
   before_filter :set_dealer
+  before_filter :set_provider
 
   helper StatisticsHelper
 
