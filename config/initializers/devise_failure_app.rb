@@ -2,7 +2,8 @@ module Devise
   FailureApp.class_eval do
 
     def respond
-      if env["REQUEST_PATH"] =~ /^\/api/
+      request_path = env["REQUEST_PATH"] || env["REQUEST_URI"]
+      if request_path =~ /^\/api/
         respond_json
       elsif http_auth?
         http_auth
