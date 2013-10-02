@@ -70,6 +70,7 @@ class Accounts::Dealer < Accounts::Account
       as: :cleaning_goal_attainment, append_to: :detail
     t.add ->(d) { Share::Statisticable.goal_attainment d.bulk_purchasing_orders }, 
       as: :bulk_purchasing_goal_attainment, append_to: :detail
+    t.add :mending, template: :base, append_to: :detail
     t.add :orders_count, append_to: :detail
     t.add ->(d) { d.orders.includes(:user).last(3) }, as: :last_3_orders, 
       append_to: :detail, template: :base
