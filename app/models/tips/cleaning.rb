@@ -15,9 +15,9 @@ class Tips::Cleaning < ActiveRecord::Base
   include Share::Statisticable
 
   api_accessible :base do |t|
-    t.only :id, :title, :cleaning_type_id, :price, :vip_price, :description, 
+    t.only :id, :title, :area_id, :cleaning_type_id, :price, :vip_price, :description, 
         :orders_count, :reviews_count
-    t.methods :cleaning_type, :stars
+    t.methods :area, :cleaning_type, :stars
     t.images :image
     t.add :dealer, template: :base
   end

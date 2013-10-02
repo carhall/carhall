@@ -60,21 +60,30 @@ describe "Users" do
     include_examples "resources#list", :favorite
     include_examples "resources#list", :hot
 
+    context "with area_id" do
+      let(:dealer_detail) { attributes_for(:dealer)[:detail].merge(area_id: 1) }
+      let(:append_attrs_when_build) {{ detail: dealer_detail }}
+      let(:args) {{ filter: { area_id: 1 }}}
+      let(:other_args) {{ filter: { area_id: 2 }}}
+      include_examples "resources#index filtered"
+    end
+
     context "with dealer_type_id" do
-      let(:detail) { attributes_for(:dealer)[:detail].merge(dealer_type_id: 1) }
-      let(:append_attrs_when_build) {{ detail: detail }}
+      let(:dealer_detail) { attributes_for(:dealer)[:detail].merge(dealer_type_id: 1) }
+      let(:append_attrs_when_build) {{ detail: dealer_detail }}
       let(:args) {{ filter: { dealer_type_id: 1 }}}
       let(:other_args) {{ filter: { dealer_type_id: 2 }}}
       include_examples "resources#index filtered"
     end
 
     context "with bussiness_scope_id" do
-      let(:detail) { attributes_for(:dealer)[:detail].merge(business_scope_ids: [1]) }
-      let(:append_attrs_when_build) {{ detail: detail }}
+      let(:dealer_detail) { attributes_for(:dealer)[:detail].merge(business_scope_ids: [1]) }
+      let(:append_attrs_when_build) {{ detail: dealer_detail }}
       let(:args) {{ filter: { business_scope_id: 1 }}}
       let(:other_args) {{ filter: { business_scope_id: 2 }}}
       include_examples "resources#index filtered"
     end
+
   end
 
   describe Api::Accounts::ProvidersController do

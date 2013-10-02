@@ -13,6 +13,11 @@ class Tips::Mending < ActiveRecord::Base
   serialize :brand_ids, Array
   enumerate :brands, with: Share::Brand, multiple: true
 
+  def self.with_brand name
+    id = active_enum_get_id_for_brands(name)
+    where('brand_ids LIKE \'%- ?\n%\'', id)
+  end
+
   enumerate :area, with: Share::Area
 
   validates_presence_of :dealer
@@ -22,8 +27,8 @@ class Tips::Mending < ActiveRecord::Base
   include Share::Statisticable
 
   api_accessible :base do |t|
-    t.only :id, :brand_ids, :description, :orders_count, :reviews_count
-    t.methods :brands, :discount
+    t.only :id, :area_id, :brand_ids, :description, :orders_count, :reviews_count
+    t.methods :area, :brands, :discount
     t.add :dealer, template: :base
   end
   

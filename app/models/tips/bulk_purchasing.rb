@@ -20,9 +20,9 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   include Tips::Expiredable
 
   api_accessible :base do |t|
-    t.only :id, :title, :expire_at, :bulk_purchasing_type_id, :price, :vip_price, 
+    t.only :id, :title, :expire_at, :area_id, :bulk_purchasing_type_id, :price, :vip_price, 
         :description, :orders_count, :reviews_count
-    t.methods :bulk_purchasing_type
+    t.methods :area, :bulk_purchasing_type
     t.images :image
     t.add :dealer, template: :base
   end

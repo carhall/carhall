@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "Tips" do
   include_context "shared context"
 
-  let(:dealer) { create :dealer }
+  let(:dealer_detail) { attributes_for(:dealer)[:detail].merge(area_id: 1) }
+  let(:dealer) { create :dealer, detail: dealer_detail }
   let(:append_attrs_when_build) {{ dealer: dealer }}
 
   shared_examples "tips#nearby" do 
@@ -36,6 +37,20 @@ describe "Tips" do
     include_examples "tips#favorite"
     include_examples "tips#hot"
 
+    context "with area_id" do
+      let(:append_attrs_when_build) {{ dealer: dealer, area_id: 1 }}
+      let(:args) {{ filter: { area_id: 1 }}}
+      let(:other_args) {{ filter: { area_id: 2 }}}
+      include_examples "resources#index filtered"
+    end
+
+    context "with brand_id" do
+      let(:append_attrs_when_build) {{ dealer: dealer, brand_ids: [1] }}
+      let(:args) {{ filter: { brand_id: 1 }}}
+      let(:other_args) {{ filter: { brand_id: 2 }}}
+      include_examples "resources#index filtered"
+    end
+
     context "with dealer_id" do
       let(:append_args) {{ dealer_id: dealer.id }}
       include_examples "resources#show"
@@ -51,8 +66,15 @@ describe "Tips" do
     include_examples "tips#favorite"
     include_examples "tips#hot"
 
+    context "with area_id" do
+      let(:append_attrs_when_build) {{ dealer: dealer, area_id: 1 }}
+      let(:args) {{ filter: { area_id: 1 }}}
+      let(:other_args) {{ filter: { area_id: 2 }}}
+      include_examples "resources#index filtered"
+    end
+
     context "with cleaning_type_id" do
-      let(:append_attrs_when_build) {{ cleaning_type_id: 1 }}
+      let(:append_attrs_when_build) {{ dealer: dealer, cleaning_type_id: 1 }}
       let(:args) {{ filter: { cleaning_type_id: 1 }}}
       let(:other_args) {{ filter: { cleaning_type_id: 2 }}}
       include_examples "resources#index filtered"
@@ -73,6 +95,13 @@ describe "Tips" do
     include_examples "tips#resources"
     include_examples "tips#nearby"
 
+    context "with area_id" do
+      let(:append_attrs_when_build) {{ dealer: dealer, area_id: 1 }}
+      let(:args) {{ filter: { area_id: 1 }}}
+      let(:other_args) {{ filter: { area_id: 2 }}}
+      include_examples "resources#index filtered"
+    end
+
     context "with dealer_id" do
       let(:append_args) {{ dealer_id: dealer.id }}
       include_examples "tips#resources"
@@ -88,8 +117,15 @@ describe "Tips" do
     include_examples "tips#favorite"
     include_examples "tips#hot"
 
+    context "with area_id" do
+      let(:append_attrs_when_build) {{ dealer: dealer, area_id: 1 }}
+      let(:args) {{ filter: { area_id: 1 }}}
+      let(:other_args) {{ filter: { area_id: 2 }}}
+      include_examples "resources#index filtered"
+    end
+
     context "with bulk_purchasing_type_id" do
-      let(:append_attrs_when_build) {{ bulk_purchasing_type_id: 1 }}
+      let(:append_attrs_when_build) {{ dealer: dealer, bulk_purchasing_type_id: 1 }}
       let(:args) {{ filter: { bulk_purchasing_type_id: 1 }}}
       let(:other_args) {{ filter: { bulk_purchasing_type_id: 2 }}}
       include_examples "resources#index filtered"

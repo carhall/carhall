@@ -1,13 +1,15 @@
 class Api::Tips::MendingsController < Api::Tips::ApplicationController
   set_resource_class Tips::Mending
-  before_filter :set_filter
 
   def set_parent
     @parent = Tips::Mending.includes(:dealer, :reviews)
   end
 
   def set_filter
-    @parent = @parent.with_brand(params[:filter][:brand_id]) if params[:filter]
+    super
+    if params[:filter] and params[:filter][:brand_id]
+      @parent = @parent.with_brand(params[:filter][:brand_id].to_i)
+    end
   end
 
   def show

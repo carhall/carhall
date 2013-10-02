@@ -12,7 +12,8 @@ class Tips::Activity < ActiveRecord::Base
   include Tips::Expiredable
 
   api_accessible :base do |t|
-    t.only :id, :title, :expire_at, :description
+    t.only :id, :title, :expire_at, :area_id, :description
+    t.methods :area
     t.images :image
     t.add :dealer, template: :base
   end 

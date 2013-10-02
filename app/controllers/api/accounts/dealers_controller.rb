@@ -15,9 +15,14 @@ class Api::Accounts::DealersController < Api::Accounts::ApplicationController
   end
 
   def set_filter
-    if filter = params[:filter]
-      @parent = @parent.with_dealer_type(filter[:dealer_type_id].to_i) if filter[:dealer_type_id]
-      @parent = @parent.with_business_scope(filter[:business_scope_id].to_i) if filter[:business_scope_id]
+    if params[:filter] and params[:filter][:area_id]
+      @parent = @parent.with_area(params[:filter][:area_id].to_i)
+    end
+    if params[:filter] and params[:filter][:dealer_type_id]
+      @parent = @parent.with_dealer_type(params[:filter][:dealer_type_id].to_i)
+    end
+    if params[:filter] and params[:filter][:business_scope_id]
+      @parent = @parent.with_business_scope(params[:filter][:business_scope_id].to_i)
     end
   end
 

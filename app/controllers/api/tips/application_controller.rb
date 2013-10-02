@@ -1,12 +1,19 @@
 class Api::Tips::ApplicationController < Api::ApplicationController
   before_filter :set_dealer
 
+  def set_filter
+    if params[:filter] and params[:filter][:area_id]
+      @parent = @parent.with_area(params[:filter][:area_id].to_i)
+    end
+  end
+
   def set_dealer
     @dealer = Accounts::Dealer.find(params[:dealer_id]) if params[:dealer_id]
   end
 
   def self.set_resource_class klass, options = {}
     before_filter :set_parent
+    before_filter :set_filter
 
     define_method :set_parent do
       @parent = klass.includes(:dealer, :reviews)
