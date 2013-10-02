@@ -9,7 +9,7 @@ class Tips::MendingsController < Tips::ApplicationController
 
     if @tip.update_attributes(data_params)
       index_path = { action: :index }
-      redirect_to index_path, flash: { success: i18n_message(:update_success_without_title, 'tips/mending') }
+      redirect_to tips_root_path, flash: { success: i18n_message(:update_success_without_title, 'tips/mending') }
     else
       if params[:commit] == "更新专修品牌"
         render :edit_brands
