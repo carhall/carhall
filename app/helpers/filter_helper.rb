@@ -13,6 +13,17 @@ module FilterHelper
     authorize! :use, self
   end
 
+  def filter_parent key
+    if params[:filter]
+      if params[:filter][:"#{key}_id"]
+        @parent = @parent.send(:"with_#{key}", params[:filter][:"#{key}_id"].to_i)
+      end
+      if params[:filter][:"#{key}"]
+        @parent = @parent.send(:"with_#{key}", params[:filter][:"#{key}"])
+      end
+    end
+  end
+
   def set_user
     @user = if user_id = params[:user_id]
       Accounts::User.find(user_id)

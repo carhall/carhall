@@ -7,9 +7,7 @@ class Api::Tips::MendingsController < Api::Tips::ApplicationController
 
   def set_filter
     super
-    if params[:filter] and params[:filter][:brand_id]
-      @parent = @parent.with_brand(params[:filter][:brand_id].to_i)
-    end
+    filter_parent :brand
   end
 
   def show

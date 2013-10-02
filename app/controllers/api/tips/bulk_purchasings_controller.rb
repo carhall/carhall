@@ -3,9 +3,7 @@ class Api::Tips::BulkPurchasingsController < Api::Tips::ApplicationController
 
   def set_filter
     super
-    if params[:filter] and params[:filter][:bulk_purchasing_type_id]
-      @parent = @parent.with_bulk_purchasing_type(params[:filter][:bulk_purchasing_type_id].to_i)
-    end
+    filter_parent :bulk_purchasing_type
   end
 
 end

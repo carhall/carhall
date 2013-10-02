@@ -2,9 +2,7 @@ class Api::Tips::ApplicationController < Api::ApplicationController
   before_filter :set_dealer
 
   def set_filter
-    if params[:filter] and params[:filter][:area_id]
-      @parent = @parent.with_area(params[:filter][:area_id].to_i)
-    end
+    filter_parent :area
   end
 
   def set_dealer
