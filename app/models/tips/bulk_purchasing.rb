@@ -22,7 +22,7 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   api_accessible :base do |t|
     t.only :id, :title, :expire_at, :area_id, :bulk_purchasing_type_id, :price, :vip_price, 
         :description, :orders_count, :reviews_count
-    t.methods :area, :bulk_purchasing_type
+    t.methods :area, :bulk_purchasing_type, :stars
     t.images :image
     t.add :dealer, template: :base
   end
