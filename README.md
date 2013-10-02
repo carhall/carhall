@@ -160,7 +160,7 @@ GET    | /api/current_user/detail          | 查询当前用户详细信息
 PUT    | /api/current_user                 | 修改当前用户信息  
 PUT    | /api/current_user/password        | 修改当前用户密码  
 
-GET查询汽车服务商时，可以在URI中使用两个附加字段filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的汽车服务商信息  
+GET查询汽车服务商时，可以在URI中使用三个附加字段filter[area_id]、filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的汽车服务商信息  
 > 例如，查询4S店汽车服务商信息：
 > 
 >    GET /api/tips/cleanings?filter[dealer_type_id]=4
@@ -392,12 +392,15 @@ GET    | /api/tips/dealers/:dealer_id/mending/detail | 查询指定商户的保�
 >    GET /api/tips/cleanings/nearby?lat=40.0&lng=116.6
 > 
 
-GET查询时，可以在URI中使用一个附加字段filter[brand_id]作为条件，来查询指定车型的保养专修信息  
+GET查询时，可以在URI中使用两个附加字段filter[area_id]和filter[brand_id]作为条件，来查询指定车型的保养专修信息  
 > 例如，查询奥迪维修信息：
 > 
 >    GET /api/tips/cleanings?filter[brand_id]=2
 > 
-
+> 可以同时使用多个过滤字段
+> 
+>    GET /api/tips/cleanings?filter[brand_id]=2&filter[area_id]=1
+> 
 
 Cleaning 洗车美容
 ==========
@@ -433,7 +436,7 @@ GET    | /api/dealers/:dealer_id/cleanings/cheapie  | 查询指定商户的洗�
 GET    | /api/dealers/:dealer_id/cleanings/favorite | 查询指定商户的洗车美容信息（评分最高）  
 GET    | /api/dealers/:dealer_id/cleanings/hot      | 查询指定商户的洗车美容信息（购买最多）  
 
-GET查询时，可以在URI中使用一个附加字段filter[cleaning_type_id]作为条件，来查询指定类别的洗车美容信息  
+GET查询时，可以在URI中使用两个附加字段filter[area_id]和filter[cleaning_type_id]作为条件，来查询指定类别的洗车美容信息  
 **注意：会员洗车即filter[cleaning_type_id]=0**  
 查询相关参数，参见 Mending 保养专修  
 
@@ -459,6 +462,8 @@ GET    | /api/tips/activities/:id                  | 查询指定活动信息
 GET    | /api/tips/activities/:id/detail           | 查询指定活动详细信息   
 GET    | /api/dealers/:dealer_id/activities        | 查询指定商户的活动信息（默认排序）  
 GET    | /api/dealers/:dealer_id/activities/nearby | 查询指定商户的活动信息（离我最近）  
+
+GET查询时，可以在URI中使用一个附加字段filter[area_id]作为条件，来查询指定类别的团购信息  
 
 查询相关参数，参见 Mending 保养专修  
 
@@ -498,7 +503,7 @@ GET    | /api/dealers/:dealer_id/bulk_purchasings/cheapie  | 查询指定商户�
 GET    | /api/dealers/:dealer_id/bulk_purchasings/favorite | 查询指定商户的团购信息（评分最高）  
 GET    | /api/dealers/:dealer_id/bulk_purchasings/hot      | 查询指定商户的团购信息（购买最多）  
 
-GET查询时，可以在URI中使用一个附加字段filter[bulk_purchasing_type_id]作为条件，来查询指定类别的团购信息  
+GET查询时，可以在URI中使用两个附加字段filter[area_id]和filter[bulk_purchasing_type_id]作为条件，来查询指定类别的团购信息  
 查询相关参数，参见 Mending 保养专修  
 
 
