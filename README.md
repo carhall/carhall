@@ -389,18 +389,29 @@ GET    | /api/tips/dealers/:dealer_id/mending/detail | 查询指定商户的保�
 使用nearby，离我最近时，需要附加参数lat（经度）和lng（纬度）
 > 例如：
 > 
->    GET /api/tips/cleanings/nearby?lat=40.0&lng=116.6
+>     GET /api/tips/mendings/nearby?lat=40.0&lng=116.6
 > 
 
 GET查询时，可以在URI中使用两个附加字段filter[area_id]和filter[brand_id]作为条件，来查询指定车型的保养专修信息  
 > 例如，查询奥迪维修信息：
 > 
->    GET /api/tips/cleanings?filter[brand_id]=2
+>     GET /api/tips/mendings?filter[brand_id]=2
 > 
 > 可以同时使用多个过滤字段
 > 
->    GET /api/tips/cleanings?filter[brand_id]=2&filter[area_id]=1
+>     GET /api/tips/mendings?filter[brand_id]=2&filter[area_id]=1
 > 
+> 
+> filter[area_id]和filter[area]都可以使用，分别用来提交ID和ID所对应的名称，例如：
+> 
+>     GET /api/tips/mendings?filter[area_id]=1
+> 
+> 和
+> 
+>     GET /api/tips/mendings?filter[area]=北京市
+> 
+> 等价；所有_id结尾的过滤字段都可以以这种方式直接提交ID所对应的名称。
+
 
 Cleaning 洗车美容
 ==========
