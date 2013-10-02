@@ -1,5 +1,5 @@
 class Api::Tips::OrdersController < Api::ApplicationController
-  set_resource_class Tips::Order, detail: true
+  set_resource_class ::Tips::Order, detail: true
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
 
   # POST /api/resources/1/orders

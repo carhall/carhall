@@ -5,13 +5,13 @@ class Api::Posts::ClubsController < Api::Posts::ApplicationController
   # GET /api/club
   # GET /api/club.json
   def show
-    render_show Posts::Club.with_club(@area_id, @brand_id)
+    render_show ::Posts::Club.with_club(@area_id, @brand_id)
   end
 
   # PUT /api/club
   # PUT /api/club.json
   def update
-    club = Posts::Club.with_user(@user)
+    club = ::Posts::Club.with_user(@user)
     authorize! :update, club
     if club.update_attributes(data_params)
       render_update_success club
@@ -21,7 +21,7 @@ class Api::Posts::ClubsController < Api::Posts::ApplicationController
   end
 
   def president
-    club = Posts::Club.with_user(@user)
+    club = ::Posts::Club.with_user(@user)
     club.appoint_president @user
     # if club.apply_president(@user, params[:data][:description]).save
     if club.save
@@ -32,7 +32,7 @@ class Api::Posts::ClubsController < Api::Posts::ApplicationController
   end
 
   def mechanics
-    club = Posts::Club.with_user(@user)
+    club = ::Posts::Club.with_user(@user)
     club.appoint_mechanic @user
     # if club.apply_mechanic(@user, params[:data][:description]).save
     if club.save

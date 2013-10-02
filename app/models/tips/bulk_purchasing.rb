@@ -27,4 +27,6 @@ class Tips::BulkPurchasing < ActiveRecord::Base
     t.add :dealer, template: :base
   end
   
+  api_accessible_for_detail
+  
 end

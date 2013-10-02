@@ -1,7 +1,7 @@
 class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   skip_before_filter :authenticate_account!, only: [:login]
 
-  set_resource_class Accounts::Account, detail: true
+  set_resource_class ::Accounts::Account, detail: true
 
   # POST /api/accounts/login
   # POST /api/accounts/login.json

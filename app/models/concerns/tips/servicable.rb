@@ -11,21 +11,23 @@ module Tips::Servicable
     end
 
     acts_as_api
-
-    api_accessible :detail do |t|
-      t.add :goal_attainment, append_to: :detail
-      t.add ->(s) { s.orders.includes(:user).last(3) }, 
-        as: :last_3_orders, append_to: :detail, template: :base
-      t.add ->(s) { s.reviews.includes(order: :user).last(3) }, 
-        as: :last_3_reviews, append_to: :detail, template: :base
-      t.add :dealer, template: :detail
-    end
   end
   
   module ClassMethods 
     def with_dealer dealer
       dealer_id = if dealer.is_a? Integer then dealer else dealer.id end
       where(dealer_id: dealer_id)
+    end
+
+    def api_accessible_for_detail
+      api_accessible :detail, extend: :base do |t|
+        t.add :goal_attainment, append_to: :detail
+        t.add ->(s) { s.orders.includes(:user).last(3) }, 
+          as: :last_3_orders, append_to: :detail, template: :base
+        t.add ->(s) { s.reviews.includes(order: :user).last(3) }, 
+          as: :last_3_reviews, append_to: :detail, template: :base
+        t.add :dealer, template: :detail
+      end
     end
 
     def set_order_class klass

@@ -28,10 +28,12 @@ class Tips::Mending < ActiveRecord::Base
 
   api_accessible :base do |t|
     t.only :id, :area_id, :brand_ids, :description, :orders_count, :reviews_count
-    t.methods :area, :brands, :discount
+    t.methods :area, :brands, :discount, :stars
     t.add :dealer, template: :base
   end
   
+  api_accessible_for_detail
+
   def init_grouped_array_by_brand_and_type
     brands_count = Share::Brand.all.count
     types_count = Tips::MendingOrderDetail::MendingType.all.count

@@ -13,11 +13,11 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
   end
 
   def friends
-    render_index Posts::Post.with_friends(@user)
+    render_index ::Posts::Post.with_friends(@user)
   end
 
   def top
-    render_index Posts::Post.top
+    render_index ::Posts::Post.top
   end
 
   def club
@@ -27,7 +27,7 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
   # GET /api/posts/1
   # GET /api/posts/1.json
   def show
-    render_show Posts::Post.find(params[:id])
+    render_show ::Posts::Post.find(params[:id])
   end
 
   # POST /api/posts
@@ -39,7 +39,7 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
   # DELETE /api/posts/1
   # DELETE /api/posts/1.json
   def destroy
-    post = Posts::Post.find(params[:id])
+    post = ::Posts::Post.find(params[:id])
     authorize! :destroy, post
     post.destroy
 

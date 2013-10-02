@@ -1,5 +1,5 @@
 class Api::Tips::CleaningsController < Api::Tips::ApplicationController
-  set_resource_class Tips::Cleaning
+  set_resource_class ::Tips::Cleaning
 
   def set_filter
     super

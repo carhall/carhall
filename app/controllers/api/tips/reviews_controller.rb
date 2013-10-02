@@ -1,5 +1,5 @@
 class Api::Tips::ReviewsController < Api::ApplicationController
-  set_resource_class Tips::Review
+  set_resource_class ::Tips::Review
 
   protected
 

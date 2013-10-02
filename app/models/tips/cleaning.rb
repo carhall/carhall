@@ -21,5 +21,7 @@ class Tips::Cleaning < ActiveRecord::Base
     t.images :image
     t.add :dealer, template: :base
   end
+
+  api_accessible_for_detail
   
 end
