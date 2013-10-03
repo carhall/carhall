@@ -61,7 +61,7 @@ end
 
 3.times do
   FactoryGirl.create :programme, provider: provider
-  FactoryGirl.create :host, provider: provider, hosts { Bcst::Host.all.sample(3) }
+  FactoryGirl.create :host, provider: provider, programmes: Bcst::Programme.all.sample(3)
 end
 
 10.times do

@@ -10,7 +10,7 @@
 
     <%= render 'share/alert', message: '还没有用户关注您！' if @inverse_friends.empty? %>
     
-    <% @inverse_friends = @inverse_friends.includes :detail, :orders, :reviews %>
+    <% @inverse_friends = @inverse_friends.includes(:detail, :orders, :reviews).page(params[:page]) %>
     <table class="table table-striped datatable">
       <thead>
         <tr>
@@ -40,6 +40,7 @@
         <% end %>
       </tbody>
     </table>
+    <%= paginate @inverse_friends %>
 
   </div>
 </div>

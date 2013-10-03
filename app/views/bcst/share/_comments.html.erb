@@ -1,4 +1,4 @@
-<% @comments = @comments.includes(:user) %>
+<% @comments = @comments.includes(:user).page(params[:page]) %>
 <table class="table">
   <thead>
     <tr>
@@ -19,3 +19,4 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @comments %>

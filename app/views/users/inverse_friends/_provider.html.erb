@@ -2,6 +2,7 @@
   <h3>客户列表 <small></small></h3>
 </div>
 
+<% @inverse_friends = @inverse_friends.page(params[:page]) %>
 <%= render 'share/alert', message: '还没有用户关注您！' if @inverse_friends.empty? %>
 
 <table class="table">
@@ -24,3 +25,4 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @inverse_friends %>

@@ -29,6 +29,13 @@
         </table>
       </div>
     </div>
+
+    <div class="page-header">
+      <h3>节目板块评论 <small></small></h3>
+    </div>
+
+    <% @comments = @bcst.comments %>
+    <%= render 'bcst/share/comments' %>
   </div>
 
 </div>
