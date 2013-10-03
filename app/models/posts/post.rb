@@ -15,6 +15,8 @@ class Posts::Post < ActiveRecord::Base
     self.club = user.club
   end
 
+  default_scope { order('id DESC') }
+
   def self.with_friends user
     with_user(user.friend_ids - user.post_blacklist_ids)
   end

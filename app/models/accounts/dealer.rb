@@ -72,9 +72,9 @@ class Accounts::Dealer < Accounts::Account
       as: :bulk_purchasing_goal_attainment, append_to: :detail
     t.add :mending, template: :base, append_to: :detail
     t.add :orders_count, append_to: :detail
-    t.add ->(d) { d.orders.includes(:user).last(3) }, as: :last_3_orders, 
+    t.add ->(d) { d.orders.unscoped.includes(:user).last(3) }, as: :last_3_orders, 
       append_to: :detail, template: :base
-    t.add ->(d) { d.reviews.includes(order: :user).last(3) }, as: :last_3_reviews,
+    t.add ->(d) { d.reviews.unscoped.includes(order: :user).last(3) }, as: :last_3_reviews,
       append_to: :detail, template: :base
   end
 

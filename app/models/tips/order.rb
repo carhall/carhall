@@ -11,6 +11,8 @@ class Tips::Order < ActiveRecord::Base
 
   validates_presence_of :source, :user 
   
+  default_scope { order('id DESC') }
+  
   before_create do
     self.dealer_id = source.dealer_id
     self.title = set_title

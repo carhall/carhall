@@ -16,7 +16,7 @@ class Accounts::User < Accounts::Account
   end
 
   api_accessible :detail, extend: :detail do |t|
-    t.add ->(u) { u.posts.includes(:user).last(3) }, 
+    t.add ->(u) { u.posts.unscoped.includes(:user).last(3) }, 
       as: :last_3_posts, append_to: :detail, template: :base
     t.add :posts_count, append_to: :detail
   end
