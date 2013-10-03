@@ -2,7 +2,7 @@ class Api::Tips::MendingsController < Api::Tips::ApplicationController
   set_resource_class ::Tips::Mending
 
   def set_parent
-    @parent = Tips::Mending.includes(:dealer, :reviews)
+    @parent = ::Tips::Mending.includes(:dealer, :reviews)
   end
 
   def set_filter
@@ -12,7 +12,7 @@ class Api::Tips::MendingsController < Api::Tips::ApplicationController
 
   def show
     mending = @dealer.mending if @dealer
-    mending ||= Tips::Mending.find(params[:id])
+    mending ||= ::Tips::Mending.find(params[:id])
     render_show mending
   end
 

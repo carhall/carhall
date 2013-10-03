@@ -6,7 +6,7 @@ class Api::Accounts::UsersController < Api::Accounts::ApplicationController
   # POST /api/users
   # POST /api/users.json
   def create
-    @user = Accounts::User.new data_params
+    @user = ::Accounts::User.new data_params
     @user.reset_authentication_token
 
     render_create @user, :with_token

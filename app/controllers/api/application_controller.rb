@@ -56,7 +56,7 @@ private
   # authentication features to get the token from a header.
   def authenticate_account_from_token!
     auth_token = params[:auth_token].presence
-    account    = auth_token && Accounts::Account.find_by(authentication_token: auth_token)
+    account    = auth_token && ::Accounts::Account.find_by(authentication_token: auth_token)
  
     if account
       # Notice we are passing store false, so the user is not
