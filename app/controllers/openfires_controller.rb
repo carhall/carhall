@@ -1,5 +1,3 @@
-AbsoluteUrlPrefix = Env['CARHALL_URL_PREFIX']
-
 class OpenfiresController < ActionController::Base
   include Api::RenderHelper
 
@@ -33,8 +31,8 @@ class OpenfiresController < ActionController::Base
   end
 
   def list_users
-    @users = ::Accounts::Account.find(params[:ids].split(','))
-    render_data users: @users.includes(:detail).map {|u| openfire_user_detail(u) }
+    @users = ::Accounts::Account.includes(:detail).find(params[:ids].split(','))
+    render_data users: @users.map {|u| openfire_user_detail(u) }
   end
 
   protected

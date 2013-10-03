@@ -11,11 +11,19 @@ module Accounts::TokenAuthenticatable
       self.authentication_token = generate_authentication_token
     end
   end
+
+  def ensure_authentication_token!
+    ensure_authentication_token && save(validate: false)
+  end
  
   def reset_authentication_token
     self.authentication_token = generate_authentication_token
   end
  
+  def reset_authentication_token!
+    reset_authentication_token && save(validate: false)
+  end
+  
   private
   
   def generate_authentication_token
