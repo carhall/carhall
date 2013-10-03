@@ -6,7 +6,7 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   # POST /api/accounts/login
   # POST /api/accounts/login.json
   def login
-    @user = Accounts::Account.find_for_database_authentication(mobile: params[:data][:mobile])
+    @user = ::Accounts::Account.find_for_database_authentication(mobile: params[:data][:mobile])
 
     if @user && @user.valid_password?(params[:data][:password])
       @user.reset_authentication_token!  # make sure the user has a token generated

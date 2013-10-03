@@ -169,13 +169,13 @@ Carhall::Application.routes.draw do
         post :mechanics
       end
 
-      resources :current_user do
+      resources :current_user, only: [] do
         resources :post_blacklists, only: [:index]
         resources :posts, only: [:index]
         resource :club, only: [:show]
       end
 
-      resources :users do
+      resources :users, only: [] do
         resources :posts, only: [:index]
       end
     end
@@ -242,7 +242,7 @@ Carhall::Application.routes.draw do
     end
 
     namespace :tips, path: '' do
-      resources :dealers do
+      resources :dealers, only: [] do
         resource :mending, only: [:show] do
           get :detail
         end
