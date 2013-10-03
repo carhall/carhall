@@ -105,7 +105,7 @@ Carhall::Application.routes.draw do
     resources :constants, only: [:index, :show]
 
     # Accounts
-    namespace :accounts, path: '' do
+     scope module: :accounts do
       resources :users, only: [:show, :create] do
         get :detail, on: :member
 
@@ -151,7 +151,7 @@ Carhall::Application.routes.draw do
     resources :comments, only: [:index, :show, :create, :destroy]
 
     # Posts
-    namespace :posts, path: '' do
+    scope module: :posts do
       resources :posts, only: [:index, :show, :create, :destroy] do
         get :friends, on: :collection
         get :top, on: :collection
@@ -241,7 +241,7 @@ Carhall::Application.routes.draw do
       end
     end
 
-    namespace :tips, path: '' do
+    scope module: :tips do
       resources :dealers, only: [] do
         resource :mending, only: [:show] do
           get :detail
