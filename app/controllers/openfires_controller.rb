@@ -2,7 +2,7 @@ class OpenfiresController < ActionController::Base
   include Api::RenderHelper
 
   def login
-    @user = Account.find_for_database_authentication(mobile: params[:mobile])
+    @user = ::Accounts::Account.find_for_database_authentication(mobile: params[:mobile])
 
     if @user && @user.valid_password?(params[:password])
       @user.ensure_authentication_token!
@@ -14,7 +14,7 @@ class OpenfiresController < ActionController::Base
   end
 
   def login_by_token
-    @user = Account.where(authentication_token: params[:token]).first
+    @user = ::Accounts::Account.where(authentication_token: params[:token]).first
 
     if @user
       @user.ensure_authentication_token!
@@ -26,12 +26,12 @@ class OpenfiresController < ActionController::Base
   end
 
   def get_user
-    @user = Account.find(params[:id])
+    @user = ::Accounts::Account.find(params[:id])
     render_data user: openfire_user_detail(@user)
   end
 
   def list_users
-    @users = Account.find(params[:ids].split(','))
+    @users = ::Accounts::Account.find(params[:ids].split(','))
     render_data users: @users.includes(:detail).map {|u| openfire_user_detail(u) }
   end
 
