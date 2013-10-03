@@ -1,43 +1,25 @@
 class CreateCleanings < ActiveRecord::Migration
   def change
     create_table :cleanings do |t|
-      t.references :dealer
-      t.references :location
-      t.integer :area_id
+      t.references :dealer, index: true
+      t.references :location, index: true
+      t.integer :area_id, index: true
 
       t.string  :title
-      t.integer :cleaning_type_id
-      t.float   :price
-      t.float   :vip_price
+      t.integer :cleaning_type_id, index: true
+      t.float   :price, index: true
+      t.float   :vip_price, index: true
       t.text    :description
       t.attachment :image
       
-      t.float   :total_sale
+      t.float   :total_cost, index: true
 
-      t.integer :orders_count, default: 0
-      t.integer :reviews_count, default: 0
-      t.integer :stars_count, default: 0
+      t.integer :orders_count, default: 0, index: true
+      t.integer :reviews_count, default: 0, index: true
+      t.integer :stars_count, default: 0, index: true
 
       t.timestamps
     end
-
-    change_table :cleanings do |t|
-      t.index :dealer_id
-      t.index :location_id
-      t.index :area_id
-
-      t.index :cleaning_type_id
-
-      t.index :price
-      t.index :vip_price
-      
-      t.index :total_sale
-
-      t.index :orders_count
-      t.index :reviews_count
-      t.index :stars_count
-      
-    end
-
+    
   end
 end

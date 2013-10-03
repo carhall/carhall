@@ -1,7 +1,7 @@
 class CreateReviews < ActiveRecord::Migration
   def change
     create_table :reviews do |t|
-      t.references :order
+      t.references :order, index: true
 
       t.text    :content
       t.integer :stars
@@ -9,9 +9,5 @@ class CreateReviews < ActiveRecord::Migration
       t.timestamps
     end
 
-    change_table :reviews do |t|
-      t.index :order_id
-    end
-    
   end
 end

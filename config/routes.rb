@@ -63,7 +63,7 @@ Carhall::Application.routes.draw do
     
 
     resources :hosts
-    resource :programme_list
+    resources :programme_lists
     resources :programmes do
       resources :comments
     end

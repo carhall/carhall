@@ -3,13 +3,8 @@ class CreateLocations < ActiveRecord::Migration
     create_table :locations do |t|
       t.float  :latitude, limit: 32
       t.float  :longitude, limit: 32
-      t.string :geohash
+      t.string :geohash, index: true
     
     end
-
-    change_table :locations do |t|
-      t.index :geohash
-    end
-
   end
 end

@@ -4,32 +4,19 @@ class CreateOrders < ActiveRecord::Migration
       # For STI
       t.string  :type
 
-      t.references :user
-      t.references :dealer
-      t.references :dealer_detail
-      t.references :detail
-      t.references :source
+      t.references :user, index: true
+      t.references :dealer, index: true
+      t.references :detail, index: true
+      t.references :source, index: true
 
       t.string  :title
-      t.integer :state_id
+      t.integer :state_id, index: true
       t.float   :cost
       
       t.integer :count, default: 0
       t.integer :used_count, default: 0
       
       t.timestamps
-    end
-
-    change_table :orders do |t|
-      t.index [:type, :id]
-      
-      t.index :user_id
-      t.index :dealer_id
-      t.index :detail_id
-      t.index :source_id
-      
-      t.index :state_id
-
     end
 
   end

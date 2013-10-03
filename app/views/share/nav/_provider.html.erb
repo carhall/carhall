@@ -2,5 +2,5 @@
   <li<%= active? "dashboards" %>><a href="<%= dashboard_path %>">首页</a></li>
   <li<%= active? "users" %>><a href="<%= users_inverse_friends_path %>">客户管理</a></li>
   <li<%= active? "bcst" %>><a href="<%= bcst_root_path %>">业务管理</a></li>
-  <li<%= active? "settings" or active? "users/registrations#edit" %>><a href="<%= setting_path %>">设置</a></li>
+  <li<%= active? "settings" or active? "accounts/registrations#edit" %>><a href="<%= setting_path %>">设置</a></li>
 </ul>

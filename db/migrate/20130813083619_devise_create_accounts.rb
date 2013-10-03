@@ -2,7 +2,7 @@ class DeviseCreateAccounts < ActiveRecord::Migration
   def change
     create_table(:accounts) do |t|
       ## Database authenticatable
-      # t.string :email,              null: false, default: ""
+      t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -44,7 +44,7 @@ class DeviseCreateAccounts < ActiveRecord::Migration
     # BaseUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
     change_table :accounts do |t|
-      # t.index :email,                unique: true
+      t.index :email,                unique: true
       t.index :reset_password_token, unique: true
       t.index :confirmation_token,   unique: true
       t.index :unlock_token,         unique: true

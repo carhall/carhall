@@ -1,7 +1,12 @@
 class Bcst::Programme < ActiveRecord::Base
-  belongs_to :provider
+  belongs_to :provider, class_name: 'Accounts::Provider'
 
-  extend Share::Ids2Resources
-  define_ids2resources_methods 'Bcst::Host', :hosts
+  has_and_belongs_to_many :hosts
+
+  # For avatar
+  extend Share::ImageAttachments
+  define_avatar_method
+
+  validates_presence_of :title
 
 end

@@ -4,7 +4,6 @@ class CreateHosts < ActiveRecord::Migration
       t.references :provider, index: true
       t.string :name
       t.attachment :avatar
-      t.string :programme_ids
       t.text :description
 
       t.timestamps

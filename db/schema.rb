@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130930124116) do
+ActiveRecord::Schema.define(version: 20131003085322) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "", null: false
@@ -52,21 +52,12 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.integer  "location_id"
   end
 
-  add_index "accounts", ["accepted_at"], name: "index_accounts_on_accepted_at", using: :btree
   add_index "accounts", ["authentication_token"], name: "index_accounts_on_authentication_token", unique: true, using: :btree
   add_index "accounts", ["confirmation_token"], name: "index_accounts_on_confirmation_token", unique: true, using: :btree
   add_index "accounts", ["detail_id"], name: "index_accounts_on_detail_id", using: :btree
   add_index "accounts", ["location_id"], name: "index_accounts_on_location_id", using: :btree
-  add_index "accounts", ["mobile"], name: "index_accounts_on_mobile", unique: true, using: :btree
-  add_index "accounts", ["orders_count"], name: "index_accounts_on_orders_count", using: :btree
-  add_index "accounts", ["posts_count"], name: "index_accounts_on_posts_count", using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
-  add_index "accounts", ["reviews_count"], name: "index_accounts_on_reviews_count", using: :btree
-  add_index "accounts", ["stars_count"], name: "index_accounts_on_stars_count", using: :btree
-  add_index "accounts", ["total_cost"], name: "index_accounts_on_total_cost", using: :btree
-  add_index "accounts", ["type", "id"], name: "index_accounts_on_type_and_id", using: :btree
   add_index "accounts", ["unlock_token"], name: "index_accounts_on_unlock_token", unique: true, using: :btree
-  add_index "accounts", ["username"], name: "index_accounts_on_username", using: :btree
 
   create_table "activities", force: true do |t|
     t.integer  "dealer_id"
@@ -83,7 +74,6 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.datetime "updated_at"
   end
 
-  add_index "activities", ["area_id"], name: "index_activities_on_area_id", using: :btree
   add_index "activities", ["dealer_id"], name: "index_activities_on_dealer_id", using: :btree
   add_index "activities", ["location_id"], name: "index_activities_on_location_id", using: :btree
 
@@ -121,7 +111,7 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.float    "total_sale"
+    t.float    "total_cost"
     t.integer  "orders_count",            default: 0
     t.integer  "reviews_count",           default: 0
     t.integer  "stars_count",             default: 0
@@ -129,16 +119,8 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.datetime "updated_at"
   end
 
-  add_index "bulk_purchasings", ["area_id"], name: "index_bulk_purchasings_on_area_id", using: :btree
-  add_index "bulk_purchasings", ["bulk_purchasing_type_id"], name: "index_bulk_purchasings_on_bulk_purchasing_type_id", using: :btree
   add_index "bulk_purchasings", ["dealer_id"], name: "index_bulk_purchasings_on_dealer_id", using: :btree
   add_index "bulk_purchasings", ["location_id"], name: "index_bulk_purchasings_on_location_id", using: :btree
-  add_index "bulk_purchasings", ["orders_count"], name: "index_bulk_purchasings_on_orders_count", using: :btree
-  add_index "bulk_purchasings", ["price"], name: "index_bulk_purchasings_on_price", using: :btree
-  add_index "bulk_purchasings", ["reviews_count"], name: "index_bulk_purchasings_on_reviews_count", using: :btree
-  add_index "bulk_purchasings", ["stars_count"], name: "index_bulk_purchasings_on_stars_count", using: :btree
-  add_index "bulk_purchasings", ["total_sale"], name: "index_bulk_purchasings_on_total_sale", using: :btree
-  add_index "bulk_purchasings", ["vip_price"], name: "index_bulk_purchasings_on_vip_price", using: :btree
 
   create_table "cleanings", force: true do |t|
     t.integer  "dealer_id"
@@ -153,7 +135,7 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.float    "total_sale"
+    t.float    "total_cost"
     t.integer  "orders_count",       default: 0
     t.integer  "reviews_count",      default: 0
     t.integer  "stars_count",        default: 0
@@ -161,16 +143,8 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.datetime "updated_at"
   end
 
-  add_index "cleanings", ["area_id"], name: "index_cleanings_on_area_id", using: :btree
-  add_index "cleanings", ["cleaning_type_id"], name: "index_cleanings_on_cleaning_type_id", using: :btree
   add_index "cleanings", ["dealer_id"], name: "index_cleanings_on_dealer_id", using: :btree
   add_index "cleanings", ["location_id"], name: "index_cleanings_on_location_id", using: :btree
-  add_index "cleanings", ["orders_count"], name: "index_cleanings_on_orders_count", using: :btree
-  add_index "cleanings", ["price"], name: "index_cleanings_on_price", using: :btree
-  add_index "cleanings", ["reviews_count"], name: "index_cleanings_on_reviews_count", using: :btree
-  add_index "cleanings", ["stars_count"], name: "index_cleanings_on_stars_count", using: :btree
-  add_index "cleanings", ["total_sale"], name: "index_cleanings_on_total_sale", using: :btree
-  add_index "cleanings", ["vip_price"], name: "index_cleanings_on_vip_price", using: :btree
 
   create_table "clubs", force: true do |t|
     t.integer  "president_id"
@@ -223,10 +197,6 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.datetime "rqrcode_image_updated_at"
   end
 
-  add_index "dealer_details", ["area_id"], name: "index_dealer_details_on_area_id", using: :btree
-  add_index "dealer_details", ["dealer_type_id"], name: "index_dealer_details_on_dealer_type_id", using: :btree
-  add_index "dealer_details", ["rqrcode_token"], name: "index_dealer_details_on_rqrcode_token", unique: true, using: :btree
-
   create_table "friend", force: true do |t|
     t.integer "user_id"
     t.integer "friend_id"
@@ -254,7 +224,6 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "programme_ids"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -262,13 +231,19 @@ ActiveRecord::Schema.define(version: 20130930124116) do
 
   add_index "hosts", ["provider_id"], name: "index_hosts_on_provider_id", using: :btree
 
+  create_table "hosts_programmes", id: false, force: true do |t|
+    t.integer "host_id"
+    t.integer "programme_id"
+  end
+
+  add_index "hosts_programmes", ["host_id"], name: "index_hosts_programmes_on_host_id", using: :btree
+  add_index "hosts_programmes", ["programme_id"], name: "index_hosts_programmes_on_programme_id", using: :btree
+
   create_table "locations", force: true do |t|
     t.float  "latitude"
     t.float  "longitude"
     t.string "geohash"
   end
-
-  add_index "locations", ["geohash"], name: "index_locations_on_geohash", using: :btree
 
   create_table "mending_order_details", force: true do |t|
     t.integer  "brand_id"
@@ -279,21 +254,18 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.text     "description"
   end
 
-  add_index "mending_order_details", ["brand_id"], name: "index_mending_order_details_on_brand_id", using: :btree
-  add_index "mending_order_details", ["mending_type_id"], name: "index_mending_order_details_on_mending_type_id", using: :btree
-
   create_table "mendings", force: true do |t|
     t.integer  "dealer_id"
     t.integer  "location_id"
     t.integer  "area_id"
     t.text     "discount"
-    t.string   "brand_ids",      limit: 1024
+    t.string   "brand_ids"
     t.text     "description"
-    t.float    "total_sale"
-    t.integer  "orders_count",                default: 0
-    t.integer  "reviews_count",               default: 0
-    t.integer  "stars_count",                 default: 0
-    t.text     "total_sales"
+    t.float    "total_cost"
+    t.integer  "orders_count",   default: 0
+    t.integer  "reviews_count",  default: 0
+    t.integer  "stars_count",    default: 0
+    t.text     "total_costs"
     t.text     "orders_counts"
     t.text     "reviews_counts"
     t.text     "stars_counts"
@@ -301,13 +273,8 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.datetime "updated_at"
   end
 
-  add_index "mendings", ["area_id"], name: "index_mendings_on_area_id", using: :btree
   add_index "mendings", ["dealer_id"], name: "index_mendings_on_dealer_id", using: :btree
   add_index "mendings", ["location_id"], name: "index_mendings_on_location_id", using: :btree
-  add_index "mendings", ["orders_count"], name: "index_mendings_on_orders_count", using: :btree
-  add_index "mendings", ["reviews_count"], name: "index_mendings_on_reviews_count", using: :btree
-  add_index "mendings", ["stars_count"], name: "index_mendings_on_stars_count", using: :btree
-  add_index "mendings", ["total_sale"], name: "index_mendings_on_total_sale", using: :btree
 
   create_table "offline_message", force: true do |t|
     t.integer "user_id"
@@ -334,14 +301,13 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.string   "type"
     t.integer  "user_id"
     t.integer  "dealer_id"
-    t.integer  "dealer_detail_id"
     t.integer  "detail_id"
     t.integer  "source_id"
     t.string   "title"
     t.integer  "state_id"
     t.float    "cost"
-    t.integer  "count",            default: 0
-    t.integer  "used_count",       default: 0
+    t.integer  "count",      default: 0
+    t.integer  "used_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -349,8 +315,6 @@ ActiveRecord::Schema.define(version: 20130930124116) do
   add_index "orders", ["dealer_id"], name: "index_orders_on_dealer_id", using: :btree
   add_index "orders", ["detail_id"], name: "index_orders_on_detail_id", using: :btree
   add_index "orders", ["source_id"], name: "index_orders_on_source_id", using: :btree
-  add_index "orders", ["state_id"], name: "index_orders_on_state_id", using: :btree
-  add_index "orders", ["type", "id"], name: "index_orders_on_type_and_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "post_blocks", force: true do |t|
@@ -377,12 +341,14 @@ ActiveRecord::Schema.define(version: 20130930124116) do
   end
 
   add_index "posts", ["club_id"], name: "index_posts_on_club_id", using: :btree
-  add_index "posts", ["comments_count"], name: "index_posts_on_comments_count", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "programme_lists", force: true do |t|
     t.integer  "provider_id"
-    t.text     "list"
+    t.string   "airdate"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "day"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -396,7 +362,6 @@ ActiveRecord::Schema.define(version: 20130930124116) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "host_ids"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

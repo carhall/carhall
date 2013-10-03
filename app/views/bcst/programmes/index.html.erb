@@ -1,0 +1,41 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "bcst/share/sidenav/provider" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>主持人管理 <small><a href="<%= new_bcst_programme_path %>">添加</a></small></h3>
+    </div>
+
+    <%= render 'share/alert', message: '您还没有添加任何主持人！' if @bcsts.empty? %>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= translate_attribute_name :id, :'bcst/programme' %></th>
+          <th><%= translate_attribute_name :avatar, :'bcst/programme' %></th>
+          <th><%= translate_attribute_name :title, :'bcst/programme' %></th>
+          <th><%= translate_attribute_name :hosts, :'bcst/programme' %></th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bcsts.each do |bcst| %>
+          <tr>
+            <td><%= bcst.id %></td>
+            <td><img src="<%= bcst.avatar.url(:thumb) %>"></td>
+            <td><%= bcst.title %></td>
+            <td><%= bcst.hosts.map(&:name).join('、') %></td>
+            <td class="actions">
+              <%= link_to content_tag(:i, '', class: 'icon-search'), bcst_programme_path(bcst), title: '查看详情', rel: 'tooltip' %>
+              <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_bcst_programme_path(bcst), title: '编辑', rel: 'tooltip' %>
+              <%= link_to content_tag(:i, '', class: 'icon-remove'), bcst_programme_path(bcst), data: { method: :delete, confirm: '您确定要删除这个节目板块？' }, title: '删除', rel: 'tooltip' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

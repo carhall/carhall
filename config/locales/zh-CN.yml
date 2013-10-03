@@ -6,7 +6,7 @@ zh-CN:
   can_not_add_self: 您不能把自己加为好友。
   not_enough_count: 订单使用次数不足。
   order_canceled: 订单已经被取消。
-  create_success: 成功发布一个新的 %{model} “%{title}”。
+  create_success: 成功创建一个新的 %{model} “%{title}”。
   update_success: 成功更新 %{model} “%{title}” 信息。
   update_success_without_title: 成功更新 %{model} 信息。
   destroy_success: 成功删除 %{model} “%{title}”。
@@ -23,6 +23,9 @@ zh-CN:
       tips/cleaning: 服务项目
       tips/activity: 活动
       tips/bulk_purchasing: 团购项目
+      bcst/host: 主持人
+      bcst/programme: 节目板块
+      bcst/programme_list: 节目单
     attributes:
       accounts/account: &account
         id: ID
@@ -110,6 +113,24 @@ zh-CN:
         plate_num: 车牌号
         arrive_at: 到店时间
         description: 预约项目
+      bcst/host:
+        id: ID
+        avatar: 头像
+        name: 姓名
+        programme_ids: 主持节目
+        programmes: 主持节目
+        description: 主持人介绍
+      bcst/programme:
+        id: ID
+        avatar: LOGO
+        title: 名称
+        host_ids: 主持人
+        hosts: 主持人
+        description: 节目板块介绍
+      bcst/programme_list:
+        airdate: 时段
+        title: 节目名称
+        description: 节目概述
   simple_form:
     labels:
       account:

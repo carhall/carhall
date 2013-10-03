@@ -8,6 +8,7 @@ class Ability
     case user.user_type
     when :superadmin
       can :manage, :all
+
     when :admin
       can :use, Admins::AdminsController
       can :use, Admins::UsersController
@@ -24,14 +25,21 @@ class Ability
     when :provider
       can :use, SettingsController
       can :use, Users::InverseFriendsController
+
       can :use, Bcst::DashboardsController
+      # if user.accepted?
+        can :use, Bcst::HostsController
+        can :use, Bcst::ProgrammesController
+        can :use, Bcst::ProgrammeListsController
+        can :use, Bcst::CommentsController
+      # end
 
     when :dealer
       can :use, SettingsController
-      can :use, Tips::DashboardsController
       can :use, Users::InverseFriendsController
       can :use, Users::ReviewsController
 
+      can :use, Tips::DashboardsController
       # if user.accepted?
         can :use, Tips::CleaningsController
         can :use, Tips::MendingsController

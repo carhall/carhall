@@ -4,10 +4,10 @@ class Api::Tips::ReviewsController < Api::ApplicationController
   protected
 
   AccreditedKeys = {
-    'mending_id' => Tips::Mending,
-    'cleaning_id' => Tips::Cleaning,
-    'bulk_purchasing_id' => Tips::BulkPurchasing,
-    'dealer_id' => Accounts::Dealer,
+    'mending_id' => ::Tips::Mending,
+    'cleaning_id' => ::Tips::Cleaning,
+    'bulk_purchasing_id' => ::Tips::BulkPurchasing,
+    'dealer_id' => ::Accounts::Dealer,
   }
 
   def set_parent

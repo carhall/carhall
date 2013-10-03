@@ -21,7 +21,7 @@ class Api::CommentsController < Api::ApplicationController
 protected
 
   AccreditedKeys = {
-    'post_id' => Posts::Post,
+    'post_id' => ::Posts::Post,
   }
 
   def set_parent

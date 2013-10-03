@@ -1,0 +1,12 @@
+<%= simple_form_for(@bcst, html: { class: 'form-horizontal' }) do |f| %>
+  <%= devise_error_messages! @bcst %>
+
+  <%= f.input :day, as: :hidden %>
+  
+  <%= f.input :title, autofocus: true %>
+  <%= f.input :airdate, input_html: { data: { mask: '99:99 至 99:99' }}, hint: '填数字即可，例如：09:00 至 18:00' %>
+
+  <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>

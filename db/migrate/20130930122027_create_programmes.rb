@@ -4,7 +4,6 @@ class CreateProgrammes < ActiveRecord::Migration
       t.references :provider, index: true
       t.string :title
       t.attachment :avatar
-      t.string :host_ids
       t.text :description
 
       t.timestamps

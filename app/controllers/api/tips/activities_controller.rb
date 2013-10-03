@@ -4,5 +4,6 @@ class Api::Tips::ActivitiesController < Api::Tips::ApplicationController
   def set_parent
     @parent = Tips::Activity.includes(:dealer)
     @parent = @parent.with_dealer @dealer if @dealer
+    @parent = @parent.in_progress
   end
 end

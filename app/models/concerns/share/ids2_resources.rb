@@ -6,13 +6,18 @@ module Share::Ids2Resources
       serialize :#{attr_ids_name}, Array
 
       def #{attrs_name}
-        @#{attrs_name} ||= #{klass}.find(#{attr_ids_name})
+        @#{attrs_name} ||= #{klass}.where(id: #{attr_ids_name})
       end
 
       def #{attrs_name}= resources
         @#{attrs_name} = resources
-        #{attr_ids_name} = resources.pluck(:id)
+        #{attr_ids_name} = resources.map(&:id)
       end
+
+      def #{attr_ids_name}= ids
+        super ids.select{|id|id.present?}.map(&:to_i)
+      end
+
     EOM
   end
 end

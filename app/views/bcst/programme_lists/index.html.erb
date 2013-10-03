@@ -1,0 +1,61 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "bcst/share/sidenav/provider" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>节目单管理 <small></small></h3>
+    </div>
+
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="blank"><%= translate_attribute_name :airdate, :'bcst/programme_list' %></th>
+          <th class="blank"><%= translate_attribute_name :title, :'bcst/programme_list' %></th>
+          <th class="blank"><%= translate_attribute_name :description, :'bcst/programme_list' %></th>
+          <th class="blank">操作</th>
+        </tr>
+      </thead>
+
+      <% (0..6).each do |day| %>
+        <% lists = @provider.programme_list[day.to_s] %>
+
+        <thead>
+          <tr>
+            <th class="blank">
+              周<%= t('date.abbr_day_names')[day] %>
+            </th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% lists.each do |list| %>
+            <tr>
+              <td><%= list.airdate %></td>
+              <td><%= list.title %></td>
+              <td><%= list.description %></td>
+              <td class="actions">
+                <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_bcst_programme_list_path(list), title: '编辑', rel: 'tooltip' %>
+                <%= link_to content_tag(:i, '', class: 'icon-remove'), bcst_programme_list_path(list), data: { method: :delete, confirm: '您确定要删除这个项目？' }, title: '删除', rel: 'tooltip' %>
+              </td>
+            <tr>
+          <% end if lists %>
+
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="actions">
+                <%= link_to "添加", new_bcst_programme_list_path(day: day) %>
+            </td>
+          </tr>
+
+        </tbody>
+      <% end %>
+
+    </table>
+
+  </div>
+</div>
