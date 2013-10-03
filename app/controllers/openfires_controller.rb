@@ -1,3 +1,5 @@
+AbsoluteUrlPrefix = Env['CARHALL_URL_PREFIX']
+
 class OpenfiresController < ActionController::Base
   include Api::RenderHelper
 
@@ -42,11 +44,11 @@ class OpenfiresController < ActionController::Base
   end
 
   def openfire_user_detail u
-    avatar_thumb_url = if u.avatar.present? then Carhall::AbsoluteUrlPrefix + u.avatar.url(:thumb) end
+    avatar_thumb_url = if u.avatar.present? then AbsoluteUrlPrefix + u.avatar.url(:thumb) end
     sex_id = u.detail.sex_id rescue nil
     { 
       id: u.id, username: u.username, mobile: u.mobile, 
-      avatar_thumb_url: avatar_thumb_url, sex_id: sex_id || 2
+      avatar_thumb_url: avatar_thumb_url, sex_id: sex_id || 0
     }
   end
 end
