@@ -27,14 +27,14 @@ FactoryGirl.define do
 
   factory :activity, class: Tips::Activity do
     title { Faker::Lorem.sentence }
-    expire_at { rand_time(3.months.ago, 3.months.since) }
+    expire_at { rand_time(1.months.since, 3.months.since) }
     dealer
   end
 
   factory :bulk_purchasing, class: Tips::BulkPurchasing do
     title { Faker::Lorem.sentence }
     bulk_purchasing_type { Tips::BulkPurchasing::BulkPurchasingType.names.sample }
-    expire_at { rand_time(3.months.ago, 3.months.since) }
+    expire_at { rand_time(1.months.since, 3.months.since) }
     price { rand(100) }
     vip_price { rand(100) }
     dealer

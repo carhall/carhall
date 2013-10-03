@@ -7,6 +7,9 @@ class Accounts::Provider < Accounts::Account
   has_many :programmes, class_name: 'Bcst::Programme'
   has_many :programme_lists, class_name: 'Bcst::ProgrammeList'
 
+  has_many :exposures, as: :source, class_name: 'Bcst::Exposure'
+  has_many :traffic_reports, as: :source, class_name: 'Bcst::TrafficReport'
+
   def programme_list
     hash = (0..6).reduce({}) { |ret, day| ret[day.to_s] = []; ret } 
     programme_lists.each { |pl| hash[pl.day.to_s] << pl }

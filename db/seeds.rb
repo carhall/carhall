@@ -28,9 +28,10 @@ end
   FactoryGirl.create :comment, source: Posts::Post.all.sample, user: Accounts::User.all.sample
 end
 
-100.times do
+25.times do
   u = FactoryGirl.create :user
   u.make_friend_with! dealer
+  u.make_friend_with! provider
 end
 
 mending = FactoryGirl.create :mending, dealer: dealer
@@ -56,4 +57,19 @@ end
       user: dealer.inverse_friends.sample, source: bulk_purchasing
     FactoryGirl.create :review, order: bulk_purchasing_order
   end
+end
+
+3.times do
+  FactoryGirl.create :programme, provider: provider
+  FactoryGirl.create :host, provider: provider, hosts { Bcst::Host.all.sample(3) }
+end
+
+10.times do
+  FactoryGirl.create :programme_list, provider: provider
+end
+
+25.times do
+  FactoryGirl.create :exposure, source: provider
+  FactoryGirl.create :traffic_report, source: provider
+  FactoryGirl.create :programme_comment, source: Bcst::Programme.all.sample
 end

@@ -1,0 +1,21 @@
+<% @comments = @comments.includes(:user) %>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= translate_attribute_name :username, :'accounts/user' %></th>
+      <th><%= translate_attribute_name :avatar, :'accounts/user' %></th>
+      <th><%= translate_attribute_name :content, :'share/comment' %></th>
+      <th><%= translate_attribute_name :created_at, :'share/comment' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.user.username %></td>
+        <td><img src="<%= comment.user.avatar.url(:thumb) %>"></td>
+        <td><%= comment.content %></td>
+        <td><%= l comment.created_at, format: :short %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

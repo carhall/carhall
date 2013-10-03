@@ -9,4 +9,6 @@ class Bcst::Programme < ActiveRecord::Base
 
   validates_presence_of :title
 
+  has_many :comments, as: :source, class_name: 'Bcst::Comment'
+
 end

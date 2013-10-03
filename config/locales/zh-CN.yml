@@ -12,6 +12,7 @@ zh-CN:
   destroy_success: 成功删除 %{model} “%{title}”。
   mending: "%{dealer} %{brand} 保养专修"
   times:  " %{count} 份"
+  to_many: 过多（最多为 %{count} 个）
   activerecord:
     models:
       accounts/account: 用户
@@ -26,6 +27,9 @@ zh-CN:
       bcst/host: 主持人
       bcst/programme: 节目板块
       bcst/programme_list: 节目单
+      bcst/comment: 评论
+      bcst/exposure: 曝光
+      bcst/traffic_report: 路况信息
     attributes:
       accounts/account: &account
         id: ID
@@ -131,6 +135,9 @@ zh-CN:
         airdate: 时段
         title: 节目名称
         description: 节目概述
+      share/comment:
+        content: 评论内容
+        created_at: 评论时间
   simple_form:
     labels:
       account:

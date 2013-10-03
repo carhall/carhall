@@ -21,7 +21,7 @@ class Tips::Mending < ActiveRecord::Base
   enumerate :area, with: Share::Area
 
   validates_presence_of :dealer
-  validates_length_of :brand_ids, :maximum => 5
+  validates_length_of :brand_ids, :maximum => 5, :message => I18n.t(".to_many")
   
   include Share::Localizable
   include Share::Statisticable

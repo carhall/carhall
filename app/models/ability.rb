@@ -32,6 +32,8 @@ class Ability
         can :use, Bcst::ProgrammesController
         can :use, Bcst::ProgrammeListsController
         can :use, Bcst::CommentsController
+        can :use, Bcst::ExposuresController
+        can :use, Bcst::TrafficReportsController
       # end
 
     when :dealer

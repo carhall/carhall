@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 20131003085322) do
   add_index "clubs", ["area_id", "brand_id"], name: "index_clubs_on_area_id_and_brand_id", using: :btree
 
   create_table "comments", force: true do |t|
+    t.string   "type"
     t.integer  "user_id"
     t.integer  "at_user_id"
     t.integer  "source_id"
@@ -174,6 +175,7 @@ ActiveRecord::Schema.define(version: 20131003085322) do
   end
 
   add_index "comments", ["source_type", "source_id"], name: "index_comments_on_source_type_and_source_id", using: :btree
+  add_index "comments", ["type", "id"], name: "index_comments_on_type_and_id", using: :btree
 
   create_table "dealer_details", force: true do |t|
     t.integer  "area_id"
