@@ -24,7 +24,6 @@ describe "Posts" do
       end
     end
 
-
     describe "GET friends" do
       before { user.make_friend_with(other).save }
       before { 3.times { create resource, user: other }}

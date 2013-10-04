@@ -22,6 +22,7 @@ protected
 
   AccreditedKeys = {
     'post_id' => ::Posts::Post,
+    'programme_id' => ::Bcst::Programme,
   }
 
   def set_parent

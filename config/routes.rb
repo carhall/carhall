@@ -282,23 +282,29 @@ Carhall::Application.routes.draw do
       end
     end
 
+    namespace :bcst do
+      resources :hosts, only: [:index, :show] do
+        get :detail, on: :member
+      end
+      resources :programmes, only: [:index, :show] do
+        get :detail, on: :member
+        
+        resources :comments, only: [:index, :show, :create, :destroy]
+      end
+
+      resource :programme_list, only: [:show] do
+        get :detail
+      end
+    end
+
     scope module: :bcst do
       resources :providers, only: [] do
-        resources :hosts, only: [:index, :show] do
-          get :detail, on: :member
-        end
-        resources :programmes, only: [:index, :show] do
-          get :detail, on: :member
-          
-          resources :comments
-        end
+        resources :hosts, only: [:index]
+        resources :programmes, only: [:index]
+        resource :programme_list, only: [:show]
 
-        resource :programme_list, only: [:index, :show] do
-          get :detail
-        end
-
-        resources :exposures, only: [:index, :show]
-        resources :traffic_reports, only: [:index, :show]
+        resources :exposures, only: [:index, :show, :create, :destroy]
+        resources :traffic_reports, only: [:index, :show, :create, :destroy]
       end
     end
 
