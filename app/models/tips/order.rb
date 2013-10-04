@@ -6,6 +6,7 @@ class Tips::Order < ActiveRecord::Base
   include Share::Userable
   belongs_to :user, counter_cache: true, class_name: 'Accounts::User'
 
+  include Share::Dealerable
   belongs_to :dealer, counter_cache: true, class_name: 'Accounts::Dealer'
   has_one :review
 

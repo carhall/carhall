@@ -263,7 +263,7 @@ GET查询车友会时，可以在URI中使用两个附加字段作为条件，fi
 >     GET /api/posts/club?filter[area_id]=1&filter[brand_id]=2
 
 
-Comments 圈子随手拍评论
+PostComment 圈子随手拍评论
 ==========
 字段
 ----------
@@ -564,7 +564,7 @@ detail          | 附加字段的 **哈希表**        |
 API
 ----------
 Method | URI                                                               | 说明
--------|-------------------------------------------------------------------|------------------------
+-------|-------------------------------------------------------------------|----
 GET    | /api/tips/mendings/:mending_id/orders                             | 查询指定保养专修的所有订单  
 GET    | /api/tips/mendings/:mending_id/orders/:id                         | 查询指定保养专修的指定订单  
 GET    | /api/tips/mendings/:mending_id/orders/:id/detail                  | 查询指定保养专修的指定订单详情  
@@ -600,7 +600,7 @@ stars           | 评价等级                    | 整型，0-5
 API
 ----------
 Method | URI                                                               | 说明
--------|-------------------------------------------------------------------|------------------------
+-------|-------------------------------------------------------------------|----
 GET    | /api/tips/mendings/:mending_id/reviews                            | 查询指定保养专修的所有订单的评价  
 POST   | /api/tips/mendings/:mending_id/orders/:id/review                  | 提交指定保养专修的指定订单的评价  
 GET    | /api/tips/cleanings/:cleaning_id/reviews                          | 查询指定汽车美容的所有订单的评价  
@@ -609,6 +609,150 @@ GET    | /api/tips/bulk_purchasings/bulk_purchasing_id/reviews             | 查
 POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/review  | 提交指定团购的指定订单的评价  
 GET    | /api/dealers/:dealer_id/reviews                                   | 查询指定商家的所有订单的评价
 
+
+Host 主持人
+==========
+字段
+----------
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+name            |                            | 
+description     |                            | 
+avatar          |                            | 
+
+API
+----------
+Method | URI                                                     | 说明
+-------|---------------------------------------------------------|--------------
+GET    | /api/bcst/hosts                                         | 查询所有主持人信息  
+GET    | /api/bcst/hosts/:id                                     | 查询指定主持人信息  
+GET    | /api/bcst/hosts/:id/detail                              | 查询指定主持人详细信息 
+GET    | /api/providers/:provider_id/hosts                       | 查询指定媒体的所有主持人信息  
+
+
+Programme 节目板块
+==========
+字段
+----------
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+title           |                            | 
+description     |                            | 
+avatar          |                            | 
+
+API
+----------
+Method | URI                                                     | 说明
+-------|---------------------------------------------------------|--------------
+GET    | /api/bcst/hosts                                         | 查询所有节目板块信息  
+GET    | /api/bcst/programmes/:id                                | 查询指定节目板块信息  
+GET    | /api/bcst/programmes/:id/detail                         | 查询指定节目板块详细信息 
+GET    | /api/providers/:provider_id/programmes                  | 查询指定媒体的所有节目板块信息  
+
+
+ProgrammeList 节目单
+==========
+字段
+----------
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+list            | 节目单信息                   | 哈希表
+
+其中list是一个哈希表，key是0-6，分别代表周日、周一到周六，value是优惠信息数组的哈希表，包含airdate（播出时段）、title（节目名称）、description（节目介绍）三个字段  
+> 例如：
+> 
+>     {
+>       0: [
+>            {
+>              airdate: '10:00 到 15:00', 
+>              title: '得吧得吧'
+>              description: '得吧得吧'
+>            },
+>            {
+>              airdate: '16:00 到 17:00', 
+>              title: '得吧得吧'
+>              description: '得吧得吧'
+>            }
+>          ],
+>       6: [
+>            {
+>              airdate: '10:00 到 12:00', 
+>              title: '得吧得吧'
+>              description: '得吧得吧'
+>            }
+>          ]
+>     }  
+>
+
+API
+----------
+Method | URI                                                     | 说明
+-------|---------------------------------------------------------|--------------
+GET    | /api/bcst/programme_lists                               | 查询所有节目单信息  
+GET    | /api/providers/:provider_id/programme_list              | 查询指定媒体的节目单信息  
+
+
+Exposure 曝光台
+==========
+字段
+----------
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+content         |                            | 必须
+user            | 发表评论用户信息             | 哈希，只读
+at_user         | 回复用户信息                | 哈希，只读
+at_user_id      | 回复用户ID                  | 
+
+API
+----------
+Method | URI                                                     | 说明
+-------|---------------------------------------------------------|--------------
+GET    | /api/providers/:provider_id/exposures                   | 查询指定媒体的曝光台  
+POST   | /api/providers/:provider_id/exposures                   | 新建曝光 
+DELETE | /api/providers/:provider_id/exposures/:id               | 删除曝光
+  
+
+TrafficReport 路况信息
+==========
+字段
+----------
+字段名称         | 详细描述                    | 限制条件
+----------------|---------------------------|----------------------------------
+content         |                           | 必须
+user            | 发表评论用户信息             | 哈希，只读
+latitude        |                           | 
+longitude       |                           | 
+at_user         | 回复用户信息                | 哈希，只读
+at_user_id      | 回复用户ID                  | 
+
+API
+----------
+Method | URI                                                     | 说明
+-------|---------------------------------------------------------|--------------
+GET    | /api/providers/:provider_id/traffic_reports             | 查询指定媒体的路况信息  
+POST   | /api/providers/:provider_id/traffic_reports             | 新建路况信息 
+DELETE | /api/providers/:provider_id/traffic_reports/:id         | 删除路况信息
+
+
+ProgrammeComment 节目板块评论
+==========
+字段
+----------
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+content         |                            | 必须
+user            | 发表评论用户信息             | 哈希，只读
+at_user         | 回复用户信息                | 哈希，只读
+at_user_id      | 回复用户ID                  | 
+
+API
+----------
+Method | URI                                                     | 说明
+-------|---------------------------------------------------------|-------------
+GET    | /api/bcst/programmes/:programme_id/commets              | 查询指定节目板块的评论  
+POST   | /api/bcst/programmes/:programme_id/commets              | 新建评论 
+DELETE | /api/bcst/programmes/:programme_id/commets/:id          | 删除评论
+  
 
 常量表
 ==========

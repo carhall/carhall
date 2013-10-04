@@ -16,6 +16,15 @@ class Accounts::Provider < Accounts::Account
     hash
   end
 
+  def programme_list_as_api_response
+    hash = (0..6).reduce({}) { |ret, day| ret[day.to_s] = []; ret } 
+    programme_lists.each { |pl| hash[pl.day.to_s] << pl.as_api_response(:base) }
+    { list: hash }
+  end
+
   validates_presence_of :type
 
+  api_accessible :detail, extend: :detail do |t|
+    t.add :programmes, template: :base, append_to: :detail
+  end
 end

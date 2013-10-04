@@ -11,8 +11,8 @@ class Api::Tips::MendingsController < Api::Tips::ApplicationController
   end
 
   def show
+    mending = ::Tips::Mending.find(params[:id]) if params[:id]
     mending = @dealer.mending if @dealer
-    mending ||= ::Tips::Mending.find(params[:id])
     render_show mending
   end
 

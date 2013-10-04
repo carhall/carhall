@@ -16,9 +16,9 @@ class Api::Accounts::FriendsController < Api::Accounts::ApplicationController
   end
 
   def provider
-    render_index @user.dealer_friends
+    render_index @user.provider_friends
   end
-  
+
   # POST /api/friends/1
   # POST /api/friends/1.json
   def create

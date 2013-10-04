@@ -2,7 +2,8 @@ module Tips::Servicable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :dealer, class_name: 'Accounts::Dealer'
+    include Share::Dealerable
+
     default_scope { order('id DESC') }
     
     before_save do
@@ -13,12 +14,7 @@ module Tips::Servicable
     acts_as_api
   end
   
-  module ClassMethods 
-    def with_dealer dealer
-      dealer_id = if dealer.is_a? Integer then dealer else dealer.id end
-      where(dealer_id: dealer_id)
-    end
-
+  module ClassMethods
     def api_accessible_for_detail
       api_accessible :detail, extend: :base do |t|
         t.add :goal_attainment, append_to: :detail

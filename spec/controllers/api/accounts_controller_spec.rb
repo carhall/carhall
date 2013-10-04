@@ -99,11 +99,25 @@ describe "Users" do
       before { 3.times { user.make_friend_with(create(:user)).save }}
 
       include_examples "resources#collection", :index
+
+      describe "GET user" do
+        include_examples "resources#collection", :user
+      end
       
       describe "with user_id" do
         let(:args) {{ user_id: user.id }}
         include_examples "resources#collection", :index
       end
+    end
+
+    describe "GET dealer" do
+      before { 3.times { user.make_friend_with(create(:dealer)).save }}
+      include_examples "resources#collection", :dealer
+    end
+
+    describe "GET provider" do
+      before { 3.times { user.make_friend_with(create(:provider)).save }}
+      include_examples "resources#collection", :provider
     end
     
     context do

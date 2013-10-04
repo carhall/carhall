@@ -1,6 +1,5 @@
 class Api::Tips::ApplicationController < Api::ApplicationController
-  before_filter :set_dealer
-
+  
   def set_filter
     filter_parent :area
   end
@@ -10,18 +9,12 @@ class Api::Tips::ApplicationController < Api::ApplicationController
   end
 
   def self.set_resource_class klass, options = {}
-    before_filter :set_parent
+    super klass, options.reverse_merge(detail: true)
     before_filter :set_filter
 
     define_method :set_parent do
       @parent = klass.includes(:dealer, :reviews)
       @parent = @parent.with_dealer @dealer if @dealer
-    end
-
-    # GET /api/resources
-    # GET /api/resources.json
-    define_method :index do
-      render_index @parent
     end
 
     define_method :nearby do
@@ -38,16 +31,6 @@ class Api::Tips::ApplicationController < Api::ApplicationController
     
     define_method :hot do
       render_index @parent.hot
-    end
-
-    # GET /api/resources/1
-    # GET /api/resources/1.json
-    define_method :show do
-      render_show klass.find(params[:id])
-    end
-    
-    define_method :detail do
-      render_show klass.find(params[:id]), :detail
     end
   end
   

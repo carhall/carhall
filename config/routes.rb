@@ -150,7 +150,7 @@ Carhall::Application.routes.draw do
         get :user, on: :collection
         get :dealer, on: :collection
         get :provider, on: :collection
-        
+
         post ':id', action: :create, on: :collection
       end
 
@@ -279,6 +279,26 @@ Carhall::Application.routes.draw do
 
         resources :orders, only: [:index, :show]
         resources :reviews, only: [:index, :show]
+      end
+    end
+
+    scope module: :bcst do
+      resources :providers, only: [] do
+        resources :hosts, only: [:index, :show] do
+          get :detail, on: :member
+        end
+        resources :programmes, only: [:index, :show] do
+          get :detail, on: :member
+          
+          resources :comments
+        end
+
+        resource :programme_list, only: [:index, :show] do
+          get :detail
+        end
+
+        resources :exposures, only: [:index, :show]
+        resources :traffic_reports, only: [:index, :show]
       end
     end
 
