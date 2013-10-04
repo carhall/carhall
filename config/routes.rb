@@ -109,7 +109,11 @@ Carhall::Application.routes.draw do
       resources :users, only: [:show, :create] do
         get :detail, on: :member
 
-        resources :friends, only: [:index]
+        resources :friends, only: [:index] do
+          get :user, on: :collection
+          get :dealer, on: :collection
+          get :provider, on: :collection
+        end
       end
       
       resources :accounts, only: [:show] do
@@ -122,7 +126,11 @@ Carhall::Application.routes.draw do
         get :detail
         put :password
 
-        resources :friends, only: [:index]
+        resources :friends, only: [:index] do
+          get :user, on: :collection
+          get :dealer, on: :collection
+          get :provider, on: :collection
+        end
         resources :blacklists, only: [:index]
       end
 
@@ -139,6 +147,10 @@ Carhall::Application.routes.draw do
       end
 
       resources :friends, only: [:index, :destroy] do
+        get :user, on: :collection
+        get :dealer, on: :collection
+        get :provider, on: :collection
+        
         post ':id', action: :create, on: :collection
       end
 

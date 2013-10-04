@@ -69,7 +69,7 @@ User 用户
 username        | 中文昵称                    | 2-20个字母或汉字，必须
 mobile          |                            | 必须
 avatar          | 头像                       | 上传时使用图片附件，查询返回数据为avatar_url，avatar_thumb_url，分别代表头像原图链接和头像缩略图链接
-user_type       | 用户类型，可能为 admin（管理员）, user（普通用户）, dealer（汽车服务商）, provider（订阅号）| 只读，手机端只    能注册普通用户
+user_type       | 用户类型，可能为 admin（管理员）, user（车主）, dealer（服务商、商户）, provider（媒体）| 只读，手机端只    能注册车主
 description     | 用户说明，个性签名           |
 accepted        | 通过验证                    | 布尔型，只读，只对dealer和provider有效
 detail          | 附加字段的 **哈希表**        |
@@ -118,12 +118,12 @@ detail          | 附加字段的 **哈希表**        |
   detail[address]            |                            |
   detail[phone]              |                            |
   detail[open_during]        | 开店时间                    |
-  detail[rqrcode_token]      | 校验码，用于二维码扫描时校验  | 只读
+  detail[rqrcode_token]      | 校验码，用于二维码扫描时校验    | 只读
   detail[latitude]           | 经度                       | 只读
   detail[longitude]          | 纬度                       | 只读
   detail[mending_goal_attainment]         | 保养专修交易达成率      | 只读
   detail[cleaning_goal_attainment]        | 洗车美容交易达成率      | 只读
-  detail[bulk_purchasing_goal_attainment] | 团购交易达成率          | 只读
+  detail[bulk_purchasing_goal_attainment] | 团购交易达成率         | 只读
   detail[orders_count]       | 订单总数                    | 只读
 
   **建议：显示时使用dealer_type和business_scopes，因为后期可能会添加新的业务范围**
@@ -144,15 +144,15 @@ GET    | /api/accounts/:id                 | 查询指定账户信息
 GET    | /api/accounts/:id/detail          | 查询指定账户详细信息  
 GET    | /api/users/:id                    | 查询指定用户信息  
 GET    | /api/users/:id/detail             | 查询指定用户详细信息  
-GET    | /api/dealers                      | 查询所有商家信息（默认排序）
-GET    | /api/dealers/nearby               | 查询所有商家信息（离我最近）（周边网店）  
-GET    | /api/dealers/favorite             | 查询所有商家信息（评分最高）  
-GET    | /api/dealers/hot                  | 查询所有商家信息（购买最多）    
-GET    | /api/dealers/:id                  | 查询指定商家信息  
-GET    | /api/dealers/:id/detail           | 查询指定商家详细信息  
-GET    | /api/providers                    | 查询所有订阅号信息  
-GET    | /api/providers/:id                | 查询指定订阅号信息  
-GET    | /api/providers/:id/detail         | 查询指定订阅号详细信息  
+GET    | /api/dealers                      | 查询所有商户信息（默认排序）
+GET    | /api/dealers/nearby               | 查询所有商户信息（离我最近）（周边网店）  
+GET    | /api/dealers/favorite             | 查询所有商户信息（评分最高）  
+GET    | /api/dealers/hot                  | 查询所有商户信息（购买最多）    
+GET    | /api/dealers/:id                  | 查询指定商户信息  
+GET    | /api/dealers/:id/detail           | 查询指定商户详细信息  
+GET    | /api/providers                    | 查询所有媒体信息  
+GET    | /api/providers/:id                | 查询指定媒体信息  
+GET    | /api/providers/:id/detail         | 查询指定媒体详细信息  
 POST   | /api/accounts/login               | 用户登录  
 POST   | /api/users                        | 新建用户，user_type默认为user  
 GET    | /api/current_user                 | 查询当前用户信息  
@@ -160,8 +160,8 @@ GET    | /api/current_user/detail          | 查询当前用户详细信息
 PUT    | /api/current_user                 | 修改当前用户信息  
 PUT    | /api/current_user/password        | 修改当前用户密码  
 
-GET查询汽车服务商时，可以在URI中使用三个附加字段filter[area_id]、filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的汽车服务商信息  
-> 例如，查询4S店汽车服务商信息：
+GET查询商户时，可以在URI中使用三个附加字段filter[area_id]、filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的商户信息  
+> 例如，查询4S店商户信息：
 > 
 >    GET /api/tips/cleanings?filter[dealer_type_id]=4
 > 
@@ -194,13 +194,19 @@ Friend 好友
 ==========
 API
 ----------
-Method | URI                               | 说明
--------|-----------------------------------|------------------------------------
-GET    | /api/users/:id/friends            | 查询指定用户好友信息  
-GET    | /api/current_user/friends         | 查询当前用户好友信息  
-GET    | /api/friends                      | （同上）  
-POST   | /api/friends/:user_id             | 添加好友  
-DELETE | /api/friends/:user_id             | 删除好友  
+Method | URI                                | 说明
+-------|------------------------------------|-----------------------------------
+GET    | /api/users/:id/friends             | 查询指定用户好友信息  
+GET    | /api/current_user/friends          | 查询当前用户好友信息  
+GET    | /api/friends                       | （同上）   
+GET    | /api/current_user/friends/user     | 查询当前车主好友信息  
+GET    | /api/friends/user                  | （同上）   
+GET    | /api/current_user/friends/dealer   | 查询当前商户好友信息  
+GET    | /api/friends/dealer                | （同上）   
+GET    | /api/current_user/friends/provider | 查询当前媒体好友信息（即关注频道）  
+GET    | /api/friends/provider              | （同上）  
+POST   | /api/friends/:user_id              | 添加好友  
+DELETE | /api/friends/:user_id              | 删除好友  
 
 新建好友、删除好友只需POST、DELETE /api/friends/好友ID，不需要提交表单  
 
@@ -243,7 +249,7 @@ GET    | /api/posts/club                   | 查询车友会
 GET    | /api/posts/:id                    | 查询指定随手拍  
 POST   | /api/posts                        | 新建随手拍  
 DELETE | /api/posts/:id                    | 删除随手拍  
-**注意：只有普通用户能访问该接口**    
+**注意：只有车主能访问该接口**    
 
 > 例如：  
 > 
@@ -275,7 +281,7 @@ Method | URI                               | 说明
 GET    | /api/posts/:post_id/comments      | 查询指定随手拍评论  
 POST   | /api/posts/:post_id/comments      | 新建随手拍评论  
 DELETE | /api/posts/:post_id/comments/:id  | 删除随手拍评论  
-**注意：只有普通用户能访问该接口**    
+**注意：只有车主能访问该接口**    
 
 > 例如：  
 > 
@@ -296,7 +302,7 @@ GET    | /api/post_blacklists              | （同上）
 POST   | /api/post_blacklists/:user_id     | 添加黑名单  
 DELETE | /api/post_blacklists/:user_id     | 删除黑名单  
 
-**注意：只有普通用户能访问该接口**    
+**注意：只有车主能访问该接口**    
 
 同好友接口一样，新建好友、删除圈子黑名单只需POST、DELETE /api/post_blacklists/用户ID，不需要提交表单  
 
@@ -324,7 +330,7 @@ POST   | /api/club/president               | 申请成为车友会堂主
 POST   | /api/club/mechanics               | 申请成为车友会在线技师  
 PUT    | /api/club                         | 修改车友会信息（包括公告和LOGO，只有堂主可用）  
 
-**注意：只有普通用户能访问该接口**    
+**注意：只有车主能访问该接口**    
 
 提交申请时需要带data[area_id]和data[brand_id]两个字段  
 GET查询时，可以在URI中使用两个附加字段作为条件，filter[area_id]和filter[brand_id]来查询指定地区和品牌的车友会信息，如果不填，默认返回用户所在的车友会信息（即根据用户的area_id, brand_id来查询）  
