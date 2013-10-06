@@ -64,6 +64,7 @@ class Accounts::Dealer < Accounts::Account
   end
 
   api_accessible :detail, extend: :detail do |t|
+    t.add :stars, append_to: :detail
     t.add ->(d) { Share::Statisticable.goal_attainment d.mending_orders }, 
       as: :mending_goal_attainment, append_to: :detail
     t.add ->(d) { Share::Statisticable.goal_attainment d.cleaning_orders }, 

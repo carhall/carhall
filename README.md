@@ -749,9 +749,9 @@ API
 ----------
 Method | URI                                                     | 说明
 -------|---------------------------------------------------------|-------------
-GET    | /api/bcst/programmes/:programme_id/commets              | 查询指定节目板块的评论  
-POST   | /api/bcst/programmes/:programme_id/commets              | 新建评论 
-DELETE | /api/bcst/programmes/:programme_id/commets/:id          | 删除评论
+GET    | /api/bcst/programmes/:programme_id/comments             | 查询指定节目板块的评论  
+POST   | /api/bcst/programmes/:programme_id/comments             | 新建评论 
+DELETE | /api/bcst/programmes/:programme_id/comments/:id         | 删除评论
   
 
 常量表

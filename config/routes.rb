@@ -72,22 +72,28 @@ Carhall::Application.routes.draw do
     resources :traffic_reports
   end
 
-  namespace :admins do
-    resources :admins
+  namespace :statistic do
+    resources :providers
     resources :dealers
     resources :users
+  end
 
-    resources :advertisements
+  namespace :accounts do
+    resources :admins
+    resources :providers
+    resources :dealers
+    resources :users
+  end
 
-    namespace :tips do
-      resource :dashboard, only: :show
-      root to: 'dashboards#show'
-      
-      resources :mendings
-      resources :cleanings
-      resources :activities
-      resources :bulk_purchasings
-    end
+  namespace :business do
+    resource :advert
+    resource :push
+    resources :ad_templates
+    resources :tutorials
+  end
+
+  namespace :category do
+    resources :brands
   end
 
   # For openfire
