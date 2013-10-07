@@ -6,6 +6,8 @@ class CreateExposures < ActiveRecord::Migration
       t.references :provider, index: true
       t.text :content
       t.attachment :image
+      
+      t.timestamps
     end
   end
 end
