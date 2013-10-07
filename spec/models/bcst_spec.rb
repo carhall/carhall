@@ -24,7 +24,7 @@ describe "Bcst" do
   end
 
   describe Bcst::Exposure do
-    subject { create :exposure, source: provider }
+    subject { create :exposure, provider: provider }
     include_examples "valid record"
   end
   

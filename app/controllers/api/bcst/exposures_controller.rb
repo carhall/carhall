@@ -5,4 +5,8 @@ class Api::Bcst::ExposuresController < Api::CommentsController
     @parent = @provider.exposures.includes(:user, :at_user)
   end
   
+  def data_params
+    params.require(:data).permit(:content, :image, :at_user_id)
+  end
+
 end

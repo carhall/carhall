@@ -5,6 +5,7 @@ class CreateTrafficReports < ActiveRecord::Migration
       t.references :at_user
       t.references :provider, index: true
       t.text :content
+      t.attachment :image
       
       t.float  :latitude, limit: 32
       t.float  :longitude, limit: 32

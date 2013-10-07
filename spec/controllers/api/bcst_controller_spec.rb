@@ -31,7 +31,7 @@ describe "Bcst" do
 
   describe Api::Bcst::ExposuresController do
     let(:resource) { :exposure }
-    let(:append_attrs_when_build) {{ source: provider, user: user }}
+    let(:append_attrs_when_build) {{ provider: provider, user: user }}
     let(:append_args) {{ provider_id: provider.id }}
     include_examples "resources#index"
     include_examples "resources#show"
@@ -39,7 +39,7 @@ describe "Bcst" do
     include_examples "resources#destroy"
 
     describe "when exposure belongs to other" do
-      let(:append_attrs_when_build) {{ source: provider, user: other }}
+      let(:append_attrs_when_build) {{ provider: provider, user: other }}
       include_examples "resources#destroy failed"
     end
   end

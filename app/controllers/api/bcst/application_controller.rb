@@ -9,7 +9,7 @@ class Api::Bcst::ApplicationController < Api::ApplicationController
     super klass, options.reverse_merge(detail: true)
 
     define_method :set_parent do
-      @parent = klass
+      @parent = klass.all
       @parent = @parent.with_provider @provider if @provider
     end
   end

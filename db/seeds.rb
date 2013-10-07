@@ -11,17 +11,17 @@ me = FactoryGirl.create :user, mobile: '13112345678'
 
 test_users = [%w(张敬伟 18600037683), %w(李永亮 15910967893), %w(李阳 15901013540), %w(李行 18053932727), %w(胡潇 15810535015), %w(白云 13911307656), %w(张永良 18910873748)]
 test_users.each do |u, m|
-  FactoryGirl.create :user, username: u, mobile: m
+  FactoryGirl.create :user, username: u, mobile: m rescue nil
 end
 
-test_users = [何总, 杨俊, 李小新, 陈仙萍, 张颜峰]
+test_users = %w(何总 杨俊 李小新 陈仙萍 张颜峰)
 test_users.each do |u|
-  FactoryGirl.create :user, username: u
+  FactoryGirl.create :user, username: u rescue nil
 end
 
-User.all.each do |u|
+Accounts::User.all.each do |u|
   10.times do
-    u.make_friend_with! User.all.sample
+    u.make_friend_with! Accounts::User.all.sample
   end
 end
 
@@ -85,7 +85,7 @@ end
 end
 
 25.times do
-  FactoryGirl.create :exposure, source: provider
-  FactoryGirl.create :traffic_report, source: provider
+  FactoryGirl.create :exposure, provider: provider
+  FactoryGirl.create :traffic_report, provider: provider
   FactoryGirl.create :programme_comment, source: Bcst::Programme.all.sample
 end

@@ -12,13 +12,15 @@ class Bcst::Host < ActiveRecord::Base
 
   acts_as_api
 
-  api_accessible :base do |t|
+  api_accessible :without_programme do |t|
     t.only :id, :name, :description
     t.images :avatar
   end
 
-  api_accessible :detail, extend: :base do |t|
-    t.add :programmes, template: :base
+  api_accessible :base, extend: :without_programme do |t|
+    t.add :programmes, template: :without_host
   end
+
+  api_accessible :detail, extend: :base
 
 end

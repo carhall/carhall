@@ -634,7 +634,6 @@ Method | URI                                                     | 说明
 -------|---------------------------------------------------------|--------------
 GET    | /api/bcst/hosts                                         | 查询所有主持人信息  
 GET    | /api/bcst/hosts/:id                                     | 查询指定主持人信息  
-GET    | /api/bcst/hosts/:id/detail                              | 查询指定主持人详细信息 
 GET    | /api/providers/:provider_id/hosts                       | 查询指定媒体的所有主持人信息  
 
 
@@ -654,7 +653,6 @@ Method | URI                                                     | 说明
 -------|---------------------------------------------------------|--------------
 GET    | /api/bcst/hosts                                         | 查询所有节目板块信息  
 GET    | /api/bcst/programmes/:id                                | 查询指定节目板块信息  
-GET    | /api/bcst/programmes/:id/detail                         | 查询指定节目板块详细信息 
 GET    | /api/providers/:provider_id/programmes                  | 查询指定媒体的所有节目板块信息  
 
 
@@ -707,8 +705,9 @@ Exposure 曝光台
 字段名称         | 详细描述                    | 限制条件
 ----------------|----------------------------|----------------------------------
 content         |                            | 必须
-user            | 发表评论用户信息             | 哈希，只读
-at_user         | 回复用户信息                | 哈希，只读
+image           |                            | 
+user            | 发表评论用户信息              | 哈希，只读
+at_user         | 回复用户信息                 | 哈希，只读
 at_user_id      | 回复用户ID                  | 
 
 API
@@ -727,6 +726,7 @@ TrafficReport 路况信息
 字段名称         | 详细描述                    | 限制条件
 ----------------|---------------------------|----------------------------------
 content         |                           | 必须
+image           |                           | 
 user            | 发表评论用户信息             | 哈希，只读
 latitude        |                           | 
 longitude       |                           | 

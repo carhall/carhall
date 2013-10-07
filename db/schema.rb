@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007033324) do
+ActiveRecord::Schema.define(version: 20131007104335) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "", null: false
@@ -199,6 +199,19 @@ ActiveRecord::Schema.define(version: 20131007033324) do
     t.datetime "rqrcode_image_updated_at"
     t.integer  "specific_service_id"
   end
+
+  create_table "exposures", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "at_user_id"
+    t.integer  "provider_id"
+    t.text     "content"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "exposures", ["provider_id"], name: "index_exposures_on_provider_id", using: :btree
 
   create_table "friend", force: true do |t|
     t.integer "user_id"
@@ -397,6 +410,10 @@ ActiveRecord::Schema.define(version: 20131007033324) do
     t.integer  "at_user_id"
     t.integer  "provider_id"
     t.text     "content"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "geohash"

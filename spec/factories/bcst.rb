@@ -29,7 +29,7 @@ FactoryGirl.define do
 
   factory :exposure, class: Bcst::Exposure do
     content { Faker::Lorem.sentence }
-    association :source, factory: :provider
+    provider
     user
   end
 

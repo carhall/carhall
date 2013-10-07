@@ -51,7 +51,7 @@ class Ability
       
     when :user
       can :destroy, [Posts::Post, Share::Comment], user_id: user.id
-      can :destroy, Bcst::TrafficReport, user_id: user.id
+      can :destroy, [Bcst::Exposure, Bcst::TrafficReport], user_id: user.id
       can :update, Tips::Order, user_id: user.id
       can :update, Posts::Club, president_id: user.id
       

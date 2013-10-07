@@ -7,7 +7,7 @@ class Accounts::Provider < Accounts::Account
   has_many :programmes, class_name: 'Bcst::Programme'
   has_many :programme_lists, class_name: 'Bcst::ProgrammeList'
 
-  has_many :exposures, as: :source, class_name: 'Bcst::Exposure'
+  has_many :exposures, class_name: 'Bcst::Exposure'
   has_many :traffic_reports, class_name: 'Bcst::TrafficReport'
 
   def programme_list

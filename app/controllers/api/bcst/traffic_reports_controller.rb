@@ -6,6 +6,7 @@ class Api::Bcst::TrafficReportsController < Api::CommentsController
   end
   
   def data_params
-    params.require(:data).permit(:content, :at_user_id, :latitude, :longitude)
+    params.require(:data).permit(:content, :image, :at_user_id, :latitude, :longitude)
   end
+
 end

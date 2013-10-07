@@ -199,6 +199,35 @@ Carhall::Application.routes.draw do
     end
 
     # Tips
+    scope module: :tips do
+      resources :dealers, only: [] do
+        resource :mending, only: [:show] do
+          get :detail
+        end
+
+        resources :cleanings, only: [:index] do
+          get :nearby, on: :collection
+          get :cheapie, on: :collection
+          get :favorite, on: :collection
+          get :hot, on: :collection
+        end
+        
+        resources :activities, only: [:index] do
+          get :nearby, on: :collection
+        end
+        
+        resources :bulk_purchasings, only: [:index] do
+          get :nearby, on: :collection
+          get :cheapie, on: :collection
+          get :favorite, on: :collection
+          get :hot, on: :collection
+        end
+
+        resources :orders, only: [:index, :show]
+        resources :reviews, only: [:index, :show]
+      end
+    end
+
     namespace :tips do
       resources :mendings, only: [:index, :show] do
         get :nearby, on: :collection
@@ -259,32 +288,15 @@ Carhall::Application.routes.draw do
       end
     end
 
-    scope module: :tips do
-      resources :dealers, only: [] do
-        resource :mending, only: [:show] do
-          get :detail
-        end
+    # Bcst
+    scope module: :bcst do
+      resources :providers, only: [] do
+        resources :hosts, only: [:index]
+        resources :programmes, only: [:index]
+        resource :programme_list, only: [:show]
 
-        resources :cleanings, only: [:index] do
-          get :nearby, on: :collection
-          get :cheapie, on: :collection
-          get :favorite, on: :collection
-          get :hot, on: :collection
-        end
-        
-        resources :activities, only: [:index] do
-          get :nearby, on: :collection
-        end
-        
-        resources :bulk_purchasings, only: [:index] do
-          get :nearby, on: :collection
-          get :cheapie, on: :collection
-          get :favorite, on: :collection
-          get :hot, on: :collection
-        end
-
-        resources :orders, only: [:index, :show]
-        resources :reviews, only: [:index, :show]
+        resources :exposures, only: [:index, :show, :create, :destroy]
+        resources :traffic_reports, only: [:index, :show, :create, :destroy]
       end
     end
 
@@ -300,17 +312,6 @@ Carhall::Application.routes.draw do
 
       resource :programme_list, only: [:show] do
         get :detail
-      end
-    end
-
-    scope module: :bcst do
-      resources :providers, only: [] do
-        resources :hosts, only: [:index]
-        resources :programmes, only: [:index]
-        resource :programme_list, only: [:show]
-
-        resources :exposures, only: [:index, :show, :create, :destroy]
-        resources :traffic_reports, only: [:index, :show, :create, :destroy]
       end
     end
 
