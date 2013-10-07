@@ -50,6 +50,7 @@
 
             <%= f.simple_fields_for :detail do |ff| %>
               <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerType.to_select, wrapper_html: { class: "dealer" } %>
+              <%= ff.input :specific_service_id, collection: Accounts::DealerDetail::SpecificService.to_select, wrapper_html: { class: "specific_service" }, required: true %>
               <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScope.to_select, as: :check_boxes, wrapper_html: { class: "dealer" } %>
               <%= ff.input :area_id, collection: Share::Area.to_select, wrapper_html: { class: "dealer" }, required: true %>
               <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
@@ -87,6 +88,18 @@
 <% content_for :javascripts do %>
   <script type="text/javascript">
   $(document).ready(function() {
+    $dealer_type = $("#account_detail_attributes_dealer_type_id")
+    function prepare_specific_service_input() {
+      $(".control-group").filter(".specific_service").hide()
+      if($dealer_type.val() == "2") {
+        $(".control-group").filter(".specific_service").show()
+      } else {
+        $(".control-group").filter(".specific_service").hide()
+      }
+    }
+    prepare_specific_service_input()
+    $dealer_type.change(prepare_specific_service_input)
+
     ac = new BMap.Autocomplete({'input': 'account_detail_attributes_address'}) // # 建立一个自动完成的对象 
     ac.setInputValue($('#account_detail_attributes_address').val())
     // $('#account_detail_attributes_area_id').change(function() {

@@ -63,6 +63,11 @@ class Accounts::Dealer < Accounts::Account
     where(detail_id: detail_ids)
   end
 
+  def self.with_specific_service specific_service
+    detail_ids = Accounts::DealerDetail.with_specific_service(specific_service).pluck(:id)
+    where(detail_id: detail_ids)
+  end
+
   api_accessible :detail, extend: :detail do |t|
     t.add :stars, append_to: :detail
     t.add ->(d) { Share::Statisticable.goal_attainment d.mending_orders }, 

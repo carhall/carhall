@@ -9,6 +9,22 @@
 Accounts::Account.where(mobile: '13112345678').destroy_all
 me = FactoryGirl.create :user, mobile: '13112345678'
 
+test_users = [%w(张敬伟 18600037683), %w(李永亮 15910967893), %w(李阳 15901013540), %w(李行 18053932727), %w(胡潇 15810535015), %w(白云 13911307656), %w(张永良 18910873748)]
+test_users.each do |u, m|
+  FactoryGirl.create :user, username: u, mobile: m
+end
+
+test_users = [何总, 杨俊, 李小新, 陈仙萍, 张颜峰]
+test_users.each do |u|
+  FactoryGirl.create :user, username: u
+end
+
+User.all.each do |u|
+  10.times do
+    u.make_friend_with! User.all.sample
+  end
+end
+
 Accounts::Account.where(mobile: '13212345678').destroy_all
 dealer = FactoryGirl.create :dealer, mobile: '13212345678'
 

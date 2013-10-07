@@ -15,6 +15,8 @@ class Accounts::DealerDetail < ActiveRecord::Base
   serialize :business_scope_ids, Array
   enumerate :business_scopes, with: %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险), multiple: true
 
+  enumerate :specific_service, with: %w(轮胎 换油 改装 钣喷 空调)
+
   def self.with_business_scope name
     id = active_enum_get_id_for_business_scopes(name)
     where('business_scope_ids LIKE \'%- ?\n%\'', id)

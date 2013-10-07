@@ -15,9 +15,11 @@ class Api::Accounts::DealersController < Api::Accounts::ApplicationController
   end
 
   def set_filter
+    search_parent
     filter_parent :area
     filter_parent :dealer_type
     filter_parent :business_scope
+    filter_parent :specific_service
   end
 
 end

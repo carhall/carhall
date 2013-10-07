@@ -76,6 +76,14 @@ describe "Users" do
       include_examples "resources#index filtered"
     end
 
+    context "with specific_service_id" do
+      let(:dealer_detail) { attributes_for(:dealer)[:detail].merge(specific_service_id: 1) }
+      let(:append_attrs_when_build) {{ detail: dealer_detail }}
+      let(:args) {{ filter: { specific_service_id: 1 }}}
+      let(:other_args) {{ filter: { specific_service_id: 2 }}}
+      include_examples "resources#index filtered"
+    end
+
     context "with bussiness_scope_id" do
       let(:dealer_detail) { attributes_for(:dealer)[:detail].merge(business_scope_ids: [1]) }
       let(:append_attrs_when_build) {{ detail: dealer_detail }}
@@ -92,6 +100,14 @@ describe "Users" do
     include_examples "resources#index"
     include_examples "resources#show"
     include_examples "resources#detail"
+
+    context "with query" do
+      let(:append_attrs_when_build) {{ username: 'Hello' }}
+      let(:args) {{ query: 'Hello' }}
+      let(:other_args) {{ query: 'Bye' }}
+      include_examples "resources#index filtered"
+    end
+
   end
 
   describe Api::Accounts::FriendsController do

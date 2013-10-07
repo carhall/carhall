@@ -51,6 +51,8 @@ zh-CN:
         dealer_type: 服务商类型
         business_scope_ids: 业务范围
         business_scopes: 业务范围
+        specific_service_id: 专项服务
+        specific_service: 专项服务
         company: 单位名称
         address: 地址
         phone: 电话

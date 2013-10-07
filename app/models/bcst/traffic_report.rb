@@ -1,10 +1,20 @@
-class Bcst::TrafficReport < Share::Comment
+class Bcst::TrafficReport < ActiveRecord::Base
+  include Share::Userable
+  include Share::Providerable
+  
+  belongs_to :at_user, class_name: 'Accounts::User'
+
+  validates_presence_of :user, :provider
+  validates_presence_of :content
+
   default_scope { order('id DESC') }
   
-  def self.with_provider provider
-    provider = if provider.kind_of? Accounts::Provider then 
-      provider else Accounts::Provider.find(provider) end
-    provider.traffic_reports
-  end
+  acts_as_api
 
+  api_accessible :base do |t|
+    t.only :id, :content, :created_at, :latitude, :longitude
+    t.add :user, template: :base
+    t.add :at_user, template: :base
+  end
+  
 end

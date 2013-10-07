@@ -20,6 +20,8 @@ class Accounts::Account < ActiveRecord::Base
   validates_presence_of :username, :type
   validates_length_of :username, :within => 2..20, :allow_blank => true
 
+  acts_as_indexed :fields => [:username]
+
   def accepted
     accepted?
   end

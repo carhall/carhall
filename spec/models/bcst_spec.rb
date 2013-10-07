@@ -29,7 +29,7 @@ describe "Bcst" do
   end
   
   describe Bcst::TrafficReport do
-    subject { create :traffic_report, source: provider }
+    subject { create :traffic_report, provider: provider }
     include_examples "valid record"
   end
 end

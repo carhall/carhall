@@ -24,6 +24,12 @@ module FilterHelper
     end
   end
 
+  def search_parent
+    if params[:query]
+      @parent = @parent.with_query(params[:query])
+    end
+  end
+
   def set_user
     @user = if user_id = params[:user_id]
       Accounts::User.find(user_id)

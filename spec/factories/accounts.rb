@@ -41,6 +41,7 @@ FactoryGirl.define do
         phone: Faker::PhoneNumber.phone_number,
         open_during: Faker::Lorem.sentence,
         dealer_type: Accounts::DealerDetail::DealerType.names.sample,
+        specific_service: Accounts::DealerDetail::SpecificService.names.sample,
         business_scopes: Accounts::DealerDetail::BusinessScope.names.sample(3),
         authentication_image: File.open("public/images/thumb/missing.png"),
       }

@@ -2,6 +2,7 @@ class Api::Accounts::UsersController < Api::Accounts::ApplicationController
   skip_before_filter :authenticate_account!, only: [:create]
 
   set_resource_class ::Accounts::User, detail: true
+  before_filter :search_parent
 
   # POST /api/users
   # POST /api/users.json

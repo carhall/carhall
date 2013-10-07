@@ -112,8 +112,10 @@ detail          | 附加字段的 **哈希表**        |
   ---------------------------|----------------------------|-----------------------
   detail[dealer_type_id]     | 服务商类型ID                | 0-3，对应洗车美容、专项服务、专修、4S店，同area_id和area的关系，见User关于area的说明
   detail[dealer_type]        | 服务商类型                  | 洗车美容、专项服务、专修、4S店，其中之一
-  detail[business_scope_ids] | 业务范围IDs（数组）          | [0-8, 0-8, ...]，对应洗车、美容、轮胎、换油、改装、钣喷、空调、专修、保险，同area_id和area的关系，见User关于area的说明，唯一不同是这里是ID的数组
+  detail[business_scope_ids] | 业务范围IDs（数组）          | [1-9, 1-9, ...]，对应洗车、美容、轮胎、换油、改装、钣喷、空调、专修、保险，同area_id和area的关系，见User关于area的说明，唯一不同是这里是ID的数组
   detail[business_scopes]    | 业务范围（数组）             | 洗车、美容、轮胎、换油、改装、钣喷、空调、专修、保险，其中若干个
+  detail[specific_service_id] | 专项服务ID                | 
+  detail[specific_service]   | 专项服务                   | 轮胎、换油、改装、钣喷、空调，其中之一
   detail[company]            |                            |
   detail[address]            |                            |
   detail[phone]              |                            |
@@ -163,7 +165,13 @@ PUT    | /api/current_user/password        | 修改当前用户密码
 GET查询商户时，可以在URI中使用三个附加字段filter[area_id]、filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的商户信息  
 > 例如，查询4S店商户信息：
 > 
->    GET /api/tips/cleanings?filter[dealer_type_id]=4
+>    GET /api/dealers?filter[dealer_type_id]=4
+> 
+
+GET查询媒体时，可以在URI中使用附加字段query作为条件，来根据用户名进行查询    
+> 例如，查询用户名为“你好”的媒体信息：
+> 
+>    GET /api/providers?query=你好
 > 
 
 用户登录使用data[mobile]和data[password]进行登录，返回AuthToken和用户信息  

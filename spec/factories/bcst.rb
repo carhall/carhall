@@ -35,7 +35,9 @@ FactoryGirl.define do
 
   factory :traffic_report, class: Bcst::TrafficReport do
     content { Faker::Lorem.sentence }
-    association :source, factory: :provider
+    latitude { 40 }
+    longitude { 116.3 }
+    provider
     user
   end
 end
