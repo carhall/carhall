@@ -10,35 +10,20 @@
 
     <%= render 'share/alert', message: '您还没有收到保养专修订单！' if @orders.empty? %>
 
-    <% @orders = @orders.includes(:detail) %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th><%= translate_attribute_name :id, :'tips/order' %></th>
-          <th><%= translate_attribute_name :title, :'tips/order' %></th>
-          <th><%= translate_attribute_name :brand, :'tips/order' %></th>
-          <th><%= translate_attribute_name :series, :'tips/order' %></th>
-          <th><%= translate_attribute_name :plate_num, :'tips/order' %></th>
-          <th><%= translate_attribute_name :arrive_at, :'tips/order' %></th>
-          <th><%= translate_attribute_name :price, :'tips/order' %></th>
-          <th><%= translate_attribute_name :state, :'tips/order' %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
-          <tr>
-            <td><%= order.id %></td>
-            <td><%= order.title %></td>
-            <td><%= order.detail.brand %></td>
-            <td><%= order.detail.series %></td>
-            <td><%= order.detail.plate_num %></td>
-            <td><%= l order.detail.arrive_at, format: :short %></td>
-            <td><%= order.cost %></td>
-            <td><%= order.state %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% @orders = @orders.includes(:detail).page(params[:page]) %>
+
+    <%= index_for @orders, class: :table do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :title %>
+      <%= t.attribute :brand, in: :detail %>
+      <%= t.attribute :series, in: :detail %>
+      <%= t.attribute :plate_num, in: :detail %>
+      <%= t.attribute :arrive_at, in: :detail, format: :short %>
+      <%= t.attribute :cost %>
+      <%= t.attribute :state %>
+    <% end %>
+
+    <%= paginate @orders %>
 
   </div>
 </div>

@@ -13,30 +13,12 @@
         <img src="<%= @tip.image.url(:medium) %>">
       </div>
       <div class="span9">
-        <table class="table">
-          <thead>
-            <tr>
-              <th><%= translate_attribute_name :cleaning_type, :'tips/cleaning' %></th>
-              <td><%= @tip.cleaning_type %></td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-            </tr>
-            <tr>
-              <th><%= translate_attribute_name :vip_price, :'tips/cleaning' %></th>
-              <td><%= @tip.vip_price %></td>
-            </tr>
-            <tr>
-              <th><%= translate_attribute_name :price, :'tips/cleaning' %></th>
-              <td><%= @tip.price %></td>
-            </tr>
-            <tr>
-              <th><%= translate_attribute_name :description, :'tips/cleaning' %></th>
-              <td><%= @tip.description %></td>
-            </tr>
-          </tbody>
-        </table>
+        <%= show_for @tip do |s| %>
+          <%= s.attribute :cleaning_type %>
+          <%= s.attribute :vip_price %>
+          <%= s.attribute :price %>
+          <%= s.attribute :description %>
+        <% end %>
       </div>
     </div>
   </div>

@@ -2,27 +2,17 @@
   <h3>客户列表 <small></small></h3>
 </div>
 
-<% @inverse_friends = @inverse_friends.page(params[:page]) %>
 <%= render 'share/alert', message: '还没有用户关注您！' if @inverse_friends.empty? %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= translate_attribute_name :id, :'accounts/user' %></th>
-      <th><%= translate_attribute_name :avatar, :'accounts/user' %></th>
-      <th><%= translate_attribute_name :username, :'accounts/user' %></th>
-      <th><%= translate_attribute_name :description, :'accounts/user' %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @inverse_friends.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><img src="<%= user.avatar.url(:thumb) %>" /></td>
-        <td><%= user.username %></td>
-        <td><%= user.description %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @inverse_friends = @inverse_friends.page(params[:page]) %>
+
+<%= index_for @inverse_friends, class: :table do |t| %>
+  <%= t.attribute :id %>
+  <%= t.attribute :avatar do |avatar| %>
+    <%= image_tag(avatar.url(:thumb)) %>
+  <% end %>
+  <%= t.attribute :username %>
+  <%= t.attribute :description %>
+<% end %>
+
 <%= paginate @inverse_friends %>

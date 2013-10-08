@@ -20,7 +20,7 @@
           </div>
         </div>
       <% end %>
-      <%= f.input :type, collection: [['媒体', 'Accounts::Provider'], ['汽车服务商', 'Accounts::Dealer']], required: true %>
+      <%= f.input :type, collection: [['媒体', 'Accounts::Provider'], ['服务商', 'Accounts::Dealer']], required: true %>
 
       <%= f.simple_fields_for :detail do |ff| %>
         <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerType.to_select, wrapper_html: { class: "dealer" }, required: true %>

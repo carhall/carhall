@@ -1,52 +1,42 @@
 <% @dealer.reviews.load_target %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>上月交易动态</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>上月完成订单</th>
-      <td><%= @dealer.recent_orders_count %> 笔</td>
-    </tr>
-    <tr>
-      <th>总成交额</th>
-      <td><%= @dealer.recent_total_cost %> 元</td>
-    </tr>
-    <tr>
-      <th>交易用户</th>
-      <td><%= @dealer.recent_ordered_users_count %> 个</td>
-    </tr>
-    <tr>
-      <th>本月综合评分</th>
-      <td>
-        <%= print_stars @dealer.recent_stars %>
-      </td>
-    </tr>
-    <tr>
-      <td class="blank">&nbsp;</td>
-    </tr>
-    <tr>
-      <th class="blank">综合数据</th>
-    </tr>
-    <tr>
-      <th>交易达成率</th>
-      <td><%= @dealer.goal_attainment %> %</td>
-    </tr>
-    <tr>
-      <th>店铺总评分</th>
-      <td>
-        <%= print_stars @dealer.stars %>
-      </td>
-    </tr>
-    <tr>
-      <th>应收款</th>
-      <td><%= 0 %> 元</td>
-    </tr>
-    <tr>
-      <th>应付佣金</th>
-      <td><%= 0 %> 元</td>
-    </tr>
-  </tbody>
-</table>
+<div class="dl-horizontal dl-span9">
+  <dl><strong>上月交易动态</strong></dl>
+  <dl>
+    <dt>上月完成订单</dt>
+    <dd><%= @dealer.recent_orders_count %> 笔</dd>
+  </dl>
+  <dl>
+    <dt>总成交额</dt>
+    <dd><%= @dealer.recent_total_cost %> 元</dd>
+  </dl>
+  <dl>
+    <dt>交易用户</dt>
+    <dd><%= @dealer.recent_ordered_users_count %> 个</dd>
+  </dl>
+  <dl>
+    <dt>本月综合评分</dt>
+    <dd>
+      <%= print_stars @dealer.recent_stars %>
+    </dd>
+  </dl>
+  <dl>&nbsp;</dl>
+  <dl class="no-border"><strong>综合数据</strong></dl>
+  <dl>
+    <dt>交易达成率</dt>
+    <dd><%= @dealer.goal_attainment %> %</dd>
+  </dl>
+  <dl>
+    <dt>店铺总评分</dt>
+    <dd>
+      <%= print_stars @dealer.stars %>
+    </dd>
+  </dl>
+  <dl>
+    <dt>应收款</dt>
+    <dd><%= 0 %> 元</dd>
+  </dl>
+  <dl>
+    <dt>应付佣金</dt>
+    <dd><%= 0 %> 元</dd>
+  </dl>
+</div>

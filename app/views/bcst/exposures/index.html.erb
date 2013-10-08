@@ -6,9 +6,11 @@
   <div class="span9">
     <div class="page-header">
       <h3>曝光台 <small></small></h3>
-
-      <%= render "bcst/share/comments" %>
     </div>
+
+    <%= render 'share/alert', message: '您还没有收到任何曝光信息！' if @comments.empty? %>
+    
+    <%= render "bcst/share/comments" %>
 
   </div>
 

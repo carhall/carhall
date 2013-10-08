@@ -13,20 +13,10 @@
         <img src="<%= @bcst.avatar.url(:medium) %>">
       </div>
       <div class="span9">
-        <table class="table">
-          <thead>
-            <tr>
-              <th><%= translate_attribute_name :programmes, :'bcst/host' %></th>
-              <td><%= @bcst.programmes.map(&:title).join('、') %></td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th><%= translate_attribute_name :description, :'bcst/host' %></th>
-              <td><%= @bcst.description %></td>
-            </tr>
-          </tbody>
-        </table>
+        <%= show_for @bcst do |s| %>
+          <%= s.association :programmes, using: :title, join: '、' %>
+          <%= s.attribute :description %>
+        <% end %>
       </div>
     </div>
   </div>

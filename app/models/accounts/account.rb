@@ -33,6 +33,17 @@ class Accounts::Account < ActiveRecord::Base
     type.demodulize.underscore.to_sym
   end
 
+  def human_user_type
+    {
+      guest: '访客',
+      superadmin: '超级管理员',
+      admin: '管理员',
+      user: '车主',
+      dealer: '服务商',
+      provider: '媒体',
+    }[user_type]
+  end
+
   acts_as_api
 
   api_accessible :base do |t|

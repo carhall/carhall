@@ -17,7 +17,7 @@ zh-CN:
     models:
       accounts/account: 用户
       accounts/user: 普通用户
-      accounts/dealer: 汽车服务商
+      accounts/dealer: 服务商
       accounts/provider: 媒体
       accounts/friendship: 好友
       tips/mending: 保养专修
@@ -89,8 +89,8 @@ zh-CN:
         description: 项目介绍
         orders_count: 购买次数
         stars: 满意度
-        total_sale: 总销售额
-        trend_stars: 满意度趋势
+        total_cost: 总销售额
+        recent_stars: 满意度趋势
       tips/activity:
         id: ID
         title: 项目名称
@@ -112,13 +112,14 @@ zh-CN:
         title: 名称
         count: 购买份数
         used_count: 已使用份数
-        price: 订单总价
+        cost: 订单总价
+        description: 预约项目
+      tips/mending_order/detail:
         state: 订单状态
         brand: 汽车品牌
         series: 汽车型号
         plate_num: 车牌号
         arrive_at: 到店时间
-        description: 预约项目
       bcst/host:
         id: ID
         avatar: 头像
@@ -137,9 +138,21 @@ zh-CN:
         airdate: 时段
         title: 节目名称
         description: 节目概述
-      share/comment:
+      share/comment: &comment
         content: 评论内容
         created_at: 评论时间
+      share/comment/user: &comment_user
+        username: 昵称
+        avatar: 头像
+      bcst/exposure: 
+        <<: *comment
+      bcst/exposure/user:
+        <<: *comment_user
+      bcst/traffic_report: 
+        <<: *comment
+      bcst/traffic_report/user:
+        <<: *comment_user
+
   simple_form:
     labels:
       account:

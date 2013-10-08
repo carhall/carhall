@@ -13,20 +13,10 @@
         <img src="<%= @bcst.avatar.url(:medium) %>">
       </div>
       <div class="span9">
-        <table class="table">
-          <thead>
-            <tr>
-              <th><%= translate_attribute_name :hosts, :'bcst/programme' %></th>
-              <td><%= @bcst.hosts.map(&:name).join('、') %></td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th><%= translate_attribute_name :description, :'bcst/programme' %></th>
-              <td><%= @bcst.description %></td>
-            </tr>
-          </tbody>
-        </table>
+        <%= show_for @bcst do |s| %>
+          <%= s.association :hosts, using: :name, join: '、' %>
+          <%= s.attribute :description %>
+        <% end %>
       </div>
     </div>
 
@@ -35,7 +25,11 @@
     </div>
 
     <% @comments = @bcst.comments %>
+
+    <%= render 'share/alert', message: '您还没有收到任何节目板块留言！' if @comments.empty? %>
+
     <%= render 'bcst/share/comments' %>
+
   </div>
 
 </div>

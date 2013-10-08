@@ -13,20 +13,10 @@
         <img src="<%= @tip.image.url(:medium) %>">
       </div>
       <div class="span9">
-        <table class="table">
-          <thead>
-            <tr>
-              <th><%= translate_attribute_name :expire_at, :'tips/activity' %></th>
-              <td><%= l @tip.expire_at %></td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th><%= translate_attribute_name :description, :'tips/activity' %></th>
-              <td><%= @tip.description %></td>
-            </tr>
-          </tbody>
-        </table>
+        <%= show_for @tip do |s| %>
+          <%= s.attribute :expire_at %>
+          <%= s.attribute :description %>
+        <% end %>
       </div>
     </div>
   </div>

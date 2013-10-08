@@ -10,37 +10,23 @@
 
     <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
     
-    <% @cleanings = @cleanings.includes :orders, :reviews %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th><%= translate_attribute_name :id, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :image, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :title, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :cleaning_type, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :vip_price, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :orders_count, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :stars, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :total_sale, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :trend_stars, :'tips/cleaning' %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cleanings.each do |cleaning| %>
-          <tr>
-            <td><%= cleaning.id %></td>
-            <td><img src="<%= cleaning.image.url(:thumb) %>" /></td>
-            <td><%= cleaning.title %></td>
-            <td><%= cleaning.cleaning_type %></td>
-            <td><%= cleaning.vip_price %></td>
-            <td><%= cleaning.orders_count %></td>
-            <td><%= cleaning.stars %></td>
-            <td><%= cleaning.total_cost %></td>
-            <td><%= cleaning.recent_stars %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% @cleanings = @cleanings.includes(:orders, :reviews).page(params[:page]) %>
+
+    <%= index_for @cleanings, class: :table do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :image do |image| %>
+        <%= image_tag(image.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :title %>
+      <%= t.attribute :cleaning_type %>
+      <%= t.attribute :vip_price %>
+      <%= t.attribute :orders_count %>
+      <%= t.attribute :stars %>
+      <%= t.attribute :total_cost %>
+      <%= t.attribute :recent_stars %>
+    <% end %>
+
+    <%= paginate @cleanings %>
 
   </div>
 </div>

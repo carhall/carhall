@@ -1,0 +1,8 @@
+zh-CN:
+  index_for:
+    actions:
+      actions: 操作
+      show: <i class="icon-search" rel="tooltip" title="查看详情"></i>
+      edit: <i class="icon-pencil" rel="tooltip" title="编辑"></i>
+      destroy: <i class="icon-remove" rel="tooltip" title="删除"></i>
+      confirmation: "您确定要删除这个项目?"

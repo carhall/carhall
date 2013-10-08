@@ -49,6 +49,46 @@ table.table {
       text-decoration: none;
     }
   }
+  td, th {
+    &.no-border {
+      border: 0;
+    }
+  }
+}
+
+dl {
+  margin: 0;
+  padding: 10px;
+  border-top: 1px solid #dddddd;
+}
+
+dl:first-child {
+  border-top: 0;
+}
+dl.no-border {
+  border: 0; 
+}
+
+.dl-horizontal {
+  dt {
+    text-align: left;
+  }
+}
+.dl-horizontal.dl-span6 {
+  dd {
+    margin-left: 250px;
+    @media (max-width: 767px) {
+      margin-left: 0; 
+    }
+  }
+}
+.dl-horizontal.dl-span9 {
+  dd {
+    margin-left: 320px;
+    @media (max-width: 767px) {
+      margin-left: 0; 
+    }
+  }
 }
 
 /* Custom container */
@@ -258,6 +298,9 @@ table.table {
     }
   }
 }
+.simple_form.no-margin {
+  margin: 0; 
+}
 
 
 .btn-submit {
@@ -298,10 +341,6 @@ table.table {
     background-color: #0081c2;
     #gradient > .vertical(#08c, #0077b3);
   }
-}
-
-.blank {
-  border: none!important;
 }
 
 .template {

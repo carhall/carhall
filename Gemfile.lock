@@ -11,6 +11,16 @@ GIT
     active_enum (0.9.12)
       activesupport (>= 3.0)
 
+PATH
+  remote: ..
+  specs:
+    index_for (0.1.0)
+      actionpack (>= 3.2, < 5)
+      activemodel (>= 3.2, < 5)
+    show_for (0.1.0)
+      actionpack (>= 3.2, < 5)
+      activemodel (>= 3.2, < 5)
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -238,6 +248,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   geohash!
+  index_for!
   inherited_resources
   jasny_bootstrap_extension_rails
   jbuilder (~> 1.2)
@@ -258,6 +269,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   select2-rails (~> 3.5.0)
+  show_for!
   simple_form
   therubyracer
   turbolinks

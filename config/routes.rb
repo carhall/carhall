@@ -187,7 +187,7 @@ Carhall::Application.routes.draw do
         post :mechanics
       end
 
-      resources :current_user, only: [] do
+      resource :current_user, only: [] do
         resources :post_blacklists, only: [:index]
         resources :posts, only: [:index]
         resource :club, only: [:show]

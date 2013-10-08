@@ -10,28 +10,17 @@
 
     <%= render 'share/alert', message: '您还没有收到团购订单！' if @orders.empty? %>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th><%= translate_attribute_name :id, :'tips/order' %></th>
-          <th><%= translate_attribute_name :title, :'tips/order' %></th>
-          <th><%= translate_attribute_name :count, :'tips/order' %></th>
-          <th><%= translate_attribute_name :price, :'tips/order' %></th>
-          <th><%= translate_attribute_name :state, :'tips/order' %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
-          <tr>
-            <td><%= order.id %></td>
-            <td><%= order.title %></td>
-            <td><%= order.count %></td>
-            <td><%= order.cost %></td>
-            <td><%= order.state %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% @orders = @orders.page(params[:page]) %>
+
+    <%= index_for @orders, class: :table do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :title %>
+      <%= t.attribute :count %>
+      <%= t.attribute :cost %>
+      <%= t.attribute :state %>
+    <% end %>
+
+    <%= paginate @orders %>
 
   </div>
 </div>

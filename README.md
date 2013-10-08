@@ -69,7 +69,7 @@ User 用户
 username        | 中文昵称                    | 2-20个字母或汉字，必须
 mobile          |                            | 必须
 avatar          | 头像                       | 上传时使用图片附件，查询返回数据为avatar_url，avatar_thumb_url，分别代表头像原图链接和头像缩略图链接
-user_type       | 用户类型，可能为 admin（管理员）, user（车主）, dealer（服务商、商户）, provider（媒体）| 只读，手机端只    能注册车主
+user_type       | 用户类型，可能为 admin（管理员）, user（车主）, dealer（服务商、服务商）, provider（媒体）| 只读，手机端只    能注册车主
 description     | 用户说明，个性签名           |
 accepted        | 通过验证                    | 布尔型，只读，只对dealer和provider有效
 detail          | 附加字段的 **哈希表**        |
@@ -146,12 +146,12 @@ GET    | /api/accounts/:id                 | 查询指定账户信息
 GET    | /api/accounts/:id/detail          | 查询指定账户详细信息  
 GET    | /api/users/:id                    | 查询指定用户信息  
 GET    | /api/users/:id/detail             | 查询指定用户详细信息  
-GET    | /api/dealers                      | 查询所有商户信息（默认排序）
-GET    | /api/dealers/nearby               | 查询所有商户信息（离我最近）（周边网店）  
-GET    | /api/dealers/favorite             | 查询所有商户信息（评分最高）  
-GET    | /api/dealers/hot                  | 查询所有商户信息（购买最多）    
-GET    | /api/dealers/:id                  | 查询指定商户信息  
-GET    | /api/dealers/:id/detail           | 查询指定商户详细信息  
+GET    | /api/dealers                      | 查询所有服务商信息（默认排序）
+GET    | /api/dealers/nearby               | 查询所有服务商信息（离我最近）（周边网店）  
+GET    | /api/dealers/favorite             | 查询所有服务商信息（评分最高）  
+GET    | /api/dealers/hot                  | 查询所有服务商信息（购买最多）    
+GET    | /api/dealers/:id                  | 查询指定服务商信息  
+GET    | /api/dealers/:id/detail           | 查询指定服务商详细信息  
 GET    | /api/providers                    | 查询所有媒体信息  
 GET    | /api/providers/:id                | 查询指定媒体信息  
 GET    | /api/providers/:id/detail         | 查询指定媒体详细信息  
@@ -162,8 +162,8 @@ GET    | /api/current_user/detail          | 查询当前用户详细信息
 PUT    | /api/current_user                 | 修改当前用户信息  
 PUT    | /api/current_user/password        | 修改当前用户密码  
 
-GET查询商户时，可以在URI中使用三个附加字段filter[area_id]、filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的商户信息  
-> 例如，查询4S店商户信息：
+GET查询服务商时，可以在URI中使用三个附加字段filter[area_id]、filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的服务商信息  
+> 例如，查询4S店服务商信息：
 > 
 >    GET /api/dealers?filter[dealer_type_id]=4
 > 
@@ -209,7 +209,7 @@ GET    | /api/current_user/friends          | 查询当前用户好友信息
 GET    | /api/friends                       | （同上）   
 GET    | /api/current_user/friends/user     | 查询当前车主好友信息  
 GET    | /api/friends/user                  | （同上）   
-GET    | /api/current_user/friends/dealer   | 查询当前商户好友信息  
+GET    | /api/current_user/friends/dealer   | 查询当前服务商好友信息  
 GET    | /api/friends/dealer                | （同上）   
 GET    | /api/current_user/friends/provider | 查询当前媒体好友信息（即关注频道）  
 GET    | /api/friends/provider              | （同上）  
@@ -397,8 +397,8 @@ GET    | /api/tips/mendings/favorite                 | 查询所有保养专修�
 GET    | /api/tips/mendings/hot                      | 查询所有保养专修信息（购买最多）
 GET    | /api/tips/mendings/:id                      | 查询指定保养专修信息  
 GET    | /api/tips/mendings/:id/detail               | 查询指定保养专修详细信息  
-GET    | /api/tips/dealers/:dealer_id/mending        | 查询指定商户的保养专修信息  
-GET    | /api/tips/dealers/:dealer_id/mending/detail | 查询指定商户的保养专修详细信息  
+GET    | /api/tips/dealers/:dealer_id/mending        | 查询指定服务商的保养专修信息  
+GET    | /api/tips/dealers/:dealer_id/mending/detail | 查询指定服务商的保养专修详细信息  
 
 使用nearby，离我最近时，需要附加参数lat（经度）和lng（纬度）
 > 例如：
@@ -455,11 +455,11 @@ GET    | /api/tips/cleanings/favorite               | 查询所有洗车美容�
 GET    | /api/tips/cleanings/hot                    | 查询所有洗车美容信息（购买最多）
 GET    | /api/tips/cleanings/:id                    | 查询指定洗车美容信息  
 GET    | /api/tips/cleanings/:id/detail             | 查询指定洗车美容详细信息  
-GET    | /api/dealers/:dealer_id/cleanings          | 查询指定商户的洗车美容信息（默认排序）  
-GET    | /api/dealers/:dealer_id/cleanings/nearby   | 查询指定商户的洗车美容信息（离我最近）  
-GET    | /api/dealers/:dealer_id/cleanings/cheapie  | 查询指定商户的洗车美容信息（价格最低）  
-GET    | /api/dealers/:dealer_id/cleanings/favorite | 查询指定商户的洗车美容信息（评分最高）  
-GET    | /api/dealers/:dealer_id/cleanings/hot      | 查询指定商户的洗车美容信息（购买最多）  
+GET    | /api/dealers/:dealer_id/cleanings          | 查询指定服务商的洗车美容信息（默认排序）  
+GET    | /api/dealers/:dealer_id/cleanings/nearby   | 查询指定服务商的洗车美容信息（离我最近）  
+GET    | /api/dealers/:dealer_id/cleanings/cheapie  | 查询指定服务商的洗车美容信息（价格最低）  
+GET    | /api/dealers/:dealer_id/cleanings/favorite | 查询指定服务商的洗车美容信息（评分最高）  
+GET    | /api/dealers/:dealer_id/cleanings/hot      | 查询指定服务商的洗车美容信息（购买最多）  
 
 GET查询时，可以在URI中使用两个附加字段filter[area_id]和filter[cleaning_type_id]作为条件，来查询指定类别的洗车美容信息  
 **注意：会员洗车即filter[cleaning_type_id]=0**  
@@ -485,8 +485,8 @@ GET    | /api/tips/activities                      | 查询所有活动信息（
 GET    | /api/tips/activities/nearby               | 查询所有活动信息（离我最近）  
 GET    | /api/tips/activities/:id                  | 查询指定活动信息  
 GET    | /api/tips/activities/:id/detail           | 查询指定活动详细信息   
-GET    | /api/dealers/:dealer_id/activities        | 查询指定商户的活动信息（默认排序）  
-GET    | /api/dealers/:dealer_id/activities/nearby | 查询指定商户的活动信息（离我最近）  
+GET    | /api/dealers/:dealer_id/activities        | 查询指定服务商的活动信息（默认排序）  
+GET    | /api/dealers/:dealer_id/activities/nearby | 查询指定服务商的活动信息（离我最近）  
 
 GET查询时，可以在URI中使用一个附加字段filter[area_id]作为条件，来查询指定类别的团购信息  
 
@@ -522,11 +522,11 @@ GET    | /api/tips/bulk_purchasings/favorite               | 查询所有团购�
 GET    | /api/tips/bulk_purchasings/hot                    | 查询所有团购信息（购买最多）
 GET    | /api/tips/bulk_purchasings/:id                    | 查询指定团购信息  
 GET    | /api/tips/bulk_purchasings/:id/detail             | 查询指定团购详细信息  
-GET    | /api/dealers/:dealer_id/bulk_purchasings          | 查询指定商户的团购信息（默认排序）  
-GET    | /api/dealers/:dealer_id/bulk_purchasings/nearby   | 查询指定商户的团购信息（离我最近）  
-GET    | /api/dealers/:dealer_id/bulk_purchasings/cheapie  | 查询指定商户的团购信息（价格最低）  
-GET    | /api/dealers/:dealer_id/bulk_purchasings/favorite | 查询指定商户的团购信息（评分最高）  
-GET    | /api/dealers/:dealer_id/bulk_purchasings/hot      | 查询指定商户的团购信息（购买最多）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings          | 查询指定服务商的团购信息（默认排序）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings/nearby   | 查询指定服务商的团购信息（离我最近）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings/cheapie  | 查询指定服务商的团购信息（价格最低）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings/favorite | 查询指定服务商的团购信息（评分最高）  
+GET    | /api/dealers/:dealer_id/bulk_purchasings/hot      | 查询指定服务商的团购信息（购买最多）  
 
 GET查询时，可以在URI中使用两个附加字段filter[area_id]和filter[bulk_purchasing_type_id]作为条件，来查询指定类别的团购信息  
 查询相关参数，参见 Mending 保养专修  

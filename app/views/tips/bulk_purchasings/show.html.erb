@@ -13,32 +13,13 @@
         <img src="<%= @tip.image.url(:medium) %>">
       </div>
       <div class="span9">
-        <table class="table">
-          <thead>
-            <tr>
-              <th><%= translate_attribute_name :bulk_purchasing_type, :'tips/bulk_purchasing' %></th>
-              <td><%= @tip.bulk_purchasing_type %></td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th><%= translate_attribute_name :expire_at, :'tips/bulk_purchasing' %></th>
-              <td><%= l @tip.expire_at %></td>
-            </tr>
-            <tr>
-              <th><%= translate_attribute_name :vip_price, :'tips/bulk_purchasing' %></th>
-              <td><%= @tip.vip_price %></td>
-            </tr>
-            <tr>
-              <th><%= translate_attribute_name :price, :'tips/bulk_purchasing' %></th>
-              <td><%= @tip.price %></td>
-            </tr>
-            <tr>
-              <th><%= translate_attribute_name :description, :'tips/bulk_purchasing' %></th>
-              <td><%= @tip.description %></td>
-            </tr>
-          </tbody>
-        </table>
+        <%= show_for @tip do |s| %>
+          <%= s.attribute :bulk_purchasing_type %>
+          <%= s.attribute :expire_at %>
+          <%= s.attribute :vip_price %>
+          <%= s.attribute :price %>
+          <%= s.attribute :description %>
+        <% end %>
       </div>
     </div>
   </div>

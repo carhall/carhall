@@ -10,36 +10,21 @@
 
     <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @tips.empty? %>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th><%= translate_attribute_name :id, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :image, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :title, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :cleaning_type, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :vip_price, :'tips/cleaning' %></th>
-          <th><%= translate_attribute_name :price, :'tips/cleaning' %></th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @tips.each do |tip| %>
-          <tr>
-            <td><%= tip.id %></td>
-            <td><img src="<%= tip.image.url(:thumb) %>"></td>
-            <td><%= tip.title %></td>
-            <td><%= tip.cleaning_type %></td>
-            <td><%= tip.vip_price %></td>
-            <td><%= tip.price %></td>
-            <td class="actions">
-              <%= link_to content_tag(:i, '', class: 'icon-search'), tips_cleaning_path(tip), title: '查看详情', rel: 'tooltip' %>
-              <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_tips_cleaning_path(tip), title: '编辑', rel: 'tooltip' %>
-              <%= link_to content_tag(:i, '', class: 'icon-remove'), tips_cleaning_path(tip), data: { method: :delete, confirm: '您确定要删除这个项目？' }, title: '删除', rel: 'tooltip' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% @tips = @tips.page(params[:page]) %>
+
+    <%= index_for @tips, class: :table do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :image do |image| %>
+        <%= image_tag(image.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :title %>
+      <%= t.attribute :cleaning_type %>
+      <%= t.attribute :vip_price %>
+      <%= t.attribute :price %>
+      <%= t.actions :all %>
+    <% end %>
+
+    <%= paginate @tips %>
 
   </div>
 </div>

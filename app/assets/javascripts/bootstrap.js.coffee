@@ -1,6 +1,6 @@
 jQuery ->
   $("a[rel~=popover], .has-popover").popover()
-  $("a[rel~=tooltip], .has-tooltip").tooltip()
+  $("a[rel~=tooltip], i[rel~=tooltip], .has-tooltip").tooltip()
 
   # For fluid containers
   $('.datatable').dataTable

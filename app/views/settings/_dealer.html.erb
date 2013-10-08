@@ -1,60 +1,19 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= translate_attribute_name :username, :'accounts/account' %></th>
-      <td><%= @user.username %></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th><%= translate_attribute_name :user_type, :'accounts/account' %></th>
-      <td>汽车服务商</td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :dealer_type, :'accounts/account/detail' %></th>
-      <td><%= @user.detail.dealer_type %></td>
-    </tr>
-    <% if @user.detail.specific_service_id %>
-      <tr>
-        <th><%= translate_attribute_name :specific_service, :'accounts/account/detail' %></th>
-        <td><%= @user.detail.specific_service %></td>
-      </tr>
-    <% end %>
-    <tr>
-      <th><%= translate_attribute_name :business_scopes, :'accounts/account/detail' %></th>
-      <td><%= @user.detail.business_scopes.join('、') %></td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :mobile, :'accounts/account' %></th>
-      <td><%= @user.mobile %></td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :company, :'accounts/account/detail' %></th>
-      <td><%= @user.detail.company %></td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :address, :'accounts/account/detail' %></th>
-      <td><%= @user.detail.address %></td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :phone, :'accounts/account/detail' %></th>
-      <td><%= @user.detail.phone %></td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :open_during, :'accounts/account/detail' %></th>
-      <td><%= @user.detail.open_during %></td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :authentication_image, :'accounts/account/detail' %></th>
-      <td><img src="<%= @user.detail.authentication_image.url(:medium) %>"></td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :accepted, :'accounts/account/detail' %></th>
-      <td><label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label></td>
-    </tr>
-    <tr>
-      <th><%= translate_attribute_name :description, :'accounts/account' %></th>
-      <td><%= @user.description %></td>
-    </tr>
-  </tbody>
-</table>
+<%= show_for @user do |s| %>
+  <%= s.attribute :username %>
+  <%= s.attribute :user_type %>
+  <%= s.attribute :mobile %>
+  <%= s.attribute :dealer_type, in: :detail %>
+  <%= s.attribute :specific_service, in: :detail %>
+  <%= s.attribute :business_scopes, in: :detail, join: '、' %>
+  <%= s.attribute :company, in: :detail %>
+  <%= s.attribute :address, in: :detail %>
+  <%= s.attribute :phone, in: :detail %>
+  <%= s.attribute :open_during, in: :detail %>
+  <%= s.attribute :authentication_image, in: :detail do %>
+    <%= image_tag(@user.detail.authentication_image.url(:medium)) %>
+  <% end %>
+  <%= s.attribute :accepted, in: :detail do %>
+    <label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label>
+  <% end %>
+  <%= s.attribute :description %>
+<% end %>
