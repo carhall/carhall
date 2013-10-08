@@ -11,12 +11,18 @@ GIT
     active_enum (0.9.12)
       activesupport (>= 3.0)
 
-PATH
-  remote: ..
+GIT
+  remote: git://github.com/bbtfr/index_for.git
+  revision: 9f44dc824266f917ca2cc436cc68cf5ac7329689
   specs:
     index_for (0.1.0)
       actionpack (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
+
+GIT
+  remote: git://github.com/bbtfr/show_for.git
+  revision: 522926531a30800f3bc597bdcb3f1e8354639696
+  specs:
     show_for (0.1.0)
       actionpack (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
