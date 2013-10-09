@@ -10,6 +10,8 @@ class Accounts::Provider < Accounts::Account
   has_many :exposures, class_name: 'Bcst::Exposure'
   has_many :traffic_reports, class_name: 'Bcst::TrafficReport'
 
+  validates_presence_of :type
+
   def programme_list
     hash = (0..6).reduce({}) { |ret, day| ret[day.to_s] = []; ret } 
     programme_lists.each { |pl| hash[pl.day.to_s] << pl }
@@ -21,8 +23,6 @@ class Accounts::Provider < Accounts::Account
     programme_lists.each { |pl| hash[pl.day.to_s] << pl.as_api_response(:base) }
     { list: hash }
   end
-
-  validates_presence_of :type
 
   api_accessible :detail, extend: :detail do |t|
     t.add :programmes, template: :base, append_to: :detail

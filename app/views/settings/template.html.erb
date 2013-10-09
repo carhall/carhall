@@ -13,9 +13,9 @@
         <img src="<%= @dealer.avatar.url(:medium) %>">
       </div>
       <div class="span9">
-        <%= simple_form_for(@dealer, url: account_registration_path, html: { method: :put, class: 'form-horizontal no-margin' }) do |f| %>
+        <%= simple_form_for(@dealer, url: account_registration_path, html: { method: :put, class: 'form-horizontal no-margin dl-horizontal dl-span6' }) do |f| %>
 
-          <div class="dl-horizontal dl-span6">
+          <div>
             <dl><strong>业务模板管理</strong></dl>
             <dl>
               <dt>洗车美容</dt>

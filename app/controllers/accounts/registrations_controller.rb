@@ -18,8 +18,9 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
       permit << {detail_attributes: [:id, :company, :phone]}
     when "Accounts::Dealer"
       permit << :type
+      permit << :area_id
       permit << {detail_attributes: [:id, :dealer_type_id, :specific_service_id, 
-        :business_scope_ids, :area_id, :company, :address, :phone, :open_during, 
+        :business_scope_ids, :company, :address, :phone, :open_during, 
         :authentication_image,
         {template_ids: []}, {business_scope_ids: []}]}
     else

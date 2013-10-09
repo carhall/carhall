@@ -45,9 +45,9 @@ zh-CN:
         description: 用户说明
         confirmation_token: 手机验证码
         reset_password_token: 手机验证码
-      accounts/account/detail: &detail
         area_id: 地区
         area: 地区
+      accounts/account/detail: &detail
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型
         business_scope_ids: 业务范围
