@@ -6,13 +6,9 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
-    detail do
-      {
-        sex: Accounts::UserDetail::Sex.names.sample,
-        area: Share::Area.names.sample,
-        brand: Share::Brand.names.sample,
-      }
-    end
+    sex { Accounts::Account::Sex.names.sample }
+    area { Share::Area.names.sample }
+    brand { Share::Brand.names.sample }
   end
 
   factory :provider, class: Accounts::Provider do
@@ -33,9 +29,9 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
+    area { Share::Area.names.sample }
     detail do
       {
-        area: Share::Area.names.sample,
         company: Faker::Lorem.sentence,
         address: Address.sample,
         phone: Faker::PhoneNumber.phone_number,

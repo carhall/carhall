@@ -7,7 +7,7 @@ module Tips::Servicable
     default_scope { order('id DESC') }
     
     before_save do
-      self.area_id = dealer.detail.area_id
+      self.area_id = dealer.area_id
       self.location_id = dealer.location_id
     end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007104335) do
+ActiveRecord::Schema.define(version: 20131009024840) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "", null: false
@@ -50,8 +50,12 @@ ActiveRecord::Schema.define(version: 20131007104335) do
     t.integer  "stars_count",            default: 0
     t.integer  "total_cost",             default: 0
     t.integer  "location_id"
+    t.integer  "sex_id"
+    t.integer  "area_id"
+    t.integer  "brand_id"
   end
 
+  add_index "accounts", ["area_id", "brand_id"], name: "index_accounts_on_area_id_and_brand_id", using: :btree
   add_index "accounts", ["authentication_token"], name: "index_accounts_on_authentication_token", unique: true, using: :btree
   add_index "accounts", ["confirmation_token"], name: "index_accounts_on_confirmation_token", unique: true, using: :btree
   add_index "accounts", ["detail_id"], name: "index_accounts_on_detail_id", using: :btree
@@ -178,7 +182,6 @@ ActiveRecord::Schema.define(version: 20131007104335) do
   add_index "comments", ["type", "id"], name: "index_comments_on_type_and_id", using: :btree
 
   create_table "dealer_details", force: true do |t|
-    t.integer  "area_id"
     t.integer  "dealer_type_id"
     t.string   "business_scope_ids"
     t.string   "company"
@@ -426,9 +429,6 @@ ActiveRecord::Schema.define(version: 20131007104335) do
   add_index "traffic_reports", ["provider_id"], name: "index_traffic_reports_on_provider_id", using: :btree
 
   create_table "user_details", force: true do |t|
-    t.integer  "sex_id"
-    t.integer  "area_id"
-    t.integer  "brand_id"
     t.string   "series"
     t.string   "plate_num"
     t.integer  "balance",            default: 0, null: false
@@ -437,8 +437,6 @@ ActiveRecord::Schema.define(version: 20131007104335) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
-
-  add_index "user_details", ["area_id", "brand_id"], name: "index_user_details_on_area_id_and_brand_id", using: :btree
 
   create_table "user_device", force: true do |t|
     t.integer "user_id"

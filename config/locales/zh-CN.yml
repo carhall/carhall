@@ -1,5 +1,6 @@
 zh-CN:
-  unknown: 未知
+  active_enum:
+    unknown: 未知
   unaccepted: 您的账号还没有被激活，请联系管理员为您激活帐户。
   can_not_use_tips: 在账户被激活之前，您不能进行业务管理。
   in_blacklist: 该用户在您的黑名单中。

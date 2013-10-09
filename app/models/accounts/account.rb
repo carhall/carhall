@@ -22,6 +22,10 @@ class Accounts::Account < ActiveRecord::Base
 
   acts_as_indexed :fields => [:username]
 
+  enumerate :area, with: Share::Area
+  enumerate :brand, with: Share::Brand
+  enumerate :sex, with: %w(男 女)
+
   def accepted
     accepted?
   end

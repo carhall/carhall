@@ -1,13 +1,11 @@
 class Accounts::DealerDetail < ActiveRecord::Base
-  enumerate :area, with: Share::Area
-
   extend Share::ImageAttachments
   define_image_method
   alias_attribute :authentication_image, :image
 
   define_rqrcode_image_method
   
-  validates_presence_of :area_id, :dealer_type_id, :business_scope_ids,
+  validates_presence_of :dealer_type_id, :business_scope_ids,
     :company, :address, :phone, :open_during, :authentication_image
 
   enumerate :dealer_type, with: %w(洗车美容 专项服务 专修 4S店)
@@ -33,10 +31,10 @@ class Accounts::DealerDetail < ActiveRecord::Base
   acts_as_api
 
   api_accessible :base do |t|
-    t.only :area_id, :dealer_type_id, :business_scope_ids, :company, :address, 
+    t.only :dealer_type_id, :business_scope_ids, :company, :address, 
         :phone, :open_during, :latitude, :longitude, :rqrcode_token, 
         :orders_count, :reviews_count
-    t.methods :area, :dealer_type, :business_scopes
+    t.methods :dealer_type, :business_scopes
   end
 
 end

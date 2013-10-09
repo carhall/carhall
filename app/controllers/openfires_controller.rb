@@ -31,7 +31,7 @@ class OpenfiresController < ActionController::Base
   end
 
   def list_users
-    @users = ::Accounts::Account.includes(:detail).find(params[:ids].split(','))
+    @users = ::Accounts::Account.find(params[:ids].split(','))
     render_data users: @users.map {|u| openfire_user_detail(u) }
   end
 
@@ -43,7 +43,7 @@ class OpenfiresController < ActionController::Base
 
   def openfire_user_detail u
     avatar_thumb_url = if u.avatar.present? then AbsoluteUrlPrefix + u.avatar.url(:thumb) end
-    sex_id = u.detail.sex_id rescue nil
+    sex_id = u.sex_id || 0
     { 
       id: u.id, username: u.username, mobile: u.mobile, 
       avatar_thumb_url: avatar_thumb_url, sex_id: sex_id || 0

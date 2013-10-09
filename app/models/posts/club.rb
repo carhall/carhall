@@ -21,8 +21,7 @@ class Posts::Club < ActiveRecord::Base
   end
 
   def self.with_user user
-    detail = user.detail
-    with_club detail.area_id, detail.brand_id
+    with_club user.area_id, user.brand_id
   end
 
   def apply_president user, description

@@ -61,8 +61,7 @@ describe "Users" do
     include_examples "resources#list", :hot
 
     context "with area_id" do
-      let(:dealer_detail) { attributes_for(:dealer)[:detail].merge(area_id: 1) }
-      let(:append_attrs_when_build) {{ detail: dealer_detail }}
+      let(:append_attrs_when_build) {{ area_id: 1 }}
       let(:args) {{ filter: { area_id: 1 }}}
       let(:other_args) {{ filter: { area_id: 2 }}}
       include_examples "resources#index filtered"

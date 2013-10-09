@@ -78,12 +78,12 @@ detail          | 附加字段的 **哈希表**        |
   
   字段名称              | 详细描述                    | 限制条件
   ---------------------|----------------------------|---------------------------
-  detail[sex_id]       | 性别ID                     | 0或1，分别代表男或女
-  detail[sex]          |                            | “男”或“女”中的一个汉字
-  detail[area_id]      | 区域ID                     | area_id（integer）和area（string，根据area_id取得）指向同一个字段
-  detail[area]         | 区域                       | 
-  detail[brand_id]     | 品牌ID                     | 同area_id和area的关系
-  detail[brand]        | 品牌                       | 
+  sex_id               | 性别ID                     | 1或2，分别代表男或女
+  sex                  |                            | “男”或“女”中的一个汉字
+  area_id              | 区域ID                     | area_id（integer）和area（string，根据area_id取得）指向同一个字段
+  area                 | 区域                       | 
+  brand_id             | 品牌ID                     | 同area_id和area的关系
+  brand                | 品牌                       | 
   detail[series]       | 型号                       |
   detail[plate_num]    | 车牌号                     |
   detail[balance]      | 余额                       | 只读
@@ -100,7 +100,7 @@ detail          | 附加字段的 **哈希表**        |
   > 和
   > 
   >     表单
-  >     area_id    0
+  >     area_id    1
   > 
   > 是等价的,但是最好提交表单时用area_id和brand_id,数字更加简单方便.
   
@@ -187,7 +187,7 @@ GET查询媒体时，可以在URI中使用附加字段query作为条件，来根
 >     表单
 >     _method                  put
 >     data[state_msg]          xxx
->     data[detail][area_id]    1 
+>     data[detail][series]     xxx 
 
 > 再例如：修改用户密码，使用POST方式：  
 > 

@@ -21,7 +21,7 @@ class Accounts::Dealer < Accounts::Account
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, class_name: 'Tips::Review'
   
-  validates_presence_of :type
+  validates_presence_of :area_id, :type
 
   validates_each :detail do |record, attr, value|
     if value and value.address_changed?
@@ -48,11 +48,6 @@ class Accounts::Dealer < Accounts::Account
     detail.template_syms.include? template
   end
 
-  def self.with_area area
-    detail_ids = Accounts::DealerDetail.with_area(area).pluck(:id)
-    where(detail_id: detail_ids)
-  end
-
   def self.with_dealer_type dealer_type
     detail_ids = Accounts::DealerDetail.with_dealer_type(dealer_type).pluck(:id)
     where(detail_id: detail_ids)
@@ -69,6 +64,8 @@ class Accounts::Dealer < Accounts::Account
   end
 
   api_accessible :detail, extend: :detail do |t|
+    t.add :area_id, append_to: :detail
+    t.add :area, append_to: :detail
     t.add :stars, append_to: :detail
     t.add ->(d) { Share::Statisticable.goal_attainment d.mending_orders }, 
       as: :mending_goal_attainment, append_to: :detail

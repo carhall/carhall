@@ -3,8 +3,7 @@ require 'spec_helper'
 describe "Tips" do
   include_context "shared context"
 
-  let(:dealer_detail) { attributes_for(:dealer)[:detail].merge(area_id: 1) }
-  let(:dealer) { create :dealer, detail: dealer_detail }
+  let(:dealer) { create :dealer, area_id: 1 }
   let(:append_attrs_when_build) {{ dealer: dealer }}
 
   shared_examples "tips#nearby" do 

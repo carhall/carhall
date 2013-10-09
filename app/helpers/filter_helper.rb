@@ -47,9 +47,8 @@ module FilterHelper
       @area_id = filter[:area_id]
       @brand_id = filter[:brand_id]
     elsif (@user ||= set_current_user).user_type == :user
-      detail = @user.detail
-      @area_id = detail.area_id
-      @brand_id = detail.brand_id
+      @area_id = @user.area_id
+      @brand_id = @user.brand_id
     end
   end
 
