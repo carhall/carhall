@@ -22,6 +22,8 @@ class Bcst::Programme < ActiveRecord::Base
     t.add :hosts, template: :without_programme
   end
 
-  api_accessible :detail, extend: :base
+  api_accessible :detail, extend: :base do |t|
+    t.add :comments, template: :base
+  end
 
 end
