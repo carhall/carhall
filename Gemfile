@@ -75,7 +75,6 @@ gem 'geohash', github: 'RyanNaughton/geohash'
 # gem 'active_enum', github: 'bbtfr/active_enum'
 gem 'active_enum', path: '..'
 gem 'inherited_resources'
-gem 'acts_as_indexed'
 
 group :development, :test do
   gem 'faker'

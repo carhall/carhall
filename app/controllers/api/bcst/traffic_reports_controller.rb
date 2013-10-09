@@ -1,4 +1,4 @@
-class Api::Bcst::TrafficReportsController < Api::CommentsController
+class Api::Bcst::TrafficReportsController < Api::Bcst::CommentsController
 
   def set_parent
     @provider = ::Accounts::Provider.find(params[:provider_id])
