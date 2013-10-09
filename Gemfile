@@ -72,8 +72,8 @@ gem 'paperclip'
 gem 'rqrcode-rails3'
 gem 'mini_magick'
 gem 'geohash', github: 'RyanNaughton/geohash'
-# gem 'active_enum', github: 'bbtfr/active_enum'
-gem 'active_enum', path: '..'
+gem 'active_enum', github: 'bbtfr/active_enum'
+# gem 'active_enum', path: '..'
 gem 'inherited_resources'
 
 group :development, :test do

@@ -5,6 +5,13 @@ GIT
     geohash (0.0.1.alpha)
 
 GIT
+  remote: git://github.com/bbtfr/active_enum.git
+  revision: 0828c3754e0db8969a6a7a7d3529026996e27358
+  specs:
+    active_enum (0.9.12)
+      activesupport (>= 3.0)
+
+GIT
   remote: git://github.com/bbtfr/index_for.git
   revision: 9f44dc824266f917ca2cc436cc68cf5ac7329689
   specs:
@@ -19,12 +26,6 @@ GIT
     show_for (0.1.0)
       actionpack (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
-
-PATH
-  remote: ..
-  specs:
-    active_enum (0.9.12)
-      activesupport (>= 3.0)
 
 GEM
   remote: http://ruby.taobao.org/
