@@ -73,9 +73,13 @@ Carhall::Application.routes.draw do
   end
 
   namespace :statistic do
+    resource :dashboard
+    root to: 'dashboards#show'
+
+    resources :users
     resources :providers
     resources :dealers
-    resources :users
+    resources :distributors
   end
 
   namespace :accounts do
@@ -94,6 +98,10 @@ Carhall::Application.routes.draw do
 
   namespace :category do
     resources :brands
+  end
+
+  namespace :posts do
+    resources :posts
   end
 
   # For openfire

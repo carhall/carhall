@@ -1,0 +1,20 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "statistic/share/sidenav/admin" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>车主数据 <small></small></h3>
+    </div>
+
+    <%= index_for @users, class: 'table datatable' do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :username %>
+      <%= t.attribute :total_cost %>
+      <%= t.attribute :balance, in: :detail %>
+    <% end %>
+
+  </div>
+
+</div>

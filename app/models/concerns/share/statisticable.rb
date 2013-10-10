@@ -9,6 +9,10 @@ module Share::Statisticable
     Share::Statisticable.mean_stars reviews
   end
 
+  def human_stars
+    stars.round(2)
+  end
+
   def last_stars
     review = if reviews.loaded?
       reviews.last
@@ -27,6 +31,10 @@ module Share::Statisticable
       target_reviews = recent_reviews
     end
     Share::Statisticable.mean_stars target_reviews
+  end
+
+  def human_recent_stars
+    recent_stars.round(2)
   end
 
   def recent_orders_count
@@ -64,7 +72,6 @@ module Share::Statisticable
     scope :cheapie, -> { order('vip_price ASC') }
     scope :favorite, -> { all.sort{|s|s.stars} }
     scope :hot, -> { order('orders_count DESC') }
-
   end
 
 end

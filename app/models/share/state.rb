@@ -1,5 +1,5 @@
 class Share::State < ActiveEnum::Base
-  States = %i(finished canceled unfinished)
+  States = %i(unfinished finished canceled)
 
   value States
   

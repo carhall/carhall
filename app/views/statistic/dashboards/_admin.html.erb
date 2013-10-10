@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>地区</th>
+      <th>服务商</th>
+      <th>经销商</th>
+      <th>车主</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% accounts = ::Accounts::Account.group_by_area_and_type %>
+    <% Share::Area.all.each do |area_id, area| %>
+      <tr>
+        <td><%= area %></td>
+        <td><%= accounts[area_id][:dealer].count %></td>
+        <td><%= accounts[area_id][:distributor].count %></td>
+        <td><%= accounts[area_id][:user].count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  
+</table>

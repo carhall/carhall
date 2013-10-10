@@ -4,7 +4,6 @@ class Accounts::Account < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, 
     :validatable#, :confirmable#, :lockable#, :trackable
 
-  include Accounts::Acceptable
   include Accounts::TokenAuthenticatable
 
   # For details
@@ -29,10 +28,6 @@ class Accounts::Account < ActiveRecord::Base
   enumerate :brand, with: Share::Brand
   enumerate :sex, with: %w(男 女)
 
-  def accepted
-    accepted?
-  end
-
   def user_type
     return :guest if new_record?
     return :account unless type
@@ -48,6 +43,7 @@ class Accounts::Account < ActiveRecord::Base
       user: '车主',
       dealer: '服务商',
       provider: '媒体',
+      distributor: '经销商',
     }[user_type]
   end
 
@@ -55,7 +51,7 @@ class Accounts::Account < ActiveRecord::Base
 
   api_accessible :base do |t|
     t.only :id, :username, :mobile, :description
-    t.methods :user_type, :accepted
+    t.methods :user_type
     t.images :avatar
   end 
 
@@ -74,4 +70,27 @@ class Accounts::Account < ActiveRecord::Base
   end
   def detail_attributes= hash=nil
   end
+
+  def self.init_grouped_array_by_area_and_type
+    areas_count = Share::Area.all.count
+    Array.new(areas_count+1) { { 
+      guest: [],
+      superadmin: [],
+      admin: [],
+      user: [],
+      dealer: [],
+      provider: [],
+      distributor: [],
+    } }
+  end
+
+  def self.group_by_area_and_type
+    accounts = all
+    grouped_accounts = init_grouped_array_by_area_and_type
+    accounts.each do |account|
+      grouped_accounts[account.area_id||0][account.user_type] << account
+    end
+    grouped_accounts
+  end
+
 end

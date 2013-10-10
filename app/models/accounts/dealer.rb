@@ -1,4 +1,5 @@
 class Accounts::Dealer < Accounts::Account
+  include Accounts::Publicable
   include Accounts::RqrcodeTokenable
 
   include Share::Localizable
@@ -79,6 +80,19 @@ class Accounts::Dealer < Accounts::Account
       append_to: :detail, template: :base
     t.add ->(d) { d.reviews.unscoped.includes(order: :user).last(3) }, as: :last_3_reviews,
       append_to: :detail, template: :base
+  end
+
+  # statistic
+  def adverts_balance
+    inverse_friends_count * 3
+  end
+
+  def commission
+    0
+  end
+
+  def income
+    0
   end
 
 end

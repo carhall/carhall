@@ -17,6 +17,7 @@ zh-CN:
   activerecord:
     models:
       accounts/account: 用户
+      accounts/admin: 管理员
       accounts/user: 普通用户
       accounts/dealer: 服务商
       accounts/provider: 媒体
@@ -32,6 +33,28 @@ zh-CN:
       bcst/exposure: 曝光
       bcst/traffic_report: 路况信息
     attributes:
+      statistic: &statisticable
+        orders_count: 预约次数
+        total_cost: 总销售额
+        stars: 好评
+        recent_stars: 好评趋势
+        last_stars: 最近好评
+        last_ordered_at: 最近消费时间
+      service: &servicalbe
+        id: ID
+        title: 项目名称
+        expire_at: 活动期限
+        image: 图片
+        vip_price: 会员价
+        price: 原价
+        description: 项目介绍
+      public: &publicable
+        inverse_friends_count: 被关注数
+        adverts_balance: 广告基金
+        commission: 应付佣金
+        income: 应收款
+        accepted?: 年费
+        expire_at: 到期时间
       accounts/account: &account
         id: ID
         mobile: 手机号码
@@ -45,8 +68,13 @@ zh-CN:
         description: 用户说明
         confirmation_token: 手机验证码
         reset_password_token: 手机验证码
+        sex_id: 性别
+        sex: 性别
         area_id: 地区
         area: 地区
+        brand_id: 汽车品牌
+        brand: 汽车品牌
+        created_at: 加入时间
       accounts/account/detail: &detail
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型
@@ -62,52 +90,34 @@ zh-CN:
         accepted: 服务商认证
       accounts/user: 
         <<: *account
-        created_at: 加入时间
+        <<: *statisticable
         total_cost: 总消费额
-        last_ordered_at: 最近消费时间
-        last_stars: 最近满意度
       accounts/user/detail:
+        balance: 账户余额
         brand: 车型品牌
       accounts/dealer: 
         <<: *account
+        <<: *statisticable
+        <<: *publicable
       accounts/provider: 
         <<: *account
       tips/mending:
         brand_ids: 专修品牌
         brands: 专修品牌
         mending_type: 类型
-        orders_count: 预约次数
-        stars: 满意度
-        trend_stars: 满意度趋势
+        <<: *statisticable
       tips/cleaning:
-        id: ID
-        title: 项目名称
+        <<: *servicalbe
+        <<: *statisticable
         cleaning_type_id: 类型
         cleaning_type: 类型
-        image: 图片
-        vip_price: 会员价
-        price: 原价
-        description: 项目介绍
-        orders_count: 购买次数
-        stars: 满意度
-        total_cost: 总销售额
-        recent_stars: 满意度趋势
       tips/activity:
-        id: ID
-        title: 项目名称
-        expire_at: 活动期限
-        image: 图片
-        description: 项目介绍
+        <<: *servicalbe
       tips/bulk_purchasing:
-        id: ID
-        title: 项目名称
-        expire_at: 活动期限
+        <<: *servicalbe
+        <<: *statisticable
         bulk_purchasing_type_id: 类型
         bulk_purchasing_type: 类型
-        image: 图片
-        vip_price: 会员价
-        price: 原价
-        description: 项目介绍
       tips/order:
         id: ID
         title: 名称

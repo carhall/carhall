@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "statistic/share/sidenav/admin" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>服务商数据 <small></small></h3>
+    </div>
+
+    <%= index_for @dealers, class: 'table datatable' do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :username %>
+      <%= t.attribute :total_cost %>
+      <%= t.attribute :inverse_friends_count %>
+      <%= t.attribute :adverts_balance %>
+      <%= t.attribute :commission %>
+      <%= t.attribute :income %>
+      <%= t.attribute :stars %>
+      <%= t.attribute :accepted? %>
+      <%= t.attribute :expire_at %>
+    <% end %>
+
+  </div>
+
+</div>

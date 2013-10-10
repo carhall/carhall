@@ -1,36 +1,17 @@
 <div class="page-header">
-  <h3>管理员管理 <small></small></h3>
+  <h3>管理员管理 <small><%= link_to "添加", new_accounts_admin_path %></small></h3>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= translate_attribute_name :id, :'accounts/account' %></th>
-      <th><%= translate_attribute_name :avatar, :'accounts/account' %></th>
-      <th><%= translate_attribute_name :username, :'accounts/account' %></th>
-      <th><%= translate_attribute_name :description, :'accounts/account' %></th>
-      <th>操作</th>    
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><img src="<%= user.avatar.url(:thumb) %>" /></td>
-        <td><%= user.username %></td>
-        <td><%= user.description %></td>
-        <td class="actions">
-          <%= link_to content_tag(:i, '', class: 'icon-search'), admins_admin_path(user), title: '查看详情', rel: 'tooltip' %>
-          <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_admins_admin_path(user), title: '编辑', rel: 'tooltip' %>
-          <% if can? :destroy, user %>
-            <%= link_to content_tag(:i, '', class: 'icon-remove'), admins_admin_path(user), data: { method: :delete, confirm: '您确定要删除这个用户？' }, title: '删除', rel: 'tooltip' %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @admins = @admins.page(params[:page]) %>
 
-<%= link_to "新建管理员", new_admins_admin_path, class: 'btn btn-submit' %>
+<%= index_for @admins, class: 'table' do |t| %>
+  <%= t.attribute :id %>
+  <%= t.attribute :avatar do |avatar| %>
+    <%= image_tag(avatar.url(:thumb)) %>
+  <% end %>
+  <%= t.attribute :username %>
+  <%= t.attribute :description %>
+  <%= t.actions :all %>
+<% end %>
 
-<%= paginate @users %>
+<%= paginate @admins %>
