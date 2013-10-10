@@ -99,14 +99,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.2.0)
       i18n (~> 0.5)
-    has_scope (0.6.0.rc)
-      actionpack (>= 3.2, < 5)
-      activesupport (>= 3.2, < 5)
     hike (1.2.3)
     i18n (0.6.5)
-    inherited_resources (1.4.1)
-      has_scope (~> 0.6.0.rc)
-      responders (~> 1.0.0.rc)
     jasny_bootstrap_extension_rails (0.0.1)
     jbuilder (1.5.1)
       activesupport (>= 3.0.0)
@@ -175,8 +169,6 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
-    responders (1.0.0)
-      railties (>= 3.2, < 5)
     rqrcode (0.4.2)
     rqrcode-rails3 (0.1.6)
       rqrcode (>= 0.4.2)
@@ -253,7 +245,6 @@ DEPENDENCIES
   faker
   geohash!
   index_for!
-  inherited_resources
   jasny_bootstrap_extension_rails
   jbuilder (~> 1.2)
   jquery-datatables-rails
