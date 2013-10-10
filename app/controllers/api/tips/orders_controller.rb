@@ -1,6 +1,11 @@
 class Api::Tips::OrdersController < Api::ApplicationController
   set_resource_class ::Tips::Order, detail: true
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
+  before_filter :set_filter
+
+  def set_filter
+    filter_parent :state
+  end
 
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json

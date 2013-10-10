@@ -20,7 +20,7 @@ class Accounts::Account < ActiveRecord::Base
   validates_length_of :username, :within => 2..20, :allow_blank => true
 
   include Share::Queryable
-  define_queryable_column :username
+  define_queryable_column :username, :mobile
 
   acts_as_api
 

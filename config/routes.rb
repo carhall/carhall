@@ -120,7 +120,13 @@ Carhall::Application.routes.draw do
 
     # Accounts
      scope module: :accounts do
-      resources :users, only: [:show, :create] do
+      resources :accounts, only: [:index, :show] do
+        get :detail, on: :member
+        post :login, on: :collection
+        
+      end
+      
+      resources :users, only: [:index, :show, :create] do
         get :detail, on: :member
 
         resources :friends, only: [:index] do
@@ -128,12 +134,6 @@ Carhall::Application.routes.draw do
           get :dealer, on: :collection
           get :provider, on: :collection
         end
-      end
-      
-      resources :accounts, only: [:show] do
-        get :detail, on: :member
-        post :login, on: :collection
-        
       end
 
       resource :current_user, only: [:show, :update] do
