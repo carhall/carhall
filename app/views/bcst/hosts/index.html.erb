@@ -8,9 +8,11 @@
       <h3>主持人管理 <small><a href="<%= new_bcst_host_path %>">添加</a></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '您还没有添加任何主持人！' if @bcsts.empty? %>
+    <%= render 'share/alert', message: '您还没有添加任何主持人！' if @hosts.empty? %>
 
-    <%= index_for @bcsts, class: :table do |t| %>
+    <% @hosts = @hosts.includes(:programmes).page(params[:page]) %>
+
+    <%= index_for @hosts, class: :table do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :avatar do |avatar| %>
         <%= image_tag(avatar.url(:thumb)) %>
@@ -19,6 +21,8 @@
       <%= t.association :programmes, using: :title, join: '、' %>
       <%= t.actions :all %>
     <% end %>
+
+    <%= paginate @hosts %>
 
   </div>
 </div>

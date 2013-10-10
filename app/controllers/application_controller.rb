@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       params[namespaced_name] &&= send(method) if respond_to?(method, true)
     end
 
-    load_and_authorize_resource options.merge(class: klass)
+    load_and_authorize_resource options.reverse_merge(class: klass)
 
     def namespaced_name
       @namespaced_name ||= controller_path.gsub('/', '_').singularize.to_sym
@@ -31,11 +31,18 @@ class ApplicationController < ActionController::Base
       instance_variable_get("@#{instance_name.to_s.pluralize}")
     end
 
+    def resource_instance= instance
+      instance_variable_set("@#{instance_name}", instance)
+    end
+
+    def collection_instance= instance
+      instance_variable_set("@#{instance_name.to_s.pluralize}", instance)
+    end
+
 
     if options[:singleton]
 
       define_method :edit do
-        @member = @parent || build_resource.create
       end
 
       define_method :update do
@@ -75,7 +82,7 @@ class ApplicationController < ActionController::Base
         end
 
         define_method :update do
-          if resource_instance.update_attributes(data_params)
+          if resource_instance.update_attributes params[namespaced_name]
             flash[:success] = i18n_message(:update_success, klass.model_name.i18n_key)
             redirect_to action: :index
           else
@@ -93,13 +100,13 @@ class ApplicationController < ActionController::Base
 
     end # singletion
 
-  end
+    define_method :i18n_message do |message_type, model|
+      resource = resource_instance
+      i18n_options = { model: I18n.t(model, scope: 'activerecord.models') }
+      i18n_options[:title] = resource.send(options[:title]||:title)
+      I18n.t(message_type, i18n_options)
+    end
 
-  def i18n_message message_type, model
-    resource = resource_instance
-    options = { model: I18n.t(model, scope: 'activerecord.models') }
-    options[:title] = resource.title if resource.respond_to? :title
-    I18n.t(message_type, options)
   end
 
 end

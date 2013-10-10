@@ -1,7 +1,7 @@
 class Accounts::ApplicationController < ApplicationController
 
   def self.set_resource_class klass, options = {}
-    super klass, options
+    super klass, options.merge(title: :username)
 
     define_method :account_params do
       params[namespaced_name]
@@ -26,13 +26,6 @@ class Accounts::ApplicationController < ApplicationController
       end
 
     end
-  end
-
-  def i18n_message message_type, klass
-    resource = resource_instance
-    options = { model: I18n.t(klass.model_name.i18n_key, scope: 'activerecord.models') }
-    options[:title] = resource.username
-    I18n.t(message_type, options)
   end
 
 end

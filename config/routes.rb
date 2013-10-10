@@ -26,8 +26,8 @@ Carhall::Application.routes.draw do
   namespace :users do
     resources :inverse_friends
     resources :reviews do
-      get :cleaning, on: :collection
       get :mending, on: :collection
+      get :cleanings, on: :collection
     end
   end
 

@@ -1,5 +1,4 @@
 class Admins::ApplicationController < ApplicationController
-  prepend_before_filter :ensure_user_type
 
   def self.set_resource_class klass, options = {}
     before_filter :set_admin

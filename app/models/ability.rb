@@ -10,10 +10,6 @@ class Ability
       can :manage, :all
 
     when :admin
-      can :use, Admins::AdminsController
-      can :use, Admins::UsersController
-      can :use, Admins::DealersController
-
       can :manage, Accounts::Admin, id: user.id
       can :manage, [Accounts::Dealer, Accounts::Provider, Accounts::User]
       
@@ -23,37 +19,37 @@ class Ability
     when :guest
 
     when :provider
-      can :use, SettingsController
-      can :use, Users::InverseFriendsController
+      can :manage, :setting
+      can :read, Accounts::Friendship
 
-      can :use, Bcst::DashboardsController
+      can :read, Bcst
       # if user.accepted?
-        can :use, Bcst::HostsController
-        can :use, Bcst::ProgrammesController
-        can :use, Bcst::ProgrammeListsController
-        can :use, Bcst::CommentsController
-        can :use, Bcst::ExposuresController
-        can :use, Bcst::TrafficReportsController
+        can :manage, Bcst::Host, provider: user
+        can :manage, Bcst::Programme, provider: user
+        can :manage, Bcst::ProgrammeList, provider: user
+        can :manage, Bcst::Comment, provider: user
+        can :manage, Bcst::Exposure, provider: user
+        can :manage, Bcst::TrafficReport, provider: user
       # end
 
     when :dealer
-      can :use, SettingsController
-      can :use, Users::InverseFriendsController
-      can :use, Users::ReviewsController
+      can :manage, :setting
+      can :read, Accounts::Friendship
+      can :manage, Tips::Review
 
-      can :use, Tips::DashboardsController
+      can :read, Tips
       # if user.accepted?
-        can :use, Tips::CleaningsController
-        can :use, Tips::MendingsController
-        can :use, Tips::ActivitiesController
-        can :use, Tips::BulkPurchasingsController
+        can :manage, Tips::Cleaning, dealer: user
+        can :manage, Tips::Mending, dealer: user
+        can :manage, Tips::Activity, dealer: user
+        can :manage, Tips::BulkPurchasing, dealer: user
       # end
       
     when :user
-      can :destroy, [Posts::Post, Share::Comment], user_id: user.id
-      can :destroy, [Bcst::Exposure, Bcst::TrafficReport], user_id: user.id
-      can :update, Tips::Order, user_id: user.id
-      can :update, Posts::Club, president_id: user.id
+      can :destroy, [Posts::Post, Share::Comment], user: user
+      can :destroy, [Bcst::Exposure, Bcst::TrafficReport], user: user
+      can :update, Tips::Order, user: user
+      can :update, Posts::Club, president: user
       
     end
     

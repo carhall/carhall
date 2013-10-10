@@ -5,15 +5,15 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3><%= @tip.title %> <small><a href="<%= edit_tips_cleaning_path(@tip) %>">编辑</a></small></h3>
+      <h3><%= @cleaning.title %> <small><a href="<%= edit_tips_cleaning_path(@cleaning) %>">编辑</a></small></h3>
     </div>
 
     <div class="row-fluid">
       <div class="span3">
-        <img src="<%= @tip.image.url(:medium) %>">
+        <img src="<%= @cleaning.image.url(:medium) %>">
       </div>
       <div class="span9">
-        <%= show_for @tip do |s| %>
+        <%= show_for @cleaning do |s| %>
           <%= s.attribute :cleaning_type %>
           <%= s.attribute :vip_price %>
           <%= s.attribute :price %>

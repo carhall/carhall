@@ -1,9 +1,4 @@
-class Bcst::TrafficReportsController < Bcst::CommentsController
-
-private
-
-  def set_parent
-    @parent = @provider.traffic_reports
-  end
+class Bcst::TrafficReportsController < Bcst::ApplicationController
+  set_resource_class Bcst::TrafficReport
   
 end

@@ -125,8 +125,8 @@ zh-CN:
         used_count: 已使用份数
         cost: 订单总价
         description: 预约项目
-      tips/mending_order/detail:
         state: 订单状态
+      tips/mending_order/detail:
         brand: 汽车品牌
         series: 汽车型号
         plate_num: 车牌号

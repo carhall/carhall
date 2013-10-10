@@ -9,10 +9,6 @@ module FilterHelper
     current_account
   end
 
-  def ensure_user_type
-    authorize! :use, self
-  end
-
   def filter_parent key
     if params[:filter]
       if params[:filter][:"#{key}_id"]
@@ -57,14 +53,15 @@ module FilterHelper
   end
   
   def set_dealer
-    @dealer = current_account
+    @dealer = current_account if current_account.user_type == :dealer
   end
 
   def set_provider
-    @provider = current_account
+    @provider = current_account if current_account.user_type == :dealer
   end
 
   def set_admin
-    @admin = current_account
+    @admin = current_account if current_account.user_type == :admin or 
+      current_account.user_type == :superadmin
   end
 end

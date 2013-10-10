@@ -5,15 +5,15 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3><%= @bcst.title %> <small><a href="<%= edit_bcst_programme_path(@bcst) %>">编辑</a></small></h3>
+      <h3><%= @programme.title %> <small><a href="<%= edit_bcst_programme_path(@programme) %>">编辑</a></small></h3>
     </div>
 
     <div class="row-fluid">
       <div class="span3">
-        <img src="<%= @bcst.avatar.url(:medium) %>">
+        <img src="<%= @programme.avatar.url(:medium) %>">
       </div>
       <div class="span9">
-        <%= show_for @bcst do |s| %>
+        <%= show_for @programme do |s| %>
           <%= s.association :hosts, using: :name, join: '、' %>
           <%= s.attribute :description %>
         <% end %>
@@ -24,11 +24,11 @@
       <h3>节目板块评论 <small></small></h3>
     </div>
 
-    <% @comments = @bcst.comments %>
+    <% programme_comments = @programme.comments %>
 
-    <%= render 'share/alert', message: '您还没有收到任何节目板块留言！' if @comments.empty? %>
+    <%= render 'share/alert', message: '您还没有收到任何节目板块留言！' if programme_comments.empty? %>
 
-    <%= render 'bcst/share/comments' %>
+    <%= render 'bcst/share/comments', comments: programme_comments %>
 
   </div>
 

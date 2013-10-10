@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  prepend_before_filter :ensure_user_type
+  authorize_resource class: false
   before_filter :set_dealer, only: [:finance, :template]
   before_filter :ensure_rqrcode_image
 

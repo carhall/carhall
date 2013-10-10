@@ -1,5 +1,5 @@
 class Bcst::DashboardsController < ApplicationController
-  prepend_before_filter :ensure_user_type
+  authorize_resource :bcst
   before_filter :set_provider
 
   def show

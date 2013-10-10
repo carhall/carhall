@@ -1,5 +1,5 @@
 class Tips::MendingsController < Tips::ApplicationController
-  set_resource_class Tips::Mending, singleton: true, orders: true
+  set_resource_class Tips::Mending, singleton: true, through: :dealer, orders: true
 
   alias_method :edit_discount, :edit
   alias_method :edit_brands, :edit
@@ -19,7 +19,7 @@ class Tips::MendingsController < Tips::ApplicationController
     end
   end
 
-  def data_params
+  def tips_mending_params
     params.require(:tips_mending).permit(
       discount:[:discount_during, :man_hours_discount, :spare_parts_discount], 
       brand_ids: []

@@ -1,9 +1,4 @@
-class Bcst::ExposuresController < Bcst::CommentsController
+class Bcst::ExposuresController < Bcst::ApplicationController
+  set_resource_class Bcst::Exposure
 
-private
-
-  def set_parent
-    @parent = @provider.exposures
-  end
-  
 end

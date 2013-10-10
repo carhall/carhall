@@ -1,10 +1,10 @@
 class Users::ReviewsController < ApplicationController
-  prepend_before_filter :ensure_user_type
+  authorize_resource class: Tips::Review
   before_filter :set_dealer
 
   helper StatisticsHelper
 
-  def cleaning
+  def cleanings
     @cleanings = @dealer.cleanings
   end
   

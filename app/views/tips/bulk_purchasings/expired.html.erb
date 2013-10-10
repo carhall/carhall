@@ -8,7 +8,7 @@
       <h3>已结束的团购列表 <small></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '您还没有已结束的团购！' if @tips.empty? %>
+    <%= render 'share/alert', message: '您还没有已结束的团购！' if @bulk_purchasings.empty? %>
 
     <%= render 'list' %>
 

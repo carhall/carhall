@@ -1,6 +1,6 @@
-<% @tips = @tips.page(params[:page]) %>
+<% @bulk_purchasings = @bulk_purchasings.page(params[:page]) %>
 
-<%= index_for @tips, class: :table do |t| %>
+<%= index_for @bulk_purchasings, class: :table do |t| %>
   <%= t.attribute :id %>
   <%= t.attribute :image do |image| %>
     <%= image_tag(image.url(:thumb)) %>
@@ -13,5 +13,5 @@
   <%= t.actions :all %>
 <% end %>
 
-<%= paginate @tips %>
+<%= paginate @bulk_purchasings %>
 

@@ -11,6 +11,7 @@
  *= require jasny-bootstrap
  *= require dataTables/jquery.dataTables.bootstrap
  *= require select2
+ *= require select2-bootstrap
  *= require_self
  *= require_tree .
  */

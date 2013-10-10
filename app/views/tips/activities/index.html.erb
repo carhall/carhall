@@ -8,7 +8,7 @@
       <h3>活动项目管理 <small></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '您还没有创建任何活动！' if @tips.empty? %>
+    <%= render 'share/alert', message: '您还没有创建任何活动！' if @activities.empty? %>
     
     <%= render 'list' %>
 

@@ -1,5 +1,5 @@
 class Users::InverseFriendsController < ApplicationController
-  prepend_before_filter :ensure_user_type
+  authorize_resource class: Accounts::Friendship
   before_filter :set_current_user
   
   helper StatisticsHelper

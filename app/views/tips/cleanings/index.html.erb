@@ -8,11 +8,11 @@
       <h3>服务项目管理 <small></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @tips.empty? %>
+    <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
 
-    <% @tips = @tips.page(params[:page]) %>
+    <% @cleanings = @cleanings.page(params[:page]) %>
 
-    <%= index_for @tips, class: :table do |t| %>
+    <%= index_for @cleanings, class: :table do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :image do |image| %>
         <%= image_tag(image.url(:thumb)) %>
@@ -24,7 +24,7 @@
       <%= t.actions :all %>
     <% end %>
 
-    <%= paginate @tips %>
+    <%= paginate @cleanings %>
 
   </div>
 </div>

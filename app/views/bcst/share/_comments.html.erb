@@ -1,5 +1,5 @@
-<% @comments = @comments.includes(:user).page(params[:page]) %>
-<%= index_for @comments, class: :table do |t| %>
+<% comments = comments.includes(:user).page(params[:page]) %>
+<%= index_for comments, class: :table do |t| %>
   <%= t.attribute :username, in: :user %>
   <%= t.attribute :avatar, in: :user do |avatar| %>
     <%= image_tag(avatar.url(:thumb)) %>
@@ -8,4 +8,4 @@
   <%= t.attribute :created_at, format: :short %>
 <% end %>
 
-<%= paginate @comments %>
+<%= paginate comments %>
