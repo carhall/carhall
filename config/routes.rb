@@ -127,9 +127,20 @@ Carhall::Application.routes.draw do
     end
     resources :providers do
       put :accept, on: :member
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
     end
 
     resources :users
+    resources :candidates do
+      get :president, on: :collection
+      get :president, on: :member
+      get :mechanic, on: :collection
+      get :mechanic, on: :member
+    end
+
   end
 
   namespace :business do
@@ -145,6 +156,16 @@ Carhall::Application.routes.draw do
 
   namespace :posts do
     resources :posts
+    resources :clubs do
+      delete :relieve_president, on: :member
+      delete 'relieve_mechanic/:mechanic_id', action: :relieve_mechanic, on: :member
+    end
+    resources :president_candidates do
+      put :appoint, on: :member
+    end
+    resources :mechanic_candidates do
+      put :appoint, on: :member
+    end
   end
 
   # For openfire

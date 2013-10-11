@@ -8,7 +8,7 @@
       <h3>车主数据 <small></small></h3>
     </div>
 
-    <%= index_for @users, class: 'table datatable' do |t| %>
+    <%= index_for @users, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :username %>
       <%= t.attribute :total_cost %>

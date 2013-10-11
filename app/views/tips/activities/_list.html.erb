@@ -1,6 +1,4 @@
-<% @activities = @activities.page(params[:page]) %>
-
-<%= index_for @activities, class: :table do |t| %>
+<%= index_for @activities, class: :datatable do |t| %>
   <%= t.attribute :id %>
   <%= t.attribute :image do |image| %>
     <%= image_tag(image.url(:thumb)) %>
@@ -9,5 +7,3 @@
   <%= t.attribute :expire_at, format: :short %>
   <%= t.actions :all %>
 <% end %>
-
-<%= paginate @activities %>

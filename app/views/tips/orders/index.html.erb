@@ -5,20 +5,14 @@
   
   <div class="span9">
     <div class="page-header">
-      <% if @parent %>
-        <h3>洗车美容 “<%= @parent.title %>” 订单列表 <small></small></h3>
-      <% else %>
-        <h3>洗车美容订单列表 <small></small></h3>
-      <% end %>
+      <h3>订单列表 <small></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '您还没有收到洗车美容订单！' if @orders.empty? %>
+    <%= render 'share/alert', message: '您还没有收到保养专修订单！' if @orders.empty? %>
 
     <%= index_for @orders, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :title %>
-      <%= t.attribute :count %>
-      <%= t.attribute :used_count %>
       <%= t.attribute :cost %>
       <%= t.attribute :state %>
     <% end %>

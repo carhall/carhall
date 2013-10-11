@@ -12,9 +12,8 @@ GIT
       actionpack (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
 
-GIT
-  remote: git://github.com/bbtfr/show_for.git
-  revision: 9f2bc37ae032930b6d647a41af91df3a9c3d1379
+PATH
+  remote: ..
   specs:
     show_for (0.1.0)
       actionpack (>= 3.2, < 5)

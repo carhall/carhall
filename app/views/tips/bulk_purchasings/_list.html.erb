@@ -1,4 +1,4 @@
-<%= index_for @bulk_purchasings, class: 'table datatable' do |t| %>
+<%= index_for @bulk_purchasings, class: :datatable do |t| %>
   <%= t.attribute :id %>
   <%= t.attribute :image do |image| %>
     <%= image_tag(image.url(:thumb)) %>
@@ -7,7 +7,6 @@
   <%= t.attribute :bulk_purchasing_type %>
   <%= t.attribute :expire_at, format: :short %>
   <%= t.attribute :vip_price %>
-  <%= t.attribute :price %>
   <%= t.attribute :state %>
   <%= t.attribute :orders_count %>
   <%= t.action_link :orders do |bulk_purchasing| %>

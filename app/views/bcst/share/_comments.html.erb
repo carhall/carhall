@@ -1,5 +1,6 @@
 <% comments = comments.includes(:user).page(params[:page]) %>
-<%= index_for comments, class: :table do |t| %>
+
+<%= index_for comments do |t| %>
   <%= t.attribute :username, in: :user %>
   <%= t.attribute :avatar, in: :user do |avatar| %>
     <%= image_tag(avatar.url(:thumb)) %>

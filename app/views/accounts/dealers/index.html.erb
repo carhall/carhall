@@ -8,11 +8,12 @@
       <h3>服务商管理 <small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
     </div>
 
-    <%= index_for @dealers, class: 'table datatable' do |t| %>
+    <%= index_for @dealers, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :avatar do |avatar| %>
         <%= image_tag(avatar.url(:thumb)) %>
       <% end %>
+      <%= t.attribute :mobile %>
       <%= t.attribute :username %>
       <%= t.attribute :state %>
       <%= t.action_link :accept do |dealer| %>

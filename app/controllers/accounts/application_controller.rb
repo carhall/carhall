@@ -52,7 +52,7 @@ class Accounts::ApplicationController < ApplicationController
       end
       
       if result
-        flash[:success] = i18n_message(:update_success, klass.name.underscore)
+        flash[:success] = i18n_message(:update_success)
         redirect_to action: :index
       else
         render :edit

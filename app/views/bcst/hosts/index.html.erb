@@ -10,9 +10,9 @@
 
     <%= render 'share/alert', message: '您还没有添加任何主持人！' if @hosts.empty? %>
 
-    <% @hosts = @hosts.includes(:programmes).page(params[:page]) %>
+    <% @hosts = @hosts.includes(:programmes) %>
 
-    <%= index_for @hosts, class: :table do |t| %>
+    <%= index_for @hosts, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :avatar do |avatar| %>
         <%= image_tag(avatar.url(:thumb)) %>
@@ -21,8 +21,6 @@
       <%= t.association :programmes, using: :title, join: '、' %>
       <%= t.actions :all %>
     <% end %>
-
-    <%= paginate @hosts %>
 
   </div>
 </div>

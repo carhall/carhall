@@ -12,4 +12,6 @@
 <ul class="nav nav-list sidenav affix-top">
   <li><span><strong>车主管理</strong></span></li>
   <li<%= active? 'accounts/users' %>><a href="<%= accounts_users_path %>"><i class="icon-chevron-right"></i> 车主管理</a></li>
+  <li<%= active? 'accounts/candidates#president' %>><a href="<%= president_accounts_candidates_path %>"><i class="icon-chevron-right"></i> 堂主管理</a></li>
+  <li<%= active? 'accounts/candidates#mechanic' %>><a href="<%= mechanic_accounts_candidates_path %>"><i class="icon-chevron-right"></i> 在线技师管理</a></li>
 </ul>

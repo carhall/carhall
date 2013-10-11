@@ -11,6 +11,8 @@ zh-CN:
   update_success: 成功更新 %{model} “%{title}” 信息。
   update_success_without_title: 成功更新 %{model} 信息。
   destroy_success: 成功删除 %{model} “%{title}”。
+  appoint_success: 成功认命 “%{title}” 为 %{model}。
+  relieve_success: 成功卸任 %{model} “%{title}”。
   mending: "%{dealer} %{brand} 保养专修"
   times:  " %{count} 份"
   to_many: 过多（最多为 %{count} 个）
@@ -24,6 +26,9 @@ zh-CN:
       accounts/friendship: 好友
       share/comment: 评论
       posts/post: 随手拍
+      posts/club: 车友会
+      posts/president_candidate: 堂主申请
+      posts/mechanic_candidate: 在线技师申请
       tips/mending: 保养专修
       tips/cleaning: 服务项目
       tips/activity: 活动
@@ -36,7 +41,7 @@ zh-CN:
       bcst/traffic_report: 路况信息
     attributes:
       statistic: &statisticable
-        orders_count: 预约次数
+        orders_count: 订单数
         total_cost: 总销售额
         stars: 好评
         recent_stars: 好评趋势
@@ -121,6 +126,8 @@ zh-CN:
       tips/bulk_purchasing:
         <<: *servicalbe
         <<: *statisticable
+        expire_at: 团购期限
+        vip_price: 团购价
         bulk_purchasing_type_id: 类型
         bulk_purchasing_type: 类型
       tips/order:
@@ -158,6 +165,7 @@ zh-CN:
         content: 评论内容
         created_at: 评论时间
       share/comment/user: &comment_user
+        mobile: 手机号码
         username: 昵称
         avatar: 头像
       bcst/exposure: 
@@ -174,6 +182,31 @@ zh-CN:
         image: 图片
       posts/post/user:
         username: 发帖人
+      posts/club:
+        id: ID
+        avatar: LOGO
+        title: 名称
+        announcement: 公告
+        president: 堂主
+        mechanics: 在线技师
+      posts/club/president:
+        avatar: 堂主头像
+        username: 堂主
+        mobile: 堂主手机号码 
+      posts/president_candidate:
+        id: ID
+        description: 申请理由
+      posts/president_candidate/user:
+        <<: *comment_user
+      posts/president_candidate/source:
+        title: 申请车友会
+      posts/mechanic_candidate:
+        id: ID
+        description: 申请理由
+      posts/mechanic_candidate/user:
+        <<: *comment_user
+      posts/mechanic_candidate/source:
+        title: 申请车友会
   simple_form:
     labels:
       account:

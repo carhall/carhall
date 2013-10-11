@@ -31,8 +31,8 @@ gem 'jasny_bootstrap_extension_rails'
 
 # For frontend
 gem 'simple_form'
-gem 'show_for', github: 'bbtfr/show_for'
-# gem 'show_for', path: '..'
+# gem 'show_for', github: 'bbtfr/show_for'
+gem 'show_for', path: '..'
 gem 'index_for', github: 'bbtfr/index_for'
 # gem 'index_for', path: '..'
 

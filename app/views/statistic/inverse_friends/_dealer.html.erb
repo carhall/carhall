@@ -10,9 +10,9 @@
 
     <%= render 'share/alert', message: '还没有用户关注您！' if @inverse_friends.empty? %>
     
-    <% @inverse_friends = @inverse_friends.includes(:detail, :orders, :reviews).page(params[:page]) %>
+    <% @inverse_friends = @inverse_friends.includes(:detail, :orders, :reviews) %>
 
-    <%= index_for @inverse_friends, class: :table do |t| %>
+    <%= index_for @inverse_friends, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :avatar do |avatar| %>
         <%= image_tag(avatar.url(:thumb)) %>
@@ -24,8 +24,6 @@
       <%= t.attribute :last_ordered_at, format: :short %>
       <%= t.attribute :last_stars %>
     <% end %>
-
-    <%= paginate @inverse_friends %>
 
   </div>
 </div>

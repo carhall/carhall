@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011043918) do
+ActiveRecord::Schema.define(version: 20131011135428) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",   null: false
@@ -64,6 +64,11 @@ ActiveRecord::Schema.define(version: 20131011043918) do
   add_index "accounts", ["location_id"], name: "index_accounts_on_location_id", using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
   add_index "accounts", ["unlock_token"], name: "index_accounts_on_unlock_token", unique: true, using: :btree
+
+  create_table "accounts_clubs", force: true do |t|
+    t.integer "user_id"
+    t.integer "club_id"
+  end
 
   create_table "activities", force: true do |t|
     t.integer  "dealer_id"

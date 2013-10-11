@@ -4,6 +4,8 @@ class Accounts::Provider < Accounts::Account
 
   set_detail_class Accounts::ProviderDetail
 
+  include Share::Displayable
+  
   has_many :hosts, class_name: 'Bcst::Host'
   has_many :programmes, class_name: 'Bcst::Programme'
   has_many :programme_lists, class_name: 'Bcst::ProgrammeList'

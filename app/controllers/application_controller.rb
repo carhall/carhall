@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
         @member = @parent || klass.new
 
         if @member.update_attributes(data_params)
-          flash[:success] = i18n_message(:update_success_without_title, klass.model_name.i18n_key)
+          flash[:success] = i18n_message(:update_success_without_title)
           redirect_to action: :show
         else
           render :edit
@@ -70,9 +70,8 @@ class ApplicationController < ActionController::Base
 
         define_method :create do
           if resource_instance.save
-            index_path = { action: :index }
-            flash[:success] = i18n_message(:create_success, klass.model_name.i18n_key)
-            redirect_to index_path
+            flash[:success] = i18n_message(:create_success)
+            redirect_to action: :index
           else
             render :new
           end
@@ -83,7 +82,7 @@ class ApplicationController < ActionController::Base
 
         define_method :update do
           if resource_instance.update_attributes params[namespaced_name]
-            flash[:success] = i18n_message(:update_success, klass.model_name.i18n_key)
+            flash[:success] = i18n_message(:update_success)
             redirect_to action: :index
           else
             render :edit
@@ -93,18 +92,23 @@ class ApplicationController < ActionController::Base
         define_method :destroy do
           resource_instance.destroy
 
-          flash[:success] = i18n_message(:destroy_success, klass.model_name.i18n_key)
-          redirect_to action: :index
+          flash[:success] = i18n_message(:destroy_success)
+          redirect_to :back
         end
       end
 
     end # singletion
 
-    define_method :i18n_message do |message_type, model|
+    define_method :i18n_title do
+      title = options[:title] || :title
       resource = resource_instance
+      resource.send(title) if resource.respond_to? title
+    end
+
+    define_method :i18n_message do |message_type|
+      model = klass.model_name.i18n_key
       i18n_options = { model: I18n.t(model, scope: 'activerecord.models') }
-      title = options[:title]||:title
-      i18n_options[:title] = resource.send(title) if resource.respond_to? title
+      i18n_options[:title] = i18n_title
       I18n.t(message_type, i18n_options)
     end
 

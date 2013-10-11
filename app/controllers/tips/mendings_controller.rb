@@ -12,7 +12,7 @@ class Tips::MendingsController < Tips::ApplicationController
     load_mending
 
     if @mending.update_attributes(tips_mending_params)
-      flash[:success] = i18n_message(:update_success_without_title, 'tips/mending')
+      flash[:success] = i18n_message(:update_success_without_title)
       redirect_to tips_root_path
     else
       if params[:commit] == "更新专修品牌"

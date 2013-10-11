@@ -1,0 +1,52 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "accounts/share/sidenav/admin" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%= @club.title %><small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span3">
+        <img src="<%= @club.avatar.url(:medium) %>">
+      </div>
+      <div class="span9">
+        <%= show_for @club do |s| %>
+          <%= s.attribute :announcement %>
+          
+          <%= s.attribute "堂主信息" do end %>
+          <%= s.attribute :username, in: :president %>
+          <%= s.attribute :mobile, in: :president %>
+          <% if @club.president %>
+            <%= s.attribute "" do %>
+              <%= link_to "卸任", relieve_president_posts_club_path(@club), method: :delete,  data: { confirm: '您确认要卸任这个用户？' } %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+      </div>
+    </div>
+
+    <% @president_candidates = @club.president_candidates.includes(:user) %>
+
+    <div class="page-header">
+      <h3>堂主申请列表 <small></small></h3>
+    </div>
+
+    <%= index_for @club.president_candidates, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :avatar, in: :user do |avatar| %>
+        <%= image_tag(avatar.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :username, in: :user %>
+      <%= t.attribute :mobile, in: :user %>
+      <%= t.action_link :appoint do |candidate| %>
+        <%= icon_link_to "认命", 'icon-ok', appoint_posts_president_candidate_path(candidate), method: :put, data: { confirm: '您确认要认命这个用户？' } %>
+      <% end %>
+      <%= t.actions :destroy %>
+    <% end %>
+
+  </div>
+</div>

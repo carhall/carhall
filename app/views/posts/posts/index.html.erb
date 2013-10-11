@@ -8,7 +8,7 @@
       <h3>服务商管理 <small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
     </div>
 
-    <%= index_for @posts, class: 'table datatable' do |t| %>
+    <%= index_for @posts, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :username, in: :user %>
       <%= t.attribute :content %>

@@ -40,3 +40,7 @@ ShowFor.setup do |config|
   # specify label_proc - it will be automatically called, passing in the label text.
   # config.label_proc = lambda { |l| l + ":" }
 end
+
+IndexFor.setup do |config|
+  config.index_for_class = :table
+end

@@ -1,6 +1,8 @@
 class Tips::OrdersController < Tips::ApplicationController
-  before_filter :set_parent
-  set_resource_class Tips::Order, :through => :parent
+  load_resource :mending, class: Tips::Mending
+  load_resource :cleaning, class: Tips::Cleaning
+  load_resource :bulk_purchasing, class: Tips::BulkPurchasing
+  set_resource_class Tips::Order, :through => [:mending, :cleaning, :bulk_purchasing]
 
   def mending
     @orders = @dealer.mending_orders
@@ -15,26 +17,9 @@ class Tips::OrdersController < Tips::ApplicationController
   end
 
   def index
-    render @parent_type
+    render 'mending' if @mending
+    render 'cleaning' if @cleaning
+    render 'bulk_purchasing' if @bulk_purchasing
   end
 
-  AccreditedKeys = {
-    'mending_id' => ::Tips::Mending,
-    'cleaning_id' => ::Tips::Cleaning,
-    'bulk_purchasing_id' => ::Tips::BulkPurchasing,
-    'dealer_id' => ::Accounts::Dealer,
-  }
-
-  def set_parent
-    params.each do |key, value|
-      if AccreditedKeys.keys.include? key
-        parent_class = AccreditedKeys[key]
-        @parent_type = key.gsub('_id', '')
-        @parent = parent_class.find(value)
-        return
-      end
-    end
-  end
-
-  
 end

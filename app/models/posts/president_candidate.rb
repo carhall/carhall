@@ -1,5 +1,7 @@
 class Posts::PresidentCandidate < Share::OpenDatabaseStruct
   alias_attribute :description, :content
-  # attr_accessible :user_id, :description
 
+  validates_presence_of :user
+  validates_presence_of :content
+  
 end
