@@ -50,6 +50,7 @@ zh-CN:
         vip_price: 会员价
         price: 原价
         description: 项目介绍
+        state: 项目状态
       public: &publicable
         inverse_friends_count: 被关注数
         adverts_balance: 广告基金
@@ -77,6 +78,7 @@ zh-CN:
         brand_id: 汽车品牌
         brand: 汽车品牌
         created_at: 加入时间
+        state: 账户状态
       accounts/account/detail: &detail
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型
@@ -104,10 +106,11 @@ zh-CN:
       accounts/provider: 
         <<: *account
       tips/mending:
+        <<: *servicalbe
+        <<: *statisticable
         brand_ids: 专修品牌
         brands: 专修品牌
         mending_type: 类型
-        <<: *statisticable
       tips/cleaning:
         <<: *servicalbe
         <<: *statisticable

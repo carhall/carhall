@@ -103,7 +103,8 @@ class ApplicationController < ActionController::Base
     define_method :i18n_message do |message_type, model|
       resource = resource_instance
       i18n_options = { model: I18n.t(model, scope: 'activerecord.models') }
-      i18n_options[:title] = resource.send(options[:title]||:title)
+      title = options[:title]||:title
+      i18n_options[:title] = resource.send(title) if resource.respond_to? title
       I18n.t(message_type, i18n_options)
     end
 

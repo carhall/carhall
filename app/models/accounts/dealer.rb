@@ -4,6 +4,7 @@ class Accounts::Dealer < Accounts::Account
 
   include Share::Localizable
   include Share::Statisticable
+  include Share::Displayable
 
   set_detail_class Accounts::DealerDetail
 

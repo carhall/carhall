@@ -3,6 +3,7 @@ module Tips::Servicable
 
   included do
     include Share::Dealerable
+    include Share::Displayable
 
     default_scope { order('id DESC') }
     

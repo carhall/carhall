@@ -13,7 +13,7 @@ class Api::Tips::ApplicationController < Api::ApplicationController
     before_filter :set_filter
 
     define_method :set_parent do
-      @parent = klass.includes(:dealer, :reviews)
+      @parent = klass.includes(:dealer, :reviews).ordered
       @parent = @parent.with_dealer @dealer if @dealer
     end
 

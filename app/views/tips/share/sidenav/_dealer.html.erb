@@ -3,15 +3,15 @@
     <li><span><strong>交易管理</strong></span></li>
 
     <% if @dealer.has_template? :bulk_purchasing %>
-      <li<%= active? 'tips/bulk_purchasings#orders' %>><a href="<%= orders_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 团购订单</a></li>
+      <li<%= active? 'tips/orders#bulk_purchasing' %>><a href="<%= bulk_purchasing_tips_orders_path %>"><i class="icon-chevron-right"></i> 团购订单</a></li>
     <% end %>
 
     <% if @dealer.has_template? :cleaning %>
-      <li<%= active? 'tips/cleanings#orders' %>><a href="<%= orders_tips_cleanings_path %>"><i class="icon-chevron-right"></i> 洗车美容订单</a></li>
+      <li<%= active? 'tips/orders#cleaning' %>><a href="<%= cleaning_tips_orders_path %>"><i class="icon-chevron-right"></i> 洗车美容订单</a></li>
     <% end %>
     
     <% if @dealer.has_template? :mending %>
-      <li<%= active? 'tips/mendings#orders' %>><a href="<%= orders_tips_mending_path %>"><i class="icon-chevron-right"></i> 保养专修订单</a></li>
+      <li<%= active? 'tips/orders#mending' %>><a href="<%= mending_tips_orders_path %>"><i class="icon-chevron-right"></i> 保养专修订单</a></li>
     <% end %>
   </ul>
 <% end %>

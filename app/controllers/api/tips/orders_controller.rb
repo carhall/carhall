@@ -64,11 +64,11 @@ protected
     params.each do |key, value|
       if AccreditedKeys.keys.include? key
         parent_class = AccreditedKeys[key]
-        @parent = parent_class.find(value).orders
+        @parent = parent_class.find(value).orders.includes(:dealer, :user, :source)
         return
       end
     end
-    @parent = current_user.orders
+    @parent = current_user.orders.includes(:dealer, :user, :source)
   end
 
   def set_order

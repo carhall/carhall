@@ -3,20 +3,19 @@ class Ability
 
   def initialize(user)
     # Define abilities for the passed in user here. For example:
-    
+    alias_action :expose, :hide, :stick, :unstick, :to => :set_displayable
+    alias_action :mending, :cleaning, :bulk_purchasing, :to => :read
+
     user ||= Accounts::User.new # guest user (not logged in)
     case user.user_type
     when :admin
       if user.superadmin?
         can :manage, :all  # superadmin
       else
-        can :read, Accounts::Admin
-        can :manage, Accounts::Admin, id: user.id
-        cannot :manage, Accounts::Admin, id: 1
+        can :manage, :all  # superadmin
+        cannot :motify, Accounts::Admin
       end
 
-      can :manage, [Accounts::Dealer, Accounts::Provider, Accounts::User]
-      
       # no one can destroy superadmin
 
     when :guest
@@ -31,14 +30,15 @@ class Ability
         can :manage, Bcst::Programme, provider: user
         can :manage, Bcst::ProgrammeList, provider: user
         can :manage, Bcst::Comment, provider: user
-        can :manage, Bcst::Exposure, provider: user
-        can :manage, Bcst::TrafficReport, provider: user
+
+        can :read, Bcst::Exposure, provider: user
+        can :read, Bcst::TrafficReport, provider: user
       # end
 
+      cannot :set_displayable, :all
     when :dealer
       can :manage, :setting
       can :read, Accounts::Friendship
-      can :manage, Tips::Review
 
       can :read, Tips
       # if user.accepted?
@@ -46,14 +46,25 @@ class Ability
         can :manage, Tips::Mending, dealer: user
         can :manage, Tips::Activity, dealer: user
         can :manage, Tips::BulkPurchasing, dealer: user
+        
+        can :read, Tips::Review
+        can :read, Tips::Order
       # end
       
+      cannot :set_displayable, :all
     when :user
-      can :destroy, [Posts::Post, Share::Comment], user: user
-      can :destroy, [Bcst::Exposure, Bcst::TrafficReport], user: user
-      can :update, Tips::Order, user: user
-      can :update, Posts::Club, president: user
+      can :read, :all
+      can :manage, Share::Comment, user: user
+
+      can :manage, Posts::Post, user: user
+      can :manage, Posts::Club, president: user
+
+      can :manage, Bcst::Exposure, user: user
+      can :manage, Bcst::TrafficReport, user: user
       
+      can :manage, Tips::Order, user: user
+      
+      cannot :set_displayable, :all
     end
     
     # The first argument to `can` is the action you are giving the user 

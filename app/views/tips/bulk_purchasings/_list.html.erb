@@ -8,7 +8,24 @@
   <%= t.attribute :expire_at, format: :short %>
   <%= t.attribute :vip_price %>
   <%= t.attribute :price %>
+  <%= t.attribute :state %>
+  <%= t.attribute :orders_count %>
+  <%= t.action_link :orders do |bulk_purchasing| %>
+    <%= icon_link_to "浏览订单", 'icon-book', tips_bulk_purchasing_orders_path(bulk_purchasing) %>
+  <% end %>
   <% if @user.admin? %>
+    <%= t.action_link :display do |bulk_purchasing| %>
+      <% if bulk_purchasing.displayed? %>
+        <%= icon_link_to "隐藏", 'icon-eye-close', hide_tips_bulk_purchasing_path(bulk_purchasing), method: :put, data: { confirm: '您确认要隐藏这个项目？' } %>
+        <% if bulk_purchasing.sticked? %>
+          <%= icon_link_to "取消置顶", 'icon-chevron-down', unstick_tips_bulk_purchasing_path(bulk_purchasing), method: :put, data: { confirm: '您确认要取消置顶这个项目？' } %>
+        <% else %>
+          <%= icon_link_to "置顶", 'icon-chevron-up', stick_tips_bulk_purchasing_path(bulk_purchasing), method: :put, data: { confirm: '您确认要置顶这个项目？' } %>
+        <% end %>
+      <% else %>
+        <%= icon_link_to "显示", 'icon-eye-open', expose_tips_bulk_purchasing_path(bulk_purchasing), method: :put, data: { confirm: '您确认要显示这个项目？' } %>
+      <% end %>
+    <% end %>
     <%= t.actions :destroy %>
   <% else %>
     <%= t.actions :all %>

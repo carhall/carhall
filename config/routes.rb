@@ -19,15 +19,21 @@ Carhall::Application.routes.draw do
   resource :setting do
     get :template
     get :finance
-    
-    get :rqrcode
   end
 
-  namespace :users do
+  namespace :statistic do
+    resource :dashboard
+    root to: 'dashboards#show'
+
+    resources :distributors
+    resources :dealers
+    resources :providers
+    resources :users
+
     resources :inverse_friends
     resources :reviews do
       get :mending, on: :collection
-      get :cleanings, on: :collection
+      get :cleaning, on: :collection
     end
   end
 
@@ -42,22 +48,49 @@ Carhall::Application.routes.draw do
     end
 
     resources :mendings do
-      get :orders, on: :collection
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
+
+      resources :orders
     end
 
     resources :cleanings do
-      get :orders, on: :collection
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
+
+      resources :orders
     end
     
     resources :activities do
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
+
       get :in_progress, on: :collection
       get :expired, on: :collection
     end
     
     resources :bulk_purchasings do
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
+      
       get :in_progress, on: :collection
-      get :orders, on: :collection
       get :expired, on: :collection
+
+      resources :orders
+    end
+
+    resources :orders do
+      get :mending, on: :collection
+      get :cleaning, on: :collection
+      get :bulk_purchasing, on: :collection
     end
   end
 
@@ -76,22 +109,26 @@ Carhall::Application.routes.draw do
     resources :traffic_reports
   end
 
-  namespace :statistic do
-    resource :dashboard
-    root to: 'dashboards#show'
-
-    resources :distributors
-    resources :dealers
-    resources :providers
-    resources :users
-  end
-
   namespace :accounts do
     resources :admins
-    resources :agents
-    resources :distributors
-    resources :dealers
-    resources :providers
+
+    resources :agents do
+      put :accept, on: :member
+    end
+    resources :distributors do
+      put :accept, on: :member
+    end
+    resources :dealers do
+      put :accept, on: :member
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
+    end
+    resources :providers do
+      put :accept, on: :member
+    end
+
     resources :users
   end
 

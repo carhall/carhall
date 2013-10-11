@@ -9,4 +9,8 @@ module ApplicationHelper
     I18n.translate("#{scope}.#{attribute_name}", scope: "activerecord.attributes")
   end
   
+  def icon_link_to title, icon_class, path, options={}
+    icon = content_tag(:i, nil, rel: :tooltip, title: title, class: icon_class)
+    link_to icon, path, options
+  end
 end

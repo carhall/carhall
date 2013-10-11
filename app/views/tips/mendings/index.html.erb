@@ -12,10 +12,27 @@
 
     <%= index_for @mendings, class: 'table datatable' do |t| %>
       <%= t.attribute :id %>
-      <%= t.attribute :brands do |brands| %>
+      <%= t.attribute :brands, yield_collection: true do |brands| %>
         <%= brands.join('、') %>
       <% end %>
+      <%= t.attribute :state %>
+      <%= t.attribute :orders_count %>
+      <%= t.action_link :orders do |mending| %>
+        <%= icon_link_to "浏览订单", 'icon-book', tips_mending_orders_path(mending) %>
+      <% end %>
       <% if @user.admin? %>
+        <%= t.action_link :display do |mending| %>
+          <% if mending.displayed? %>
+            <%= icon_link_to "隐藏", 'icon-eye-close', hide_tips_mending_path(mending), method: :put, data: { confirm: '您确认要隐藏这个项目？' } %>
+            <% if mending.sticked? %>
+              <%= icon_link_to "取消置顶", 'icon-chevron-down', unstick_tips_mending_path(mending), method: :put, data: { confirm: '您确认要取消置顶这个项目？' } %>
+            <% else %>
+              <%= icon_link_to "置顶", 'icon-chevron-up', stick_tips_mending_path(mending), method: :put, data: { confirm: '您确认要置顶这个项目？' } %>
+            <% end %>
+          <% else %>
+            <%= icon_link_to "显示", 'icon-eye-open', expose_tips_mending_path(mending), method: :put, data: { confirm: '您确认要显示这个项目？' } %>
+          <% end %>
+        <% end %>
         <%= t.actions :destroy %>
       <% else %>
         <%= t.actions :all %>

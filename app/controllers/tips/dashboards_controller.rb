@@ -1,4 +1,5 @@
 class Tips::DashboardsController < ApplicationController
+  authorize_resource :tips
   before_filter :set_dealer
 
   helper StatisticsHelper

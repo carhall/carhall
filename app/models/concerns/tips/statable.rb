@@ -1,6 +1,5 @@
 module Tips::Statable
   extend ActiveSupport::Concern
-    
 
   included do
     validates_each :state_id do |record, attr, value|

@@ -22,4 +22,8 @@ class Api::Accounts::DealersController < Api::Accounts::ApplicationController
     filter_parent :specific_service
   end
 
+  def set_parent
+    @parent = ::Accounts::Dealer.ordered
+  end
+
 end

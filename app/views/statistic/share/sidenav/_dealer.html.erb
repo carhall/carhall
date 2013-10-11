@@ -1,0 +1,16 @@
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>会员分析</strong></span></li>
+  <li<%= active? 'statistic/inverse_friends#index' %>><a href="<%= statistic_inverse_friends_path %>"><i class="icon-chevron-right"></i> 客户列表</a></li>
+</ul>
+
+<% if @dealer.has_template? :cleaning or @dealer.has_template? :mending %>
+  <ul class="nav nav-list sidenav">
+    <li><span><strong>项目反馈</strong></span></li>
+    <% if @dealer.has_template? :cleaning %>
+      <li<%= active? 'statistic/reviews#cleaning' %>><a href="<%= cleaning_statistic_reviews_path %>"><i class="icon-chevron-right"></i> 洗车美容</a></li>
+    <% end %>
+    <% if @dealer.has_template? :mending %>
+      <li<%= active? 'statistic/reviews#mending' %>><a href="<%= mending_statistic_reviews_path %>"><i class="icon-chevron-right"></i> 保养专修</a></li>
+    <% end %>
+  </ul>
+<% end %>

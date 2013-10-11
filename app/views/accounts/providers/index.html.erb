@@ -5,7 +5,7 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3>服务商管理 <small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
+      <h3>服务商管理 <small><%#= link_to "添加", new_accounts_provider_path %></small></h3>
     </div>
 
     <%= index_for @providers, class: 'table datatable' do |t| %>
@@ -14,7 +14,11 @@
         <%= image_tag(avatar.url(:thumb)) %>
       <% end %>
       <%= t.attribute :username %>
-      <%= t.attribute :description %>
+      <%= t.action_link :accept do |provider| %>
+        <% unless provider.accepted? %>
+          <%= icon_link_to "通过验证", 'icon-ok', accept_accounts_provider_path(provider), method: :put, data: { confirm: '您确认要验证这个用户？' } %>
+        <% end %>
+      <% end %>
       <%= t.actions :destroy %>
     <% end %>
 

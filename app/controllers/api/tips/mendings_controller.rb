@@ -2,7 +2,7 @@ class Api::Tips::MendingsController < Api::Tips::ApplicationController
   set_resource_class ::Tips::Mending
 
   def set_parent
-    @parent = ::Tips::Mending.includes(:dealer, :reviews)
+    @parent = ::Tips::Mending.includes(:dealer, :reviews).ordered
   end
 
   def set_filter

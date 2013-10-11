@@ -14,6 +14,28 @@ class Tips::ApplicationController < ApplicationController
       end
     end
 
+    define_method :expose do
+      service = resource_instance
+      service.expose!
+      redirect_to :back
+    end
+    define_method :hide do
+      service = resource_instance
+      service.hide!
+      redirect_to :back
+    end
+
+    define_method :stick do
+      service = resource_instance
+      service.stick!
+      redirect_to :back
+    end
+    define_method :unstick do
+      service = resource_instance
+      service.unstick!
+      redirect_to :back
+    end
+
     # GET /api/resources/orders
     # GET /api/resources/orders.json
     define_method :orders do

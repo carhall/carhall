@@ -14,7 +14,26 @@
         <%= image_tag(avatar.url(:thumb)) %>
       <% end %>
       <%= t.attribute :username %>
-      <%= t.attribute :description %>
+      <%= t.attribute :state %>
+      <%= t.action_link :accept do |dealer| %>
+        <% unless dealer.accepted? %>
+          <%= icon_link_to "通过验证", 'icon-ok', accept_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要验证这个用户？' } %>
+        <% end %>
+      <% end %>
+      <%= t.action_link :display do |dealer| %>
+        <% if dealer.accepted? %>
+          <% if dealer.displayed? %>
+            <%= icon_link_to "隐藏", 'icon-eye-close', hide_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要隐藏这个用户？' } %>
+            <% if dealer.sticked? %>
+              <%= icon_link_to "取消置顶", 'icon-chevron-down', unstick_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要取消置顶这个用户？' } %>
+            <% else %>
+              <%= icon_link_to "置顶", 'icon-chevron-up', stick_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要置顶这个用户？' } %>
+            <% end %>
+          <% else %>
+            <%= icon_link_to "显示", 'icon-eye-open', expose_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要显示这个用户？' } %>
+          <% end %>
+        <% end %>
+      <% end %>
       <%= t.actions :destroy %>
     <% end %>
 

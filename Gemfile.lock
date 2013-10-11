@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: git://github.com/bbtfr/index_for.git
-  revision: 9f44dc824266f917ca2cc436cc68cf5ac7329689
+  revision: 693d17663168367f677e58438929264982d58991
   specs:
     index_for (0.1.0)
       actionpack (>= 3.2, < 5)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: git://github.com/bbtfr/show_for.git
-  revision: 522926531a30800f3bc597bdcb3f1e8354639696
+  revision: 9f2bc37ae032930b6d647a41af91df3a9c3d1379
   specs:
     show_for (0.1.0)
       actionpack (>= 3.2, < 5)

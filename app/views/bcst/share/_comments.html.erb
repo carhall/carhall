@@ -6,6 +6,9 @@
   <% end %>
   <%= t.attribute :content %>
   <%= t.attribute :created_at, format: :short %>
+  <% if @user.admin? %>
+    <%= t.actions :destroy %>
+  <% end %>
 <% end %>
 
 <%= paginate comments %>
