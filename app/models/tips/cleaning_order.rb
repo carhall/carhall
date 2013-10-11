@@ -21,7 +21,7 @@ class Tips::CleaningOrder < Tips::Order
   extend Share::Exclamation
   define_exclamation_and_method :use
 
-  api_accessible :detail, extend: :base do |t|
+  api_accessible :base, extend: :base do |t|
     t.add :count
     t.add :used_count
   end
