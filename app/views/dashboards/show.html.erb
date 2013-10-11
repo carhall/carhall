@@ -1,8 +1,6 @@
 <% case @user_type %>
 <% when :provider, :dealer, :admin %>
   <%= render @user_type.to_s %>
-<% when :superadmin %>
-  <%= render 'admin' %>
 <% else %>
   <%= render 'welcome' %>
 <% end %>

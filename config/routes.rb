@@ -41,6 +41,10 @@ Carhall::Application.routes.draw do
       get :edit_brands
     end
 
+    resources :mendings do
+      get :orders, on: :collection
+    end
+
     resources :cleanings do
       get :orders, on: :collection
     end
@@ -76,16 +80,18 @@ Carhall::Application.routes.draw do
     resource :dashboard
     root to: 'dashboards#show'
 
-    resources :users
-    resources :providers
-    resources :dealers
     resources :distributors
+    resources :dealers
+    resources :providers
+    resources :users
   end
 
   namespace :accounts do
     resources :admins
-    resources :providers
+    resources :agents
+    resources :distributors
     resources :dealers
+    resources :providers
     resources :users
   end
 
@@ -231,6 +237,11 @@ Carhall::Application.routes.draw do
           get :hot, on: :collection
         end
 
+        resources :orders, only: [:index, :show]
+        resources :reviews, only: [:index, :show]
+      end
+
+      resource :current_user, only: [] do
         resources :orders, only: [:index, :show]
         resources :reviews, only: [:index, :show]
       end

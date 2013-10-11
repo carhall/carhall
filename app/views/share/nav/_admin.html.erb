@@ -4,5 +4,5 @@
   <li<%= active? "accounts" %>><a href="<%= accounts_admins_path %>">用户管理</a></li>
   <li<%= active? "business" %>><a href="<%= business_advert_path %>">业务管理</a></li>
   <li<%= active? "category" %>><a href="<%= category_brands_path %>">分类管理</a></li>
-  <li<%= active? "content" %>><a href="<%= posts_posts_path %>">内容模块管理</a></li>
+  <li<%= active? "posts" or active? "tips" or active? "bcst" %>><a href="<%= posts_posts_path %>">内容模块管理</a></li>
 </ul>

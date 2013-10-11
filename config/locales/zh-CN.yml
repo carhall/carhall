@@ -22,6 +22,8 @@ zh-CN:
       accounts/dealer: 服务商
       accounts/provider: 媒体
       accounts/friendship: 好友
+      share/comment: 评论
+      posts/post: 随手拍
       tips/mending: 保养专修
       tips/cleaning: 服务项目
       tips/activity: 活动
@@ -163,7 +165,12 @@ zh-CN:
         <<: *comment
       bcst/traffic_report/user:
         <<: *comment_user
-
+      posts/post:
+        id: ID
+        content: 内容
+        image: 图片
+      posts/post/user:
+        username: 发帖人
   simple_form:
     labels:
       account:

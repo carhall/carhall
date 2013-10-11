@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div class="span3">
-    <%= render "tips/share/sidenav/dealer" %>
+    <%= render "tips/share/sidenav/#{@user_type}" %>
   </div>
   
   <div class="span9">
@@ -10,9 +10,7 @@
 
     <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
 
-    <% @cleanings = @cleanings.page(params[:page]) %>
-
-    <%= index_for @cleanings, class: :table do |t| %>
+    <%= index_for @cleanings, class: 'table datatable' do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :image do |image| %>
         <%= image_tag(image.url(:thumb)) %>
@@ -21,10 +19,12 @@
       <%= t.attribute :cleaning_type %>
       <%= t.attribute :vip_price %>
       <%= t.attribute :price %>
-      <%= t.actions :all %>
+      <% if @user.admin? %>
+        <%= t.actions :destroy %>
+      <% else %>
+        <%= t.actions :all %>
+      <% end %>
     <% end %>
-
-    <%= paginate @cleanings %>
 
   </div>
 </div>

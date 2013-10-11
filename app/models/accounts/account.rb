@@ -31,14 +31,16 @@ class Accounts::Account < ActiveRecord::Base
   def user_type
     return :guest if new_record?
     return :account unless type
-    return :superadmin if id == 1
     type.demodulize.underscore.to_sym
+  end
+
+  def admin?
+    false
   end
 
   def human_user_type
     {
       guest: '访客',
-      superadmin: '超级管理员',
       admin: '管理员',
       user: '车主',
       dealer: '服务商',
@@ -75,7 +77,6 @@ class Accounts::Account < ActiveRecord::Base
     areas_count = Share::Area.all.count
     Array.new(areas_count+1) { { 
       guest: [],
-      superadmin: [],
       admin: [],
       user: [],
       dealer: [],

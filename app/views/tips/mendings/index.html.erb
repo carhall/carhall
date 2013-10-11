@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>专修项目管理 <small></small></h3>
+    </div>
+
+    <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @mendings.empty? %>
+
+    <%= index_for @mendings, class: 'table datatable' do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :brands do |brands| %>
+        <%= brands.join('、') %>
+      <% end %>
+      <% if @user.admin? %>
+        <%= t.actions :destroy %>
+      <% else %>
+        <%= t.actions :all %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

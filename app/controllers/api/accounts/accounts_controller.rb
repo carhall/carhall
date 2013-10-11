@@ -2,6 +2,23 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   skip_before_filter :authenticate_account!, only: [:login]
 
   set_resource_class ::Accounts::Account, detail: true
+  before_filter :set_filter
+
+  def set_filter
+    if params[:filter]
+      if params[:filter][:user_type]
+        user_type = {
+          'public_account' => [Accounts::Provider, Accounts::Dealer],
+          'admin' => [Accounts::Admin],
+          'dealer' => [Accounts::Dealer],
+          'provider' => [Accounts::Provider],
+          'user' => [Accounts::User],
+        }
+        sql_where_query = user_type[params[:filter][:user_type]].map{|k|"type = '#{k.name}'"}.join(' or ')
+        @parent = @parent.where(sql_where_query)
+      end
+    end
+  end
 
   # POST /api/accounts/login
   # POST /api/accounts/login.json

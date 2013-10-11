@@ -595,25 +595,24 @@ Method | URI                                                               | 说
 -------|-------------------------------------------------------------------|----
 GET    | /api/tips/mendings/:mending_id/orders                             | 查询指定保养专修的所有订单  
 GET    | /api/tips/mendings/:mending_id/orders/:id                         | 查询指定保养专修的指定订单  
-GET    | /api/tips/mendings/:mending_id/orders/:id/detail                  | 查询指定保养专修的指定订单详情  
 POST   | /api/tips/mendings/:mending_id/orders                             | 新建指定保养专修订单  
 PUT    | /api/tips/mendings/:mending_id/orders/:id/finish                  | 标记指定保养专修已完成  
 DELETE | /api/tips/mendings/:mending_id/orders/:id/cancel                  | 标记指定保养专修已取消  
 GET    | /api/tips/cleanings/:cleaning_id/orders                           | 查询指定洗车美容的所有订单  
 GET    | /api/tips/cleanings/:cleaning_id/orders/:id                       | 查询指定洗车美容的指定订单  
-GET    | /api/tips/cleanings/:cleaning_id/orders/:id/detail                | 查询指定洗车美容的指定订单详情  
 POST   | /api/tips/cleanings/:cleaning_id/orders                           | 新建指定洗车美容订单  
 PUT    | /api/tips/cleanings/:cleaning_id/orders/:id/use/:count            | 标记指定洗车美容已使用count次  
 DELETE | /api/tips/cleanings/:cleaning_id/orders/:id/cancel                | 标记指定洗车美容已取消  
 GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders             | 查询指定团购的所有订单  
 GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id         | 查询指定团购的指定订单  
-GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/detail  | 查询指定团购的指定订单详情  
 POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders             | 新建指定团购订单  
 PUT    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/finish  | 标记指定团购已完成  
 DELETE | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/cancel  | 标记指定团购已取消  
 GET    | /api/dealers/:dealer_id/orders                                    | 查询指定商家的所有订单  
 GET    | /api/dealers/:dealer_id/orders/:id                                | 查询指定商家的指定订单  
-GET    | /api/dealers/:dealer_id/orders/:id/detail                         | 查询指定商家的指定订单详情  
+GET    | /api/current_user/orders                                          | 查询当前车主的所有订单  
+GET    | /api/current_user/orders/:id                                      | 查询当前车主的指定订单  
+
 GET查询订单信息时，可以在URI中使用附加字段filter[state_id]作为条件，来查询指定状态的订单信息  
 
 > 例如，查询未消费洗车美容订单信息：
@@ -621,6 +620,14 @@ GET查询订单信息时，可以在URI中使用附加字段filter[state_id]作�
 >    GET /api/cleanings/1/orders?filter[state_id]=1
 >    或
 >    GET /api/cleanings/1/orders?filter[state]=unfinished
+> 
+
+如果使用/api/current_user/orders接口查询时，还可以附加一个字段filter[order_type]过滤订单类型  
+订单类型包括：  
+mending_order（保养专修订单）, cleaning_order（洗车美容订单）, bulk_purchasing_order（团购订单）
+> 例如，查询当前车主所有未完成的保养专修订单信息：
+> 
+>    GET /api/current_user?filter[order_type]=mending_order&filter[state]=unfinished
 > 
 
 

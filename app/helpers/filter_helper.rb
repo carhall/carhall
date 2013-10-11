@@ -61,7 +61,6 @@ module FilterHelper
   end
 
   def set_admin
-    @admin = current_account if current_account.user_type == :admin or 
-      current_account.user_type == :superadmin
+    @admin = current_account if current_account.user_type == :admin
   end
 end

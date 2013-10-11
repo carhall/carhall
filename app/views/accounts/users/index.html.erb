@@ -1,34 +1,26 @@
-<div class="page-header">
-  <h3>车主管理 <small></small></h3>
-</div>
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "accounts/share/sidenav/admin" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>车主管理 <small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
+    </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= translate_attribute_name :id, :'accounts/user' %></th>
-      <th><%= translate_attribute_name :avatar, :'accounts/user' %></th>
-      <th><%= translate_attribute_name :username, :'accounts/user' %></th>
-      <th><%= translate_attribute_name :description, :'accounts/user' %></th>
-      <th>操作</th>    
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><img src="<%= user.avatar.url(:thumb) %>" /></td>
-        <td><%= user.username %></td>
-        <td><%= user.description %></td>
-        <td class="actions">
-          <%= link_to content_tag(:i, '', class: 'icon-search'), admins_user_path(user), title: '查看详情', rel: 'tooltip' %>
-          <%= link_to content_tag(:i, '', class: 'icon-pencil'), edit_admins_user_path(user), title: '编辑', rel: 'tooltip' %>
-          <% if can? :destroy, user %>
-            <%= link_to content_tag(:i, '', class: 'icon-remove'), admins_user_path(user), data: { method: :delete, confirm: '您确定要删除这个用户？' }, title: '删除', rel: 'tooltip' %>
-          <% end %>
-        </td>
-      </tr>
+    <% @users = @users.page(params[:page]) %>
+
+    <%= index_for @users, class: 'table' do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :avatar do |avatar| %>
+        <%= image_tag(avatar.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :username %>
+      <%= t.attribute :description %>
+      <%= t.actions :destroy %>
     <% end %>
-  </tbody>
-</table>
 
-<%= paginate @users %>
+    <%= paginate @users %>
+
+  </div>
+</div>

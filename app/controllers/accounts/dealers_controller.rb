@@ -1,4 +1,4 @@
 class Accounts::DealersController < Accounts::ApplicationController
-  load_and_authorize_resource
+  set_resource_class Accounts::Dealer
 
 end

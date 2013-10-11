@@ -6,15 +6,18 @@ class Ability
     
     user ||= Accounts::User.new # guest user (not logged in)
     case user.user_type
-    when :superadmin
-      can :manage, :all
-
     when :admin
-      can :manage, Accounts::Admin, id: user.id
+      if user.superadmin?
+        can :manage, :all  # superadmin
+      else
+        can :read, Accounts::Admin
+        can :manage, Accounts::Admin, id: user.id
+        cannot :manage, Accounts::Admin, id: 1
+      end
+
       can :manage, [Accounts::Dealer, Accounts::Provider, Accounts::User]
       
       # no one can destroy superadmin
-      cannot :manage, Accounts::Admin, id: 1
 
     when :guest
 

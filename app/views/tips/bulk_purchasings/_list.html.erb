@@ -1,6 +1,4 @@
-<% @bulk_purchasings = @bulk_purchasings.page(params[:page]) %>
-
-<%= index_for @bulk_purchasings, class: :table do |t| %>
+<%= index_for @bulk_purchasings, class: 'table datatable' do |t| %>
   <%= t.attribute :id %>
   <%= t.attribute :image do |image| %>
     <%= image_tag(image.url(:thumb)) %>
@@ -10,8 +8,9 @@
   <%= t.attribute :expire_at, format: :short %>
   <%= t.attribute :vip_price %>
   <%= t.attribute :price %>
-  <%= t.actions :all %>
+  <% if @user.admin? %>
+    <%= t.actions :destroy %>
+  <% else %>
+    <%= t.actions :all %>
+  <% end %>
 <% end %>
-
-<%= paginate @bulk_purchasings %>
-
