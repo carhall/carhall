@@ -3,9 +3,6 @@ class AddColumnsForRights < ActiveRecord::Migration
     change_table :accounts do |t|
       t.integer :position, default: 0
       t.boolean :display, default: true
-    end
-
-    change_table :dealer_details do |t|
       t.integer :rank_id, default: 1
     end
 

@@ -13,6 +13,13 @@ zh-CN:
   destroy_success: 成功删除 %{model} “%{title}”。
   appoint_success: 成功通过 “%{title}” 的 %{model}。
   relieve_success: 成功卸任 %{model} “%{title}”。
+  accept_success: 成功验证 %{model} “%{title}”。
+  show_success: 成功显示 %{model} “%{title}”。
+  hide_success: 成功隐藏 %{model} “%{title}”。
+  stick_success: 成功置顶 %{model} “%{title}”。
+  unstick_success: 成功取消置顶 %{model} “%{title}”。
+  rank_up_success: 成功升级 %{model} 帐号 “%{title}”。
+  rank_down_success: 成功降级 %{model} 帐号 “%{title}”。
   mending: "%{dealer} %{brand} 保养专修"
   times:  " %{count} 份"
   to_many: 过多（最多为 %{count} 个）
@@ -63,6 +70,7 @@ zh-CN:
         income: 应收款
         accepted?: 年费
         expire_at: 到期时间
+        rank: 会员级别
       accounts/account: &account
         id: ID
         mobile: 手机号码

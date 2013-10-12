@@ -16,11 +16,13 @@
       <%= t.attribute :mobile %>
       <%= t.attribute :username %>
       <%= t.attribute :state %>
+      <%= t.attribute :rank %>
       <%= t.action_link :accept do |dealer| %>
         <% unless dealer.accepted? %>
           <%= icon_link_to "通过验证", 'icon-ok', accept_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要验证这个用户？' } %>
         <% end %>
       <% end %>
+
       <%= t.action_link :display do |dealer| %>
         <% if dealer.accepted? %>
           <% if dealer.displayed? %>
@@ -35,7 +37,18 @@
           <% end %>
         <% end %>
       <% end %>
+
+      <%= t.action_link :rank do |dealer| %>
+        <% if dealer.rank_up? %>
+          <%= icon_link_to "会员升级", 'icon-arrow-up', rank_up_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要升级这个用户？' } %>
+        <% end %>
+        <% if dealer.rank_down? %>
+          <%= icon_link_to "会员降级", 'icon-arrow-down', rank_down_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要降级这个用户？' } %>
+        <% end %>
+      <% end %>
+
       <%= t.actions :destroy %>
+
     <% end %>
 
   </div>

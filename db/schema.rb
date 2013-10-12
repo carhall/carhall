@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20131011135428) do
     t.integer  "brand_id"
     t.integer  "position",               default: 0
     t.boolean  "display",                default: true
+    t.integer  "rank_id",                default: 1
   end
 
   add_index "accounts", ["area_id", "brand_id"], name: "index_accounts_on_area_id_and_brand_id", using: :btree
@@ -214,7 +215,6 @@ ActiveRecord::Schema.define(version: 20131011135428) do
     t.integer  "rqrcode_image_file_size"
     t.datetime "rqrcode_image_updated_at"
     t.integer  "specific_service_id"
-    t.integer  "rank_id",                    default: 1
   end
 
   create_table "exposures", force: true do |t|

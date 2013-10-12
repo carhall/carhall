@@ -124,6 +124,8 @@ Carhall::Application.routes.draw do
       put :hide, on: :member
       put :stick, on: :member
       put :unstick, on: :member
+      put :rank_up, on: :member
+      put :rank_down, on: :member
     end
     resources :providers do
       put :accept, on: :member

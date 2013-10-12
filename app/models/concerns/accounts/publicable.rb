@@ -14,6 +14,18 @@ module Accounts::Publicable
     accepted_at + 1.year if accepted?
   end
 
+  def adverts_balance
+    inverse_friends_count * 3
+  end
+
+  def commission
+    0
+  end
+
+  def income
+    0
+  end
+
   module ClassMethods
 
   end
