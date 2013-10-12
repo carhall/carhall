@@ -5,8 +5,10 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3>服务商管理 <small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
+      <h3>随手拍管理 <small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
     </div>
+
+    <% @posts = @posts.includes(:user) %>
 
     <%= index_for @posts, class: :datatable do |t| %>
       <%= t.attribute :id %>
@@ -14,6 +16,9 @@
       <%= t.attribute :content %>
       <%= t.attribute :image do |image| %>
         <%= image_tag(image.url(:thumb)) %>
+      <% end %>
+      <%= t.action_link :comments do |post| %>
+        <%= icon_link_to "浏览评论", 'icon-comment', posts_post_comments_path(post) %>
       <% end %>
       <%= t.actions :destroy %>
     <% end %>

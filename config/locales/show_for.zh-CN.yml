@@ -3,5 +3,5 @@ zh-CN:
     blank: 无
     # If you want to use html tags with blank value use blank html translation
     # blank_html: "<span>Not specified</span>"
-    "yes": "Yes"
-    "no": "No"
+    "yes": "是"
+    "no": "否"

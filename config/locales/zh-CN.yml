@@ -11,7 +11,7 @@ zh-CN:
   update_success: 成功更新 %{model} “%{title}” 信息。
   update_success_without_title: 成功更新 %{model} 信息。
   destroy_success: 成功删除 %{model} “%{title}”。
-  appoint_success: 成功认命 “%{title}” 为 %{model}。
+  appoint_success: 成功通过 “%{title}” 的 %{model}。
   relieve_success: 成功卸任 %{model} “%{title}”。
   mending: "%{dealer} %{brand} 保养专修"
   times:  " %{count} 份"

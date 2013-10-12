@@ -9,7 +9,7 @@
 </ul>
 <ul class="nav nav-list sidenav affix-top">
   <li><span><strong>服务商内容管理</strong></span></li>
-  <li<%= active? 'tips/bulk_purchasings' %>><a href="<%= tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 团购管理</a></li>
-  <li<%= active? 'tips/cleanings' %>><a href="<%= tips_cleanings_path %>"><i class="icon-chevron-right"></i> 洗车美容管理</a></li>
-  <li<%= active? 'tips/mendings' %>><a href="<%= tips_mendings_path %>"><i class="icon-chevron-right"></i> 保养专修管理</a></li>
+  <li<%= active? 'tips/bulk_purchasings' or active? 'tips/orders', :bulk_purchasing_id %>><a href="<%= tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 团购管理</a></li>
+  <li<%= active? 'tips/cleanings' or active? 'tips/orders', :cleaning_id %>><a href="<%= tips_cleanings_path %>"><i class="icon-chevron-right"></i> 洗车美容管理</a></li>
+  <li<%= active? 'tips/mendings' or active? 'tips/orders', :mending_id %>><a href="<%= tips_mendings_path %>"><i class="icon-chevron-right"></i> 保养专修管理</a></li>
 </ul>

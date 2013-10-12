@@ -7,7 +7,7 @@ class Posts::Club < ActiveRecord::Base
 
   has_many :mechanic_candidates, class_name: 'Posts::MechanicCandidate', as: :source
   has_many :president_candidates, class_name: 'Posts::PresidentCandidate', as: :source
-  has_and_belongs_to_many :mechanics, class_name: 'Accounts::User'
+  has_and_belongs_to_many :mechanics, -> { uniq }, class_name: 'Accounts::User'
   
   extend Share::ImageAttachments
   define_avatar_method

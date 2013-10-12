@@ -155,7 +155,9 @@ Carhall::Application.routes.draw do
   end
 
   namespace :posts do
-    resources :posts
+    resources :posts do
+      resources :comments, shallow: true
+    end
     resources :clubs do
       delete :relieve_president, on: :member
       delete 'relieve_mechanic/:mechanic_id', action: :relieve_mechanic, on: :member

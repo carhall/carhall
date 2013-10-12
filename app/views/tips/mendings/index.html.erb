@@ -12,9 +12,7 @@
 
     <%= index_for @mendings, class: :datatable do |t| %>
       <%= t.attribute :id %>
-      <%= t.attribute :brands, yield_collection: true do |brands| %>
-        <%= brands.join('、') %>
-      <% end %>
+      <%= t.attribute :brands, join: '、' %>
       <%= t.attribute :state %>
       <%= t.attribute :orders_count %>
       <%= t.action_link :orders do |mending| %>

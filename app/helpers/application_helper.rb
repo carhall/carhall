@@ -1,8 +1,12 @@
 module ApplicationHelper
-  def active? name
-    if "#{controller_path}##{action_name}".start_with? name
-      " class=\"active\"".html_safe
-    end
+  def active? *name
+    options = name.extract_options!
+    exists = name[1..-1]
+    name = name.first
+    return unless "#{controller_path}##{action_name}".start_with? name
+    return if exists.detect { |k| params[k].blank? }
+    return if options.detect { |k,v| params[k] != v }
+    " class=\"active\"".html_safe
   end
 
   def translate_attribute_name attribute_name, scope

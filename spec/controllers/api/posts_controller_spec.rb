@@ -112,10 +112,12 @@ describe "Posts" do
     include_examples "resource#show"
 
     describe "POST president" do
+      let(:append_args) {{ data: { description: 'Test' }}}
       include_examples "resources#post", :president
     end
     
     describe "POST mechanics" do
+      let(:append_args) {{ data: { description: 'Test' }}}
       include_examples "resources#post", :mechanics
     end
     

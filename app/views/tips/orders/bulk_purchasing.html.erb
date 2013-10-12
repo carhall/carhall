@@ -5,8 +5,8 @@
   
   <div class="span9">
     <div class="page-header">
-      <% if @parent %>
-        <h3>团购 “<%= @parent.title %>” 订单列表 <small></small></h3>
+      <% if @bulk_purchasing %>
+        <h3>团购 “<%= @bulk_purchasing.title %>” 订单列表 <small></small></h3>
       <% else %>
         <h3>团购订单列表 <small></small></h3>
       <% end %>

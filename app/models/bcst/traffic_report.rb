@@ -2,6 +2,7 @@ class Bcst::TrafficReport < ActiveRecord::Base
   include Share::Userable
   include Share::Providerable
   
+  has_many :comments, as: :source, class_name: 'Bcst::Comment'
   belongs_to :at_user, class_name: 'Accounts::User'
 
   validates_presence_of :user, :provider
