@@ -1,5 +1,5 @@
 class Api::Accounts::DealersController < Api::Accounts::ApplicationController
-  set_resource_class ::Accounts::Dealer, detail: true
+  set_resource_class ::Accounts::Dealer, detail: true, display: true
   before_filter :set_filter
 
   def nearby
@@ -20,10 +20,6 @@ class Api::Accounts::DealersController < Api::Accounts::ApplicationController
     filter_parent :dealer_type
     filter_parent :business_scope
     filter_parent :specific_service
-  end
-
-  def set_parent
-    @parent = ::Accounts::Dealer.ordered
   end
 
 end

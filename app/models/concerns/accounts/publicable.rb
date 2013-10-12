@@ -3,6 +3,19 @@ module Accounts::Publicable
 
   included do
     include Accounts::Acceptable
+    include Accounts::Rankable
+
+    include Share::Displayable
+
+    scope :followed_counted, -> {
+      select("#{table_name}.*, count(friend.id) AS followed_count").
+      joins('LEFT OUTER JOIN friend ON friend.friend_id = accounts.id').
+      group('accounts.id')
+    }
+
+    scope :followed, -> { followed_counted.order("followed_count DESC") }
+
+    scope :ordered, -> { displayed.followed.positioned }
   end
 
   # statistic

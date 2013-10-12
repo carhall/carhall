@@ -3,6 +3,7 @@ module Accounts::Rankable
 
   included do
     enumerate :rank, with: %w(普通会员 托管优护会员 白金会员)
+    scope :ranked, -> { order('rank_id DESC') } 
   end
 
   def rank_up

@@ -8,11 +8,13 @@
       <h3>服务商数据 <small></small></h3>
     </div>
 
+    <% @dealers = @dealers.followed_counted %>
+
     <%= index_for @dealers, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :username %>
       <%= t.attribute :total_cost %>
-      <%= t.attribute :inverse_friends_count %>
+      <%= t.attribute :followed_count %>
       <%= t.attribute :adverts_balance %>
       <%= t.attribute :commission %>
       <%= t.attribute :income %>

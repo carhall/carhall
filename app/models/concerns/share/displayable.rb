@@ -3,7 +3,7 @@ module Share::Displayable
 
   included do
     scope :displayed, -> { where(display: true) }
-    scope :ordered, -> { displayed.order("position DESC") }
+    scope :positioned, -> { order("position DESC") }
 
   end
 

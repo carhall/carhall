@@ -6,6 +6,7 @@ module Tips::Servicable
     include Share::Displayable
 
     default_scope { order('id DESC') }
+    scope :ordered, -> { displayed.positioned }
     
     before_save do
       self.area_id = dealer.area_id

@@ -8,6 +8,8 @@
       <h3>服务商管理 <small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
     </div>
 
+    <% @dealers = @dealers.followed_counted %>
+
     <%= index_for @dealers, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :avatar do |avatar| %>
@@ -15,6 +17,7 @@
       <% end %>
       <%= t.attribute :mobile %>
       <%= t.attribute :username %>
+      <%= t.attribute :followed_count %>
       <%= t.attribute :state %>
       <%= t.attribute :rank %>
       <%= t.action_link :accept do |dealer| %>
@@ -39,11 +42,13 @@
       <% end %>
 
       <%= t.action_link :rank do |dealer| %>
-        <% if dealer.rank_up? %>
-          <%= icon_link_to "会员升级", 'icon-arrow-up', rank_up_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要升级这个用户？' } %>
-        <% end %>
-        <% if dealer.rank_down? %>
-          <%= icon_link_to "会员降级", 'icon-arrow-down', rank_down_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要降级这个用户？' } %>
+        <% if dealer.accepted? %>
+          <% if dealer.rank_up? %>
+            <%= icon_link_to "会员升级", 'icon-arrow-up', rank_up_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要升级这个用户？' } %>
+          <% end %>
+          <% if dealer.rank_down? %>
+            <%= icon_link_to "会员降级", 'icon-arrow-down', rank_down_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要降级这个用户？' } %>
+          <% end %>
         <% end %>
       <% end %>
 

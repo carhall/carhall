@@ -1,11 +1,9 @@
 class Accounts::Dealer < Accounts::Account
   include Accounts::Publicable
   include Accounts::RqrcodeTokenable
-  include Accounts::Rankable
   
   include Share::Localizable
   include Share::Statisticable
-  include Share::Displayable
 
   set_detail_class Accounts::DealerDetail
 

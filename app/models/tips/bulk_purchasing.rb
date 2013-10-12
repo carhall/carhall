@@ -16,7 +16,7 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   enumerate :bulk_purchasing_type, with: %w(洗车美容 保养专修 汽车装饰 其他)
 
   include Tips::Expiredable
-  scope :ordered, -> { displayed.in_progress.order("position DESC") }
+  scope :ordered, -> { displayed.positioned.in_progress }
 
   api_accessible :base do |t|
     t.only :id, :title, :expire_at, :area_id, :bulk_purchasing_type_id, :price, :vip_price, 

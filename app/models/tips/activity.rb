@@ -10,7 +10,7 @@ class Tips::Activity < ActiveRecord::Base
   validates_presence_of :title, :expire_at
 
   include Tips::Expiredable
-  scope :ordered, -> { displayed.in_progress.order("position DESC") }
+  scope :ordered, -> { displayed.positioned.in_progress }
 
   api_accessible :base do |t|
     t.only :id, :title, :expire_at, :area_id, :description

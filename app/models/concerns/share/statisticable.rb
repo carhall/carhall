@@ -1,6 +1,12 @@
 module Share::Statisticable 
   extend ActiveSupport::Concern
 
+  included do
+    scope :cheapie, -> { order('vip_price ASC') }
+    scope :favorite, -> { all.sort{|s|s.stars} }
+    scope :hot, -> { order('orders_count DESC') }
+  end
+
   class << self
     include StatisticsHelper
   end
@@ -66,12 +72,6 @@ module Share::Statisticable
       orders.last
     end
     order.created_at if order
-  end
-
-  included do
-    scope :cheapie, -> { order('vip_price ASC') }
-    scope :favorite, -> { all.sort{|s|s.stars} }
-    scope :hot, -> { order('orders_count DESC') }
   end
 
 end
