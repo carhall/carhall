@@ -19,8 +19,8 @@
         </tr>
       </thead>
 
-      <% (0..6).each do |day| %>
-        <% lists = @provider.programme_list[day.to_s] %>
+      <% Share::Day.all.each do |day, name| %>
+        <% lists = @provider.programme_list[name] %>
 
         <thead>
           <tr>
@@ -48,7 +48,7 @@
             <td></td>
             <td></td>
             <td class="actions">
-                <%= link_to "添加", new_bcst_programme_list_path(day: day) %>
+                <%= link_to "添加", new_bcst_programme_list_path(day: name) %>
             </td>
           </tr>
 

@@ -14,14 +14,14 @@ class Accounts::Provider < Accounts::Account
   validates_presence_of :type
 
   def programme_list
-    hash = (0..6).reduce({}) { |ret, day| ret[day.to_s] = []; ret } 
-    programme_lists.each { |pl| hash[pl.day.to_s] << pl }
+    hash = Share::Day.names.reduce({}) { |ret, name| ret[name] = []; ret } 
+    programme_lists.each { |pl| hash[pl.day] << pl }
     hash
   end
 
   def programme_list_as_api_response
-    hash = (0..6).reduce({}) { |ret, day| ret[day.to_s] = []; ret } 
-    programme_lists.each { |pl| hash[pl.day.to_s] << pl.as_api_response(:base) }
+    hash = Share::Day.names.reduce({}) { |ret, name| ret[name] = []; ret } 
+    programme_lists.each { |pl| hash[pl.day] << pl.as_api_response(:base) }
     { list: hash }
   end
 

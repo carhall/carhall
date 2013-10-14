@@ -12,14 +12,14 @@
       <%= devise_error_messages! @mending %>
 
         <%= f.fields_for :discount do |ff| %>
-          <% (0..6).each do |day| %>
+          <% Share::Day.all.each do |day, name| %>
 
             <div class="control-group">
-              <label class="control-label" for="user_current_password"><strong>周<%= t('date.abbr_day_names')[day] %></strong></label>
+              <label class="control-label"strong>周<%= t('date.abbr_day_names')[day] %></strong></label>
             </div>
 
-            <%= ff.fields_for day.to_s do |fff| %>
-              <% fff.object = OpenStruct.new @mending.discount[day.to_s] %>
+            <%= ff.fields_for name do |fff| %>
+              <% fff.object = OpenStruct.new @mending.discount[name] %>
 
               <%= fff.input :discount_during, required: false, input_html: { data: { mask: '99:99 至 99:99' }}, hint: ('填数字即可，例如：09:00 至 18:00' if day == 0) %>
               <%= fff.input :man_hours_discount, required: false, input_html: { data: { mask: '9.9 折' }} %>

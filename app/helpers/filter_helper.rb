@@ -57,7 +57,7 @@ module FilterHelper
   end
 
   def set_provider
-    @provider = current_account if current_account.user_type == :dealer
+    @provider = current_account if current_account.user_type == :provider
   end
 
   def set_admin

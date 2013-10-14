@@ -223,8 +223,30 @@ zh-CN:
         detail:
           <<: *detail
       tips_mending:
-        discount:
+        default: &discount
           discount_during: 优惠时段
           man_hours_discount: 工时优惠
           spare_parts_discount: 零件优惠
+        discount:
+          monday:
+            <<: *discount
+          tuesday:
+            <<: *discount
+          wednesday:
+            <<: *discount
+          thursday:
+            <<: *discount
+          friday:
+            <<: *discount
+          saturday:
+            <<: *discount
+          sunday:
+            <<: *discount
+
+
+
+
+
+
+
 

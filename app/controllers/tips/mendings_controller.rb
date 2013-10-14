@@ -24,8 +24,11 @@ class Tips::MendingsController < Tips::ApplicationController
   end
 
   def tips_mending_params
+    discount = [:discount_during, :man_hours_discount, :spare_parts_discount]
     params.require(:tips_mending).permit(
-      discount:[:discount_during, :man_hours_discount, :spare_parts_discount], 
+      discount: [monday: discount, tuesday: discount, 
+        wednesday: discount, thursday: discount, friday: discount, 
+        saturday: discount, sunday: discount], 
       brand_ids: []
     )
   end

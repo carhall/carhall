@@ -3,7 +3,6 @@ class Bcst::ProgrammeList < ActiveRecord::Base
 
   validates_presence_of :provider
   validates_presence_of :title, :airdate, :day
-  validates_numericality_of :day, greater_than_or_equal_to: 0, less_than_or_equal_to: 6, allow_nil: true
 
   acts_as_api
 

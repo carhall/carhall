@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011135428) do
+ActiveRecord::Schema.define(version: 20131014114821) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",   null: false
@@ -287,6 +287,7 @@ ActiveRecord::Schema.define(version: 20131011135428) do
     t.datetime "arrive_at"
     t.integer  "mending_type_id"
     t.text     "description"
+    t.boolean  "notified",        default: false
   end
 
   create_table "mendings", force: true do |t|
@@ -385,7 +386,7 @@ ActiveRecord::Schema.define(version: 20131011135428) do
     t.string   "airdate"
     t.string   "title"
     t.text     "description"
-    t.integer  "day"
+    t.string   "day"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
