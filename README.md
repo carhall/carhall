@@ -164,7 +164,7 @@ GET    | /api/current_user/detail          | 查询当前用户详细信息
 PUT    | /api/current_user                 | 修改当前用户信息  
 PUT    | /api/current_user/password        | 修改当前用户密码  
 
-GET查询服务商时，可以在URI中使用三个附加字段filter[area_id]、filter[dealer_type_id]和filter[business_scope_id]作为条件，来查询指定服务商类型和业务范围的服务商信息  
+GET查询服务商时，可以在URI中使用附加字段filter[area_id]、filter[dealer_type_id]、filter[business_scope_id]和filter[specific_service_id]作为条件，来查询指定地区、服务商类型、业务范围和专项服务类型的服务商信息  
 > 例如，查询4S店服务商信息：
 > 
 >    GET /api/dealers?filter[dealer_type_id]=4
