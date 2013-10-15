@@ -10,7 +10,23 @@
 
     <%= render 'share/alert', message: '您还没有收到任何曝光信息！' if @exposures.empty? %>
     
-    <%= render "bcst/share/comments", comments: @exposures %>
+    <% @exposures = @exposures.includes(:user, :at_user).page(params[:page]) %>
+
+    <%= index_for @exposures do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :username, in: :user %>
+      <%= t.attribute :content %>
+      <%= t.attribute :image do |image| %>
+        <%= image_tag(image.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :created_at, format: :short %>
+      <% if @user.admin? %>
+        <%= t.actions :destroy %>
+      <% end %>
+    <% end %>
+
+    <%= paginate @exposures %>
+
 
   </div>
 

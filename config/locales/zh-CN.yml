@@ -177,20 +177,21 @@ zh-CN:
         mobile: 手机号码
         username: 昵称
         avatar: 头像
-      bcst/exposure: 
-        <<: *comment
-      bcst/exposure/user:
-        <<: *comment_user
-      bcst/traffic_report: 
-        <<: *comment
-      bcst/traffic_report/user:
-        <<: *comment_user
-      posts/post:
+      posts/post: &post
         id: ID
         content: 内容
         image: 图片
-      posts/post/user:
+        created_at: 发表时间
+      posts/post/user: &post_user
         username: 发帖人
+      bcst/exposure: 
+        <<: *post
+      bcst/exposure/user:
+        <<: *post_user
+      bcst/traffic_report: 
+        <<: *post
+      bcst/traffic_report/user:
+        <<: *post_user
       posts/club:
         id: ID
         avatar: LOGO

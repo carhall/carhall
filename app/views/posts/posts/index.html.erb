@@ -17,6 +17,7 @@
       <%= t.attribute :image do |image| %>
         <%= image_tag(image.url(:thumb)) %>
       <% end %>
+      <%= t.attribute :created_at, format: :short %>
       <%= t.action_link :comments do |post| %>
         <%= icon_link_to "浏览评论", 'icon-comment', posts_post_comments_path(post) %>
       <% end %>
