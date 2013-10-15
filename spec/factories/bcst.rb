@@ -18,7 +18,7 @@ FactoryGirl.define do
     airdate { "#{rand(24)}:00 至 #{rand(24)}:00" }
     title { Faker::Name.name }
     description { Faker::Lorem.sentence }
-    day { rand(6) }
+    day { Share::Day.names.sample }
   end
 
   factory :programme_comment, class: Bcst::Comment do
