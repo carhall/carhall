@@ -1,5 +1,6 @@
 class Api::Accounts::DealersController < Api::Accounts::ApplicationController
   set_resource_class ::Accounts::Dealer, detail: true, display: true
+  before_filter :search_parent
   before_filter :set_filter
 
   def nearby
@@ -15,7 +16,6 @@ class Api::Accounts::DealersController < Api::Accounts::ApplicationController
   end
 
   def set_filter
-    search_parent
     filter_parent :area
     filter_parent :dealer_type
     filter_parent :business_scope
