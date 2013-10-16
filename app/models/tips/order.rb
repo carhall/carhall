@@ -80,7 +80,6 @@ class Tips::Order < ActiveRecord::Base
     t.only :id, :title, :state_id, :cost, :created_at
     t.methods :order_type, :state
     t.add :user, template: :base
-    t.add :dealer, template: :base
     t.add :source, template: :base
   end
   
