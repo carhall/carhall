@@ -1,4 +1,4 @@
-class Share::Brand < ActiveEnum::Base
+class Share::Brand < ActiveRecord::Base
   Brands = ["阿斯顿·马丁", "奥迪", "巴博斯", "宝骏", 
     "宝马", "保时捷", "北京汽车", "北汽威旺", "北汽制造", 
     "奔驰", "奔腾", "本田", "比亚迪", "标致", "别克", 
@@ -23,6 +23,9 @@ class Share::Brand < ActiveEnum::Base
     "中兴", "众泰", "其它", 
   ]
 
-  value Brands
+  acts_as_enum
+
+  validates_presence_of :name 
+  validates_uniqueness_of :name
 
 end

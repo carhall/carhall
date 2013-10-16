@@ -14,6 +14,7 @@
       <%= t.attribute :id %>
       <%= t.attribute :username, in: :user %>
       <%= t.attribute :content %>
+      <%= t.attribute :created_at, format: :short %>
       <%= t.actions :destroy %>
     <% end %>
 

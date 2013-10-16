@@ -89,3 +89,5 @@ end
   FactoryGirl.create :traffic_report, provider: provider
   FactoryGirl.create :programme_comment, source: Bcst::Programme.all.sample
 end
+
+

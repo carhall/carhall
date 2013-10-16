@@ -1,0 +1,14 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "category/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>车型品牌管理 <small></small></h3>
+    </div>
+
+    <%= render 'category/share/list', enums: @brands %>
+
+  </div>
+</div>

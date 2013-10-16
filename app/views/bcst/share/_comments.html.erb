@@ -1,4 +1,4 @@
-<% comments = comments.includes(:user).page(params[:page]) %>
+<% comments = comments.includes(:user, :at_user).page(params[:page]) %>
 
 <%= index_for comments do |t| %>
   <%= t.attribute :username, in: :user %>

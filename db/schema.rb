@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131014114821) do
+ActiveRecord::Schema.define(version: 20131015071843) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",   null: false
@@ -110,6 +110,10 @@ ActiveRecord::Schema.define(version: 20131014114821) do
 
   add_index "blocks", ["blacklist_id"], name: "index_blocks_on_blacklist_id", using: :btree
   add_index "blocks", ["user_id"], name: "index_blocks_on_user_id", using: :btree
+
+  create_table "brands", force: true do |t|
+    t.string "name"
+  end
 
   create_table "bulk_purchasings", force: true do |t|
     t.integer  "dealer_id"

@@ -7,9 +7,11 @@ module ActiveEnum
         extend ClassMethods
         class_attribute :active_enum_options
         self.active_enum_options = options.reverse_merge(:name_column => 'name')
-        scope :enum_values, select("#{primary_key}, #{active_enum_options[:name_column]}").
-                            where(active_enum_options[:conditions]).
-                            order("#{primary_key} #{active_enum_options[:order]}")
+        scope :enum_values, -> { 
+          select("#{primary_key}, #{active_enum_options[:name_column]}").
+          where(active_enum_options[:conditions]).
+          order("#{primary_key} #{active_enum_options[:order]}")
+        }
       end
 
     end
@@ -26,6 +28,10 @@ module ActiveEnum
 
       def to_select
         enum_values.map {|v| [v.send(active_enum_options[:name_column]), v.id] }
+      end
+
+      def as_json options={}
+        enum_values.map {|v| [v.id, v.send(active_enum_options[:name_column])] }
       end
 
       def [](index)

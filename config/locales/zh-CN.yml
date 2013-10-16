@@ -182,6 +182,7 @@ zh-CN:
         content: 内容
         image: 图片
         created_at: 发表时间
+        comments_count: 评论数
       posts/post/user: &post_user
         username: 发帖人
       bcst/exposure: 
@@ -217,6 +218,9 @@ zh-CN:
         <<: *comment_user
       posts/mechanic_candidate/source:
         title: 申请车友会
+      share/brand:
+        id: ID
+        name: 名称
   simple_form:
     labels:
       account:
