@@ -3,7 +3,7 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
   before_filter :set_area_id_and_brand_id, except: :create
 
   def render_index posts
-    super posts.includes(:user).order('id DESC')
+    super posts.order('id DESC')
   end
 
   # GET /api/posts

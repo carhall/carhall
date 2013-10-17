@@ -74,6 +74,7 @@ gem 'mini_magick'
 gem 'geohash', github: 'RyanNaughton/geohash'
 # gem 'active_enum', github: 'bbtfr/active_enum'
 gem 'active_enum', path: 'vendor'
+gem "second_level_cache", github: 'hooopo/second_level_cache'
 
 group :development, :test do
   gem 'faker'

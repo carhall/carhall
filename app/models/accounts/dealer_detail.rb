@@ -32,8 +32,7 @@ class Accounts::DealerDetail < ActiveRecord::Base
 
   api_accessible :base do |t|
     t.only :dealer_type_id, :business_scope_ids, :company, :address, 
-        :phone, :open_during, :latitude, :longitude, :rqrcode_token, 
-        :orders_count, :reviews_count
+        :phone, :open_during, :latitude, :longitude, :rqrcode_token
     t.methods :dealer_type, :business_scopes
   end
 

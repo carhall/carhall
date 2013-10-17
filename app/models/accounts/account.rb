@@ -61,7 +61,7 @@ class Accounts::Account < ActiveRecord::Base
     t.only :authentication_token
   end 
 
-  api_accessible :detail, extend: :base do |t|
+  api_accessible :detail, extend: :base, includes: [:detail] do |t|
     t.add :detail, template: :base
   end
 

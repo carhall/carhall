@@ -64,22 +64,41 @@ class Accounts::Dealer < Accounts::Account
     where(detail_id: detail_ids)
   end
 
+  def last_3_orders
+    orders.unscoped.includes(:user, source: [:dealer]).last(3)
+  end
+
+  def last_3_reviews
+    reviews.unscoped.includes(order: [:user, source: [:dealer]]).last(3)
+  end
+
+  def mending_goal_attainment
+    Share::Statisticable.goal_attainment mending_orders
+  end
+
+  def cleaning_goal_attainment
+    Share::Statisticable.goal_attainment cleaning_orders
+  end
+
+  def bulk_purchasing_goal_attainment
+    Share::Statisticable.goal_attainment bulk_purchasing_orders
+  end
+
+  extend Share::MethodCache
+  define_cached_methods :mending_goal_attainment, :cleaning_goal_attainment, 
+    :bulk_purchasing_goal_attainment
+
   api_accessible :detail, extend: :detail do |t|
     t.add :area_id, append_to: :detail
     t.add :area, append_to: :detail
     t.add :stars, append_to: :detail
-    t.add ->(d) { Share::Statisticable.goal_attainment d.mending_orders }, 
-      as: :mending_goal_attainment, append_to: :detail
-    t.add ->(d) { Share::Statisticable.goal_attainment d.cleaning_orders }, 
-      as: :cleaning_goal_attainment, append_to: :detail
-    t.add ->(d) { Share::Statisticable.goal_attainment d.bulk_purchasing_orders }, 
-      as: :bulk_purchasing_goal_attainment, append_to: :detail
+    t.add :mending_goal_attainment, append_to: :detail
+    t.add :cleaning_goal_attainment, append_to: :detail
+    t.add :bulk_purchasing_goal_attainment, append_to: :detail
     t.add :mending, template: :base, append_to: :detail
     t.add :orders_count, append_to: :detail
-    t.add ->(d) { d.orders.unscoped.includes(:user).last(3) }, as: :last_3_orders, 
-      append_to: :detail, template: :base
-    t.add ->(d) { d.reviews.unscoped.includes(order: :user).last(3) }, as: :last_3_reviews,
-      append_to: :detail, template: :base
+    t.add :last_3_orders, append_to: :detail, template: :base
+    t.add :last_3_reviews, append_to: :detail, template: :base
   end
 
 end

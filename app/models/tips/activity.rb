@@ -12,7 +12,7 @@ class Tips::Activity < ActiveRecord::Base
   include Tips::Expiredable
   scope :ordered, -> { displayed.positioned.in_progress }
 
-  api_accessible :base do |t|
+  api_accessible :base, includes: [:dealer] do |t|
     t.only :id, :title, :expire_at, :area_id, :description
     t.methods :area
     t.images :image

@@ -29,7 +29,7 @@ protected
     params.each do |key, value|
       if AccreditedKeys.keys.include? key
         parent_class = AccreditedKeys[key]
-        @parent = parent_class.find(value).comments.includes(:user, :at_user)
+        @parent = parent_class.find(value).comments
         return
       end
     end

@@ -2,7 +2,7 @@ class Api::Bcst::TrafficReportsController < Api::Bcst::CommentsController
 
   def set_parent
     @provider = ::Accounts::Provider.find(params[:provider_id])
-    @parent = @provider.traffic_reports.includes(:user, :at_user)
+    @parent = @provider.traffic_reports
   end
   
   def data_params

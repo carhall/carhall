@@ -25,7 +25,7 @@ class Accounts::Provider < Accounts::Account
     { list: hash }
   end
 
-  api_accessible :detail, extend: :detail do |t|
+  api_accessible :detail, extend: :detail, includes: [:programmes] do |t|
     t.add :programmes, template: :base, append_to: :detail
   end
 end

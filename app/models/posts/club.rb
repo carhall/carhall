@@ -62,7 +62,7 @@ class Posts::Club < ActiveRecord::Base
 
   acts_as_api
 
-  api_accessible :base do |t|
+  api_accessible :base, includes: [:president, :mechanics] do |t|
     t.only :id, :title, :announcement
     t.methods :president, :mechanics
     t.images :avatar

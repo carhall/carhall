@@ -20,6 +20,13 @@ GIT
       actionpack (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
 
+GIT
+  remote: git://github.com/hooopo/second_level_cache.git
+  revision: fa97a91329e70224dd9cc7aac813a022e008a40f
+  specs:
+    second_level_cache (2.0.0)
+      activesupport (~> 4.0.0.beta1)
+
 PATH
   remote: vendor
   specs:
@@ -262,6 +269,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
+  second_level_cache!
   select2-rails (~> 3.5.0)
   show_for!
   simple_form

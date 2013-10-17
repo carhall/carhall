@@ -27,7 +27,7 @@ class Posts::Post < ActiveRecord::Base
 
   acts_as_api
 
-  api_accessible :base do |t|
+  api_accessible :base, includes: [:user] do |t|
     t.only :id, :content, :view_count, :comments_count, :created_at
     t.images :image
     t.add :user, template: :base

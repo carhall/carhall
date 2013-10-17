@@ -15,6 +15,10 @@ class Accounts::User < Accounts::Account
     Posts::Club.with_user self
   end
 
+  def last_3_posts
+    posts.unscoped.includes(:user).last(3)
+  end
+
   api_accessible :detail, extend: :detail do |t|
     t.add :sex_id, append_to: :detail
     t.add :sex, append_to: :detail
@@ -22,8 +26,7 @@ class Accounts::User < Accounts::Account
     t.add :area, append_to: :detail
     t.add :brand_id, append_to: :detail
     t.add :brand, append_to: :detail
-    t.add ->(u) { u.posts.unscoped.includes(:user).last(3) }, 
-      as: :last_3_posts, append_to: :detail, template: :base
+    t.add :last_3_posts, append_to: :detail, template: :base
     t.add :posts_count, append_to: :detail
   end
 

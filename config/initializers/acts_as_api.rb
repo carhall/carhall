@@ -1,5 +1,7 @@
 module ActsAsApi
   module Base
+    CacheVersion = 1
+
     ClassMethods.module_eval do
       # Determines the attributes, methods of the model that are accessible in the api response.
       # *Note*: There is only whitelisting for api accessible attributes.
@@ -7,7 +9,7 @@ module ActsAsApi
       # be contained in the api responses.
       def api_accessible(api_template, options = {}, &block)
 
-        attributes = ApiTemplate.new(api_template)
+        attributes = ApiTemplate.new(api_template, options)
 
         attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
 
@@ -17,16 +19,67 @@ module ActsAsApi
 
         class_attribute "api_accessible_#{api_template}".to_sym
         send "api_accessible_#{api_template}=", attributes
+
+        after_commit do
+          Rails.cache.delete([self.class, self.id, api_template, CacheVersion])
+        end if options[:cache]
       end
-      
+
+      def as_api_response(api_template, options = {})
+        api_includes = (api_accessible_attributes(api_template).includes rescue nil)
+
+        scope = all
+        scope = scope.includes(api_includes) if api_includes
+        scope.collect do |item|
+          if item.respond_to?(:as_api_response)
+            item.as_api_response(api_template,options)
+          else
+            item
+          end
+        end
+
+      end
+
+    end
+
+    InstanceMethods.module_eval do
+      # Creates the api response of the model and returns it as a Hash.
+      # Will raise an exception if the passed api template is not defined for the model
+      def as_api_response(api_template, options = {})
+        api_attributes = self.class.api_accessible_attributes(api_template)
+        raise ActsAsApi::TemplateNotFoundError.new("acts_as_api template :#{api_template.to_s} was not found for model #{self.class}") if api_attributes.nil?
+
+        before_api_response(api_template)
+        response_hash = around_api_response(api_template) do
+          api_attributes.to_response_hash(self, api_attributes, options)
+        end
+        after_api_response(api_template)
+
+        response_hash
+      end
+
+      alias_method :as_api_response_without_cache, :as_api_response
+      def as_api_response(api_template, options = {})
+        api_cache = (self.class.api_accessible_attributes(api_template).cache rescue nil)
+        if api_cache
+          Rails.cache.fetch([self.class, self.id, api_template, CacheVersion], expires_in: api_cache) do
+            as_api_response_without_cache(api_template, options)
+          end
+        else
+          as_api_response_without_cache(api_template, options)
+        end
+      end
     end
   end
 
   ApiTemplate.class_eval do
     attr_reader :serializable_options
+    attr_accessor :includes, :cache
 
-    def initialize(api_template)
-      super
+    def initialize(api_template, api_options)
+      super(api_template)
+      @includes = api_options[:includes]
+      @cache = api_options[:cache]
       @options ||= {}
       @serializable_options ||= {}
     end
@@ -35,6 +88,8 @@ module ActsAsApi
       super
       self.options.merge!(other_hash.options) if other_hash.respond_to?(:options)
       self.serializable_options.merge!(other_hash.serializable_options) if other_hash.respond_to?(:serializable_options)
+      self.includes ||= other_hash.includes if other_hash.respond_to?(:includes)
+      self.cache ||= other_hash.cache if other_hash.respond_to?(:cache)
     end
 
     def insert(array)
@@ -86,7 +141,7 @@ module ActsAsApi
 
         if out.respond_to?(:as_api_response)
           sub_template = api_template_for(fieldset, field)
-          out = out.as_api_response(sub_template, options)
+          out = out.as_api_response(sub_template)
         end
 
         set_value(api_output, fieldset, field, out, options)

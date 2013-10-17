@@ -18,7 +18,7 @@ class Bcst::Programme < ActiveRecord::Base
     t.images :avatar
   end
 
-  api_accessible :base, extend: :without_host do |t|
+  api_accessible :base, extend: :without_host, includes: [:hosts] do |t|
     t.add :hosts, template: :without_programme
   end
 

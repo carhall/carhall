@@ -3,20 +3,6 @@ class Api::Tips::OrdersController < Api::ApplicationController
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
   before_filter :set_filter
 
-  def set_filter
-    filter_parent :state
-    if params[:filter]
-      if params[:filter][:order_type]
-        order_type = {
-          'mending_order' => [Tips::MendingOrder],
-          'cleaning_order' => [Tips::CleaningOrder],
-          'bulk_purchasing_order' => [Tips::BulkPurchasingOrder],
-        }
-        sql_where_query = order_type[params[:filter][:order_type]].map{|k|"type = '#{k.name}'"}.join(' or ')
-        @parent = @parent.where(sql_where_query)
-      end
-    end
-  end
 
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
@@ -64,11 +50,26 @@ protected
     params.each do |key, value|
       if AccreditedKeys.keys.include? key
         parent_class = AccreditedKeys[key]
-        @parent = parent_class.find(value).orders.includes(:dealer, :user, :source)
+        @parent = parent_class.find(value).orders
         return
       end
     end
-    @parent = current_user.orders.includes(:dealer, :user, :source)
+    @parent = current_user.orders
+  end
+
+  def set_filter
+    filter_parent :state
+    if params[:filter]
+      if params[:filter][:order_type]
+        order_type = {
+          'mending_order' => [Tips::MendingOrder],
+          'cleaning_order' => [Tips::CleaningOrder],
+          'bulk_purchasing_order' => [Tips::BulkPurchasingOrder],
+        }
+        sql_where_query = order_type[params[:filter][:order_type]].map{|k|"type = '#{k.name}'"}.join(' or ')
+        @parent = @parent.where(sql_where_query)
+      end
+    end
   end
 
   def set_order

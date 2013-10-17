@@ -15,7 +15,7 @@ class Bcst::TrafficReport < ActiveRecord::Base
   
   acts_as_api
 
-  api_accessible :base do |t|
+  api_accessible :base, includes: [:user, :at_user] do |t|
     t.only :id, :content, :created_at, :latitude, :longitude
     t.images :image
     t.add :user, template: :base

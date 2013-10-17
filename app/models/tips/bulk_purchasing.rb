@@ -18,7 +18,7 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   include Tips::Expiredable
   scope :ordered, -> { displayed.positioned.in_progress }
 
-  api_accessible :base do |t|
+  api_accessible :base, includes: [:dealer] do |t|
     t.only :id, :title, :expire_at, :area_id, :bulk_purchasing_type_id, :price, :vip_price, 
         :description, :orders_count, :reviews_count
     t.methods :area, :bulk_purchasing_type, :stars
