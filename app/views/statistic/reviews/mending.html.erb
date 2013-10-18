@@ -27,7 +27,7 @@
           <% @types.each do |type_id, type| %>
             <tr>
               <% if type_id == 1 %>
-                <td rowspan="<%= @types.count %>"><%= Share::Brand[brand_id] %></td>
+                <td rowspan="<%= @types.count %>"><%= Category::Brand[brand_id] %></td>
               <% end %>
               <td><%= type %></td>
               <td><%= @grouped_orders[brand_id][type_id].count %></td>

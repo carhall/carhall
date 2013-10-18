@@ -19,7 +19,7 @@
         </tr>
       </thead>
 
-      <% Share::Day.all.each do |day, name| %>
+      <% Category::Day.all.each do |day, name| %>
         <% lists = @provider.programme_list[name] %>
 
         <thead>

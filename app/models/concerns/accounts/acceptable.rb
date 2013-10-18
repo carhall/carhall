@@ -5,17 +5,16 @@ module Accounts::Acceptable
     !!accepted_at
   end
 
-  def accept!
+  def accept
     self.accepted_at = Time.now.utc
-    save(:validate => false)
   end
 
-  def reject!
+  def reject
     self.accepted_at = nil
-    save(:validate => false)
   end
 
-  module ClassMethods
+  extend Share::Exclamation
+  define_exclamation_and_method :accept
+  define_exclamation_and_method :reject
 
-  end
 end

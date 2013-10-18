@@ -1,4 +1,4 @@
-class Share::Area < ActiveEnum::Base
+class Category::Area < ActiveEnum::Base
   Areas = [
     "北京市", "天津市", "上海市", "重庆市", "香港特别行政区", "澳门特别行政区", 
     "河北省", "山西省", "内蒙古自治区", "辽宁省", "吉林省", "黑龙江省", 

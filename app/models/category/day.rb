@@ -1,4 +1,4 @@
-class Share::Day < ActiveEnum::Base
+class Category::Day < ActiveEnum::Base
   Days = [
     "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"
   ]

@@ -1,6 +1,6 @@
 class Posts::Club < ActiveRecord::Base
-  enumerate :area, with: Share::Area
-  enumerate :brand, with: Share::Brand
+  enumerate :area, with: Category::Area
+  enumerate :brand, with: Category::Brand
 
   belongs_to :president, class_name: 'Accounts::User'
   has_many :posts

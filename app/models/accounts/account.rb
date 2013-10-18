@@ -24,8 +24,8 @@ class Accounts::Account < ActiveRecord::Base
 
   acts_as_api
 
-  enumerate :area, with: Share::Area
-  enumerate :brand, with: Share::Brand
+  enumerate :area, with: Category::Area
+  enumerate :brand, with: Category::Brand
   enumerate :sex, with: %w(男 女)
 
   def user_type
@@ -74,7 +74,7 @@ class Accounts::Account < ActiveRecord::Base
   end
 
   def self.init_grouped_array_by_area_and_type
-    areas_count = Share::Area.all.count
+    areas_count = Category::Area.all.count
     Array.new(areas_count+1) { { 
       guest: [],
       admin: [],

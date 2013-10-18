@@ -7,6 +7,18 @@ module Accounts::Publicable
 
     include Share::Displayable
 
+    def accept
+      super
+      expose
+    end
+
+    def reject
+      super
+      hide
+    end
+
+    validates_presence_of :detail
+
     scope :followed_counted, -> {
       select("#{table_name}.*, count(friend.id) AS followed_count").
       joins('LEFT OUTER JOIN friend ON friend.friend_id = accounts.id').
@@ -14,8 +26,8 @@ module Accounts::Publicable
     }
 
     scope :followed, -> { followed_counted.order("followed_count DESC") }
-
     scope :ordered, -> { displayed.followed.positioned }
+
   end
 
   # statistic
@@ -39,7 +51,4 @@ module Accounts::Publicable
     0
   end
 
-  module ClassMethods
-
-  end
 end

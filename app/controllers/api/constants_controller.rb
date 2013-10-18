@@ -2,8 +2,8 @@ class Api::ConstantsController < Api::ApplicationController
   def constants
     {
       sexes: ::Accounts::Account::Sex.all,
-      areas: Share::Area.all,
-      brands: Share::Brand.all,
+      areas: Category::Area.all,
+      brands: Category::Brand.all,
       dealer_types: ::Accounts::DealerDetail::DealerType.all,
       business_scopes: ::Accounts::DealerDetail::BusinessScope.all,
       cleaning_types: ::Tips::Cleaning::CleaningType.all,

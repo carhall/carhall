@@ -154,6 +154,7 @@ Carhall::Application.routes.draw do
 
   namespace :category do
     resources :brands
+    resources :products
   end
 
   namespace :posts do

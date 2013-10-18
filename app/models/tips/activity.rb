@@ -4,7 +4,7 @@ class Tips::Activity < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
 
-  enumerate :area, with: Share::Area
+  enumerate :area, with: Category::Area
   include Share::Localizable
   
   validates_presence_of :title, :expire_at

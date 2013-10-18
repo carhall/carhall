@@ -5,7 +5,7 @@ class Tips::Cleaning < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
   
-  enumerate :area, with: Share::Area
+  enumerate :area, with: Category::Area
   enumerate :cleaning_type, with: %w(洗车 漆面养护 清洁护理)
   
   validates_presence_of :dealer

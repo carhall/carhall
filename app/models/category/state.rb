@@ -1,4 +1,4 @@
-class Share::State < ActiveEnum::Base
+class Category::State < ActiveEnum::Base
   States = %i(unfinished finished canceled)
 
   value States

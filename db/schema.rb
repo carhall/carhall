@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131015071843) do
+ActiveRecord::Schema.define(version: 20131018144455) do
 
   create_table "accounts", force: true do |t|
-    t.string   "encrypted_password",     default: "",   null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20131015071843) do
     t.datetime "updated_at"
     t.string   "type"
     t.integer  "detail_id"
-    t.string   "username",               default: "",   null: false
-    t.string   "mobile",                 default: "",   null: false
+    t.string   "username",               default: "",    null: false
+    t.string   "mobile",                 default: "",    null: false
     t.text     "description"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20131015071843) do
     t.integer  "area_id"
     t.integer  "brand_id"
     t.integer  "position",               default: 0
-    t.boolean  "display",                default: true
+    t.boolean  "display",                default: false
     t.integer  "rank_id",                default: 1
   end
 

@@ -114,4 +114,9 @@ class ApplicationController < ActionController::Base
 
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = I18n.t(".access_denied")
+    redirect_to :root
+  end
+
 end

@@ -16,7 +16,15 @@
       <%= t.attribute :mobile %>
       <%= t.attribute :username %>
       <%= t.attribute :description %>
-      <%= t.actions :all %>
+      <%= t.action_link :all do |record| %>
+        <%= link_to t("index_for.actions.show").html_safe, accounts_admin_path(record) %>
+        <% if can? :update, record %>
+          <%= link_to t("index_for.actions.edit").html_safe, edit_accounts_admin_path(record) %>
+        <% end %>
+        <% if can? :destroy, record %>
+          <%= link_to t("index_for.actions.destroy").html_safe, accounts_admin_path(record), method: :delete, data: { confirm: t("index_for.actions.confirmation") } %>
+        <% end %>
+      <% end %>
     <% end %>
 
   </div>

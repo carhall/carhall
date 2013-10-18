@@ -3,21 +3,21 @@ module Tips::Statable
 
   included do
     validates_each :state_id do |record, attr, value|
-      if record.state_id_was == Share::State[:canceled]
+      if record.state_id_was == Category::State["canceled"]
         record.errors.add(attr, I18n.t('order_canceled'))
       end
     end
 
-    enumerate :state, with: Share::State
+    enumerate :state, with: Category::State
 
   end
 
   def cancel
-    self.state = :canceled
+    self.state = "canceled"
   end
 
   def finish
-    self.state = :finished
+    self.state = "finished"
   end
 
   def canceled?

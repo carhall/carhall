@@ -11,7 +11,7 @@
     <%= simple_form_for(@mending, html: { class: 'form-horizontal' }) do |f| %>
       <%= devise_error_messages! @mending %>
 
-        <%= f.input :brand_ids, collection: Share::Brand.to_select, as: :check_boxes %>
+        <%= f.input :brand_ids, collection: Category::Brand.to_select, as: :check_boxes %>
       
 
       <%= f.button :submit, "更新专修品牌", class: 'btn-submit' %>

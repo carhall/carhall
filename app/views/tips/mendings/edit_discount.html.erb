@@ -12,7 +12,7 @@
       <%= devise_error_messages! @mending %>
 
         <%= f.fields_for :discount do |ff| %>
-          <% Share::Day.all.each do |day, name| %>
+          <% Category::Day.all.each do |day, name| %>
 
             <div class="control-group">
               <label class="control-label"strong>周<%= t('date.abbr_day_names')[day%7] %></strong></label>

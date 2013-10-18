@@ -4,8 +4,8 @@ class CreateBrands < ActiveRecord::Migration
       t.string :name, index: true, unique: true
     end
 
-    Share::Brand::Brands.each do |name| 
-      Share::Brand.create(name: name) 
+    Category::Brand::Brands.each do |name| 
+      Category::Brand.create(name: name) 
     end
 
   end

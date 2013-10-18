@@ -13,7 +13,8 @@ class Ability
         can :manage, :all  # superadmin
       else
         can :manage, :all  # superadmin
-        cannot :motify, Accounts::Admin
+        cannot [:update, :destroy, :create], Accounts::Admin
+        can :update, Accounts::Admin, id: user.id
       end
 
       # no one can destroy superadmin
@@ -25,7 +26,7 @@ class Ability
       can :read, Accounts::Friendship
 
       can :read, Bcst
-      # if user.accepted?
+      if user.accepted?
         can :manage, Bcst::Host, provider: user
         can :manage, Bcst::Programme, provider: user
         can :manage, Bcst::ProgrammeList, provider: user
@@ -33,7 +34,7 @@ class Ability
 
         can :read, Bcst::Exposure, provider: user
         can :read, Bcst::TrafficReport, provider: user
-      # end
+      end
 
       cannot :set_displayable, :all
     when :dealer
@@ -41,7 +42,7 @@ class Ability
       can :read, Accounts::Friendship
 
       can :read, Tips
-      # if user.accepted?
+      if user.accepted?
         can :manage, Tips::Cleaning, dealer: user
         can :manage, Tips::Mending, dealer: user
         can :manage, Tips::Activity, dealer: user
@@ -49,7 +50,7 @@ class Ability
         
         can :read, Tips::Review
         can :read, Tips::Order
-      # end
+      end
       
       cannot :set_displayable, :all
     when :user

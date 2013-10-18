@@ -11,14 +11,14 @@ class Tips::Mending < ActiveRecord::Base
   serialize :stars_counts, Hash
 
   serialize :brand_ids, Array
-  enumerate :brands, with: Share::Brand, multiple: true
+  enumerate :brands, with: Category::Brand, multiple: true
 
   def self.with_brand name
     id = active_enum_get_id_for_brands(name)
     where('brand_ids LIKE \'%- ?\n%\'', id)
   end
 
-  enumerate :area, with: Share::Area
+  enumerate :area, with: Category::Area
 
   validates_presence_of :dealer
   validates_length_of :brand_ids, :maximum => 5, :message => I18n.t(".to_many")
@@ -35,7 +35,7 @@ class Tips::Mending < ActiveRecord::Base
   api_accessible_for_detail
 
   def init_grouped_array_by_brand_and_type
-    brands_count = Share::Brand.all.count
+    brands_count = Category::Brand.all.count
     types_count = Tips::MendingOrderDetail::MendingType.all.count
     Array.new(brands_count+1) { Array.new(types_count+1) { [] }}
   end

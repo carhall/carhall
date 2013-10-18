@@ -1,6 +1,7 @@
 zh-CN:
   active_enum:
     unknown: 未知
+  access_denied: 您没有权限访问此页面。
   unaccepted: 您的账号还没有被激活，请联系管理员为您激活帐户。
   can_not_use_tips: 在账户被激活之前，您不能进行业务管理。
   in_blacklist: 该用户在您的黑名单中。
@@ -46,6 +47,8 @@ zh-CN:
       bcst/comment: 评论
       bcst/exposure: 曝光
       bcst/traffic_report: 路况信息
+      category/brand: 车型品牌
+      category/product: 产品品牌
     attributes:
       statistic: &statisticable
         orders_count: 订单数
@@ -218,7 +221,7 @@ zh-CN:
         <<: *comment_user
       posts/mechanic_candidate/source:
         title: 申请车友会
-      share/brand:
+      category/brand:
         id: ID
         name: 名称
   simple_form:
