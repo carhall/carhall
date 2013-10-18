@@ -3,7 +3,7 @@ module Tips::Statable
 
   included do
     validates_each :state_id do |record, attr, value|
-      if record.state_id_was == Category::State["canceled"]
+      if record.state_id_was == Category::State[:canceled]
         record.errors.add(attr, I18n.t('order_canceled'))
       end
     end
@@ -13,24 +13,25 @@ module Tips::Statable
   end
 
   def cancel
-    self.state = "canceled"
+    self.state = :canceled
   end
 
   def finish
-    self.state = "finished"
-  end
-
-  def canceled?
-    self.state == "canceled"
-  end
-
-  def finished?
-    self.state == "finished"
+    self.state = :finished
   end
 
   def reset
-    self.state_id = nil
+    self.state = :unfinished
   end
+
+  def canceled?
+    self.state_id == Category::State[:canceled]
+  end
+
+  def finished?
+    self.state_id == Category::State[:finished]
+  end
+
 
   extend Share::Exclamation
   define_exclamation_and_method :cancel
