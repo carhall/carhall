@@ -16,6 +16,8 @@ class Ability
         cannot [:update, :destroy, :create], Accounts::Admin
         can :update, Accounts::Admin, id: user.id
       end
+      # no one can destroy superadmin
+      cannot :destroy, Accounts::Admin, id: 1
 
       # no one can destroy superadmin
 
