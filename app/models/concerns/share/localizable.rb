@@ -11,7 +11,9 @@ module Share::Localizable
       lat = lat.to_f
       lng = lng.to_f
 
-      geo_hash = Geohash.encode(lat, lng, 5)
+      # For testing
+      geo_hash = Geohash.encode(lat, lng, 4)
+      # geo_hash = Geohash.encode(lat, lng, 5)
       geo_bbox = Geohash.neighbors(geo_hash) << geo_hash
       sql_where_query = geo_bbox.map{|g|"locations.geohash LIKE '#{g}%'"}.join(' or ')
       
