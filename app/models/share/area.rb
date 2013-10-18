@@ -12,12 +12,13 @@ class Share::Area < ActiveEnum::Base
 
   class << self
     def get(index)
+      return nil if index.nil?
       if index.is_a?(Fixnum)
         row = store.get_by_id(index)
         row[1] if row
       else
         Areas.find_index do |area|
-          area.start_with? index
+          area.start_with? index.to_s
         end + 1
       end
     end
