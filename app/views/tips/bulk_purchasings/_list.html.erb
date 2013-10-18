@@ -1,5 +1,8 @@
+<% @bulk_purchasings = @bulk_purchasings.includes(:dealer) if @user.admin? %>
+
 <%= index_for @bulk_purchasings, class: :datatable do |t| %>
   <%= t.attribute :id %>
+  <%= t.association :dealer, using: :username if @user.admin? %>
   <%= t.attribute :image do |image| %>
     <%= image_tag(image.url(:thumb)) %>
   <% end %>

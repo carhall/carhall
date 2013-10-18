@@ -10,8 +10,11 @@
 
     <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
 
+    <% @cleanings = @cleanings.includes(:dealer) if @user.admin? %>
+    
     <%= index_for @cleanings, class: :datatable do |t| %>
       <%= t.attribute :id %>
+      <%= t.association :dealer, using: :username if @user.admin? %>
       <%= t.attribute :image do |image| %>
         <%= image_tag(image.url(:thumb)) %>
       <% end %>

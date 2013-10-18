@@ -10,8 +10,11 @@
 
     <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @mendings.empty? %>
 
+    <% @mendings = @mendings.includes(:dealer) if @user.admin? %>
+    
     <%= index_for @mendings, class: :datatable do |t| %>
       <%= t.attribute :id %>
+      <%= t.association :dealer, using: :username if @user.admin? %>
       <%= t.attribute :brands, join: '、' %>
       <%= t.attribute :state %>
       <%= t.attribute :orders_count %>

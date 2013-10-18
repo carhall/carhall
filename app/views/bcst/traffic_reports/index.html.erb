@@ -10,11 +10,13 @@
 
     <%= render 'share/alert', message: '您还没有收到任何路况信息！' if @traffic_reports.empty? %>
 
+    <% @traffic_reports = @traffic_reports.includes(:provider) if @user.admin? %>
     <% @traffic_reports = @traffic_reports.includes(:user, :at_user).page(params[:page]) %>
 
     <%= index_for @traffic_reports do |t| %>
       <%= t.attribute :id %>
-      <%= t.attribute :username, in: :user %>
+      <%= t.association :provider, using: :username if @user.admin? %>
+      <%= t.association :user, using: :username %>
       <%= t.attribute :content %>
       <%= t.attribute :image do |image| %>
         <%= image_tag(image.url(:thumb)) %>

@@ -66,6 +66,7 @@ zh-CN:
         price: 原价
         description: 项目介绍
         state: 项目状态
+        dealer: 所属服务商
       public: &publicable
         inverse_friends_count: 被关注数
         followed_count: 被关注数
@@ -186,16 +187,13 @@ zh-CN:
         image: 图片
         created_at: 发表时间
         comments_count: 评论数
-      posts/post/user: &post_user
-        username: 发帖人
+        user: 发帖人
       bcst/exposure: 
         <<: *post
-      bcst/exposure/user:
-        <<: *post_user
+        provider: 所属媒体
       bcst/traffic_report: 
         <<: *post
-      bcst/traffic_report/user:
-        <<: *post_user
+        provider: 所属媒体
       posts/club:
         id: ID
         avatar: LOGO
