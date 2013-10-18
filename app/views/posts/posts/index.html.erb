@@ -12,7 +12,7 @@
 
     <%= index_for @posts, class: :datatable do |t| %>
       <%= t.attribute :id %>
-      <%= t.attribute :username, in: :user %>
+      <%= t.association :user, using: :username %>
       <%= t.attribute :content %>
       <%= t.attribute :image do |image| %>
         <%= image_tag(image.url(:thumb)) %>
