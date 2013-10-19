@@ -2,10 +2,6 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
   before_filter :set_user, except: :show
   before_filter :set_area_id_and_brand_id, except: :create
 
-  def render_index posts
-    super posts.order('id DESC')
-  end
-
   # GET /api/posts
   # GET /api/posts.json
   def index
