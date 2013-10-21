@@ -49,7 +49,7 @@ class Posts::Club < ActiveRecord::Base
   end
 
   def title
-    "#{area.gsub(/省|市|维吾尔自治区|\p{Word}族自治区|自治区|特别行政区/, '')}#{brand}车友会"
+    "#{area}#{brand}车友会"
   end
 
   extend Share::Exclamation
