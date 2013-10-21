@@ -82,7 +82,7 @@ zh-CN:
       accounts/account: &account
         id: ID
         mobile: 手机号码
-        username: 昵称
+        username: 公众帐号
         current_password: 当前密码
         password: 密码
         password_confirmation: 确认密码
@@ -116,6 +116,7 @@ zh-CN:
       accounts/user: 
         <<: *account
         <<: *statisticable
+        username: 昵称
         total_cost: 总消费额
       accounts/user/detail:
         balance: 账户余额
