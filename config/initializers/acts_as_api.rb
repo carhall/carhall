@@ -27,9 +27,10 @@ module ActsAsApi
 
       def as_api_response(api_template, options = {})
         api_includes = (api_accessible_attributes(api_template).includes rescue nil)
+        api_cache = (api_accessible_attributes(api_template).cache rescue nil)
 
         scope = all
-        scope = scope.includes(api_includes) if api_includes
+        scope = scope.includes(api_includes) if api_includes and not api_cache
         scope.collect do |item|
           if item.respond_to?(:as_api_response)
             item.as_api_response(api_template,options)

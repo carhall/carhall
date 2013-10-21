@@ -51,7 +51,8 @@ class Tips::Review < ActiveRecord::Base
 
   acts_as_api
 
-  api_accessible :base, includes: [order: [:user, source: [:dealer]]] do |t|
+  api_accessible :base, 
+    includes: [order: [:user, source: [:dealer]]] do |t|
     t.only :id, :content, :stars, :created_at
     t.add :order, template: :base
   end

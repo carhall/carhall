@@ -77,6 +77,6 @@ module Share::Statisticable
   extend Share::MethodCache
   define_cached_methods :stars, :recent_stars, :recent_orders_count, 
     :total_cost, :recent_total_cost, :recent_ordered_users_count, 
-    :goal_attainment, expires_in: 5.minutes
+    :goal_attainment, expires_in: 1.hour
 
 end
