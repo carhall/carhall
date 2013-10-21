@@ -16,7 +16,7 @@ class Accounts::User < Accounts::Account
   end
 
   def last_3_posts
-    posts.unscoped.includes(:user).last(3)
+    posts.includes(:user).first(3)
   end
 
   api_accessible :detail, extend: :detail do |t|

@@ -17,11 +17,11 @@ module Tips::Servicable
   end
   
   def last_3_orders
-    orders.unscoped.includes(:user).last(3)
+    orders.includes(:user).first(3)
   end
 
   def last_3_reviews
-    reviews.unscoped.includes(order: :user).last(3)
+    reviews.includes(order: :user).first(3)
   end
 
   module ClassMethods

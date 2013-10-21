@@ -65,11 +65,11 @@ class Accounts::Dealer < Accounts::Account
   end
 
   def last_3_orders
-    orders.unscoped.includes(:user, source: [:dealer]).last(3)
+    orders.includes(:user, source: [:dealer]).first(3)
   end
 
   def last_3_reviews
-    reviews.unscoped.includes(order: [:user, source: [:dealer]]).last(3)
+    reviews.includes(order: [:user, source: [:dealer]]).first(3)
   end
 
   def mending_goal_attainment
