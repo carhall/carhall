@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018144455) do
+ActiveRecord::Schema.define(version: 20131019063929) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -90,6 +90,23 @@ ActiveRecord::Schema.define(version: 20131018144455) do
 
   add_index "activities", ["dealer_id"], name: "index_activities_on_dealer_id", using: :btree
   add_index "activities", ["location_id"], name: "index_activities_on_location_id", using: :btree
+
+  create_table "ad_templates", force: true do |t|
+    t.string   "title"
+    t.float    "price",               default: 0.0
+    t.integer  "product_id"
+    t.integer  "product_type_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "apply", force: true do |t|
     t.integer "from_user_id"
@@ -219,6 +236,24 @@ ActiveRecord::Schema.define(version: 20131018144455) do
     t.integer  "rqrcode_image_file_size"
     t.datetime "rqrcode_image_updated_at"
     t.integer  "specific_service_id"
+  end
+
+  create_table "distributor_details", force: true do |t|
+    t.integer  "distributor_type_id"
+    t.string   "business_scope_ids"
+    t.string   "product_ids"
+    t.string   "company"
+    t.string   "phone"
+    t.string   "rqrcode_token"
+    t.string   "manual_file_name"
+    t.string   "manual_content_type"
+    t.integer  "manual_file_size"
+    t.datetime "manual_updated_at"
+  end
+
+  create_table "distributor_infos_tutorials", id: false, force: true do |t|
+    t.integer "tutorial_id",         null: false
+    t.integer "distributor_info_id", null: false
   end
 
   create_table "exposures", force: true do |t|
@@ -385,6 +420,10 @@ ActiveRecord::Schema.define(version: 20131018144455) do
   add_index "posts", ["club_id"], name: "index_posts_on_club_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
+  create_table "products", force: true do |t|
+    t.string "name"
+  end
+
   create_table "programme_lists", force: true do |t|
     t.integer  "provider_id"
     t.string   "airdate"
@@ -448,6 +487,22 @@ ActiveRecord::Schema.define(version: 20131018144455) do
   end
 
   add_index "traffic_reports", ["provider_id"], name: "index_traffic_reports_on_provider_id", using: :btree
+
+  create_table "tutorials", force: true do |t|
+    t.string   "title"
+    t.integer  "product_id"
+    t.integer  "product_type_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_details", force: true do |t|
     t.string   "series"

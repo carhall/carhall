@@ -1,3 +1,6 @@
-class Category::Product < ActiveEnum::Base
-  
+class Category::Product < ActiveRecord::Base
+  Products = []
+
+  include Share::Categoryable
+
 end

@@ -76,6 +76,9 @@ zh-CN:
         accepted?: 年费
         expire_at: 到期时间
         rank: 会员级别
+      category: &categoryable
+        id: ID
+        name: 名称
       accounts/account: &account
         id: ID
         mobile: 手机号码
@@ -220,8 +223,9 @@ zh-CN:
       posts/mechanic_candidate/source:
         title: 申请车友会
       category/brand:
-        id: ID
-        name: 名称
+        <<: *categoryable
+      category/product:
+        <<: *categoryable
   simple_form:
     labels:
       account:

@@ -23,20 +23,6 @@ class Category::Brand < ActiveRecord::Base
     "中兴", "众泰", "其它", 
   ]
 
-  acts_as_enum
-
-  def self.lookup_by_id(index)
-    Rails.cache.fetch([self, index], expires_in: 1.day) do
-      enum_values.find_by_id(index)
-    end
-  end
-
-  after_commit :flush_cache
-  def flush_cache
-    Rails.cache.delete([self.class, self.id])
-  end
-
-  validates_presence_of :name 
-  validates_uniqueness_of :name
-
+  include Share::Categoryable
+  
 end

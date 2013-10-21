@@ -17,12 +17,10 @@ class Posts::Post < ActiveRecord::Base
 
   default_scope { order('id DESC') }
 
+  scope :top, -> { unscoped.order('comments_count DESC, id DESC') }
+
   def self.with_friends user
     with_user(user.friend_ids - user.post_blacklist_ids)
-  end
-
-  def self.top
-    unscoped.order('comments_count DESC, id DESC')
   end
 
   acts_as_api
