@@ -1,15 +1,15 @@
 class Api::ConstantsController < Api::ApplicationController
   def constants
     {
-      sexes: ::Accounts::Account::Sex.names,
-      areas: Category::Area.names,
-      brands: Category::Brand.names,
-      dealer_types: ::Accounts::DealerDetail::DealerType.names,
-      business_scopes: ::Accounts::DealerDetail::BusinessScope.names,
-      cleaning_types: ::Tips::Cleaning::CleaningType.names,
-      mending_types: ::Tips::MendingOrderDetail::MendingType.names,
-      bulk_purchasing_types: ::Tips::BulkPurchasing::BulkPurchasingType.names,
-      specific_services: ::Accounts::DealerDetail::SpecificService.names,
+      sexes: ::Accounts::Account::Sex.all,
+      areas: Category::Area.all,
+      brands: Category::Brand.all.map{|r|[r.id, r.name]},
+      dealer_types: ::Accounts::DealerDetail::DealerType.all,
+      business_scopes: ::Accounts::DealerDetail::BusinessScope.all,
+      cleaning_types: ::Tips::Cleaning::CleaningType.all,
+      mending_types: ::Tips::MendingOrderDetail::MendingType.all,
+      bulk_purchasing_types: ::Tips::BulkPurchasing::BulkPurchasingType.all,
+      specific_services: ::Accounts::DealerDetail::SpecificService.all,
     }
   end
 
