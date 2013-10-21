@@ -47,6 +47,10 @@ class Api::ApplicationController < ActionController::Base
       error_code: exception_name.demodulize.underscore, 
       backtrace: exception.backtrace[0..2],
     }
+    Rails.logger.error <<-EOE
+API Error: #{exception_name}: #{exception_message}
+  #{exception.backtrace.select{|b|b=~/carhall/}.join("\n  ")}
+EOE
   end
 
 private
