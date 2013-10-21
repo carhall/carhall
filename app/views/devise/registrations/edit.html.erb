@@ -54,7 +54,7 @@
               <%= ff.input :specific_service_id, collection: Accounts::DealerDetail::SpecificService.to_select, wrapper_html: { class: "specific_service" }, required: true %>
               <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScope.to_select, as: :check_boxes, wrapper_html: { class: "dealer" } %>
               <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
-              <%= f.input :area_id, collection: Category::Area.to_select, wrapper_html: { class: "dealer" }, required: true %>
+              <%= f.input :area_id, collection: Category::Area.to_select, wrapper_html: { class: "dealer" }, input_html: { class: 'select2' }, required: true %>
               <%= ff.input :address, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" } %>
               <%= ff.input :phone, wrapper_html: { class: "dealer provider" } %>
               <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00' %>
