@@ -81,7 +81,11 @@ class Tips::Order < ActiveRecord::Base
     t.only :id, :title, :state_id, :cost, :created_at
     t.methods :order_type, :state
     t.add :user, template: :base
-    # t.add :source, template: :base
+  end
+
+  api_accessible :detail, extend: :base,
+    includes: [:user, source: [:dealer]] do |t|
+    t.add :source, template: :base
   end
   
 end
