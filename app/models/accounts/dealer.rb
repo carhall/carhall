@@ -88,6 +88,8 @@ class Accounts::Dealer < Accounts::Account
   define_cached_methods :mending_goal_attainment, :cleaning_goal_attainment, 
     :bulk_purchasing_goal_attainment
 
+  api_accessible :detail_without_statistic, extend: :detail
+
   api_accessible :detail, extend: :detail do |t|
     t.add :area_id, append_to: :detail
     t.add :area, append_to: :detail

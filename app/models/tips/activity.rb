@@ -20,7 +20,7 @@ class Tips::Activity < ActiveRecord::Base
   end 
 
   api_accessible :detail, extend: :base do |t|
-    t.add :dealer, template: :detail
+    t.add :dealer, template: :detail_without_statistic
   end 
 
 end
