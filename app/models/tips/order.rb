@@ -77,11 +77,11 @@ class Tips::Order < ActiveRecord::Base
   acts_as_api
 
   api_accessible :base, 
-    includes: [:user, source: [:dealer]] do |t|
+    includes: [:user] do |t|
     t.only :id, :title, :state_id, :cost, :created_at
     t.methods :order_type, :state
     t.add :user, template: :base
-    t.add :source, template: :base
+    # t.add :source, template: :base
   end
   
 end
