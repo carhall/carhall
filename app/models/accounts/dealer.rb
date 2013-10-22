@@ -100,7 +100,7 @@ class Accounts::Dealer < Accounts::Account
     t.add :mending, template: :base, append_to: :detail
     t.add :orders_count, append_to: :detail
     t.add :last_3_orders, append_to: :detail, template: :base
-    t.add :last_3_reviews, append_to: :detail, template: :base
+    # t.add :last_3_reviews, append_to: :detail, template: :base
   end
 
 end

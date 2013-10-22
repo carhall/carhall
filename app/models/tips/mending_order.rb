@@ -12,8 +12,8 @@ class Tips::MendingOrder < Tips::Order
     0
   end
 
-  api_accessible :base, extend: :base, includes: [:user, :detail, source: [:dealer]] do |t|
-    t.add :detail, template: :base
-  end
+  # api_accessible :base, extend: :base, includes: [:user, :detail, source: [:dealer]] do |t|
+  #   t.add :detail, template: :base
+  # end
   
 end
