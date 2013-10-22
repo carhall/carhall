@@ -1,4 +1,6 @@
 class Api::ConstantsController < Api::ApplicationController
+  skip_before_filter :authenticate_account!
+
   def constants
     {
       sexes: ::Accounts::Account::Sex.all,
