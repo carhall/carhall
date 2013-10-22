@@ -5,7 +5,7 @@ class Api::ConstantsController < Api::ApplicationController
     {
       sexes: ::Accounts::Account::Sex.all,
       areas: Category::Area.all,
-      brands: Category::Brand.all.map{|r|[r.id, r.name]},
+      brands: Category::Brand.all,
       dealer_types: ::Accounts::DealerDetail::DealerType.all,
       business_scopes: ::Accounts::DealerDetail::BusinessScope.all,
       cleaning_types: ::Tips::Cleaning::CleaningType.all,
