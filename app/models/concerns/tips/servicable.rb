@@ -30,7 +30,7 @@ module Tips::Servicable
       api_accessible :detail, extend: :base do |t|
         t.add :goal_attainment, append_to: :detail
         t.add :last_3_orders, append_to: :detail, template: :base
-        t.add :last_3_reviews, append_to: :detail, template: :base
+        # t.add :last_3_reviews, append_to: :detail, template: :base
         t.add :dealer, template: :detail_without_statistic
       end
     end

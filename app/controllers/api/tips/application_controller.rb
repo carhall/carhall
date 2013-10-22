@@ -1,11 +1,12 @@
 class Api::Tips::ApplicationController < Api::ApplicationController
-  
-  def set_filter
-    filter_parent :area
-  end
+  before_filter :set_dealer
 
   def set_dealer
     @dealer = ::Accounts::Dealer.find(params[:dealer_id]) if params[:dealer_id]
+  end
+
+  def set_filter
+    filter_parent :area
   end
 
   def self.set_resource_class klass, options = {}
