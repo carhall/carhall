@@ -33,6 +33,8 @@ module Accounts::Friendshipable
   end
 
   def break_with! friend
+    friend = Accounts::Account.find(friend) unless friend.kind_of? Accounts::Account
+    inverse_friendships.where(user_id: friend).delete_all if friend.user_type != :user
     friendships.where(friend_id: friend).delete_all
   end
 
