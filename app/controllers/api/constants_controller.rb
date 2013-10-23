@@ -5,7 +5,7 @@ class Api::ConstantsController < Api::ApplicationController
     {
       sexes: ::Accounts::Account::Sex.all,
       areas: Category::Area.all,
-      brands: Category::Brand.all,
+      brands: Category::Brand.all.map{|b|[b.id, b.name]},
       dealer_types: ::Accounts::DealerDetail::DealerType.all,
       business_scopes: ::Accounts::DealerDetail::BusinessScope.all,
       cleaning_types: ::Tips::Cleaning::CleaningType.all,
@@ -21,5 +21,9 @@ class Api::ConstantsController < Api::ApplicationController
 
   def show
     render_data constants[params[:id].to_sym]
+  end
+
+  def brands
+    render_data Category::Brand.all
   end
 end

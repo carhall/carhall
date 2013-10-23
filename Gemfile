@@ -37,10 +37,10 @@ gem 'index_for', github: 'bbtfr/index_for'
 # gem 'index_for', path: '..'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+# gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -64,6 +64,7 @@ gem 'devise', '~> 3.1'
 gem 'cancan'
 
 # For Apis
+gem 'rails-api'
 gem 'acts_as_api'
 
 # Basic
@@ -75,6 +76,8 @@ gem 'geohash', github: 'RyanNaughton/geohash'
 # gem 'active_enum', github: 'bbtfr/active_enum'
 gem 'active_enum', path: 'vendor'
 # gem "second_level_cache", github: 'hooopo/second_level_cache'
+
+gem 'resque'
 
 group :development, :test do
   gem 'faker'

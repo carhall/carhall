@@ -185,7 +185,9 @@ Carhall::Application.routes.draw do
   ############################
   # APIs
   namespace :api do
-    resources :constants, only: [:index, :show]
+    resources :constants, only: [:index, :show] do
+      get :brands, on: :collection
+    end
 
     # Accounts
      scope module: :accounts do

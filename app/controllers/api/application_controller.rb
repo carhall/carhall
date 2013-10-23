@@ -1,4 +1,7 @@
-class Api::ApplicationController < ActionController::Base
+class Api::ApplicationController < ActionController::API
+  include CanCan::ControllerAdditions
+  include ActionController::StrongParameters
+
   # This is our new function that comes before Devise's one
   before_filter :authenticate_account_from_token!
   # This is Devise's authentication
