@@ -26,43 +26,35 @@ module Accounts::Friendshipable
 
   end
 
-  def make_friend_with friend
+  def make_friend_with! friend
     friend_id = Share::Userable.get_id friend
-    friendships.where(friend_id: friend_id).first_or_initialize
+    inverse_friendships.where(user_id: friend_id).first_or_create if user_type != :user
+    friendships.where(friend_id: friend_id).first_or_create
   end
 
-  def break_with friend
+  def break_with! friend
     friend_id = Share::Userable.get_id friend
-    friendship = friendships.where(friend_id: friend_id).first
-    friendship.destroy if friendship
+    friendships.where(friend_id: friend_id).delete_all
   end
 
-  def add_to_blacklist blacklist
+  def add_to_blacklist! blacklist
     blacklist_id = Share::Userable.get_id blacklist
-    break_with blacklist_id
-    blocks.where(blacklist_id: blacklist_id).first_or_initialize
+    blocks.where(blacklist_id: blacklist_id).first_or_create
   end
   
-  def add_to_post_blacklist blacklist
+  def add_to_post_blacklist! blacklist
     blacklist_id = Share::Userable.get_id blacklist
-    post_blocks.where(blacklist_id: blacklist_id).first_or_initialize
+    post_blocks.where(blacklist_id: blacklist_id).first_or_create
   end
 
-  def remove_from_blacklist blacklist
+  def remove_from_blacklist! blacklist
     blacklist_id = Share::Userable.get_id blacklist
-    block = blocks.where(blacklist_id: blacklist_id).first
-    block.destroy if block
+    blocks.where(blacklist_id: blacklist_id).delete_all
   end
 
-  def remove_from_post_blacklist blacklist
+  def remove_from_post_blacklist! blacklist
     blacklist_id = Share::Userable.get_id blacklist
-    block = post_blocks.where(blacklist_id: blacklist_id).first
-    block.destroy if block
+    post_blocks.where(blacklist_id: blacklist_id).delete_all
   end
 
-  extend Share::Exclamation
-  define_exclamation_dot_method :make_friend_with
-  define_exclamation_dot_method :add_to_blacklist
-  define_exclamation_dot_method :add_to_post_blacklist
-  
 end

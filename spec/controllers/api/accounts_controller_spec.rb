@@ -111,7 +111,7 @@ describe "Users" do
 
   describe Api::Accounts::FriendsController do
     context do
-      before { 3.times { user.make_friend_with(create(:user)).save }}
+      before { 3.times { user.make_friend_with!(create(:user)) }}
 
       include_examples "resources#collection", :index
 
@@ -126,17 +126,17 @@ describe "Users" do
     end
 
     describe "GET dealer" do
-      before { 3.times { user.make_friend_with(create(:dealer)).save }}
+      before { 3.times { user.make_friend_with!(create(:dealer)) }}
       include_examples "resources#collection", :dealer
     end
 
     describe "GET provider" do
-      before { 3.times { user.make_friend_with(create(:provider)).save }}
+      before { 3.times { user.make_friend_with!(create(:provider)) }}
       include_examples "resources#collection", :provider
     end
     
     context do
-      before { user.make_friend_with(other).save }
+      before { user.make_friend_with!(other) }
       let(:args) {{ id: other.id }}
       include_examples "resources#post", :create
       include_examples "resources#delete", :destroy
@@ -145,7 +145,7 @@ describe "Users" do
 
   describe Api::Accounts::BlacklistsController do
     context do
-      before { 3.times { user.add_to_blacklist(create(:user)).save }}
+      before { 3.times { user.add_to_blacklist!(create(:user)) }}
 
       include_examples "resources#collection", :index
       
@@ -156,7 +156,7 @@ describe "Users" do
     end
     
     context do
-      before { user.add_to_blacklist(other).save }
+      before { user.add_to_blacklist!(other) }
       let(:args) {{ id: other.id }}
       include_examples "resources#post", :create
       include_examples "resources#delete", :destroy

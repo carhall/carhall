@@ -10,19 +10,14 @@ class Api::Posts::PostBlacklistsController < Api::Posts::ApplicationController
   # POST /api/post_blacklists/1
   # POST /api/post_blacklists/1.json
   def create
-    block = @user.add_to_post_blacklist params[:id]
-    if not block.new_record? or block.save
-      render_created
-    else
-      render_failure block
-    end
+    @user.add_to_post_blacklist! params[:id]
+    render_created
   end
 
   # DELETE /api/post_blacklists/1
   # DELETE /api/post_blacklists/1.json
   def destroy
-    @user.remove_from_post_blacklist params[:id]
-
+    @user.remove_from_post_blacklist! params[:id]
     render_accepted
   end
   

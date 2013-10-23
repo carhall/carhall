@@ -9,14 +9,14 @@ describe "Posts" do
 
     describe "post_blacklist" do
       before do
-        user.make_friend_with(other).save
+        user.make_friend_with!(other)
         create :post, user: other
       end 
       it "friends' post display in #with_friends" do
         Posts::Post.with_friends(user).should have(1).items
       end
       it "#add_to_post_blacklist, doesn't display in #with_friends" do
-        user.add_to_post_blacklist(other).save
+        user.add_to_post_blacklist!(other)
         Posts::Post.with_friends(user).should be_empty
       end
     end

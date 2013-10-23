@@ -25,7 +25,7 @@ describe "Posts" do
     end
 
     describe "GET friends" do
-      before { user.make_friend_with(other).save }
+      before { user.make_friend_with!(other) }
       before { 3.times { create resource, user: other }}
       include_examples "resources#collection", :friends
     end
@@ -44,10 +44,10 @@ describe "Posts" do
     end
 
     describe "when other in post blacklist" do
-      before { user.add_to_post_blacklist(other).save }
+      before { user.add_to_post_blacklist!(other) }
 
       describe "GET friends" do
-        before { user.make_friend_with(other).save }
+        before { user.make_friend_with!(other) }
         before { 3.times { create resource, user: other }}
         include_examples "resources#collection empty", :friends
       end
@@ -87,7 +87,7 @@ describe "Posts" do
   describe Api::Posts::PostBlacklistsController do
 
     describe "GET index" do
-      before { 3.times { user.add_to_post_blacklist(create(:user)).save }}
+      before { 3.times { user.add_to_post_blacklist!(create(:user)) }}
       include_examples "resources#collection", :index
     end
     
@@ -97,7 +97,7 @@ describe "Posts" do
     end
     
     describe "when other in post blacklist" do
-      before { user.add_to_post_blacklist(other).save }
+      before { user.add_to_post_blacklist!(other) }
 
       describe "DELETE destroy" do
         let(:args) {{ id: other.id }}
