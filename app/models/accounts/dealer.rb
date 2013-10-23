@@ -26,7 +26,7 @@ class Accounts::Dealer < Accounts::Account
 
   before_save do
     if area_changed?
-      self.mending.update_attributes(area_id: self.area_id)
+      self.mending.update_attributes(area_id: self.area_id) if self.mending
       self.cleanings.update_all(area_id: self.area_id)
       self.activities.update_all(area_id: self.area_id)
       self.bulk_purchasings.update_all(area_id: self.area_id)
