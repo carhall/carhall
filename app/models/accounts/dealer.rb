@@ -113,7 +113,7 @@ class Accounts::Dealer < Accounts::Account
     t.add :mending_goal_attainment, append_to: :detail
     t.add :cleaning_goal_attainment, append_to: :detail
     t.add :bulk_purchasing_goal_attainment, append_to: :detail
-    t.add :mending, template: :base, append_to: :without_dealer
+    t.add :mending, template: :without_dealer, append_to: :detail
     t.add :orders_count, append_to: :detail
     t.add :last_3_orders, append_to: :detail, template: :base
     # t.add :last_3_reviews, append_to: :detail, template: :base
