@@ -24,6 +24,22 @@ class Accounts::Dealer < Accounts::Account
   
   validates_presence_of :area_id, :type
 
+  before_save do
+    if area_changed?
+      self.mending.update_attributes(area_id: self.area_id)
+      self.cleanings.update_all(area_id: self.area_id)
+      self.activities.update_all(area_id: self.area_id)
+      self.bulk_purchasings.update_all(area_id: self.area_id)
+    end
+
+    # if detail.address_changed?
+    #   self.mending.update_attributes(location_id: self.location_id)
+    #   self.cleanings.update_all(location_id: self.location_id)
+    #   self.activities.update_all(location_id: self.location_id)
+    #   self.bulk_purchasings.update_all(location_id: self.location_id)
+    # end
+  end
+
   validates_each :detail do |record, attr, value|
     if value and value.address_changed?
       bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value.address}"
@@ -97,7 +113,7 @@ class Accounts::Dealer < Accounts::Account
     t.add :mending_goal_attainment, append_to: :detail
     t.add :cleaning_goal_attainment, append_to: :detail
     t.add :bulk_purchasing_goal_attainment, append_to: :detail
-    t.add :mending, template: :base, append_to: :detail
+    t.add :mending, template: :base, append_to: :without_dealer
     t.add :orders_count, append_to: :detail
     t.add :last_3_orders, append_to: :detail, template: :base
     # t.add :last_3_reviews, append_to: :detail, template: :base

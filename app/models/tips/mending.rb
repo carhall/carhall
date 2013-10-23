@@ -26,9 +26,12 @@ class Tips::Mending < ActiveRecord::Base
   include Share::Localizable
   include Share::Statisticable
 
-  api_accessible :base, includes: [:dealer] do |t|
+  api_accessible :without_dealer, includes: [:dealer] do |t|
     t.only :id, :area_id, :brand_ids, :description, :orders_count, :reviews_count
     t.methods :area, :brands, :discount, :stars
+  end
+
+  api_accessible :base, extend: :without_dealer, includes: [:dealer] do |t|
     t.add :dealer, template: :base
   end
   
