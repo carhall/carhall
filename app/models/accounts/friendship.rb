@@ -1,5 +1,5 @@
 class Accounts::Friendship < ActiveRecord::Base
-  # self.table_name = "friend"
+  self.table_name = "friend"
 
   belongs_to :user, class_name: 'Accounts::Account'
   belongs_to :friend, class_name: 'Accounts::Account'
