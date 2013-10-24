@@ -63,14 +63,16 @@ private
   # authentication features to get the token from a header.
   def authenticate_account_from_token!
     auth_token = params[:auth_token].presence
-    account    = auth_token && ::Accounts::Account.find_by(authentication_token: auth_token)
- 
-    if account
+    @current_account = Rails.cache.fetch([:auth_token, auth_token], expires_in: 1.hour) do
+      auth_token && ::Accounts::Account.find_by(authentication_token: auth_token)
+    end
+
+    if @current_account
       # Notice we are passing store false, so the user is not
       # actually stored in the session and a token is needed
       # for every request. If you want the token to work as a
       # sign in token, you can simply remove store: false.
-      sign_in account, store: false
+      sign_in @current_account, store: false
     end
   end
 end

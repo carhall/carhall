@@ -5,10 +5,6 @@ module FilterHelper
     @current_ability ||= Ability.new(current_account)
   end
 
-  def current_user
-    current_account
-  end
-
   def filter_parent key
     if params[:filter]
       if params[:filter][:"#{key}_id"]
