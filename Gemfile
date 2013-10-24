@@ -77,7 +77,7 @@ gem 'geohash', github: 'RyanNaughton/geohash'
 gem 'active_enum', path: 'vendor'
 # gem "second_level_cache", github: 'hooopo/second_level_cache'
 
-gem 'resque'
+# gem 'resque'
 
 group :development, :test do
   gem 'faker'
