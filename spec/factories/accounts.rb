@@ -16,6 +16,7 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
+    display { true }
     detail do
       {
         company: Faker::Lorem.sentence,
@@ -29,6 +30,7 @@ FactoryGirl.define do
     password { 'password' }
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
+    display { true }
     area { Category::Area.names.sample }
     detail do
       {

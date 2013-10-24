@@ -39,6 +39,7 @@ module Accounts::Friendshipable
   end
 
   def add_to_blacklist! blacklist
+    break_with! blacklist
     blocks.where(blacklist_id: blacklist).first_or_create
   end
   
