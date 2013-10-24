@@ -27,5 +27,7 @@ module Carhall
     config.i18n.default_locale = :'zh-CN'
 
     config.action_dispatch.rescue_responses["CanCan::AccessDenied"] = :forbidden
+
+    config.api_only = false
   end
 end
