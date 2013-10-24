@@ -1,4 +1,4 @@
-class Api::ApplicationController < ActionController::API
+class Api::ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
   include ActionController::StrongParameters
 

@@ -64,7 +64,7 @@ gem 'devise', '~> 3.1'
 gem 'cancan'
 
 # For Apis
-gem 'rails-api'
+# gem 'rails-api'
 gem 'acts_as_api'
 
 # Basic

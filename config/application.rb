@@ -28,9 +28,9 @@ module Carhall
 
     config.action_dispatch.rescue_responses["CanCan::AccessDenied"] = :forbidden
 
-    config.api_only = false
-    config.middleware.use Rack::MethodOverride
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Flash
+    # config.api_only = false
+    # config.middleware.use Rack::MethodOverride
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Flash
   end
 end
