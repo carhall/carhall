@@ -41,16 +41,16 @@ private
 
   def update_params
     params.require(:data).permit(:username, :mobile, :description, :avatar, 
-      detail: [:id, :sex_id, :sex, :area_id, :area, :brand_id, :brand, 
-        :series, :plate_num, :car_image]
+      :sex_id, :sex, :area_id, :area, :brand_id, :brand, 
+      detail: [:id, :series, :plate_num, :car_image]
     )
   end
 
   def password_params
     params.require(:data).permit(:username, :mobile, :description, :avatar, 
       :password, :password_confirmation, :current_password, 
-      detail: [:id, :sex_id, :sex, :area_id, :area, :brand_id, :brand, 
-        :series, :plate_num, :car_image]
+      :sex_id, :sex, :area_id, :area, :brand_id, :brand,
+      detail: [:id, :series, :plate_num, :car_image]
     )
   end
 
