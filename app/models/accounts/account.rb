@@ -25,6 +25,11 @@ class Accounts::Account < ActiveRecord::Base
   acts_as_api
 
   enumerate :area, with: Category::Area
+  alias_method :city, :area
+  def province
+    area(:province)
+  end
+
   enumerate :brand, with: Category::Brand
   enumerate :sex, with: %w(男 女)
 

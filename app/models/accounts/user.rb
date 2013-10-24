@@ -24,6 +24,8 @@ class Accounts::User < Accounts::Account
     t.add :sex, append_to: :detail
     t.add :area_id, append_to: :detail
     t.add :area, append_to: :detail
+    t.add :city, append_to: :detail
+    t.add :province, append_to: :detail
     t.add :brand_id, append_to: :detail
     t.add :brand, append_to: :detail
     t.add :last_3_posts, append_to: :detail, template: :base
