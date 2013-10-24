@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019063929) do
+ActiveRecord::Schema.define(version: 20131024062904) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -117,6 +117,16 @@ ActiveRecord::Schema.define(version: 20131019063929) do
 
   add_index "apply", ["from_user_id"], name: "index_apply_on_from_user_id", using: :btree
   add_index "apply", ["to_user_id"], name: "index_apply_on_to_user_id", using: :btree
+
+  create_table "blacklist", force: true do |t|
+    t.integer "user_id"
+    t.integer "blacklist_id"
+    t.integer "created_at",   limit: 8
+    t.integer "updated_at",   limit: 8
+  end
+
+  add_index "blacklist", ["blacklist_id"], name: "index_blacklist_on_blacklist_id", using: :btree
+  add_index "blacklist", ["user_id"], name: "index_blacklist_on_user_id", using: :btree
 
   create_table "blocks", force: true do |t|
     t.integer  "user_id"
