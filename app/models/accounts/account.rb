@@ -34,9 +34,13 @@ class Accounts::Account < ActiveRecord::Base
   enumerate :sex, with: %w(男 女)
 
   def user_type
-    return :guest if new_record?
-    return :account unless type
-    type.demodulize.underscore.to_sym
+    @user_type ||= if new_record?
+      :guest
+    elsif not type
+      :account
+    else
+      type.demodulize.underscore.to_sym
+    end
   end
 
   def admin?
