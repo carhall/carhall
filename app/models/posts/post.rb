@@ -25,13 +25,13 @@ class Posts::Post < ActiveRecord::Base
 
   acts_as_api
 
-  api_accessible :base, includes: [:user] do |t|
+  api_accessible :base, cache: 1.hour, includes: [:user] do |t|
     t.only :id, :content, :view_count, :comments_count, :created_at
     t.images :image
     t.add :user, template: :base
   end
 
-  api_accessible :detail ,extend: :base, 
+  api_accessible :detail, extend: :base, cache: 1.hour,
     includes: [:user, comments: [:user, :at_user]] do |t|
     t.add :comments, template: :base
   end

@@ -38,7 +38,7 @@ class OpenfiresController < ActionController::Base
   protected
 
   def openfire_user_info u
-    { id: u.id, mobile: u.mobile, token: u.authentication_token }
+    { id: u.id, mobile: u.mobile, token: u.authentication_token, user_type_id: u.user_type_id }
   end
 
   def openfire_user_detail u
@@ -47,7 +47,7 @@ class OpenfiresController < ActionController::Base
     { 
       id: u.id, username: u.username, mobile: u.mobile, 
       avatar_thumb_url: avatar_thumb_url, sex_id: sex_id || 0,
-      user_type: u.user_type, user_type_id: u.user_type_id
+      user_type_id: u.user_type_id
     }
   end
 end

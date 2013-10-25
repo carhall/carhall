@@ -9,7 +9,7 @@ class Share::Comment < ActiveRecord::Base
   
   acts_as_api
 
-  api_accessible :base, includes: [:user, :at_user] do |t|
+  api_accessible :base, cache: 1.hour, includes: [:user, :at_user] do |t|
     t.only :id, :content, :created_at
     t.add :user, template: :base
     t.add :at_user, template: :base
