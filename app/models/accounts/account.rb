@@ -51,6 +51,19 @@ class Accounts::Account < ActiveRecord::Base
       dealer: '服务商',
       provider: '媒体',
       distributor: '经销商',
+      agent: '代理商',
+    }[user_type]
+  end
+
+  def user_type_id
+    {
+      guest: 1,
+      admin: 2,
+      user: 3,
+      dealer: 4,
+      provider: 5,
+      distributor: 6,
+      agent: 7,
     }[user_type]
   end
 

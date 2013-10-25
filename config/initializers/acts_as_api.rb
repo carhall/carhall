@@ -30,10 +30,10 @@ module ActsAsApi
         api_cache = (api_accessible_attributes(api_template).cache rescue nil)
 
         scope = all
-        scope = scope.includes(api_includes) if api_includes and not api_cache
+        scope = scope.includes(api_includes) if api_includes && !api_cache
         scope.collect do |item|
           if item.respond_to?(:as_api_response)
-            item.as_api_response(api_template,options)
+            item.as_api_response(api_template, options)
           else
             item
           end
@@ -142,7 +142,7 @@ module ActsAsApi
 
         if out.respond_to?(:as_api_response)
           sub_template = api_template_for(fieldset, field)
-          out = out.as_api_response(sub_template)
+          out = out.as_api_response(sub_template, sub: true)
         end
 
         set_value(api_output, fieldset, field, out, options)
@@ -164,5 +164,19 @@ module ActsAsApi
         end[field] = out
       end
     end
+  end
+end
+
+ActiveRecord::Associations::CollectionProxy.class_eval do
+
+  def as_api_response(api_template, options = {})
+    collect do |item|
+      if item.respond_to?(:as_api_response)
+        item.as_api_response(api_template, options)
+      else
+        item
+      end
+    end
+
   end
 end

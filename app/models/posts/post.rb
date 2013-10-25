@@ -31,4 +31,9 @@ class Posts::Post < ActiveRecord::Base
     t.add :user, template: :base
   end
 
+  api_accessible :detail ,extend: :base, 
+    includes: [:user, comments: [:user, :at_user]] do |t|
+    t.add :comments, template: :base
+  end
+
 end
