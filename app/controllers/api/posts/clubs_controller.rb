@@ -22,7 +22,7 @@ class Api::Posts::ClubsController < Api::Posts::ApplicationController
 
   def president
     club = ::Posts::Club.with_user(@user)
-    club.apply_president(@user, params[:data][:description])
+    club.apply_president!(@user, params[:data][:description])
     # club.appoint_president @user
     if club.save
       render_created
@@ -33,7 +33,7 @@ class Api::Posts::ClubsController < Api::Posts::ApplicationController
 
   def mechanics
     club = ::Posts::Club.with_user(@user)
-    club.apply_mechanic(@user, params[:data][:description])
+    club.apply_mechanic!(@user, params[:data][:description])
     # club.appoint_mechanic @user
     if club.save
       render_created

@@ -27,6 +27,7 @@ module Carhall
     config.i18n.default_locale = :'zh-CN'
 
     config.action_dispatch.rescue_responses["CanCan::AccessDenied"] = :forbidden
+    config.action_dispatch.rescue_responses["ActiveRecord::AssociationTypeMismatch"] = :unprocessable_entity
 
     # config.api_only = false
     # config.middleware.use Rack::MethodOverride
