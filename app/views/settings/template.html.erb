@@ -10,34 +10,52 @@
 
     <div class="row-fluid">
       <div class="span3">
-        <img src="<%= @dealer.avatar.url(:medium) %>">
+        <img src="<%= @user.avatar.url(:medium) %>">
       </div>
       <div class="span9">
-        <%= simple_form_for(@dealer, url: account_registration_path, html: { method: :put, class: 'form-horizontal no-margin dl-horizontal dl-span6' }) do |f| %>
+        <%= simple_form_for(@user, url: account_registration_path, html: { method: :put, class: 'form-horizontal no-margin dl-horizontal dl-span6' }) do |f| %>
 
-          <div>
-            <dl><strong>业务模板管理</strong></dl>
-            <dl>
-              <dt>洗车美容</dt>
-              <dd><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 1 %>></dd>
-            </dl>
-            <dl>
-              <dt>保养专修</dt>
-              <dd><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 2 %>></dd>
-            </dl>
-            <dl>&nbsp;</dl>
-            <dl class="no-border"><strong>营销模块管理</strong></dl>
-            <dl>
-              <dt>团购</dt>
-              <dd><input class="check_boxes" id="account_detail_attributes_template_ids_3" name="account[detail_attributes][template_ids][]" type="checkbox" value="3"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 3 %>></dd>
-            </dl>
-            <dl>
-              <dt>近期活动</dt>
-              <dd><input class="check_boxes" id="account_detail_attributes_template_ids_4" name="account[detail_attributes][template_ids][]" type="checkbox" value="4"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 4 %>></dd>
-            </dl>
-          </div>
+          <% if @dealer %>
+            <div>
+              <dl><strong>业务模板管理</strong></dl>
+              <dl>
+                <dt>洗车美容</dt>
+                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 1 %>></dd>
+              </dl>
+              <dl>
+                <dt>保养专修</dt>
+                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 2 %>></dd>
+              </dl>
+              <dl>&nbsp;</dl>
+              <dl class="no-border"><strong>营销模块管理</strong></dl>
+              <dl>
+                <dt>团购</dt>
+                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_3" name="account[detail_attributes][template_ids][]" type="checkbox" value="3"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 3 %>></dd>
+              </dl>
+              <dl>
+                <dt>近期活动</dt>
+                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_4" name="account[detail_attributes][template_ids][]" type="checkbox" value="4"<%= "checked=\"checked\"" if @dealer.detail.template_ids.include? 4 %>></dd>
+              </dl>
+            </div>
 
-          <input name="account[type]" type="hidden" value="Accounts::Dealer">
+            <input name="account[type]" type="hidden" value="Accounts::Dealer">
+          <% elsif @provider %>
+
+            <div>
+              <dl><strong>业务模板管理</strong></dl>
+              <dl>
+                <dt>曝光台</dt>
+                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @provider.detail.template_ids.include? 1 %>></dd>
+              </dl>
+              <dl>
+                <dt>路况信息</dt>
+                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @provider.detail.template_ids.include? 2 %>></dd>
+              </dl>
+
+              <input name="account[type]" type="hidden" value="Accounts::Provider">
+            </div>
+
+          <% end %>
           <input name="account[detail_attributes][template_ids][]" type="hidden" value="">
 
           <input class="btn btn-submit" name="commit" type="submit" value="更新业务模板">

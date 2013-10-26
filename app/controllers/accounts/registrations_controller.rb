@@ -15,7 +15,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     case @account_params[:type]
     when "Accounts::Provider"
       permit << :type
-      permit << {detail_attributes: [:id, :company, :phone]}
+      permit << {detail_attributes: [:id, :company, :phone, {template_ids: []}]}
     when "Accounts::Dealer"
       permit << :type
       permit << :area_id

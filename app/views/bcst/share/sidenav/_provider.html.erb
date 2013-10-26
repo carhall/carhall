@@ -8,10 +8,17 @@
   <li<%= active? 'bcst/programmes' %>><a href="<%= bcst_programmes_path %>"><i class="icon-chevron-right"></i> 节目板块</a></li>
 </ul>
 
-<ul class="nav nav-list sidenav affix-top">
-  <li><span><strong>业务板块</strong></span></li>
+<% if @provider.has_template? :exposure or @provider.has_template? :traffic_report %>
+  <ul class="nav nav-list sidenav affix-top">
+    <li><span><strong>业务板块</strong></span></li>
 
-  <li<%= active? 'bcst/traffic_reports' %>><a href="<%= bcst_traffic_reports_path %>"><i class="icon-chevron-right"></i> 路况信息</a></li>
+    <% if @provider.has_template? :exposure %>
+      <li<%= active? 'bcst/exposures' %>><a href="<%= bcst_exposures_path %>"><i class="icon-chevron-right"></i> 曝光台</a></li>
+    <% end %>
 
-  <li<%= active? 'bcst/exposures' %>><a href="<%= bcst_exposures_path %>"><i class="icon-chevron-right"></i> 曝光台</a></li>
-</ul>
+    <% if @provider.has_template? :traffic_report %>
+      <li<%= active? 'bcst/traffic_reports' %>><a href="<%= bcst_traffic_reports_path %>"><i class="icon-chevron-right"></i> 路况信息</a></li>
+    <% end %>
+
+  </ul>
+<% end %>

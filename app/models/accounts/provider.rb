@@ -13,6 +13,10 @@ class Accounts::Provider < Accounts::Account
 
   validates_presence_of :type
 
+  def has_template? template
+    detail.template_syms.include? template
+  end
+
   def programme_list
     hash = Category::Day.names.reduce({}) { |ret, name| ret[name] = []; ret } 
     programme_lists.each { |pl| hash[pl.day] << pl }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024062904) do
+ActiveRecord::Schema.define(version: 20131026011120) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -468,6 +468,7 @@ ActiveRecord::Schema.define(version: 20131024062904) do
     t.string   "rqrcode_image_content_type"
     t.integer  "rqrcode_image_file_size"
     t.datetime "rqrcode_image_updated_at"
+    t.string   "template_ids"
   end
 
   create_table "reviews", force: true do |t|

@@ -23,12 +23,17 @@ class Posts::Post < ActiveRecord::Base
     with_user(user.friend_ids - user.post_blacklist_ids)
   end
 
+  def last_10_comments
+    comments.first(3)
+  end
+
   acts_as_api
 
   api_accessible :base, cache: 1.hour, includes: [:user] do |t|
     t.only :id, :content, :view_count, :comments_count, :created_at
     t.images :image
     t.add :user, template: :base
+    # t.add :last_10_comments
   end
 
   api_accessible :detail, extend: :base, cache: 1.hour,
