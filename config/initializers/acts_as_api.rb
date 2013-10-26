@@ -1,6 +1,7 @@
 module ActsAsApi
   module Base
     CacheVersion = 1
+    Expires_in = 1.hour
 
     ClassMethods.module_eval do
       # Determines the attributes, methods of the model that are accessible in the api response.
@@ -22,15 +23,14 @@ module ActsAsApi
 
         after_commit do
           Rails.cache.delete([self.class, self.id, api_template, CacheVersion])
-        end if options[:cache]
+        end
       end
 
       def as_api_response(api_template, options = {})
         api_includes = (api_accessible_attributes(api_template).includes rescue nil)
-        api_cache = (api_accessible_attributes(api_template).cache rescue nil)
 
         scope = all
-        scope = scope.includes(api_includes) if api_includes && !api_cache
+        scope = scope.includes(api_includes) if api_includes
         scope.collect do |item|
           if item.respond_to?(:as_api_response)
             item.as_api_response(api_template, options)
@@ -61,12 +61,8 @@ module ActsAsApi
 
       alias_method :as_api_response_without_cache, :as_api_response
       def as_api_response(api_template, options = {})
-        api_cache = (self.class.api_accessible_attributes(api_template).cache rescue nil)
-        if api_cache
-          Rails.cache.fetch([self.class, self.id, api_template, CacheVersion], expires_in: api_cache) do
-            as_api_response_without_cache(api_template, options)
-          end
-        else
+        Rails.cache.fetch([self.class, self.id, api_template, CacheVersion], 
+          expires_in: Expires_in) do
           as_api_response_without_cache(api_template, options)
         end
       end
@@ -80,7 +76,6 @@ module ActsAsApi
     def initialize(api_template, api_options)
       super(api_template)
       @includes = api_options[:includes]
-      @cache = api_options[:cache]
       @options ||= {}
       @serializable_options ||= {}
     end
@@ -90,7 +85,6 @@ module ActsAsApi
       self.options.merge!(other_hash.options) if other_hash.respond_to?(:options)
       self.serializable_options.merge!(other_hash.serializable_options) if other_hash.respond_to?(:serializable_options)
       self.includes ||= other_hash.includes if other_hash.respond_to?(:includes)
-      self.cache ||= other_hash.cache if other_hash.respond_to?(:cache)
     end
 
     def insert(array)
