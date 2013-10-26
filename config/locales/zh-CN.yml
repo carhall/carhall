@@ -68,6 +68,7 @@ zh-CN:
         state: 项目状态
         dealer: 所属服务商
       public: &publicable
+        username: 公众帐号
         inverse_friends_count: 被关注数
         followed_count: 被关注数
         adverts_balance: 广告基金
@@ -100,6 +101,7 @@ zh-CN:
         brand: 汽车品牌
         created_at: 加入时间
         state: 账户状态
+        <<: *statisticable
       accounts/account/detail: &detail
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型
@@ -115,19 +117,16 @@ zh-CN:
         accepted: 服务商认证
       accounts/user: 
         <<: *account
-        <<: *statisticable
         total_cost: 总消费额
       accounts/user/detail:
         balance: 账户余额
         brand: 车型品牌
       accounts/dealer: 
         <<: *account
-        <<: *statisticable
         <<: *publicable
-        username: 公众帐号
       accounts/provider: 
         <<: *account
-        username: 公众帐号
+        <<: *publicable
       tips/mending:
         <<: *servicalbe
         <<: *statisticable
