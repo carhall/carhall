@@ -21,9 +21,9 @@ module ActsAsApi
         class_attribute "api_accessible_#{api_template}".to_sym
         send "api_accessible_#{api_template}=", attributes
 
-        after_commit do
-          Rails.cache.delete([self.class, self.id, api_template, CacheVersion])
-        end
+        # after_commit do
+        #   Rails.cache.delete([self.class, self.id, api_template, CacheVersion])
+        # end
       end
 
       def as_api_response(api_template, options = {})
@@ -38,9 +38,7 @@ module ActsAsApi
             item
           end
         end
-
       end
-
     end
 
     InstanceMethods.module_eval do
@@ -59,19 +57,19 @@ module ActsAsApi
         response_hash
       end
 
-      alias_method :as_api_response_without_cache, :as_api_response
-      def as_api_response(api_template, options = {})
-        Rails.cache.fetch([self.class, self.id, api_template, CacheVersion], 
-          expires_in: Expires_in) do
-          as_api_response_without_cache(api_template, options)
-        end
-      end
+      # alias_method :as_api_response_without_cache, :as_api_response
+      # def as_api_response(api_template, options = {})
+      #   Rails.cache.fetch([self.class, self.id, api_template, CacheVersion], 
+      #     expires_in: Expires_in) do
+      #     as_api_response_without_cache(api_template, options)
+      #   end
+      # end
     end
   end
 
   ApiTemplate.class_eval do
     attr_reader :serializable_options
-    attr_accessor :includes, :cache
+    attr_accessor :includes
 
     def initialize(api_template, api_options)
       super(api_template)
