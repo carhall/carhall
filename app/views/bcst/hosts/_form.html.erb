@@ -14,7 +14,7 @@
     </div>
   <% end %>
 
-  <%= f.input :programme_ids, collection: Bcst::Programme.all.map{|r|[r.title, r.id]}, input_html: { multiple: true, class: 'select2' } %>
+  <%= f.input :programme_ids, collection: @provider.programmes.map{|r|[r.title, r.id]}, input_html: { multiple: true, class: 'select2' } %>
   <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
 
   <%= f.button :submit, class: 'btn-submit' %>
