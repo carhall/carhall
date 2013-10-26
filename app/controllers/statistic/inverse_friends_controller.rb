@@ -1,6 +1,5 @@
 class Statistic::InverseFriendsController < Statistic::ApplicationController
   authorize_resource class: Accounts::Friendship
-  before_filter :set_current_user
   
   helper StatisticsHelper
     

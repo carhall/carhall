@@ -1,4 +1,5 @@
 class Api::Tips::ReviewsController < Api::ApplicationController
+  before_filter :set_current_user
   set_resource_class ::Tips::Review
 
   protected
@@ -18,6 +19,6 @@ class Api::Tips::ReviewsController < Api::ApplicationController
         return
       end
     end
-    @parent = current_user.reviews
+    @parent = @current_user.reviews
   end
 end
