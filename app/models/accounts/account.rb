@@ -87,6 +87,19 @@ class Accounts::Account < ActiveRecord::Base
     t.add :detail, template: :base
   end
 
+  api_accessible :openfire_user_info do |t|
+    t.only :id, :mobile
+    t.methods :user_type_id
+    t.add :authentication_token, as: :token
+  end
+
+  api_accessible :openfire_user_detail do |t|
+    t.only :id, :username, :mobile
+    t.methods :user_type_id
+    t.add ->(u) { u.sex_id || 0 }, as: :sex_id
+    t.add ->(u) { u.avatar.url(:thumb) }, as: :avatar_thumb_url
+  end
+
   # Fake detail
   attr_accessor :detail
   def detail
