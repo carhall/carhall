@@ -18,7 +18,7 @@
         <%= image_tag(avatar.url(:thumb)) %>
       <% end %>
       <%= t.attribute :username %>
-      <%= t.attribute :brand, in: :detail %>
+      <%= t.attribute :brand %>
       <%= t.attribute :created_at, format: :short %>
       <%= t.attribute :total_cost %>
       <%= t.attribute :last_ordered_at, format: :short %>
