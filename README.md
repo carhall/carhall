@@ -608,10 +608,6 @@ GET    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id         | 查
 POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders             | 新建指定团购订单  
 PUT    | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/finish  | 标记指定团购已完成  
 DELETE | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/cancel  | 标记指定团购已取消  
-GET    | /api/dealers/:dealer_id/orders                                    | 查询指定商家的所有订单  
-GET    | /api/dealers/:dealer_id/orders/:id                                | 查询指定商家的指定订单  
-GET    | /api/current_user/orders                                          | 查询当前车主的所有订单  
-GET    | /api/current_user/orders/:id                                      | 查询当前车主的指定订单  
 GET    | /api/tips/mending_orders                                          | 查询当前车主的所有保养专修订单  
 GET    | /api/tips/mending_orders/:id                                      | 查询指定保养专修的指定订单  
 PUT    | /api/tips/mending_orders/:id/finish                               | 标记指定保养专修已完成  
