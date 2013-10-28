@@ -15,10 +15,11 @@ module Accounts::RqrcodeTokenable
     #     break token
     #   end
     # end
-    "qichetang:#{id}"
+    detail.rqrcode_token = "qichetang:#{id}"
   end
 
   def generate_rqrcode_image string=nil, options={}
+    ensure_rqrcode_token!
     string ||= detail.rqrcode_token
     size   = options[:size]  || RQRCode.minimum_qr_size_from_string(string)
     level  = options[:level] || :h
