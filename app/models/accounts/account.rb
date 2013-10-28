@@ -97,7 +97,8 @@ class Accounts::Account < ActiveRecord::Base
     t.only :id, :username, :mobile
     t.methods :user_type_id
     t.add ->(u) { u.sex_id || 0 }, as: :sex_id
-    t.add ->(u) { u.avatar.url(:thumb) }, as: :avatar_thumb_url
+    t.add ->(u) { "#{AbsoluteUrlPrefix}#{u.avatar.url(:thumb)}" if u.avatar.present? }, 
+      as: :avatar_thumb_url
   end
 
   # Fake detail
