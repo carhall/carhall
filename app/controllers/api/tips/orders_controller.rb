@@ -4,7 +4,6 @@ class Api::Tips::OrdersController < Api::ApplicationController
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
   before_filter :set_filter
 
-
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
   def create

@@ -2,19 +2,20 @@ module Accounts::RqrcodeTokenable
   extend ActiveSupport::Concern
 
   included do
-    before_create :generate_rqrcode_token!, prepend: true
+    after_create :generate_rqrcode_token!
   end
 
   # Generate a token by looping and ensuring does not already exist.
   def generate_rqrcode_token
-    loop do
-      token = Devise.friendly_token
-      unless detail.class.where(rqrcode_token: token).exists?
-        detail.rqrcode_token = token
-        generate_rqrcode_image token
-        break token
-      end
-    end
+    # loop do
+    #   token = Devise.friendly_token
+    #   unless detail.class.where(rqrcode_token: token).exists?
+    #     detail.rqrcode_token = token
+    #     generate_rqrcode_image token
+    #     break token
+    #   end
+    # end
+    "qichetang:#{id}"
   end
 
   def generate_rqrcode_image string=nil, options={}

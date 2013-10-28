@@ -8,6 +8,10 @@ class Accounts::User < Accounts::Account
   has_many :orders, class_name: 'Tips::Order'
   has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Tips::Order'
 
+  has_many :mending_orders, class_name: 'Tips::MendingOrder'
+  has_many :cleaning_orders, class_name: 'Tips::CleaningOrder'
+  has_many :bulk_purchasing_orders, class_name: 'Tips::BulkPurchasingOrder'
+
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, class_name: 'Tips::Review'
 

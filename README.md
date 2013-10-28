@@ -612,6 +612,25 @@ GET    | /api/dealers/:dealer_id/orders                                    | 查
 GET    | /api/dealers/:dealer_id/orders/:id                                | 查询指定商家的指定订单  
 GET    | /api/current_user/orders                                          | 查询当前车主的所有订单  
 GET    | /api/current_user/orders/:id                                      | 查询当前车主的指定订单  
+GET    | /api/tips/mending_orders                                          | 查询当前车主的所有保养专修订单  
+GET    | /api/tips/mending_orders/:id                                      | 查询指定保养专修的指定订单  
+PUT    | /api/tips/mending_orders/:id/finish                               | 标记指定保养专修已完成  
+DELETE | /api/tips/mending_orders/:id/cancel                               | 标记指定保养专修已取消  
+GET    | /api/tips/cleaning_orders                                         | 查询当前车主的所有洗车美容订单  
+GET    | /api/tips/cleaning_orders/:id                                     | 查询指定洗车美容的指定订单  
+PUT    | /api/tips/cleaning_orders/:id/use/:count                          | 标记指定洗车美容已使用count次  
+DELETE | /api/tips/cleaning_orders/:id/cancel                              | 标记指定洗车美容已取消  
+GET    | /api/tips/bulk_purchasing_orders                                  | 查询当前车主的所有团购订单  
+GET    | /api/tips/bulk_purchasing_orders/:id                              | 查询指定团购的指定订单  
+POST   | /api/tips/bulk_purchasing_orders                                  | 新建指定团购订单  
+PUT    | /api/tips/bulk_purchasing_orders/:id/finish                       | 标记指定团购已完成  
+DELETE | /api/tips/bulk_purchasing_orders/:id/cancel                       | 标记指定团购已取消  
+GET    | /api/dealers/:dealer_id/orders                                    | 查询指定商家的所有订单  
+GET    | /api/dealers/:dealer_id/orders/:id                                | 查询指定商家的指定订单  
+GET    | /api/current_user/orders                                          | 查询当前车主的所有订单  
+GET    | /api/tips/orders                                                  | 同上  
+GET    | /api/current_user/orders/:id                                      | 查询当前车主的指定订单  
+GET    | /api/tips/orders/:id                                              | 同上  
 
 GET查询订单信息时，可以在URI中使用附加字段filter[state_id]作为条件，来查询指定状态的订单信息  
 

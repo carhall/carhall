@@ -370,6 +370,34 @@ Carhall::Application.routes.draw do
         
         resources :reviews, only: [:index, :show]
       end
+
+      resources :orders, only: [:index, :show, :create] do
+        put :finish, on: :member
+        post :review, on: :member
+        delete :cancel, on: :member
+      end
+      
+      resources :mending_orders, only: [:index, :show, :create] do
+        put :finish, on: :member
+        post :review, on: :member
+        delete :cancel, on: :member
+      end
+      
+      resources :cleaning_orders, only: [:index, :show, :create] do
+        put "use/:count", action: :use, on: :member
+        put :use, on: :member
+        post :review, on: :member
+        delete :cancel, on: :member
+      end
+      
+      resources :bulk_purchasing_orders, only: [:index, :show, :create] do
+        put :finish, on: :member
+        post :review, on: :member
+        delete :cancel, on: :member
+      end
+      
+      resources :reviews, only: [:index, :show]
+
     end
 
     # Bcst
