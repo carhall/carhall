@@ -73,6 +73,8 @@ private
       # for every request. If you want the token to work as a
       # sign in token, you can simply remove store: false.
       sign_in @current_account, store: false
+    else
+      authenticate_account!
     end
   end
 end
