@@ -1,5 +1,5 @@
 class Api::ConstantsController < Api::ApplicationController
-  skip_before_filter :authenticate_account!
+  skip_before_filter :authenticate_account_from_token!
 
   def constants
     {
