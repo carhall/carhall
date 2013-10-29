@@ -20,7 +20,7 @@ class Accounts::User < Accounts::Account
   end
 
   def last_3_posts
-    posts.includes(:user).first(3)
+    posts.includes(:user).last(3)
   end
 
   api_accessible :detail, extend: :detail do |t|
