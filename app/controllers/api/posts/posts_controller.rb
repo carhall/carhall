@@ -1,6 +1,5 @@
 class Api::Posts::PostsController < Api::Posts::ApplicationController
   before_filter :set_user, except: :show
-  before_filter :set_api_template, only: [:index, :friends, :top, :club]
   before_filter :set_area_id_and_brand_id, except: :create
 
   # GET /api/posts
@@ -46,20 +45,6 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
     post.destroy
 
     render_accepted
-  end
-
-protected
-  
-  def set_api_template
-    @api_template = if params[:detail]
-      :detail
-    else
-      :base
-    end
-  end
-
-  def render_index resources, api_template=@api_template
-    super
   end
 
 private

@@ -159,16 +159,20 @@ module ActsAsApi
   end
 end
 
-# ActiveRecord::Associations::CollectionProxy.class_eval do
+ActiveRecord::Associations::CollectionProxy.class_eval do
 
-#   def as_api_response(api_template, options = {})
-#     collect do |item|
-#       if item.respond_to?(:as_api_response)
-#         item.as_api_response(api_template, options)
-#       else
-#         item
-#       end
-#     end
+  def as_api_response(api_template, options = {})
+    api_includes = (api_accessible_attributes(api_template).includes rescue nil) 
+    
+    scope = self
+    scope = scope.includes(api_includes) if api_includes and !options[:included]
+    scope.collect do |item|
+      if item.respond_to?(:as_api_response)
+        item.as_api_response(api_template, options)
+      else
+        item
+      end
+    end
 
-#   end
-# end
+  end
+end
