@@ -18,7 +18,7 @@ class Bcst::Host < ActiveRecord::Base
   end
 
   api_accessible :base, extend: :without_programme, includes: [:programmes] do |t|
-    t.add :programmes, template: :without_host
+    t.include :programmes, template: :without_host
   end
 
   api_accessible :detail, extend: :base

@@ -32,7 +32,7 @@ class Accounts::User < Accounts::Account
     t.add :province, append_to: :detail
     t.add :brand_id, append_to: :detail
     t.add :brand, append_to: :detail
-    t.add :last_3_posts, append_to: :detail, template: :base
+    t.include :last_3_posts, append_to: :detail, template: :base
     t.add :posts_count, append_to: :detail
   end
 

@@ -64,8 +64,8 @@ class Posts::Club < ActiveRecord::Base
 
   api_accessible :base, includes: [:president, :mechanics] do |t|
     t.only :id, :title, :announcement
-    t.add :president, template: :base
-    t.add :mechanics, template: :base
+    t.include :president, template: :base
+    t.include :mechanics, template: :base
     t.images :avatar
   end
   

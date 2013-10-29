@@ -69,6 +69,7 @@ module ActsAsApi
 
   ApiTemplate.class_eval do
     attr_reader :serializable_options
+    attr_reader :include_fieldset, :include_options
     attr_accessor :includes
 
     def initialize(api_template, api_options)
@@ -76,6 +77,13 @@ module ActsAsApi
       @includes = api_options[:includes]
       @options ||= {}
       @serializable_options ||= {}
+      @include_fieldset ||= {}
+      @include_options ||= {}
+      @serializable_options[:include] ||= []
+      @serializable_options[:methods] ||= []
+      @serializable_options[:only] ||= []
+      @serializable_options[:except] ||= []
+      @serializable_options[:images] ||= []
     end
 
     def merge!(other_hash, &block)
@@ -91,28 +99,26 @@ module ActsAsApi
       end
     end
 
-    def include(*array)
-      @serializable_options[:include] ||= []
-      @serializable_options[:include] += array
+    def include(val, options={})
+      item_key = (options[:as] || val).to_sym
+      
+      @include_fieldset[item_key] = val
+      @include_options[item_key] = options
     end
 
     def methods(*array)
-      @serializable_options[:methods] ||= []
       @serializable_options[:methods] += array
     end
 
     def only(*array)
-      @serializable_options[:only] ||= []
       @serializable_options[:only] += array
     end
     
     def except(*array)
-      @serializable_options[:except] ||= []
       @serializable_options[:except] += array
     end
     
     def images(*array)
-      @serializable_options[:images] ||= []
       @serializable_options[:images] += array
     end
 
@@ -123,12 +129,11 @@ module ActsAsApi
 
     # Generates a hash that represents the api response based on this
     # template for the passed model instance.
-    def to_response_hash(model, fieldset = self, options = {})
-      api_output = model.serializable_hash(serializable_options) if model.respond_to? :serializable_hash
-      api_output ||= {}
+    def to_response_hash(model, fieldset = self, options = {}, api_output = {})
+      api_output.merge! model.serializable_hash(serializable_options) if model.respond_to? :serializable_hash
 
       fieldset.each do |field, value|
-        next unless allowed_to_render?(fieldset, field, model, options)
+        # next unless allowed_to_render?(fieldset, field, model, options)
 
         out = process_value(model, value, options)
 
@@ -137,7 +142,33 @@ module ActsAsApi
           out = out.as_api_response(sub_template, included: true)
         end
 
-        set_value(api_output, fieldset, field, out, options)
+        append_to = fieldset.options_for(field)[:append_to]
+        set_value(api_output, append_to, field, out, options)
+      end
+
+      api_output
+    end
+
+    alias_method :to_response_hash_without_includes, :to_response_hash
+    def to_response_hash(model, fieldset = self, options = {})
+      api_output = {}
+      to_response_hash_without_includes(model, fieldset, options, api_output)
+      to_response_hash_for_includes(model, fieldset, options, api_output)
+    end
+
+    def to_response_hash_for_includes(model, fieldset = self, options = {}, api_output = {})
+      include_fieldset.each do |field, value|
+        # next unless allowed_to_render?(fieldset, field, model, options)
+
+        out = process_value(model, value, options)
+
+        if out
+          sub_template = include_options[field][:template]
+          out = out.as_api_response(sub_template, included: true)
+        end
+
+        append_to = include_options[field][:append_to]
+        set_value(api_output, append_to, field, out, options)
       end
 
       api_output
@@ -145,13 +176,11 @@ module ActsAsApi
 
   private
     
-    def set_value(api_output, fieldset, field, out, options)
-      fieldset_options = fieldset.options_for(field)
-
-      unless fieldset_options[:append_to]
+    def set_value(api_output, append_to, field, out, options)
+      unless append_to
         api_output[field] = out
       else
-        fieldset_options[:append_to].to_s.split('.').reduce(api_output) do |sub_output, key|
+        append_to.to_s.split('.').reduce(api_output) do |sub_output, key|
           sub_output[key.to_sym] ||= {}
         end[field] = out
       end

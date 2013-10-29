@@ -29,7 +29,7 @@ class Posts::Post < ActiveRecord::Base
     t.only :id, :content, :view_count, :comments_count, :created_at
     t.images :image
     t.add :user, template: :base
-    t.add :comments, template: :base
+    t.include :comments, template: :base
   end
 
 end
