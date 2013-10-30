@@ -78,7 +78,7 @@ class Tips::Order < ActiveRecord::Base
 
   api_accessible :base, 
     includes: [:user] do |t|
-    t.only :id, :title, :state_id, :cost, :created_at
+    t.only :id, :title, :state_id, :cost, :created_at, :dealer_id
     t.methods :order_type, :state
     t.add :user, template: :base
   end
