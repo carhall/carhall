@@ -38,7 +38,7 @@ namespace :deploy do
 
   after :finishing, 'deploy:cleanup'
 
-  after :finishing, :chown do
+  before :restart, :chown do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
       execute :chown, '-R www-data', release_path
