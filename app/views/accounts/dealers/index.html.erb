@@ -8,8 +8,6 @@
       <h3>服务商管理 <small><%#= link_to "添加", new_accounts_dealer_path %></small></h3>
     </div>
 
-    <% @dealers = @dealers.followed_counted %>
-
     <%= index_for @dealers, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :avatar do |avatar| %>
@@ -17,7 +15,7 @@
       <% end %>
       <%= t.attribute :mobile %>
       <%= t.attribute :username %>
-      <%= t.attribute :followed_count %>
+      <%= t.attribute :friends_count %>
       <%= t.attribute :state %>
       <%= t.attribute :rank %>
       <%= t.action_link :accept do |dealer| %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131026011120) do
+ActiveRecord::Schema.define(version: 20131031040049) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20131026011120) do
     t.integer  "position",               default: 0
     t.boolean  "display",                default: false
     t.integer  "rank_id",                default: 1
+    t.integer  "friends_count"
   end
 
   add_index "accounts", ["area_id", "brand_id"], name: "index_accounts_on_area_id_and_brand_id", using: :btree

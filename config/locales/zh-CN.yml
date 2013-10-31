@@ -70,7 +70,7 @@ zh-CN:
       public: &publicable
         username: 公众帐号
         inverse_friends_count: 被关注数
-        followed_count: 被关注数
+        friends_count: 被关注数
         adverts_balance: 广告基金
         commission: 应付佣金
         income: 应收款

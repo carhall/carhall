@@ -2,7 +2,7 @@ class Accounts::Friendship < ActiveRecord::Base
   self.table_name = "friend"
 
   belongs_to :user, class_name: 'Accounts::Account'
-  belongs_to :friend, class_name: 'Accounts::Account'
+  belongs_to :friend, class_name: 'Accounts::Account', counter_cache: :friends_count
 
   validates_presence_of :user, :friend
 
