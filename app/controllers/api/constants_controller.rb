@@ -1,3 +1,5 @@
+VERSION = 100
+
 class Api::ConstantsController < Api::ApplicationController
   skip_before_filter :authenticate_account_from_token!
 
@@ -25,5 +27,13 @@ class Api::ConstantsController < Api::ApplicationController
 
   def brands
     render_data Category::Brand.all
+  end
+
+  def version
+    if params[:version].to_i < VERSION
+      render_data update: true, download_url: "#{AbsoluteUrlPrefix}/Carhall.apk"
+    else
+      render_data update: false
+    end
   end
 end

@@ -187,6 +187,7 @@ Carhall::Application.routes.draw do
   namespace :api do
     resources :constants, only: [:index, :show] do
       get :brands, on: :collection
+      post :version, on: :collection
     end
 
     # Accounts
