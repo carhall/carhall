@@ -436,4 +436,5 @@ Carhall::Application.routes.draw do
     }.to_json]] }, via: :all
   end
 
+  post '*foo', format: :do, to: ->(env) { [404, {}, []] }
 end
