@@ -21,9 +21,9 @@ module ActsAsApi
         class_attribute "api_accessible_#{api_template}".to_sym
         send "api_accessible_#{api_template}=", attributes
 
-        # after_commit do
-        #   Rails.cache.delete([self.class, self.id, api_template, CacheVersion])
-        # end
+        after_commit do
+          Rails.cache.delete([self.class, self.id, api_template, CacheVersion])
+        end
       end
 
       def as_api_response(api_template, options = {})
@@ -48,21 +48,23 @@ module ActsAsApi
         api_attributes = self.class.api_accessible_attributes(api_template)
         raise ActsAsApi::TemplateNotFoundError.new("acts_as_api template :#{api_template.to_s} was not found for model #{self.class}") if api_attributes.nil?
 
-        before_api_response(api_template)
-        response_hash = around_api_response(api_template) do
+        # before_api_response(api_template)
+        # response_hash = around_api_response(api_template) do
+        #   api_attributes.to_response_hash(self, api_attributes, options)
+        # end
+        # after_api_response(api_template)
+
+        response_hash = Rails.cache.fetch([self.class, self.id, api_template, CacheVersion], 
+          expires_in: Expires_in) do
           api_attributes.to_response_hash(self, api_attributes, options)
         end
-        after_api_response(api_template)
+        api_attributes.to_response_hash_without_includes(self, api_attributes, options, response_hash)
 
         response_hash
       end
 
       # alias_method :as_api_response_without_cache, :as_api_response
       # def as_api_response(api_template, options = {})
-      #   Rails.cache.fetch([self.class, self.id, api_template, CacheVersion], 
-      #     expires_in: Expires_in) do
-      #     as_api_response_without_cache(api_template, options)
-      #   end
       # end
     end
   end
