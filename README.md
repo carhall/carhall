@@ -665,6 +665,10 @@ GET    | /api/tips/cleanings/:cleaning_id/reviews                          | 查
 POST   | /api/tips/cleanings/:cleaning_id/orders/:id/review                | 提交指定汽车美容的指定订单的评价  
 GET    | /api/tips/bulk_purchasings/bulk_purchasing_id/reviews             | 查询指定团购的所有订单的评价  
 POST   | /api/tips/bulk_purchasings/:bulk_purchasing_id/orders/:id/review  | 提交指定团购的指定订单的评价  
+POST   | /api/tips/mending_orders/:id/review                               | 提交指定保养专修订单的评价  
+POST   | /api/tips/cleaning_orders/:id/review                              | 提交指定洗车美容订单的评价  
+POST   | /api/tips/bulk_purchasing_orders/:id/review                       | 提交指定团购订单的评价  
+POST   | /api/tips/orders/:id/review                                       | 提交指定订单的评价  
 GET    | /api/dealers/:dealer_id/reviews                                   | 查询指定商家的所有订单的评价
 
 
