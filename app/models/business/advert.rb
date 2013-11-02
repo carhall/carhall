@@ -1,5 +1,5 @@
 class Business::Advert < ActiveRecord::Base
-  enumerate :advert_type, with: %w(客户端首页 客户端锦囊)
+  enumerate :advert_type, with: %w(客户端首页 客户端锦囊 客户端在下)
   enumerate :area, with: Category::Area
   enumerate :brand, with: Category::Brand
  
