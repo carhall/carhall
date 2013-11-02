@@ -22,8 +22,6 @@ class Accounts::Dealer < Accounts::Account
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, class_name: 'Tips::Review'
   
-  validates_presence_of :area_id, :type
-
   before_save do
     if area_changed?
       self.mending.update_attributes(area_id: self.area_id) if self.mending

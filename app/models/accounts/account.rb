@@ -47,6 +47,14 @@ class Accounts::Account < ActiveRecord::Base
     false
   end
 
+  def public?
+    false
+  end
+
+  def user?
+    false
+  end
+
   def human_user_type
     {
       guest: '访客',

@@ -18,15 +18,15 @@ module Accounts::Publicable
     end
 
     validates_presence_of :detail
+    validates_presence_of :area_id, :type
 
     scope :followed, -> { order("friends_count DESC") }
     scope :ordered, -> { displayed.followed.positioned }
 
   end
 
-  # statistic
-  def inverse_friends_count
-    inverse_friends.count
+  def public?
+    true
   end
 
   def expire_at

@@ -15,6 +15,10 @@ class Accounts::User < Accounts::Account
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, class_name: 'Tips::Review'
 
+  def user?
+    true
+  end
+  
   def club
     Posts::Club.with_user self
   end

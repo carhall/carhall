@@ -30,7 +30,7 @@ Carhall::Application.routes.draw do
     resources :providers
     resources :users
 
-    resources :inverse_friends
+    resources :friends
     resources :reviews do
       get :mending, on: :collection
       get :cleaning, on: :collection
@@ -146,7 +146,7 @@ Carhall::Application.routes.draw do
   end
 
   namespace :business do
-    resource :advert
+    resources :adverts
     resource :push
     resources :ad_templates
     resources :tutorials
@@ -185,6 +185,8 @@ Carhall::Application.routes.draw do
   ############################
   # APIs
   namespace :api do
+    resources :adverts, only: [:index]
+
     resources :constants, only: [:index, :show] do
       get :brands, on: :collection
       post :version, on: :collection

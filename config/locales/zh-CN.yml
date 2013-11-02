@@ -49,6 +49,7 @@ zh-CN:
       bcst/traffic_report: 路况信息
       category/brand: 车型品牌
       category/product: 产品品牌
+      business/advert: 广告
     attributes:
       statistic: &statisticable
         orders_count: 订单数
@@ -160,6 +161,8 @@ zh-CN:
         series: 汽车型号
         plate_num: 车牌号
         arrive_at: 到店时间
+        mending_type: 预约项目
+        description: 预约内容
       bcst/host:
         id: ID
         avatar: 头像
@@ -227,6 +230,15 @@ zh-CN:
         <<: *categoryable
       category/product:
         <<: *categoryable
+      business/advert:
+        id: ID
+        image: 广告图片
+        advert_type_id: 显示位置
+        advert_type: 显示位置
+        area_id: 匹配区域
+        area: 匹配区域
+        brand_id: 匹配车型
+        brand: 匹配车型
   simple_form:
     labels:
       account:

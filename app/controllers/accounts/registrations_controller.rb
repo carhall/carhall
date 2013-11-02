@@ -11,14 +11,13 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     return @account_params if @account_params
     @account_params = params.require(resource_name).permit!
     permit = [:mobile, :current_password, :password, :password_confirmation, 
-      :username, :description, :avatar]
+      :username, :description, :avatar, :area_id]
     case @account_params[:type]
     when "Accounts::Provider"
       permit << :type
       permit << {detail_attributes: [:id, :company, :phone, {template_ids: []}]}
     when "Accounts::Dealer"
       permit << :type
-      permit << :area_id
       permit << {detail_attributes: [:id, :dealer_type_id, :specific_service_id, 
         :business_scope_ids, :company, :address, :phone, :open_during, 
         :authentication_image,

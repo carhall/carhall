@@ -17,12 +17,7 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
   end
 
   def club
-    case @user.user_type
-    when :user
-      render_index @user.club.posts
-    else
-      render_index ::Posts::Post.all
-    end
+    render_index ::Posts::Post.with_club @user
   end
 
   # GET /api/posts/1

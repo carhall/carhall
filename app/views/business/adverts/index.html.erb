@@ -1,0 +1,25 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "business/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>广告位管理 <small><a href="<%= new_business_advert_path %>">添加</a></small></h3>
+    </div>
+
+    <%= render 'share/alert', message: '您还没有添加任何广告！' if @adverts.empty? %>
+
+    <%= index_for @adverts, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :image do |image| %>
+        <%= image_tag(image.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :advert_type %>
+      <%= t.attribute :area %>
+      <%= t.attribute :brand %>
+      <%= t.actions :edit, :destroy %>
+    <% end %>
+
+  </div>
+</div>

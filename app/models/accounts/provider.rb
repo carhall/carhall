@@ -11,8 +11,6 @@ class Accounts::Provider < Accounts::Account
   has_many :exposures, class_name: 'Bcst::Exposure'
   has_many :traffic_reports, class_name: 'Bcst::TrafficReport'
 
-  validates_presence_of :type
-
   def has_template? template
     detail.template_syms.include? template
   end

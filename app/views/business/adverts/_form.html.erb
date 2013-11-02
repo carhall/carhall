@@ -1,0 +1,21 @@
+<%= simple_form_for(@advert, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @advert %>
+
+  <%= f.input :image do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @advert.image.url(:medium) %>" /></div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+      <div>
+        <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="business_advert[image]" /></span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.input :advert_type_id, collection: Business::Advert::AdvertType.to_select %>
+  
+  <%= f.input :area_id, collection: Category::Area.to_select, input_html: { class: 'select2' } %>
+  <%= f.input :brand_id, collection: Category::Brand.to_select, input_html: { class: 'select2' } %>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>
