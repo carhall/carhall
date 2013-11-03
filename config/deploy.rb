@@ -1,5 +1,5 @@
 set :application, 'carhall'
-set :repo_url, 'http://github.com/bbtfr/carhall.git'
+set :repo_url, 'git@github.com:bbtfr/carhall.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
