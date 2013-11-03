@@ -146,7 +146,11 @@ Carhall::Application.routes.draw do
   end
 
   namespace :business do
-    resources :adverts
+    resources :adverts do
+      get :client, on: :collection
+      get :ad_template, on: :collection
+      get :tutorial, on: :collection
+    end
     resource :push
     resources :ad_templates
     resources :tutorials

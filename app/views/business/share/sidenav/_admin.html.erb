@@ -1,3 +1,6 @@
 <ul class="nav nav-list sidenav affix-top">
-  <li<%= active? 'business/adverts' %>><a href="<%= business_adverts_path %>"><i class="icon-chevron-right"></i> 广告位管理</a></li>
+  <li><span><strong>广告位管理</strong></span></li>
+  <li<%= active? 'business/adverts#client' %>><a href="<%= client_business_adverts_path %>"><i class="icon-chevron-right"></i> 客户端广告位</a></li>
+  <li<%= active? 'business/adverts#ad_template' %>><a href="<%= ad_template_business_adverts_path %>"><i class="icon-chevron-right"></i> 广告模板广告位</a></li>
+  <li<%= active? 'business/adverts#tutorial' %>><a href="<%= tutorial_business_adverts_path %>"><i class="icon-chevron-right"></i> 在线教程广告位</a></li>
 </ul>

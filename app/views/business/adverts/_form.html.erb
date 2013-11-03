@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <%= f.input :advert_type_id, collection: Business::Advert::AdvertType.to_select %>
+  <%= f.input :advert_type_id, collection: Business::Advert::AdvertType.to_select, selected: (params[:advert_type]||@advert.advert_type_id) %>
   
   <%= f.input :area_id, collection: Category::Area.to_select, input_html: { class: 'select2' } %>
   <%= f.input :brand_id, collection: Category::Brand.to_select, input_html: { class: 'select2' } %>

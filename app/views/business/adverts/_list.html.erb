@@ -1,0 +1,10 @@
+<%= index_for @adverts, class: :datatable do |t| %>
+  <%= t.attribute :id %>
+  <%= t.attribute :image do |image| %>
+    <%= image_tag(image.url(:thumb)) %>
+  <% end %>
+  <%= t.attribute :advert_type %>
+  <%= t.attribute :area %>
+  <%= t.attribute :brand %>
+  <%= t.actions :edit, :destroy %>
+<% end %>

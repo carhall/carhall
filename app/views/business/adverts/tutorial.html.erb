@@ -5,10 +5,10 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3>广告位管理 <small></small></h3>
+      <h3>在线教程广告位管理 <small><a href="<%= new_business_advert_path(advert_type: 5) %>">添加</a></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '您还没有添加任何广告！' if @adverts.empty? %>
+    <%= render 'share/alert', message: '您还没有添加任何在线教程广告！' if @adverts.empty? %>
 
     <%= render 'business/adverts/list' %>
 
