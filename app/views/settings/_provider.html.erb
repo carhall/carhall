@@ -5,5 +5,8 @@
   <%= s.attribute :company, in: :detail %>
   <%= s.attribute :area %>
   <%= s.attribute :phone, in: :detail %>
+  <%= s.attribute :accepted, in: :detail do %>
+    <label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label>
+  <% end %>
   <%= s.attribute :description %>
 <% end %>

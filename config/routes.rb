@@ -91,6 +91,7 @@ Carhall::Application.routes.draw do
       get :mending, on: :collection
       get :cleaning, on: :collection
       get :bulk_purchasing, on: :collection
+      get :bulk_purchasing2, on: :collection
     end
 
     resources :purchase_requestings do
@@ -98,6 +99,16 @@ Carhall::Application.routes.draw do
       get :expired, on: :collection
 
     end
+
+    resources :bulk_purchasing2s do
+      get :in_progress, on: :collection
+      get :expired, on: :collection
+
+      resources :orders
+    end
+
+    resources :manual_images
+
   end
 
   namespace :bcst do
@@ -182,6 +193,10 @@ Carhall::Application.routes.draw do
       put :appoint, on: :member
     end
   end
+
+  resources :bulk_purchasing2s
+  resources :purchase_requestings
+  resources :distributors
 
   # For openfire
   resource :openfire, only: [] do

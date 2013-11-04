@@ -1,0 +1,35 @@
+<% @bulk_purchasing2s = @bulk_purchasing2s.includes(:dealer) if @user.admin? %>
+
+<%= index_for @bulk_purchasing2s, class: :datatable do |t| %>
+  <%= t.attribute :id %>
+  <%= t.association :dealer, using: :username if @user.admin? %>
+  <%= t.attribute :image do |image| %>
+    <%= image_tag(image.url(:thumb)) %>
+  <% end %>
+  <%= t.attribute :title %>
+  <%= t.attribute :bulk_purchasing_type %>
+  <%= t.attribute :expire_at, format: :short %>
+  <%= t.attribute :vip_price %>
+  <%= t.attribute :inventory %>
+  <%= t.attribute :orders_count %>
+  <%= t.action_link :orders do |bulk_purchasing2| %>
+    <%= icon_link_to "浏览订单", 'icon-book', tips_bulk_purchasing2_orders_path(bulk_purchasing2) %>
+  <% end %>
+  <% if @user.admin? %>
+    <%= t.action_link :display do |bulk_purchasing2| %>
+      <% if bulk_purchasing2.displayed? %>
+        <%= icon_link_to "隐藏", 'icon-eye-close', hide_tips_bulk_purchasing2_path(bulk_purchasing2), method: :put, data: { confirm: '您确认要隐藏这个项目？' } %>
+        <% if bulk_purchasing2.sticked? %>
+          <%= icon_link_to "取消置顶", 'icon-chevron-down', unstick_tips_bulk_purchasing2_path(bulk_purchasing2), method: :put, data: { confirm: '您确认要取消置顶这个项目？' } %>
+        <% else %>
+          <%= icon_link_to "置顶", 'icon-chevron-up', stick_tips_bulk_purchasing2_path(bulk_purchasing2), method: :put, data: { confirm: '您确认要置顶这个项目？' } %>
+        <% end %>
+      <% else %>
+        <%= icon_link_to "显示", 'icon-eye-open', expose_tips_bulk_purchasing2_path(bulk_purchasing2), method: :put, data: { confirm: '您确认要显示这个项目？' } %>
+      <% end %>
+    <% end %>
+    <%= t.actions :destroy %>
+  <% else %>
+    <%= t.actions :all %>
+  <% end %>
+<% end %>

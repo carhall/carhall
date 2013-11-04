@@ -1,0 +1,23 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>图册管理 <small></small></h3>
+    </div>
+
+    <%= render 'share/alert', message: '您还没有添加任何图册图片！' if @manual_images.empty? %>
+
+    <ul class="thumbnails row">
+      <% @manual_images.each do |manual_image| %>
+        <li class="span3">
+          <%= link_to image_tag(manual_image.image(:medium)), manual_image.image(:original), class: 'thumbnail', rel: 'hermitage' %>
+          <%= manual_image.title %>
+          <%= icon_link_to "删除", 'icon-remove', tips_manual_image_path(manual_image), method: :delete, data: { confirm: '您确认要删除这个图片？' }, class: 'delete' %>
+        </li>
+      <% end %>
+    </ul>  
+  </div>
+</div>

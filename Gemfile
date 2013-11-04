@@ -28,6 +28,7 @@ gem "select2-rails", '~> 3.5.0'
 # gem 'bootstrap-sass'
 gem "twitter-bootstrap-rails"
 gem 'jasny_bootstrap_extension_rails'
+gem 'hermitage'
 
 # For frontend
 gem 'simple_form'
@@ -40,7 +41,7 @@ gem 'index_for', github: 'bbtfr/index_for'
 # gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

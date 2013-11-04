@@ -1,5 +1,8 @@
 class CreateAccountsClubs < ActiveRecord::Migration
   def change
-    create_join_table :accounts, :clubs
+    create_table :accounts_clubs, id: false do |t|
+      t.references :user
+      t.references :club
+    end
   end
 end

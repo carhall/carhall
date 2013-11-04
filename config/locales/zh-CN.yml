@@ -9,6 +9,7 @@ zh-CN:
   not_enough_count: 订单使用次数不足。
   order_canceled: 订单已经被取消。
   create_success: 成功创建一个新的 %{model} “%{title}”。
+  update_success_without_title: 成功创建一个新的 %{model} 。
   update_success: 成功更新 %{model} “%{title}” 信息。
   update_success_without_title: 成功更新 %{model} 信息。
   destroy_success: 成功删除 %{model} “%{title}”。
@@ -43,7 +44,9 @@ zh-CN:
       tips/cleaning: 服务项目
       tips/activity: 活动
       tips/bulk_purchasing: 团购项目
+      tips/bulk_purchasing2: 团购项目
       tips/purchase_requesting: 求购
+      tips/manual_image: 图册图片
       bcst/host: 主持人
       bcst/programme: 节目板块
       bcst/programme_list: 节目单
@@ -118,9 +121,12 @@ zh-CN:
         phone: 电话
         open_during: 营业时间
         authentication_image: 营业执照认证资料
-        accepted: 服务商认证
+        accepted: 公众帐号认证
         product_ids: 经销品牌
+        products: 经销品牌
         brand_ids: 车型品牌配件
+        brands: 车型品牌配件
+        main_area: 省份
       accounts/user: 
         <<: *account
         total_cost: 总消费额
@@ -153,6 +159,14 @@ zh-CN:
         vip_price: 团购价
         bulk_purchasing_type_id: 类型
         bulk_purchasing_type: 类型
+      tips/bulk_purchasing2:
+        <<: *servicalbe
+        <<: *statisticable
+        inventory: 库存
+        expire_at: 团购期限
+        vip_price: 团购价
+        bulk_purchasing_type_id: 类型
+        bulk_purchasing_type: 类型
       tips/purchase_requesting:
         <<: *servicalbe
         title: 求购商品
@@ -160,7 +174,7 @@ zh-CN:
         price_range: 价格范围
         purchase_requesting_type_id: 类型
         purchase_requesting_type: 类型
-      tips/order:
+      tips/order: &order
         id: ID
         title: 名称
         count: 购买份数
@@ -168,6 +182,8 @@ zh-CN:
         cost: 订单总价
         description: 预约项目
         state: 订单状态
+      tips/bulk_purchasing2_order:
+        <<: *order
       tips/mending_order/detail:
         brand: 汽车品牌
         series: 汽车型号
@@ -251,6 +267,9 @@ zh-CN:
         area: 匹配区域
         brand_id: 匹配车型
         brand: 匹配车型
+      tips/manual_image: 
+        title: 图片标题
+        image: 图片
   simple_form:
     labels:
       account:

@@ -17,10 +17,10 @@ class Accounts::DealerDetail < ActiveRecord::Base
 
   attr_accessor :product_ids, :brand_ids
 
-  def self.with_business_scope name
+  scope :with_business_scope, -> (name) {
     id = active_enum_get_id_for_business_scopes(name)
     where('business_scope_ids LIKE \'%- ?\n%\'', id)
-  end
+  }
 
   serialize :template_ids, Array
   enumerate :templates, with: %w(洗车美容 保养专修 团购 近期活动), multiple: true

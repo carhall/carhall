@@ -63,29 +63,29 @@ class Accounts::Dealer < Accounts::Account
     detail.template_syms.include? template
   end
 
-  def self.with_dealer_type dealer_type
+  scope :with_dealer_type, -> (dealer_type) {
     detail_ids = Accounts::DealerDetail.with_dealer_type(dealer_type).pluck(:id)
     where(detail_id: detail_ids)
-  end
-  
-  def self.with_business_scope business_scope
+  }
+
+  scope :with_business_scope, -> (business_scope) {
     detail_ids = Accounts::DealerDetail.with_business_scope(business_scope).pluck(:id)
     where(detail_id: detail_ids)
-  end
+  } 
 
-  def self.with_specific_service specific_service
+  scope :with_specific_service, -> (specific_service) {
     detail_ids = Accounts::DealerDetail.with_specific_service(specific_service).pluck(:id)
     where(detail_id: detail_ids)
-  end
+  }
 
   def last_3_orders
-    orders.includes(:user, source: [:dealer]).last(3)
+    orders.includes(:user).last(3)
   end
 
   def last_3_reviews
-    reviews.includes(order: [:user, source: [:dealer]]).last(3)
+    reviews.includes(:user).last(3)
   end
-
+  
   def mending_goal_attainment
     Share::Statisticable.goal_attainment mending_orders
   end

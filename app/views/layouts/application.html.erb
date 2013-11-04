@@ -15,7 +15,7 @@
         <div class="navbar-inner">
           <div class="container">
             <% case @user_type %>
-            <% when :provider, :dealer, :admin %>
+            <% when :provider, :dealer, :distributor, :admin %>
               <%= render "share/nav/#{@user_type}" %>
             <% else %>
               <%= render 'share/nav/welcome' %>

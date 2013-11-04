@@ -17,6 +17,7 @@ FactoryGirl.define do
     username { Faker::Name.name }
     description { Faker::Lorem.sentence }
     display { true }
+    area { Category::Area.names.sample }
     detail do
       {
         company: Faker::Lorem.sentence,

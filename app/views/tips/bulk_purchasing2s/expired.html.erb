@@ -1,0 +1,16 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>已结束的团购列表 <small></small></h3>
+    </div>
+
+    <%= render 'share/alert', message: '您还没有已结束的团购！' if @bulk_purchasing2s.empty? %>
+
+    <%= render 'list' %>
+
+  </div>
+</div>

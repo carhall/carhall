@@ -1,0 +1,18 @@
+<%= simple_form_for(@manual_image, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @manual_image %>
+
+  <%= f.input :title %>
+
+  <%= f.input :image do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @manual_image.image.url(:medium) %>" /></div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+      <div>
+        <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="tips_manual_image[image]" /></span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>

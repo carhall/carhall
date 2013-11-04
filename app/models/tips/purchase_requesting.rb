@@ -4,7 +4,7 @@ class Tips::PurchaseRequesting < ActiveRecord::Base
   default_scope { order('id DESC') }
   
   before_save do
-    self.main_area = dealer.province
+    self.area_id = dealer.area_id
   end
 
   extend Share::ImageAttachments

@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     alias_action :expose, :hide, :stick, :unstick, :to => :set_displayable
-    alias_action :mending, :cleaning, :bulk_purchasing, :to => :read
+    alias_action :mending, :cleaning, :bulk_purchasing, :bulk_purchasing2, :to => :read
 
     user ||= Accounts::User.new # guest user (not logged in)
     case user.user_type
@@ -56,6 +56,19 @@ class Ability
       end
       
       cannot :set_displayable, :all
+    when :distributor
+      can :manage, :setting
+      can :read, Accounts::Friendship
+
+      can :read, Tips
+      # if user.accepted?
+        can :manage, Tips::BulkPurchasing2, distributor: user
+        can :manage, Tips::ManualImage, distributor: user
+        
+        can :read, Tips::Order
+        can :read, Tips::BulkPurchasing2Order
+      # end
+      
     when :user
       can :read, :all
       can :manage, Share::Comment, user: user

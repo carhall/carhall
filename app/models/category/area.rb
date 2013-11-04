@@ -36,26 +36,17 @@ class Category::Area < ActiveEnum::Base
     "台湾" => %w(台北 台中 台南 高雄 基隆 新竹 嘉义 宜兰 桃园 彰化 苗栗 云林 屏东 彭湖 花莲), 
   }
   Areas = AreaMap.values.flatten.uniq
+  Provinces = AreaMap.keys.uniq
 
-  AreaMap.each do |province, cities|
-    cities.each do |city|
-      value name: city, province: province
-    end
+  class Main < ActiveEnum::Base
+    value Provinces
   end
 
-  # class << self
-  #   def get(index)
-  #     return nil if index.nil?
-  #     if index.is_a?(Fixnum)
-  #       row = store.get_by_id(index)
-  #       row[1] if row
-  #     else
-  #       Areas.find_index do |area|
-  #         area.start_with? index.to_s
-  #       end + 1
-  #     end
-  #   end
-  #   alias_method :[], :get
-  # end
+  AreaMap.each_with_index do |tmp, province_index|
+    province, cities = tmp
+    cities.each_with_index do |city, city_index|
+      value id: (province_index+1)*100+city_index+1, name: city, province: province
+    end
+  end
 
 end

@@ -6,7 +6,7 @@ class CreatePurchaseRequestings < ActiveRecord::Migration
       t.string   :title
       t.datetime :expire_at
       t.integer  :purchase_requesting_type_id
-      t.integer  :main_area_id
+      t.integer  :area_id
       t.string   :price_range
       t.text     :description
 

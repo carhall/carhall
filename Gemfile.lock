@@ -108,9 +108,16 @@ GEM
       railties (>= 3.0.0)
     faker (1.2.0)
       i18n (~> 0.5)
+    hermitage (0.0.6)
+      coffee-rails
+      jquery-rails
+      rails (>= 3.2)
     hike (1.2.3)
     i18n (0.6.5)
     jasny_bootstrap_extension_rails (0.0.1)
+    jbuilder (1.5.1)
+      activesupport (>= 3.0.0)
+      multi_json (>= 1.2.0)
     jquery-datatables-rails (1.11.2)
       jquery-rails
     jquery-migrate-rails (1.2.1)
@@ -262,8 +269,10 @@ DEPENDENCIES
   factory_girl_rails
   faker
   geohash!
+  hermitage
   index_for!
   jasny_bootstrap_extension_rails
+  jbuilder (~> 1.2)
   jquery-datatables-rails
   jquery-migrate-rails
   jquery-rails

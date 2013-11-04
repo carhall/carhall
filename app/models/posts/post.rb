@@ -19,19 +19,19 @@ class Posts::Post < ActiveRecord::Base
 
   scope :top, -> { reorder('comments_count DESC, id DESC') }
 
-  def self.with_friends user
+  scope :with_friends, -> (user) {
     with_user(user.friend_ids - user.post_blacklist_ids)
-  end
+  }
 
-  def self.with_club user
+  scope :with_club, -> (user) {
     if user.admin?
-      all
+      self
     elsif user.public?
       where(area_id: user.area_id)
     elsif user.user?
       where(area_id: user.area_id, brand_id: user.brand_id)
     end
-  end
+  }
 
   acts_as_api
 

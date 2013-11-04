@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103090910) do
+ActiveRecord::Schema.define(version: 20131104041427) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20131103090910) do
   add_index "accounts", ["unlock_token"], name: "index_accounts_on_unlock_token", unique: true, using: :btree
 
   create_table "accounts_clubs", id: false, force: true do |t|
-    t.integer "account_id", null: false
-    t.integer "club_id",    null: false
+    t.integer "user_id"
+    t.integer "club_id"
   end
 
   create_table "activities", force: true do |t|
@@ -152,6 +152,46 @@ ActiveRecord::Schema.define(version: 20131103090910) do
   create_table "brands", force: true do |t|
     t.string "name"
   end
+
+  create_table "bulk_purchasing2_orders", force: true do |t|
+    t.integer  "dealer_id"
+    t.integer  "distributor_id"
+    t.integer  "source_id"
+    t.string   "title"
+    t.integer  "state_id"
+    t.float    "cost"
+    t.integer  "count",          default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bulk_purchasing2_orders", ["dealer_id"], name: "index_bulk_purchasing2_orders_on_dealer_id", using: :btree
+  add_index "bulk_purchasing2_orders", ["distributor_id"], name: "index_bulk_purchasing2_orders_on_distributor_id", using: :btree
+  add_index "bulk_purchasing2_orders", ["source_id"], name: "index_bulk_purchasing2_orders_on_source_id", using: :btree
+
+  create_table "bulk_purchasing2s", force: true do |t|
+    t.integer  "distributor_id"
+    t.integer  "location_id"
+    t.integer  "area_id"
+    t.string   "title"
+    t.integer  "bulk_purchasing_type_id"
+    t.datetime "expire_at"
+    t.float    "price"
+    t.float    "vip_price"
+    t.integer  "inventory"
+    t.text     "description"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.float    "total_cost"
+    t.integer  "orders_count",            default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bulk_purchasing2s", ["distributor_id"], name: "index_bulk_purchasing2s_on_distributor_id", using: :btree
+  add_index "bulk_purchasing2s", ["location_id"], name: "index_bulk_purchasing2s_on_location_id", using: :btree
 
   create_table "bulk_purchasings", force: true do |t|
     t.integer  "dealer_id"
@@ -261,7 +301,6 @@ ActiveRecord::Schema.define(version: 20131103090910) do
 
   create_table "distributor_details", force: true do |t|
     t.integer  "distributor_type_id"
-    t.integer  "main_area_id"
     t.string   "business_scope_ids"
     t.string   "product_ids"
     t.string   "brand_ids"
@@ -348,11 +387,15 @@ ActiveRecord::Schema.define(version: 20131103090910) do
   end
 
   create_table "manual_images", force: true do |t|
+    t.integer  "distributor_id"
+    t.string   "title"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
+
+  add_index "manual_images", ["distributor_id"], name: "index_manual_images_on_distributor_id", using: :btree
 
   create_table "mending_order_details", force: true do |t|
     t.integer  "brand_id"
@@ -501,7 +544,7 @@ ActiveRecord::Schema.define(version: 20131103090910) do
     t.string   "title"
     t.datetime "expire_at"
     t.integer  "purchase_requesting_type_id"
-    t.integer  "main_area_id"
+    t.integer  "area_id"
     t.string   "price_range"
     t.text     "description"
     t.string   "image_file_name"

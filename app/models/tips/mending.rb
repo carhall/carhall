@@ -13,10 +13,10 @@ class Tips::Mending < ActiveRecord::Base
   serialize :brand_ids, Array
   enumerate :brands, with: Category::Brand, multiple: true
 
-  def self.with_brand name
+  scope :with_brand, -> (name) {
     id = active_enum_get_id_for_brands(name)
     where('brand_ids LIKE \'%- ?\n%\'', id)
-  end
+  }
 
   enumerate :area, with: Category::Area
 

@@ -1,0 +1,22 @@
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>图册管理</strong></span></li>
+
+  <li<%= active? 'tips/manual_images#new' %>><a href="<%= new_tips_manual_image_path %>"><i class="icon-chevron-right"></i> 上传图片</a></li>
+  <li<%= active? 'tips/manual_images#index' %>><a href="<%= tips_manual_images_path %>"><i class="icon-chevron-right"></i> 管理图册</a></li>
+
+</ul>
+
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>交易管理</strong></span></li>
+
+  <li<%= active? 'tips/orders#bulk_purchasing2' %>><a href="<%= bulk_purchasing2_tips_orders_path %>"><i class="icon-chevron-right"></i> 团购订单</a></li>
+
+</ul>
+
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>促销管理</strong></span></li>
+
+  <li<%= active? 'tips/bulk_purchasing2s#new' %>><a href="<%= new_tips_bulk_purchasing2_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
+  <li<%= active? 'tips/bulk_purchasing2s#in_progress' %>><a href="<%= in_progress_tips_bulk_purchasing2s_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
+  <li<%= active? 'tips/bulk_purchasing2s#expired' %>><a href="<%= expired_tips_bulk_purchasing2s_path %>"><i class="icon-chevron-right"></i> 已结束的团购</a></li>
+</ul>

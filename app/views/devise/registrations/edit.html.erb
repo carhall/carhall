@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <% case @user_type %>
-  <% when :provider, :dealer, :admin %>
+  <% when :provider, :dealer, :distributor, :admin %>
     <div class="span3">
       <%= render "settings/sidenav/#{@user_type}" %>
     </div>
@@ -47,18 +47,17 @@
           <%= f.hidden_field :type %>
           
           <% if resource.user_type == :dealer %>
-          
 
             <%= f.simple_fields_for :detail do |ff| %>
-              <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerType.to_select, wrapper_html: { class: "dealer" } %>
+              <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerType.to_select %>
               <%= ff.input :specific_service_id, collection: Accounts::DealerDetail::SpecificService.to_select, wrapper_html: { class: "specific_service" }, required: true %>
-              <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScope.to_select, as: :check_boxes, wrapper_html: { class: "dealer" } %>
-              <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
-              <%= f.input :area_id, collection: Category::Area.to_select, wrapper_html: { class: "dealer provider" }, input_html: { class: 'select2' }, required: true %>
-              <%= ff.input :address, input_html: { class: 'input-xxlarge' }, wrapper_html: { class: "dealer" } %>
-              <%= ff.input :phone, wrapper_html: { class: "dealer provider" } %>
-              <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00' %>
-              <%= ff.input :authentication_image, wrapper_html: { class: "dealer" } do %>
+              <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScope.to_select, as: :check_boxes %>
+              <%= ff.input :company, input_html: { class: 'input-xlarge' } %>
+              <%= f.input :area_id, collection: Category::Area.to_select, input_html: { class: 'select2' }, required: true %>
+              <%= ff.input :address, input_html: { class: 'input-xxlarge' } %>
+              <%= ff.input :phone %>
+              <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, hint: '填数字即可，例如：09:00 至 18:00' %>
+              <%= ff.input :authentication_image do %>
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                   <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="account[detail_attributes][authentication_image]" /></span>
                   <span class="fileupload-preview"></span>
@@ -70,9 +69,28 @@
           <% elsif resource.user_type == :provider %>
             
             <%= f.simple_fields_for :detail do |ff| %>
-              <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" } %>
-              <%= f.input :area_id, collection: Category::Area.to_select, wrapper_html: { class: "dealer provider" }, input_html: { class: 'select2' }, required: true %>
-              <%= ff.input :phone, wrapper_html: { class: "dealer provider" } %>
+              <%= ff.input :company, input_html: { class: 'input-xlarge' } %>
+              <%= f.input :area_id, collection: Category::Area.to_select, input_html: { class: 'select2' }, required: true %>
+              <%= ff.input :phone %>
+            <% end %>
+
+          <% elsif resource.user_type == :distributor %>
+            
+            <%= f.simple_fields_for :detail do |ff| %>
+              <%= ff.input :business_scope_ids, collection: Accounts::DistributorDetail::BusinessScope.to_select, as: :check_boxes %>
+              <%= ff.input :company, input_html: { class: 'input-xlarge' } %>
+              <%= f.input :area_id, collection: Category::Area.to_select, input_html: { class: 'select2' }, required: true %>
+              <%= ff.input :address, input_html: { class: 'input-xxlarge' } %>
+              <%= ff.input :phone %>
+              <%= ff.input :product_ids, collection: Category::Product.to_select, wrapper_html: { class: "distributor" }, input_html: { class: 'select2', multiple: true }, required: true %>
+              <%= ff.input :brand_ids, collection: Category::Brand.to_select, wrapper_html: { class: "distributor" }, input_html: { class: 'select2', multiple: true }, required: true %>
+              <%= ff.input :authentication_image do %>
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                  <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="account[detail_attributes][authentication_image]" /></span>
+                  <span class="fileupload-preview"></span>
+                  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                </div>
+              <% end %>
             <% end %>
 
           <% end %>

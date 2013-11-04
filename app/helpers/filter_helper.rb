@@ -48,6 +48,10 @@ module FilterHelper
     @user_type = (current_account || Accounts::User.new).user_type
   end
   
+  def set_distributor
+    @distributor = current_account if current_account.user_type == :distributor
+  end
+
   def set_dealer
     @dealer = current_account if current_account.user_type == :dealer
   end

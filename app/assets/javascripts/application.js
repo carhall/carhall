@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require hermitage
 //= require jquery-migrate
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap

@@ -1,0 +1,8 @@
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>经销商大全</strong></span></li>
+
+  <% Accounts::DistributorDetail::BusinessScope.all.each do |key, value| %>
+    <li<%= ' class="active"'.html_safe if @business_scope_id == key %>><a href="<%= distributors_path(business_scope_id: key) %>"><i class="icon-chevron-right"></i> <%= value %></a></li>
+  <% end %>
+
+</ul>
