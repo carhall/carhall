@@ -43,7 +43,7 @@ FactoryGirl.define do
   factory :mending_order, class: Tips::MendingOrder do
     detail do
       {
-        brand_id: [0,1,2,3].sample, 
+        brand: Category::Brand.names.first(5).sample, 
         series: Faker::Lorem.word, 
         plate_num: generate(:plate_num),
         mending_type: Tips::MendingOrderDetail::MendingType.names.sample,

@@ -1,11 +1,10 @@
 class Api::Posts::ClubsController < Api::Posts::ApplicationController
   before_filter :set_current_user
-  before_filter :set_area_id_and_brand_id, only: :show
 
   # GET /api/club
   # GET /api/club.json
   def show
-    render_show ::Posts::Club.with_club(@area_id, @brand_id)
+    render_show ::Posts::Club.with_user(@user)
   end
 
   # PUT /api/club

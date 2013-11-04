@@ -18,14 +18,15 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   include Tips::Expiredable
   scope :ordered, -> { displayed.positioned.in_progress }
 
-  api_accessible :base, includes: [:dealer] do |t|
-    t.only :id, :title, :expire_at, :area_id, :bulk_purchasing_type_id, :price, :vip_price, 
-        :description, :orders_count, :reviews_count
-    t.methods :area, :bulk_purchasing_type, :stars
-    t.images :image
-    t.add :dealer, template: :base
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :title, :expire_at, :area_id, :area,
+        :bulk_purchasing_type_id, :bulk_purchasing_type, :price, :vip_price, 
+        :description, :orders_count, :reviews_count, :stars
+      json.image! self, :image
+    end
   end
   
-  api_accessible_for_detail
+  to_detail_builder
   
 end

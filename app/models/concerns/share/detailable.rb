@@ -14,6 +14,10 @@ module Share::Detailable
         end
       end
 
+      after_initialize do
+        detail ||= build_detail
+      end
+
     end
   end
   

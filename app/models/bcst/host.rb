@@ -10,17 +10,21 @@ class Bcst::Host < ActiveRecord::Base
   validates_presence_of :provider
   validates_presence_of :name
 
-  acts_as_api
-
-  api_accessible :without_programme do |t|
-    t.only :id, :name, :description
-    t.images :avatar
+  def to_without_programme_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :name, :description
+      json.image! self, :avatar
+    end
   end
 
-  api_accessible :base, extend: :without_programme, includes: [:programmes] do |t|
-    t.include :programmes, template: :without_host
+  def to_base_builder
+    json = to_without_programme_builder
+    json.programmes programmes.map{|h|h.to_without_programme_builder.attributes!}
+    json
   end
 
-  api_accessible :detail, extend: :base
+  def to_detail_builder
+    to_base_builder
+  end
 
 end

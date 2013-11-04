@@ -7,12 +7,12 @@ class Share::Comment < ActiveRecord::Base
   validates_presence_of :user, :source
   validates_presence_of :content
   
-  acts_as_api
-
-  api_accessible :base, includes: [:user, :at_user] do |t|
-    t.only :id, :content, :created_at
-    t.add :user, template: :base
-    t.add :at_user, template: :base
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :content, :created_at
+      json.builder! self, :user, :base
+      json.builder! self, :at_user, :base
+    end
   end
 
 end

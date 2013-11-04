@@ -12,15 +12,17 @@ class Tips::Activity < ActiveRecord::Base
   include Tips::Expiredable
   scope :ordered, -> { displayed.positioned.in_progress }
 
-  api_accessible :base, includes: [:dealer] do |t|
-    t.only :id, :title, :expire_at, :area_id, :description
-    t.methods :area
-    t.images :image
-    t.add :dealer, template: :base
-  end 
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :title, :expire_at, :area_id, :area, :description
+      json.image! self, :image
+    end
+  end
 
-  api_accessible :detail, extend: :base do |t|
-    t.add :dealer, template: :detail_without_statistic
-  end 
+  def to_detail_builder
+    json = to_base_builder
+    json.builder! self, :dealer, :detail_without_statistic
+    json
+  end
 
 end

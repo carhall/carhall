@@ -49,17 +49,22 @@ class Tips::Review < ActiveRecord::Base
 
   # end
 
-  acts_as_api
-
-  api_accessible :base, 
-    includes: [order: [:user]] do |t|
-    t.only :id, :content, :stars, :created_at
-    t.add :order, template: :base
+  def to_without_order_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :content, :stars, :created_at
+    end
   end
 
-  api_accessible :detail, extend: :base,
-    includes: [order: [:user, source: [:dealer]]] do |t|
-    t.add :order, template: :detail
+  def to_base_builder
+    json = to_without_order_builder
+    json.builder! self, :order, :base
+    json
+  end
+
+  def to_detail_builder
+    json = to_without_order_builder
+    json.builder! self, :order, :detail
+    json
   end
 
 end

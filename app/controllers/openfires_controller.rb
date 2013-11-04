@@ -6,7 +6,7 @@ class OpenfiresController < ActionController::Base
 
     if @user && @user.valid_password?(params[:password])
       @user.ensure_authentication_token!
-      render_data @user.as_api_response(:openfire_user_info)
+      render_data @user.to_openfire_user_info_builder
     else
       warden.custom_failure!
       render_error t('devise.failure.invalid'), :unauthorized
@@ -18,7 +18,7 @@ class OpenfiresController < ActionController::Base
 
     if @user
       @user.ensure_authentication_token!
-      render_data @user.as_api_response(:openfire_user_info)
+      render_data @user.to_openfire_user_info_builder
     else
       warden.custom_failure!
       render_error t('devise.failure.invalid'), :unauthorized
@@ -27,12 +27,12 @@ class OpenfiresController < ActionController::Base
 
   def get_user
     @user = ::Accounts::Account.find(params[:id])
-    render_data user: @user.as_api_response(:openfire_user_detail)
+    render_data user: @user.to_openfire_user_detail_builder.attributes!
   end
 
   def list_users
     @users = ::Accounts::Account.find(params[:ids].split(','))
-    render_data users: @users.as_api_response(:openfire_user_detail)
+    render_data users: @users.map{|u|u.to_openfire_user_detail_builder.attributes!}
   end
 
 end

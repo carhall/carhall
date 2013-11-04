@@ -3,8 +3,10 @@ class Tips::BulkPurchasingOrder < Tips::Order
 
   validates_presence_of :count
   
-  api_accessible :base, extend: :base do |t|
-    t.add :count
+  def to_base_builder
+    json = super
+    json.extract! self, :count
+    json
   end
 
 end

@@ -15,11 +15,11 @@ class Accounts::ProviderDetail < ActiveRecord::Base
     ids = template_ids.map{|i|i-1}
     %i(exposure traffic_report).values_at(*ids)
   end
-  acts_as_api
 
-  api_accessible :base do |t|
-    t.only :company, :phone, :rqrcode_token, :template_ids
-    t.methods :templates
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :company, :phone, :rqrcode_token, :template_ids, :templates
+    end
   end
-
+  
 end

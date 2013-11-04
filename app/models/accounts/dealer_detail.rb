@@ -30,12 +30,11 @@ class Accounts::DealerDetail < ActiveRecord::Base
     %i(cleaning mending bulk_purchasing activity).values_at(*ids)
   end
 
-  acts_as_api
-
-  api_accessible :base do |t|
-    t.only :dealer_type_id, :business_scope_ids, :company, :address, 
-        :phone, :open_during, :latitude, :longitude, :rqrcode_token
-    t.methods :dealer_type, :business_scopes
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :dealer_type_id, :dealer_type, :business_scope_ids, :business_scopes,
+        :company, :address, :phone, :open_during, :rqrcode_token
+    end
   end
 
 end

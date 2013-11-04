@@ -21,9 +21,10 @@ class Tips::CleaningOrder < Tips::Order
   extend Share::Exclamation
   define_exclamation_and_method :use
 
-  api_accessible :base, extend: :base do |t|
-    t.add :count
-    t.add :used_count
+  def to_base_builder
+    json = super
+    json.extract! self, :count, :used_count
+    json
   end
-  
+
 end

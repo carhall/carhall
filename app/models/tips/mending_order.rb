@@ -12,8 +12,10 @@ class Tips::MendingOrder < Tips::Order
     0
   end
 
-  # api_accessible :base, extend: :base, includes: [:user, :detail, source: [:dealer]] do |t|
-  #   t.add :detail, template: :base
-  # end
+  def to_base_builder
+    json = super
+    json.builder! self, :detail, :base
+    json
+  end
   
 end

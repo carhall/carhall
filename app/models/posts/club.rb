@@ -60,13 +60,13 @@ class Posts::Club < ActiveRecord::Base
   define_exclamation_and_method :relieve_president
   define_exclamation_and_method :relieve_mechanic
 
-  acts_as_api
-
-  api_accessible :base, includes: [:president, :mechanics] do |t|
-    t.only :id, :title, :announcement
-    t.include :president, template: :base
-    t.include :mechanics, template: :base
-    t.images :avatar
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :title, :announcement
+      json.builder! self, :president, :base
+      json.mechanics mechanics.map{|m|m.to_base_builder.attributes!}
+      json.image! self, :avatar
+    end
   end
-  
+
 end

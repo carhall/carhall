@@ -13,13 +13,13 @@ class Bcst::TrafficReport < ActiveRecord::Base
   
   default_scope { order('id DESC') }
   
-  acts_as_api
-
-  api_accessible :base, includes: [:user, :at_user] do |t|
-    t.only :id, :content, :created_at, :latitude, :longitude
-    t.images :image
-    t.add :user, template: :base
-    t.add :at_user, template: :base
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :content, :created_at, :latitude, :longitude
+      json.image! self, :image
+      json.builder! self, :user, :base
+      json.builder! self, :at_user, :base
+    end
   end
   
 end

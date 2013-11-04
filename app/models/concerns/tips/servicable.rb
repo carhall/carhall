@@ -12,26 +12,19 @@ module Tips::Servicable
       self.area_id = dealer.area_id
       self.location_id = dealer.location_id
     end
-
-    acts_as_api
-  end
-  
-  def last_3_orders
-    orders.includes(:user).last(3)
-  end
-
-  def last_3_reviews
-    reviews.includes(order: :user).last(3)
   end
 
   module ClassMethods
 
-    def api_accessible_for_detail
-      api_accessible :detail, extend: :base do |t|
-        t.add :goal_attainment, append_to: :detail
-        t.add :last_3_orders, append_to: :detail, template: :base
-        # t.add :last_3_reviews, append_to: :detail, template: :base
-        t.add :dealer, template: :detail_without_statistic
+    def to_detail_builder
+      define_method :to_detail_builder do
+        json = to_base_builder
+        json.detail do
+          json.extract! self, :goal_attainment
+          json.last_3_orders orders.includes(:user).last(3).map{|o|o.to_base_builder.attributes!}
+          json.builder! self, :dealer, :detail_without_statistic
+        end
+        json
       end
     end
 

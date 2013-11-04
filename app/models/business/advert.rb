@@ -7,16 +7,14 @@ class Business::Advert < ActiveRecord::Base
 
   validates_presence_of :image, :advert_type_id
 
-  acts_as_api
-
   def image_url
     "#{AbsoluteUrlPrefix}#{image.url(:medium)}"
   end
 
-  api_accessible :base do |t|
-    t.only :id
-    t.methods :image_url
-  end
+  # api_accessible :base do |t|
+  #   t.only :id
+  #   t.methods :image_url
+  # end
 
   scope :client, -> { where(advert_type_id: [1, 2, 3]) }
   scope :ad_template, -> { where(advert_type_id: 4) }

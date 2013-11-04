@@ -29,13 +29,6 @@ class Accounts::Dealer < Accounts::Account
       self.activities.update_all(area_id: self.area_id)
       self.bulk_purchasings.update_all(area_id: self.area_id)
     end
-
-    # if detail.address_changed?
-    #   self.mending.update_attributes(location_id: self.location_id)
-    #   self.cleanings.update_all(location_id: self.location_id)
-    #   self.activities.update_all(location_id: self.location_id)
-    #   self.bulk_purchasings.update_all(location_id: self.location_id)
-    # end
   end
 
   validates_each :detail do |record, attr, value|
@@ -78,14 +71,6 @@ class Accounts::Dealer < Accounts::Account
     where(detail_id: detail_ids)
   }
 
-  def last_3_orders
-    orders.includes(:user).last(3)
-  end
-
-  def last_3_reviews
-    reviews.includes(:user).last(3)
-  end
-  
   def mending_goal_attainment
     Share::Statisticable.goal_attainment mending_orders
   end
@@ -102,19 +87,19 @@ class Accounts::Dealer < Accounts::Account
   define_cached_methods :mending_goal_attainment, :cleaning_goal_attainment, 
     :bulk_purchasing_goal_attainment
 
-  api_accessible :detail_without_statistic, extend: :detail
+  alias_method :to_detail_without_statistic_builder, :to_detail_builder
 
-  api_accessible :detail, extend: :detail do |t|
-    t.add :area_id, append_to: :detail
-    t.add :area, append_to: :detail
-    t.add :stars, append_to: :detail
-    t.add :mending_goal_attainment, append_to: :detail
-    t.add :cleaning_goal_attainment, append_to: :detail
-    t.add :bulk_purchasing_goal_attainment, append_to: :detail
-    t.add :mending, template: :without_dealer, append_to: :detail
-    t.add :orders_count, append_to: :detail
-    t.include :last_3_orders, append_to: :detail, template: :base
-    # t.add :last_3_reviews, append_to: :detail, template: :base
+  def to_detail_builder
+    json = to_base_builder
+    json.detail do
+      json.attributes!.merge! detail.to_base_builder.attributes!
+      json.extract! self, :area_id, :area, :stars, :mending_goal_attainment,
+        :cleaning_goal_attainment, :bulk_purchasing_goal_attainment,
+        :orders_count
+      json.builder! self, :mending, :without_dealer
+      json.last_3_orders(orders.includes(:user).last(3).map{|o|o.to_base_builder.attributes!})
+    end
+    json
   end
 
 end

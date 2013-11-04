@@ -66,7 +66,7 @@ gem 'cancan'
 
 # For Apis
 # gem 'rails-api'
-gem 'acts_as_api'
+# gem 'acts_as_api'
 
 # Basic
 gem 'kaminari'

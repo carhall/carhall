@@ -26,16 +26,16 @@ class Tips::Mending < ActiveRecord::Base
   include Share::Localizable
   include Share::Statisticable
 
-  api_accessible :without_dealer, includes: [:dealer] do |t|
-    t.only :id, :area_id, :brand_ids, :description, :orders_count, :reviews_count
-    t.methods :area, :brands, :discount, :stars
+  def to_without_dealer_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :area_id, :area, :brand_ids, :brands, 
+        :description, :orders_count, :reviews_count, :discount, :stars
+    end
   end
 
-  api_accessible :base, extend: :without_dealer, includes: [:dealer] do |t|
-    t.add :dealer, template: :base
-  end
-  
-  api_accessible_for_detail
+  alias_method :to_base_builder, :to_without_dealer_builder
+
+  to_detail_builder
 
   def init_grouped_array_by_brand_and_type
     brands_count = Category::Brand.all.count

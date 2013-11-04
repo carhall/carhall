@@ -74,18 +74,18 @@ class Tips::Order < ActiveRecord::Base
     type.demodulize.underscore.to_sym
   end
 
-  acts_as_api
-
-  api_accessible :base, 
-    includes: [:user] do |t|
-    t.only :id, :title, :state_id, :cost, :created_at, :dealer_id
-    t.methods :order_type, :state
-    t.add :user, template: :base
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :title, :state_id, :cost, :created_at, :dealer_id,
+        :order_type, :state
+      json.user user.to_base_builder
+    end
   end
 
-  api_accessible :detail, extend: :base,
-    includes: [:user, source: [:dealer]] do |t|
-    t.add :source, template: :base
+  def to_detail_builder
+    json = to_base_builder
+    json.builder! self, :source, :base
+    json
   end
-  
+
 end

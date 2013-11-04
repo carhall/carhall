@@ -4,10 +4,10 @@ class Bcst::ProgrammeList < ActiveRecord::Base
   validates_presence_of :provider
   validates_presence_of :title, :airdate, :day
 
-  acts_as_api
-
-  api_accessible :base do |t|
-    t.only :title, :airdate, :description
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :title, :airdate, :description
+    end
   end
-
+  
 end

@@ -1,29 +1,24 @@
 class Api::Posts::PostsController < Api::Posts::ApplicationController
   before_filter :set_user, except: :show
-  before_filter :set_area_id_and_brand_id, except: :create
+  set_resource_class ::Posts::Post
+  before_filter :set_includes
 
   # GET /api/posts
   # GET /api/posts.json
   def index
-    render_index @user.posts
+    render_index @parent.with_user @user
   end
 
   def friends
-    render_index ::Posts::Post.with_friends(@user)
+    render_index @parent.with_friends(@user)
   end
 
   def top
-    render_index ::Posts::Post.top
+    render_index @parent.top
   end
 
   def club
-    render_index ::Posts::Post.with_club @user
-  end
-
-  # GET /api/posts/1
-  # GET /api/posts/1.json
-  def show
-    render_show ::Posts::Post.find(params[:id])
+    render_index @parent.with_club @user
   end
 
   # POST /api/posts
@@ -35,7 +30,7 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
   # DELETE /api/posts/1
   # DELETE /api/posts/1.json
   def destroy
-    post = ::Posts::Post.find(params[:id])
+    post = @parent.find(params[:id])
     authorize! :destroy, post
     post.destroy
 
@@ -44,6 +39,10 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
 
 private
   
+  def set_includes
+    @parent = @parent.includes(:user, comments: [:user, :at_user])
+  end
+
   def data_params
     params.require(:data).permit(:content, :image)
   end

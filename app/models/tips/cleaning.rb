@@ -14,14 +14,15 @@ class Tips::Cleaning < ActiveRecord::Base
   include Share::Localizable
   include Share::Statisticable
 
-  api_accessible :base, includes: [:dealer] do |t|
-    t.only :id, :title, :area_id, :cleaning_type_id, :price, :vip_price, :description, 
-        :orders_count, :reviews_count
-    t.methods :area, :cleaning_type, :stars
-    t.images :image
-    t.add :dealer, template: :base
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :title, :area_id, :area,
+        :cleaning_type_id, :cleaning_type, :price, :vip_price, 
+        :description, :orders_count, :reviews_count, :stars
+      json.image! self, :image
+    end
   end
-
-  api_accessible_for_detail
+  
+  to_detail_builder
   
 end

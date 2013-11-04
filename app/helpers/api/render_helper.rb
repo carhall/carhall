@@ -1,43 +1,47 @@
 module Api
   module RenderHelper
 
-    def render_index resources, api_template=:base
+    def render_index resources, template=:base
       resources = Kaminari.paginate_array(resources) if resources.kind_of? Array
       resources = resources.page(params[:page]) if params[:page]
       resources = resources.per(params[:per_page]) if params[:per_page]
-      render_data resources.as_api_response api_template
+      render_data resources.map{|r|r.send(:"to_#{template}_builder").attributes!}
     end
 
-    def render_show resource, api_template=:base
-      render_data resource.as_api_response api_template
+    def render_show resource, template=:base
+      render_data resource.send(:"to_#{template}_builder")
     end
 
-    def render_data json_data, status=:ok
-      render json: { data: json_data, success: true }, status: status
+    def render_data data, status=:ok
+      json = Jbuilder.new do |json|
+        json.data data
+        json.success true
+      end
+      render json: json.target!, status: status
     end
 
-    def render_create resource, api_template=:base
+    def render_create resource, template=:base
       if resource.save
-        render_create_success resource, api_template
+        render_create_success resource, template
       else
         render_failure resource
       end
     end
 
-    def render_update resource, api_template=:base
+    def render_update resource, template=:base
       if resource.save
-        render_update_success resource, api_template
+        render_update_success resource, template
       else
         render_failure resource
       end
     end
 
-    def render_create_success resource, api_template=:base
-      render_data resource.as_api_response(api_template), :created
+    def render_create_success resource, template=:base
+      render_data resource.send(:"to_#{template}_builder"), :created
     end
 
-    def render_update_success resource, api_template=:base
-      render_data resource.as_api_response(api_template), :accepted
+    def render_update_success resource, template=:base
+      render_data resource.send(:"to_#{template}_builder"), :accepted
     end
 
     def render_failure resource, status = :unprocessable_entity

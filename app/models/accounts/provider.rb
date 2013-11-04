@@ -16,18 +16,24 @@ class Accounts::Provider < Accounts::Account
   end
 
   def programme_list
-    hash = Category::Day.names.reduce({}) { |ret, name| ret[name] = []; ret } 
-    programme_lists.each { |pl| hash[pl.day] << pl }
+    hash = Category::Day.names.reduce({}){|ret,name|ret[name]=[];ret} 
+    programme_lists.each{|pl|hash[pl.day]<<pl}
     hash
   end
 
-  def programme_list_as_api_response
-    hash = Category::Day.names.reduce({}) { |ret, name| ret[name] = []; ret } 
-    programme_lists.each { |pl| hash[pl.day] << pl.as_api_response(:base) }
-    { list: hash }
+  def to_programme_list_builder
+    hash = Category::Day.names.reduce({}){|ret,name|ret[name]=[];ret} 
+    programme_lists.each{|pl|hash[pl.day]<<pl.to_base_builder.attributes!}
+    {list:hash}
   end
 
-  api_accessible :detail, extend: :detail, includes: [:programmes] do |t|
-    t.add :programmes, template: :base, append_to: :detail
+  def to_detail_builder
+    json = to_base_builder
+    json.detail do
+      json.attributes!.merge! detail.to_base_builder.attributes!
+      json.programmes(programmes.includes(:hosts).map{|p|p.to_base_builder.attributes!})
+    end
+    json
   end
+
 end

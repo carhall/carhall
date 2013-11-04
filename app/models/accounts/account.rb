@@ -22,8 +22,6 @@ class Accounts::Account < ActiveRecord::Base
   include Share::Queryable
   define_queryable_column :username, :mobile
 
-  acts_as_api
-
   include Share::Areable
   enumerate :brand, with: Category::Brand
   enumerate :sex, with: %w(男 女)
@@ -74,34 +72,41 @@ class Accounts::Account < ActiveRecord::Base
     }[user_type]
   end
 
-  acts_as_api
-
-  api_accessible :base do |t|
-    t.only :id, :username, :mobile, :description
-    t.methods :user_type
-    t.images :avatar
-  end 
-
-  api_accessible :with_token, extend: :base do |t|
-    t.only :authentication_token
-  end 
-
-  api_accessible :detail, extend: :base, includes: [:detail] do |t|
-    t.add :detail, template: :base
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :username, :mobile, :description, :user_type
+      json.image! self, :avatar
+    end
   end
 
-  api_accessible :openfire_user_info do |t|
-    t.only :id, :mobile
-    t.methods :user_type_id
-    t.add :authentication_token, as: :token
+  def to_with_token_builder
+    json = to_base_builder
+    json.extract! self, :authentication_token
+    json
   end
 
-  api_accessible :openfire_user_detail do |t|
-    t.only :id, :username, :mobile
-    t.methods :user_type_id
-    t.add ->(u) { u.sex_id || 0 }, as: :sex_id
-    t.add ->(u) { "#{AbsoluteUrlPrefix}#{u.avatar.url(:thumb)}" if u.avatar.present? }, 
-      as: :avatar_thumb_url
+  def to_detail_builder
+    json = to_base_builder
+    json.detail detail.to_base_builder
+    json
+  end
+
+  def to_openfire_user_info_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :mobile, :user_type_id
+      json.token authentication_token
+    end
+  end
+
+  def avatar_thumb_url
+    "#{AbsoluteUrlPrefix}#{avatar.url(:thumb)}" if avatar.present?
+  end
+
+  def to_openfire_user_detail_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :username, :mobile, :user_type_id, :avatar_thumb_url
+      json.sex_id(sex_id||0)
+    end
   end
 
   # Fake detail

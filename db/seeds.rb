@@ -36,12 +36,13 @@ provider = FactoryGirl.create :provider, mobile: '13312345678'
   me.make_friend_with! u
 end
 
-10.times do
+100.times do
   FactoryGirl.create :post, user: me.user_friends.sample
 end
 
-30.times do
-  FactoryGirl.create :comment, source: Posts::Post.all.sample, user: Accounts::User.all.sample
+1000.times do
+  FactoryGirl.create :comment, source: Posts::Post.all.sample, 
+    user: Accounts::User.all.sample, at_user: Accounts::User.all.sample
 end
 
 25.times do

@@ -23,21 +23,15 @@ class Accounts::User < Accounts::Account
     Posts::Club.with_user self
   end
 
-  def last_3_posts
-    posts.includes(:user).last(3)
-  end
-
-  api_accessible :detail, extend: :detail do |t|
-    t.add :sex_id, append_to: :detail
-    t.add :sex, append_to: :detail
-    t.add :area_id, append_to: :detail
-    t.add :area, append_to: :detail
-    t.add :city, append_to: :detail
-    t.add :province, append_to: :detail
-    t.add :brand_id, append_to: :detail
-    t.add :brand, append_to: :detail
-    t.include :last_3_posts, append_to: :detail, template: :base
-    t.add :posts_count, append_to: :detail
+  def to_detail_builder
+    json = to_base_builder
+    json.detail do
+      json.merge! detail.to_base_builder.attributes!
+      json.extract! self, :sex_id, :sex, :area_id, :area, :city, :province, 
+        :brand_id, :brand, :posts_count
+      json.last_3_posts(posts.includes(:user).last(3).map{|p|p.to_without_comment_builder.attributes!})
+    end
+    json
   end
 
 end

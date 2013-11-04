@@ -33,13 +33,18 @@ class Posts::Post < ActiveRecord::Base
     end
   }
 
-  acts_as_api
-
-  api_accessible :base, includes: [:user, comments: [:user, :at_user]] do |t|
-    t.only :id, :content, :view_count, :comments_count, :created_at
-    t.images :image
-    t.add :user, template: :base
-    t.include :comments, template: :base
+  def to_without_comment_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :content, :comments_count, :created_at
+      json.image! self, :image
+      json.user user.to_base_builder
+    end
+  end
+    
+  def to_base_builder
+    json = to_without_comment_builder
+    json.comments comments.map{|c|c.to_base_builder.attributes!}
+    json
   end
 
 end
