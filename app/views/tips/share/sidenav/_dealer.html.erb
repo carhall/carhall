@@ -16,6 +16,15 @@
   </ul>
 <% end %>
 
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>货源管理</strong></span></li>
+  <li><span>限时求购</span></li>
+
+  <li<%= active? 'tips/purchase_requestings#new' %>><a href="<%= new_tips_purchase_requesting_path %>"><i class="icon-chevron-right"></i> 发布求购</a></li>
+  <li<%= active? 'tips/purchase_requestings#in_progress' %>><a href="<%= in_progress_tips_purchase_requestings_path %>"><i class="icon-chevron-right"></i> 进行中的求购</a></li>
+  <li<%= active? 'tips/purchase_requestings#expired' %>><a href="<%= expired_tips_purchase_requestings_path %>"><i class="icon-chevron-right"></i> 已结束的求购</a></li>
+</ul>
+
 <% if @dealer.has_template? :cleaning or @dealer.has_template? :mending %>
   <ul class="nav nav-list sidenav">
     <li><span><strong>业务管理</strong></span></li>

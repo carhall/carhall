@@ -1,0 +1,27 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%= @purchase_requesting.title %> <small><a href="<%= edit_tips_purchase_requesting_path(@purchase_requesting) %>">编辑</a></small></h3>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span3">
+        <img src="<%= @purchase_requesting.image.url(:medium) %>">
+      </div>
+      <div class="span9">
+        <%= show_for @purchase_requesting do |s| %>
+          <%= s.attribute :purchase_requesting_type %>
+          <%= s.attribute :expire_at %>
+          <%= s.attribute :vip_price %>
+          <%= s.attribute :price %>
+          <%= s.attribute :description %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>

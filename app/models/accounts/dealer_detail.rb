@@ -15,6 +15,8 @@ class Accounts::DealerDetail < ActiveRecord::Base
 
   enumerate :specific_service, with: %w(轮胎 换油 改装 钣喷 空调)
 
+  attr_accessor :product_ids, :brand_ids
+
   def self.with_business_scope name
     id = active_enum_get_id_for_business_scopes(name)
     where('business_scope_ids LIKE \'%- ?\n%\'', id)

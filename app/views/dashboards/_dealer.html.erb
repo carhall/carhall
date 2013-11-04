@@ -16,38 +16,50 @@
     <!-- Example row of columns -->
     <div class="row-fluid marketing">
       <div class="span6">
-        <i class="icon-user pull-left icon-5x"></i>
-        <h4>客户管理</h4>
-        <p class="muted">管理，独有一套。 </p>
+        <a href="<%= statistic_friends_path %>">
+          <i class="icon-user pull-left icon-5x"></i>
+          <h4>客户管理</h4>
+          <p class="muted">管理，独有一套。 </p>
+        </a>
       </div>
       <div class="span6">
-        <i class="icon-book pull-left icon-5x"></i>
-        <h4>业务管理</h4>
-        <p class="muted">业务，另辟蹊径。 </p>
-      </div>
-    </div>
-    <div class="row-fluid marketing">
-      <div class="span6">
-        <i class="icon-tag pull-left icon-5x"></i>
-        <h4>团购</h4>
-        <p class="muted">促销，进货的优惠。 </p>
-      </div>
-      <div class="span6">
-        <i class="icon-rocket pull-left icon-5x"></i>
-        <h4>限时求购</h4>
-        <p class="muted">看看，捡来的商机。 </p>
+        <a href="<%= tips_root_path %>">
+          <i class="icon-book pull-left icon-5x"></i>
+          <h4>业务管理</h4>
+          <p class="muted">业务，另辟蹊径。 </p>
+        </a>
       </div>
     </div>
     <div class="row-fluid marketing">
       <div class="span6">
-        <i class="icon-magic pull-left icon-5x"></i>
-        <h4>经销商大全</h4>
-        <p class="muted">指尖上的商家。 </p>
+        <a href="<%= tips_root_path %>">
+          <i class="icon-tag pull-left icon-5x"></i>
+          <h4>团购</h4>
+          <p class="muted">促销，进货的优惠。 </p>
+        </a>
       </div>
       <div class="span6">
-        <i class="icon-cog pull-left icon-5x"></i>
-        <h4>设置</h4>
-        <p class="muted">资料管理。 </p>
+        <a href="<%= tips_purchase_requestings_path %>">
+          <i class="icon-rocket pull-left icon-5x"></i>
+          <h4>限时求购</h4>
+          <p class="muted">试试，在家找货。 </p>
+        </a>
+      </div>
+    </div>
+    <div class="row-fluid marketing">
+      <div class="span6">
+        <a href="<%#= distributors_cards_path %>">
+          <i class="icon-magic pull-left icon-5x"></i>
+          <h4>经销商大全</h4>
+          <p class="muted">指尖上的商家。 </p>
+        </a>
+      </div>
+      <div class="span6">
+        <a href="<%= setting_path %>">
+          <i class="icon-cog pull-left icon-5x"></i>
+          <h4>设置</h4>
+          <p class="muted">资料管理。 </p>
+        </a>
       </div>
     </div>
   </div>

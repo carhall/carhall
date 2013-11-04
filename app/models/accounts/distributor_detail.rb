@@ -1,16 +1,28 @@
 class Accounts::DistributorDetail < ActiveRecord::Base
   extend Share::ImageAttachments
+  define_image_method
+  alias_attribute :authentication_image, :image
+
   define_rqrcode_image_method
   
-  validates_presence_of :distributor_type_id, :business_scope_ids,
-    :company, :address, :phone
+  validates_presence_of :business_scope_ids, :company, :address, :phone
 
-  enumerate :distributor_type, with: %w(洗车美容 专项服务 专修 4S店)
+  # enumerate :distributor_type, with: %w(洗车美容 专项服务 专修 4S店)
 
   serialize :business_scope_ids, Array
-  enumerate :business_scopes, with: %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险), multiple: true
+  enumerate :business_scopes, with: %w(汽车用品 洗车美容工具 汽保工具 美容养护 深化养护 汽车配件 电子产品), multiple: true
 
   enumerate :specific_service, with: %w(轮胎 换油 改装 钣喷 空调)
+
+  serialize :product_ids, Array
+  enumerate :products, with: Category::Product, multiple: true
+
+  serialize :brand_ids, Array
+  enumerate :brands, with: Category::Brand, multiple: true
+
+  enumerate :main_area, with: Category::MainArea
+
+  attr_accessor :dealer_type_id, :specific_service_id, :open_during
 
   def self.with_business_scope name
     id = active_enum_get_id_for_business_scopes(name)

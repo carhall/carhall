@@ -19,7 +19,7 @@ module StatisticsHelper
   def goal_attainment orders
     uncanceled_count = orders.length - states_count(orders, :canceled)
     return 0.0 if uncanceled_count == 0
-    states_count(orders, :finished) / uncanceled_count
+    states_count(orders, :finished) * 100.0 / uncanceled_count
   end
   
   def states_count orders, state

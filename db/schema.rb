@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131102065840) do
+ActiveRecord::Schema.define(version: 20131103090910) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 20131102065840) do
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
   add_index "accounts", ["unlock_token"], name: "index_accounts_on_unlock_token", unique: true, using: :btree
 
-  create_table "accounts_clubs", force: true do |t|
-    t.integer "user_id"
-    t.integer "club_id"
+  create_table "accounts_clubs", id: false, force: true do |t|
+    t.integer "account_id", null: false
+    t.integer "club_id",    null: false
   end
 
   create_table "activities", force: true do |t|
@@ -261,15 +261,22 @@ ActiveRecord::Schema.define(version: 20131102065840) do
 
   create_table "distributor_details", force: true do |t|
     t.integer  "distributor_type_id"
+    t.integer  "main_area_id"
     t.string   "business_scope_ids"
     t.string   "product_ids"
+    t.string   "brand_ids"
     t.string   "company"
+    t.string   "address"
     t.string   "phone"
     t.string   "rqrcode_token"
-    t.string   "manual_file_name"
-    t.string   "manual_content_type"
-    t.integer  "manual_file_size"
-    t.datetime "manual_updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "rqrcode_image_file_name"
+    t.string   "rqrcode_image_content_type"
+    t.integer  "rqrcode_image_file_size"
+    t.datetime "rqrcode_image_updated_at"
   end
 
   create_table "distributor_infos_tutorials", id: false, force: true do |t|
@@ -338,6 +345,13 @@ ActiveRecord::Schema.define(version: 20131102065840) do
     t.float  "latitude"
     t.float  "longitude"
     t.string "geohash"
+  end
+
+  create_table "manual_images", force: true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "mending_order_details", force: true do |t|
@@ -480,6 +494,20 @@ ActiveRecord::Schema.define(version: 20131102065840) do
     t.integer  "rqrcode_image_file_size"
     t.datetime "rqrcode_image_updated_at"
     t.string   "template_ids"
+  end
+
+  create_table "purchase_requestings", force: true do |t|
+    t.integer  "dealer_id"
+    t.string   "title"
+    t.datetime "expire_at"
+    t.integer  "purchase_requesting_type_id"
+    t.integer  "main_area_id"
+    t.string   "price_range"
+    t.text     "description"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "reviews", force: true do |t|

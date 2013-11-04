@@ -1,0 +1,14 @@
+<% @purchase_requestings = @purchase_requestings.includes(:dealer) if @user.admin? %>
+
+<%= index_for @purchase_requestings, class: :datatable do |t| %>
+  <%= t.attribute :id %>
+  <%= t.association :dealer, using: :username if @user.admin? %>
+  <%= t.attribute :image do |image| %>
+    <%= image_tag(image.url(:thumb)) %>
+  <% end %>
+  <%= t.attribute :title %>
+  <%= t.attribute :purchase_requesting_type %>
+  <%= t.attribute :expire_at, format: :short %>
+  <%= t.attribute :price_range %>
+  <%= t.actions :all %>
+<% end %>

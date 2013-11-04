@@ -22,6 +22,12 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
         :business_scope_ids, :company, :address, :phone, :open_during, 
         :authentication_image,
         {template_ids: []}, {business_scope_ids: []}]}
+    when "Accounts::Distributor"
+      permit << :type
+      permit << {detail_attributes: [:id, :distributor_type_id, 
+        :business_scope_ids, :company, :address, :phone,
+        :authentication_image, {product_ids: []}, {brand_ids: []},
+        {business_scope_ids: []}]}
     else
     end
     @account_params = @account_params.permit(permit)

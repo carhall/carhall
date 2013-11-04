@@ -20,18 +20,21 @@
           </div>
         </div>
       <% end %>
-      <%= f.input :type, collection: [['媒体', 'Accounts::Provider'], ['服务商', 'Accounts::Dealer']], required: true %>
+      <%= f.input :type, collection: [['媒体', 'Accounts::Provider'], ['服务商', 'Accounts::Dealer'], ['经销商', 'Accounts::Distributor']], required: true %>
 
       <%= f.simple_fields_for :detail do |ff| %>
         <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerType.to_select, wrapper_html: { class: "dealer" }, required: true %>
         <%= ff.input :specific_service_id, collection: Accounts::DealerDetail::SpecificService.to_select, wrapper_html: { class: "specific_service" } %>
         <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScope.to_select, as: :check_boxes, wrapper_html: { class: "dealer" }, required: true %>
-        <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider" }, required: true %>
-        <%= f.input :area_id, collection: Category::Area.to_select, wrapper_html: { class: "dealer provider" }, input_html: { class: 'select2' }, required: true %>
-        <%= ff.input :address, input_html: { class: 'input-xxlarge address' }, wrapper_html: { class: "dealer" }, required: true %>
-        <%= ff.input :phone, wrapper_html: { class: "dealer provider" }, required: true %>
+        <%= ff.input :business_scope_ids, collection: Accounts::DistributorDetail::BusinessScope.to_select, as: :check_boxes, wrapper_html: { class: "distributor" }, required: true %>
+        <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider distributor" }, required: true %>
+        <%= f.input :area_id, collection: Category::Area.to_select, wrapper_html: { class: "dealer provider distributor" }, input_html: { class: 'select2' }, required: true %>
+        <%= ff.input :address, input_html: { class: 'input-xxlarge address' }, wrapper_html: { class: "dealer distributor" }, required: true %>
+        <%= ff.input :phone, wrapper_html: { class: "dealer provider distributor" }, required: true %>
         <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00', required: true %>
-        <%= ff.input :authentication_image, wrapper_html: { class: "dealer" }, required: true do %>
+        <%= ff.input :product_ids, collection: Category::Product.to_select, wrapper_html: { class: "distributor" }, input_html: { class: 'select2', multiple: true }, required: true %>
+        <%= ff.input :brand_ids, collection: Category::Brand.to_select, wrapper_html: { class: "distributor" }, input_html: { class: 'select2', multiple: true }, required: true %>
+        <%= ff.input :authentication_image, wrapper_html: { class: "dealer distributor" }, required: true do %>
           <div class="fileupload fileupload-new" data-provides="fileupload">
             <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="account[detail_attributes][authentication_image]" /></span>
             <span class="fileupload-preview"></span>
@@ -58,11 +61,13 @@
   $(document).ready(function() {
     $user_type = $("#account_type")
     function prepare_detail_inputs() {
-      $(".control-group").filter(".provider, .dealer").hide()
+      $(".control-group").filter(".provider, .dealer, .distributor").hide()
       if($user_type.val() == "Accounts::Provider") {
         $(".control-group").filter(".provider").show()
       } else if($user_type.val() == "Accounts::Dealer") {
         $(".control-group").filter(".dealer").show()
+      } else if($user_type.val() == "Accounts::Distributor") {
+        $(".control-group").filter(".distributor").show()
       }
     }
 

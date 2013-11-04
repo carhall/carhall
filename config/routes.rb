@@ -92,6 +92,12 @@ Carhall::Application.routes.draw do
       get :cleaning, on: :collection
       get :bulk_purchasing, on: :collection
     end
+
+    resources :purchase_requestings do
+      get :in_progress, on: :collection
+      get :expired, on: :collection
+
+    end
   end
 
   namespace :bcst do
@@ -380,6 +386,8 @@ Carhall::Application.routes.draw do
 
       resources :orders, only: [:index, :show, :create] do
         put :finish, on: :member
+        put "use/:count", action: :use, on: :member
+        put :use, on: :member
         post :review, on: :member
         delete :cancel, on: :member
       end
