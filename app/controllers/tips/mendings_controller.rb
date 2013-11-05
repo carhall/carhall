@@ -35,7 +35,7 @@ class Tips::MendingsController < Tips::ApplicationController
 
   def load_mending
     if @dealer
-      @mending = @dealer.mending || @dealer.build_mending
+      @mending = @dealer.mending || @dealer.create_mending
     else
       @mending = Tips::Mending.find(params[:id])
     end

@@ -1,3 +1,10 @@
+<% unless @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :bulk_purchasing or @dealer.has_template? :activity %>
+  <div class="alert alert-error fade in">
+    <button class="close" data-dismiss="alert">×</button>
+    您还没有添加任何业务模板，请在 <a href="<%= template_setting_path %>">业务模板管理</a> 中添加模板。
+  </div>
+<% end %>
+
 <% if @dealer.has_template? :bulk_purchasing or @dealer.has_template? :cleaning or @dealer.has_template? :mending %>
   <ul class="nav nav-list sidenav affix-top">
     <li><span><strong>交易管理</strong></span></li>
@@ -59,11 +66,4 @@
       <li<%= active? 'tips/bulk_purchasings#expired' %>><a href="<%= expired_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 已结束的团购</a></li>
     <% end %>
   </ul>
-<% end %>
-
-<% unless @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :bulk_purchasing or @dealer.has_template? :activity %>
-  <div class="alert alert-error fade in">
-    <button class="close" data-dismiss="alert">×</button>
-    您还没有添加任何业务模板，请在 <a href="<%= template_setting_path %>">业务模板管理</a> 中添加模板。
-  </div>
 <% end %>
