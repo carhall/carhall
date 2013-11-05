@@ -22,8 +22,8 @@ module Tips::Servicable
         json.detail do
           json.extract! self, :goal_attainment
           json.last_3_orders orders.includes(:user).last(3).map{|o|o.to_base_builder.attributes!}
-          json.builder! self, :dealer, :detail_without_statistic
         end
+        json.builder! self, :dealer, :detail_without_statistic
         json
       end
     end
