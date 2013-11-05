@@ -33,7 +33,11 @@ class Tips::Mending < ActiveRecord::Base
     end
   end
 
-  alias_method :to_base_builder, :to_without_dealer_builder
+  def to_base_builder
+    json = to_without_dealer_builder
+    json.builder! self, :dealer, :base
+    json
+  end
 
   to_detail_builder
 
