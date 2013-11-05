@@ -11,10 +11,11 @@ class Business::Advert < ActiveRecord::Base
     "#{AbsoluteUrlPrefix}#{image.url(:medium)}"
   end
 
-  # api_accessible :base do |t|
-  #   t.only :id
-  #   t.methods :image_url
-  # end
+  def to_base_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :image_url
+    end
+  end
 
   scope :client, -> { where(advert_type_id: [1, 2, 3]) }
   scope :ad_template, -> { where(advert_type_id: 4) }
