@@ -19,7 +19,7 @@ class Bcst::Host < ActiveRecord::Base
 
   def to_base_builder
     json = to_without_programme_builder
-    json.programmes programmes.map{|h|h.to_without_programme_builder.attributes!}
+    json.programmes programmes.map{|h|h.to_without_host_builder.attributes!}
     json
   end
 
