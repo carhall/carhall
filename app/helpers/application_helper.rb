@@ -17,4 +17,9 @@ module ApplicationHelper
     icon = content_tag(:i, nil, rel: :tooltip, title: title, class: icon_class)
     link_to icon, path, options
   end
+
+  def format_nil value
+    value || '<span class="muted">无</span>'.html_safe
+  end
+
 end

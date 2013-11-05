@@ -23,17 +23,21 @@
         </tr>
       </thead>
       <tbody>
-        <% @mending.brand_ids.each do |brand_id| %>
-          <% @types.each do |type_id, type| %>
-            <tr>
-              <% if type_id == 1 %>
-                <td rowspan="<%= @types.count %>"><%= Category::Brand[brand_id] %></td>
-              <% end %>
-              <td><%= type %></td>
-              <td><%= @grouped_orders[brand_id][type_id].count %></td>
-              <td><%= mean_stars @grouped_reviews[brand_id][type_id] %></td>
-              <td><%= mean_stars recent @grouped_reviews[brand_id][type_id] %></td>
-            </tr>
+        <% Category::Brand.all.each do |brand| %>
+          <% if @grouped_orders[brand.id] %>
+            <% @types.each do |type_id, type| %>
+              <% orders = @grouped_orders[brand.id][type_id] %>
+              <% reviews = @grouped_reviews[brand.id][type_id] || [] %>
+              <tr>
+                <% if type_id == 1 %>
+                  <td rowspan="<%= @types.count %>"><%= brand.name %></td>
+                <% end %>
+                <td><%= type %></td>
+                <td><%= format_nil orders.try(:count) %></td>
+                <td><%= mean_stars reviews %></td>
+                <td><%= mean_stars recent reviews %></td>
+              </tr>
+            <% end %>
           <% end %>
         <% end %>
       </tbody>

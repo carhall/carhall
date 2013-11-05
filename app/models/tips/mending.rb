@@ -41,28 +41,26 @@ class Tips::Mending < ActiveRecord::Base
 
   to_detail_builder
 
-  def init_grouped_array_by_brand_and_type
-    brands_count = Category::Brand.all.count
-    types_count = Tips::MendingOrderDetail::MendingType.all.count
-    Array.new(brands_count+1) { Array.new(types_count+1) { [] }}
-  end
-
   def orders_group_by_brand_and_type
-    orders = self.orders.includes(:detail)
-    grouped_orders = init_grouped_array_by_brand_and_type
-    orders.each do |order|
-      grouped_orders[order.detail.brand_id][order.detail.mending_type_id] << order
+    hash = orders.includes(:detail).group_by do |order|
+      order.detail.brand_id
     end
-    grouped_orders
+    hash.update hash do |key, value|
+      value.group_by do |order|
+        order.detail.mending_type_id
+      end
+    end
   end
 
   def reviews_group_by_brand_and_type
-    reviews = self.reviews.includes(order: :detail)
-    grouped_reviews = init_grouped_array_by_brand_and_type
-    reviews.each do |review|
-      grouped_reviews[review.order.detail.brand_id][review.order.detail.mending_type_id] << review
+    hash = reviews.includes(order: :detail).group_by do |review|
+      review.order.detail.brand_id
     end
-    grouped_reviews
+    hash.update hash do |key, value|
+      value.group_by do |review|
+        review.order.detail.mending_type_id
+      end
+    end
   end
 
 end

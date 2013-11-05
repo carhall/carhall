@@ -13,9 +13,9 @@
       <% if accounts[area_id] %>
         <tr>
           <td><%= area %></td>
-          <td><%= accounts[area_id][:dealer].try :count %></td>
-          <td><%= accounts[area_id][:distributor].try :count %></td>
-          <td><%= accounts[area_id][:user].try :count %></td>
+          <td><%= format_nil accounts[area_id][:dealer].try(:count) %></td>
+          <td><%= format_nil accounts[area_id][:distributor].try(:count) %></td>
+          <td><%= format_nil accounts[area_id][:user].try(:count) %></td>
         </tr>
       <% end %>
     <% end %>
