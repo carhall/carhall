@@ -38,7 +38,7 @@ module Accounts::Publicable
   end
 
   def adverts_balance
-    friends_count * 3
+    (friends_count||0) * 3
   end
 
   def commission
