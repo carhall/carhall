@@ -15,8 +15,18 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
           'provider' => [Accounts::Provider],
           'user' => [Accounts::User],
         }
-        sql_where_query = user_type[params[:filter][:user_type]].map{|k|"type = '#{k.name}'"}.join(' or ')
+        types = user_type[params[:filter][:user_type]]
+        sql_where_query = types.map{|k|"type = '#{k.name}'"}.join(' or ')
         @parent = @parent.where(sql_where_query)
+
+        user_display = {
+          'public_account' => { display: true },
+          'dealer' => { display: true },
+          'provider' => { display: true },
+        }
+        display = user_display[params[:filter][:user_type]]
+        @parent = @parent.where(display) if display
+
       end
     end
   end
