@@ -194,9 +194,14 @@ Carhall::Application.routes.draw do
     end
   end
 
-  resources :bulk_purchasing2s
+  resources :bulk_purchasing2s do
+    resources :bulk_purchasing2_orders
+  end
   resources :purchase_requestings
-  resources :distributors
+  resources :distributors do
+    post :make_friend, on: :member
+    delete :break, on: :member
+  end
 
   # For openfire
   resource :openfire, only: [] do

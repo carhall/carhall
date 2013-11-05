@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h3>提交订单 <small></small></h3>
+</div>
+
+<div class="row-fluid">
+  <div class="span3">
+    <img src="<%= @bulk_purchasing2.image.url(:medium) %>">
+  </div>
+  <div class="span9">
+
+    <%= simple_form_for(@bulk_purchasing2_order, html: { class: 'form-horizontal', multipart: true }, url: bulk_purchasing2_bulk_purchasing2_orders_path(@bulk_purchasing2)) do |f| %>
+      <%= devise_error_messages! @bulk_purchasing2_order %>
+
+      <div class="control-group">
+        <label class="control-label">团购名称</label>
+        <div class="controls">
+          <label><%= @bulk_purchasing2.title %></label>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">单价</label>
+        <div class="controls">
+          <label id="price"><%= @bulk_purchasing2.vip_price %></label>
+        </div>
+      </div>
+
+      <%= f.input :count, autofocus: true, input_html: { class: 'input-xlarge' } %>
+
+      <div class="control-group">
+        <label class="control-label">总价</label>
+        <div class="controls">
+          <label id="price_total">0</label>
+        </div>
+      </div>
+
+      <%= f.button :submit, class: 'btn-submit' %>
+    <% end %>
+
+  </div>
+</div>
+
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    var $price_total = $("#price_total")
+    var price = $("#price").text()
+    $("#tips_bulk_purchasing2_order_count").change(function() {
+      $price_total.text($(this).val() * price)
+    })
+  })
+  </script>
+<% end %>

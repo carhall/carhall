@@ -10,7 +10,7 @@ class Tips::PurchaseRequesting < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
 
-  enumerate :area, with: Category::Area
+  include Share::Areable
 
   validates_presence_of :dealer  
   validates_presence_of :title, :purchase_requesting_type_id, :expire_at, :price_range

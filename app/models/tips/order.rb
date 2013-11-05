@@ -65,7 +65,7 @@ class Tips::Order < ActiveRecord::Base
   end
 
   def set_cost
-    cost = source.price if source.respond_to? :price
+    cost = source.vip_price if source.respond_to? :vip_price
     cost *= count if count
   end
 

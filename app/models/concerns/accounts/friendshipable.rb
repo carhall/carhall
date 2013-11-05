@@ -26,6 +26,10 @@ module Accounts::Friendshipable
 
   end
 
+  def is_friend? user
+    friend_ids.include?(user.id)
+  end
+
   def make_friend_with! friend
     friend = Accounts::Account.find(friend) unless friend.kind_of? Accounts::Account
     inverse_friendships.where(user_id: friend).first_or_create if friend.user_type != :user

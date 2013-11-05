@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h3>
+    <%= distributor.username %> 
+    <small>
+      <% if @current_user != distributor %>
+        <% if @current_user.is_friend? distributor %>
+          <%= link_to "取消关注", break_distributor_path(distributor), class: 'btn btn-mini btn-danger', data: { method: :delete } %>
+        <% else %>
+          <%= link_to "关注", make_friend_distributor_path(distributor), class: 'btn btn-mini btn-primary', data: { method: :post } %>
+        <% end %>
+      <% end %>
+    </small>
+  </h3>
+</div>
+
+<div class="row-fluid">
+  <div class="span3">
+    <img src="<%= distributor.avatar.url(:medium) %>">
+  </div>
+  <div class="span9">
+    <%= show_for distributor do |s| %>
+      <%= s.attribute :username %>
+      <%= s.attribute :user_type %>
+      <%= s.attribute :mobile %>
+      <%= s.attribute :business_scopes, in: :detail, join: '、' %>
+      <%= s.attribute :company, in: :detail %>
+      <%= s.attribute :area %>
+      <%= s.attribute :main_area %>
+      <%= s.attribute :address, in: :detail %>
+      <%= s.attribute :phone, in: :detail %>
+      <%= s.attribute :products, in: :detail, join: '、' %>
+      <%= s.attribute :brands, in: :detail, join: '、' %>
+      <%= s.attribute :authentication_image, in: :detail do %>
+        <%= image_tag(@user.detail.authentication_image.url(:medium)) %>
+      <% end %>
+      <%= s.attribute :accepted, in: :detail do %>
+        <label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label>
+      <% end %>
+      <%= s.attribute :description %>
+    <% end %>
+  </div>
+</div>

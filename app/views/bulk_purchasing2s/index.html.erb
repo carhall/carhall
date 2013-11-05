@@ -1,0 +1,37 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "sidenav" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>团购 <small><%= [Accounts::DistributorDetail::BusinessScope[@bulk_purchasing_type_id], Category::Product[@product_id], Category::Area::Main[@main_area_id]].select{|v|v.present?}.join('、') %></small></h3>
+    </div>
+
+    <% @bulk_purchasing2s = @bulk_purchasing2s.includes(:distributor) %>
+
+    <p>
+      所属省份：
+      <% @main_areas = @bulk_purchasing2s.map(&:main_area).group_by(&:to_s).map{|k,v|[k, v.length]} %>
+      <% @main_areas.each do |main_area, count| %>
+        <%= link_to "#{main_area}(#{count}个)", bulk_purchasing2s_path(bulk_purchasing_type_id: @bulk_purchasing_type_id, main_area_id: Category::Area::Main[main_area]) %>
+      <% end %>
+    </p>
+
+    <%= index_for @bulk_purchasing2s, class: :datatable do |t| %>
+      <%= t.attribute :image do |image| %>
+        <%= image_tag(image.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :title %>
+      <%= t.attribute :expire_at, format: :short %>
+      <%= t.attribute :vip_price %>
+      <%= t.association :distributor, using: :username %>
+      <%= t.attribute :inventory %>
+      <%= t.attribute :orders_count %>
+      <%= t.action_link :show do |bulk_purchasing2| %>
+        <%= icon_link_to "查看详情", 'icon-search', bulk_purchasing2_path(bulk_purchasing2) %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

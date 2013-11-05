@@ -25,6 +25,10 @@ module Accounts::Publicable
 
   end
 
+  def phone
+    detail.phone || mobile rescue mobile
+  end
+
   def public?
     true
   end
@@ -34,7 +38,7 @@ module Accounts::Publicable
   end
 
   def adverts_balance
-    inverse_friends_count * 3
+    friends_count * 3
   end
 
   def commission

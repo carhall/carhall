@@ -1,0 +1,54 @@
+<div class="page-header">
+  <h3><%= @purchase_requesting.title %> <small></small></h3>
+</div>
+
+<div class="row-fluid">
+  <div class="span3">
+    <img src="<%= @purchase_requesting.image.url(:medium) %>">
+  </div>
+  <div class="span9">
+    <%= show_for @purchase_requesting do |s| %>
+      <%= s.attribute :purchase_requesting_type %>
+      <%= s.attribute :expire_at %>
+      <%= s.attribute :main_area %>
+      <%= s.attribute :price_range %>
+      <%= s.attribute :description %>
+    <% end %>
+  </div>
+</div>
+
+<% dealer = @purchase_requesting.dealer %>
+<h3>采购商信息：</h3>
+
+<div class="page-header">
+  <h3><%= dealer.username %> <small></small></h3>
+</div>
+
+<div class="row-fluid">
+  <div class="span3">
+    <img src="<%= dealer.avatar.url(:medium) %>">
+  </div>
+  <div class="span9">
+    <%= show_for dealer do |s| %>
+      <%= s.attribute :username %>
+      <%= s.attribute :user_type %>
+      <%= s.attribute :mobile %>
+      <%= s.attribute :dealer_type, in: :detail %>
+      <%= s.attribute :specific_service, in: :detail %>
+      <%= s.attribute :business_scopes, in: :detail, join: '、' %>
+      <%= s.attribute :company, in: :detail %>
+      <%= s.attribute :area %>
+      <%= s.attribute :address, in: :detail %>
+      <%= s.attribute :phone, in: :detail %>
+      <%= s.attribute :open_during, in: :detail %>
+      <%= s.attribute :authentication_image, in: :detail do %>
+        <%= image_tag(@user.detail.authentication_image.url(:medium)) %>
+      <% end %>
+      <%= s.attribute :accepted, in: :detail do %>
+        <label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label>
+      <% end %>
+      <%= s.attribute :description %>
+    <% end %>
+
+  </div>
+</div>

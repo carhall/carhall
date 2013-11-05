@@ -45,6 +45,7 @@ zh-CN:
       tips/activity: 活动
       tips/bulk_purchasing: 团购项目
       tips/bulk_purchasing2: 团购项目
+      tips/bulk_purchasing2_order: 团购订单
       tips/purchase_requesting: 求购
       tips/manual_image: 图册图片
       bcst/host: 主持人
@@ -108,6 +109,7 @@ zh-CN:
         brand: 汽车品牌
         created_at: 加入时间
         state: 账户状态
+        main_area: 省份
         <<: *statisticable
       accounts/account/detail: &detail
         dealer_type_id: 服务商类型
@@ -126,7 +128,6 @@ zh-CN:
         products: 经销品牌
         brand_ids: 车型品牌配件
         brands: 车型品牌配件
-        main_area: 省份
       accounts/user: 
         <<: *account
         total_cost: 总消费额
@@ -167,6 +168,7 @@ zh-CN:
         vip_price: 团购价
         bulk_purchasing_type_id: 类型
         bulk_purchasing_type: 类型
+        distributor: 供货商
       tips/purchase_requesting:
         <<: *servicalbe
         title: 求购商品
@@ -174,6 +176,11 @@ zh-CN:
         price_range: 价格范围
         purchase_requesting_type_id: 类型
         purchase_requesting_type: 类型
+        main_area: 所属省份
+        image: 参考图片
+      tips/purchase_requesting/dealer:
+        username: 采购商
+        phone: 联系电话
       tips/order: &order
         id: ID
         title: 名称
@@ -274,6 +281,7 @@ zh-CN:
     labels:
       account:
         <<: *account
+        username: 公众帐号
         detail:
           <<: *detail
       tips_mending:
