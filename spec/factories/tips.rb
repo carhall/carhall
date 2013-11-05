@@ -19,7 +19,7 @@ FactoryGirl.define do
 
   factory :cleaning, class: Tips::Cleaning do
     title { Faker::Lorem.sentence }
-    cleaning_type { Tips::Cleaning::CleaningType.names.sample }
+    cleaning_type { Tips::Cleaning::CleaningType.names.first }
     price { rand(100) }
     vip_price { rand(100) }
     dealer
@@ -43,7 +43,7 @@ FactoryGirl.define do
   factory :mending_order, class: Tips::MendingOrder do
     detail do
       {
-        brand: Category::Brand.names.first(5).sample, 
+        brand: Category::Brand.names.sample, 
         series: Faker::Lorem.word, 
         plate_num: generate(:plate_num),
         mending_type: Tips::MendingOrderDetail::MendingType.names.sample,

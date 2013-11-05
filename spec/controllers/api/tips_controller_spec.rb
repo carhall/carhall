@@ -140,8 +140,6 @@ describe "Tips" do
     end
   end
 
-
-
   describe "Orders" do
     shared_examples "orders#use" do
       describe "PUT use" do
@@ -211,8 +209,6 @@ describe "Tips" do
       include_examples "resources#collection", :index
     end
   end
-
-
 
   describe "Riviews" do
     let(:resource) { :review }

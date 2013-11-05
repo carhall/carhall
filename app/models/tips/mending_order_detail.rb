@@ -1,7 +1,7 @@
 class Tips::MendingOrderDetail < ActiveRecord::Base
   enumerate :brand, with: Category::Brand
 
-  # validates_presence_of :brand_id, :series, :plate_num, :arrive_at, :mending_type_id
+  validates_presence_of :brand_id, :series, :plate_num, :arrive_at, :mending_type_id
 
   enumerate :mending_type, with: %w(标准保养 维修)
 

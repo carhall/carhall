@@ -9,12 +9,12 @@ require 'rspec/autorun'
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 Dir[File.expand_path("app/controllers/*.rb")].each do |file|
-    require file
+  require file
 end 
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -30,6 +30,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  config.global_fixtures = :all
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
