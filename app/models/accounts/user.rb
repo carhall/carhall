@@ -26,6 +26,7 @@ class Accounts::User < Accounts::Account
   def to_detail_builder
     json = to_base_builder
     json.detail do
+      self.detail ||= build_detail
       json.merge! detail.to_base_builder.attributes!
       json.extract! self, :sex_id, :sex, :area_id, :area, :city, :province, 
         :brand_id, :brand, :posts_count
