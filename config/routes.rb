@@ -472,5 +472,7 @@ Carhall::Application.routes.draw do
     }.to_json]] }, via: :all
   end
 
+  get 'Carhall', format: :apk, to: "application#download_apk"
+
   post '*foo', format: :do, to: ->(env) { [404, {}, []] }
 end

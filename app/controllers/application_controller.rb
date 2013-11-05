@@ -114,6 +114,16 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def download_apk
+    p params[:version]
+    apk_latest = ::Business::ClientVersion.apk_latest
+    if apk_latest
+      redirect_to apk_latest.download_url
+    else
+      render nothing: true, status: :no_content
+    end
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = I18n.t(".access_denied")
     redirect_to :root
