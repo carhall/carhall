@@ -117,25 +117,11 @@ class Accounts::Account < ActiveRecord::Base
   def detail_attributes= hash=nil
   end
 
-  def self.init_grouped_array_by_area_and_type
-    areas_count = Category::Area.all.count
-    Array.new(areas_count+1) { { 
-      guest: [],
-      admin: [],
-      user: [],
-      dealer: [],
-      provider: [],
-      distributor: [],
-    } }
-  end
-
   def self.group_by_area_and_type
-    accounts = all
-    grouped_accounts = init_grouped_array_by_area_and_type
-    accounts.each do |account|
-      grouped_accounts[account.area_id||0][account.user_type] << account
+    hash = all.group_by(&:area_id)
+    hash.update hash do |key, value|
+      value.group_by(&:user_type)
     end
-    grouped_accounts
   end
 
 end

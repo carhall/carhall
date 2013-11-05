@@ -10,12 +10,14 @@
   <tbody>
     <% accounts = ::Accounts::Account.group_by_area_and_type %>
     <% Category::Area.all.each do |area_id, area| %>
-      <tr>
-        <td><%= area %></td>
-        <td><%= accounts[area_id][:dealer].count %></td>
-        <td><%= accounts[area_id][:distributor].count %></td>
-        <td><%= accounts[area_id][:user].count %></td>
-      </tr>
+      <% if accounts[area_id] %>
+        <tr>
+          <td><%= area %></td>
+          <td><%= accounts[area_id][:dealer].try :count %></td>
+          <td><%= accounts[area_id][:distributor].try :count %></td>
+          <td><%= accounts[area_id][:user].try :count %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
   
