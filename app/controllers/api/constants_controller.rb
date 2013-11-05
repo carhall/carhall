@@ -28,13 +28,11 @@ class Api::ConstantsController < Api::ApplicationController
   end
 
   def version
-    $apk_vesion ||= ::Business::ClientVersion.apk_latest
+    $apk_vesion ||= ::Business::ClientVersion.apk_latest || OpenStruct.new(version: -1)
     if params[:version].to_i < $apk_vesion.version
       render_data update: true, download_url: $apk_vesion.download_url
     else
       render_data update: false
     end
-  rescue
-    render_data update: false
   end
 end
