@@ -40,12 +40,4 @@ class Accounts::DistributorDetail < ActiveRecord::Base
     %i(cleaning mending bulk_purchasing activity).values_at(*ids)
   end
 
-  acts_as_api
-
-  api_accessible :base do |t|
-    t.only :dealer_type_id, :business_scope_ids, :company, :address, 
-        :phone, :open_during, :latitude, :longitude, :rqrcode_token
-    t.methods :dealer_type, :business_scopes
-  end
-
 end
