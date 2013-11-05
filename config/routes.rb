@@ -171,6 +171,7 @@ Carhall::Application.routes.draw do
     resource :push
     resources :ad_templates
     resources :tutorials
+    resources :client_versions
   end
 
   namespace :category do

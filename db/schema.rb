@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104041427) do
+ActiveRecord::Schema.define(version: 20131105134824) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -245,6 +245,15 @@ ActiveRecord::Schema.define(version: 20131104041427) do
 
   add_index "cleanings", ["dealer_id"], name: "index_cleanings_on_dealer_id", using: :btree
   add_index "cleanings", ["location_id"], name: "index_cleanings_on_location_id", using: :btree
+
+  create_table "client_versions", force: true do |t|
+    t.integer  "client_type_id"
+    t.integer  "version"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
 
   create_table "clubs", force: true do |t|
     t.integer  "president_id"

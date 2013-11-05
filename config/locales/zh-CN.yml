@@ -58,6 +58,7 @@ zh-CN:
       category/brand: 车型品牌
       category/product: 产品品牌
       business/advert: 广告
+      business/client_version: 客户端
     attributes:
       statistic: &statisticable
         orders_count: 订单数
@@ -278,6 +279,12 @@ zh-CN:
       tips/manual_image: 
         title: 图片标题
         image: 图片
+      business/client_version:
+        id: ID
+        client_type_id: 客户端类型
+        client_type: 客户端类型
+        version: 版本号
+        file: 下载链接
   simple_form:
     labels:
       account:
@@ -305,6 +312,8 @@ zh-CN:
             <<: *discount
           sunday:
             <<: *discount
+      business_client_version:
+        file: 客户端文件
 
 
 

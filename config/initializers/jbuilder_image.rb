@@ -3,9 +3,9 @@ AbsoluteUrlPrefix = ENV['CARHALL_URL_PREFIX']
 Jbuilder.class_eval do
   def image! object, image
     if object.send(image).present?
-      set! :"#{image}_url", "#{AbsoluteUrlPrefix}#{object.send(image).url}"
-      set! :"#{image}_medium_url", "#{AbsoluteUrlPrefix}#{object.send(image).url(:medium)}"
-      set! :"#{image}_thumb_url", "#{AbsoluteUrlPrefix}#{object.send(image).url(:thumb)}"
+      set! :"#{image}_url", "#{AbsoluteUrlPrefix}#{object.send(image).url(:original,timestamp:false)}"
+      set! :"#{image}_medium_url", "#{AbsoluteUrlPrefix}#{object.send(image).url(:medium,timestamp:false)}"
+      set! :"#{image}_thumb_url", "#{AbsoluteUrlPrefix}#{object.send(image).url(:thumb,timestamp:false)}"
     else
       set! :"#{image}_url", nil
       set! :"#{image}_medium_url", nil
