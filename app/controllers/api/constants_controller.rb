@@ -34,5 +34,7 @@ class Api::ConstantsController < Api::ApplicationController
     else
       render_data update: false
     end
+  rescue
+    render_data update: false
   end
 end
