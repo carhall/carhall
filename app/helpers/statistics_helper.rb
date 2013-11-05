@@ -23,7 +23,7 @@ module StatisticsHelper
   end
   
   def states_count orders, state
-    state_id = Category::State.get_id state
+    state_id = Category::State[state]
     orders.select{|o|o.state_id == state_id}.length
   end
 
