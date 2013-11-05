@@ -28,7 +28,7 @@ class Api::ConstantsController < Api::ApplicationController
   end
 
   def version
-    $apk_vesion ||= ::Business::ClientVersion.apk.latest
+    $apk_vesion ||= ::Business::ClientVersion.apk_latest
     if params[:version].to_i < $apk_vesion.version
       render_data update: true, download_url: $apk_vesion.download_url
     else

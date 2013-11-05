@@ -8,13 +8,14 @@ class Business::ClientVersion < ActiveRecord::Base
     "#{client_type} #{version}"
   end
 
-  scope :apk, -> { with_client_type('Android') }
-  scope :latest, -> { order(:version).last }
+  def self.apk_latest
+    with_client_type('Android').order(:version).last
+  end
 
   after_commit do
     case client_type
     when 'Android'
-      $apk_vesion = ::Business::ClientVersion.apk.latest
+      $apk_vesion = ::Business::ClientVersion.apk_latest
     when 'iOS'
       
     end
