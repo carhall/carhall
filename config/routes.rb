@@ -414,6 +414,7 @@ Carhall::Application.routes.draw do
       end
       
       resources :cleaning_orders, only: [:index, :show, :create] do
+        put :finish, on: :member
         put "use/:count", action: :use, on: :member
         put :use, on: :member
         post :review, on: :member
