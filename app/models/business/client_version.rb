@@ -8,13 +8,20 @@ class Business::ClientVersion < ActiveRecord::Base
     "#{client_type} #{version}"
   end
 
+  scope :apk, -> { with_client_type('Android') }
+  scope :latest, -> { order(:version).last }
+
   after_commit do
     case client_type
     when 'Android'
-      $apk_vesion = ::Business::ClientVersion.with_client_type('Android').order(:version).last
+      $apk_vesion = ::Business::ClientVersion.apk.latest
     when 'iOS'
       
     end
+  end
+
+  def download_url
+    "#{AbsoluteUrlPrefix}#{file.url(:original, timestamp: false)}"
   end
 
 end
