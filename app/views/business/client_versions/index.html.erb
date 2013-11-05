@@ -1,0 +1,22 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "business/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>客户端版本管理 <small><%= link_to "发布新版客户端", new_business_client_version_path %></small></h3>
+    </div>
+
+    <%= index_for @client_versions, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :client_type %>
+      <%= t.attribute :version %>
+      <%= t.attribute :file do |file| %>
+        <%= link_to file.original_filename, file.url(:original, timestamp: false) %>
+      <% end %>
+      <%= t.actions :edit, :destroy %>
+    <% end %>
+
+  </div>
+</div>

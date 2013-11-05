@@ -1,0 +1,17 @@
+<%= simple_form_for(@client_version, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @client_version %>
+
+  <%= f.input :file do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更换</span><input type="file" name="business_client_version[file]" /></span>
+      <span class="fileupload-preview"></span>
+      <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+    </div>
+  <% end %>
+
+  <%= f.input :client_type_id, collection: Business::ClientVersion::ClientType.to_select %>
+
+  <%= f.input :version %>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>
