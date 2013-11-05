@@ -9,7 +9,7 @@ class BulkPurchasing2OrdersController < ApplicationController
     order = @bulk_purchasing2.orders.new(params.require(:tips_bulk_purchasing2_order).permit(:count))
     order.dealer = @current_user
     if order.save
-      flash[:success] = "成功提交订单"
+      flash[:success] = I18n.t('book_success')
       redirect_to bulk_purchasing2_path(@bulk_purchasing2)
     else
       render 'new'
