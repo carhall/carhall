@@ -20,6 +20,7 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
 
       end
     end
+    @parent ||= ::Accounts::Account
   end
 
   # POST /api/accounts/login
