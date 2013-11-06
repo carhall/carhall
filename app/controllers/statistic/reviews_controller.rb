@@ -5,8 +5,7 @@ class Statistic::ReviewsController < Statistic::ApplicationController
   helper StatisticsHelper
   
   def mending
-    @mending = @dealer.mending || Tips::Mending.create(dealer: @dealer)
-    @types = Tips::MendingOrderDetail::MendingType.all
+    @mending = @dealer.mending || @dealer.create_mending
   end
 
   def cleaning

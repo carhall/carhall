@@ -23,14 +23,15 @@
         </tr>
       </thead>
       <tbody>
+        <% mending_types_count = Tips::MendingOrderDetail::MendingType.all.count %>
         <% Category::Brand.all.each do |brand| %>
           <% if @grouped_orders[brand.id] %>
-            <% @types.each do |type_id, type| %>
+            <% Tips::MendingOrderDetail::MendingType.all.each do |type_id, type| %>
               <% orders = @grouped_orders[brand.id][type_id] %>
-              <% reviews = @grouped_reviews[brand.id][type_id] || [] %>
+              <% reviews = @grouped_reviews[brand.id][type_id] || [] rescue [] %>
               <tr>
                 <% if type_id == 1 %>
-                  <td rowspan="<%= @types.count %>"><%= brand.name %></td>
+                  <td rowspan="<%= mending_types_count %>"><%= brand.name %></td>
                 <% end %>
                 <td><%= type %></td>
                 <td><%= format_nil orders.try(:count) %></td>
