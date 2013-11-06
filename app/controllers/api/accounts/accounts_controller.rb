@@ -3,9 +3,8 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
 
   set_resource_class ::Accounts::Account, detail: true
   before_filter :search_parent
-  before_filter :set_filter
 
-  def set_filter
+  def set_parent
     if params[:filter]
       if params[:filter][:user_type]
         user_type = {
