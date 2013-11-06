@@ -131,9 +131,12 @@ Carhall::Application.routes.draw do
 
     resources :agents do
       put :accept, on: :member
+      put :rank_down, on: :member
     end
     resources :distributors do
       put :accept, on: :member
+      put :rank_up, on: :member
+      put :rank_down, on: :member
     end
     resources :dealers do
       put :accept, on: :member

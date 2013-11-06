@@ -143,6 +143,9 @@ zh-CN:
       accounts/provider: 
         <<: *account
         <<: *publicable
+      accounts/distributor: 
+        <<: *account
+        <<: *publicable
       tips/mending:
         <<: *servicalbe
         <<: *statisticable

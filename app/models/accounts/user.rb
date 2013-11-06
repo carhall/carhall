@@ -26,7 +26,7 @@ class Accounts::User < Accounts::Account
   def to_detail_builder
     json = to_base_builder
     json.detail do
-      json.merge! detail.to_base_builder.attributes!
+      json.merge! (detail||build_detail).to_base_builder.attributes!
       json.extract! self, :sex_id, :sex, :area_id, :area, :city, :province, 
         :brand_id, :brand, :posts_count
       json.last_3_posts(posts.includes(:user).last(3).map{|p|p.to_without_comment_builder.attributes!})

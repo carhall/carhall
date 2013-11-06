@@ -1,6 +1,6 @@
 <h3>你好，<%= @current_user.username %> <small>（<%= @current_user.mobile %>）</small></h3>
 
-<div class="row-fluid">
+<div class="row">
   <div class="span4 pull-right">
     <div class="well">
       <h3>系统公告</h3>
@@ -14,15 +14,15 @@
     <div class="jumbotron"></div>
 
     <!-- Example row of columns -->
-    <div class="row-fluid marketing">
-      <div class="span6">
+    <div class="row marketing">
+      <div class="span4">
         <a href="<%= bcst_root_path %>">
           <i class="icon-book pull-left icon-5x"></i>
           <h4>业务管理</h4>
           <p class="muted">业务，另辟蹊径。 </p>
         </a>
       </div>
-      <div class="span6">
+      <div class="span4">
         <a href="<%= setting_path %>">
           <i class="icon-cog pull-left icon-5x"></i>
           <h4>设置</h4>

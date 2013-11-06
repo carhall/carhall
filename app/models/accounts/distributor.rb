@@ -19,4 +19,21 @@ class Accounts::Distributor < Accounts::Account
     where(detail_id: detail_ids)
   }
 
+  def agent?
+    false
+  end
+
+  def rank_up
+    self.type = 'Accounts::Agent'
+  end
+
+  def rank_down
+    self.type = 'Accounts::Distributor'
+  end
+
+  extend Share::Exclamation
+  define_exclamation_and_method :rank_up
+  define_exclamation_and_method :rank_down
+  
+  
 end

@@ -1,0 +1,14 @@
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>会员分析</strong></span></li>
+  <li<%= active? 'statistic/friends#index' %>><a href="<%= statistic_friends_path %>"><i class="icon-chevron-right"></i> 客户列表</a></li>
+</ul>
+
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>账户数据统计 </strong></span></li>
+
+  <li<%= active? 'statistic/dealers' %>><a href="<%= statistic_dealers_path %>"><i class="icon-chevron-right"></i> 服务商数据统计</a></li>
+
+  <li<%= active? 'statistic/distributors' %>><a href="<%= statistic_distributors_path %>"><i class="icon-chevron-right"></i> 经销商数据统计</a></li>
+
+  <li<%= active? 'statistic/users' %>><a href="<%= statistic_users_path %>"><i class="icon-chevron-right"></i> 车主数据统计</a></li>
+</ul>

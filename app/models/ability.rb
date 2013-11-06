@@ -61,14 +61,21 @@ class Ability
       can :read, Accounts::Friendship
 
       can :read, Tips
-      # if user.accepted?
+      if user.accepted?
         can :manage, Tips::BulkPurchasing2, distributor: user
         can :manage, Tips::ManualImage, distributor: user
         
         can :read, Tips::Order
         can :read, Tips::BulkPurchasing2Order
-      # end
+      end
+
+      if user.agent?
+        can :read, Accounts::User, area_id: user.main_area_range
+        can :read, Accounts::Dealer, area_id: user.main_area_range
+        can :read, Accounts::Distributor, area_id: user.main_area_range
+      end
       
+      cannot :set_displayable, :all
     when :user
       can :read, :all
       can :manage, Share::Comment, user: user
@@ -84,22 +91,5 @@ class Ability
       cannot :set_displayable, :all
     end
     
-    # The first argument to `can` is the action you are giving the user 
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on. 
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
 end

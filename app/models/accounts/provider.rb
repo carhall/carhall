@@ -1,7 +1,4 @@
-class Accounts::Provider < Accounts::Account
-  include Accounts::Publicable
-  include Accounts::RqrcodeTokenable
-
+class Accounts::Provider < Accounts::PublicAccount
   set_detail_class Accounts::ProviderDetail
   
   has_many :hosts, class_name: 'Bcst::Host'

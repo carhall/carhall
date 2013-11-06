@@ -9,6 +9,9 @@ FactoryGirl.define do
     sex { Accounts::Account::Sex.names.sample }
     area { Category::Area.names.sample }
     brand { Category::Brand.names.sample }
+    detail do
+      {}
+    end
   end
 
   factory :provider, class: Accounts::Provider do

@@ -5,9 +5,36 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3>经销商管理 <small><%#= link_to "添加", new_accounts_admin_path %></small></h3>
+      <h3>经销商管理 <small></small></h3>
     </div>
 
+    <%= index_for @distributors, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :avatar do |avatar| %>
+        <%= image_tag(avatar.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :mobile %>
+      <%= t.attribute :username %>
+      <%= t.attribute :main_area %>
+      <%= t.action_link :accept do |distributor| %>
+        <% unless distributor.accepted? %>
+          <%= icon_link_to "通过验证", 'icon-ok', accept_accounts_distributor_path(distributor), method: :put, data: { confirm: '您确认要验证这个用户？' } %>
+        <% end %>
+      <% end %>
+
+      <%= t.action_link :rank do |distributor| %>
+        <% if distributor.accepted? %>
+          <% if distributor.agent? %>
+            <%= icon_link_to "降级为经销商", 'icon-arrow-down', rank_down_accounts_distributor_path(distributor), method: :put, data: { confirm: '您确认要降级这个用户成为经销商？' } %>
+          <% else %>
+            <%= icon_link_to "升级为代理商", 'icon-arrow-up', rank_up_accounts_distributor_path(distributor), method: :put, data: { confirm: '您确认要升级这个用户成为代理商？' } %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= t.actions :destroy %>
+
+    <% end %>
 
   </div>
 </div>

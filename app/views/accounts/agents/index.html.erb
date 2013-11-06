@@ -5,9 +5,31 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3>代理商管理 <small><%#= link_to "添加", new_accounts_admin_path %></small></h3>
+      <h3>代理商管理 <small></small></h3>
     </div>
 
+    <%= index_for @agents, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :avatar do |avatar| %>
+        <%= image_tag(avatar.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :mobile %>
+      <%= t.attribute :username %>
+      <%= t.attribute :main_area %>
+      <%= t.action_link :accept do |agent| %>
+        <% unless agent.accepted? %>
+          <%= icon_link_to "通过验证", 'icon-ok', accept_accounts_agent_path(agent), method: :put, data: { confirm: '您确认要验证这个用户？' } %>
+        <% end %>
+      <% end %>
+
+      <%= t.action_link :rank do |agent| %>
+        <% if agent.accepted? %>
+          <%= icon_link_to "降级为经销商", 'icon-arrow-down', rank_down_accounts_agent_path(agent), method: :put, data: { confirm: '您确认要降级这个用户成为经销商？' } %>
+        <% end %>
+      <% end %>
+
+      <%= t.actions :destroy %>
+    <% end %>
 
   </div>
 </div>

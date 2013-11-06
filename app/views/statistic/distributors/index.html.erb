@@ -1,13 +1,21 @@
 <div class="row-fluid">
   <div class="span3">
-    <%= render "statistic/share/sidenav/admin" %>
+    <%= render "statistic/share/sidenav/#{@user_type}" %>
   </div>
   
   <div class="span9">
     <div class="page-header">
-      <h3>服务商数据 <small></small></h3>
+      <h3>经销商数据 <small></small></h3>
     </div>
 
-  </div>
+    <%= index_for @distributors, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :username %>
+      <%= t.attribute :area %>
+      <%= t.attribute :main_area %>
+      <%= t.attribute :accepted? %>
+      <%= t.attribute :expire_at, format: :long %>
+    <% end %>
 
+  </div>
 </div>

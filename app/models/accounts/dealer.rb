@@ -1,7 +1,4 @@
-class Accounts::Dealer < Accounts::Account
-  include Accounts::Publicable
-  include Accounts::RqrcodeTokenable
-  
+class Accounts::Dealer < Accounts::PublicAccount
   include Share::Localizable
   include Share::Statisticable
 
