@@ -34,6 +34,12 @@ module FilterHelper
     @user ||= @current_user = current_account
   end
 
+  def redirect_guest
+    unless @current_user
+      raise CanCan::AccessDenied
+    end
+  end
+
   def set_area_id_and_brand_id
     if filter = params[:filter]
       @area_id = filter[:area_id]

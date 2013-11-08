@@ -5,15 +5,15 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3><%= @tip.title %> <small><a href="<%= edit_tips_activity_path(@tip) %>">编辑</a></small></h3>
+      <h3><%= @activity.title %> <small><a href="<%= edit_tips_activity_path(@activity) %>">编辑</a></small></h3>
     </div>
 
     <div class="row-fluid">
       <div class="span3">
-        <img src="<%= @tip.image.url(:medium) %>">
+        <img src="<%= @activity.image.url(:medium) %>">
       </div>
       <div class="span9">
-        <%= show_for @tip do |s| %>
+        <%= show_for @activity do |s| %>
           <%= s.attribute :expire_at %>
           <%= s.attribute :description %>
         <% end %>
