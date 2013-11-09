@@ -12,7 +12,7 @@ class Api::Tips::MendingsController < Api::Tips::ApplicationController
 
   def show
     mending = ::Tips::Mending.find(params[:id]) if params[:id]
-    mending ||= @parent.first
+    mending ||= @dealer.mending
     render_show mending
   end
 
