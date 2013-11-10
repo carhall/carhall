@@ -4,18 +4,9 @@ class Tips::CleaningOrder < Tips::Order
   validates_presence_of :count
 
   validates_each :used_count do |record, attr, value|
-    record.errors.add(attr, I18n.t('.not_enough_count')) if value && value > count
-  end
-
-  def use count = 1
-    raise ArgumentError('negative count') if count < 0
-    self.used_count ||= 0
-    self.used_count += count
-    finish if self.used_count == self.count
-  end
-
-  def used?
-    self.used_count.nil? or self.used_count == 0
+    if record.used_count_changed? && value && value > count 
+      record.errors.add(attr, I18n.t('.not_enough_count'))
+    end
   end
 
   extend Share::Exclamation

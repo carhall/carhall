@@ -32,6 +32,17 @@ module Tips::Statable
     self.state_id == Category::State[:finished]
   end
 
+  def use count = 1
+    raise ArgumentError('negative count') if count < 0
+    self.used_count ||= 0
+    self.used_count += count
+    finish if self.used_count == self.count
+  end
+
+  def used?
+    self.used_count.nil? or self.used_count == 0
+  end
+
 
   extend Share::Exclamation
   define_exclamation_and_method :cancel

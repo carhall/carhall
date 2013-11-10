@@ -82,6 +82,16 @@ class Tips::Order < ActiveRecord::Base
     end
   end
 
+  def to_list_builder
+    Jbuilder.new do |json|
+      json.extract! self, :id, :title, :state_id, :cost, :created_at, :dealer_id,
+        :order_type, :state
+      json.builder! self, :dealer, :base
+      json.has_review review.present?
+      json.builder! self, :review, :base
+    end
+  end
+
   def to_detail_builder
     json = to_base_builder
     json.builder! self, :source, :base

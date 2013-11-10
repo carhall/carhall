@@ -8,6 +8,12 @@ class Tips::BulkPurchasing2Order < ActiveRecord::Base
 
   validates_presence_of :count
   
+  validates_each :used_count do |record, attr, value|
+    if record.used_count_changed? && value && value > count 
+      record.errors.add(attr, I18n.t('.not_enough_count'))
+    end
+  end
+  
   before_create do
     self.distributor_id = source.distributor_id
     self.title = set_title

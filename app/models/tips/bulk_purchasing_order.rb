@@ -5,7 +5,7 @@ class Tips::BulkPurchasingOrder < Tips::Order
   
   def to_base_builder
     json = super
-    json.extract! self, :count
+    json.extract! self, :count, :used_count
     json
   end
 

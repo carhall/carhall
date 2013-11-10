@@ -5,7 +5,7 @@ class Api::Tips::MendingOrdersController < Api::Tips::OrdersController
   before_filter :set_filter
 
   def set_parent
-    @parent = @current_user.mending_orders
+    @parent = @current_user.mending_orders.includes(:detail)
   end
 
   def set_filter

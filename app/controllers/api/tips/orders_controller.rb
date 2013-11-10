@@ -1,8 +1,13 @@
 class Api::Tips::OrdersController < Api::ApplicationController
   before_filter :set_current_user
   set_resource_class ::Tips::Order, detail: true
+  before_filter :set_includes, only: :index
   before_filter :set_order, only: [:finish, :use, :cancel, :review]
   before_filter :set_filter
+
+  def render_index resources, template=:list
+    super
+  end
 
   # POST /api/resources/1/orders
   # POST /api/resources/1/orders.json
@@ -55,6 +60,10 @@ protected
       end
     end
     @parent = @current_user.orders
+  end
+
+  def set_includes
+    @parent = @parent.includes(:user, :dealer, :review)
   end
 
   def set_filter
