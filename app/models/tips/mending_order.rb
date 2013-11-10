@@ -18,12 +18,6 @@ class Tips::MendingOrder < Tips::Order
     json
   end
   
-  def to_list_builder
-    json = super
-    json.builder! self, :detail, :base
-    json
-  end
-  
   def use count
     finish
   end

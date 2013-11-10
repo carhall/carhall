@@ -8,6 +8,11 @@ module Tips::Statable
       end
     end
 
+    validates_each :used_count do |record, attr, value|
+      count = record.count
+      record.errors.add(:base, I18n.t('.not_enough_count')) if value && count && value > count
+    end
+
     enumerate :state, with: Category::State
 
   end
@@ -36,7 +41,7 @@ module Tips::Statable
     raise ArgumentError('negative count') if count < 0
     self.used_count ||= 0
     self.used_count += count
-    finish if self.used_count == self.count
+    finish if self.used_count >= self.count
   end
 
   def used?
