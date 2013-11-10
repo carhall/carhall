@@ -78,18 +78,16 @@ class Tips::Order < ActiveRecord::Base
     Jbuilder.new do |json|
       json.extract! self, :id, :title, :state_id, :cost, :created_at, :dealer_id,
         :order_type, :state
-      json.user user.to_base_builder
+      json.builder! self, :user, :base
     end
   end
 
   def to_list_builder
-    Jbuilder.new do |json|
-      json.extract! self, :id, :title, :state_id, :cost, :created_at, :dealer_id,
-        :order_type, :state
-      json.builder! self, :dealer, :base
-      json.has_review review.present?
-      json.builder! self, :review, :base
-    end
+    json = to_base_builder
+    json.builder! self, :dealer, :base
+    json.has_review review.present?
+    json.builder! self, :review, :without_order
+    json
   end
 
   def to_detail_builder
