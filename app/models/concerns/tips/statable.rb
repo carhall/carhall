@@ -4,7 +4,7 @@ module Tips::Statable
   included do
     validates_each :state_id do |record, attr, value|
       if record.state_id_was == Category::State[:canceled]
-        record.errors.add(attr, I18n.t('order_canceled'))
+        record.errors.add(:base, I18n.t('order_canceled'))
       end
     end
 

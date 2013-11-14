@@ -84,7 +84,18 @@ class Accounts::Dealer < Accounts::PublicAccount
   define_cached_methods :mending_goal_attainment, :cleaning_goal_attainment, 
     :bulk_purchasing_goal_attainment
 
-  alias_method :to_detail_without_statistic_builder, :to_detail_builder
+  def to_detail_without_statistic_builder
+    json = to_base_builder
+    json.detail do
+      json.attributes!.merge! detail.to_base_builder.attributes!
+      json.extract! self, :area_id, :area
+      if location
+        json.latitude location.latitude
+        json.longitude location.longitude
+      end
+    end
+    json
+  end
 
   def to_detail_builder
     json = to_base_builder
@@ -93,6 +104,10 @@ class Accounts::Dealer < Accounts::PublicAccount
       json.extract! self, :area_id, :area, :stars, :mending_goal_attainment,
         :cleaning_goal_attainment, :bulk_purchasing_goal_attainment,
         :orders_count
+      if location
+        json.latitude location.latitude
+        json.longitude location.longitude
+      end
       json.builder! self, :mending, :without_dealer
       json.last_3_orders(orders.includes(:user).last(3).map{|o|o.to_base_builder.attributes!})
     end

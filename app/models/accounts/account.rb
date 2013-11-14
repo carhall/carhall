@@ -99,7 +99,7 @@ class Accounts::Account < ActiveRecord::Base
   end
 
   def avatar_thumb_url
-    "#{AbsoluteUrlPrefix}#{avatar.url(:thumb)}" if avatar.present?
+    "#{AbsoluteUrlPrefix}#{avatar.url(:thumb, timestamp: false)}" if avatar.present?
   end
 
   def to_openfire_user_detail_builder
