@@ -6,7 +6,7 @@ module ActionSms
       ActiveSupport::Notifications.instrument("deliver.action_sms") do |payload|
         set_payload payload
                               
-        ihuyi_sms_service_url = "http://106.ihuyi.com/webservice/sms.php?method=Submit&account=cf_carhall&password=qichetang&mobile=#{to}&content=#{body}"
+        ihuyi_sms_service_url = "http://106.ihuyi.com/webservice/sms.php?method=Submit&account=cf_qct&password=vRrZz4&mobile=#{to}&content=#{body}"
         begin
           result = Hash.from_xml(open(URI::encode(ihuyi_sms_service_url)).read)
           Rails.logger.info("  Requested Ihuyi API #{ihuyi_sms_service_url}")

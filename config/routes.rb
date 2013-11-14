@@ -231,6 +231,8 @@ Carhall::Application.routes.draw do
       resources :accounts, only: [:index, :show] do
         get :detail, on: :member
         post :login, on: :collection
+        post :confirm, on: :collection
+        post :resend_confirm, on: :collection
         
       end
       

@@ -167,6 +167,7 @@ Method | URI                               | 说明
 GET    | /api/accounts                     | 查询所有账户信息  
 GET    | /api/accounts/:id                 | 查询指定账户信息  
 GET    | /api/accounts/:id/detail          | 查询指定账户详细信息  
+GET    | /api/accounts/:id/detail          | 查询指定账户详细信息  
 GET    | /api/users                        | 查询所有用户信息  
 GET    | /api/users/:id                    | 查询指定用户信息  
 GET    | /api/users/:id/detail             | 查询指定用户详细信息  
@@ -180,6 +181,8 @@ GET    | /api/providers                    | 查询所有媒体信息
 GET    | /api/providers/:id                | 查询指定媒体信息  
 GET    | /api/providers/:id/detail         | 查询指定媒体详细信息  
 POST   | /api/accounts/login               | 用户登录  
+POST   | /api/accounts/confirm             | 验证用户信息，短信  
+POST   | /api/accounts/resend_confirm      | 重新发送验证用户信息，短信  
 POST   | /api/users                        | 新建用户，user_type默认为user  
 GET    | /api/current_user                 | 查询当前用户信息  
 GET    | /api/current_user/detail          | 查询当前用户详细信息  
@@ -236,6 +239,18 @@ admin（管理员）, user（车主）, dealer（服务商）, provider（媒体
 >     _method                  put
 >     data[current_password]   xxx
 >     data[password]           www 
+
+> 验证用户信息，短信验证码，使用POST方式：  
+> 
+>     POST /api/accounts/confirm
+>     表单
+>     data[confirmation_token]   xxx
+
+> 验证用户信息，重新发送短信验证码，使用POST方式：  
+> 
+>     POST /api/accounts/resend_confirm
+>     表单
+>     data[mobile]   xxx
 
 
 Friend 好友

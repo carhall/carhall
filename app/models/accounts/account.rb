@@ -2,7 +2,7 @@ class Accounts::Account < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, 
-    :validatable#, :confirmable#, :lockable#, :trackable
+    :validatable, :confirmable#, :lockable#, :trackable
 
   include Accounts::TokenAuthenticatable
 
