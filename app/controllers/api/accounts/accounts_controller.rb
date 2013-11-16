@@ -1,5 +1,5 @@
 class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
-  skip_before_filter :authenticate_account_from_token!, only: [:login, :confirm, :resend_confirm]
+  skip_before_filter :authenticate_account_from_token!, only: [:login, :confirm, :resend_confirm, :password, :send_password]
 
   set_resource_class ::Accounts::Account, detail: true
   before_filter :search_parent
