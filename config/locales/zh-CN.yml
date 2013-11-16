@@ -7,6 +7,7 @@ zh-CN:
   in_blacklist: 该用户在您的黑名单中。
   can_not_add_self: 您不能把自己加为好友。
   not_enough_count: 订单使用次数不足。
+  not_enough_balance: 您的余额不足。
   order_canceled: 订单已经被取消。
   create_success: 成功创建一个新的 %{model} “%{title}”。
   update_success_without_title: 成功创建一个新的 %{model} 。
@@ -60,6 +61,8 @@ zh-CN:
       category/product: 产品品牌
       business/advert: 广告
       business/client_version: 客户端
+      business/ad_template: 广告模板
+      business/tutorial: 在线教程
     attributes:
       statistic: &statisticable
         orders_count: 订单数
@@ -289,6 +292,26 @@ zh-CN:
         client_type: 客户端类型
         version: 版本号
         file: 下载链接
+      business/ad_template:
+        id: ID
+        title: 名称
+        price: 下载价格
+        product_id: 品牌
+        product: 品牌
+        product_type_id: 类型
+        product_type: 类型
+        avatar: 缩略图
+        file: 原始图（PSD）
+      business/tutorial:
+        id: ID
+        title: 名称
+        product_id: 品牌
+        product: 品牌
+        product_type_id: 类型
+        product_type: 类型
+        avatar: 缩略图
+        file: 视频文件
+        url: 视频嵌入链接
   simple_form:
     labels:
       account:

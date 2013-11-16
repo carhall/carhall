@@ -14,7 +14,7 @@ class Tips::BulkPurchasing2 < ActiveRecord::Base
     class_name: Tips::BulkPurchasing2Order, foreign_key: :source_id
   
   extend Share::ImageAttachments
-  define_image_method
+  define_image2_method
 
   include Share::Areable
   include Share::Localizable

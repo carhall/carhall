@@ -16,6 +16,16 @@ module FilterHelper
     end
   end
 
+  def set_filter_id parent, key
+    if params[:"#{key}_id"]
+      filter_id = params[:"#{key}_id"].to_i
+      instance_variable_set(:"@#{key}_id", filter_id)
+      parent.send(:"with_#{key}", filter_id)
+    else
+      parent
+    end
+  end
+
   def search_parent
     if params[:query]
       @parent = @parent.with_query(params[:query])

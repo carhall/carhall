@@ -66,4 +66,24 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
     end
   end
 
+  def password
+    @user = ::Accounts::Account.reset_password_by_token(params[:data].permit(:reset_password_token, :password))
+
+    if @user.errors.empty?
+      render_update_success @user
+    else
+      render_failure @user
+    end
+  end
+
+  def send_password
+    @user = ::Accounts::Account.send_reset_password_instructions(mobile: params[:data][:mobile])
+    
+    if @user.errors.empty?
+      render_update_success @user
+    else
+      render_failure @user
+    end
+  end
+
 end

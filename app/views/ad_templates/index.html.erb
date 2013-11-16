@@ -1,0 +1,32 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "sidenav" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>广告模板 <small><%= [Business::AdTemplate::ProductType[@product_type_id], Category::Product[@product_id]].select{|v|v.present?}.join('、') %></small></h3>
+    </div>
+
+    <p>
+      品牌：
+      <% @products = @ad_templates.map(&:product).group_by(&:to_s).map{|k,v|[k, v.length]} %>
+      <% @products.each do |product, count| %>
+        <%= link_to "#{product}(#{count}个)", ad_templates_path(product_type_id: @product_type_id, product_id: Category::Product[product]) %>
+      <% end %>
+    </p>
+
+    <%= index_for @ad_templates, class: :datatable do |t| %>
+      <%= t.attribute :avatar do |avatar| %>
+        <%= image_tag(avatar.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :product %>
+      <%= t.attribute :product_type %>
+      <%= t.attribute :price %>
+      <%= t.action_link :show do |ad_template| %>
+        <%= icon_link_to "查看详情", 'icon-search', ad_template_path(ad_template) %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

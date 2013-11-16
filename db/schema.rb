@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131105134824) do
+ActiveRecord::Schema.define(version: 20131116121911) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -327,6 +327,13 @@ ActiveRecord::Schema.define(version: 20131105134824) do
     t.datetime "rqrcode_image_updated_at"
   end
 
+  create_table "distributor_infos", force: true do |t|
+    t.integer "tutorial_id"
+    t.string  "company"
+    t.string  "address"
+    t.string  "phone"
+  end
+
   create_table "distributor_infos_tutorials", id: false, force: true do |t|
     t.integer "tutorial_id",         null: false
     t.integer "distributor_info_id", null: false
@@ -604,6 +611,7 @@ ActiveRecord::Schema.define(version: 20131105134824) do
     t.datetime "file_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "url"
   end
 
   create_table "user_details", force: true do |t|

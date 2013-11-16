@@ -1,0 +1,22 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "business/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>在线教程管理 <small></small></h3>
+    </div>
+
+    <%= index_for @tutorials, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :avatar do |avatar| %>
+        <%= image_tag(avatar.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :product %>
+      <%= t.attribute :product_type %>
+      <%= t.actions :edit, :destroy %>
+    <% end %>
+
+  </div>
+</div>

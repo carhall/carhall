@@ -206,6 +206,10 @@ Carhall::Application.routes.draw do
     post :make_friend, on: :member
     delete :break, on: :member
   end
+  resources :ad_templates do
+    post :buy, on: :member
+  end
+  resources :tutorials  
 
   # For openfire
   resource :openfire, only: [] do
@@ -234,6 +238,8 @@ Carhall::Application.routes.draw do
         post :confirm, on: :collection
         post :resend_confirm, on: :collection
         
+        post :password, on: :collection
+        post :send_password, on: :collection
       end
       
       resources :users, only: [:index, :show, :create] do
