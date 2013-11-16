@@ -17,6 +17,7 @@ class Accounts::Account < ActiveRecord::Base
   define_avatar_method
 
   validates_presence_of :username, :type
+  validates_uniqueness_of :username
   validates_length_of :username, :within => 2..20, :allow_blank => true
 
   include Share::Queryable

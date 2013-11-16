@@ -4,7 +4,8 @@ class Accounts::User < Accounts::Account
   set_detail_class Accounts::UserDetail
    
   # For posts
-  has_many :posts, class_name: 'Posts::Post'
+  has_many :posts, class_name: 'Posts::Post'#, dependent: :destroy
+  has_many :comments, class_name: 'Posts::Comment'#, dependent: :destroy
   has_many :orders, class_name: 'Tips::Order'
   has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Tips::Order'
 
