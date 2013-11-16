@@ -312,6 +312,11 @@ zh-CN:
         avatar: 缩略图
         file: 视频文件
         url: 视频嵌入链接
+        distributor_infos: 代理商
+      business/distributor_info:
+        company: 公司
+        phone: 电话
+        address: 地址
   simple_form:
     labels:
       account:

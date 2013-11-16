@@ -22,6 +22,7 @@
       <% end %>
       <%= t.attribute :product %>
       <%= t.attribute :product_type %>
+      <%= t.association :distributor_infos, using: :company, join: '、' %>
       <%= t.action_link :show do |tutorial| %>
         <%= icon_link_to "查看详情", 'icon-search', tutorial_path(tutorial) %>
       <% end %>

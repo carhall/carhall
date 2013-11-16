@@ -3,7 +3,8 @@ class Business::TutorialsController < Business::ApplicationController
 
   def business_tutorial_params
     params.require(:business_tutorial).permit(:title, :avatar, 
-      :file, :url, :product_id, :product_type_id, :distributor_infos)
+      :file, :url, :product_id, :product_type_id, 
+      distributor_infos_attributes: [:id, :_destroy, :company, :phone, :address])
   end
 
 end

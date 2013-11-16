@@ -1,24 +1,24 @@
 <div class="page-header">
-  <h3><%= @bulk_purchasing2.title %> <small></small></h3>
+  <h3><%= @tutorial.title %> <small></small></h3>
 </div>
+
 
 <div class="row-fluid">
-  <div class="span3">
-    <img src="<%= @bulk_purchasing2.image.url(:medium) %>">
-  </div>
-  <div class="span9">
-    <%= show_for @bulk_purchasing2 do |s| %>
-      <%= s.attribute :bulk_purchasing_type %>
-      <%= s.attribute :expire_at %>
-      <%= s.attribute :vip_price %>
-      <%= s.attribute :price %>
-      <%= s.attribute :inventory %>
-      <%= s.attribute :description %>
+  <div class="span5">
+    <%= show_for @tutorial do |s| %>
+      <%= s.attribute :avatar do |avatar| %>
+        <%= image_tag(avatar.url(:thumb)) %>
+      <% end %>
+      <%= s.attribute :product %>
+      <%= s.attribute :product_type %>
     <% end %>
-    <%= link_to "预订", new_bulk_purchasing2_bulk_purchasing2_order_path(@bulk_purchasing2), class: 'pull-right btn btn-primary' %>
+
+    <h3>代理商信息：</h3>
+
+    <% @distributor_infos = @tutorial.distributor_infos %>
+    <%= render partial: 'distributor_info', collection: @distributor_infos %>
+  </div>
+  <div class="span7">
+    <%= raw @tutorial.url %>
   </div>
 </div>
-
-<h3>供货商信息：</h3>
-
-<%= render 'distributors/info', distributor: @bulk_purchasing2.distributor %>

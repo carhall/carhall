@@ -72,6 +72,7 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.2)
       climate_control (>= 0.0.3, < 1.0)
+    cocoon (1.2.3)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -259,6 +260,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
+  cocoon
   coffee-rails (~> 4.0.0)
   devise (~> 3.1)
   factory_girl_rails

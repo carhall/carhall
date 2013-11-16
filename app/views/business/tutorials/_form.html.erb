@@ -27,5 +27,22 @@
 
   <%= f.input :url, input_html: { rows: 4, class: 'input-xxlarge' } %>
 
+  <hr>
+  <div class="control-group">
+    <label class="control-label"><strong>代理商信息</strong></label>
+  </div>
+
+  <div class="distributor_infos">
+    <%= f.fields_for :distributor_infos do |ff| %>
+      <%= render 'distributor_info_fields', f: ff %>
+    <% end %>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= link_to_add_association '添加代理商', f, :distributor_infos, class: 'btn' %>
+      </div>
+    </div>
+  </div>
+
   <%= f.button :submit, class: 'btn-submit' %>
 <% end %>

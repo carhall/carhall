@@ -15,6 +15,7 @@
       <% end %>
       <%= t.attribute :product %>
       <%= t.attribute :product_type %>
+      <%= t.association :distributor_infos, using: :company, join: '、' %>
       <%= t.actions :edit, :destroy %>
     <% end %>
 

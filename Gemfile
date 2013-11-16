@@ -32,6 +32,7 @@ gem 'hermitage'
 
 # For frontend
 gem 'simple_form'
+gem 'cocoon'
 gem 'show_for', github: 'bbtfr/show_for'
 # gem 'show_for', path: '..'
 gem 'index_for', github: 'bbtfr/index_for'

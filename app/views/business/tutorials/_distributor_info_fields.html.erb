@@ -1,0 +1,11 @@
+<div class="nested-fields">
+  <%= f.input :company %>
+  <%= f.input :phone %>
+  <%= f.input :address %>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= link_to_remove_association "删除代理商", f, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>
