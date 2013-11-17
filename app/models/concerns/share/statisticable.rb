@@ -65,11 +65,11 @@ module Share::Statisticable
 
   def last_ordered_at
     order = if orders.loaded?
-      orders.last
+      orders.first
     elsif recent_orders.loaded?
-      recent_orders.last
+      recent_orders.first
     else
-      orders.last
+      orders.first
     end
     order.created_at if order
   end
