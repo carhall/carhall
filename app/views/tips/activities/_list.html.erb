@@ -1,7 +1,7 @@
 <%= index_for @activities, class: :datatable do |t| %>
   <%= t.attribute :id %>
   <%= t.attribute :image do |image| %>
-    <%= image_tag(image.url(:thumb)) %>
+    <%= image_tag(image.url(:small)) %>
   <% end %>
   <%= t.attribute :title %>
   <%= t.attribute :expire_at, format: :short %>

@@ -16,7 +16,7 @@
       <%= t.attribute :id %>
       <%= t.association :dealer, using: :username if @user.admin? %>
       <%= t.attribute :image do |image| %>
-        <%= image_tag(image.url(:thumb)) %>
+        <%= image_tag(image.url(:small)) %>
       <% end %>
       <%= t.attribute :title %>
       <%= t.attribute :cleaning_type %>
