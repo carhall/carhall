@@ -82,7 +82,7 @@ class Accounts::Dealer < Accounts::PublicAccount
 
   extend Share::MethodCache
   define_cached_methods :mending_goal_attainment, :cleaning_goal_attainment, 
-    :bulk_purchasing_goal_attainment
+    :bulk_purchasing_goal_attainment, expires_in: 1.hour
 
   def to_detail_without_statistic_builder
     json = to_base_builder

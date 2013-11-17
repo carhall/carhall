@@ -6,16 +6,19 @@
   <div class="span9">
     <div class="page-header">
       <% if @cleaning %>
-        <h3>洗车美容 “<%= @cleaning.title %>” 订单列表 <small></small></h3>
+        <h3>服务项目 “<%= @cleaning.title %>” 订单列表 <small></small></h3>
       <% else %>
-        <h3>洗车美容订单列表 <small></small></h3>
+        <h3>服务项目订单列表 <small></small></h3>
       <% end %>
     </div>
+
+    <% @orders = @orders.includes(:user) %>
 
     <%= render 'share/alert', message: '您还没有收到洗车美容订单！' if @orders.empty? %>
 
     <%= index_for @orders, class: :datatable do |t| %>
       <%= t.attribute :id %>
+      <%= t.association :user, using: :username %>
       <%= t.attribute :title %>
       <%= t.attribute :count %>
       <%= t.attribute :used_count %>

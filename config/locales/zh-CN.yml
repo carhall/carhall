@@ -198,8 +198,10 @@ zh-CN:
         cost: 订单总价
         description: 预约项目
         state: 订单状态
+        user: 购买车主
       tips/bulk_purchasing2_order:
         <<: *order
+        dealer: 购买服务商
       tips/mending_order/detail:
         brand: 汽车品牌
         series: 汽车型号

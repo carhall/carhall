@@ -14,7 +14,7 @@
     <% end %>
 
     <% if @dealer.has_template? :cleaning %>
-      <li<%= active? 'tips/orders#cleaning' %>><a href="<%= cleaning_tips_orders_path %>"><i class="icon-chevron-right"></i> 洗车美容订单</a></li>
+      <li<%= active? 'tips/orders#cleaning' %>><a href="<%= cleaning_tips_orders_path %>"><i class="icon-chevron-right"></i> 服务项目订单</a></li>
     <% end %>
     
     <% if @dealer.has_template? :mending %>

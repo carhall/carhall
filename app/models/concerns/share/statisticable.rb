@@ -21,11 +21,11 @@ module Share::Statisticable
 
   def last_stars
     review = if reviews.loaded?
-      reviews.last
+      reviews.first
     elsif recent_reviews.loaded?
-      recent_reviews.last
+      recent_reviews.first
     else
-      reviews.last
+      reviews.first
     end
     review.stars if review
   end

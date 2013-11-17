@@ -2,7 +2,7 @@ class Tips::Activity < ActiveRecord::Base
   include Tips::Servicable
 
   extend Share::ImageAttachments
-  define_image2_method
+  define_image_method
 
   enumerate :area, with: Category::Area
   include Share::Localizable

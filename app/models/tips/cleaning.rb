@@ -3,7 +3,7 @@ class Tips::Cleaning < ActiveRecord::Base
   set_order_class Tips::CleaningOrder
 
   extend Share::ImageAttachments
-  define_image2_method
+  define_image_method
   
   enumerate :area, with: Category::Area
   enumerate :cleaning_type, with: %w(洗车 漆面养护 清洁护理 轮胎 换油 改装 钣喷)

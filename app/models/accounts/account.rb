@@ -14,7 +14,7 @@ class Accounts::Account < ActiveRecord::Base
 
   # For avatar
   extend Share::ImageAttachments
-  define_avatar2_method
+  define_avatar_method
 
   validates_presence_of :username, :type
   validates_uniqueness_of :username
@@ -101,10 +101,6 @@ class Accounts::Account < ActiveRecord::Base
 
   def avatar_thumb_url
     "#{AbsoluteUrlPrefix}#{avatar.url(:thumb, timestamp: false)}" if avatar.present?
-  end
-  
-  def image_thumb_url
-    "#{AbsoluteUrlPrefix}#{avatar.url(:recthumb, timestamp: false)}" if avatar.present?
   end
 
   def to_openfire_user_detail_builder

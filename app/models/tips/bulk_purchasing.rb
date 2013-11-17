@@ -3,7 +3,7 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   set_order_class Tips::BulkPurchasingOrder
   
   extend Share::ImageAttachments
-  define_image2_method
+  define_image_method
 
   enumerate :area, with: Category::Area
   

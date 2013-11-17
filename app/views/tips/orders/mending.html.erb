@@ -8,12 +8,13 @@
       <h3>保养专修订单列表 <small></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '您还没有收到保养专修订单！' if @orders.empty? %>
+    <% @orders = @orders.includes(:user, :detail) %>
 
-    <% @orders = @orders.includes(:detail) %>
+    <%= render 'share/alert', message: '您还没有收到保养专修订单！' if @orders.empty? %>
 
     <%= index_for @orders, class: :datatable do |t| %>
       <%= t.attribute :id %>
+      <%= t.association :user, using: :username %>
       <%= t.attribute :title %>
       <%= t.attribute :brand, in: :detail %>
       <%= t.attribute :series, in: :detail %>
