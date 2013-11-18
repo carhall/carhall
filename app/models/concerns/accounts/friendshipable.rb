@@ -11,6 +11,7 @@ module Accounts::Friendshipable
     has_many :user_friends, through: :friendships, source: :friend, class_name: 'Accounts::User'
     has_many :dealer_friends, through: :friendships, source: :friend, class_name: 'Accounts::Dealer'
     has_many :provider_friends, through: :friendships, source: :friend, class_name: 'Accounts::Provider'
+    has_many :distributor_friends, through: :friendships, source: :friend, class_name: 'Accounts::Distributor'
 
     # For blocks, blacklists and inverse_blacklists
     has_many :blocks, class_name: 'Accounts::Block', foreign_key: :user_id

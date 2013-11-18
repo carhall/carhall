@@ -4,6 +4,6 @@ class Statistic::FriendsController < Statistic::ApplicationController
   helper StatisticsHelper
     
   def index
-    @friends = @user.user_friends
+    @friends = @user.friends
   end
 end

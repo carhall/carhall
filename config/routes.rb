@@ -31,6 +31,9 @@ Carhall::Application.routes.draw do
     resources :users
 
     resources :friends
+    resources :user_friends
+    resources :dealer_friends
+    resources :distributor_friends
     resources :reviews do
       get :mending, on: :collection
       get :cleaning, on: :collection
