@@ -1,6 +1,4 @@
 class Accounts::Distributor < Accounts::Account
-  Accounts::Agent
-  
   include Accounts::Publicable
   include Accounts::RqrcodeTokenable
 
@@ -41,3 +39,5 @@ class Accounts::Distributor < Accounts::Account
   
   
 end
+
+Accounts::Agent
