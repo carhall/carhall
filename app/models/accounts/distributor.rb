@@ -1,4 +1,6 @@
 class Accounts::Distributor < Accounts::Account
+  Accounts::Agent
+  
   include Accounts::Publicable
   include Accounts::RqrcodeTokenable
 
@@ -8,6 +10,8 @@ class Accounts::Distributor < Accounts::Account
 
   has_many :bulk_purchasing2s, class_name: 'Tips::BulkPurchasing2'
   has_many :bulk_purchasing2_orders, class_name: 'Tips::BulkPurchasing2Order'
+
+  has_many :manual_images, class_name: 'Tips::ManualImage'
 
   scope :with_business_scope, -> (business_scope) {
     detail_ids = Accounts::DistributorDetail.with_business_scope(business_scope).pluck(:id)

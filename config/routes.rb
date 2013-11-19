@@ -206,6 +206,7 @@ Carhall::Application.routes.draw do
   end
   resources :purchase_requestings
   resources :distributors do
+    get :manual_images, on: :member
     post :make_friend, on: :member
     delete :break, on: :member
   end

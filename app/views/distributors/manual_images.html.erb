@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h3><%= @distributor.username %> 图册 <small></small></h3>
+</div>
+
+<ul class="thumbnails row">
+  <% @manual_images.each do |manual_image| %>
+    <li class="span3">
+      <%= link_to image_tag(manual_image.image(:medium)), manual_image.image(:original), class: 'thumbnail', rel: 'hermitage' %>
+      <%= manual_image.title %>
+    </li>
+  <% end %>
+</ul>  

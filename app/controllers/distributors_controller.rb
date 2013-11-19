@@ -23,4 +23,9 @@ class DistributorsController < ApplicationController
     redirect_to :back
   end
 
+  def manual_images
+    @distributor = ::Accounts::Distributor.find(params[:id])
+    @manual_images = @distributor.manual_images
+  end
+  
 end
