@@ -1,22 +1,25 @@
 <div class="row-fluid">
   <div class="span3">
-    <%= render "accounts/share/sidenav/admin" %>
+    <%= render "statistic/share/sidenav/#{@user_type}" %>
   </div>
   
   <div class="span9">
+    
     <div class="page-header">
-      <h3>车主管理 <small></small></h3>
+      <h3>经销商列表 <small></small></h3>
     </div>
 
-    <%= index_for @users, class: :datatable do |t| %>
+    <%= render 'share/alert', message: '您还没有关注任何经销商！' if @friends.empty? %>
+
+    <%= index_for @friends, class: :datatable do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :avatar do |avatar| %>
         <%= image_tag(avatar.url(:thumb)) %>
       <% end %>
-      <%= t.attribute :mobile %>
       <%= t.attribute :username %>
-      <%#= t.actions :destroy %>
+      <%= t.attribute :description %>
     <% end %>
+
 
   </div>
 </div>

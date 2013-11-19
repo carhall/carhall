@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h3>客户列表 <small></small></h3>
+</div>
+
+<%= render 'share/alert', message: '还没有用户关注您！' if @friends.empty? %>
+
+<%= index_for @friends, class: :datatable do |t| %>
+  <%= t.attribute :id %>
+  <%= t.attribute :avatar do |avatar| %>
+    <%= image_tag(avatar.url(:thumb)) %>
+  <% end %>
+  <%= t.attribute :username %>
+  <%= t.attribute :description %>
+<% end %>
