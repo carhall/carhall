@@ -39,5 +39,3 @@ class Accounts::Distributor < Accounts::Account
   
   
 end
-
-Accounts::Agent
