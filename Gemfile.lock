@@ -83,6 +83,7 @@ GEM
     coffee-script-source (1.6.3)
     columnize (0.3.6)
     commonjs (0.2.7)
+    dalli (2.6.4)
     debugger (1.6.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -262,6 +263,7 @@ DEPENDENCIES
   capistrano-rvm
   cocoon
   coffee-rails (~> 4.0.0)
+  dalli
   devise (~> 3.1)
   factory_girl_rails
   faker
