@@ -6,8 +6,8 @@ set :repo_url, 'git@github.com:bbtfr/carhall.git'
 set :deploy_to, '/var/www/carhall'
 # set :scm, :git
 
-# set :format, :pretty
-# set :log_level, :debug
+set :format, :pretty
+set :log_level, :info
 # set :pty, true
 
 set :linked_files, %w{config/database.yml}
