@@ -21,6 +21,10 @@ class Accounts::Distributor < Accounts::Account
     where(detail_id: detail_ids)
   }
 
+  has_attached_file :avatar, styles: { medium: "300x200#", thumb: "60x60#" },
+    path: ":rails_root/public/system/accounts/distributors/:attachment/:id_partition/:style/:filename",
+    url: "/system/accounts/distributors/:attachment/:id_partition/:style/:filename"
+
   def agent?
     false
   end
