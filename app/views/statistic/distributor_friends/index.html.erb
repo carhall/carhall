@@ -18,6 +18,9 @@
       <% end %>
       <%= t.attribute :username %>
       <%= t.attribute :description %>
+      <%= t.action_link :show do |distributor| %>
+        <%= icon_link_to "查看详情", 'icon-search', distributor_path(distributor) %>
+      <% end %>
     <% end %>
 
 
