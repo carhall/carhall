@@ -19,11 +19,14 @@ class Share::Comment < ActiveRecord::Base
         json.id self.user_id
         json.username self.user_username
       end
-      json.at_user do |json|
-        if self.at_user_id
+
+      if self.at_user_id
+        json.at_user do |json|
           json.id self.at_user_id
           json.username self.at_user_username
         end
+      else
+        json.at_user nil
       end
     end
   end
