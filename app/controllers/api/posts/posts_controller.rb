@@ -40,7 +40,7 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
 private
   
   def set_includes
-    @parent = @parent.includes(:user, comments: [:user, :at_user])
+    @parent = @parent.includes(:comments)
   end
 
   def data_params

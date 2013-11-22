@@ -15,6 +15,11 @@ class Posts::Post < ActiveRecord::Base
     self.brand_id ||= user.brand_id
   end
 
+  before_save do
+    self.user_username ||= user.username
+    self.user_description ||= user.description
+  end
+
   default_scope { order('id DESC') }
 
   scope :top, -> { reorder('comments_count DESC, id DESC') }
@@ -37,13 +42,17 @@ class Posts::Post < ActiveRecord::Base
     Jbuilder.new do |json|
       json.extract! self, :id, :content, :comments_count, :created_at
       json.image! self, :image
-      json.user user.to_base_builder
+      json.user do |json|
+        json.id self.user_id
+        json.username self.user_username
+        json.description self.user_description
+      end
     end
   end
     
   def to_base_builder
     json = to_without_comment_builder
-    json.comments comments.map{|c|c.to_base_builder.attributes!}
+    json.comments comments.map { |c| c.to_base_builder.attributes! }
     json
   end
 

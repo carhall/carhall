@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118023719) do
+ActiveRecord::Schema.define(version: 20131122030504) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -282,6 +282,8 @@ ActiveRecord::Schema.define(version: 20131118023719) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_username"
+    t.string   "at_user_username"
   end
 
   add_index "comments", ["source_type", "source_id"], name: "index_comments_on_source_type_and_source_id", using: :btree
@@ -511,9 +513,22 @@ ActiveRecord::Schema.define(version: 20131118023719) do
     t.datetime "updated_at"
     t.integer  "area_id"
     t.integer  "brand_id"
+    t.string   "user_username"
+    t.string   "user_description"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "posts_comments", force: true do |t|
+    t.integer  "user_id"
+    t.string   "user_username"
+    t.integer  "at_user_id"
+    t.string   "at_user_username"
+    t.integer  "source_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "products", force: true do |t|
     t.string "name"
