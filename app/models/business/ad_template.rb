@@ -15,6 +15,8 @@ class Business::AdTemplate < ActiveRecord::Base
       user.detail.balance_used += price
       user.save
     end
+  rescue
+    nil
   end
 
 end

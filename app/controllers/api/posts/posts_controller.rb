@@ -3,6 +3,10 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
   set_resource_class ::Posts::Post
   before_filter :set_includes
 
+  def render_index posts
+    super posts, params[:detail] ? :base : :without_comment
+  end
+
   # GET /api/posts
   # GET /api/posts.json
   def index
@@ -40,7 +44,7 @@ class Api::Posts::PostsController < Api::Posts::ApplicationController
 private
   
   def set_includes
-    @parent = @parent.includes(:comments)
+    @parent = @parent.includes(:comments) if params[:detail]
   end
 
   def data_params
