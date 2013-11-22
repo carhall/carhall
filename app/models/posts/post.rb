@@ -18,6 +18,7 @@ class Posts::Post < ActiveRecord::Base
   before_save do
     self.user_username ||= user.username
     self.user_description ||= user.description
+    self.user_avatar_thumb_url ||= user.avatar_thumb_url
   end
 
   default_scope { order('id DESC') }
@@ -46,6 +47,7 @@ class Posts::Post < ActiveRecord::Base
         json.id self.user_id
         json.username self.user_username
         json.description self.user_description
+        json.avatar_thumb_url self.user_avatar_thumb_url
       end
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122030504) do
+ActiveRecord::Schema.define(version: 20131122024631) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -504,7 +504,7 @@ ActiveRecord::Schema.define(version: 20131122030504) do
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.text     "content"
-    t.integer  "comments_count",     default: 0
+    t.integer  "comments_count",        default: 0
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -515,6 +515,7 @@ ActiveRecord::Schema.define(version: 20131122030504) do
     t.integer  "brand_id"
     t.string   "user_username"
     t.string   "user_description"
+    t.string   "user_avatar_thumb_url"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree

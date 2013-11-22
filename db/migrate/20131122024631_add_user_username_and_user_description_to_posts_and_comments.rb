@@ -3,6 +3,7 @@ class AddUserUsernameAndUserDescriptionToPostsAndComments < ActiveRecord::Migrat
     change_table :posts do |t|
       t.string :user_username
       t.string :user_description
+      t.string :user_avatar_thumb_url
     end
     Posts::Post.all.each{|p|p.save}
 
