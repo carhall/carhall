@@ -41,7 +41,7 @@ class Accounts::Dealer < Accounts::PublicAccount
             longitude: result['result']['location']['lng']
           }
         else
-          value.errors.add(:address, :invalid)
+          record.errors.add(:"detail.address", :invalid)
         end
       rescue Exception => e
         record.errors.add(:base, e.message)
