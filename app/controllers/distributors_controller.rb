@@ -1,6 +1,6 @@
 class DistributorsController < ApplicationController
   def index
-    @distributors = ::Accounts::Distributor.all
+    @distributors = ::Accounts::Distributor.accepted
 
     @distributors = set_filter_id @distributors, :business_scope
     @distributors = set_filter_id @distributors, :main_area

@@ -13,6 +13,10 @@ module Accounts::Acceptable
     self.accepted_at = nil
   end
 
+  included do
+    scope :accepted, -> { where.not(accepted_at: nil) }
+  end
+
   extend Share::Exclamation
   define_exclamation_and_method :accept
   define_exclamation_and_method :reject
