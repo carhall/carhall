@@ -6,12 +6,18 @@
   <div class="span3">
     <img src="<%= @ad_template.avatar.url(:medium) %>">
   </div>
-  <div class="span9">
+  <div class="<%= @adverts.any? ? 'span6' : 'span9' %>">
     <%= show_for @ad_template do |s| %>
       <%= s.attribute :product %>
       <%= s.attribute :product_type %>
       <%= s.attribute :price %>
     <% end %>
     <%= link_to "购买", buy_ad_template_path(@ad_template), class: 'pull-right btn btn-primary', data: { method: :post } %>
+  </div>
+  
+  <div class="span3">
+    <% @adverts.each do |advert| %>
+      <%= image_tag advert.image.url(:medium) %>
+    <% end %>
   </div>
 </div>
