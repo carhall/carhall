@@ -11,10 +11,8 @@ class Business::AdTemplate < ActiveRecord::Base
   validates_presence_of :title, :product_id, :product_type_id, :price
   
   def buy user
-    if user.detail.balance_used <= user.adverts_balance
-      user.detail.balance_used += price
-      user.save
-    end
+    user.detail.balance_used += price
+    user.save
   rescue
     nil
   end

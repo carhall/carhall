@@ -47,6 +47,12 @@ class Accounts::Dealer < Accounts::PublicAccount
         record.errors.add(:base, e.message)
       end
     end
+
+    if value and value.balance_used_changed?
+      if value.balance_used >= record.adverts_balance
+        value.errors.add(:balance_used, :not_enough_balance)
+      end
+    end
   end
 
   def has_template? template
