@@ -1,4 +1,10 @@
 class AdTemplatesController < ApplicationController
+  before_filter :set_adverts
+
+  def set_adverts
+    @adverts = Business::Advert.ad_template
+  end
+
   def index
     @ad_templates = ::Business::AdTemplate.all
 

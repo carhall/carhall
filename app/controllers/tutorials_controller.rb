@@ -1,4 +1,10 @@
 class TutorialsController < ApplicationController
+  before_filter :set_adverts
+
+  def set_adverts
+    @adverts = Business::Advert.tutorial
+  end
+
   def index
     @tutorials = ::Business::Tutorial.all
 

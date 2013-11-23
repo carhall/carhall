@@ -3,7 +3,7 @@
     <%= render "sidenav" %>
   </div>
   
-  <div class="span9">
+  <div class="<%= @adverts.any? ? 'span6' : 'span9' %>">
     <div class="page-header">
       <h3>广告模板 <small><%= [Business::AdTemplate::ProductType[@product_type_id], Category::Product[@product_id]].select{|v|v.present?}.join('、') %></small></h3>
     </div>
@@ -28,5 +28,11 @@
       <% end %>
     <% end %>
 
+  </div>
+
+  <div class="span3">
+    <% @adverts.each do |advert| %>
+      <%= image_tag advert.image.url(:medium) %>
+    <% end %>
   </div>
 </div>

@@ -8,6 +8,8 @@
       <h3>在线教程 <small><%= [Business::AdTemplate::ProductType[@product_type_id], Category::Product[@product_id]].select{|v|v.present?}.join('、') %></small></h3>
     </div>
 
+    <% @tutorials = @tutorials.includes(:distributor_infos) %>
+    
     <p>
       品牌：
       <% @products = @tutorials.map(&:product).group_by(&:to_s).map{|k,v|[k, v.length]} %>

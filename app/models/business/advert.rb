@@ -1,7 +1,8 @@
 class Business::Advert < ActiveRecord::Base
   enumerate :advert_type, with: %w(客户端首页 客户端锦囊 客户端在下 公众平台广告模板 公众平台在线教程)
-  enumerate :area, with: Category::Area
+  # enumerate :area, with: Category::Area::Main
   enumerate :brand, with: Category::Brand
+  include Share::Areable
  
   has_attached_file :image, styles: { medium: "480x220>", thumb: "60x60#" }
 
