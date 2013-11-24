@@ -37,24 +37,24 @@ class Api::ApplicationController < ActionController::Base
     
   end
 
-#   rescue_from Exception do |exception|
-#     exception_message = exception.message
-#     exception_name = exception.class.name
-#     rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[exception_name]
-#     exception_message = I18n.t "#{exception_name.underscore}", 
-#       default: I18n.t(:description, default: exception_message),
-#       scope: [:exception, rescue_response], 
-#       exception_name: exception_name, 
-#       exception_message: exception_message
-#     render_error exception_message, rescue_response, {
-#       error_code: exception_name.demodulize.underscore, 
-#       backtrace: exception.backtrace[0..2],
-#     }
-#     Rails.logger.error <<-EOE
-# API Error: #{exception_name}: #{exception_message}
-#   #{exception.backtrace.select{|b|b=~/carhall/}.join("\n  ")}
-# EOE
-#   end
+  rescue_from Exception do |exception|
+    exception_message = exception.message
+    exception_name = exception.class.name
+    rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[exception_name]
+    exception_message = I18n.t "#{exception_name.underscore}", 
+      default: I18n.t(:description, default: exception_message),
+      scope: [:exception, rescue_response], 
+      exception_name: exception_name, 
+      exception_message: exception_message
+    render_error exception_message, rescue_response, {
+      error_code: exception_name.demodulize.underscore, 
+      backtrace: exception.backtrace[0..2],
+    }
+    Rails.logger.error <<-EOE
+API Error: #{exception_name}: #{exception_message}
+  #{exception.backtrace.select{|b|b=~/carhall/}.join("\n  ")}
+EOE
+  end
 
 private
   
