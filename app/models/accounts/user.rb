@@ -2,6 +2,7 @@ class Accounts::User < Accounts::Account
   include Share::Statisticable
   
   set_detail_class Accounts::UserDetail
+  define_avatar_method styles: { medium: "200x200#", thumb: "60x60#" }
    
   # For posts
   has_many :posts, class_name: 'Posts::Post', dependent: :destroy
