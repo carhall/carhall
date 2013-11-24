@@ -38,7 +38,9 @@ module Accounts::Publicable
   end
 
   def adverts_balance
-    (friends_count||0) * 3
+    (friends_count||0) * 3 - detail.balance_used
+  rescue
+    0
   end
 
   def commission

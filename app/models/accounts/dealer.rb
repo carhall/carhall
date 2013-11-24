@@ -49,7 +49,7 @@ class Accounts::Dealer < Accounts::PublicAccount
     end
 
     if value and value.balance_used_changed?
-      if value.balance_used > record.adverts_balance
+      if record.adverts_balance < 0
         record.errors.add(:base, :not_enough_balance)
       end
     end

@@ -25,6 +25,10 @@ class Posts::Post < ActiveRecord::Base
     "#{AbsoluteUrlPrefix}#{super}" if super.present?
   end
 
+  def user_avatar_medium_url
+    user_avatar_thumb_url.gsub("thumb", "medium") if user_avatar_thumb_url.present?
+  end
+
   default_scope { order('id DESC') }
 
   scope :top, -> { reorder('comments_count DESC, id DESC') }
@@ -52,6 +56,7 @@ class Posts::Post < ActiveRecord::Base
         json.username self.user_username
         json.description self.user_description
         json.avatar_thumb_url self.user_avatar_thumb_url
+        json.avatar_medium_url self.user_avatar_medium_url
       end
     end
   end
