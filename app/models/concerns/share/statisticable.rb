@@ -20,13 +20,20 @@ module Share::Statisticable
   end
 
   def last_stars
-    review = if reviews.loaded?
-      reviews.first
-    elsif recent_reviews.loaded?
-      recent_reviews.first
+    review = if recent_reviews.loaded?
+      recent_reviews
     else
-      reviews.first
-    end
+      reviews
+    end.first
+    review.stars if review
+  end
+
+  def last_stars_with_dealer dealer_id
+    review = if recent_reviews.loaded?
+      recent_reviews
+    else
+      reviews
+    end.detect{|r|r.order.dealer_id == dealer_id}
     review.stars if review
   end
 
@@ -86,8 +93,10 @@ module Share::Statisticable
   end
 
   extend Share::MethodCache
-  define_cached_methods :stars, :recent_stars, :recent_orders_count, 
-    :total_cost, :recent_total_cost, :recent_ordered_users_count, 
+  define_cached_methods :stars, :recent_stars,
+    :last_stars, :last_stars_with_dealer, 
+    :recent_orders_count, :recent_ordered_users_count,
+    :total_cost, :total_cost_with_dealer, :recent_total_cost, 
     :goal_attainment, :last_ordered_at, :last_ordered_at_with_dealer, 
     expires_in: 1.hour
 

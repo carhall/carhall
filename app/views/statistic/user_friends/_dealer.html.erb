@@ -10,7 +10,7 @@
 
     <%= render 'share/alert', message: '还没有用户关注您！' if @friends.empty? %>
     
-    <% @friends = @friends.includes(:detail, :orders, :reviews) %>
+    <% @friends = @friends.includes(:detail, :orders, reviews: [:order]) %>
 
     <%= index_for @friends, class: :datatable do |t| %>
       <%= t.attribute :id %>
@@ -22,7 +22,7 @@
       <%= t.attribute :created_at, format: :short %>
       <%= t.attribute :total_cost_with_dealer, args: @user.id %>
       <%= t.attribute :last_ordered_at_with_dealer, args: @user.id, format: :short %>
-      <%= t.attribute :last_stars %>
+      <%= t.attribute :last_stars_with_dealer, args: @user.id %>
     <% end %>
 
   </div>

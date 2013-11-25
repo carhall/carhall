@@ -71,6 +71,7 @@ zh-CN:
         stars: 好评
         recent_stars: 好评趋势
         last_stars: 最近好评
+        last_stars_with_dealer: 最近好评
         last_ordered_at: 最近消费时间
         last_ordered_at_with_dealer: 最近消费时间
       service: &servicalbe
