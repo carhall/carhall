@@ -7,7 +7,7 @@ module Share::MethodCache
       class_eval do
         alias_method method_without_cache, method
         define_method method do |*args|
-          Rails.cache.fetch([self.class, self.id, method, *args, options[:version]], 
+          Rails.cache.fetch([self.class.name, self.id, method, *args, options[:version]], 
             expires_in: (options[:expires_in]||1.hour)) do
             send method_without_cache, *args
           end

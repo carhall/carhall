@@ -51,6 +51,10 @@ module Share::Statisticable
     Share::Statisticable.total_cost orders
   end
 
+  def total_cost_with_dealer dealer_id
+    Share::Statisticable.total_cost orders.select{|o|o.dealer_id == dealer_id}
+  end
+
   def recent_total_cost
     Share::Statisticable.total_cost recent_orders
   end
@@ -72,18 +76,19 @@ module Share::Statisticable
     order.created_at if order
   end
 
-  def last_ordered_at_with_dealer dealer
+  def last_ordered_at_with_dealer dealer_id
     order = if recent_orders.loaded?
       recent_orders
     else
       orders
-    end.with_dealer(dealer).first
+    end.detect{|o|o.dealer_id == dealer_id}
     order.created_at if order
   end
 
   extend Share::MethodCache
   define_cached_methods :stars, :recent_stars, :recent_orders_count, 
     :total_cost, :recent_total_cost, :recent_ordered_users_count, 
-    :goal_attainment, expires_in: 1.hour
+    :goal_attainment, :last_ordered_at, :last_ordered_at_with_dealer, 
+    expires_in: 1.hour
 
 end

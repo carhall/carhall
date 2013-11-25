@@ -20,8 +20,8 @@
       <%= t.attribute :username %>
       <%= t.attribute :brand %>
       <%= t.attribute :created_at, format: :short %>
-      <%= t.attribute :total_cost %>
-      <%= t.attribute :last_ordered_at, format: :short %>
+      <%= t.attribute :total_cost_with_dealer, args: @user.id %>
+      <%= t.attribute :last_ordered_at_with_dealer, args: @user.id, format: :short %>
       <%= t.attribute :last_stars %>
     <% end %>
 

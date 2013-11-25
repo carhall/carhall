@@ -67,10 +67,12 @@ zh-CN:
       statistic: &statisticable
         orders_count: 订单数
         total_cost: 总销售额
+        total_cost_with_dealer: 总销售额
         stars: 好评
         recent_stars: 好评趋势
         last_stars: 最近好评
         last_ordered_at: 最近消费时间
+        last_ordered_at_with_dealer: 最近消费时间
       service: &servicalbe
         id: ID
         title: 项目名称
