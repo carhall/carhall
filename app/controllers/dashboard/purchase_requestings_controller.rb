@@ -1,4 +1,4 @@
-class PurchaseRequestingsController < ApplicationController
+class Dashboard::PurchaseRequestingsController < Dashboard::ApplicationController
   def index
     @purchase_requestings = ::Tips::PurchaseRequesting.in_progress
     

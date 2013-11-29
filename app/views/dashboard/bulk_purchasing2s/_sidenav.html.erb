@@ -1,0 +1,8 @@
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>团购</strong></span></li>
+
+  <% Tips::BulkPurchasing2::BulkPurchasingType.all.each do |key, value| %>
+    <li<%= ' class="active"'.html_safe if @bulk_purchasing_type_id == key %>><a href="<%= dashboard_bulk_purchasing2s_path(bulk_purchasing_type_id: key) %>"><i class="icon-chevron-right"></i> <%= value %></a></li>
+  <% end %>
+
+</ul>

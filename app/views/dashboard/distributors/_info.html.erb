@@ -4,12 +4,12 @@
     <small>
       <% if @current_user != distributor %>
         <% if @current_user.is_friend? distributor %>
-          <%= link_to "取消关注", break_distributor_path(distributor), class: 'btn btn-mini btn-danger', data: { method: :delete } %>
+          <%= link_to "取消关注", break_dashboard_distributor_path(distributor), class: 'btn btn-mini btn-danger', data: { method: :delete } %>
         <% else %>
-          <%= link_to "关注", make_friend_distributor_path(distributor), class: 'btn btn-mini btn-primary', data: { method: :post } %>
+          <%= link_to "关注", make_friend_dashboard_distributor_path(distributor), class: 'btn btn-mini btn-primary', data: { method: :post } %>
         <% end %>
       <% end %>
-      <%= link_to "查看图册", manual_images_distributor_path(distributor), class: 'btn btn-mini' %>
+      <%= link_to "查看图册", manual_images_dashboard_distributor_path(distributor), class: 'btn btn-mini' %>
     </small>
   </h3>
 </div>

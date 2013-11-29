@@ -14,7 +14,7 @@
       品牌：
       <% @products = @tutorials.map(&:product).group_by(&:to_s).map{|k,v|[k, v.length]} %>
       <% @products.each do |product, count| %>
-        <%= link_to "#{product}(#{count}个)", tutorials_path(product_type_id: @product_type_id, product_id: Category::Product[product]) %>
+        <%= link_to "#{product}(#{count}个)", dashboard_tutorials_path(product_type_id: @product_type_id, product_id: Category::Product[product]) %>
       <% end %>
     </p>
 
@@ -26,7 +26,7 @@
       <%= t.attribute :product_type %>
       <%= t.association :distributor_infos, using: :company, join: '、' %>
       <%= t.action_link :show do |tutorial| %>
-        <%= icon_link_to "查看详情", 'icon-search', tutorial_path(tutorial) %>
+        <%= icon_link_to "查看详情", 'icon-search', dashboard_tutorial_path(tutorial) %>
       <% end %>
     <% end %>
 

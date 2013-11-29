@@ -16,7 +16,7 @@
           <%= s.attribute :product_type %>
           <%= s.attribute :price %>
         <% end %>
-        <%= link_to "购买", buy_ad_template_path(@ad_template), class: 'pull-right btn btn-primary', data: { method: :post } %>
+        <%= link_to "购买", buy_dashboard_ad_template_path(@ad_template), class: 'pull-right btn btn-primary', data: { method: :post } %>
       </div>
 
     </div>

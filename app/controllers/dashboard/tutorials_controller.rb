@@ -1,4 +1,4 @@
-class TutorialsController < ApplicationController
+class Dashboard::TutorialsController < Dashboard::ApplicationController
   before_filter :set_adverts
 
   def set_adverts

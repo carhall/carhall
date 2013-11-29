@@ -14,7 +14,7 @@
       所属省份：
       <% @main_areas = @purchase_requestings.map(&:main_area).group_by(&:to_s).map{|k,v|[k, v.length]} %>
       <% @main_areas.each do |main_area, count| %>
-        <%= link_to "#{main_area}(#{count}个)", purchase_requestings_path(purchase_requesting_type_id: @purchase_requesting_type_id, main_area_id: Category::Area::Main[main_area]) %>
+        <%= link_to "#{main_area}(#{count}个)", dashboard_purchase_requestings_path(purchase_requesting_type_id: @purchase_requesting_type_id, main_area_id: Category::Area::Main[main_area]) %>
       <% end %>
     </p>
 
@@ -28,7 +28,7 @@
       <%= t.attribute :username, in: :dealer %>
       <%= t.attribute :phone, in: :dealer %>
       <%= t.action_link :show do |purchase_requesting| %>
-        <%= icon_link_to "查看详情", 'icon-search', purchase_requesting_path(purchase_requesting) %>
+        <%= icon_link_to "查看详情", 'icon-search', dashboard_purchase_requesting_path(purchase_requesting) %>
       <% end %>
     <% end %>
 

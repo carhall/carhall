@@ -15,10 +15,10 @@
       <%= s.attribute :inventory %>
       <%= s.attribute :description %>
     <% end %>
-    <%= link_to "预订", new_bulk_purchasing2_bulk_purchasing2_order_path(@bulk_purchasing2), class: 'pull-right btn btn-primary' %>
+    <%= link_to "预订", new_dashboard_bulk_purchasing2_bulk_purchasing2_order_path(@bulk_purchasing2), class: 'pull-right btn btn-primary' %>
   </div>
 </div>
 
 <h3>供货商信息：</h3>
 
-<%= render 'distributors/info', distributor: @bulk_purchasing2.distributor %>
+<%= render 'dashboard/distributors/info', distributor: @bulk_purchasing2.distributor %>

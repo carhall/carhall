@@ -12,7 +12,7 @@
       品牌：
       <% @products = @ad_templates.map(&:product).group_by(&:to_s).map{|k,v|[k, v.length]} %>
       <% @products.each do |product, count| %>
-        <%= link_to "#{product}(#{count}个)", ad_templates_path(product_type_id: @product_type_id, product_id: Category::Product[product]) %>
+        <%= link_to "#{product}(#{count}个)", dashboard_ad_templates_path(product_type_id: @product_type_id, product_id: Category::Product[product]) %>
       <% end %>
     </p>
 
@@ -24,7 +24,7 @@
       <%= t.attribute :product_type %>
       <%= t.attribute :price %>
       <%= t.action_link :show do |ad_template| %>
-        <%= icon_link_to "查看详情", 'icon-search', ad_template_path(ad_template) %>
+        <%= icon_link_to "查看详情", 'icon-search', dashboard_ad_template_path(ad_template) %>
       <% end %>
     <% end %>
 

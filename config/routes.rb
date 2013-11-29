@@ -201,19 +201,21 @@ Carhall::Application.routes.draw do
     end
   end
 
-  resources :bulk_purchasing2s do
-    resources :bulk_purchasing2_orders
+  namespace :dashboard do
+    resources :bulk_purchasing2s do
+      resources :bulk_purchasing2_orders
+    end
+    resources :purchase_requestings
+    resources :distributors do
+      get :manual_images, on: :member
+      post :make_friend, on: :member
+      delete :break, on: :member
+    end
+    resources :ad_templates do
+      post :buy, on: :member
+    end
+    resources :tutorials  
   end
-  resources :purchase_requestings
-  resources :distributors do
-    get :manual_images, on: :member
-    post :make_friend, on: :member
-    delete :break, on: :member
-  end
-  resources :ad_templates do
-    post :buy, on: :member
-  end
-  resources :tutorials  
 
   # For openfire
   resource :openfire, only: [] do

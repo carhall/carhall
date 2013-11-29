@@ -15,7 +15,7 @@
       品牌：
       <% @products = @details.map(&:products).flatten.group_by(&:to_s).map{|k,v|[k, v.length]} %>
       <% @products.each do |product, count| %>
-        <%= link_to "#{product}(#{count}个)", distributors_path(business_scope_id: @business_scope_id, product_id: Category::Product[product], main_area_id: @main_area_id) %>
+        <%= link_to "#{product}(#{count}个)", dashboard_distributors_path(business_scope_id: @business_scope_id, product_id: Category::Product[product], main_area_id: @main_area_id) %>
       <% end %>
     </p>
 
@@ -23,7 +23,7 @@
       所属省份：
       <% @main_areas = @distributors.map(&:main_area).group_by(&:to_s).map{|k,v|[k, v.length]} %>
       <% @main_areas.each do |main_area, count| %>
-        <%= link_to "#{main_area}(#{count}个)", distributors_path(business_scope_id: @business_scope_id, product_id: @product_id, main_area_id: Category::Area::Main[main_area]) %>
+        <%= link_to "#{main_area}(#{count}个)", dashboard_distributors_path(business_scope_id: @business_scope_id, product_id: @product_id, main_area_id: Category::Area::Main[main_area]) %>
       <% end %>
     </p>
 
@@ -33,7 +33,7 @@
       <%= t.attribute :products, join: '、', in: :detail %>
       <%= t.attribute :phone, in: :detail %>
       <%= t.action_link :show do |distributor| %>
-        <%= icon_link_to "查看详情", 'icon-search', distributor_path(distributor) %>
+        <%= icon_link_to "查看详情", 'icon-search', dashboard_distributor_path(distributor) %>
       <% end %>
     <% end %>
 

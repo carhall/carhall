@@ -1,4 +1,4 @@
-class BulkPurchasing2sController < ApplicationController
+class Dashboard::BulkPurchasing2sController < Dashboard::ApplicationController
   def index
     @bulk_purchasing2s = ::Tips::BulkPurchasing2.in_progress
     

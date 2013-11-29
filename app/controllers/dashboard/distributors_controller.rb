@@ -1,4 +1,4 @@
-class DistributorsController < ApplicationController
+class Dashboard::DistributorsController < Dashboard::ApplicationController
   def index
     @distributors = ::Accounts::Distributor.accepted
 

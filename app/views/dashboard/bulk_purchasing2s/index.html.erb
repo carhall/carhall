@@ -14,7 +14,7 @@
       所属省份：
       <% @main_areas = @bulk_purchasing2s.map(&:main_area).group_by(&:to_s).map{|k,v|[k, v.length]} %>
       <% @main_areas.each do |main_area, count| %>
-        <%= link_to "#{main_area}(#{count}个)", bulk_purchasing2s_path(bulk_purchasing_type_id: @bulk_purchasing_type_id, main_area_id: Category::Area::Main[main_area]) %>
+        <%= link_to "#{main_area}(#{count}个)", dashboard_bulk_purchasing2s_path(bulk_purchasing_type_id: @bulk_purchasing_type_id, main_area_id: Category::Area::Main[main_area]) %>
       <% end %>
     </p>
 
@@ -29,7 +29,7 @@
       <%= t.attribute :inventory %>
       <%= t.attribute :orders_count %>
       <%= t.action_link :show do |bulk_purchasing2| %>
-        <%= icon_link_to "查看详情", 'icon-search', bulk_purchasing2_path(bulk_purchasing2) %>
+        <%= icon_link_to "查看详情", 'icon-search', dashboard_bulk_purchasing2_path(bulk_purchasing2) %>
       <% end %>
     <% end %>
 

@@ -1,0 +1,8 @@
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>在线教程</strong></span></li>
+
+  <% Business::Tutorial::ProductType.all.each do |key, value| %>
+    <li<%= ' class="active"'.html_safe if @product_type_id == key %>><a href="<%= dashboard_tutorials_path(product_type_id: key) %>"><i class="icon-chevron-right"></i> <%= value %></a></li>
+  <% end %>
+
+</ul>
