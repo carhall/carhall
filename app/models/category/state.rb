@@ -1,12 +1,14 @@
 class Category::State < ActiveEnum::Base
-  States = %w(未完成 已完成 已取消)
+  States = %w(未完成 已完成 已取消 未启用)
   Lookup = {
     "未完成" => 1,
     "已完成" => 2,
     "已取消" => 3,
+    "未启用" => 4,
     "unfinished" => 1,
     "finished" => 2,
     "canceled" => 3,
+    "disabled" => 4,
   }
 
   value States

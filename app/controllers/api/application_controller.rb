@@ -9,6 +9,7 @@ class Api::ApplicationController < ActionController::Base
 
   include Api::RenderHelper
   include FilterHelper
+  alias_method :current_user, :current_account
 
   def self.set_resource_class klass, options = {}
     before_filter :set_parent

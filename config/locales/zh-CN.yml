@@ -9,6 +9,8 @@ zh-CN:
   not_enough_count: 订单使用次数不足。
   not_enough_balance: 您的余额不足。
   order_canceled: 订单已经被取消。
+  order_disabled: 订单尚未被启用。
+  order_enabled_can_not_cancel: 已启用订单不能被取消。
   create_success: 成功创建一个新的 %{model} “%{title}”。
   update_success_without_title: 成功创建一个新的 %{model} 。
   update_success: 成功更新 %{model} “%{title}” 信息。
@@ -24,6 +26,7 @@ zh-CN:
   unstick_success: 成功取消置顶 %{model} “%{title}”。
   rank_up_success: 成功升级 %{model} 帐号 “%{title}”。
   rank_down_success: 成功降级 %{model} 帐号 “%{title}”。
+  enable_success: 成功启用 会员卡 “%{title}”。
   mending: "%{dealer} %{brand} 保养专修"
   times:  " %{count} 份"
   to_many: 过多（最多为 %{count} 个）
@@ -51,6 +54,10 @@ zh-CN:
       tips/bulk_purchasing2_order: 团购订单
       tips/purchase_requesting: 求购
       tips/manual_image: 图册图片
+      tips/vip_card: 会员卡
+      tips/vip_card_item: 服务项目
+      tips/vip_card_order: 会员卡订单
+      tips/vip_card_order_item: 会员卡服务项目
       bcst/host: 主持人
       bcst/programme: 节目板块
       bcst/programme_list: 节目单
@@ -212,6 +219,24 @@ zh-CN:
         arrive_at: 到店时间
         mending_type: 预约项目
         description: 预约内容
+      tips/vip_card:
+        <<: *servicalbe
+        title: 会员卡名称
+        vip_price: 会员卡售价
+        description: 会员卡介绍
+        status: 状态
+      tips/vip_card_item: &vip_card_item
+        title: 服务项目名称
+        count: 总使用次数
+      tips/vip_card/vip_card_items:
+        <<: *vip_card_item
+      tips/vip_card_order:
+        vip_card_order_items: 会员卡服务项目
+      tips/vip_card_order/vip_card_order_items:
+        base: 会员卡服务项目
+      tips/vip_card_order_item:
+        <<: *vip_card_item
+        used_count: 已使用次数
       bcst/host:
         id: ID
         avatar: 头像

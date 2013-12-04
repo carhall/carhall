@@ -5,14 +5,12 @@ class Tips::Cleaning < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image2_method
   
-  enumerate :area, with: Category::Area
+  include Share::Statisticable
+
   enumerate :cleaning_type, with: %w(洗车 漆面养护 清洁护理 轮胎 换油 改装 钣喷)
   
   validates_presence_of :dealer
   validates_presence_of :title, :cleaning_type_id, :price, :vip_price
-  
-  include Share::Localizable
-  include Share::Statisticable
 
   def to_base_builder
     Jbuilder.new do |json|

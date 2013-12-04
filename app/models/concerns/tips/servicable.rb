@@ -4,6 +4,9 @@ module Tips::Servicable
   included do
     include Share::Dealerable
     include Share::Displayable
+    
+    include Share::Areable
+    include Share::Localizable
 
     default_scope { order('id DESC') }
     scope :ordered, -> { displayed.positioned }
@@ -35,7 +38,7 @@ module Tips::Servicable
         class_name: klass, foreign_key: :source_id
       
       has_many :reviews, through: :orders
-      has_many :recent_reviews, through: :recent_orders, class_name: 'Review'
+      has_many :recent_reviews, through: :recent_orders, class_name: 'Tips::Review'
 
     end
   end

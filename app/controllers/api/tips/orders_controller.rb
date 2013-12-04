@@ -25,7 +25,7 @@ class Api::Tips::OrdersController < Api::ApplicationController
   # PUT /api/resources/1/orders/1/use
   # PUT /api/resources/1/orders/1/use.json
   def use
-    @order.use params.fetch(:count, 1)
+    @order.use params.fetch(:count, 1).to_i
     render_update @order
   end
   
@@ -48,18 +48,36 @@ protected
     'mending_id' => ::Tips::Mending,
     'cleaning_id' => ::Tips::Cleaning,
     'bulk_purchasing_id' => ::Tips::BulkPurchasing,
+    'vip_card_id' => ::Tips::VipCard,
     'dealer_id' => ::Accounts::Dealer,
+  }
+  
+  OrderTypes = {
+    'mending_order' => ::Tips::MendingOrder,
+    'cleaning_order' => ::Tips::CleaningOrder,
+    'bulk_purchasing_order' => ::Tips::BulkPurchasingOrder,
+    'vip_card_order' => ::Tips::VipCardOrder,
   }
 
   def set_parent
-    params.each do |key, value|
-      if AccreditedKeys.keys.include? key
-        parent_class = AccreditedKeys[key]
-        @parent = parent_class.find(value).orders
-        return
+    if params[:filter] && params[:filter][:order_type]
+      klass = OrderTypes[params[:filter][:order_type]]
+      @parent = klass.all
+      @parent = @parent.includes(:detail) if klass == Tips::MendingOrder
+      @parent = @parent.includes(:vip_card_order_items) if klass == Tips::VipCardOrder
+    else
+      params.each do |key, value|
+        if AccreditedKeys.keys.include? key
+          klass = AccreditedKeys[key]
+          @parent = klass.find(value).orders
+          @parent = @parent.includes(:detail) if klass == Tips::Mending
+          @parent = @parent.includes(:vip_card_order_items) if klass == Tips::VipCard
+          return
+        end
       end
+      @parent = @current_user.orders
     end
-    @parent = @current_user.orders
+    @parent ||= ::Accounts::Account.all
   end
 
   def set_includes
@@ -68,17 +86,6 @@ protected
 
   def set_filter
     filter_parent :state
-    if params[:filter]
-      if params[:filter][:order_type]
-        order_type = {
-          'mending_order' => [Tips::MendingOrder],
-          'cleaning_order' => [Tips::CleaningOrder],
-          'bulk_purchasing_order' => [Tips::BulkPurchasingOrder],
-        }
-        sql_where_query = order_type[params[:filter][:order_type]].map{|k|"type = '#{k.name}'"}.join(' or ')
-        @parent = @parent.where(sql_where_query)
-      end
-    end
   end
 
   def set_order

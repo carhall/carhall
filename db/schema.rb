@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122024631) do
+ActiveRecord::Schema.define(version: 20131204062417) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -342,6 +342,23 @@ ActiveRecord::Schema.define(version: 20131122024631) do
     t.integer "distributor_info_id", null: false
   end
 
+  create_table "espinita_audits", force: true do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.text     "audited_changes"
+    t.string   "comment"
+    t.integer  "version"
+    t.string   "action"
+    t.string   "remote_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "espinita_audits", ["auditable_id", "auditable_type"], name: "index_espinita_audits_on_auditable_id_and_auditable_type", using: :btree
+  add_index "espinita_audits", ["user_id", "user_type"], name: "index_espinita_audits_on_user_id_and_user_type", using: :btree
+
   create_table "exposures", force: true do |t|
     t.integer  "user_id"
     t.integer  "at_user_id"
@@ -651,5 +668,49 @@ ActiveRecord::Schema.define(version: 20131122024631) do
   end
 
   add_index "user_device", ["user_id"], name: "index_user_device_on_user_id", using: :btree
+
+  create_table "vip_card_items", force: true do |t|
+    t.integer "vip_card_id"
+    t.string  "title"
+    t.float   "price"
+    t.integer "count"
+  end
+
+  add_index "vip_card_items", ["vip_card_id"], name: "index_vip_card_items_on_vip_card_id", using: :btree
+
+  create_table "vip_card_order_items", force: true do |t|
+    t.integer "vip_card_order_id"
+    t.integer "source_id"
+    t.string  "title"
+    t.integer "state_id",          default: 1
+    t.float   "cost"
+    t.integer "count",             default: 0
+    t.integer "used_count",        default: 0
+  end
+
+  create_table "vip_cards", force: true do |t|
+    t.integer  "dealer_id"
+    t.integer  "location_id"
+    t.integer  "area_id"
+    t.string   "title"
+    t.float    "price"
+    t.float    "vip_price"
+    t.text     "description"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "position",           default: 0
+    t.boolean  "display",            default: true
+    t.float    "total_cost"
+    t.integer  "orders_count",       default: 0
+    t.integer  "reviews_count",      default: 0
+    t.integer  "stars_count",        default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vip_cards", ["dealer_id"], name: "index_vip_cards_on_dealer_id", using: :btree
+  add_index "vip_cards", ["location_id"], name: "index_vip_cards_on_location_id", using: :btree
 
 end

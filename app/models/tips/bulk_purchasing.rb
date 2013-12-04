@@ -5,9 +5,6 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image2_method
 
-  enumerate :area, with: Category::Area
-  
-  include Share::Localizable
   include Share::Statisticable
   
   validates_presence_of :dealer

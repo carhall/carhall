@@ -116,7 +116,6 @@ class ApplicationController < ActionController::Base
   end
 
   def download_apk
-    p params[:version]
     apk_latest = ::Business::ClientVersion.apk_latest
     if apk_latest
       redirect_to apk_latest.download_url

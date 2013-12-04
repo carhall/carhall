@@ -1,0 +1,34 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%= @vip_card.title %> <small><a href="<%= edit_tips_vip_card_path(@vip_card) %>">编辑</a></small></h3>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span3">
+        <img src="<%= @vip_card.image.url(:medium) %>">
+      </div>
+      <div class="span9">
+        <%= show_for @vip_card do |s| %>
+          <%= s.attribute :vip_price %>
+          <%= s.attribute :description %>
+
+          <%= s.attribute "服务项目列表" do end %>
+          <dl>
+            <%= index_for @vip_card.vip_card_items do |t| %>
+              <%= t.attribute :title %>
+              <%= t.attribute :count %>
+            <% end %>
+          </dl>
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

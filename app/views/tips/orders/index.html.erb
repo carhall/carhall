@@ -10,7 +10,7 @@
 
     <% @orders = @orders.includes(:user) %>
 
-    <%= render 'share/alert', message: '您还没有收到保养专修订单！' if @orders.empty? %>
+    <%= render 'share/alert', message: '您还没有收到任何订单！' if @orders.empty? %>
 
     <%= index_for @orders, class: :datatable do |t| %>
       <%= t.attribute :id %>

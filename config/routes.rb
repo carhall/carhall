@@ -90,11 +90,21 @@ Carhall::Application.routes.draw do
       resources :orders
     end
 
+    resources :vip_cards do
+      put :disable, on: :member
+      put :reenable, on: :member
+
+      resources :orders
+    end
+
     resources :orders do
       get :mending, on: :collection
       get :cleaning, on: :collection
       get :bulk_purchasing, on: :collection
       get :bulk_purchasing2, on: :collection
+      get :vip_card, on: :collection
+
+      put :enable, on: :member
     end
 
     resources :purchase_requestings do
@@ -353,6 +363,8 @@ Carhall::Application.routes.draw do
           get :hot, on: :collection
         end
 
+        resources :vip_cards, only: [:index]
+
         resources :orders, only: [:index, :show]
         resources :reviews, only: [:index, :show]
       end
@@ -418,11 +430,23 @@ Carhall::Application.routes.draw do
           post :review, on: :member
           delete :cancel, on: :member
         end
+
+        resources :reviews, only: [:index, :show]
+      end
         
+      resources :vip_cards, only: [:index, :show] do
+        get :detail, on: :member
+
+        resources :orders, only: [:index, :show, :create] do
+          put :finish, on: :member
+          post :review, on: :member
+          delete :cancel, on: :member
+        end
+
         resources :reviews, only: [:index, :show]
       end
 
-      resources :orders, only: [:index, :show, :create] do
+      resources :orders, only: [:index, :show] do
         put :finish, on: :member
         put "use/:count", action: :use, on: :member
         put :use, on: :member
@@ -430,13 +454,13 @@ Carhall::Application.routes.draw do
         delete :cancel, on: :member
       end
       
-      resources :mending_orders, only: [:index, :show, :create] do
+      resources :mending_orders, only: [:index, :show] do
         put :finish, on: :member
         post :review, on: :member
         delete :cancel, on: :member
       end
       
-      resources :cleaning_orders, only: [:index, :show, :create] do
+      resources :cleaning_orders, only: [:index, :show] do
         put :finish, on: :member
         put "use/:count", action: :use, on: :member
         put :use, on: :member
@@ -444,8 +468,16 @@ Carhall::Application.routes.draw do
         delete :cancel, on: :member
       end
       
-      resources :bulk_purchasing_orders, only: [:index, :show, :create] do
+      resources :bulk_purchasing_orders, only: [:index, :show] do
         put :finish, on: :member
+        post :review, on: :member
+        delete :cancel, on: :member
+      end
+
+      resources :vip_card_orders, only: [:index, :show] do
+        put :finish, on: :member
+        put "use/:count", action: :use, on: :member
+        put :use, on: :member
         post :review, on: :member
         delete :cancel, on: :member
       end

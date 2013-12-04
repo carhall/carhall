@@ -4,6 +4,9 @@ class Tips::BulkPurchasing2 < ActiveRecord::Base
 
   default_scope { order('id DESC') }
   
+  include Share::Areable
+  include Share::Localizable
+  
   before_save do
     self.area_id = distributor.area_id
     self.location_id = distributor.location_id
@@ -16,9 +19,6 @@ class Tips::BulkPurchasing2 < ActiveRecord::Base
   extend Share::ImageAttachments
   define_image_method
 
-  include Share::Areable
-  include Share::Localizable
-  
   validates_presence_of :distributor
   validates_presence_of :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price, :inventory
 

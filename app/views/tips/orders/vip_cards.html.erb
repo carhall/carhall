@@ -1,0 +1,30 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>会员卡订单列表 <small></small></h3>
+    </div>
+
+    <% @orders = @orders.includes(:user) %>
+
+    <%= render 'share/alert', message: '您还没有收到会员卡订单！' if @orders.empty? %>
+
+    <%= index_for @orders, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.association :user, using: :username %>
+      <%= t.attribute :title %>
+      <%= t.attribute :cost %>
+      <%= t.attribute :state %>
+      <%= t.action_link :show do |vip_card_order| %>
+        <%= icon_link_to "显示详情", 'icon-search', tips_order_path(vip_card_order) %>
+      <% end %>
+      <%= t.action_link :enable do |vip_card_order| %>
+        <%= icon_link_to "启用", 'icon-ok', enable_tips_order_path(vip_card_order), method: :put, data: { confirm: '您确认要启用这张会员卡？' } if vip_card_order.disabled? %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

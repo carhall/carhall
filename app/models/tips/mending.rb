@@ -2,6 +2,8 @@ class Tips::Mending < ActiveRecord::Base
   include Tips::Servicable
   set_order_class Tips::MendingOrder
   
+  include Share::Statisticable
+  
   serialize :discount, Hash
 
   serialize :total_sales, Hash
@@ -18,14 +20,9 @@ class Tips::Mending < ActiveRecord::Base
     where('brand_ids LIKE \'%- ?\n%\'', id)
   }
 
-  enumerate :area, with: Category::Area
-
   validates_presence_of :dealer
   validates_length_of :brand_ids, :maximum => 5, :message => I18n.t(".to_many")
   
-  include Share::Localizable
-  include Share::Statisticable
-
   def to_without_dealer_builder
     Jbuilder.new do |json|
       json.extract! self, :id, :area_id, :area, :brand_ids, :brands, 

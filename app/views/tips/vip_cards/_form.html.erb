@@ -1,0 +1,39 @@
+<%= simple_form_for(@vip_card, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @vip_card %>
+
+  <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
+  <%= f.input :image do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @vip_card.image.url(:medium) %>" /></div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+      <div>
+        <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="tips_vip_card[image]" /></span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.input :vip_price %>
+  <%#= f.input :price, hint: '填数字即可，单位：元' %>
+
+  <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
+  
+  <hr>
+  <div class="control-group">
+    <label class="control-label"><strong>服务项目信息</strong></label>
+  </div>
+
+  <div class="vip_card_items">
+    <%= f.fields_for :vip_card_items do |ff| %>
+      <%= render 'vip_card_item_fields', f: ff %>
+    <% end %>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= link_to_add_association '添加服务项目', f, :vip_card_items, class: 'btn' %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>

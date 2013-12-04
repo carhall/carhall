@@ -3,8 +3,11 @@ module Tips::Statable
 
   included do
     validates_each :state_id do |record, attr, value|
-      if record.state_id_was == Category::State[:canceled]
+      if record.canceled?
         record.errors.add(:base, I18n.t('order_canceled'))
+      end
+      if record.disabled?
+        record.errors.add(:base, I18n.t('order_disabled'))
       end
     end
 
@@ -29,12 +32,22 @@ module Tips::Statable
     self.state = :unfinished
   end
 
+  def disable
+    self.state = :disabled
+  end
+
+  alias_method :enable, :reset
+
   def canceled?
-    self.state_id == Category::State[:canceled]
+    self.state_id == Category::State[:canceled] or self.state_id_was == Category::State[:canceled]
   end
 
   def finished?
     self.state_id == Category::State[:finished]
+  end
+
+  def disabled?
+    self.state_id == Category::State[:disabled] and self.state_id_was == Category::State[:disabled]
   end
 
   def use count = 1
@@ -52,6 +65,9 @@ module Tips::Statable
   extend Share::Exclamation
   define_exclamation_and_method :cancel
   define_exclamation_and_method :finish
+  define_exclamation_and_method :use
   define_exclamation_and_method :reset
+  define_exclamation_and_method :enable
+  define_exclamation_and_method :disable
 
 end

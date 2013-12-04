@@ -4,21 +4,19 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   set_resource_class ::Accounts::Account, detail: true
   before_filter :search_parent
 
-  def set_parent
-    if params[:filter]
-      if params[:filter][:user_type]
-        user_type = {
-          'public_account' => Accounts::PublicAccount,
-          'admin' => Accounts::Admin,
-          'dealer' => Accounts::Dealer,
-          'provider' => Accounts::Provider,
-          'user' => Accounts::User,
-        }
-        klass = user_type[params[:filter][:user_type]]
-        @parent = klass.all
-        @parent = @parent.where(display: true) if klass <= Accounts::PublicAccount
+  UserTypes = {
+    'public_account' => ::Accounts::PublicAccount,
+    'admin' => ::Accounts::Admin,
+    'dealer' => ::Accounts::Dealer,
+    'provider' => ::Accounts::Provider,
+    'user' => ::Accounts::User,
+  }
 
-      end
+  def set_parent
+    if params[:filter] && params[:filter][:user_type]
+      klass = UserTypes[params[:filter][:user_type]]
+      @parent = klass.all
+      @parent = @parent.where(display: true) if klass <= Accounts::PublicAccount
     end
     @parent ||= ::Accounts::Account.all
   end
