@@ -221,6 +221,7 @@ zh-CN:
         description: 预约内容
       tips/vip_card:
         <<: *servicalbe
+        orders_count: 订单数
         title: 会员卡名称
         vip_price: 会员卡售价
         description: 会员卡介绍

@@ -21,6 +21,10 @@
       <%= t.attribute :title %>
       <%= t.attribute :vip_price %>
       <%= t.attribute :status %>
+      <%= t.attribute :orders_count %>
+      <%= t.action_link :orders do |vip_card| %>
+        <%= icon_link_to "浏览订单", 'icon-book', tips_vip_card_orders_path(vip_card) %>
+      <% end %>
       <%= t.actions :show, :edit %>
       <%= t.action_link :destroy do |vip_card| %>
         <% if vip_card.displayed? %>

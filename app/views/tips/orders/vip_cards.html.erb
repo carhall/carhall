@@ -5,7 +5,11 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3>会员卡订单列表 <small></small></h3>
+      <% if @vip_card %>
+        <h3>会员卡 “<%= @vip_card.title %>” 订单列表 <small></small></h3>
+      <% else %>
+        <h3>会员卡订单列表 <small></small></h3>
+      <% end %>
     </div>
 
     <% @orders = @orders.includes(:user) %>
