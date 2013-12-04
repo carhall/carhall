@@ -8,7 +8,7 @@
       <h3>求购项目管理 <small></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '您还没有创建任何求购！' if @vip_cards.empty? %>
+    <%= render 'share/alert', message: '您还没有创建任何会员卡！' if @vip_cards.empty? %>
 
     <% @vip_cards = @vip_cards.includes(:dealer) if @user.admin? %>
 
