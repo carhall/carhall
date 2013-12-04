@@ -113,8 +113,8 @@ GET查询订单信息时，可以在URI中使用附加字段filter[state_id]作�
 
 > 例如，查询未消费会员卡订单信息：
 > 
->    GET /api/tips/vip_card_orders?filter[state_id]=1  
->    或  
+>     GET /api/tips/vip_card_orders?filter[state_id]=1  
+>     或  
 >     GET /api/tips/vip_card_orders?filter[state]=unfinished  
 > 
 
