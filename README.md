@@ -261,7 +261,7 @@ PUT    | /api/current_user/password        | 修改当前用户密码
 GET查询服务商时，可以在URI中使用附加字段filter[area_id]、filter[dealer_type_id]、filter[business_scope_id]和filter[specific_service_id]作为条件，来查询指定地区、服务商类型、业务范围和专项服务类型的服务商信息  
 > 例如，查询4S店服务商信息：
 > 
->    GET /api/dealers?filter[dealer_type_id]=4
+>     GET /api/dealers?filter[dealer_type_id]=4
 > 
 
 GET查询用户时，即以下四个接口，可以在URI中使用附加字段query作为条件，来根据用户名进行查询  
@@ -275,7 +275,7 @@ GET    | /api/providers                    | 查询所有媒体信息
 
 > 例如，查询用户名为“你好”的媒体信息：
 > 
->    GET /api/providers?query=你好
+>     GET /api/providers?query=你好
 > 
 
 如果使用/api/accounts接口查询时，还可以附加一个字段filter[user_type]过滤用户类型  
@@ -283,7 +283,7 @@ GET    | /api/providers                    | 查询所有媒体信息
 admin（管理员）, user（车主）, dealer（服务商）, provider（媒体）, public_account（公众号，目前就是只服务商和媒体）  
 > 例如，查询用户名为“你好”的公众号信息：
 > 
->    GET /api/accounts?query=你好&filter[user_type]=public_account
+>     GET /api/accounts?query=你好&filter[user_type]=public_account
 > 
 
 用户登录使用data[mobile]和data[password]进行登录，返回AuthToken和用户信息  
@@ -751,9 +751,9 @@ GET查询订单信息时，可以在URI中使用附加字段filter[state_id]作�
 
 > 例如，查询未消费洗车美容订单信息：
 > 
->    GET /api/cleanings/1/orders?filter[state_id]=1
->    或
->    GET /api/cleanings/1/orders?filter[state]=unfinished
+>     GET /api/cleanings/1/orders?filter[state_id]=1
+>     或
+>     GET /api/cleanings/1/orders?filter[state]=unfinished
 > 
 
 如果使用/api/current_user/orders接口查询时，还可以附加一个字段filter[order_type]过滤订单类型  
@@ -761,7 +761,7 @@ GET查询订单信息时，可以在URI中使用附加字段filter[state_id]作�
 mending_order（保养专修订单）, cleaning_order（洗车美容订单）, bulk_purchasing_order（团购订单）
 > 例如，查询当前车主所有未完成的保养专修订单信息：
 > 
->    GET /api/current_user?filter[order_type]=mending_order&filter[state]=unfinished
+>     GET /api/current_user?filter[order_type]=mending_order&filter[state]=unfinished
 > 
 
 
@@ -961,10 +961,10 @@ GET    | /api/constants                    | 查询所有常量
 GET    | /api/constants/:constant_name     | 查询指定常量
 
 其中，constant_name即为上表所列的常数名，小写
-例如：获取所有的Area
-
-    GET /api/constants/areas
-
+> 例如：获取所有的Area
+> 
+>     GET /api/constants/areas
+> 
 
 
 Area对应表
