@@ -60,6 +60,72 @@ GET、PUT和DELETE都可以使用POST模拟，需要额外添加_method=get/put/
 ~~或者使用HTTP头，Accept: application/json，效果相同~~  
 目前应该已经解决了API打印HTML的问题，因此不需要再使用以上手段  
 
+
+VipCard 会员卡
+==========
+字段
+----------
+字段名称                 | 详细描述                    | 限制条件
+------------------------|----------------------------|--------------------------
+title                   |                            | 
+price                   | 原价                       |
+vip_price               | 会员价                      |
+description             |                            |
+image                   |                            |
+orders_count            | 洗车美容订单数               |
+stars                   | 评价等级                    | 浮点型，0-5，只读
+items                   | 服务项目                    | 包含id title count三项
+
+API
+----------
+Method | URI                                        | 说明
+-------|--------------------------------------------|---------------------------
+GET    | /api/tips/vip_cards                        | 查询所有会员卡信息（默认排序）  
+GET    | /api/tips/vip_cards/:id                    | 查询指定会员卡信息  
+GET    | /api/tips/vip_cards/:id/detail             | 查询指定会员卡详细信息  
+GET    | /api/dealers/:dealer_id/vip_cards          | 查询指定服务商的会员卡信息（默认排序）  
+
+
+VipCardOrder 会员卡订单
+==========
+字段
+----------
+字段名称         | 详细描述                    | 限制条件
+----------------|----------------------------|----------------------------------
+title           |                            | 只读，由服务器端生成，例如：“美容洗车 1 份”
+cost            | 订单总价                    | 只读，由服务器端计算得出
+state_id        | 订单状态ID                  | 1-4
+state           | 订单状态                    | unfinished（未消费）, finished, canceled, disabled（未启用）其中之一
+items           | 服务项目                    | 包含id title count used_count四项
+
+API
+----------
+Method | URI                                                               | 说明
+-------|-------------------------------------------------------------------|----
+GET    | /api/tips/vip_cards/:vip_card_id/orders                           | 查询指定会员卡的所有订单  
+GET    | /api/tips/vip_card_orders                                         | 查询当前车主的所有会员卡订单  
+GET    | /api/tips/vip_card_orders/:id                                     | 查询指定会员卡订单  
+PUT    | /api/tips/vip_card_orders/:id/use                                 | 标记指定会员卡订单已使用  
+PUT    | /api/tips/vip_card_orders/:id/finish                              | 标记指定会员卡订单已完成  
+DELETE | /api/tips/vip_card_orders/:id/cancel                              | 取消指定会员卡订单  
+
+GET查询订单信息时，可以在URI中使用附加字段filter[state_id]作为条件，来查询指定状态的订单信息  
+
+> 例如，查询未消费会员卡订单信息：
+> 
+>    GET /api/tips/vip_card_orders?filter[state_id]=1
+>    或
+>    GET /api/tips/vip_card_orders?filter[state]=unfinished
+> 
+
+> 标记指定会员卡订单已使用  
+> 
+>    PUT /api/tips/vip_card_orders/:id/use
+>    参数
+>    data[item_id]      1  // item_id为会员卡订单中items中每一项的id
+>    data[count]        1  // 使用次数
+
+
 Advert 广告位
 ==========
 字段
