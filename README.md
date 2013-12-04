@@ -115,15 +115,15 @@ GET查询订单信息时，可以在URI中使用附加字段filter[state_id]作�
 > 
 >    GET /api/tips/vip_card_orders?filter[state_id]=1  
 >    或  
->    GET /api/tips/vip_card_orders?filter[state]=unfinished  
+>     GET /api/tips/vip_card_orders?filter[state]=unfinished  
 > 
 
 > 标记指定会员卡订单已使用：  
 > 
->    PUT /api/tips/vip_card_orders/:id/use  
->    参数  
->    data[item_id]      1  // item_id为会员卡订单中items中每一项的id  
->    data[count]        1  // 使用次数  
+>     PUT /api/tips/vip_card_orders/:id/use  
+>     参数  
+>     data[item_id]      1  // item_id为会员卡订单中items中每一项的id  
+>     data[count]        1  // 使用次数  
 > 
 
 
