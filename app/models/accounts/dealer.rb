@@ -87,9 +87,13 @@ class Accounts::Dealer < Accounts::PublicAccount
     Share::Statisticable.goal_attainment bulk_purchasing_orders
   end
 
+  def vip_card_goal_attainment
+    Share::Statisticable.goal_attainment vip_card_orders
+  end
+
   extend Share::MethodCache
   define_cached_methods :mending_goal_attainment, :cleaning_goal_attainment, 
-    :bulk_purchasing_goal_attainment, expires_in: 1.hour
+    :bulk_purchasing_goal_attainment, :vip_card_goal_attainment, expires_in: 1.hour
 
   def to_detail_without_statistic_builder
     json = to_base_builder
@@ -110,6 +114,7 @@ class Accounts::Dealer < Accounts::PublicAccount
       json.attributes!.merge! detail.to_base_builder.attributes!
       json.extract! self, :area_id, :area, :stars, :mending_goal_attainment,
         :cleaning_goal_attainment, :bulk_purchasing_goal_attainment,
+        :vip_card_goal_attainment,
         :orders_count
       if location
         json.latitude location.latitude
