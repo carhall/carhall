@@ -3,10 +3,10 @@ module Tips::Statable
 
   included do
     validates_each :state_id do |record, attr, value|
-      if record.canceled?
+      if record.state_id_was == Category::State[:canceled]
         record.errors.add(:base, I18n.t('order_canceled'))
       end
-      if record.disabled?
+      if record.state_id_was == Category::State[:disabled] && record.state_id == Category::State[:disabled]
         record.errors.add(:base, I18n.t('order_disabled'))
       end
     end
@@ -39,7 +39,7 @@ module Tips::Statable
   alias_method :enable, :reset
 
   def canceled?
-    self.state_id == Category::State[:canceled] or self.state_id_was == Category::State[:canceled]
+    self.state_id == Category::State[:canceled]
   end
 
   def finished?
@@ -47,7 +47,7 @@ module Tips::Statable
   end
 
   def disabled?
-    self.state_id == Category::State[:disabled] and self.state_id_was == Category::State[:disabled]
+    self.state_id == Category::State[:disabled]
   end
 
   def use count = 1
