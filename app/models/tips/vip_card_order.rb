@@ -2,7 +2,7 @@ class Tips::VipCardOrder < Tips::Order
   belongs_to :source, class_name: 'VipCard', counter_cache: :orders_count
   has_many :vip_card_order_items, class_name: 'VipCardOrderItem', autosave: true
 
-  # validates_associated :vip_card_order_items, message: I18n.t('.not_enough_count')
+  has_many :reviews, foreign_key: :order_id
 
   def set_title
     source.title
@@ -22,23 +22,33 @@ class Tips::VipCardOrder < Tips::Order
     end
   end
 
+
   def to_base_builder
     json = super
     json.items(vip_card_order_items.map{|i|i.to_base_builder.attributes!})
     json
   end
 
+  def create_review item_id, review_params
+    item = vip_card_order_items.find(item_id)
+    item.has_review = true
+    review = reviews.create review_params
+    item.save if review.valid?
+    review
+  end
+
   def use item_id, count = 1
     raise ArgumentError('negative count') if count < 0
-    return if self.disabled?
-    self.vip_card_order_items.detect do |item|
-      item.use count if item.id == item_id.to_i
+    return if disabled?
+    i = vip_card_order_items.find(item_id)
+    vip_card_order_items.detect do |item|
+      item.use count if item == i
     end
-    finish if self.has_finished?
+    finish if has_finished?
   end
 
   def has_finished?
-    not self.vip_card_order_items.detect do |item|
+    not vip_card_order_items.detect do |item|
       not item.finished?
     end
   end

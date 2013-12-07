@@ -25,7 +25,7 @@ class Tips::VipCardOrderItem < ActiveRecord::Base
 
   def to_base_builder
     Jbuilder.new do |json|
-      json.extract! self, :id, :title, :state_id, :state, :count, :used_count
+      json.extract! self, :id, :title, :state_id, :state, :count, :used_count, :has_review
     end
   end
 
