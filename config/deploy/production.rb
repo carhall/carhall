@@ -15,7 +15,7 @@ set :stage, :production
 # definition into the server list. The second argument
 # something that quacks like a has can be used to set
 # extended properties on the server.
-server '115.28.13.212', user: 'root', roles: %w{web app}
+server '115.28.13.212', user: 'root', roles: %w{web app db}
 set :rails_env, :production
 
 # you can set custom ssh options

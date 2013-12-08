@@ -9,6 +9,7 @@ class Category::State < ActiveEnum::Base
     "finished" => 2,
     "canceled" => 3,
     "disabled" => 4,
+    "enabled" => [1, 2],
   }
 
   value States
