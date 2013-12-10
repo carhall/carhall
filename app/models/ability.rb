@@ -45,7 +45,6 @@ class Ability
 
       can :read, Tips
       if user.accepted?
-        can :manage, Tips::PurchaseRequesting, dealer: user
         can :manage, Tips::Cleaning, dealer: user
         can :manage, Tips::Mending, dealer: user
         can :manage, Tips::Activity, dealer: user
@@ -57,6 +56,8 @@ class Ability
 
         can :enable, Tips::Order, dealer: user
       end
+      
+      can :manage, Tips::PurchaseRequesting, dealer: user
       
       cannot :set_displayable, :all
     when :distributor
