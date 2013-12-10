@@ -5,7 +5,7 @@ class Tips::VipCardsController < Tips::ApplicationController
   alias_method :disable, :hide
 
   def tips_vip_card_params
-    params.require(:tips_vip_card).permit(:title, :vip_price, :description, :image,
+    params.require(:tips_vip_card).permit(:title, :vip_price, :price, :description, :image,
       vip_card_items_attributes: [:id, :_destroy, :title, :count])
   end
 
