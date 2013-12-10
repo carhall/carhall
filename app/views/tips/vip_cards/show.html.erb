@@ -15,6 +15,7 @@
       <div class="span9">
         <%= show_for @vip_card do |s| %>
           <%= s.attribute :vip_price %>
+          <%= s.attribute :price %>
           <%= s.attribute :description %>
 
           <%= s.attribute "服务项目列表" do end %>
