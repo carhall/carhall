@@ -1,6 +1,7 @@
 class Api::Tips::ReviewsController < Api::ApplicationController
   before_filter :set_current_user
   set_resource_class ::Tips::Review
+  before_filter :set_includes, only: :index
 
   protected
 
@@ -8,6 +9,7 @@ class Api::Tips::ReviewsController < Api::ApplicationController
     'mending_id' => ::Tips::Mending,
     'cleaning_id' => ::Tips::Cleaning,
     'bulk_purchasing_id' => ::Tips::BulkPurchasing,
+    'vip_card_id' => ::Tips::VipCard,
     'dealer_id' => ::Accounts::Dealer,
   }
 
@@ -21,4 +23,9 @@ class Api::Tips::ReviewsController < Api::ApplicationController
     end
     @parent = @current_user.reviews
   end
+  
+  def set_includes
+    @parent = @parent.includes(order: [:user])
+  end
+
 end
