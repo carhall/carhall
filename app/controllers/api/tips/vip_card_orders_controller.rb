@@ -5,12 +5,14 @@ class Api::Tips::VipCardOrdersController < Api::Tips::OrdersController
   end
 
   def use
-    @order.use params[:data][:item_id], params[:data].fetch(:count, 1).to_i
+    @order.use params.require(:data).require(:item_id), params.require(:data).fetch(:count, 1).to_i
     render_update @order
   end
 
   def review
-    render_create @order.create_review params[:data][:item_id], review_params
+    render_create @order.build_review params.require(:data).require(:item_id), review_params
+  rescue ActiveRecord::RecordNotSaved
+    render_error I18n.t('review_exist'), :unprocessable_entity
   end
 
 end

@@ -24,9 +24,11 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   # POST /api/accounts/login
   # POST /api/accounts/login.json
   def login
-    @user = ::Accounts::Account.find_for_database_authentication(mobile: params[:data][:mobile])
+    @user = ::Accounts::Account.find_for_database_authentication(mobile: 
+      params.require(:data).require(:mobile))
 
-    if @user && @user.valid_password?(params[:data][:password])
+    if @user && @user.valid_password?(
+      params.require(:data).require(:password))
       sign_in(@user)
       @user.reset_authentication_token!  # make sure the user has a token generated
       render_create_success @user, :with_token
@@ -45,7 +47,8 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   end
 
   def confirm
-    @user = ::Accounts::Account.confirm_by_token(params[:data][:confirmation_token])
+    @user = ::Accounts::Account.confirm_by_token(
+      params.require(:data).require(:confirmation_token))
 
     if @user.errors.empty?
       render_update_success @user
@@ -55,7 +58,8 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   end
 
   def resend_confirm
-    @user = ::Accounts::Account.send_confirmation_instructions(mobile: params[:data][:mobile])
+    @user = ::Accounts::Account.send_confirmation_instructions(mobile: 
+      params.require(:data).require(:mobile))
     
     if @user.errors.empty?
       render_update_success @user
@@ -65,7 +69,8 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   end
 
   def password
-    @user = ::Accounts::Account.reset_password_by_token(params[:data].permit(:reset_password_token, :password))
+    @user = ::Accounts::Account.reset_password_by_token(
+      paramsparams.require(:data).permit(:reset_password_token, :password))
 
     if @user.errors.empty?
       render_update_success @user
@@ -75,7 +80,8 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
   end
 
   def send_password
-    @user = ::Accounts::Account.send_reset_password_instructions(mobile: params[:data][:mobile])
+    @user = ::Accounts::Account.send_reset_password_instructions(
+      mobile: params.require(:data).require(:mobile))
     
     if @user.errors.empty?
       render_update_success @user

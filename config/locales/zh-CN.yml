@@ -1,4 +1,8 @@
 zh-CN:
+  exception:
+    default: 服务器内部错误。
+    bad_request: 
+      default: 上传参数无效。
   active_enum:
     unknown: 未知
   access_denied: 您没有权限访问此页面。
@@ -8,6 +12,7 @@ zh-CN:
   can_not_add_self: 您不能把自己加为好友。
   not_enough_count: 订单使用次数不足。
   not_enough_balance: 您的余额不足。
+  review_exist: 您已经评价过该订单。
   order_canceled: 订单已经被取消。
   order_disabled: 订单尚未被启用。
   order_enabled_can_not_cancel: 已启用订单不能被取消。
@@ -238,6 +243,9 @@ zh-CN:
       tips/vip_card_order_item:
         <<: *vip_card_item
         used_count: 已使用次数
+      tips/review:
+        stars: 评分
+        content: 评价内容
       bcst/host:
         id: ID
         avatar: 头像

@@ -9,7 +9,8 @@ class Tips::VipCard < ActiveRecord::Base
 
   has_many :vip_card_items, class_name: 'Tips::VipCardItem'
   accepts_nested_attributes_for :vip_card_items, allow_destroy: true
-  
+  alias_attribute :items, :vip_card_items
+
   validates_presence_of :title, :vip_price
 
   def status
@@ -27,7 +28,7 @@ class Tips::VipCard < ActiveRecord::Base
 
   def to_detail_builder
     json = to_base_builder
-    json.items(vip_card_items.map{|i|i.to_base_builder.attributes!})
+    json.items(items.map{|i|i.to_base_builder.attributes!})
     json.detail do
       json.extract! self, :goal_attainment
       json.last_3_orders(orders.includes(:user).reorder('id DESC').first(3).map{|o|o.to_base_builder.attributes!})

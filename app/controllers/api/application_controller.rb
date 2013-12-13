@@ -38,22 +38,50 @@ class Api::ApplicationController < ActionController::Base
     
   end
 
-  rescue_from Exception do |exception|
-    exception_message = exception.message
-    exception_name = exception.class.name
-    rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[exception_name]
-    exception_message = I18n.t "#{exception_name.underscore}", 
-      default: I18n.t(:description, default: exception_message),
-      scope: [:exception, rescue_response], 
-      exception_name: exception_name, 
-      exception_message: exception_message
-    render_error exception_message, rescue_response, {
-      error_code: exception_name.demodulize.underscore, 
-      backtrace: exception.backtrace[0..2],
-    }
-    Rails.logger.error <<-EOE
-API Error: #{exception_name}: #{exception_message}
-  #{exception.backtrace.select{|b|b=~/carhall/}.join("\n  ")}
+  if Rails.env == "development"
+    rescue_from Exception do |exception|
+      exception_message = exception.message
+      exception_name = exception.class.name
+      rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[exception_name]
+      backtrace = exception.backtrace.select{|b|b=~/carhall/}
+      default_message = I18n.t :default, 
+        scope: [:exception, rescue_response], 
+        default: I18n.t(:default, scope: :exception)
+      i18n_message = I18n.t "#{exception_name.underscore}", 
+        default: default_message,
+        scope: [:exception, rescue_response], 
+        exception_name: exception_name, 
+        exception_message: exception_message
+      render_error i18n_message, rescue_response, {
+        exception_name: exception_name.demodulize.underscore, 
+        exception_message: exception_message,
+        backtrace: backtrace,
+      }
+      log_error exception, exception_name, exception_message, backtrace
+    end
+  elsif Rails.env == "production"
+    rescue_from Exception do |exception|
+      exception_message = exception.message
+      exception_name = exception.class.name
+      rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[exception_name]
+      default_message = I18n.t :default, 
+        scope: [:exception, rescue_response], 
+        default: I18n.t(:default, scope: :exception)
+      i18n_message = I18n.t "#{exception_name.underscore}", 
+        default: default_message,
+        scope: [:exception, rescue_response], 
+        exception_name: exception_name, 
+        exception_message: exception_message
+      render_error i18n_message, rescue_response
+      log_error exception, exception_name, exception_message
+    end
+  end
+
+  def log_error exception, exception_name=nil, exception_message=nil, backtrace=nil
+      Rails.logger.error <<-EOE
+
+API Error: #{exception_name||exception.class.name}: #{exception_message||exception.message}
+  #{(backtrace||exception.backtrace.select{|b|b=~/carhall/}).join("\n  ")}
 EOE
   end
 

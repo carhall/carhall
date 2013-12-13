@@ -39,7 +39,9 @@ class Api::Tips::OrdersController < Api::ApplicationController
   # POST /api/resources/1/orders/1/review
   # POST /api/resources/1/orders/1/review.json
   def review
-    render_create @order.create_review review_params
+    render_create @order.build_review review_params
+  rescue ActiveRecord::RecordNotSaved
+    render_error I18n.t('review_exist'), :unprocessable_entity
   end
 
 protected
