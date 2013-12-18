@@ -1,6 +1,7 @@
 <%= show_for @user do |s| %>
   <%= s.attribute :username %>
   <%= s.attribute :user_type %>
+  <%= s.attribute :rank %>
   <%= s.attribute :mobile %>
   <%= s.attribute :dealer_type, in: :detail %>
   <%= s.attribute :specific_service, in: :detail %>

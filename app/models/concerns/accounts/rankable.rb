@@ -2,7 +2,7 @@ module Accounts::Rankable
   extend  ActiveSupport::Concern
 
   included do
-    enumerate :rank, with: %w(普通会员 托管优护会员 白金会员)
+    enumerate :rank, with: %w(体验会员 普通会员 金卡会员 钻石会员)
     scope :ranked, -> { order('rank_id DESC') } 
   end
 
@@ -15,7 +15,7 @@ module Accounts::Rankable
   end
 
   def rank_up?
-    rank_id < 3
+    rank_id < 4
   end
 
   def rank_down?

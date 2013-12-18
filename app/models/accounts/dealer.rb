@@ -56,8 +56,23 @@ class Accounts::Dealer < Accounts::PublicAccount
     end
   end
 
+  RankAbility = {
+    cleaning: 2,
+    mending: 4,
+    bulk_purchasing: 1,
+    activity: 1,
+    vip_card: 3,
+  }
+
   def has_template? template
-    detail.template_syms.include? template
+    return false if not detail.template_syms.include?(template)
+    can_use_template? template
+  end
+
+  def can_use_template? template
+    return false if not accepted?
+    return false if rank_id < RankAbility[template]
+    return true
   end
 
   scope :with_dealer_type, -> (dealer_type) {

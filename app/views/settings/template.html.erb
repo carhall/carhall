@@ -17,31 +17,47 @@
 
           <% if @dealer %>
             <div>
-              <dl><strong>业务模板管理</strong></dl>
-              <dl>
-                <dt>洗车美容</dt>
-                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @dealer.has_template? :cleaning %>></dd>
-              </dl>
-              <dl>
-                <dt>保养专修</dt>
-                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @dealer.has_template? :mending %>></dd>
-              </dl>
-              <dl>&nbsp;</dl>
-              <dl class="no-border"><strong>营销模块管理</strong></dl>
-              <dl>
-                <dt>团购</dt>
-                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_3" name="account[detail_attributes][template_ids][]" type="checkbox" value="3"<%= "checked=\"checked\"" if @dealer.has_template? :bulk_purchasing %>></dd>
-              </dl>
-              <dl>
-                <dt>近期活动</dt>
-                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_4" name="account[detail_attributes][template_ids][]" type="checkbox" value="4"<%= "checked=\"checked\"" if @dealer.has_template? :activity %>></dd>
-              </dl>
-              <dl>&nbsp;</dl>
-              <dl class="no-border"><strong>会员卡管理</strong></dl>
-              <dl>
-                <dt>会员卡</dt>
-                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_5" name="account[detail_attributes][template_ids][]" type="checkbox" value="5"<%= "checked=\"checked\"" if @dealer.has_template? :vip_card %>></dd>
-              </dl>
+              <% if @dealer.can_use_template? :cleaning or @dealer.can_use_template? :mending %>
+                <dl><strong>业务模板管理</strong></dl>
+                <% if @dealer.can_use_template? :cleaning %>
+                  <dl>
+                    <dt>洗车美容</dt>
+                    <dd><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @dealer.has_template? :cleaning %>></dd>
+                  </dl>
+                <% end %>
+                <% if @dealer.can_use_template? :mending %>
+                  <dl>
+                    <dt>保养专修</dt>
+                    <dd><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @dealer.has_template? :mending %>></dd>
+                  </dl>
+                <% end %>
+                <dl>&nbsp;</dl>
+              <% end %>
+
+              <% if @dealer.can_use_template? :bulk_purchasing or @dealer.can_use_template? :activity %>
+                <dl class="no-border"><strong>营销模块管理</strong></dl>
+                <% if @dealer.can_use_template? :bulk_purchasing %>
+                  <dl>
+                    <dt>团购</dt>
+                    <dd><input class="check_boxes" id="account_detail_attributes_template_ids_3" name="account[detail_attributes][template_ids][]" type="checkbox" value="3"<%= "checked=\"checked\"" if @dealer.has_template? :bulk_purchasing %>></dd>
+                  </dl>
+                <% end %>
+                <% if @dealer.can_use_template? :activity %>
+                  <dl>
+                    <dt>近期活动</dt>
+                    <dd><input class="check_boxes" id="account_detail_attributes_template_ids_4" name="account[detail_attributes][template_ids][]" type="checkbox" value="4"<%= "checked=\"checked\"" if @dealer.has_template? :activity %>></dd>
+                  </dl>
+                <% end %>
+                <dl>&nbsp;</dl>
+              <% end %>
+
+              <% if @dealer.can_use_template? :vip_card %>
+                <dl class="no-border"><strong>会员卡管理</strong></dl>
+                <dl>
+                  <dt>会员卡</dt>
+                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_5" name="account[detail_attributes][template_ids][]" type="checkbox" value="5"<%= "checked=\"checked\"" if @dealer.has_template? :vip_card %>></dd>
+                </dl>
+              <% end %>
             </div>
 
             <input name="account[type]" type="hidden" value="Accounts::Dealer">
