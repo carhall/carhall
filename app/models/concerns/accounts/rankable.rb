@@ -4,6 +4,10 @@ module Accounts::Rankable
   included do
     enumerate :rank, with: %w(体验会员 普通会员 金卡会员 钻石会员)
     scope :ranked, -> { order('rank_id DESC') } 
+    
+    def human_rank
+      accepted? ? rank : '未验证会员'
+    end
   end
 
   def rank_up
