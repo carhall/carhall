@@ -30,7 +30,7 @@ class Accounts::Dealer < Accounts::PublicAccount
   end
 
   validates_each :detail do |record, attr, value|
-    if value and value.address_changed?
+    if value.address.present? and value.address_changed?
       bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value.address}"
       begin
         result = JSON.parse(open(URI::encode(bmap_geocoding_url)).read)
@@ -42,7 +42,7 @@ class Accounts::Dealer < Accounts::PublicAccount
             longitude: result['result']['location']['lng']
           }
         else
-          record.errors.add(:"detail.address", :invalid)
+          record.errors.add(:address, :invalid)
         end
       rescue Exception => e
         record.errors.add(:base, e.message)
@@ -55,6 +55,8 @@ class Accounts::Dealer < Accounts::PublicAccount
       end
     end
   end
+
+  delegate :address, to: :detail
 
   RankAbility = {
     cleaning: 2,

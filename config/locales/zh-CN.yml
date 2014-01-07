@@ -131,6 +131,7 @@ zh-CN:
         created_at: 加入时间
         state: 账户状态
         main_area: 省份
+        address: 地址
         <<: *statisticable
       accounts/account/detail: &detail
         dealer_type_id: 服务商类型
