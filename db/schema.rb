@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131207131139) do
+ActiveRecord::Schema.define(version: 20140108085915) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -647,6 +647,16 @@ ActiveRecord::Schema.define(version: 20131207131139) do
     t.datetime "updated_at"
     t.text     "url"
   end
+
+  create_table "uploads", force: true do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "type_id"
+  end
+
+  add_index "uploads", ["type_id"], name: "index_uploads_on_type_id", using: :btree
 
   create_table "user_details", force: true do |t|
     t.string   "series"

@@ -4,7 +4,9 @@ class CreateVipCardItems < ActiveRecord::Migration
       t.references :vip_card, index: true
 
       t.string   :title
-      t.float    :price, index: true
+      t.float    :price
+      t.index    :price
+
       t.integer  :count
       
     end

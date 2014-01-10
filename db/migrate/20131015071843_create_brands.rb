@@ -1,7 +1,8 @@
 class CreateBrands < ActiveRecord::Migration
   def change
     create_table :brands do |t|
-      t.string :name, index: true, unique: true
+      t.string :name, unique: true
+      t.index  :name
     end
 
     Category::Brand::Brands.each do |name| 

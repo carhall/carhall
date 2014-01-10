@@ -1,7 +1,9 @@
 class CreateDistributorDetails < ActiveRecord::Migration
   def change
     create_table :distributor_details do |t|
-      t.integer :distributor_type_id, index: true
+      t.integer :distributor_type_id
+      t.index   :distributor_type_id
+      
       t.string  :business_scope_ids
 
       t.string  :product_ids

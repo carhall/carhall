@@ -9,7 +9,8 @@ class CreateTrafficReports < ActiveRecord::Migration
       
       t.float  :latitude, limit: 32
       t.float  :longitude, limit: 32
-      t.string :geohash, index: true
+      t.string :geohash
+      t.index  :geohash
       
       t.timestamps
     end

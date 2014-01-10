@@ -7,12 +7,17 @@ class AccountsAdditionalFields < ActiveRecord::Migration
       t.string  :type
       t.references :detail, index: true
       
-      t.string  :username, null: false, default: "", index: true
-      t.string  :mobile, null: false, default: "", index: true, unique: true
+      t.string  :username, null: false, default: ""
+      t.index   :username
+
+      t.string  :mobile, null: false, default: "", unique: true
+      t.index   :mobile
+      
       t.text    :description
       t.attachment :avatar
 
-      t.datetime :accepted_at, index: true
+      t.datetime :accepted_at
+      t.index    :accepted_at
 
     end
 

@@ -1,8 +1,11 @@
 class AddAreaIdAndBrandIdToPosts < ActiveRecord::Migration
   def change
     change_table :posts do |t|
-      t.integer :area_id, index: true
-      t.integer :brand_id, index: true
+      t.integer :area_id
+      t.index   :area_id
+      
+      t.integer :brand_id
+      t.index   :brand_id
     end
 
     Posts::Post.all do |p|

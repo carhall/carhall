@@ -5,7 +5,8 @@ class CreatePosts < ActiveRecord::Migration
       t.references :club, index: true
       t.text :content
 
-      t.integer :comments_count, default: 0, index: true
+      t.integer :comments_count, default: 0
+      t.index   :comments_count
 
       t.attachment :image
       

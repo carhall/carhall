@@ -10,7 +10,9 @@ class CreateOrders < ActiveRecord::Migration
       t.references :source, index: true
 
       t.string  :title
-      t.integer :state_id, index: true
+      t.integer :state_id
+      t.index   :state_id
+      
       t.float   :cost
       
       t.integer :count, default: 0
