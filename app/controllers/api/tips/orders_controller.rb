@@ -64,7 +64,7 @@ protected
   def set_parent
     if params[:filter] && params[:filter][:order_type]
       klass = OrderTypes[params[:filter][:order_type]]
-      @parent = klass.all
+      @parent = klass.with_user(@current_user)
       @parent = @parent.includes(:detail) if klass == Tips::MendingOrder
       @parent = @parent.includes(:vip_card_order_items) if klass == Tips::VipCardOrder
     else
