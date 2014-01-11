@@ -21,7 +21,7 @@
                 <dl><strong>业务模板管理</strong></dl>
                 <% if @dealer.can_use_template? :cleaning %>
                   <dl>
-                    <dt>洗车美容</dt>
+                    <dt>服务项目</dt>
                     <dd><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @dealer.has_template? :cleaning %>></dd>
                   </dl>
                 <% end %>

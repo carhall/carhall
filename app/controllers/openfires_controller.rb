@@ -35,4 +35,14 @@ class OpenfiresController < ActionController::Base
     render_data users: @users.map{|u|u.to_openfire_user_detail_builder.attributes!}
   end
 
+  def send_file
+    @upload = ::Share::Upload.new(file: params[:imres], type_id: params[:type])
+
+    if @upload.save
+      render_data filePath: "#{AbsoluteUrlPrefix}#{@upload.file.url}"
+    else
+      render_failure @upload
+    end
+  end
+
 end

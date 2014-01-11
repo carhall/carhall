@@ -238,6 +238,7 @@ Carhall::Application.routes.draw do
     post :login_by_token
     post :get_user
     post :list_users
+    post :send_file
   end
 
 
