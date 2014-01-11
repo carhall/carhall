@@ -10,9 +10,6 @@ class Api::Tips::CleaningsController < Api::Tips::ApplicationController
       if params[:filter][:cleaning_type]
         @parent = @parent.with_cleaning_type(params[:filter][:cleaning_type])
       end
-      unless params[:filter][:cleaning_type_id] or params[:filter][:cleaning_type]
-        @parent = @parent.with_cleaning_type(1)
-      end
     end
   end
 
