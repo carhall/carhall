@@ -1,6 +1,6 @@
 <ul class="nav">
-  <li class="active"><a href="#">首页</a></li>
-  <li><a href="#">商家合作</a></li>
-  <li><a href="#">加入我们</a></li>
-  <li><a href="#">联系我们</a></li>
+  <li<%= active? "dashboards#show" %>><%= link_to "首页", dashboard_path %></a></li>
+  <li<%= active? "dashboards#cooperations" %>><%= link_to "商家合作", cooperations_dashboard_path %></li>
+  <li<%= active? "dashboards#about_us" %>><%= link_to "关于我们", about_us_dashboard_path %></li>
+  <li<%= active? "dashboards#help" %>><%= link_to "帮助", help_dashboard_path %></li>
 </ul>

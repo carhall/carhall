@@ -1,8 +1,13 @@
 Carhall::Application.routes.draw do
   # Frontend pages
   # Dashboard
-  resource :dashboard, only: :show
+  resource :dashboard, only: :show do
+    get :cooperations
+    get :about_us
+    get :help
+  end
   root to: 'dashboards#show'
+  
   # Frontend sign_in/sing_up page
   devise_for :accounts, :class_name => "Accounts::Account", controllers: { 
     registrations: "accounts/registrations",
