@@ -5,6 +5,8 @@ Carhall::Application.routes.draw do
     get :cooperations
     get :about_us
     get :help
+
+    post :send_invitation
   end
   root to: 'dashboards#show'
   
@@ -49,12 +51,6 @@ Carhall::Application.routes.draw do
     resource :dashboard, only: :show
     root to: 'dashboards#show'
 
-    resource :mending do
-      get :orders
-      get :edit_discount
-      get :edit_brands
-    end
-
     resources :mendings do
       put :expose, on: :member
       put :hide, on: :member
@@ -62,6 +58,12 @@ Carhall::Application.routes.draw do
       put :unstick, on: :member
 
       resources :orders
+    end
+
+    resource :mending do
+      get :orders
+      get :edit_discount
+      get :edit_brands
     end
 
     resources :cleanings do
@@ -429,6 +431,8 @@ Carhall::Application.routes.draw do
         get :favorite, on: :collection
         get :hot, on: :collection
   
+        get :followed, on: :collection
+        
         get :detail, on: :member
 
         resources :orders, only: [:index, :show, :create] do

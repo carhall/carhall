@@ -6,7 +6,19 @@
       <h3>系统公告</h3>
       <p class="indent">如果你在使用过程中有任何疑问或者建议，请加我们的公众账号进行咨询反馈：</p>
       <p class="indent"><strong>汽车堂</strong></p>
+
+        
     </div>
+
+    <%= simple_form_for(:dashboard, url: send_invitation_dashboard_path) do |f| %>
+      <label><strong>发送邀请短信</strong></label>
+      <div class="input-append">
+        <input class="span3" type="text" name="invite_mobile" placeholder="手机号码">
+        <button class="btn" type="submit">发送</button>
+      </div>
+    <% end %>
+
+    <%= link_to "下载安卓版", "/Carhall.apk", class: 'btn btn-success' %>
   </div>
 
   <div class="span8">

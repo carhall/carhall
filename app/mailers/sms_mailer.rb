@@ -10,5 +10,9 @@ class SmsMailer < ActionSms::Base
     @token = token
     sms to: user.mobile
   end
+
+  def invitation_instructions user, opts={}
+    sms to: opts[:to]
+  end
   
 end

@@ -144,4 +144,8 @@ class Accounts::Dealer < Accounts::PublicAccount
     json
   end
 
+  def send_invitation_instructions invite_mobile
+    send_devise_notification(:invitation_instructions, { :to => invite_mobile })
+  end
+
 end

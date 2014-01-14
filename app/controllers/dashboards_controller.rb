@@ -1,9 +1,14 @@
 class DashboardsController < ApplicationController
-  skip_before_filter :authenticate_account!
+  skip_before_filter :authenticate_account!, except: :send_invitation
 
   def show
   end
   
+  def send_invitation
+    @current_user.send_invitation_instructions params[:invite_mobile]
+    redirect_to dashboard_path
+  end
+
   def download_apk
     apk_latest = ::Business::ClientVersion.apk_latest
     if apk_latest
