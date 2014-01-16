@@ -12,6 +12,7 @@ class SmsMailer < ActionSms::Base
   end
 
   def invitation_instructions user, opts={}
+    @user = user
     sms to: opts[:to]
   end
   
