@@ -70,7 +70,7 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
 
   def password
     @user = ::Accounts::Account.reset_password_by_token(
-      paramsparams.require(:data).permit(:reset_password_token, :password))
+      params.require(:data).permit(:reset_password_token, :password))
 
     if @user.errors.empty?
       render_update_success @user
