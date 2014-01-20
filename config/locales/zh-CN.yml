@@ -17,7 +17,7 @@ zh-CN:
   order_disabled: 订单尚未被启用。
   order_enabled_can_not_cancel: 已启用订单不能被取消。
   create_success: 成功创建一个新的 %{model} “%{title}”。
-  update_success_without_title: 成功创建一个新的 %{model} 。
+  create_success_without_title: 成功创建一个新的 %{model} 。
   update_success: 成功更新 %{model} “%{title}” 信息。
   update_success_without_title: 成功更新 %{model} 信息。
   book_success: 成功提交订单。
@@ -75,6 +75,7 @@ zh-CN:
       business/client_version: 客户端
       business/ad_template: 广告模板
       business/tutorial: 在线教程
+      statistic/sales_case: 销售记录
     attributes:
       statistic: &statisticable
         orders_count: 订单数
@@ -357,6 +358,10 @@ zh-CN:
         company: 公司
         phone: 电话
         address: 地址
+      statistic/sales_case:
+        description: 客户问题描述
+        solution: 推荐方案
+        provider: 填表人
   simple_form:
     labels:
       account:

@@ -45,6 +45,8 @@ Carhall::Application.routes.draw do
       get :mending, on: :collection
       get :cleaning, on: :collection
     end
+
+    resources :sales_cases
   end
 
   namespace :tips do

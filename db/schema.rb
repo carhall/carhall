@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140108085915) do
+ActiveRecord::Schema.define(version: 20140120021652) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -612,6 +612,17 @@ ActiveRecord::Schema.define(version: 20140108085915) do
   end
 
   add_index "reviews", ["order_id"], name: "index_reviews_on_order_id", using: :btree
+
+  create_table "sales_cases", force: true do |t|
+    t.integer "user_id"
+    t.integer "dealer_id"
+    t.text    "description"
+    t.text    "solution"
+    t.string  "provider"
+  end
+
+  add_index "sales_cases", ["dealer_id"], name: "index_sales_cases_on_dealer_id", using: :btree
+  add_index "sales_cases", ["user_id"], name: "index_sales_cases_on_user_id", using: :btree
 
   create_table "traffic_reports", force: true do |t|
     t.integer  "user_id"

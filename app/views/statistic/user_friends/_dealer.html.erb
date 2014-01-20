@@ -25,5 +25,84 @@
       <%= t.attribute :last_stars_with_dealer, args: @user.id %>
     <% end %>
 
+
   </div>
 </div>
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+    window.disableDataTable = true;
+
+    function truncate(str) {
+      if (str.length > 15) {
+        return str.substring(0, 15)+'...';
+      } else {
+        return str;
+      }
+    }
+
+    /* Formating function for row details */
+    function fnFormatDetails(oTable, nTr) {
+      var iUserId = $(oTable.fnGetData(nTr)[1]).text(),
+          aSalesCaseData = <%== Statistic::SalesCase.accessible_by(current_ability, :manage).group_by(&:user_id).to_json %>[iUserId] || [];
+
+      var sOut = '<h4>销售记录 <small><a href="/statistic/sales_cases/new?user_id='+iUserId+'">添加新的销售记录</a></small></h4>';
+      if (aSalesCaseData.length > 0) {
+        sOut += '<table class="table">';
+        sOut += '<thead><tr><th>客户问题描述</th><th>推荐方案</th><th>填表人</th><th>操作</th></tr></thead>';
+        sOut += '<tbody>';
+        for (var i = aSalesCaseData.length - 1; i >= 0; i--) {
+          aData = aSalesCaseData[i];
+          sOut += '<tr><td>'+truncate(aData['description'])+'</td><td>'+truncate(aData['solution'])+'</td><td>'+aData['provider']+'</td><td class="actions"><a href="/statistic/sales_cases/'+aData['id']+'/edit"><i class="icon-pencil" rel="tooltip" title="编辑"></i></a><a href="/statistic/sales_cases/'+aData['id']+'" data-confirm="您确认要删除这条记录？" data-method="delete"><i class="icon-remove" rel="tooltip" title="删除"></i></a></td></tr>';
+        };
+        sOut += '</tbody>';
+        sOut += '</table>';
+      }
+
+      return sOut;
+    }
+     
+    $(document).ready(function() {
+      /*
+       * Insert a 'details' column to the table
+       */
+      var nCloneTh = document.createElement('th');
+      var nCloneTd = document.createElement('td');
+      nCloneTd.innerHTML = '<i class="icon-plus-sign">';
+      nCloneTd.className = "center";
+       
+      $('.datatable thead tr').each(function () {
+        this.insertBefore(nCloneTh, this.childNodes[0]);
+      });
+       
+      $('.datatable tbody tr').each(function () {
+        this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+      });
+       
+      /* Add event listener for opening and closing details
+       * Note that the indicator for showing which row is open is not controlled by DataTables,
+       * rather it is done here
+       */
+      $('.datatable tbody td i.icon-plus-sign').click(function () {
+        var nTr = $(this).parents('tr')[0];
+        if (oTable.fnIsOpen(nTr)) {
+          /* This row is already open - close it */
+          this.className = "icon-plus-sign";
+          oTable.fnClose(nTr);
+        } else {
+          /* Open this row */
+          this.className = "icon-minus-sign";
+          oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+        }
+      });
+        
+      /*
+       * Initialse DataTables, with no sorting on the 'details' column
+       */
+      var oTable = window.initDataTable();
+       
+    });
+
+  </script>
+
+<% end %>

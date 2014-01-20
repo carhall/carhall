@@ -51,6 +51,8 @@ class Ability
         can :manage, Tips::BulkPurchasing, dealer: user
         can :manage, Tips::VipCard, dealer: user
         
+        can :manage, Statistic::SalesCase, dealer: user
+
         can :read, Tips::Review
         can :read, Tips::Order
 
