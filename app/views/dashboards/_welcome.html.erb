@@ -12,12 +12,16 @@
       <% recent_dealers = Accounts::Dealer.last(20) %>
       <div class="scroll">
         <ul class="unstyled">
-          <% recent_dealers.each_slice(2) do |dealers| %>
+          <% slice = 2 %>
+          <% recent_dealers.each_slice(slice) do |dealers| %>
             <li>
               <% dealers.each do |dealer| %>
                 <div class="span6">
                   <%= dealer.username %>
                 </div>
+              <% end %>
+              <% (slice - dealers.size).times do %>
+                <div class="span6"></div>
               <% end %>
             </li>
           <% end %>
