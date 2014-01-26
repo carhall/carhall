@@ -13,4 +13,9 @@ class Api::Tips::CleaningsController < Api::Tips::ApplicationController
     end
   end
 
+  def followed
+    render_index @parent.followed_by(current_user)
+  end
+  alias_method :index, :followed
+
 end

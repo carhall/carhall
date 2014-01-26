@@ -8,7 +8,7 @@ class Api::Tips::BulkPurchasingsController < Api::Tips::ApplicationController
   end
 
   def followed
-    render_index @parent.followed_by(@current_user)
+    render_index @parent.followed_by(current_user)
   end
 
 end

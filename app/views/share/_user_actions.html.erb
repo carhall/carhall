@@ -1,4 +1,5 @@
 <div class="pull-right user-actions">
+  <%= link_to "下载安卓客户端", "/Carhall.apk" %> | 
   <% if account_signed_in? %>
     <%= link_to "退出", destroy_account_session_path %>
   <% else %>

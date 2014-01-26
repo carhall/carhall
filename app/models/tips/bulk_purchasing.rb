@@ -15,8 +15,6 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   include Tips::Expiredable
   scope :ordered, -> { displayed.positioned.in_progress }
 
-  scope :followed_by, -> (user) { with_dealer(user.dealer_friends) }
-
   def to_base_builder
     Jbuilder.new do |json|
       json.extract! self, :id, :title, :expire_at, :area_id, :area,

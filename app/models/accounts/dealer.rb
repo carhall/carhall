@@ -131,7 +131,7 @@ class Accounts::Dealer < Accounts::PublicAccount
       json.attributes!.merge! detail.to_base_builder.attributes!
       json.extract! self, :area_id, :area, :stars, :mending_goal_attainment,
         :cleaning_goal_attainment, :bulk_purchasing_goal_attainment,
-        :vip_card_goal_attainment,
+        :vip_card_goal_attainment, :rank_id, :rank
         :orders_count
       if location
         json.latitude location.latitude

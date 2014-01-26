@@ -408,6 +408,8 @@ Carhall::Application.routes.draw do
         get :favorite, on: :collection
         get :hot, on: :collection
   
+        get :followed, on: :collection
+  
         get :detail, on: :member
 
         resources :orders, only: [:index, :show, :create] do

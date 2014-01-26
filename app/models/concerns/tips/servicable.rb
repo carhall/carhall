@@ -10,6 +10,7 @@ module Tips::Servicable
 
     default_scope { order('id DESC') }
     scope :ordered, -> { displayed.positioned }
+    scope :followed_by, -> (user) { with_dealer(user.dealer_friends) }
     
     before_save do
       self.area_id = dealer.area_id
