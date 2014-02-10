@@ -36,7 +36,7 @@ class AddColumnsForRights < ActiveRecord::Migration
 
     change_table :orders do |t|
       t.change :state_id, :integer, default: 1
-      t.index  :state_id
+      # t.index  :state_id
     end
 
   end
