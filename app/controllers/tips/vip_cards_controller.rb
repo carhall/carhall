@@ -19,7 +19,9 @@ class Tips::VipCardsController < Tips::ApplicationController
           order = @vip_card.orders.create user: user
           order.enable
           order.items.each_with_index do |item, index|
-            item.use row[index+1].to_i
+            used_count = row[index+1].to_i
+            used_count = item.count if used_count > item.count
+            item.use used_count
           end
           order.save!
           

@@ -35,13 +35,16 @@
     </div>
   </div>
 
-  <hr>
-  <%= f.input :upload, as: :file, label: '会员卡迁移数据', hint: "无迁移数据请留空此栏<br>如需迁移数据，请下载#{link_to('会员卡数据迁移模板', '/会员卡数据迁移模板.xls')}，并使用Excel打开编辑<br>注意事项：<br>1.此种方式导入的会员卡均为已付款会员卡，请谨慎使用！<br>2.导入数据不会覆盖原数据。<br>3.导入数据中客户手机号在系统中不存在，或服务项目已使用次数大于服务项目总数，会导致单条数据导入失败，但不影响其他数据导入。" do %>
-    <div class="fileupload fileupload-new" data-provides="fileupload">
-      <span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更换</span><input type="file" name="tips_vip_card[upload]" /></span>
-      <span class="fileupload-preview"></span>
-      <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
-    </div>
+  <% upload ||= false %>
+  <% if upload %>
+    <hr>
+    <%= f.input :upload, as: :file, label: '会员卡迁移数据', hint: "无迁移数据请留空此栏<br>如需迁移数据，请下载#{link_to('会员卡数据迁移模板', '/会员卡数据迁移模板.xls')}，并使用Excel打开编辑<br>注意事项：<br>1.此种方式导入的会员卡均为已付款会员卡，请谨慎使用！<br>2.导入数据不会覆盖原数据。<br>3.导入数据中客户手机号在系统中不存在，或服务项目已使用次数大于服务项目总数，会导致单条数据导入失败，但不影响其他数据导入。" do %>
+      <div class="fileupload fileupload-new" data-provides="fileupload">
+        <span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更换</span><input type="file" name="tips_vip_card[upload]" /></span>
+        <span class="fileupload-preview"></span>
+        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+      </div>
+    <% end %>
   <% end %>
 
   <%= f.button :submit, class: 'btn-submit' %>
