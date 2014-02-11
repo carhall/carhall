@@ -22,6 +22,7 @@ class AccountsAdditionalFields < ActiveRecord::Migration
     end
 
     Accounts::Admin.create!(mobile: '13012345678', password: 'password', username: '汽车堂')
+    Accounts::Admin.first.confirm!
 
   end
 end

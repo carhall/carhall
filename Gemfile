@@ -82,6 +82,8 @@ gem 'active_enum', path: 'vendor'
 
 # gem 'resque'
 
+gem 'spreadsheet'
+
 # Audit
 
 group :development, :test do
