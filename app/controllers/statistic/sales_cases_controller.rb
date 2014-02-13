@@ -14,6 +14,15 @@ class Statistic::SalesCasesController < Statistic::ApplicationController
     end
   end
 
+  def update
+    if @sales_case.update_attributes params[:statistic_sales_case]
+      flash[:success] = i18n_message(:update_success_without_title)
+      redirect_to statistic_user_friends_path
+    else
+      render :edit
+    end
+  end
+
   def statistic_sales_case_params
     params.require(:statistic_sales_case).permit(:user_id, :description, :solution, :provider)
   end
