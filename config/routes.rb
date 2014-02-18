@@ -245,6 +245,8 @@ Carhall::Application.routes.draw do
     post :send_file
   end
 
+  resources :winxin
+
 
   ############################
   # APIs
