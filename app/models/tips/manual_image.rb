@@ -6,7 +6,7 @@ class Tips::ManualImage < ActiveRecord::Base
   validates_presence_of :image
 
   before_create do
-    self.title = File.basename(image_file_name, '.*').sub(/-[[:xdigit:]]{32}\z/, '').tr('-_', ' ').capitalize
+    self.title ||= File.basename(image_file_name, '.*').sub(/-[[:xdigit:]]{32}\z/, '').tr('-_', ' ').capitalize
   end
 
 end
