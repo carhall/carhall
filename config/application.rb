@@ -29,9 +29,8 @@ module Carhall
     config.action_dispatch.rescue_responses["CanCan::AccessDenied"] = :forbidden
     config.action_dispatch.rescue_responses["ActiveRecord::AssociationTypeMismatch"] = :unprocessable_entity
 
-    # config.api_only = false
-    # config.middleware.use Rack::MethodOverride
-    # config.middleware.use ActionDispatch::Cookies
-    # config.middleware.use ActionDispatch::Flash
+    # For grape api
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
   end
 end
