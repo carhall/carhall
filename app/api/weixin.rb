@@ -2,6 +2,9 @@ module Weixin
   class Get < Grape::API
     format :txt
     desc 'Check weixin sign'
+    params do
+      requires :signature, :timestamp, :nonce, :echostr
+    end
     get ":id" do
       initialize_weixin_account
       params[:echostr]
@@ -14,10 +17,13 @@ module Weixin
     content_type :xml, "text/xml"
 
     desc 'weixin response'
+    params do
+      requires :signature, :timestamp, :nonce
+    end
     post ":id" do
       status 200
       Rails.logger.info "Parameters: #{params["xml"].to_h}"
-      respond_weixin params["xml"]
+      respond_weixin params[:account], params["xml"]
     end
   end
 
@@ -29,33 +35,33 @@ module Weixin
     end
 
     helpers do
-      def respond_weixin(params)
+      def respond_weixin(account, params)
         case params["MsgType"]
         when "event"
-          respond_event params
+          respond_event account, params
         when ""
 
         end
       end
 
-      def respond_event(params)
+      def respond_event(account, params)
         case params["EventKey"]
         when "vip_card"
-          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+          present account.vip_cards.first(5), with: ::WeixinNewsEntity
         when "cleaning"
-          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+          present account.cleanings.first(5), with: ::WeixinNewsEntity
         when "mending"
-          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+          present account.mending, with: ::WeixinMendingEntity
         when "bulk_purchasing"
-          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+          present account.bulk_purchasings.first(5), with: ::WeixinNewsEntity
         when "activity"
-          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+          present account.activities.first(5), with: ::WeixinNewsEntity
         when "dealer_description"
-          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+          account.description
         when "download_app"
-          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+          ""
         when "my_vip_card"
-          
+          ""
         end
       end
 
@@ -67,8 +73,9 @@ module Weixin
       end
 
       def check_signature
-        weixin_token = params[:id]
-        array = [weixin_token, params[:timestamp], params[:nonce]].sort
+        account = params[:account] = ::Accounts::Account.find(params[:id])
+        token = account.authentication_token
+        array = [token, params[:timestamp], params[:nonce]].sort
         params[:signature] == Digest::SHA1.hexdigest(array.join)
       end
 

@@ -1,8 +1,8 @@
-class WeixinNewsEntity < Grape::Entity
+class WeixinMendingEntity < Grape::Entity
   root :news, :news
   
   expose :Title do |resource, options|
-    resource.title
+    "#{resource.dealer.username} 保养专修"
   end
   expose :Description do |resource, options|
     resource.description
@@ -10,9 +10,9 @@ class WeixinNewsEntity < Grape::Entity
   expose :PicUrl do |resource, options|
     unless options[:env][:WeixinNews]
       options[:env][:WeixinNews] = true
-      "#{AbsoluteUrlPrefix}#{resource.image.url(:medium, timestamp: false)}"
+      "#{AbsoluteUrlPrefix}#{resource.dealer.avatar.url(:medium, timestamp: false)}"
     else
-      "#{AbsoluteUrlPrefix}#{resource.image.url(:thumb, timestamp: false)}"
+      "#{AbsoluteUrlPrefix}#{resource.dealer.avatar.url(:thumb, timestamp: false)}"
     end
   end
   expose :Url do |resource, options|

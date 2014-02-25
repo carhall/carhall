@@ -8,6 +8,7 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :cleanings, class_name: 'Tips::Cleaning'
   has_many :activities, class_name: 'Tips::Activity'
   has_many :bulk_purchasings, class_name: 'Tips::BulkPurchasing'
+  has_many :vip_cards, class_name: 'Tips::VipCard'
 
   has_many :orders, class_name: 'Tips::Order'
   has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Tips::Order'
