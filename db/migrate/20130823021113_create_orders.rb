@@ -3,6 +3,7 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       # For STI
       t.string  :type
+      t.index   [:type, :id]
 
       t.references :user, index: true
       t.references :dealer, index: true

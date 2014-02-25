@@ -11,6 +11,8 @@ class CreateMendingOrderDetails < ActiveRecord::Migration
       t.index    :mending_type_id
       
       t.text     :description
+
+      t.boolean  :notified, default: false
     end
     
   end

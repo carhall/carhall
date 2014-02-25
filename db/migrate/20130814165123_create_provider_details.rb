@@ -3,7 +3,12 @@ class CreateProviderDetails < ActiveRecord::Migration
     create_table :provider_details do |t|
       t.string  :company
       t.string  :phone
-      t.string  :rqrcode_token
+
+      t.string  :template_ids
+      
+      t.string  :rqrcode_token, unique: true
+      t.index   :rqrcode_token
+      t.attachment :rqrcode_image
 
     end
 
