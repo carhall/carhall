@@ -2,7 +2,7 @@ module Openfire
   class API < Grape::API
     version 'v1', using: :param
     format :json
-    helpers RenderHelper
+    helpers GrapeHelper
 
     error_formatter :json, ErrorFormatter
     formatter :json, DataFormatter
@@ -17,7 +17,7 @@ module Openfire
 
       if @user && @user.valid_password?(params[:password])
         @user.ensure_authentication_token!
-        present @user, with: ::Accounts::OpenfireAccountEntity, type: :login
+        present @user, with: ::OpenfireAccountEntity, type: :login
       else
         error! '401 Unauthorized', 401
       end
@@ -31,7 +31,7 @@ module Openfire
       @user = ::Accounts::Account.find_by(authentication_token: params[:token])
 
       if @user
-        present @user, with: ::Accounts::OpenfireAccountEntity, type: :login
+        present @user, with: ::OpenfireAccountEntity, type: :login
       else
         error! '401 Unauthorized', 401
       end
@@ -43,7 +43,7 @@ module Openfire
     end
     post :get_user do
       @user = ::Accounts::Account.find(params[:id])
-      present @user, with: ::Accounts::OpenfireAccountEntity, type: :detail
+      present @user, with: ::OpenfireAccountEntity, type: :detail
     end
 
     desc "List users"
@@ -52,7 +52,7 @@ module Openfire
     end
     post :list_users do
       @users = ::Accounts::Account.find(params[:ids].split(','))
-      present @users, with: ::Accounts::OpenfireAccountEntity, type: :detail
+      present @users, with: ::OpenfireAccountEntity, type: :detail
     end
 
     desc "Send media file"

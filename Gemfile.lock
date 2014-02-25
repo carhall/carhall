@@ -211,6 +211,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rqrcode (0.4.2)
     rqrcode-rails3 (0.1.6)
       rqrcode (>= 0.4.2)
@@ -322,6 +324,7 @@ DEPENDENCIES
   pry-rails
   quiet_assets
   rails (= 4.0.0)
+  rest-client
   rqrcode-rails3
   rspec-rails
   sass-rails (~> 4.0.0)

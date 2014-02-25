@@ -2,18 +2,22 @@ module Weixin
   class Get < Grape::API
     format :txt
     desc 'Check weixin sign'
-    get do
+    get ":id" do
+      initialize_weixin_account
       params[:echostr]
     end
   end
 
   class Post < Grape::API
     format :xml
+    formatter :xml, WeixinFormatter
     content_type :xml, "text/xml"
 
     desc 'weixin response'
-    post do
-      
+    post ":id" do
+      status 200
+      Rails.logger.info "Parameters: #{params["xml"].to_h}"
+      respond_weixin params["xml"]
     end
   end
 
@@ -21,12 +25,113 @@ module Weixin
     version 'v1', using: :param
 
     before do
-      weixin_token = 1
-      array = [weixin_token, params[:timestamp], params[:nonce]].sort
-      error! '403 Forbidden', 403 unless params[:signature] != Digest::SHA1.hexdigest(array.join)
+      error! '403 Forbidden', 403 unless check_signature
+    end
+
+    helpers do
+      def respond_weixin(params)
+        case params["MsgType"]
+        when "event"
+          respond_event params
+        when ""
+
+        end
+      end
+
+      def respond_event(params)
+        case params["EventKey"]
+        when "vip_card"
+          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+        when "cleaning"
+          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+        when "mending"
+          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+        when "bulk_purchasing"
+          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+        when "activity"
+          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+        when "dealer_description"
+          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+        when "download_app"
+          present ::Tips::VipCard.first(5), with: ::WeixinNewsEntity
+        when "my_vip_card"
+          
+        end
+      end
+
+      def initialize_weixin_account
+        Thread.new do
+          sleep 5
+          create_menu WeixinMenu
+        end
+      end
+
+      def check_signature
+        weixin_token = params[:id]
+        array = [weixin_token, params[:timestamp], params[:nonce]].sort
+        params[:signature] == Digest::SHA1.hexdigest(array.join)
+      end
+
+      def access_token
+        Rails.cache.fetch :access_token, expires_in: 1.hours do
+          app_id = "wx46c1198fe2a43173"
+          app_secret = "459f6ee22762db6455023a7ad52c3c20"
+          response = RestClient.get "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{app_id}&secret=#{app_secret}"
+          JSON.parse(response.to_str)["access_token"]
+        end
+      end
+
+      def create_menu menu
+        response = RestClient.post "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=#{access_token}", menu.to_json
+      end
     end
 
     mount Weixin::Get
     mount Weixin::Post    
   end
 end
+
+WeixinMenu = { 
+  button: [{
+    name: "服务项目",
+    sub_button: [{
+      type: "click",
+      name: "会员卡",
+      key: "vip_card"
+    }, {
+      type: "click",
+      name: "项目菜单",
+      key: "cleaning"
+    }, {
+      type: "click",
+      name: "保养专修",
+      key: "mending"
+    }]
+  }, {
+    name: "促销",
+    sub_button: [{
+      type: "click",
+      name: "近期团购",
+      key: "bulk_purchasing"
+    }, {
+      type: "click",
+      name: "近期活动",
+      key: "activity"
+    }]
+  }, {
+    name: "更多",
+    sub_button: [{
+      type: "click",
+      name: "商家介绍",
+      key: "dealer_description"
+    }, {
+      type: "click",
+      name: "汽车堂下载",
+      key: "download_app"
+    }, {
+      type: "click",
+      name: "我的会员卡",
+      key: "my_vip_card"
+    }]
+  }]
+}

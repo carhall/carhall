@@ -45,6 +45,8 @@ gem 'index_for', github: 'bbtfr/index_for'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'grape'
 gem 'grape-entity'
+gem 'rest-client'
+
 gem 'jbuilder', '~> 1.2'
 
 group :doc do
