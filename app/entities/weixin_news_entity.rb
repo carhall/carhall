@@ -10,7 +10,7 @@ class WeixinNewsEntity < Grape::Entity
   expose :PicUrl do |resource, options|
     unless options[:env][:WeixinNews]
       options[:env][:WeixinNews] = true
-      "#{AbsoluteUrlPrefix}#{resource.image.url(:medium, timestamp: false)}"
+      "#{AbsoluteUrlPrefix}#{resource.image.url(:original, timestamp: false)}"
     else
       "#{AbsoluteUrlPrefix}#{resource.image.url(:thumb, timestamp: false)}"
     end
