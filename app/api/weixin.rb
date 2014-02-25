@@ -18,7 +18,7 @@ module Weixin
   end
 
   class API < Grape::API
-    # version 'v1'
+    version 'v1', using: :param
 
     before do
       weixin_token = 1

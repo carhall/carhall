@@ -1,11 +1,11 @@
 module Openfire
   class API < Grape::API
-    # version 'v1'
+    version 'v1', using: :param
     format :json
-    helpers Helpers::RenderHelper
+    helpers RenderHelper
 
-    error_formatter :json, Formatters::ErrorFormatter
-    formatter :json, Formatters::DataFormatter
+    error_formatter :json, ErrorFormatter
+    formatter :json, DataFormatter
 
     desc "Login by mobile and password."
     params do
@@ -17,7 +17,7 @@ module Openfire
 
       if @user && @user.valid_password?(params[:password])
         @user.ensure_authentication_token!
-        present @user, with: Entities::Accounts::AccountEntity::OpenfireUserInfo
+        present @user, with: ::Accounts::OpenfireAccountEntity, type: :login
       else
         error! '401 Unauthorized', 401
       end
@@ -31,7 +31,7 @@ module Openfire
       @user = ::Accounts::Account.find_by(authentication_token: params[:token])
 
       if @user
-        present @user, with: Entities::Accounts::AccountEntity::OpenfireUserInfo
+        present @user, with: ::Accounts::OpenfireAccountEntity, type: :login
       else
         error! '401 Unauthorized', 401
       end
@@ -43,7 +43,7 @@ module Openfire
     end
     post :get_user do
       @user = ::Accounts::Account.find(params[:id])
-      present @user, with: Entities::Accounts::AccountEntity::OpenfireUserDetail
+      present @user, with: ::Accounts::OpenfireAccountEntity, type: :detail
     end
 
     desc "List users"
@@ -52,7 +52,7 @@ module Openfire
     end
     post :list_users do
       @users = ::Accounts::Account.find(params[:ids].split(','))
-      present @users, with: Entities::Accounts::AccountEntity::OpenfireUserDetail
+      present @users, with: ::Accounts::OpenfireAccountEntity, type: :detail
     end
 
     desc "Send media file"
