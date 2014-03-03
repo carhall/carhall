@@ -12,7 +12,7 @@ class OpenfireAPI < Grape::API
     requires :password, type: String
   end
   post :login do
-    @user = ::Accounts::Account.find_for_database_authentication(mobile: params[:mobile])
+    @user = Accounts::Account.find_for_database_authentication(mobile: params[:mobile])
 
     if @user && @user.valid_password?(params[:password])
       @user.ensure_authentication_token!
@@ -27,7 +27,7 @@ class OpenfireAPI < Grape::API
     requires :token, type: String
   end
   post :login_by_token do
-    @user = ::Accounts::Account.find_by(authentication_token: params[:token])
+    @user = Accounts::Account.find_by(authentication_token: params[:token])
 
     if @user
       present @user, with: ::OpenfireAccountEntity, type: :login
@@ -41,7 +41,7 @@ class OpenfireAPI < Grape::API
     requires :id, type: Integer
   end
   post :get_user do
-    @user = ::Accounts::Account.find(params[:id])
+    @user = Accounts::Account.find(params[:id])
     present @user, with: ::OpenfireAccountEntity, type: :detail
   end
 
@@ -50,7 +50,7 @@ class OpenfireAPI < Grape::API
     requires :ids, type: String
   end
   post :list_users do
-    @users = ::Accounts::Account.find(params[:ids].split(','))
+    @users = Accounts::Account.find(params[:ids].split(','))
     present @users, with: ::OpenfireAccountEntity, type: :detail
   end
 

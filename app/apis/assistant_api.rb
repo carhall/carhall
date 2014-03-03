@@ -15,19 +15,6 @@ class AssistantAPI < Grape::API
     }.to_json, status_code)
   end
 
-  helpers do
-    def current_user
-      token = params[:auth_token].presence
-      Rails.cache.fetch([:current_user, :token, token], expires_in: 1.hour) do
-        Accounts::Account.find_by(authentication_token: token) rescue nil
-      end
-    end
-
-    def authenticate!
-      error!('401 Unauthorized', 401) unless current_user
-    end
-  end
-
   mount Accounts::LoginAPI
   mount Accounts::CurrentUserAPI => '/current_user'
   mount Tips::VipCardOrderAPI => '/vip_card_orders'

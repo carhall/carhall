@@ -28,7 +28,7 @@ Display all vip card orders' informations of current login dealer.
 
 #### GET /vip_card_orders/:id(.:format)  
 
-Display specified vip card order's details
+Display specified vip card order's details.
 
 Parameters:
 

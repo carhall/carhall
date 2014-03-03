@@ -24,5 +24,16 @@ module GrapeHelper
     end
     entity
   end
+  
+  def current_user
+    token = params[:auth_token].presence
+    Rails.cache.fetch([:current_user, :token, token], expires_in: 1.hour) do
+      Accounts::Account.find_by(authentication_token: token) rescue nil
+    end
+  end
 
+  def authenticate!
+    error!('401 Unauthorized', 401) unless current_user
+  end
+  
 end

@@ -16,7 +16,7 @@ module Tips
       present! parent
     end
 
-    desc "Display specified vip card order's details"
+    desc "Display specified vip card order's details."
     get ":id" do
       present! parent.find(params[:id]), type: :detail
     end
