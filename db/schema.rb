@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120021652) do
+ActiveRecord::Schema.define(version: 20140301024318) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -548,12 +548,14 @@ ActiveRecord::Schema.define(version: 20140120021652) do
     t.integer  "detail_id"
     t.integer  "source_id"
     t.string   "title"
-    t.integer  "state_id",   default: 1
+    t.integer  "state_id",       default: 1
     t.float    "cost"
-    t.integer  "count",      default: 0
-    t.integer  "used_count", default: 0
+    t.integer  "count",          default: 0
+    t.integer  "used_count",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_mobile"
+    t.string   "user_plate_num"
   end
 
   add_index "orders", ["dealer_id"], name: "index_orders_on_dealer_id", using: :btree
@@ -561,6 +563,8 @@ ActiveRecord::Schema.define(version: 20140120021652) do
   add_index "orders", ["source_id"], name: "index_orders_on_source_id", using: :btree
   add_index "orders", ["state_id"], name: "index_orders_on_state_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+  add_index "orders", ["user_mobile"], name: "index_orders_on_user_mobile", using: :btree
+  add_index "orders", ["user_plate_num"], name: "index_orders_on_user_plate_num", using: :btree
 
   create_table "post_blocks", force: true do |t|
     t.integer  "user_id"
@@ -667,10 +671,14 @@ ActiveRecord::Schema.define(version: 20140120021652) do
     t.text    "description"
     t.text    "solution"
     t.string  "provider"
+    t.string  "user_mobile"
+    t.string  "user_plate_num"
   end
 
   add_index "sales_cases", ["dealer_id"], name: "index_sales_cases_on_dealer_id", using: :btree
   add_index "sales_cases", ["user_id"], name: "index_sales_cases_on_user_id", using: :btree
+  add_index "sales_cases", ["user_mobile"], name: "index_sales_cases_on_user_mobile", using: :btree
+  add_index "sales_cases", ["user_plate_num"], name: "index_sales_cases_on_user_plate_num", using: :btree
 
   create_table "traffic_reports", force: true do |t|
     t.integer  "user_id"

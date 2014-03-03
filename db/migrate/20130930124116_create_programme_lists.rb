@@ -4,8 +4,8 @@ class CreateProgrammeLists < ActiveRecord::Migration
       t.references :provider, index: true
       t.string :airdate
       t.string :title
-      t.text :description
-      t.integer :day
+      t.text   :description
+      t.string :day
 
       t.timestamps
     end

@@ -236,17 +236,19 @@ Carhall::Application.routes.draw do
     resources :tutorials  
   end
 
-  # For openfire
-  resource :openfire, only: [] do
-    post :login
-    post :login_by_token
-    post :get_user
-    post :list_users
-    post :send_file
+  namespace :weixin do
+    namespace :tips do
+      resources :mendings, only: [:show]
+      resources :cleanings, only: [:show]
+      resources :activities, only: [:show]
+      resources :bulk_purchasings, only: [:show]
+      resources :vip_cards, only: [:show]
+    end
   end
 
-  resources :winxin
-
+  mount WeixinAPI => '/weixin'
+  mount OpenfireAPI => '/openfire'
+  mount AssistantAPI => '/assistant'
 
   ############################
   # APIs

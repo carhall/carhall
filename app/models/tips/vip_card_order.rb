@@ -2,7 +2,9 @@ class Tips::VipCardOrder < Tips::Order
   belongs_to :source, class_name: 'VipCard', counter_cache: :orders_count
 
   has_many :vip_card_order_items, class_name: 'VipCardOrderItem', autosave: true
+  accepts_nested_attributes_for :vip_card_order_items, allow_destroy: false, update_only: true
   alias_attribute :items, :vip_card_order_items
+  alias_attribute :item_attributes, :vip_card_order_item_attributes
 
   has_many :reviews, foreign_key: :order_id
 
@@ -23,7 +25,6 @@ class Tips::VipCardOrder < Tips::Order
       record.errors.add(:base, I18n.t('order_enabled_can_not_cancel'))
     end
   end
-
 
   def to_base_builder
     json = super
@@ -46,9 +47,8 @@ class Tips::VipCardOrder < Tips::Order
   def use item_id, count = 1
     raise ArgumentError('negative count') if count < 0
     return if disabled?
-    i = items.find(item_id)
     items.detect do |item|
-      item.use count if item == i
+      item.use count if item.id == item_id
     end
     finish if has_finished?
   end

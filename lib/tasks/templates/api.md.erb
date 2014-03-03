@@ -1,0 +1,24 @@
+<%= api.name.titleize %>
+=====
+<% api.routes.each do |route| -%>
+
+### <%= route.route_method %> <%= route.route_path %>  
+
+<%= route.route_description %>
+<% if route.route_params.any? -%>
+
+Parameters:
+
+Name | Required | Type
+---- | -------- | ---- 
+<% end -%>
+<% route.route_params.each do |name, options| -%>
+<% if options.kind_of? Hash -%>
+<%= name %> | <%= options[:required] %> | <%= options[:type] %>
+<% else -%>
+<%= name %> | true | <%= options %> 
+<% end -%>
+<% end -%>
+
+-----
+<% end -%>

@@ -37,17 +37,11 @@ class Accounts::Account < ActiveRecord::Base
     end
   end
 
-  def admin?
-    false
-  end
+  def admin?; false; end
 
-  def public?
-    false
-  end
+  def public?; false; end
 
-  def user?
-    false
-  end
+  def user?; false; end
 
   def human_user_type
     {
@@ -58,18 +52,6 @@ class Accounts::Account < ActiveRecord::Base
       provider: '媒体',
       distributor: '经销商',
       agent: '代理商',
-    }[user_type]
-  end
-
-  def user_type_id
-    {
-      guest: 1,
-      admin: 2,
-      user: 3,
-      dealer: 4,
-      provider: 5,
-      distributor: 6,
-      agent: 7,
     }[user_type]
   end
 
@@ -90,32 +72,6 @@ class Accounts::Account < ActiveRecord::Base
     json = to_base_builder
     json.detail detail.to_base_builder
     json
-  end
-
-  def to_openfire_user_info_builder
-    Jbuilder.new do |json|
-      json.extract! self, :id, :mobile, :user_type_id
-      json.token authentication_token
-    end
-  end
-
-  def avatar_thumb_url
-    "#{AbsoluteUrlPrefix}#{avatar.url(:thumb, timestamp: false)}" if avatar.present?
-  end
-
-  def to_openfire_user_detail_builder
-    Jbuilder.new do |json|
-      json.extract! self, :id, :username, :mobile, :user_type_id, :avatar_thumb_url
-      json.sex_id(sex_id||0)
-    end
-  end
-
-  # Fake detail
-  attr_accessor :detail
-  def detail
-    @detail ||= account.build_detail rescue OpenStruct.new
-  end
-  def detail_attributes= hash=nil
   end
 
   def self.group_by_area_and_type

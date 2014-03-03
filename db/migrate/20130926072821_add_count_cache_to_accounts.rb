@@ -1,6 +1,9 @@
 class AddCountCacheToAccounts < ActiveRecord::Migration
   def change
     change_table(:accounts) do |t|
+      t.integer :friends_count, default: 0
+      t.index   :friends_count
+      
       t.integer :posts_count, default: 0
       t.index   :posts_count
 

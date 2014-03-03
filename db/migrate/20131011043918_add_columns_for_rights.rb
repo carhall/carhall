@@ -3,7 +3,7 @@ class AddColumnsForRights < ActiveRecord::Migration
     change_table :accounts do |t|
       t.integer :position, default: 0
       t.index   :position
-      t.boolean :display, default: true
+      t.boolean :display, default: false
       t.index   :display
       t.integer :rank_id, default: 1
       t.index   :rank_id

@@ -10,6 +10,7 @@ class CreateTutorials < ActiveRecord::Migration
 
       t.attachment :avatar
       t.attachment :file
+      t.string  :url, limit: 1023
 
       t.timestamps
     end

@@ -5,6 +5,7 @@ class AccountsAdditionalFields < ActiveRecord::Migration
       
       # For STI
       t.string  :type
+      t.index   [:type, :id]
       t.references :detail, index: true
       
       t.string  :username, null: false, default: ""
@@ -19,6 +20,12 @@ class AccountsAdditionalFields < ActiveRecord::Migration
       t.datetime :accepted_at
       t.index    :accepted_at
 
+      t.integer :sex_id
+
+      t.integer :area_id
+      t.integer :brand_id
+      
+      t.index [:area_id, :brand_id]
     end
 
     Accounts::Admin.create!(mobile: '13012345678', password: 'password', username: '汽车堂')

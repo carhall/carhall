@@ -22,6 +22,11 @@ class Ability
       # no one can destroy superadmin
 
     when :guest
+      can :read, Tips::Mending
+      can :read, Tips::Cleaning
+      can :read, Tips::Activity
+      can :read, Tips::BulkPurchasing
+      can :read, Tips::VipCard
 
     when :provider
       can :manage, :setting
@@ -45,8 +50,8 @@ class Ability
 
       can :read, Tips
       if user.accepted?
-        can :manage, Tips::Cleaning, dealer: user
         can :manage, Tips::Mending, dealer: user
+        can :manage, Tips::Cleaning, dealer: user
         can :manage, Tips::Activity, dealer: user
         can :manage, Tips::BulkPurchasing, dealer: user
         can :manage, Tips::VipCard, dealer: user

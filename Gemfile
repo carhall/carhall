@@ -43,6 +43,11 @@ gem 'index_for', github: 'bbtfr/index_for'
 # gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'grape'
+gem 'grape-entity'
+
+gem 'rest-client'
+
 gem 'jbuilder', '~> 1.2'
 
 group :doc do
@@ -65,10 +70,6 @@ end
 # Authentication
 gem 'devise', '~> 3.1'
 gem 'cancan'
-
-# For Apis
-# gem 'rails-api'
-# gem 'acts_as_api'
 
 # Basic
 gem 'kaminari'

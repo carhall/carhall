@@ -10,6 +10,8 @@ class CreateVipCardOrderItems < ActiveRecord::Migration
       t.float   :cost
       t.integer :count, default: 0
       t.integer :used_count, default: 0
+      
+      t.boolean :has_review, default: false
     end
   end
 end
