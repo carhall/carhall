@@ -3,8 +3,17 @@ module Tips
 
     helpers do
       def parent
-        Tips::VipCardOrder
+        current_user.vip_card_orders.includes(:user)
       end
+    end
+
+    before do
+      authenticate!
+    end
+
+    desc "List infos"
+    get do
+      present! parent
     end
 
     desc "Show detail"
@@ -25,15 +34,15 @@ module Tips
       requires :data, type: Hash
     end
     post ":id/use" do
-      vip_card_order = parent.find(params)
+      vip_card_order = parent.find(params[:id])
       vip_card_order.items.each do |item|
-        count = data[item.id]
+        count = params[:data][item.id].to_i
         item.use count if count
       end
       if vip_card_order.save
-        present! vip_card_order
+        present! vip_card_order, type: :detail
       else
-        failture! vip_card_order
+        failure! vip_card_order
       end
     end
 

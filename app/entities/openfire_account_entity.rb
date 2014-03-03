@@ -10,7 +10,7 @@ class OpenfireAccountEntity < Grape::Entity
       user.sex_id || 0
     end
     expose :avatar_thumb_url do |user, options|
-      "#{AbsoluteUrlPrefix}#{user.avatar.url(:thumb, timestamp: false)}" if user.avatar.present?
+      absolute_image_url(user.avatar, :thumb) if user.avatar.present?
     end
   end
   expose :authentication_token, as: :token, if: { type: :login }

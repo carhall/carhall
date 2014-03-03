@@ -3,6 +3,8 @@ class Accounts::Dealer < Accounts::PublicAccount
   include Share::Statisticable
 
   set_detail_class Accounts::DealerDetail
+  delegate :dealer_type, :business_scopes, :rqrcode_image, 
+    to: :detail, allow_nil: true
   delegate :latitude, :longitude, to: :location, allow_nil: true
 
   has_one :mending, class_name: 'Tips::Mending'
@@ -12,7 +14,8 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :vip_cards, class_name: 'Tips::VipCard'
 
   has_many :orders, class_name: 'Tips::Order'
-  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Tips::Order'
+  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, 
+    class_name: 'Tips::Order'
 
   has_many :mending_orders, class_name: 'Tips::MendingOrder'
   has_many :cleaning_orders, class_name: 'Tips::CleaningOrder'
@@ -20,7 +23,8 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :vip_card_orders, class_name: 'Tips::VipCardOrder'
 
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
-  has_many :recent_reviews, through: :recent_orders, source: :review, class_name: 'Tips::Review'
+  has_many :recent_reviews, through: :recent_orders, source: :review, 
+    class_name: 'Tips::Review'
   
   before_save do
     if area_changed?

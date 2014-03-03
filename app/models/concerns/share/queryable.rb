@@ -7,7 +7,7 @@ module Share::Queryable
 
   module ClassMethods
     def with_query query
-      sql_where_query = indexes.map{|i| "#{i} LIKE '%#{query}%'" }.join(' or ')
+      sql_where_query = indexes.map{|i| "#{i} LIKE '#{query}%'" }.join(' or ')
       where sql_where_query
     end
 

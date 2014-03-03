@@ -25,7 +25,7 @@ module Share::Detailable
       end
 
       detail_delegates = (klass.attribute_names - attribute_names)
-        .map{ |d| [d, :"#{d}="] }.flatten + options[:delegates].to_a
+        .map{ |d| [d, :"#{d}="] }.flatten
       delegate *detail_delegates, to: :detail, allow_nil: true
     end
   end

@@ -22,7 +22,6 @@ class WeixinAPI < Grape::API
     end
     post ":id" do
       status 200
-      Rails.logger.info "Parameters: #{params["xml"].to_h}"
       respond_weixin params[:account], params["xml"]
     end
   end

@@ -10,9 +10,9 @@ class WeixinMendingEntity < Grape::Entity
   expose :PicUrl do |resource, options|
     unless options[:env][:WeixinNews]
       options[:env][:WeixinNews] = true
-      "#{AbsoluteUrlPrefix}#{resource.dealer.avatar.url(:original, timestamp: false)}"
+      absolute_image_url(resource.dealer.avatar, :original)
     else
-      "#{AbsoluteUrlPrefix}#{resource.dealer.avatar.url(:thumb, timestamp: false)}"
+      absolute_image_url(resource.dealer.avatar, :thumb)
     end
   end
   expose :Url do |resource, options|

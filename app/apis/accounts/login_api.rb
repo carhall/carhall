@@ -11,7 +11,7 @@ module Accounts
 
       if user && user.valid_password?(params[:password])
         user.ensure_authentication_token!
-        present! user, type: login_present_type
+        present! user, type: :login
       else
         error! '401 Unauthorized', 401
       end
