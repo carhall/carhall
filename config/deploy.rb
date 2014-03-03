@@ -1,5 +1,6 @@
 set :application, 'carhall'
 set :repo_url, 'git@github.com:bbtfr/carhall.git'
+set :branch, 'deploy'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
