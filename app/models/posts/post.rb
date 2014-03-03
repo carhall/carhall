@@ -16,9 +16,9 @@ class Posts::Post < ActiveRecord::Base
   end
 
   before_save do
-    self.user_username ||= user.username
-    self.user_description ||= user.description
-    self.user_avatar_thumb_url ||= user.avatar.url(:thumb, timestamp: false) if user.avatar.present?
+    self.user_username = user.username
+    self.user_description = user.description
+    self.user_avatar_thumb_url = user.avatar.url(:thumb, timestamp: false) if user.avatar.present?
   end
 
   def user_avatar_thumb_url

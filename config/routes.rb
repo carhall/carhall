@@ -246,8 +246,9 @@ Carhall::Application.routes.draw do
     end
   end
 
-  mount Weixin::API => '/weixin'
-  mount Openfire::API => '/openfire'
+  mount WeixinAPI => '/weixin'
+  mount OpenfireAPI => '/openfire'
+  mount AssistantAPI => '/assistant'
 
   ############################
   # APIs

@@ -3,6 +3,7 @@ class Accounts::Dealer < Accounts::PublicAccount
   include Share::Statisticable
 
   set_detail_class Accounts::DealerDetail
+  delegate :latitude, :longitude, to: :location, allow_nil: true
 
   has_one :mending, class_name: 'Tips::Mending'
   has_many :cleanings, class_name: 'Tips::Cleaning'

@@ -30,9 +30,11 @@ module Carhall
     config.action_dispatch.rescue_responses["ActiveRecord::AssociationTypeMismatch"] = :unprocessable_entity
 
     # For grape api
-    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.paths.add File.join('app', 'apis'), glob: File.join('**', '*.rb')
     config.paths.add File.join('app', 'entities'), glob: File.join('**', '*.rb')
-    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    config.paths.add File.join('app', 'formatters'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'apis', '*')]
     config.autoload_paths += Dir[Rails.root.join('app', 'entities', '*')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'formatters', '*')]
   end
 end

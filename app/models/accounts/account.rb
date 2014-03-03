@@ -37,17 +37,11 @@ class Accounts::Account < ActiveRecord::Base
     end
   end
 
-  def admin?
-    false
-  end
+  def admin?; false; end
 
-  def public?
-    false
-  end
+  def public?; false; end
 
-  def user?
-    false
-  end
+  def user?; false; end
 
   def human_user_type
     {
@@ -78,14 +72,6 @@ class Accounts::Account < ActiveRecord::Base
     json = to_base_builder
     json.detail detail.to_base_builder
     json
-  end
-
-  # Fake detail
-  attr_accessor :detail
-  def detail
-    @detail ||= account.build_detail rescue OpenStruct.new
-  end
-  def detail_attributes= hash=nil
   end
 
   def self.group_by_area_and_type
