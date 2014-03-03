@@ -2,21 +2,21 @@
 =====
 <% api.routes.each do |route| -%>
 
-### <%= route.route_method %> <%= route.route_path %>  
+#### <%= route.route_method %> <%= route.route_path %>  
 
 <%= route.route_description %>
 <% if route.route_params.any? -%>
 
 Parameters:
 
-Name | Required | Type
----- | -------- | ---- 
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
 <% end -%>
 <% route.route_params.each do |name, options| -%>
 <% if options.kind_of? Hash -%>
-<%= name %> | <%= options[:required] %> | <%= options[:type] %>
+<%= name %> | <%= options[:required] %> | <%= options[:type] %> | <%= options[:desc] %>
 <% else -%>
-<%= name %> | true | <%= options %> 
+<%= name %> | true |  | <%= options %> 
 <% end -%>
 <% end -%>
 
