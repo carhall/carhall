@@ -1,4 +1,6 @@
 class OpenfireAccountEntity < Grape::Entity
+  root :users, :user
+  
   expose :id, :mobile
   expose :user_type_id do |user, options|
     { guest: 1, admin: 2, user: 3, dealer: 4, provider: 5, 
