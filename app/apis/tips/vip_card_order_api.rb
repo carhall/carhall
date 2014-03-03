@@ -11,17 +11,17 @@ module Tips
       authenticate!
     end
 
-    desc "List infos"
+    desc "Display all vip card orders' informations of current login dealer."
     get do
       present! parent
     end
 
-    desc "Show detail"
+    desc "Display specified vip card order's details"
     get ":id" do
       present! parent.find(params[:id]), type: :detail
     end
 
-    desc "Search by mobile and plate_num."
+    desc "Search vip card orders by mobile and plate_num."
     params do
       requires :query, type: String
     end
@@ -29,9 +29,18 @@ module Tips
       present! parent.with_query params[:query]
     end
 
-    desc "Set used_count"
+    desc <<-DESC
+设置会员卡订单使用次数
+
+> 例如：
+> ```
+> POST /assistant/vip_card_orders/1/use
+> data[1]   1
+> data[2]   2
+> ```
+DESC
     params do
-      requires :data, type: Hash
+      requires :data, type: Hash, desc: "key为会员卡订单服务项目ID，value为使用次数"
     end
     post ":id/use" do
       vip_card_order = parent.find(params[:id])

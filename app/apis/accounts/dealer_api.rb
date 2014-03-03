@@ -1,12 +1,7 @@
 module Accounts
   class DealerAPI < Grape::API
 
-    desc "List infos"
-    get do
-      present! Accounts::Dealer.all
-    end
-
-    desc "Show detail"
+    desc "Display the specified dealer's details."
     get ":id" do
       present! Accounts::Dealer.find(params[:id]), type: :detail
     end

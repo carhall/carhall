@@ -5,7 +5,7 @@ module Accounts
       authenticate!
     end
 
-    desc "Show detail"
+    desc "Display the current login user's details."
     get do
       present! current_user, type: :detail
     end
