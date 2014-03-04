@@ -247,16 +247,16 @@ Carhall::Application.routes.draw do
   end
 
   mount WeixinAPI => '/weixin'
-  # mount OpenfireAPI => '/openfire'
+  mount OpenfireAPI => '/openfire'
   mount AssistantAPI => '/assistant'
 
-  resource :openfire, only: [] do
-    post :login
-    post :login_by_token
-    post :get_user
-    post :list_users
-    post :send_file
-  end
+  # resource :openfire, only: [] do
+  #   post :login
+  #   post :login_by_token
+  #   post :get_user
+  #   post :list_users
+  #   post :send_file
+  # end
 
   ############################
   # APIs
