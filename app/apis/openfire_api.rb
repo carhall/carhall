@@ -12,6 +12,7 @@ class OpenfireAPI < Grape::API
     requires :password, type: String
   end
   post :login do
+    status 200
     @user = Accounts::Account.find_for_database_authentication(mobile: params[:mobile])
 
     if @user && @user.valid_password?(params[:password])
@@ -27,6 +28,7 @@ class OpenfireAPI < Grape::API
     requires :token, type: String
   end
   post :login_by_token do
+    status 200
     @user = Accounts::Account.find_by(authentication_token: params[:token])
 
     if @user
@@ -41,6 +43,7 @@ class OpenfireAPI < Grape::API
     requires :id, type: Integer
   end
   post :get_user do
+    status 200
     @user = Accounts::Account.find(params[:id])
     present @user, with: ::OpenfireAccountEntity, type: :detail
   end
@@ -50,6 +53,7 @@ class OpenfireAPI < Grape::API
     requires :ids, type: String
   end
   post :list_users do
+    status 200
     @users = Accounts::Account.find(params[:ids].split(','))
     present @users, with: ::OpenfireAccountEntity, type: :detail
   end
@@ -60,6 +64,7 @@ class OpenfireAPI < Grape::API
     requires :type, type: Integer
   end
   post :send_file do
+    status 200
     @upload = ::Share::Upload.new(file: params[:imres], type_id: params[:type])
 
     if @upload.save
