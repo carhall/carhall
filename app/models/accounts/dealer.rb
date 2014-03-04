@@ -25,6 +25,10 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, source: :review, 
     class_name: 'Tips::Review'
+
+  has_many :operating_records, class_name: 'Statistic::OperatingRecord'
+  has_many :sales_cases, class_name: 'Statistic::SalesCases'
+  has_many :clients, class_name: 'Statistic::UserInfo'
   
   before_save do
     if area_changed?

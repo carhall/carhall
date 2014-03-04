@@ -3,13 +3,15 @@ module Accounts
 
     desc "Login by mobile and password."
     params do
-      requires :mobile, type: Integer
-      requires :password, type: String
+      requires :data do
+        requires :mobile, type: Integer
+        requires :password, type: String
+      end
     end
     post :login do
-      user = Accounts::Account.find_for_database_authentication(mobile: params[:mobile])
+      user = Accounts::Account.find_for_database_authentication(mobile: params[:data][:mobile])
 
-      if user && user.valid_password?(params[:password])
+      if user && user.valid_password?(params[:data][:password])
         user.ensure_authentication_token!
         present! user, type: :login
       else

@@ -8,7 +8,7 @@ class AssistantAPI < Grape::API
 
   rescue_from :all do |exception|
     status_code = ActionDispatch::ExceptionWrapper.new(env, exception).status_code
-    error = "#{status_code} #{exception.class.name.demodulize.titleize}"
+    error = "#{status_code} #{exception.class.name.demodulize.titleize}: #{exception.message}"
     Rack::Response.new({
       error: error,
       success: false
@@ -18,5 +18,6 @@ class AssistantAPI < Grape::API
   mount Accounts::LoginAPI
   mount Accounts::CurrentUserAPI => '/current_user'
   mount Tips::VipCardOrderAPI => '/vip_card_orders'
+  mount Statistic::OperatingRecordAPI => '/operating_records'
 
 end

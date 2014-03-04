@@ -361,7 +361,7 @@ zh-CN:
       statistic/sales_case:
         description: 客户问题描述
         solution: 推荐方案
-        provider: 填表人
+        adviser: 服务顾问
   simple_form:
     labels:
       account:

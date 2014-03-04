@@ -9,8 +9,8 @@ Parameters:
 
 Name | Required | Type | Desc.
 ---- | -------- | ---- | -----
-mobile | true | Integer | 
-password | true | String | 
+data[mobile] | true | Integer | 
+data[password] | true | String | 
 
 -----
 
@@ -68,5 +68,40 @@ Name | Required | Type | Desc.
 ---- | -------- | ---- | -----
 id | true |  |  
 data | true | Hash | key为会员卡订单服务项目ID，value为使用次数
+
+-----
+
+#### GET /operating_records(.:format)  
+
+Display all operating records' informations of current login dealer.
+
+-----
+
+#### GET /operating_records/:id(.:format)  
+
+Display specified operating record's details.
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+id | true |  |  
+
+-----
+
+#### POST /operating_records(.:format)  
+
+Create a new operating record.
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+data[user_brand] | false | String | 车型
+data[user_plate_num] | true | String | 车牌号
+data[project] | true | String | 施工项目
+data[operator] | false | String | 施工人员
+data[inspector] | false | String | 质检员
+data[adviser] | true | String | 服务顾问
 
 -----

@@ -61,14 +61,13 @@ class OpenfireAPI < Grape::API
   desc "Send media file"
   params do
     requires :imres
-    requires :type, type: Integer
+    requires :type
   end
   post :send_file do
-    status 200
     @upload = ::Share::Upload.new(file: params[:imres], type_id: params[:type])
 
     if @upload.save
-      { filePath: "#{AbsoluteUrlPrefix}#{@upload.file.url}" }
+      { filePath: absolute_image_url(@upload.file, :original) }
     else
       failure! @upload
     end

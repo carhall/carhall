@@ -53,7 +53,7 @@
         sOut += '<tbody>';
         for (var i = aSalesCaseData.length - 1; i >= 0; i--) {
           aData = aSalesCaseData[i];
-          sOut += '<tr><td>'+truncate(aData['description'])+'</td><td>'+truncate(aData['solution'])+'</td><td>'+aData['provider']+'</td><td class="actions"><a href="/statistic/sales_cases/'+aData['id']+'/edit"><i class="icon-pencil" rel="tooltip" title="编辑"></i></a><a href="/statistic/sales_cases/'+aData['id']+'" data-confirm="您确认要删除这条记录？" data-method="delete"><i class="icon-remove" rel="tooltip" title="删除"></i></a></td></tr>';
+          sOut += '<tr><td>'+truncate(aData['description'])+'</td><td>'+truncate(aData['solution'])+'</td><td>'+aData['adviser']+'</td><td class="actions"><a href="/statistic/sales_cases/'+aData['id']+'/edit"><i class="icon-pencil" rel="tooltip" title="编辑"></i></a><a href="/statistic/sales_cases/'+aData['id']+'" data-confirm="您确认要删除这条记录？" data-method="delete"><i class="icon-remove" rel="tooltip" title="删除"></i></a></td></tr>';
         };
         sOut += '</tbody>';
         sOut += '</table>';
