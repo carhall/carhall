@@ -7,7 +7,7 @@ module GrapeHelper
     if resource
       present resource, options.reverse_merge(with: get_entity_class(resource))
     else
-      present []
+      error! "404 Record Not Found", 404
     end
   end
 
