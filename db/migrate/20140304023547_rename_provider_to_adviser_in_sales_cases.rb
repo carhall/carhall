@@ -3,7 +3,7 @@ class RenameProviderToAdviserInSalesCases < ActiveRecord::Migration
     change_table :sales_cases do |t|
       t.rename  :provider, :adviser
       
-      t.integer :state_id
+      t.integer :state_id, default: 1
       t.index   :state_id
       
       t.timestamps

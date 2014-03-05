@@ -5,7 +5,8 @@ module GrapeHelper
 
   def present! resource, options={}
     if resource
-      present resource, options.reverse_merge(with: get_entity_class(resource))
+      options[:with] ||= get_entity_class(resource)
+      present resource, options
     else
       error! "404 Record Not Found", 404
     end
@@ -13,8 +14,8 @@ module GrapeHelper
 
   def get_entity_class resource
     entity = nil
-    if resource.kind_of? ActiveRecord::Relation
-      resource_class = resource.klass
+    if resource.respond_to? :to_a
+      resource_class = resource.to_a.first.class
     else
       resource_class = resource.class
     end

@@ -27,7 +27,7 @@ class Accounts::Dealer < Accounts::PublicAccount
     class_name: 'Tips::Review'
 
   has_many :operating_records, class_name: 'Statistic::OperatingRecord'
-  has_many :sales_cases, class_name: 'Statistic::SalesCases'
+  has_many :sales_cases, class_name: 'Statistic::SalesCase'
   has_many :clients, class_name: 'Statistic::UserInfo'
   
   before_save do

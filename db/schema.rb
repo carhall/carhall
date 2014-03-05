@@ -699,9 +699,11 @@ ActiveRecord::Schema.define(version: 20140304025833) do
     t.string   "user_plate_num"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "state_id",       default: 1
   end
 
   add_index "sales_cases", ["dealer_id"], name: "index_sales_cases_on_dealer_id", using: :btree
+  add_index "sales_cases", ["state_id"], name: "index_sales_cases_on_state_id", using: :btree
   add_index "sales_cases", ["user_id"], name: "index_sales_cases_on_user_id", using: :btree
   add_index "sales_cases", ["user_mobile"], name: "index_sales_cases_on_user_mobile", using: :btree
   add_index "sales_cases", ["user_plate_num"], name: "index_sales_cases_on_user_plate_num", using: :btree

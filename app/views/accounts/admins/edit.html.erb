@@ -2,7 +2,7 @@
   <div class="span3">
     <%= render "accounts/share/sidenav/admin" %>
   </div>
-  
+
   <div class="span9">
     <div class="page-header">
       <h3>编辑管理员信息 <small></small></h3>
@@ -10,7 +10,7 @@
 
     <%= simple_form_for(@admin, html: { class: 'form-horizontal', multipart: true }) do |f| %>
       <%= devise_error_messages! @admin %>
-      
+
       <%= f.input :mobile, input_html: { readonly: true } %>
 
       <hr>
@@ -38,11 +38,11 @@
           </div>
         </div>
       <% end %>
-      
+
       <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
 
       <%= f.button :submit, class: 'btn-submit' %>
+      
     <% end %>
-    
   </div>
 </div>

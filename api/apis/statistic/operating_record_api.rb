@@ -13,7 +13,7 @@ module Statistic
 
     desc "Display all operating records' informations of current login dealer."
     get do
-      present! parent
+      present! parent.first(3)
     end
 
     desc "Display specified operating record's details."
