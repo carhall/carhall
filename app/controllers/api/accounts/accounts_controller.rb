@@ -30,7 +30,8 @@ class Api::Accounts::AccountsController < Api::Accounts::ApplicationController
     if @user && @user.valid_password?(
       params.require(:data).require(:password))
       sign_in(@user)
-      @user.reset_authentication_token!  # make sure the user has a token generated
+      # @user.reset_authentication_token!  # make sure the user has a token generated
+      @user.ensure_authentication_token!
       render_create_success @user, :with_token
     else
       warden.custom_failure!
