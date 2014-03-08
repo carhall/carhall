@@ -5,9 +5,9 @@ module Statistic
       authenticate!
     end
 
-    desc "Search user information by mobile and plate_num."
+    desc "通过手机号或车牌号搜索用户信息"
     params do
-      requires :query, type: String
+      requires :query, type: String, desc: '手机号或车牌号'
     end
     post :search do
       status 200

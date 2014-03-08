@@ -1,11 +1,11 @@
 module Accounts
   class LoginAPI < Grape::API
 
-    desc "Login by mobile and password."
+    desc "使用手机号和密码登录"
     params do
       requires :data do
-        requires :mobile, type: Integer
-        requires :password, type: String
+        requires :mobile, type: Integer, desc: '手机号'
+        requires :password, type: String, desc: '密码'
       end
     end
     post :login do

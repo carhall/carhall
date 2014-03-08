@@ -11,19 +11,19 @@ module Tips
       authenticate!
     end
 
-    desc "Display all vip card orders' informations of current login dealer."
+    desc "显示当前登录商户的所有会员卡订单"
     get do
       present! parent
     end
 
-    desc "Display specified vip card order's details."
+    desc "显示指定会员卡订单详情"
     get ":id" do
       present! parent.find(params[:id]), type: :detail
     end
 
-    desc "Search vip card orders by mobile and plate_num."
+    desc "通过手机号或车牌号搜索车主会员卡订单"
     params do
-      requires :query, type: String
+      requires :query, type: String, desc: '手机号或车牌号'
     end
     post :search do
       present! parent.with_query params[:query]

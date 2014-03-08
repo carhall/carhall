@@ -1,7 +1,7 @@
 module Accounts
   class DealerAPI < Grape::API
 
-    desc "Display the specified dealer's details."
+    desc "显示指定商户详情"
     get ":id" do
       present! Accounts::Dealer.find(params[:id]), type: :detail
     end

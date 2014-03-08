@@ -11,17 +11,17 @@ module Statistic
       authenticate!
     end
 
-    desc "Display all sales cases' informations of current login dealer."
+    desc "显示当前登录商户的所有销售跟踪记录"
     get do
       present! parent
     end
 
-    desc "Display specified sales case's details."
+    desc "显示指定销售跟踪记录详情"
     get ":id" do
       present! parent.find(params[:id]), type: :detail
     end
 
-    desc "Create a new sales case."
+    desc "新建一条销售跟踪记录"
     params do
       requires :data do
         requires :user_mobile, type: String, desc: '客户手机号'
@@ -40,9 +40,9 @@ module Statistic
       end
     end
 
-    desc "Search sales cases by mobile and plate_num."
+    desc "通过手机号或车牌号搜索销售跟踪记录"
     params do
-      requires :query, type: String
+      requires :query, type: String, desc: '手机号或车牌号'
     end
     post :search do
       status 200

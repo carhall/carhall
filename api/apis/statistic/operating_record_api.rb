@@ -11,17 +11,17 @@ module Statistic
       authenticate!
     end
 
-    desc "Display all operating records' informations of current login dealer."
+    desc "显示当前登录商户的所有工作记录"
     get do
       present! parent.first(3)
     end
 
-    desc "Display specified operating record's details."
+    desc "显示指定工作记录详情"
     get ":id" do
       present! parent.find(params[:id]), type: :detail
     end
 
-    desc "Create a new operating record."
+    desc "新建一条工作记录"
     params do
       requires :data do
         optional :user_brand, type: String, desc: '车型'
