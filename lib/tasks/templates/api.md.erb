@@ -2,7 +2,7 @@
 =====
 <% api.routes.each do |route| -%>
 
-#### <%= route.route_method %> <%= route.route_path %>  
+#### <%= route.route_method %> <%= api_prefix %><%= route.route_path %>  
 
 <%= route.route_description %>
 <% if route.route_params.any? -%>
