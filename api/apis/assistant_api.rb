@@ -15,6 +15,18 @@ class AssistantAPI < Grape::API
   #   }.to_json, status_code, "content-type" => "application/json")
   # end
 
+  desc "获取更新信息"
+  params do
+    requires :version, desc: '当前版本号'
+  end 
+  get :version do
+    if params[:version].to_i < 100
+      { update: false }
+    else
+      { download_url: "http://115.28.13.212/assistant.apk", update: true }
+    end
+  end
+
   mount Accounts::LoginAPI
   mount Accounts::CurrentUserAPI => '/current_user'
   mount Tips::VipCardOrderAPI => '/vip_card_orders'

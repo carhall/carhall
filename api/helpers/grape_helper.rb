@@ -36,5 +36,11 @@ module GrapeHelper
   def authenticate!
     error!('401 Unauthorized', 401) unless current_user
   end
-  
+
+  def user_info query
+    Rails.cache.fetch([:user_info, :query, query, :belongs_to, current_user.id]) do
+      user_infos = current_user.clients.with_query(query).to_a
+      user_infos ||= Accounts::User.includes(:detail).with_query(query).to_a
+    end
+  end
 end
