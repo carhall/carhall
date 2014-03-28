@@ -1,6 +1,18 @@
 Assistant Api
 =====
 
+#### GET /assistant/version(.:format)  
+
+获取更新信息
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+version | true |  | 当前版本号
+
+-----
+
 #### POST /assistant/login(.:format)  
 
 使用手机号和密码登录
