@@ -3,7 +3,7 @@ module Statistic
 
     helpers do
       def parent
-        current_user.sales_cases
+        current_user.sales_cases.includes(:user_info, user: [:detail])
       end
     end
 

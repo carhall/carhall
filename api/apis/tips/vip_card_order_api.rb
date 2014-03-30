@@ -3,7 +3,7 @@ module Tips
 
     helpers do
       def parent
-        current_user.vip_card_orders.includes(:user)
+        current_user.vip_card_orders.includes(user: [:detail])
       end
     end
 
