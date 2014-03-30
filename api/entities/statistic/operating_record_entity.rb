@@ -1,5 +1,6 @@
 module Statistic
   class OperatingRecordEntity < Grape::Entity
-    expose :id, :user_plate_num, :user_brand, :project, :operator, :inspector, :adviser, :created_at
+    expose :id, :project, :operator, :inspector, :adviser, :created_at
+    expose :user_info, using: Statistic::UserInfoEntity, as: :user
   end
 end

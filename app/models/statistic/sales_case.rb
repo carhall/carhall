@@ -3,6 +3,7 @@ class Statistic::SalesCase < ActiveRecord::Base
   include Share::Dealerable
 
   belongs_to :user_info, primary_key: :mobile, foreign_key: :user_mobile
+  include Share::UserInfoable
 
   enumerate :state, with: %w(跟踪 解决 取消)
 
@@ -22,9 +23,5 @@ class Statistic::SalesCase < ActiveRecord::Base
   
   include Share::Queryable
   define_queryable_column :user_mobile, :user_plate_num
-
-  def user_brand    
-    (user_info||user).try :brand
-  end
 
 end
