@@ -32,6 +32,7 @@ class AssistantAPI < Grape::API
   mount Tips::VipCardOrderAPI => '/vip_card_orders'
   mount Statistic::OperatingRecordAPI => '/operating_records'
   mount Statistic::SalesCaseAPI => '/sales_cases'
-  mount Statistic::UserInfoAPI => '/user_infos'
-
+  mount Statistic::ConsumptionRecordAPI => '/consumption_records'
+  mount Statistic::ConsumptionRecordAPI => '/users/:user_id/consumption_records'
+  mount Tips::MendingOrderAPI => '/mending_orders'
 end

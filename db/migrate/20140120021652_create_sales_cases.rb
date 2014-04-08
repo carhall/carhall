@@ -6,6 +6,14 @@ class CreateSalesCases < ActiveRecord::Migration
       t.text :description
       t.text :solution
       t.string :provider
+
+      t.string :user_mobile
+      t.index  :user_mobile
+
+      t.string :user_plate_num
+      t.index  :user_plate_num
+
+      t.timestamps
     end
   end
 end

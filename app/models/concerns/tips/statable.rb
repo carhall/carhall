@@ -18,6 +18,14 @@ module Tips::Statable
 
     enumerate :state, with: Category::State
 
+    has_many :consumption_records, as: :order, 
+      class_name: "Statistic::ConsumptionRecord"
+    before_save do
+      if used_count_changed?
+        consumption_records.create(count: used_count_was - used_count)
+      end
+    end
+
   end
 
   def cancel

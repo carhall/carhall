@@ -1,5 +1,6 @@
 class Tips::MendingOrder < Tips::Order
   set_detail_class Tips::MendingOrderDetail
+  delegate :brand, :mending_type, to: :detail, allow_nil: true
   belongs_to :source, class_name: 'Mending', counter_cache: :orders_count
 
   validates_presence_of :detail
@@ -19,6 +20,7 @@ class Tips::MendingOrder < Tips::Order
   end
   
   def use count
+    consumption_records.new(count: used_count_was - used_count)
     finish
   end
 

@@ -13,118 +13,19 @@ version | true |  | 当前版本号
 
 -----
 
-#### POST /assistant/login(.:format)  
-
-使用手机号和密码登录
-
-Parameters:
-
-Name | Required | Type | Desc.
----- | -------- | ---- | -----
-data[mobile] | true | Integer | 手机号
-data[password] | true | String | 密码
-
------
-
-#### GET /assistant/current_user(.:format)  
-
-显示当前登录用户详情
-
------
-
-#### GET /assistant/vip_card_orders(.:format)  
-
-显示当前登录商户的所有会员卡订单
-
------
-
-#### GET /assistant/vip_card_orders/:id(.:format)  
-
-显示指定会员卡订单详情
-
-Parameters:
-
-Name | Required | Type | Desc.
----- | -------- | ---- | -----
-id | true |  |  
-
------
-
-#### POST /assistant/vip_card_orders/search(.:format)  
-
-通过手机号或车牌号搜索车主会员卡订单
-
-Parameters:
-
-Name | Required | Type | Desc.
----- | -------- | ---- | -----
-query | true | String | 手机号或车牌号
-
------
-
-#### POST /assistant/vip_card_orders/:id/use(.:format)  
-
-设置会员卡订单使用次数
-
-> 例如：
-> ```
-> POST /assistant/vip_card_orders/1/use
-> data[1]   1
-> data[2]   2
-> ```
-
-
-Parameters:
-
-Name | Required | Type | Desc.
----- | -------- | ---- | -----
-id | true |  |  
-data | true | Hash | key为会员卡订单服务项目ID，value为使用次数
-
------
-
-#### GET /assistant/operating_records(.:format)  
-
-显示当前登录商户的所有工作记录
-
------
-
-#### GET /assistant/operating_records/:id(.:format)  
-
-显示指定工作记录详情
-
-Parameters:
-
-Name | Required | Type | Desc.
----- | -------- | ---- | -----
-id | true |  |  
-
------
-
-#### POST /assistant/operating_records(.:format)  
-
-新建一条工作记录
-
-Parameters:
-
-Name | Required | Type | Desc.
----- | -------- | ---- | -----
-data[user_brand] | false | String | 车型
-data[user_plate_num] | true | String | 车牌号
-data[project] | true | String | 施工项目
-data[operator] | false | String | 施工人员
-data[inspector] | false | String | 质检员
-data[adviser] | true | String | 服务顾问
-
------
-
-#### GET /assistant/sales_cases(.:format)  
+#### GET /assistant/users/:user_id/sales_cases(.:format)  
 
 显示当前登录商户的所有销售跟踪记录
 
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+user_id | true |  |  
+
 -----
 
-#### GET /assistant/sales_cases/:id(.:format)  
+#### GET /assistant/users/:user_id/sales_cases/:id(.:format)  
 
 显示指定销售跟踪记录详情
 
@@ -132,11 +33,12 @@ Parameters:
 
 Name | Required | Type | Desc.
 ---- | -------- | ---- | -----
+user_id | true |  |  
 id | true |  |  
 
 -----
 
-#### POST /assistant/sales_cases(.:format)  
+#### POST /assistant/users/:user_id/sales_cases(.:format)  
 
 新建一条销售跟踪记录
 
@@ -144,7 +46,8 @@ Parameters:
 
 Name | Required | Type | Desc.
 ---- | -------- | ---- | -----
-data[user_mobile] | true | String | 客户手机号
+user_id | true |  |  
+data[user_id] | true | Integer | 客户ID
 data[description] | true | String | 客户问题描述
 data[solution] | true | String | 推荐方案
 data[adviser] | true | String | 服务顾问
@@ -152,7 +55,25 @@ data[state_id] | false | Integer | 状态ID：1.跟踪 2.解决 3.取消
 
 -----
 
-#### POST /assistant/sales_cases/search(.:format)  
+#### PUT /assistant/users/:user_id/sales_cases/:id(.:format)  
+
+编辑一条销售跟踪记录
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+user_id | true |  |  
+id | true |  |  
+data[user_id] | true | Integer | 客户ID
+data[description] | true | String | 客户问题描述
+data[solution] | true | String | 推荐方案
+data[adviser] | true | String | 服务顾问
+data[state_id] | false | Integer | 状态ID：1.跟踪 2.解决 3.取消
+
+-----
+
+#### POST /assistant/users/:user_id/sales_cases/search(.:format)  
 
 通过手机号或车牌号搜索销售跟踪记录
 
@@ -160,18 +81,19 @@ Parameters:
 
 Name | Required | Type | Desc.
 ---- | -------- | ---- | -----
+user_id | true |  |  
 query | true | String | 手机号或车牌号
 
 -----
 
-#### POST /assistant/user_infos/search(.:format)  
+#### GET /assistant/users/:user_id/consumption_records(.:format)  
 
-通过手机号或车牌号搜索用户信息
+显示当前登录商户的该用户的所有消费记录
 
 Parameters:
 
 Name | Required | Type | Desc.
 ---- | -------- | ---- | -----
-query | true | String | 手机号或车牌号
+user_id | true |  |  
 
 -----

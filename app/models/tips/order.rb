@@ -15,6 +15,8 @@ class Tips::Order < ActiveRecord::Base
   include Share::Queryable
   define_queryable_column :user_mobile, :user_plate_num
 
+  enumerate :dealer_state, with: %w(跟踪 解决)
+
   default_scope { order('id DESC') }
   
   before_create do

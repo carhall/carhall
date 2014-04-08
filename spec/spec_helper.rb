@@ -42,4 +42,12 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # You can test a Grape API with RSpec. Tests make HTTP requests, 
+  # therefore they must go into the `spec/request` group. 
+  # You may want your API code to go into `app/api` - you can match that 
+  # layout under `spec` by adding the following in `spec/spec_helper.rb`.
+  config.include RSpec::Rails::RequestExampleGroup, 
+    type: :request, 
+    example_group: { file_path: /spec\/api/ }
 end

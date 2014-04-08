@@ -28,7 +28,7 @@ class Accounts::Dealer < Accounts::PublicAccount
 
   has_many :operating_records, class_name: 'Statistic::OperatingRecord'
   has_many :sales_cases, class_name: 'Statistic::SalesCase'
-  has_many :clients, class_name: 'Statistic::UserInfo'
+  has_many :consumption_records, class_name: 'Statistic::ConsumptionRecord'
   
   before_save do
     if area_changed?

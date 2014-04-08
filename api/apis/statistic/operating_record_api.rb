@@ -41,5 +41,26 @@ module Statistic
       end
     end
 
+    desc "编辑一条工作记录"
+    params do
+      requires :data do
+        optional :user_brand, type: String, desc: '车型'
+        requires :user_plate_num, type: String, desc: '车牌号'
+        requires :project, type: String, desc: '施工项目'
+        optional :operator, type: String, desc: '施工人员'
+        optional :inspector, type: String, desc: '质检员'
+        requires :adviser, type: String, desc: '服务顾问'      
+      end
+    end
+    put ":id" do
+      record = parent.find(params[:id])
+      record.update(declared(params)[:data])
+      if record.save
+        present! record, type: :detail
+      else
+        failure! record
+      end
+    end
+
   end
 end
