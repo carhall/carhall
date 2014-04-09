@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408051824) do
+ActiveRecord::Schema.define(version: 20140409053730) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -379,6 +379,10 @@ ActiveRecord::Schema.define(version: 20140408051824) do
     t.datetime "image_updated_at"
     t.string   "template_ids"
     t.integer  "balance_used",               default: 0, null: false
+    t.string   "rescue_phone"
+    t.string   "insurance_phone"
+    t.string   "secondhand_appraise_phone"
+    t.string   "postsale_phone"
   end
 
   add_index "dealer_details", ["dealer_type_id"], name: "index_dealer_details_on_dealer_type_id", using: :btree
@@ -710,17 +714,49 @@ ActiveRecord::Schema.define(version: 20140408051824) do
     t.integer  "dealer_id"
     t.text     "description"
     t.text     "solution"
-    t.string   "provider"
+    t.string   "adviser"
     t.string   "user_mobile"
     t.string   "user_plate_num"
+    t.integer  "state_id",       default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "sales_cases", ["dealer_id"], name: "index_sales_cases_on_dealer_id", using: :btree
+  add_index "sales_cases", ["state_id"], name: "index_sales_cases_on_state_id", using: :btree
   add_index "sales_cases", ["user_id"], name: "index_sales_cases_on_user_id", using: :btree
   add_index "sales_cases", ["user_mobile"], name: "index_sales_cases_on_user_mobile", using: :btree
   add_index "sales_cases", ["user_plate_num"], name: "index_sales_cases_on_user_plate_num", using: :btree
+
+  create_table "secondhand_appraise_order_details", force: true do |t|
+    t.integer  "brand_id"
+    t.string   "series"
+    t.string   "plate_num"
+    t.text     "description"
+    t.datetime "purchasing_date"
+    t.integer  "travelling_miles"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "secondhand_appraise_order_details", ["brand_id"], name: "index_secondhand_appraise_order_details_on_brand_id", using: :btree
+
+  create_table "test_drives", force: true do |t|
+    t.integer  "dealer_id"
+    t.string   "title"
+    t.float    "price"
+    t.string   "phone"
+    t.text     "params"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "orders_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "test_drives", ["dealer_id"], name: "index_test_drives_on_dealer_id", using: :btree
 
   create_table "traffic_reports", force: true do |t|
     t.integer  "user_id"
@@ -804,6 +840,17 @@ ActiveRecord::Schema.define(version: 20140408051824) do
   add_index "user_infos", ["mobile"], name: "index_user_infos_on_mobile", using: :btree
   add_index "user_infos", ["plate_num"], name: "index_user_infos_on_plate_num", using: :btree
   add_index "user_infos", ["username"], name: "index_user_infos_on_username", using: :btree
+
+  create_table "vehicle_insurance_order_details", force: true do |t|
+    t.integer "brand_id"
+    t.string  "series"
+    t.string  "plate_num"
+    t.text    "description"
+    t.integer "insurance_type_id"
+  end
+
+  add_index "vehicle_insurance_order_details", ["brand_id"], name: "index_vehicle_insurance_order_details_on_brand_id", using: :btree
+  add_index "vehicle_insurance_order_details", ["insurance_type_id"], name: "index_vehicle_insurance_order_details_on_insurance_type_id", using: :btree
 
   create_table "vip_card_items", force: true do |t|
     t.integer "vip_card_id"

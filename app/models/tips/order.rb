@@ -1,13 +1,14 @@
 class Tips::Order < ActiveRecord::Base
+  include Share::Userable
+  belongs_to :user, counter_cache: true, class_name: 'Accounts::User'
+  include Share::Dealerable
+  belongs_to :dealer, counter_cache: true, class_name: 'Accounts::Dealer'
+  
   # For details
   include Share::Detailable
 
   include Tips::Statable
-  include Share::Userable
-  belongs_to :user, counter_cache: true, class_name: 'Accounts::User'
 
-  include Share::Dealerable
-  belongs_to :dealer, counter_cache: true, class_name: 'Accounts::Dealer'
   has_one :review
 
   validates_presence_of :source, :user 
@@ -20,7 +21,7 @@ class Tips::Order < ActiveRecord::Base
   default_scope { order('id DESC') }
   
   before_create do
-    self.dealer_id = source.dealer_id
+    self.dealer_id ||= source.dealer_id
     self.title = set_title
     self.cost = set_cost
   end
@@ -31,12 +32,14 @@ class Tips::Order < ActiveRecord::Base
   end
 
   def set_title
-    "#{source.title}#{I18n.t(".times", count: count) if count}" 
+    "#{source.title}#{I18n.t(".times", count: count) if count and count > 0}" 
   end
 
   def set_cost
-    cost = source.vip_price if source.respond_to? :vip_price
-    cost *= count if count
+    cost ||= source.vip_price if source.respond_to? :vip_price
+    cost ||= source.price if source.respond_to? :price
+    cost ||= 0
+    cost *= count if count and count > 0
   end
 
   def order_type

@@ -23,6 +23,8 @@ module Tips::Statable
     before_save do
       if used_count_changed?
         consumption_records.create(count: used_count_was - used_count)
+      elsif state_id_changed? and state_id == Category::State[:finished]
+        consumption_records.create(count: 1)
       end
     end
 

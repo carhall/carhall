@@ -1,6 +1,7 @@
 class Tips::MendingOrder < Tips::Order
   set_detail_class Tips::MendingOrderDetail
   delegate :brand, :mending_type, to: :detail, allow_nil: true
+  
   belongs_to :source, class_name: 'Mending', counter_cache: :orders_count
 
   validates_presence_of :detail
@@ -9,9 +10,7 @@ class Tips::MendingOrder < Tips::Order
     I18n.t(".mending", dealer: dealer.username, brand: detail.brand)
   end
 
-  def set_cost
-    0
-  end
+  def set_cost; 0; end
 
   def to_base_builder
     json = super
@@ -19,13 +18,7 @@ class Tips::MendingOrder < Tips::Order
     json
   end
   
-  def use count
-    consumption_records.new(count: used_count_was - used_count)
-    finish
-  end
-
-  def used?
-    finished?
-  end
+  def use(count); finish; end
+  def used?; finished?; end
   
 end

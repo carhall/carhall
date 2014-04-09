@@ -4,7 +4,7 @@ module Share::Detailable
   # Fake detail
   attr_accessor :detail
   def detail
-    @detail ||= self.build_detail rescue OpenStruct.new
+    @detail ||= self.try :build_detail || OpenStruct.new
   end
   def detail_attributes= hash=nil; end
 
@@ -24,9 +24,13 @@ module Share::Detailable
         end
       end
 
+      define_method :autobuild_detail do
+        detail || build_detail
+      end
+
       detail_delegates = (klass.attribute_names - attribute_names)
-        .map{ |d| [d, :"#{d}="] }.flatten
       delegate *detail_delegates, to: :detail, allow_nil: true
+      delegate *detail_delegates.map{ |d| :"#{d}=" }, to: :autobuild_detail
     end
   end
 

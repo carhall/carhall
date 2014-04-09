@@ -33,6 +33,8 @@ zh-CN:
   rank_down_success: 成功降级 %{model} 帐号 “%{title}”。
   enable_success: 成功启用 会员卡 “%{title}”。
   mending: "%{dealer} %{brand} 保养专修"
+  vehicle_insurance: "%{dealer} %{brand} 车险续保"
+  secondhand_appraise: "%{dealer} %{brand} 二手评估"
   times:  " %{count} 份"
   to_many: 过多（最多为 %{count} 个）
   activerecord:

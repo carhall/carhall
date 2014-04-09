@@ -1,9 +1,9 @@
 module Tips
-  class MendingOrderAPI < Grape::API
+  class TestDriveOrderAPI < Grape::API
 
     helpers do
       def parent
-        current_user.mending_orders.includes(:detail, user: [:detail])
+        current_user.test_drive_orders.includes(user: [:detail])
       end
     end
 
@@ -11,21 +11,17 @@ module Tips
       authenticate!
     end
 
-    desc <<-DESC
-显示当前登录商户的所有保养专修订单
-
-返回数据中user内车型等数据的是车主信息，user外的是订单信息，以订单数据为准
-DESC
+    desc "显示当前登录商户的所有试驾订单"
     get do
       present! parent.with_dealer_state(1)
     end
 
-    desc "显示指定保养专修订单详情"
+    desc "显示指定试驾订单详情"
     get ":id" do
       present! parent.find(params[:id]), type: :detail
     end
 
-    desc "编辑一条保养专修订单"
+    desc "编辑一条试驾订单"
     params do
       requires :data do
         requires :dealer_state_id, type: Integer, desc: '状态ID：1.跟踪 2.解决'

@@ -35,4 +35,7 @@ class AssistantAPI < Grape::API
   mount Statistic::ConsumptionRecordAPI => '/consumption_records'
   mount Statistic::ConsumptionRecordAPI => '/users/:user_id/consumption_records'
   mount Tips::MendingOrderAPI => '/mending_orders'
+  mount Tips::VehicleInsuranceOrderAPI => '/vehicle_insurance_orders'
+  mount Tips::SecondhandAppraiseOrderAPI => '/secondhand_appraise_orders'
+  mount Tips::TestDriveOrderAPI => '/test_drive_orders'
 end

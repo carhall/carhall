@@ -13,8 +13,8 @@ module Tips::Servicable
     scope :followed_by, -> (user) { with_dealer(user.dealer_friends) }
     
     before_save do
-      self.area_id = dealer.area_id
-      self.location_id = dealer.location_id
+      self.area_id = dealer.area_id if self.respond_to? :area_id
+      self.location_id = dealer.location_id if self.respond_to? :location_id
     end
   end
 

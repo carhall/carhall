@@ -215,6 +215,9 @@ query | true | String | 手机号或车牌号
 
 显示当前登录商户的所有保养专修订单
 
+返回数据中user内车型等数据的是车主信息，user外的是订单信息，以订单数据为准
+
+
 -----
 
 #### GET /assistant/mending_orders/:id(.:format)  
@@ -232,6 +235,105 @@ id | true |  |
 #### PUT /assistant/mending_orders/:id(.:format)  
 
 编辑一条保养专修订单
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+id | true |  |  
+data[dealer_state_id] | true | Integer | 状态ID：1.跟踪 2.解决
+
+-----
+
+#### GET /assistant/vehicle_insurance_orders(.:format)  
+
+显示当前登录商户的所有车险续保订单
+
+返回数据中user内车型等数据的是车主信息，user外的是订单信息，以订单数据为准
+
+
+-----
+
+#### GET /assistant/vehicle_insurance_orders/:id(.:format)  
+
+显示指定车险续保订单详情
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+id | true |  |  
+
+-----
+
+#### PUT /assistant/vehicle_insurance_orders/:id(.:format)  
+
+编辑一条车险续保订单
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+id | true |  |  
+data[dealer_state_id] | true | Integer | 状态ID：1.跟踪 2.解决
+
+-----
+
+#### GET /assistant/secondhand_appraise_orders(.:format)  
+
+显示当前登录商户的所有二手评估订单
+
+返回数据中user内车型等数据的是车主信息，user外的是订单信息，以订单数据为准
+
+
+-----
+
+#### GET /assistant/secondhand_appraise_orders/:id(.:format)  
+
+显示指定二手评估订单详情
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+id | true |  |  
+
+-----
+
+#### PUT /assistant/secondhand_appraise_orders/:id(.:format)  
+
+编辑一条二手评估订单
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+id | true |  |  
+data[dealer_state_id] | true | Integer | 状态ID：1.跟踪 2.解决
+
+-----
+
+#### GET /assistant/test_drive_orders(.:format)  
+
+显示当前登录商户的所有试驾订单
+
+-----
+
+#### GET /assistant/test_drive_orders/:id(.:format)  
+
+显示指定试驾订单详情
+
+Parameters:
+
+Name | Required | Type | Desc.
+---- | -------- | ---- | -----
+id | true |  |  
+
+-----
+
+#### PUT /assistant/test_drive_orders/:id(.:format)  
+
+编辑一条试驾订单
 
 Parameters:
 
