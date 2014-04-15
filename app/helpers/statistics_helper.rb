@@ -5,11 +5,11 @@ module StatisticsHelper
 
   def mean_stars reviews
     return 0.0 if reviews.length == 0
-    (reviews.map(&:stars).reduce(0.0, :+) / reviews.length).round(2)
+    (reviews.map(&:stars).reduce(0.0, :+) / reviews.length).round(2) rescue 0.0
   end
 
   def total_cost orders
-    orders.map(&:cost).reduce(0.0, :+)
+    orders.map(&:cost).reduce(0.0, :+) rescue 0.0
   end
 
   def ordered_users_count orders
@@ -19,7 +19,7 @@ module StatisticsHelper
   def goal_attainment orders
     uncanceled_count = orders.length - states_count(orders, :canceled)
     return 0.0 if uncanceled_count == 0
-    (states_count(orders, :finished) * 100.0 / uncanceled_count).round(2)
+    (states_count(orders, :finished) * 100.0 / uncanceled_count).round(2) rescue 0.0
   end
   
   def states_count orders, state

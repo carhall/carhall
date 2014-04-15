@@ -14,8 +14,12 @@ class ApplicationController < ActionController::Base
       params[namespaced_name] &&= send(method) if respond_to?(method, true)
     end
 
-    load_and_authorize_resource options.reverse_merge(class: klass)
-
+    unless options[:no_authorize]
+      load_and_authorize_resource options.reverse_merge(class: klass)
+    else
+      load_resource options.reverse_merge(class: klass)
+    end
+    
     def namespaced_name
       @namespaced_name ||= controller_path.gsub('/', '_').singularize.to_sym
     end

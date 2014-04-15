@@ -45,23 +45,49 @@ class WeixinAPI < Grape::API
     def respond_event(account, params)
       case params["EventKey"]
       when "vip_card"
-        present account.vip_cards.first(5), with: ::WeixinNewsEntity
+        format_resources_to_news account, account.vip_cards
       when "cleaning"
-        present account.cleanings.first(5), with: ::WeixinNewsEntity
+        format_resources_to_news account, account.cleanings
       when "mending"
-        present account.mending, with: ::WeixinMendingEntity
+        format_to_news ::Tips::Mending.model_name.human, 
+          "点击查看#{I18n.t("#{::Tips::Mending.model_name.human}")}详细资料", 
+          account.avatar, 
+          "dealers/#{account.id}/#{::Tips::Mending.model_name.collection}"
       when "bulk_purchasing"
-        present account.bulk_purchasings.first(5), with: ::WeixinNewsEntity
+        format_resources_to_news account, account.bulk_purchasings
       when "activity"
-        present account.activities.first(5), with: ::WeixinNewsEntity
+        format_resources_to_news account, account.activities
       when "dealer_description"
-        account.description
+        format_to_news "商家介绍", 
+          account.description, 
+          account.avatar, 
+          "dealers/#{account.id}"
       when "download_app"
         ""
       when "my_vip_card"
         ""
       end
     end
+
+    def format_to_news title, description, image, url
+      {
+        news: {
+          Title: title,
+          Description: description,
+          PicUrl: image.url(:original),
+          Url: absolute_url(url)
+        }
+      }
+    end
+
+    def format_resources_to_news account, resources, description
+      resource = resources.first
+      format_to_news resource.class.model_name.human, 
+        "点击查看#{I18n.t("#{resource.class.model_name.human}")}详细资料", 
+        resource.image, 
+        "dealers/#{account.id}/#{resource.class.model_name.collection}"
+    end
+
 
     def initialize_weixin_account
       Thread.new do

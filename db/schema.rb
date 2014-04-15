@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409053730) do
+ActiveRecord::Schema.define(version: 20140415123910) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -590,7 +590,7 @@ ActiveRecord::Schema.define(version: 20140409053730) do
     t.integer  "source_id"
     t.string   "title"
     t.integer  "state_id",        default: 1
-    t.float    "cost"
+    t.float    "cost",            default: 0.0
     t.integer  "count",           default: 0
     t.integer  "used_count",      default: 0
     t.datetime "created_at"

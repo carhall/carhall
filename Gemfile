@@ -31,6 +31,8 @@ gem "twitter-bootstrap-rails"
 gem 'jasny_bootstrap_extension_rails'
 gem 'hermitage'
 
+gem 'ratchet-rails'
+
 # For frontend
 gem 'simple_form'
 gem 'cocoon'

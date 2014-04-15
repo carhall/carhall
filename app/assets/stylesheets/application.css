@@ -13,6 +13,6 @@
  *= require select2
  *= require select2-bootstrap
  *= require_self
- *= require_tree .
+ *= require bootstrap_and_overrides
  */
  

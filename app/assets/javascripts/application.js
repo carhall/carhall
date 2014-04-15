@@ -21,4 +21,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jasny-bootstrap
-//= require_tree .
+//= require bootstrap
+//= require html5shiv
