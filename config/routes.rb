@@ -237,12 +237,14 @@ Carhall::Application.routes.draw do
   end
 
   namespace :weixin do
-    namespace :tips do
-      resources :mendings, only: [:show]
-      resources :cleanings, only: [:show]
-      resources :activities, only: [:show]
-      resources :bulk_purchasings, only: [:show]
-      resources :vip_cards, only: [:show]
+    scope module: :tips do
+      resources :dealers do
+        resource :mending, only: [:show]
+        resources :cleanings, only: [:show, :index]
+        resources :activities, only: [:show, :index]
+        resources :bulk_purchasings, only: [:show, :index]
+        resources :vip_cards, only: [:show, :index]
+      end
     end
   end
 

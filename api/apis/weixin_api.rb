@@ -50,9 +50,9 @@ class WeixinAPI < Grape::API
         format_resources_to_news account, account.cleanings
       when "mending"
         format_to_news ::Tips::Mending.model_name.human, 
-          "点击查看#{I18n.t("#{::Tips::Mending.model_name.human}")}详细资料", 
+          "点击查看#{::Tips::Mending.model_name.human}详细资料", 
           account.avatar, 
-          "dealers/#{account.id}/#{::Tips::Mending.model_name.collection}"
+          "weixin/dealers/#{account.id}/mending"
       when "bulk_purchasing"
         format_resources_to_news account, account.bulk_purchasings
       when "activity"
@@ -61,7 +61,7 @@ class WeixinAPI < Grape::API
         format_to_news "商家介绍", 
           account.description, 
           account.avatar, 
-          "dealers/#{account.id}"
+          "weixin/dealers/#{account.id}"
       when "download_app"
         ""
       when "my_vip_card"
@@ -80,12 +80,12 @@ class WeixinAPI < Grape::API
       }
     end
 
-    def format_resources_to_news account, resources, description
+    def format_resources_to_news account, resources
       resource = resources.first
       format_to_news resource.class.model_name.human, 
-        "点击查看#{I18n.t("#{resource.class.model_name.human}")}详细资料", 
+        "点击查看#{resource.class.model_name.human}详细资料", 
         resource.image, 
-        "dealers/#{account.id}/#{resource.class.model_name.collection}"
+        "weixin/dealers/#{account.id}/#{resource.class.name.demodulize.tableize}"
     end
 
 
