@@ -1,5 +1,9 @@
 def absolute_image_url image, type
-  "#{AbsoluteUrlPrefix}#{image.url(type, timestamp: false)}"
+  absolute_url image.url(type, timestamp: false)
+end
+
+def absolute_url url
+  "#{AbsoluteUrlPrefix}/#{url}"
 end
 
 module Paperclip

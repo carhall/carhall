@@ -16,6 +16,6 @@ class WeixinNewsEntity < Grape::Entity
     end
   end
   expose :Url do |resource, options|
-    "url"
+    absolute_url("weixin/#{resource.class.name.tableize}/#{resource.id}")
   end
 end
