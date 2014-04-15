@@ -1,4 +1,5 @@
 class Weixin::ApplicationController < ApplicationController
+  skip_before_filter :authenticate_account!
   layout "weixin"
 
   def self.set_resource_class klass, options = {}
