@@ -81,8 +81,12 @@ module WeixinHelper
     end
   end
 
+  def set_account
+    params[:account] ||= ::Accounts::Account.find(params[:id])
+  end
+
   def check_signature
-    account = params[:account] = ::Accounts::Account.find(params[:id])
+    account = params[:account]
     token = account.weixin_token
     array = [token, params[:timestamp], params[:nonce]].sort
     params[:signature] == Digest::SHA1.hexdigest(array.join)
