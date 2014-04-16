@@ -101,9 +101,17 @@ module WeixinHelper
       JSON.parse(response.to_str)["access_token"]
     # end
   end
-
+  
   def create_menu menu=WeixinMenu
-    response = RestClient.post "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=#{access_token}", menu.to_json
+    weixin_request 'menu/create', menu
+  end
+
+  def weixin_request command, data
+    backup_escape = ActiveSupport::JSON::Encoding.escape_html_entities_in_json
+    ActiveSupport::JSON::Encoding.escape_html_entities_in_json = false
+    response = RestClient.post "https://api.weixin.qq.com/cgi-bin/#{command}?access_token=#{access_token}", data.to_json
+    ActiveSupport::JSON::Encoding.escape_html_entities_in_json = backup_escape
+    response
   end
 
   WeixinMenu = { 
