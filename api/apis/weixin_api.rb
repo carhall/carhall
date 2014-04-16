@@ -2,7 +2,7 @@ class WeixinAPI < Grape::API
   class Get < Grape::API
     format :txt
 
-    get :create_menu do
+    get ":id/create_menu" do
       create_menu
     end
     
