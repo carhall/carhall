@@ -99,7 +99,7 @@ group :development, :test do
   
   gem 'rspec-rails'
 
-  gem 'yaml_db'
+  gem 'yaml_db', github: 'jetthoughts/yaml_db'
 end
 
 group :development do
