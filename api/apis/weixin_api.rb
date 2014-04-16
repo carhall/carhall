@@ -11,7 +11,7 @@ class WeixinAPI < Grape::API
       requires :signature, :timestamp, :nonce, :echostr
     end
     get ":id" do
-      initialize_weixin_account
+      initialize_weixin_account params[:account]
       params[:echostr]
     end
   end
@@ -40,7 +40,7 @@ class WeixinAPI < Grape::API
     
     desc 'weixin create menu'
     get ":id/create_menu" do
-      create_menu
+      create_menu params[:account]
     end
   end
 

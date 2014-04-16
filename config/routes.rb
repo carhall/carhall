@@ -239,8 +239,22 @@ Carhall::Application.routes.draw do
   end
 
   namespace :weixin do
+    devise_for :accounts, :class_name => "Accounts::Account", controllers: { 
+      registrations: "weixin/accounts/registrations",
+      sessions: "weixin/accounts/sessions",
+      confirmations: "weixin/accounts/confirmations",
+      passwords: "weixin/accounts/passwords",
+    }
+
     scope module: :accounts do
       resources :dealers
+      resource :current_user
+    end
+
+    scope module: :statistic do
+      resource :current_user do
+        resources :consumption_records, only: [:show, :index]
+      end
     end
 
     scope module: :tips do
@@ -250,6 +264,10 @@ Carhall::Application.routes.draw do
         resources :activities, only: [:show, :index]
         resources :bulk_purchasings, only: [:show, :index]
         resources :vip_cards, only: [:show, :index]
+      end
+
+      resource :current_user do
+        resources :vip_card_orders, only: [:show, :index]
       end
     end
   end

@@ -73,11 +73,10 @@ module WeixinHelper
   end
 
 
-  def initialize_weixin_account
+  def initialize_weixin_account account
     Thread.new do
       sleep 5
-      account = params[:account]
-      create_menu WeixinMenu if account.weixin_app_id
+      create_menu account, WeixinMenu if account.weixin_app_id
     end
   end
 
@@ -92,9 +91,8 @@ module WeixinHelper
     params[:signature] == Digest::SHA1.hexdigest(array.join)
   end
 
-  def access_token
+  def access_token account
     # Rails.cache.fetch :access_token, expires_in: 1.hours do
-      account = params[:account]
       app_id = account.try(:weixin_app_id)
       app_secret = account.try(:weixin_app_secret)
       response = RestClient.get "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{app_id}&secret=#{app_secret}"
@@ -102,14 +100,14 @@ module WeixinHelper
     # end
   end
   
-  def create_menu menu=WeixinMenu
-    weixin_request 'menu/create', menu
+  def create_menu account, menu=WeixinMenu
+    request_weixin account, 'menu/create', menu
   end
 
-  def weixin_request command, data
+  def request_weixin account, command, data
     backup_escape = ActiveSupport::JSON::Encoding.escape_html_entities_in_json
     ActiveSupport::JSON::Encoding.escape_html_entities_in_json = false
-    response = RestClient.post "https://api.weixin.qq.com/cgi-bin/#{command}?access_token=#{access_token}", data.to_json
+    response = RestClient.post "https://api.weixin.qq.com/cgi-bin/#{command}?access_token=#{access_token(account)}", data.to_json
     ActiveSupport::JSON::Encoding.escape_html_entities_in_json = backup_escape
     response
   end

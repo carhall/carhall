@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h3>公众账号验证 <small></small></h3>
+</div>
+<%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { class: 'form-horizontal', method: :put }) do |f| %>
+  <div class="row-fluid">
+    <div class="span6">
+      <%= devise_error_messages! %>
+
+      <%= f.input :confirmation_token, autofocus: true %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.button :submit, "提交验证码", class: 'btn-large btn-success' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="span6 right-box">
+      <%= render "devise/share/links" %>
+    </div>
+  </div>
+<% end %>

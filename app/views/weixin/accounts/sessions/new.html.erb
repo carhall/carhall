@@ -1,0 +1,25 @@
+<h3 class="content-padded">公众账号登陆 <small></small></h3>
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
+  <div class="row-fluid">
+    <div class="span6">
+      <%= devise_error_messages! %>
+      
+      <%= f.input :mobile, autofocus: true %>
+      <%= f.input :password %>
+
+      <% if devise_mapping.rememberable? -%>
+        <%= f.input :remember_me, label: false, inline_label: '记住账号', as: :boolean %>
+      <% end %>
+      
+      <div class="control-group">
+        <div class="controls">
+          <%= f.button :submit, "用户登入", class: 'btn-large btn-success' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="span6 right-box">
+      <%= render "devise/share/links" %>
+    </div>
+  </div>
+<% end %>

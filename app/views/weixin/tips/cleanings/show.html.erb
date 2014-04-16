@@ -24,5 +24,5 @@
 <% @source = @cleaning %>
 <% @orders = @cleaning.orders.includes(:user).last(3) %>
 <%= render 'weixin/share/orders_list' %>
-<% @reviews = @cleaning.reviews.includes(:user).last(3) %>
+<% @reviews = @cleaning.reviews.includes(order: :user).last(3) %>
 <%= render 'weixin/share/reviews_list' %>

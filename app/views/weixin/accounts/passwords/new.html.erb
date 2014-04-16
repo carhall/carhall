@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h3>找回密码 <small></small></h3>
+</div>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'form-horizontal' }) do |f| %>
+  <div class="row-fluid">
+    <div class="span6">
+      <%= devise_error_messages! %>
+          
+      <%= f.input :mobile, autofocus: true %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.button :submit, "发送验证码", class: 'btn-large btn-success' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="span6 right-box">
+      <%= render "devise/share/links" %>
+    </div>
+  </div>
+<% end %>

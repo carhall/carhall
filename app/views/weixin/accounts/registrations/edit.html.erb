@@ -1,0 +1,130 @@
+<div class="row-fluid">
+  <% case @user_type %>
+  <% when :provider, :dealer, :distributor, :admin %>
+    <div class="span3">
+      <%= render "settings/sidenav/#{@user_type}" %>
+    </div>
+    <div class="span9">
+  <% else %>
+    <div class="span12">
+  <% end %>
+    <div class="page-header">
+      <h3>编辑基本信息 <small></small></h3>
+    </div>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal', multipart: true }) do |f| %>
+      <div class="row-fluid">
+        <div class="span12">
+          <%= devise_error_messages! %>
+          
+          <%= f.input :mobile, input_html: { readonly: true } %>
+
+          <hr>
+          <div class="control-group">
+            <label class="control-label" for="account_current_password"><strong>重设密码</strong></label>
+          </div>
+
+          <%= f.input :current_password %>
+          <%= f.input :password, label: '新密码' %>
+          <%= f.input :password_confirmation, hint: '重设密码，如不需重设请留空' %>
+
+          <hr>
+          <div class="control-group">
+            <label class="control-label" for="account_username"><strong>编辑基本信息</strong></label>
+          </div>
+
+          <%= f.input :username, required: true %>
+          <%= f.input :avatar do %>
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+              <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= resource.avatar.url(:medium) %>" /></div>
+              <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+              <div>
+                <span class="btn btn-file"><span class="fileupload-new">更换图片</span><span class="fileupload-exists">更换</span><input type="file" name="account[avatar]" /></span>
+                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+              </div>
+            </div>
+          <% end %>
+          
+          <%= f.hidden_field :type %>
+          
+          <% if resource.user_type == :dealer %>
+
+            <%= f.simple_fields_for :detail do |ff| %>
+              <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerType.to_select %>
+              <%= ff.input :specific_service_id, collection: Accounts::DealerDetail::SpecificService.to_select, wrapper_html: { class: "specific_service" }, required: true %>
+              <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScope.to_select, as: :check_boxes %>
+              <%= ff.input :company, input_html: { class: 'input-xlarge' } %>
+              <%= f.input :area_id, collection: Category::Area.to_select, input_html: { class: 'select2' }, required: true %>
+              <%= ff.input :address, input_html: { class: 'input-xxlarge' } %>
+              <%= ff.input :phone %>
+              <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, hint: '填数字即可，例如：09:00 至 18:00' %>
+              <%= ff.input :authentication_image do %>
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                  <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="account[detail_attributes][authentication_image]" /></span>
+                  <span class="fileupload-preview"></span>
+                  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                </div>
+              <% end %>
+            <% end %>
+
+          <% elsif resource.user_type == :provider %>
+            
+            <%= f.simple_fields_for :detail do |ff| %>
+              <%= ff.input :company, input_html: { class: 'input-xlarge' } %>
+              <%= f.input :area_id, collection: Category::Area.to_select, input_html: { class: 'select2' }, required: true %>
+              <%= ff.input :phone %>
+            <% end %>
+
+          <% elsif resource.user_type == :distributor %>
+            
+            <%= f.simple_fields_for :detail do |ff| %>
+              <%= ff.input :business_scope_ids, collection: Accounts::DistributorDetail::BusinessScope.to_select, as: :check_boxes %>
+              <%= ff.input :company, input_html: { class: 'input-xlarge' } %>
+              <%= f.input :area_id, collection: Category::Area.to_select, input_html: { class: 'select2' }, required: true %>
+              <%= ff.input :address, input_html: { class: 'input-xxlarge' } %>
+              <%= ff.input :phone %>
+              <%= ff.input :product_ids, collection: Category::Product.to_select, wrapper_html: { class: "distributor" }, input_html: { class: 'select2', multiple: true }, required: true %>
+              <%= ff.input :brand_ids, collection: Category::Brand.to_select, wrapper_html: { class: "distributor" }, input_html: { class: 'select2', multiple: true }, required: true %>
+              <%= ff.input :authentication_image do %>
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                  <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="account[detail_attributes][authentication_image]" /></span>
+                  <span class="fileupload-preview"></span>
+                  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                </div>
+              <% end %>
+            <% end %>
+
+          <% end %>
+
+          <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
+
+        </div>
+      </div>
+      
+      <%= f.button :submit, class: 'btn-submit' %>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $dealer_type = $("#account_detail_attributes_dealer_type_id")
+    function prepare_specific_service_input() {
+      $(".control-group").filter(".specific_service").hide()
+      if($dealer_type.val() == "2") {
+        $(".control-group").filter(".specific_service").show()
+      } else {
+        $(".control-group").filter(".specific_service").hide()
+      }
+    }
+    prepare_specific_service_input()
+    $dealer_type.change(prepare_specific_service_input)
+
+    ac = new BMap.Autocomplete({'input': 'account_detail_attributes_address'}) // # 建立一个自动完成的对象 
+    ac.setInputValue($('#account_detail_attributes_address').val())
+    // $('#account_detail_attributes_area_id').change(function() {
+    //   ac.setLocation($(this).find('option:selected').text());
+    // })
+  })
+  </script>
+<% end %>

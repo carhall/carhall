@@ -3,7 +3,7 @@
     <li class="table-view-cell">评分：<%= print_stars @source.stars, false %></li>
     <% @reviews.each do |review| %>
       <li class="table-view-cell">
-        <%= review.user.username %>：<%= print_stars reviews.stars %>
+        <%= review.order.user.username %>：<%= print_stars review.stars, false %>
         <pre><%= review.content %></pre>
       </li>
     <% end %>
