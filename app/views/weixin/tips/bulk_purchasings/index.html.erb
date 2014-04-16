@@ -7,8 +7,8 @@
           <div class="media-body">
             <%= bulk_purchasing.title %>
             <p>已购人数：<%= bulk_purchasing.orders_count %></p>
-            <p>评分：<%= bulk_purchasing.orders_count %></p>
-            <p>会员价：<%= bulk_purchasing.vip_price %>   原价：<%= bulk_purchasing.price %></p>
+            <p>评分：<%= print_stars bulk_purchasing.stars, false %></p>
+            <p>会员价：<%= bulk_purchasing.vip_price %>元 原价：<%= bulk_purchasing.price %>元</p>
           </div>
         <% end %>
     </li>

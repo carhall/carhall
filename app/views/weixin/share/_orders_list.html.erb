@@ -1,0 +1,12 @@
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">堂友消费记录</li>
+    <% @orders.each do |order| %>
+      <li class="table-view-cell">
+        <%= order.user.username %>
+        <p><%= order.source.title %></p>
+      </li>
+    <% end %>
+    <li class="table-view-cell orangecolor"><a class="navigate-right link" href="#">查看全部记录</a></li>
+  </ul>
+</div>

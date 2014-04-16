@@ -1,6 +1,11 @@
 class WeixinAPI < Grape::API
   class Get < Grape::API
     format :txt
+
+    get :create_menu do
+      create_menu WeixinMenu
+    end
+    
     desc 'Check weixin sign'
     params do
       requires :signature, :timestamp, :nonce, :echostr
@@ -29,11 +34,11 @@ class WeixinAPI < Grape::API
   version 'v1', using: :param
 
   before do
-    error! '403 Forbidden', 403 unless check_signature
+    # error! '403 Forbidden', 403 unless check_signature
   end
 
   helpers do
-    def respond_weixin(account, params)
+    def respond_weixin account, params
       case params["MsgType"]
       when "event"
         respond_event account, params
@@ -42,7 +47,7 @@ class WeixinAPI < Grape::API
       end
     end
 
-    def respond_event(account, params)
+    def respond_event account, params
       case params["EventKey"]
       when "vip_card"
         format_resources_to_news account, account.vip_cards
@@ -62,10 +67,27 @@ class WeixinAPI < Grape::API
           account.description, 
           account.avatar, 
           "weixin/dealers/#{account.id}"
-      when "download_app"
-        ""
-      when "my_vip_card"
-        ""
+      when "mine"
+        {
+          news: [
+            {
+              Title: "个人资料",
+              Description: "点击查看我的详细资料",
+              PicUrl: absolute_url("weixin/current_user.png"),
+              Url: absolute_url("weixin/current_user")
+            }, {
+              Title: "会员卡",
+              Description: "点击查看我的会员卡详细资料",
+              PicUrl: absolute_url("weixin/vip_cards.png"),
+              Url: absolute_url("weixin/current_user/vip_cards")
+            }, {
+              Title: "消费记录",
+              Description: "点击查看我的消费记录详细资料",
+              PicUrl: absolute_url("weixin/operating_records.png"),
+              Url: absolute_url("weixin/current_user/operating_records")
+            }
+          ]
+        }
       end
     end
 
@@ -98,15 +120,16 @@ class WeixinAPI < Grape::API
 
     def check_signature
       account = params[:account] = ::Accounts::Account.find(params[:id])
-      token = account.authentication_token
+      token = account.weixin_token
       array = [token, params[:timestamp], params[:nonce]].sort
       params[:signature] == Digest::SHA1.hexdigest(array.join)
     end
 
     def access_token
       Rails.cache.fetch :access_token, expires_in: 1.hours do
-        app_id = "wx46c1198fe2a43173"
-        app_secret = "459f6ee22762db6455023a7ad52c3c20"
+        account = params[:account]
+        app_id = account.try(:weixin_app_id)
+        app_secret = account.try(:weixin_app_secret)
         response = RestClient.get "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{app_id}&secret=#{app_secret}"
         JSON.parse(response.to_str)["access_token"]
       end
@@ -118,19 +141,19 @@ class WeixinAPI < Grape::API
   end
 
   mount WeixinAPI::Get
-  mount WeixinAPI::Post    
+  mount WeixinAPI::Post
 end
 
 WeixinMenu = { 
   button: [{
-    name: "服务项目",
+    name: "项目菜单",
     sub_button: [{
       type: "click",
       name: "会员卡",
       key: "vip_card"
     }, {
       type: "click",
-      name: "项目菜单",
+      name: "服务项目",
       key: "cleaning"
     }, {
       type: "click",
@@ -138,7 +161,7 @@ WeixinMenu = {
       key: "mending"
     }]
   }, {
-    name: "促销",
+    name: "发现",
     sub_button: [{
       type: "click",
       name: "近期团购",
@@ -149,19 +172,19 @@ WeixinMenu = {
       key: "activity"
     }]
   }, {
-    name: "更多",
+    name: "在下",
     sub_button: [{
       type: "click",
       name: "商家介绍",
       key: "dealer_description"
     }, {
       type: "click",
-      name: "汽车堂下载",
-      key: "download_app"
+      name: "我的",
+      key: "mine"
     }, {
-      type: "click",
-      name: "我的会员卡",
-      key: "my_vip_card"
+      type: "view",
+      name: "手机会员卡",
+      url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
     }]
   }]
 }

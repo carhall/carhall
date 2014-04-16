@@ -11,7 +11,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     return @account_params if @account_params
     @account_params = params.require(resource_name).permit!
     permit = [:mobile, :current_password, :password, :password_confirmation, 
-      :username, :description, :avatar, :area_id]
+      :username, :description, :avatar, :area_id, :weixin_app_id, :weixin_app_secret]
     case @account_params[:type]
     when "Accounts::Provider"
       permit << :type
@@ -84,7 +84,11 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
 protected
 
   def after_update_path_for resource
-    setting_path
+    if params[:redirect_to]
+      params[:redirect_to]
+    else
+      setting_path
+    end
   end
 
   def after_inactive_sign_up_path_for resource

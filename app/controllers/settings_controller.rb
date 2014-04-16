@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
   authorize_resource class: false
-  before_filter :set_dealer, only: [:finance, :template]
+  before_filter :set_dealer, only: [:finance, :template, :weixin]
   before_filter :set_provider, only: [:template]
   before_filter :ensure_rqrcode_image
 
@@ -15,5 +15,11 @@ class SettingsController < ApplicationController
   end
 
   def template
+  end
+
+  def weixin
+    @user.ensure_weixin_token!
+    step = params[:step] || "step1"
+    render "settings/weixin/#{step}"
   end
 end

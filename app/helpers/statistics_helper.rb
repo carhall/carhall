@@ -27,12 +27,12 @@ module StatisticsHelper
     orders.select{|o|o.state_id == state_id}.length
   end
 
-  def print_stars stars
+  def print_stars stars, display_text = true
     ret = ""
     iStars = stars.round
-    iStars.times { ret << '<i class="icon-star"></i> ' }
-    (5 - iStars).times { ret << '<i class="icon-star-empty"></i> ' }
-    ret << stars.to_s
+    iStars.times { ret << '★' }
+    (5 - iStars).times { ret << '☆' }
+    ret << " #{stars}" if display_text
     ret.html_safe
   end
 

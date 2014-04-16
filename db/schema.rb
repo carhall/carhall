@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415123910) do
+ActiveRecord::Schema.define(version: 20140416070719) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140415123910) do
     t.integer  "position",               default: 0
     t.boolean  "display",                default: false
     t.integer  "rank_id",                default: 1
+    t.string   "weixin_token"
   end
 
   add_index "accounts", ["accepted_at"], name: "index_accounts_on_accepted_at", using: :btree
@@ -383,6 +384,8 @@ ActiveRecord::Schema.define(version: 20140415123910) do
     t.string   "insurance_phone"
     t.string   "secondhand_appraise_phone"
     t.string   "postsale_phone"
+    t.string   "weixin_app_id"
+    t.string   "weixin_app_secret"
   end
 
   add_index "dealer_details", ["dealer_type_id"], name: "index_dealer_details_on_dealer_type_id", using: :btree
@@ -567,12 +570,12 @@ ActiveRecord::Schema.define(version: 20140415123910) do
     t.integer  "user_id"
     t.integer  "dealer_id"
     t.string   "user_brand"
-    t.string   "user_mobile"
-    t.string   "user_plate_num"
     t.string   "project"
     t.string   "operator"
     t.string   "inspector"
     t.string   "adviser"
+    t.string   "user_mobile"
+    t.string   "user_plate_num"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -597,7 +600,7 @@ ActiveRecord::Schema.define(version: 20140415123910) do
     t.datetime "updated_at"
     t.string   "user_mobile"
     t.string   "user_plate_num"
-    t.integer  "dealer_state_id"
+    t.integer  "dealer_state_id", default: 1
   end
 
   add_index "orders", ["dealer_id"], name: "index_orders_on_dealer_id", using: :btree
@@ -702,7 +705,7 @@ ActiveRecord::Schema.define(version: 20140415123910) do
   create_table "reviews", force: true do |t|
     t.integer  "order_id"
     t.text     "content"
-    t.integer  "stars"
+    t.integer  "stars",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -827,19 +830,6 @@ ActiveRecord::Schema.define(version: 20140415123910) do
   end
 
   add_index "user_device", ["user_id"], name: "index_user_device_on_user_id", using: :btree
-
-  create_table "user_infos", force: true do |t|
-    t.integer "dealer_id"
-    t.string  "username"
-    t.string  "mobile"
-    t.string  "plate_num"
-    t.string  "brand"
-  end
-
-  add_index "user_infos", ["dealer_id"], name: "index_user_infos_on_dealer_id", using: :btree
-  add_index "user_infos", ["mobile"], name: "index_user_infos_on_mobile", using: :btree
-  add_index "user_infos", ["plate_num"], name: "index_user_infos_on_plate_num", using: :btree
-  add_index "user_infos", ["username"], name: "index_user_infos_on_username", using: :btree
 
   create_table "vehicle_insurance_order_details", force: true do |t|
     t.integer "brand_id"

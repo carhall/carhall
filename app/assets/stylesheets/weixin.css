@@ -3,7 +3,18 @@
  *= require ratchet_and_overrides
  */
 
-.media-object {
+img.media-object {
   height: 90px;
   width: 120px;
+}
+
+pre {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #777;
+}
+
+.table-view-cell pre {
+  margin-bottom: 0;
 }

@@ -1,0 +1,12 @@
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">评分：<%= print_stars @source.stars, false %></li>
+    <% @reviews.each do |review| %>
+      <li class="table-view-cell">
+        <%= review.user.username %>：<%= print_stars reviews.stars %>
+        <pre><%= review.content %></pre>
+      </li>
+    <% end %>
+    <li class="table-view-cell orangecolor"><a class="navigate-right link" href="#">查看全部评价</a></li>
+  </ul>
+</div>

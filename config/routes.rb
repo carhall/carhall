@@ -26,6 +26,8 @@ Carhall::Application.routes.draw do
   resource :setting do
     get :template
     get :finance
+    get :weixin
+    get "weixin/:step", action: :weixin
   end
 
   namespace :statistic do
@@ -237,6 +239,10 @@ Carhall::Application.routes.draw do
   end
 
   namespace :weixin do
+    scope module: :accounts do
+      resources :dealers
+    end
+
     scope module: :tips do
       resources :dealers do
         resource :mending, only: [:show]

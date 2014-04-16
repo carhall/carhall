@@ -109,6 +109,8 @@ zh-CN:
         accepted?: 年费
         expire_at: 到期时间
         rank: 会员级别
+        weixin_app_id: AppID
+        weixin_app_secret: AppSecret
       category: &categoryable
         id: ID
         name: 名称

@@ -1,0 +1,37 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "settings/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>微信订阅号管理 <small></small></h3>
+    </div>
+    <p>首先，您需要登录微信公众平台，开启开发模式</p>
+    <ol>
+      <li>选择 功能 => 高级功能 => 编辑模式 => 关闭 “编辑模式”</li>
+      <li>选择 功能 => 高级功能 => 开发模式 => 点击 “成为开发者”</li>
+      <li>勾选 “同意《协议》” => 点击 “下一步”</li>
+      <%= image_tag "weixin-step1.jpg", alt: "填写URL和Token" %>
+      <li>如上图所示，填写
+        <table>
+          <tr>
+            <td>Url：</td>
+            <td class="text-error">
+              <%= absolute_url("weixin/dealer/#{@user.id}") %>
+            </td>
+          </tr>
+          <tr>
+            <td>Token：</td>
+            <td class="text-error">
+              <%= @user.weixin_token %>
+            </td>
+          </tr>
+        </table>
+      </li>
+      <li>点击 “提交”</li>
+    </ol>
+    <a class="btn btn-submit" href="/setting/weixin/step2">下一步</a>
+  </div>
+
+</div>

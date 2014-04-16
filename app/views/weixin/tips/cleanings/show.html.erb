@@ -1,63 +1,28 @@
 <div class="card">
   <ul class="table-view">
-    <li class="table-view-cell">项目名称</li>
-    <li class="table-view-cell">会员价10元   原价20元</li>
+    <li class="table-view-cell"><%= @cleaning.title %></li>
+    <li class="table-view-cell">会员价：<%= @cleaning.vip_price %>元 原价：<%= @cleaning.price %>元</li>
   </ul>
 </div>
 <div class="card">
   <ul class="table-view">
-    <li class="table-view-cell">评分：★★★★★ </li>
-    <li class="table-view-cell redcolor">交易达成率：90%</li>
-    <li class="table-view-cell">90个人已购买</li>
+    <li class="table-view-cell">评分：<%= print_stars @cleaning.stars, false %></li>
+    <li class="table-view-cell redcolor">交易达成率：<%= @cleaning.goal_attainment %>%</li>
+    <li class="table-view-cell"><%= @cleaning.orders_count %>个人已购买</li>
   </ul>
 </div>
-<div class="card">
-  <ul class="table-view">
-    <li class="table-view-cell">地址：</li>
-    <li class="table-view-cell redcolor">营业时间：</li>
-    <li class="table-view-cell">服务项目</li>
-    <li class="table-view-cell  orangecolor"><a class="navigate-right link" href="#">会员卡</a></li>
-    <li class="table-view-cell  orangecolor"><a class="navigate-right link" href="#">汽车美容</a></li>
-    <li class="table-view-cell  orangecolor"><a class="navigate-right link" href="#">保养专修</a></li>
-    <li class="table-view-cell">促销活动</li>
-    <li class="table-view-cell  orangecolor"><a class="navigate-right link" href="#">近期团购</a></li>
-    <li class="table-view-cell  orangecolor"><a class="navigate-right link" href="#">近期活动</a></li>
-  </ul>
-</div>
+<%= render 'weixin/share/dealer_info' %>
 <div class="card">
   <ul class="table-view">
     <li class="table-view-cell">项目介绍</li>
     <li class="table-view-cell">
       套餐内容
-      <p>。。。。。。。。。。。</p>
+      <pre><%= @cleaning.description %></pre>
     </li>
   </ul>
 </div>
-<div class="card">
-  <ul class="table-view">
-    <li class="table-view-cell">堂友消费记录</li>
-    <li class="table-view-cell">
-      XXXXX
-      <p>消费了的项目名称</p>
-    </li>
-    <li class="table-view-cell">
-      XXXXX
-      <p>做了什么项目</p>
-    </li>
-    <li class="table-view-cell  orangecolor"><a class="navigate-right link" href="#">查看全部记录</a></li>
-  </ul>
-</div>
-<div class="card">
-  <ul class="table-view">
-    <li class="table-view-cell">评分：★★★★★ </li>
-    <li class="table-view-cell">
-      XXXXX：★★★★★ 
-      <p>评价内容</p>
-    </li>
-    <li class="table-view-cell">
-      XXXXX：★★★ 
-      <p>评价内容</p>
-    </li>
-    <li class="table-view-cell  orangecolor"><a class="navigate-right link" href="#">查看全部评价</a></li>
-  </ul>
-</div>
+<% @source = @cleaning %>
+<% @orders = @cleaning.orders.includes(:user).last(3) %>
+<%= render 'weixin/share/orders_list' %>
+<% @reviews = @cleaning.reviews.includes(:user).last(3) %>
+<%= render 'weixin/share/reviews_list' %>

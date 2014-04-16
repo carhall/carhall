@@ -1,12 +1,28 @@
-<div class="titleimg">
-  <%= image_tag @activity.image.url(:medium) %>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell"><%= @vip_card.title %></li>
+    <li class="table-view-cell">会员价：<%= @vip_card.vip_price %>元 原价：<%= @vip_card.price %>元</li>
+  </ul>
 </div>
 <div class="card">
   <ul class="table-view">
-    <li class="table-view-cell"><%= @activity.title %></li>
+    <li class="table-view-cell">评分：<%= print_stars @vip_card.stars, false %></li>
+    <li class="table-view-cell redcolor">交易达成率：<%= @vip_card.goal_attainment %>%</li>
+    <li class="table-view-cell"><%= @vip_card.orders_count %>个人已购买</li>
+  </ul>
+</div>
+<%= render 'weixin/share/dealer_info' %>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">项目介绍</li>
     <li class="table-view-cell">
-      <p class="redcolor">剩余时间：<%= distance_of_time_in_words(@activity.expire_at, Time.now) %></p>
-      <p><%= @activity.description %></p>
+      套餐内容
+      <pre><%= @vip_card.description %></pre>
     </li>
   </ul>
 </div>
+<% @source = @vip_card %>
+<% @orders = @vip_card.orders.includes(:user).last(3) %>
+<%= render 'weixin/share/orders_list' %>
+<% @reviews = @vip_card.reviews.includes(:user).last(3) %>
+<%= render 'weixin/share/reviews_list' %>

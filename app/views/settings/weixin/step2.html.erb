@@ -1,0 +1,20 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "settings/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>微信订阅号管理 <small></small></h3>
+    </div>
+    <%= simple_form_for(@user, as: :account, url: account_registration_path(redirect_to: "/setting/weixin/step2"), html: { method: :put, class: 'form-horizontal no-margin dl-horizontal dl-span6' }) do |f| %>
+
+      <%= f.input :weixin_app_id %>
+      <%= f.input :weixin_app_secret %>
+
+      <%= f.button :submit, class: 'btn-submit' %>
+
+    <% end %>
+  </div>
+
+</div>

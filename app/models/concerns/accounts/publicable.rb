@@ -49,4 +49,17 @@ module Accounts::Publicable
     0
   end
 
+  def ensure_weixin_token
+    generate_weixin_token unless weixin_token
+  end
+
+  def generate_weixin_token
+    raw, enc = Devise.token_generator.generate_number(self.class, :weixin_token)
+    self.weixin_token = raw
+  end
+
+  extend Share::Exclamation
+  define_exclamation_and_method :ensure_weixin_token
+  define_exclamation_and_method :generate_weixin_token
+  
 end
