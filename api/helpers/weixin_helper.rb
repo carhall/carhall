@@ -93,13 +93,13 @@ module WeixinHelper
   end
 
   def access_token
-    Rails.cache.fetch :access_token, expires_in: 1.hours do
+    # Rails.cache.fetch :access_token, expires_in: 1.hours do
       account = params[:account]
       app_id = account.try(:weixin_app_id)
       app_secret = account.try(:weixin_app_secret)
       response = RestClient.get "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{app_id}&secret=#{app_secret}"
       JSON.parse(response.to_str)["access_token"]
-    end
+    # end
   end
 
   def create_menu menu=WeixinMenu
