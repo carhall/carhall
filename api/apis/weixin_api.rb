@@ -34,7 +34,7 @@ class WeixinAPI < Grape::API
   version 'v1', using: :param
 
   before do
-    # error! '403 Forbidden', 403 unless check_signature
+    error! '403 Forbidden', 403 unless check_signature
   end
 
   helpers WeixinHelper
