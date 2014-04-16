@@ -2,3 +2,7 @@
  *= require ratchet
  *= require ratchet_and_overrides
  */
+
+.media-object {
+  height: 90px;
+}

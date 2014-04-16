@@ -1,0 +1,11 @@
+<div class="titleimg">
+  <%= image_tag @dealer.avatar.url(:medium) %>
+</div>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">商家介绍</li>
+    <li class="table-view-cell">
+      <p><%= @dealer.description %></p>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,15 @@
+<div class="card">
+  <ul class="table-view">
+    <% @activities.each do |activity| %>
+      <li class="table-view-cell media">
+        <a class="navigate-right" href="details.html" data-transition="slide-in">
+          <%= image_tag @activity.image.url(:thumb), class: "media-object pull-left" %>
+          <div class="media-body">
+            <%= @activity.title %>
+            <p class="time redcolor">剩余时间：<%= distance_of_time_in_words(@activity.expire_at, Time.now) %></p>
+          </div>
+        </a>
+    </li>
+    <% end %>
+  </ul>
+</div>

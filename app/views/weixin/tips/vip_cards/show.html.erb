@@ -1,0 +1,12 @@
+<div class="titleimg">
+  <%= image_tag @activity.image.url(:medium) %>
+</div>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell"><%= @activity.title %></li>
+    <li class="table-view-cell">
+      <p class="redcolor">剩余时间：<%= distance_of_time_in_words(@activity.expire_at, Time.now) %></p>
+      <p><%= @activity.description %></p>
+    </li>
+  </ul>
+</div>
