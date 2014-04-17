@@ -17,7 +17,7 @@
     <li class="table-view-cell">项目介绍</li>
     <li class="table-view-cell">
       套餐内容
-      <pre><%= @vip_card.description %></pre>
+      <%= simple_format(@vip_card.description) %>
     </li>
   </ul>
 </div>

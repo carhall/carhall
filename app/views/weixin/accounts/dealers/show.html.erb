@@ -5,7 +5,7 @@
   <ul class="table-view">
     <li class="table-view-cell">商家介绍</li>
     <li class="table-view-cell">
-      <pre><%= @dealer.description %></pre>
+      <%= simple_format(@dealer.description) %>
     </li>
   </ul>
 </div>

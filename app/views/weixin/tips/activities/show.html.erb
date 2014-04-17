@@ -6,7 +6,7 @@
     <li class="table-view-cell"><%= @activity.title %></li>
     <li class="table-view-cell">
       <p class="redcolor">剩余时间：<%= distance_of_time_in_words(@activity.expire_at, Time.now) %></p>
-      <pre><%= @activity.description %></pre>
+      <%= simple_format(@activity.description) %>
     </li>
   </ul>
 </div>

@@ -17,7 +17,7 @@
     <li class="table-view-cell">项目介绍</li>
     <li class="table-view-cell">
       套餐内容
-      <pre><%= @bulk_purchasing.description %></pre>
+      <%= simple_format(@bulk_purchasing.description) %>
     </li>
   </ul>
 </div>

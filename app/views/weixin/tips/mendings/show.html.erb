@@ -1,22 +1,24 @@
 <% @mending ||= Tips::Mending.new %>
 <h3 class="content-padded">预约独享优惠</h3>
-<table class="gridtable">
-  <tr>
-    <th></th>
-    <th>优惠时段</th>
-    <th>工时优惠</th>
-    <th>零件优惠</th>
-  </tr>
-  <% Category::Day.all.each do |day, name| %>
+<div class="card">
+  <table class="table-view">
     <tr>
-      <% discount = OpenStruct.new @mending.discount[name] %>
-      <td>周<%= t('date.abbr_day_names')[day%7] %></td>
-      <td><%= discount.discount_during %></td>
-      <td><%= discount.man_hours_discount %></td>
-      <td><%= discount.spare_parts_discount %></td>
+      <th></th>
+      <th>优惠时段</th>
+      <th>工时优惠</th>
+      <th>零件优惠</th>
     </tr>
-  <% end %>
-</table>
+    <% Category::Day.all.each do |day, name| %>
+      <tr>
+        <% discount = OpenStruct.new @mending.discount[name] %>
+        <td>周<%= t('date.abbr_day_names')[day%7] %></td>
+        <td><%= discount.discount_during %></td>
+        <td><%= discount.man_hours_discount %></td>
+        <td><%= discount.spare_parts_discount %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 <h3 class="content-padded">专修品牌</h3>
 <div class="card">
   <ul class="table-view">

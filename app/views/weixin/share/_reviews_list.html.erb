@@ -4,7 +4,7 @@
     <% @reviews.each do |review| %>
       <li class="table-view-cell">
         <%= review.order.user.username %>：<%= print_stars review.stars, false %>
-        <pre><%= review.content %></pre>
+        <%= simple_format(review.content) %>
       </li>
     <% end %>
     <li class="table-view-cell orangecolor"><a class="navigate-right link" href="#">查看全部评价</a></li>
