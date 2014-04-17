@@ -11,12 +11,7 @@ Carhall::Application.routes.draw do
   root to: 'dashboards#show'
   
   # Frontend sign_in/sing_up page
-  devise_for :accounts, :class_name => "Accounts::Account", controllers: { 
-    registrations: "accounts/registrations",
-    sessions: "accounts/sessions",
-    confirmations: "accounts/confirmations",
-    passwords: "accounts/passwords",
-  }
+  devise_for :accounts, class_name: "Accounts::Account", module: "accounts"
   devise_scope :account do
     namespace :accounts do
       resource :confirmation
@@ -238,14 +233,15 @@ Carhall::Application.routes.draw do
     resources :tutorials  
   end
 
-  namespace :weixin do
-    devise_for :accounts, :class_name => "Accounts::Account", controllers: { 
-      registrations: "weixin/accounts/registrations",
-      sessions: "weixin/accounts/sessions",
-      confirmations: "weixin/accounts/confirmations",
-      passwords: "weixin/accounts/passwords",
-    }
 
+  namespace :weixin do
+    devise_for :accounts, class_name: "Accounts::Account", module: "weixin/accounts"
+    devise_scope :account do
+      namespace :accounts do
+        resource :confirmation
+      end
+    end
+    
     scope module: :accounts do
       resources :dealers
       resource :current_user
@@ -270,6 +266,8 @@ Carhall::Application.routes.draw do
         resources :vip_card_orders, only: [:show, :index]
       end
     end
+
+    root to: "accounts/current_users#show"
   end
 
   mount WeixinAPI => '/weixin'

@@ -96,8 +96,4 @@ protected
     dashboard_path
   end
 
-  def after_resending_confirmation_instructions_path_for resource
-    new_user_confirmation_path
-  end
-
 end 

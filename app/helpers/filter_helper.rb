@@ -44,6 +44,10 @@ module FilterHelper
     @user ||= @current_user = current_account
   end
 
+  def set_weixin_current_user
+    @user ||= @current_user = current_weixin_account
+  end
+
   def redirect_guest
     unless @current_user
       raise CanCan::AccessDenied
