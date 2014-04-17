@@ -63,13 +63,15 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $scroll = $("#auto-scroll")
-      setInterval(function() {
-        $scroll.find("ul:first").animate({
-          marginTop:"-20px"
-        }, 500, function() {
-          $(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
-        });
-      }, 2000)
+      if($scroll.find("li").length > 4) {
+        setInterval(function() {
+          $scroll.find("ul:first").animate({
+            marginTop:"-20px"
+          }, 500, function() {
+            $(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
+          });
+        }, 2000)
+      }
     });
   </script>
 <% end %>
