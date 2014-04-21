@@ -6,14 +6,14 @@ class AssistantAPI < Grape::API
   error_formatter :json, ErrorFormatter
   formatter :json, DataFormatter
 
-  # rescue_from :all do |exception|
-  #   status_code = ActionDispatch::ExceptionWrapper.new(env, exception).status_code
-  #   error = "#{status_code} #{exception.class.name.demodulize.titleize}: #{exception.message}"
-  #   Rack::Response.new({
-  #     error: error,
-  #     success: false
-  #   }.to_json, status_code, "content-type" => "application/json")
-  # end
+  rescue_from :all do |exception|
+    status_code = ActionDispatch::ExceptionWrapper.new(env, exception).status_code
+    error = "#{status_code} #{exception.class.name.demodulize.titleize}: #{exception.message}"
+    Rack::Response.new({
+      error: error,
+      success: false
+    }.to_json, status_code, "content-type" => "application/json")
+  end
 
   desc "获取更新信息"
   params do
