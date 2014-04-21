@@ -17,7 +17,7 @@ module Paperclip
   end
 end
 
-class NilClassEntity < Grape::Entity; end
+class ObjectEntity < Grape::Entity; end
 
 Paperclip.io_adapters.register Paperclip::HashieMashUploadedFileAdapter do |target|
   target.is_a? Hashie::Mash

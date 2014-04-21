@@ -5,6 +5,13 @@ describe AssistantAPI do
   let(:user) { create :dealer }
   let(:auth_token) { user.authentication_token }
 
+  describe "GET /assistant/version" do
+    it "returns a 200 status code" do
+      get "/assistant/version", version: 100
+      response.status.should == 200
+    end
+  end
+
   describe Accounts::LoginAPI do
     describe "POST /assistant/login" do
       it "returns a 201 status code" do
@@ -24,9 +31,31 @@ describe AssistantAPI do
   end
 
   describe Tips::VipCardOrderAPI do
+
+    before do
+    end
+    
     describe "GET /assistant/vip_card_orders" do
       it "returns an array of vip card orders" do
         get "/assistant/vip_card_orders?auth_token=#{auth_token}"
+        response.status.should == 200
+      end
+    end
+    describe "GET /assistant/vip_card_orders/:id" do
+      it "returns a vip card order" do
+        get "/assistant/vip_card_orders/1?auth_token=#{auth_token}"
+        response.status.should == 200
+      end
+    end
+    describe "POST /assistant/vip_card_orders" do
+      it "create a vip card order" do
+        post "/assistant/vip_card_orders?auth_token=#{auth_token}"
+        response.status.should == 201
+      end
+    end
+    describe "PUT /assistant/vip_card_orders/:id" do
+      it "update a vip card order" do
+        put "/assistant/vip_card_orders?auth_token=#{auth_token}"
         response.status.should == 200
       end
     end
@@ -50,12 +79,4 @@ describe AssistantAPI do
     end
   end
 
-  describe Statistic::UserInfoAPI do
-    describe "GET /assistant/user_infos" do
-      it "returns an array of user infos" do
-        get "/assistant/user_infos?auth_token=#{auth_token}"
-        response.status.should == 200
-      end
-    end
-  end
 end

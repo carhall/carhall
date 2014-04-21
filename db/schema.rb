@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416070719) do
+ActiveRecord::Schema.define(version: 20140421021044) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -350,8 +350,8 @@ ActiveRecord::Schema.define(version: 20140416070719) do
     t.integer  "dealer_id"
     t.integer  "order_id"
     t.string   "order_type"
-    t.string   "order_title"
-    t.string   "count"
+    t.string   "title"
+    t.integer  "count",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

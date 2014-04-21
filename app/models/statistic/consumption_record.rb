@@ -5,7 +5,7 @@ class Statistic::ConsumptionRecord < ActiveRecord::Base
 
   before_save do
     if order
-      self.order_title ||= order.title
+      self.title ||= order.title
       self.order_type = order.class.name
       original_order = order.try(:vip_card_order) || order
       self.user_id = original_order.user_id
