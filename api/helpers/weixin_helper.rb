@@ -123,10 +123,6 @@ module WeixinHelper
         type: "click",
         name: "服务项目",
         key: "cleaning"
-      }, {
-        type: "click",
-        name: "保养专修",
-        key: "mending"
       }]
     }, {
       name: "发现",
@@ -145,6 +141,10 @@ module WeixinHelper
         type: "click",
         name: "商家介绍",
         key: "dealer_description"
+      }, {
+        type: "view",
+        name: "违章查询",
+        url: "http://sms100.sinaapp.com/all/"
       }, {
         type: "click",
         name: "我的",
