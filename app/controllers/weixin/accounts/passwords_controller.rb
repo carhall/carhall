@@ -3,6 +3,10 @@ class Weixin::Accounts::PasswordsController < ::Accounts::PasswordsController
 
 protected
 
+  def resource_name
+    :weixin_account
+  end
+  
   def after_resetting_password_path_for resource
     { action: :show, controller: :'weixin/accounts/current_users' }
   end

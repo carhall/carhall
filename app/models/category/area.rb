@@ -49,4 +49,22 @@ class Category::Area < ActiveEnum::Base
     end
   end
 
+  class GroupedSelect
+    attr_accessor :province, :cities
+    alias_method :to_s, :province
+    
+    def initialize province, cities
+      @province = province
+      @cities = cities.map { |city| [city[1], city[0]] }
+    end
+  end
+
+  def self.to_grouped_select
+    all.group_by do |area|
+      area[2][:province]
+    end.map do |province, cities|
+      GroupedSelect.new province, cities
+    end
+  end
+
 end

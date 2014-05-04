@@ -3,8 +3,8 @@ class Weixin::Accounts::ConfirmationsController < ::Accounts::ConfirmationsContr
 
 protected
 
-  def root_path
-    { action: :show, controller: :'weixin/accounts/current_users' }
+  def resource_name
+    :weixin_account
   end
   
   # The path used after resending confirmation instructions.

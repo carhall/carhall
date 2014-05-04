@@ -1,22 +1,15 @@
-<div class="page-header">
-  <h3>公众账号验证 <small></small></h3>
-</div>
-<%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { class: 'form-horizontal', method: :post }) do |f| %>
-  <div class="row-fluid">
-    <div class="span6">
-      <%= devise_error_messages! %>
-          
-      <%= f.input :mobile, autofocus: true %>
+<% content_for :title do %>
+  账号验证
+<% end %>
 
-      <div class="control-group">
-        <div class="controls">
-          <%= f.button :submit, "重新发送验证码", class: 'btn-large btn-success' %>
-        </div>
-      </div>
-    </div>
-
-    <div class="span6 right-box">
-      <%= render "devise/share/links" %>
-    </div>
+<%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="card">
+    <ul class="table-view">
+      <li class="table-view-cell input-row"><%= f.input :mobile, autofocus: true %></li>
+    </ul>
+  </div>
+  <div class="card" style="border:none">
+    <%= f.button :submit, "重新发送验证码", class: 'btn-positive btn-block' %>
   </div>
 <% end %>

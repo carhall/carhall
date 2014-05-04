@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  汽车堂账号登陆
+  编辑账号信息
 <% end %>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
@@ -12,8 +12,8 @@
   <div class="card">
     <ul class="table-view">
       <li class="table-view-cell input-row"><%= f.input :username %></li>
-      <li class="table-view-cell input-row"><%= f.input :sex_id, collection: Accounts::Account::Sex.to_select %></li>
-      <li class="table-view-cell input-row"><%= f.input :area_id, collection: Category::Area.to_select %></li>
+      <li class="table-view-cell input-row"><%= f.input :sex_id, collection: Accounts::Account::Sex.to_select, as: :radio_buttons %></li>
+      <li class="table-view-cell input-row"><%= f.input :area_id, collection: Category::Area.to_grouped_select, as: :grouped_select, group_method: :cities %></li>
     </ul>
   </div>
   <div class="card">
