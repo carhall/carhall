@@ -46,7 +46,7 @@ module WeixinHelper
             Title: "消费记录",
             Description: "点击查看我的消费记录详细资料",
             PicUrl: absolute_url("weixin/operating_records.png"),
-            Url: absolute_url("weixin/current_user/operating_records")
+            Url: absolute_url("weixin/current_user/consumption_records")
           }
         ]
       }

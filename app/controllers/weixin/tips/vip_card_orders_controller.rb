@@ -1,6 +1,6 @@
 class Weixin::Tips::VipCardOrdersController < Weixin::ApplicationController
-  before_filter :authenticate_account!
-  before_filter :set_current_user
+  before_filter :authenticate_weixin_account!
+  before_filter :set_weixin_current_user
 
   def index
     @vip_card_orders = @user.vip_card_orders
