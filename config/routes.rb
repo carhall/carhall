@@ -255,11 +255,23 @@ Carhall::Application.routes.draw do
 
     scope module: :tips do
       resources :dealers do
-        resource :mending, only: [:show]
-        resources :cleanings, only: [:show, :index]
+        resource :mending, only: [:show] do
+          resources :orders, only: [:index]
+          resources :reviews, only: [:index]
+        end
+        resources :cleanings, only: [:show, :index] do
+          resources :orders, only: [:index]
+          resources :reviews, only: [:index]
+        end
         resources :activities, only: [:show, :index]
-        resources :bulk_purchasings, only: [:show, :index]
-        resources :vip_cards, only: [:show, :index]
+        resources :bulk_purchasings, only: [:show, :index] do
+          resources :orders, only: [:index]
+          resources :reviews, only: [:index]
+        end
+        resources :vip_cards, only: [:show, :index] do
+          resources :orders, only: [:index]
+          resources :reviews, only: [:index]
+        end
       end
 
       resource :current_user do

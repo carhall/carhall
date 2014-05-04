@@ -1,24 +1,17 @@
-<div class="page-header">
-  <h3>重置密码 <small></small></h3>
-</div>
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| %>
-  <div class="row-fluid">
-    <div class="span6">
-      <%= devise_error_messages! %>
-          
-      <%= f.input :reset_password_token, as: :string, autofocus: true %>
-      <%= f.input :password %>
-      <%= f.input :password_confirmation %>
+<% content_for :title do %>
+  重置密码
+<% end %>
 
-      <div class="control-group">
-        <div class="controls">
-          <%= f.button :submit, "重置密码", class: 'btn-large btn-success' %>
-        </div>
-      </div>
-    </div>
-
-    <div class="span6 right-box">
-      <%= render "devise/share/links" %>
-    </div>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="card">
+    <ul class="table-view">
+      <li class="table-view-cell input-row"><%= f.input :reset_password_token, as: :string, autofocus: true %></li>
+      <li class="table-view-cell input-row"><%= f.input :password %></li>
+      <li class="table-view-cell input-row"><%= f.input :password_confirmation %></li>
+    </ul>
+  </div>
+  <div class="card" style="border:none">
+    <%= f.button :submit, "重置密码", class: 'btn-positive btn-block' %>
   </div>
 <% end %>

@@ -1,14 +1,19 @@
 <div class="card">
   <ul class="table-view">
     <% @cleanings.each do |cleaning| %>
+      <li class="table-view-cell">
+        <%= link_to weixin_dealer_cleaning_path(@dealer, cleaning), data: { transition: "slide-in" } do %>
+          <%= cleaning.title %>
+        <% end %>
+      </li>
       <li class="table-view-cell media">
         <%= link_to weixin_dealer_cleaning_path(@dealer, cleaning), class: "navigate-right", data: { transition: "slide-in" } do %>
           <%= image_tag cleaning.image.url(:thumb), class: "media-object pull-left" %>
           <div class="media-body">
-            <%= cleaning.title %>
             <p>已购人数：<%= cleaning.orders_count %></p>
-            <p>评分：<%= cleaning.orders_count %></p>
-            <p>会员价：<%= cleaning.vip_price %>   原价：<%= cleaning.price %></p>
+            <p>评分：<%= print_stars cleaning.stars, false %></p>
+            <p>活动价：<%= cleaning.vip_price %></p>
+            <p>原价：<%= cleaning.price %></p>
           </div>
         <% end %>
     </li>

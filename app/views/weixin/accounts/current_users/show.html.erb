@@ -1,1 +1,35 @@
-<%= @user %>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">
+      个性签名
+      <%= simple_format @user.description %>
+    </li>
+  </ul>
+</div>
+
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">
+      昵称：<%= @user.username %>
+    </li>
+    <li class="table-view-cell">
+      性别：<%= @user.sex %>
+    </li>
+    <li class="table-view-cell">
+      地区：<%= @user.area %>
+    </li>
+  </ul>
+</div>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">
+      车型：<%= @user.brand %>
+    </li>
+    <li class="table-view-cell">
+      车牌号：<%= @user.plate_num %>
+    </li>
+  </ul>
+</div>
+<!-- <div class="card" style="border:none">
+  <%= link_to "修改个人资料", edit_weixin_account_registration_path, class: "btn btn-positive btn-block" %>
+</div> -->

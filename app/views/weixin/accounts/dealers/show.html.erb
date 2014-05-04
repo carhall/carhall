@@ -1,10 +1,15 @@
-<div class="titleimg">
-  <%= image_tag @dealer.avatar.url(:medium) %>
-</div>
 <div class="card">
   <ul class="table-view">
-    <li class="table-view-cell">商家介绍</li>
     <li class="table-view-cell">
+    <div class="titleimg">
+      <%= image_tag @dealer.avatar.url(:medium) %>
+    </div>
+  </li>
+  <li class="table-view-cell">联系方式：<%= @dealer.phone %></li>
+  <li class="table-view-cell">营业时间：<%= @dealer.open_during %></li>
+  <li class="table-view-cell">地址：<%= @dealer.address %></li>
+    <li class="table-view-cell">
+      详细介绍<br>
       <%= simple_format(@dealer.description) %>
     </li>
   </ul>

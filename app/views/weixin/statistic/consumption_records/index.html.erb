@@ -1,1 +1,16 @@
-<%= @consumption_records %>
+<div class="card">
+  <table class="table-view">
+    <tr>
+      <th>服务项目</th>
+      <th>消费次数</th>
+      <th>消费时间</th>
+    </tr>
+    <% @consumption_records.each do |consumption_record| %>
+      <tr>
+        <td><%= consumption_record.order_title %></td>
+        <td><%= consumption_record.count %></td>
+        <td><%= l consumption_record.created_at, format: :long %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

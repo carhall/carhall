@@ -1,6 +1,12 @@
 class Weixin::Tips::VipCardOrdersController < Weixin::ApplicationController
   before_filter :authenticate_account!
   before_filter :set_current_user
-  set_resource_class ::Tips::VipCardOrder, through: :user
 
+  def index
+    @vip_card_orders = @user.vip_card_orders
+  end
+
+  def show
+    @vip_card_order = @user.vip_card_orders.find(params[:id])
+  end
 end

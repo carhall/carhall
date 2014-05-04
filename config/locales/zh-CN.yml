@@ -133,6 +133,7 @@ zh-CN:
         area: 地区
         brand_id: 汽车品牌
         brand: 汽车品牌
+        plate_num: 车牌号
         created_at: 加入时间
         state: 账户状态
         main_area: 省份

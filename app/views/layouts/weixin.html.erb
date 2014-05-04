@@ -11,6 +11,15 @@
     <%= javascript_include_tag "weixin" %>
   </head>
   <body>
+    <% if content_for? :title %>
+      <header class="bar bar-nav">
+        <%= link_to :back, class: "btn btn-link btn-nav pull-left" do %>
+          <span class="icon icon-left-nav"></span>
+          返回
+        <% end %>
+        <h1 class="title"><strong><%= yield :title %></strong></h1>
+      </header>
+    <% end %>
     <div class="content">
       <%= yield %>
     </div>

@@ -1,17 +1,22 @@
 <div class="card">
   <ul class="table-view">
     <% @vip_cards.each do |vip_card| %>
+      <li class="table-view-cell">
+        <%= link_to weixin_dealer_vip_card_path(@dealer, vip_card), data: { transition: "slide-in" } do %>
+          <%= vip_card.title %>
+        <% end %>
+      </li>
       <li class="table-view-cell media">
         <%= link_to weixin_dealer_vip_card_path(@dealer, vip_card), class: "navigate-right", data: { transition: "slide-in" } do %>
           <%= image_tag vip_card.image.url(:thumb), class: "media-object pull-left" %>
           <div class="media-body">
-            <%= vip_card.title %>
             <p>已购人数：<%= vip_card.orders_count %></p>
             <p>评分：<%= print_stars vip_card.stars, false %></p>
-            <p>会员价：<%= vip_card.vip_price %>元 原价：<%= vip_card.price %>元</p>
+            <p>活动价：<%= vip_card.vip_price %></p>
+            <p>原价：<%= vip_card.price %></p>
           </div>
         <% end %>
-      </li>
+    </li>
     <% end %>
   </ul>
 </div>

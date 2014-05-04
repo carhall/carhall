@@ -1,0 +1,23 @@
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell"><%= @vip_card_order.dealer.username %></a></li>
+    <li class="table-view-cell"><%= @vip_card_order.title %></li>
+    <li class="table-view-cell">总价：<%= @vip_card_order.cost %>元</li>
+  </ul>
+</div>
+<div class="card">
+  <table class="table-view">
+    <tr>
+      <th>服务项目</th>
+      <th>总次数</th>
+      <th>已使用次数</th>
+    </tr>
+    <% @vip_card_order.items.each do |item| %>
+      <tr>
+        <td><%= item.title %></td>
+        <td><%= item.count %></td>
+        <td><%= item.used_count %></td>
+      </tr>
+      <% end %>
+  </table>
+</div>

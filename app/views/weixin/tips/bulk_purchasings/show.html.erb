@@ -6,7 +6,7 @@
 </div>
 <div class="card">
   <ul class="table-view">
-    <li class="table-view-cell">评分：<%= print_stars @bulk_purchasing.stars, false %></li>
+    <li class="table-view-cell">评分：<span class="orangecolor"><%= print_stars @bulk_purchasing.stars, false %></span></li>
     <li class="table-view-cell redcolor">交易达成率：<%= @bulk_purchasing.goal_attainment %>%</li>
     <li class="table-view-cell"><%= @bulk_purchasing.orders_count %>个人已购买</li>
   </ul>

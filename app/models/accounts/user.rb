@@ -18,6 +18,9 @@ class Accounts::User < Accounts::Account
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, source: :review, class_name: 'Tips::Review'
 
+  has_many :consumption_records, class_name: 'Statistic::ConsumptionRecord'
+
+
   def self.with_query query
     sql_where_query = indexes.map{|i| "`accounts`.`#{i}` LIKE '#{query}%'" }.join(' or ')
     sql_where_query += " or `user_details`.`plate_num` LIKE '#{query}'"

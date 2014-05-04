@@ -1,12 +1,13 @@
 <div class="card">
   <ul class="table-view">
-    <li class="table-view-cell">评分：<%= print_stars @source.stars, false %></li>
+    <li class="table-view-cell">评分：<span class="orangecolor"><%= print_stars @source.stars, false %></span></li>
     <% @reviews.each do |review| %>
       <li class="table-view-cell">
         <%= review.order.user.username %>：<%= print_stars review.stars, false %>
         <%= simple_format(review.content) %>
       </li>
     <% end %>
-    <li class="table-view-cell orangecolor"><a class="navigate-right link" href="#">查看全部评价</a></li>
+    <% reviews_path = "weixin_dealer_#{@source.class.model_name.element}_reviews_path" %>
+    <li class="table-view-cell orangecolor"><%= link_to "查看全部评价", send(reviews_path, @dealer, @source), class: "navigate-right link" %></li>
   </ul>
 </div>

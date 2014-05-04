@@ -1,0 +1,16 @@
+<% content_for :title do %>
+  评价
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">评分：<span class="orangecolor"><%= print_stars @source.stars, false %></span></li>
+    <% @reviews.each do |review| %>
+      <li class="table-view-cell">
+        <%= review.order.user.username %>：<span class="orangecolor"><%= print_stars review.stars, false %></span>
+        <%= simple_format(review.content) %>
+        <p><%= l review.created_at, format: :long %></p>
+      </li>
+    <% end %>
+  </ul>
+</div>

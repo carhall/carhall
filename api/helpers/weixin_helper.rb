@@ -41,7 +41,7 @@ module WeixinHelper
             Title: "会员卡",
             Description: "点击查看我的会员卡详细资料",
             PicUrl: absolute_url("weixin/vip_cards.png"),
-            Url: absolute_url("weixin/current_user/vip_cards")
+            Url: absolute_url("weixin/current_user/vip_card_orders")
           }, {
             Title: "消费记录",
             Description: "点击查看我的消费记录详细资料",
