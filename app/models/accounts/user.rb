@@ -19,6 +19,7 @@ class Accounts::User < Accounts::Account
   has_many :recent_reviews, through: :recent_orders, source: :review, class_name: 'Tips::Review'
 
   has_many :consumption_records, class_name: 'Statistic::ConsumptionRecord'
+  has_many :sales_cases, class_name: 'Statistic::SalesCase'
 
 
   def self.with_query query

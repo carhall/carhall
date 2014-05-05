@@ -1,0 +1,18 @@
+<div class="card">
+  <table class="table-view">
+    <tr>
+      <th>问题描述</th>
+      <th>解决方案</th>
+      <th>服务顾问</th>
+      <th>时间</th>
+    </tr>
+    <% @sales_cases.each do |sales_case| %>
+      <tr>
+        <td><%= sales_case.description %></td>
+        <td><%= sales_case.solution %></td>
+        <td><%= sales_case.adviser %></td>
+        <td><%= l sales_case.created_at, format: :long %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

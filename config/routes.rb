@@ -244,12 +244,15 @@ Carhall::Application.routes.draw do
     
     scope module: :accounts do
       resources :dealers
-      resource :current_user
+      resource :current_user do
+        get :mine
+      end
     end
 
     scope module: :statistic do
       resource :current_user do
         resources :consumption_records, only: [:show, :index]
+        resources :sales_cases, only: [:show, :index]
       end
     end
 

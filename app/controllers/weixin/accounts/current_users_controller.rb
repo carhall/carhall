@@ -5,4 +5,7 @@ class Weixin::Accounts::CurrentUsersController < Weixin::ApplicationController
   def show
   end
 
+  def mine
+  end
+
 end
