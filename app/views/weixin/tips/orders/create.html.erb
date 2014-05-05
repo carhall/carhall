@@ -3,6 +3,7 @@
 <% end %>
 
 <%= simple_form_for(@order, url: thank_you_weixin_dealer_bulk_purchasing_orders_path(@source.dealer, @source)) do |f| %>
+  <%= devise_error_messages! %>
   <div class="card">
     <ul class="table-view">
       <li class="table-view-cell"><%= @source.title %></li>
