@@ -1,0 +1,43 @@
+<% content_for :title do %>
+  提交订单
+<% end %>
+
+<%= simple_form_for(@order, url: weixin_dealer_bulk_purchasing_orders_path(@source.dealer, @source)) do |f| %>
+  <div class="card">
+    <ul class="table-view">
+      <li class="table-view-cell"><%= @source.title %></li>
+      <% price = @source.try(:vip_price) || @source.try(:price) %>
+      <li class="table-view-cell">
+        单价
+        <span id="price" class="pull-right"><%= price %> 元</span>
+      </li>
+      <li class="table-view-cell">
+        数量
+        <span class="pull-right"><span style="width:25px;" class="btn" onclick="plus()">+</span><input id="num" type="number" name="order[count]" value="1" style="width:35px;height:25px;padding:0 0 0 10px;margin:0;border:0;"><span style="width:25px;" class="btn" onclick="minus()">-</span></span>
+        </li>
+      <li class="table-view-cell">
+        总价
+        <span id="sum" class="pull-right"><%= price %> 元</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card" style="border:none">
+    <button class="btn btn-positive btn-block">提交订单</button>
+  </div>
+<% end %>
+
+<script>
+  function set_num(n) {
+    var p = parseFloat(document.getElementById("price").innerHTML);
+    document.getElementById("num").value = n;
+    document.getElementById("sum").innerHTML = p * n + " 元";
+  }
+  function plus(){
+    var n = parseInt(document.getElementById("num").value);
+    set_num(n + 1);
+  }
+  function minus(){
+    var n = parseInt(document.getElementById("num").value);
+    if(n > 0) set_num(n - 1);
+  }
+</script>
