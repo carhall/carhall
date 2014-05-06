@@ -3,6 +3,8 @@ class Accounts::UserDetail < ActiveRecord::Base
   define_image_method
   alias_attribute :car_image, :image
 
+  validates_presence_of :plate_num
+
   def to_base_builder
     Jbuilder.new do |json|
       json.extract! self, :series, :plate_num, :balance

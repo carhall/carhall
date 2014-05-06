@@ -3,7 +3,9 @@ class Accounts::User < Accounts::Account
   
   set_detail_class Accounts::UserDetail
   define_avatar_method styles: { medium: "200x200#", thumb: "60x60#" }
-   
+  
+  validates_presence_of :brand_id, :area_id
+
   # For posts
   has_many :posts, class_name: 'Posts::Post', dependent: :destroy
   has_many :comments, class_name: 'Posts::Comment', dependent: :destroy

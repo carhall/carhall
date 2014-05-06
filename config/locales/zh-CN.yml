@@ -141,6 +141,7 @@ zh-CN:
         address: 地址
         <<: *statisticable
       accounts/account/detail: &detail
+        plate_num: 车牌号
         dealer_type_id: 服务商类型
         dealer_type: 服务商类型
         business_scope_ids: 业务范围
