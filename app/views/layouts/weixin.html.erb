@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title><% if content_for?(:title) %><% yield :title %><% else %>汽车堂<% end %></title>
+    <title><% if content_for?(:title) %><%= yield :title %><% else %>汽车堂<% end %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.5, maximum-scale=1.5, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -11,15 +11,15 @@
     <%= javascript_include_tag "weixin" %>
   </head>
   <body>
-    <% if content_for? :title %>
-      <header class="bar bar-nav">
-        <%= link_to :back, class: "btn btn-link btn-nav pull-left" do %>
-          <span class="icon icon-left-nav"></span>
-          返回
-        <% end %>
-        <h1 class="title"><strong><%= yield :title %></strong></h1>
-      </header>
-    <% end %>
+    <%# if content_for? :title %>
+      <!-- <header class="bar bar-nav"> -->
+        <%#= link_to :back, class: "btn btn-link btn-nav pull-left" do %>
+          <!-- <span class="icon icon-left-nav"></span> -->
+          <!-- 返回 -->
+        <!-- <%# end %> -->
+        <!-- <h1 class="title"><strong><%= yield :title %></strong></h1> -->
+      <!-- </header> -->
+    <%# end %>
     <div class="content">
       <%= yield %>
     </div>

@@ -27,10 +27,10 @@
 <div class="card">
   <ul class="table-view">
     <li class="table-view-cell">
-      车型：<%= @user.brand %>
+      车型：<%= @user.try :brand %>
     </li>
     <li class="table-view-cell">
-      车牌号：<%= @user.plate_num %>
+      车牌号：<%= @user.try :plate_num %>
     </li>
   </ul>
 </div>
