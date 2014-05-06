@@ -39,7 +39,7 @@ module WeixinHelper
         account.avatar, 
         "weixin/dealers/#{account.id}"
     when "mine"
-      Mine
+      generate_mine
     end
   end
 
@@ -89,7 +89,7 @@ module WeixinHelper
     # end
   end
   
-  def create_menu account, menu=WeixinMenu
+  def create_menu account, menu=generate_menu(account)
     request_weixin account, 'menu/create', menu
   end
 
@@ -101,74 +101,78 @@ module WeixinHelper
     response
   end
 
-  WeixinMenu = { 
-    button: [{
-      name: "项目菜单",
-      sub_button: [{
-        type: "click",
-        name: "会员卡",
-        key: "vip_card"
+  def generate_menu account
+    { 
+      button: [{
+        name: "项目菜单",
+        sub_button: [{
+          type: "click",
+          name: "会员卡",
+          key: "vip_card"
+        }, {
+          type: "click",
+          name: "服务项目",
+          key: "cleaning"
+        }]
       }, {
-        type: "click",
-        name: "服务项目",
-        key: "cleaning"
+        name: "发现",
+        sub_button: [{
+          type: "click",
+          name: "近期团购",
+          key: "bulk_purchasing"
+        }, {
+          type: "click",
+          name: "近期活动",
+          key: "activity"
+        }]
+      }, {
+        name: "在下",
+        sub_button: [{
+          type: "click",
+          name: "商家介绍",
+          key: "dealer_description"
+        }, {
+          type: "view",
+          name: "提醒服务",
+          url: absolute_url("weixin/current_user/sales_cases?dealer_id=#{account.id}")
+        }, {
+          type: "view",
+          name: "违章查询",
+          url: "http://sms100.sinaapp.com/all/"
+        }, {
+          type: "view",
+          name: "我的",
+          url: absolute_url("weixin/current_user/mine?dealer_id=#{account.id}")
+        }, {
+          type: "view",
+          name: "手机会员卡",
+          url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
+        }]
       }]
-    }, {
-      name: "发现",
-      sub_button: [{
-        type: "click",
-        name: "近期团购",
-        key: "bulk_purchasing"
-      }, {
-        type: "click",
-        name: "近期活动",
-        key: "activity"
-      }]
-    }, {
-      name: "在下",
-      sub_button: [{
-        type: "click",
-        name: "商家介绍",
-        key: "dealer_description"
-      }, {
-        type: "view",
-        name: "提醒服务",
-        url: absolute_url("weixin/current_user/sales_cases")
-      }, {
-        type: "view",
-        name: "违章查询",
-        url: "http://sms100.sinaapp.com/all/"
-      }, {
-        type: "view",
-        name: "我的",
-        url: absolute_url("weixin/current_user/mine")
-      }, {
-        type: "view",
-        name: "手机会员卡",
-        url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
-      }]
-    }]
-  }
+    }
+  end
 
-  Mine = {
-    news: [
-      {
-        Title: "个人资料",
-        Description: "点击查看我的详细资料",
-        PicUrl: absolute_url("weixin/current_user.png"),
-        Url: absolute_url("weixin/current_user")
-      }, {
-        Title: "会员卡",
-        Description: "点击查看我的会员卡详细资料",
-        PicUrl: absolute_url("weixin/vip_cards.png"),
-        Url: absolute_url("weixin/current_user/vip_card_orders")
-      }, {
-        Title: "消费记录",
-        Description: "点击查看我的消费记录详细资料",
-        PicUrl: absolute_url("weixin/operating_records.png"),
-        Url: absolute_url("weixin/current_user/consumption_records")
-      }
-    ]
-  }
+  def generate_mine
+    {
+      news: [
+        {
+          Title: "个人资料",
+          Description: "点击查看我的详细资料",
+          PicUrl: absolute_url("weixin/current_user.png"),
+          Url: absolute_url("weixin/current_user")
+        }, {
+          Title: "会员卡",
+          Description: "点击查看我的会员卡详细资料",
+          PicUrl: absolute_url("weixin/vip_cards.png"),
+          Url: absolute_url("weixin/current_user/vip_card_orders")
+        }, {
+          Title: "消费记录",
+          Description: "点击查看我的消费记录详细资料",
+          PicUrl: absolute_url("weixin/operating_records.png"),
+          Url: absolute_url("weixin/current_user/consumption_records")
+        }
+      ]
+    }
+  end
 
 end

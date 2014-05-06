@@ -27,6 +27,15 @@ namespace :deploy do
     end
   end
 
+  desc 'Change owner www-data'
+  task :chown do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      execute :chown, '-R www-data', release_path
+      execute :chgrp, '-R www-data', release_path
+    end
+  end
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -37,14 +46,8 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
-
-  before :restart, :chown do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      execute :chown, '-R www-data', release_path
-      execute :chgrp, '-R www-data', release_path
-    end
-  end
+  after :finishing, 'deploy:chown'
+  after :finishing, 'deploy:restart'
 
 end
 

@@ -239,6 +239,7 @@ Carhall::Application.routes.draw do
     devise_scope :account do
       namespace :accounts do
         resource :confirmation
+        get :check, to: "weixin/accounts/registrations#check" 
       end
     end
     
