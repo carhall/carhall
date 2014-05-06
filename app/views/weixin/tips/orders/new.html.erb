@@ -2,7 +2,7 @@
   提交订单
 <% end %>
 
-<%= simple_form_for(@order, url: weixin_dealer_bulk_purchasing_orders_path(@source.dealer, @source)) do |f| %>
+<%= simple_form_for(@order, url: weixin_polymorphic_path(@source.dealer, @source, :orders)) do |f| %>
   <%= devise_error_messages! @order %>
   <div class="card">
     <ul class="table-view">

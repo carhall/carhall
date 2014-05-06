@@ -7,7 +7,6 @@
         <%= simple_format(review.content) %>
       </li>
     <% end %>
-    <% reviews_path = "weixin_dealer_#{@source.class.model_name.element}_reviews_path" %>
-    <li class="table-view-cell orangecolor"><%= link_to "查看全部评价", send(reviews_path, @dealer, @source), class: "navigate-right link" %></li>
+    <li class="table-view-cell orangecolor"><%= link_to "查看全部评价", weixin_polymorphic_path(@dealer, @source, :reviews), class: "navigate-right link" %></li>
   </ul>
 </div>

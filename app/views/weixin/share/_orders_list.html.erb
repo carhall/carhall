@@ -7,7 +7,6 @@
         <p><%= order.source.title %></p>
       </li>
     <% end %>
-    <% orders_path = "weixin_dealer_#{@source.class.model_name.element}_orders_path" %>
-    <li class="table-view-cell orangecolor"><%= link_to "查看全部记录", send(orders_path, @dealer, @source), class: "navigate-right link" %></li>
+    <li class="table-view-cell orangecolor"><%= link_to "查看全部记录", weixin_polymorphic_path(@dealer, @source, :orders), class: "navigate-right link" %></li>
   </ul>
 </div>

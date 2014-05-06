@@ -5,7 +5,10 @@
 <div class="card">
   <ul class="table-view">
     <li class="table-view-cell"><%= @bulk_purchasing.title %></li>
-    <li class="table-view-cell">会员价：<%= @bulk_purchasing.vip_price %>元 原价：<%= @bulk_purchasing.price %>元<%= link_to "购买", new_weixin_dealer_bulk_purchasing_order_path(@dealer, @bulk_purchasing), class: "btn btn-positive" %></li>
+    <li class="table-view-cell">
+      会员价：<%= @bulk_purchasing.vip_price %>元 原价：<%= @bulk_purchasing.price %>元
+      <%= link_to "购买", new_weixin_dealer_bulk_purchasing_order_path(@dealer, @bulk_purchasing), class: "btn btn-positive" %>
+    </li>
   </ul>
 </div>
 <div class="card">
