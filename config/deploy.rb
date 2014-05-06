@@ -52,10 +52,21 @@ end
 namespace :logs do
   desc "tail rails logs" 
   task :tail_rails do
-    on roles(:app) do
-      SSHKit.config.output_verbosity = :debug
-      trap("INT") { puts 'Interupted'; exit 0; }
-      execute "tail -f #{shared_path}/log/#{fetch(:rails_env)}.log"
+    invoke "logs:tail", fetch(:rails_env)
+  end
+  
+  task :tail, :file do |t, args|
+    if args[:file]
+      on roles(:app) do
+        SSHKit.config.output_verbosity = :debug
+        trap("INT") { puts 'Interupted'; exit 0; }
+        execute "tail -f #{shared_path}/log/#{args[:file]}.log"
+      end
+    else
+      puts "please specify a logfile e.g: 'rake logs:tail[logfile]"
+      puts "will tail 'shared_path/log/logfile.log'"
+      puts "remember if you use zsh you'll need to format it as:"
+      puts "rake 'logs:tail[logfile]' (single quotes)"
     end
   end
 end
