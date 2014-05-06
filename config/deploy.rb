@@ -58,8 +58,8 @@ namespace :logs do
   task :tail, :file do |t, args|
     if args[:file]
       on roles(:app) do
+        trap("INT") { exit }
         SSHKit.config.output_verbosity = :debug
-        trap("INT") { puts 'Interupted'; exit 0; }
         execute "tail -f #{shared_path}/log/#{args[:file]}.log"
       end
     else

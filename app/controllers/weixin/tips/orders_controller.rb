@@ -5,14 +5,14 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
   load_resource :vip_card, class: Tips::VipCard
 
   before_filter :get_source
-  before_filter :set_weixin_current_user, only: [:new, :create]
+  before_filter :set_weixin_current_user, only: [:new, :create, :thank_you]
 
   def index
     @orders = @source.orders
   end
 
   def new
-    @order = @source.orders.new
+    @order = @source.orders.new(user: @user)
   end
 
   def create
