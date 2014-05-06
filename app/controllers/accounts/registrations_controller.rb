@@ -11,7 +11,8 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     return @account_params if @account_params
     @account_params = params.require(resource_name).permit!
     permit = [:mobile, :current_password, :password, :password_confirmation, 
-      :username, :description, :avatar, :area_id, :weixin_app_id, :weixin_app_secret]
+      :username, :description, :avatar, :area_id, 
+      :weixin_app_id, :weixin_app_secret, :weixin_welcome]
     case @account_params[:type]
     when "Accounts::Provider"
       permit << :type
