@@ -43,20 +43,24 @@ table.table-view {
 }
 
 .input-row {
-  select, textarea {
-    float: right;
-    width: 65%;
+  label {
+    width: 45%;
   }
-}
-.input-row select {
-  height: 35px;
-  margin-bottom: 0;
-}
-.input-row textarea {
-  padding: 10px 15px;
-}
-.input-row label.radio {
-  width: 30%;
+  input, select, textarea {
+    float: right;
+    width: 55%;
+  }
+  select {
+    height: 35px;
+    margin-bottom: 0;
+  }
+  textarea {
+    padding: 10px 15px;
+  }
+  label.radio {
+    width: 25%;
+    padding: 10px 10px;
+  }
 }
 
 .alert {
@@ -119,12 +123,30 @@ table.table-view {
 .alert-block p + p {
   margin-top: 5px;
 }
+
 button.close {
   display: none;
 }
 
-.inline-helper {
-  float: right;
-  line-height: 50px;
-  font-weight: bold;
+.btn-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 10px 0;
+
+  .btn {
+    display: table-cell;
+    width: 1%;
+    margin-bottom: 0;
+  }
+}
+
+.card-no-border {
+  overflow: hidden;
+  margin: 10px;
+  background-color: white;
+
+  .btn {
+    margin-bottom: 0;
+  }
 }

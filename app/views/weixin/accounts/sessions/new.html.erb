@@ -13,13 +13,13 @@
   <% if devise_mapping.rememberable? -%>
     <%= f.hidden_field :remember_me, value: true %>
   <% end %>
-  <div class="card" style="border:none">
+  
+  <div class="card-no-border">
     <%= f.button :submit, "立即登录", class: 'btn-positive btn-block' %>
+  </div>
 
-    <div class="inline-helper">
-      <%= link_to "忘记密码？", new_password_path(resource_name) %>
-      | 
-      <%= link_to "注册帐号", new_registration_path(resource_name) %>
-    </div>
+  <div class="btn-group">
+    <%= link_to "忘记密码？", new_password_path(resource_name), class: 'btn btn-positive btn-block' %>
+    <%= link_to "注册帐号", new_registration_path(resource_name), class: 'btn btn-positive btn-block' %>
   </div>
 <% end %>

@@ -34,6 +34,9 @@
     </li>
   </ul>
 </div>
-<div class="card" style="border:none">
+<div class="card-no-border">
   <%= link_to "修改个人资料", edit_weixin_account_registration_path, class: "btn btn-positive btn-block" %>
+</div>
+<div class="card-no-border">
+  <%= link_to "退出登录", destroy_weixin_account_session_path, class: "btn btn-negative btn-block" %>
 </div>
