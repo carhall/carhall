@@ -11,9 +11,9 @@
     </tr>
     <% @consumption_records.each do |consumption_record| %>
       <tr>
-        <td><%= consumption_record.order_title %></td>
+        <td><%= consumption_record.title %></td>
         <td><%= consumption_record.count %></td>
-        <td><%= l consumption_record.created_at, format: :long %></td>
+        <td><%= l consumption_record.created_at, format: :short %></td>
       </tr>
     <% end %>
   </table>

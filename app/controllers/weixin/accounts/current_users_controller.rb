@@ -6,6 +6,10 @@ class Weixin::Accounts::CurrentUsersController < Weixin::ApplicationController
   end
 
   def mine
+    if params[:dealer_id]
+      dealer = Accounts::Dealer.find(params[:dealer_id])
+      @user.make_friend_with! dealer unless @user.is_friend? dealer
+    end
   end
 
 end
