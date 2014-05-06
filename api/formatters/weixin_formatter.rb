@@ -8,8 +8,18 @@ module WeixinFormatter
         format_news object[:news], params
       end
     when String
-      
+      format_text object
     end
+  end
+
+  def self.format_text text
+    {
+      ToUserName:   params["FromUserName"],
+      FromUserName: params["ToUserName"],
+      CreateTime:   Time.now.to_i,
+      MsgType:      "text",
+      Content:      text,
+    }.to_xml(root: "xml", skip_types: true)
   end
 
   def self.format_news news, params

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421021044) do
+ActiveRecord::Schema.define(version: 20140506034442) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -386,6 +386,7 @@ ActiveRecord::Schema.define(version: 20140421021044) do
     t.string   "postsale_phone"
     t.string   "weixin_app_id"
     t.string   "weixin_app_secret"
+    t.text     "weixin_welcome"
   end
 
   add_index "dealer_details", ["dealer_type_id"], name: "index_dealer_details_on_dealer_type_id", using: :btree

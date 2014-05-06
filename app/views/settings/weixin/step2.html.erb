@@ -7,17 +7,22 @@
     <div class="page-header">
       <h3>微信订阅号管理 <small></small></h3>
     </div>
-    <p><span class="text-error">[选做]</span> 通过微信认证，填写 AppID 和 AppSecret 到下表中，填写后您将获得自定义菜单，群发信息等高级功能 </p>
-    <p>AppID 和 AppSecret 只有当您通过微信认证才能获得：</p>
-    <ol>
-      <li>选择 设置 => 帐号信息 => 认证情况 进行公众号认证，其中 “关联微博认证” 和 “申请微信认证” 只需完成一项即可 </li>
-      <li>认证具体流程以微信页面为准 </li>
-    </ol>
-    <p>之后，将开发模式页面上显示的 AppID 和 AppSecret 填入下表：</p>
     <%= simple_form_for(@user, as: :account, url: account_registration_path(redirect_to: "/setting/weixin/step3"), html: { method: :put, class: 'form-horizontal no-margin dl-horizontal dl-span6' }) do |f| %>
+
+      <p><span class="text-error">[选做]</span> 通过微信认证，填写 AppID 和 AppSecret 到下表中，填写后您将获得自定义菜单，群发信息等高级功能 </p>
+      <p>AppID 和 AppSecret 只有当您通过微信认证才能获得：</p>
+      <ol>
+        <li>选择 设置 => 帐号信息 => 认证情况 进行公众号认证，其中 “关联微博认证” 和 “申请微信认证” 只需完成一项即可 </li>
+        <li>认证具体流程以微信页面为准 </li>
+      </ol>
+      <p>之后，将开发模式页面上显示的 AppID 和 AppSecret 填入下表：</p>
 
       <%= f.input :weixin_app_id %>
       <%= f.input :weixin_app_secret %>
+
+      <p>微信欢迎消息，会在用户在关注公众号时，向用户推送。</p>
+      
+      <%= f.input :weixin_welcome, as: :text, input_html: { rows: 4, class: 'input-xxlarge' } %>
 
       <%= f.button :submit, "下一步", class: 'btn-submit' %>
 

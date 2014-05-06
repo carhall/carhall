@@ -111,6 +111,7 @@ zh-CN:
         rank: 会员级别
         weixin_app_id: AppID
         weixin_app_secret: AppSecret
+        weixin_welcome: 微信欢迎消息
       category: &categoryable
         id: ID
         name: 名称

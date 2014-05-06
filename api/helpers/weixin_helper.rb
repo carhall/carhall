@@ -10,6 +10,15 @@ module WeixinHelper
   end
 
   def respond_event account, params
+    case params["Event"]
+    when "CLICK", "VIEW"
+      response_menu_event account, params
+    when "subscribe"
+      account.try(:weixin_welcome)
+    end
+  end
+
+  def response_menu_event account, params
     case params["EventKey"]
     when "vip_card"
       format_resources_to_news account, account.vip_cards
@@ -29,6 +38,8 @@ module WeixinHelper
         account.description, 
         account.avatar, 
         "weixin/dealers/#{account.id}"
+    when "mine"
+      Mine
     end
   end
 
@@ -50,7 +61,6 @@ module WeixinHelper
       resource.image, 
       "weixin/dealers/#{account.id}/#{resource.class.name.demodulize.tableize}"
   end
-
 
   def initialize_weixin_account account
     Thread.new do
@@ -138,6 +148,27 @@ module WeixinHelper
         url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
       }]
     }]
+  }
+
+  Mine = {
+    news: [
+      {
+        Title: "个人资料",
+        Description: "点击查看我的详细资料",
+        PicUrl: absolute_url("weixin/current_user.png"),
+        Url: absolute_url("weixin/current_user")
+      }, {
+        Title: "会员卡",
+        Description: "点击查看我的会员卡详细资料",
+        PicUrl: absolute_url("weixin/vip_cards.png"),
+        Url: absolute_url("weixin/current_user/vip_card_orders")
+      }, {
+        Title: "消费记录",
+        Description: "点击查看我的消费记录详细资料",
+        PicUrl: absolute_url("weixin/operating_records.png"),
+        Url: absolute_url("weixin/current_user/consumption_records")
+      }
+    ]
   }
 
 end
