@@ -48,3 +48,14 @@ namespace :deploy do
   end
 
 end
+
+namespace :logs do
+  desc "tail rails logs" 
+  task :tail_rails do
+    on roles(:app) do
+      SSHKit.config.output_verbosity = :debug
+      trap("INT") { puts 'Interupted'; exit 0; }
+      execute "tail -f #{shared_path}/log/#{fetch(:rails_env)}.log"
+    end
+  end
+end

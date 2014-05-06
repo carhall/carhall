@@ -1,22 +1,22 @@
 module WeixinFormatter
   def self.call(object, env)
+    params = env["grape.request.params"]["xml"]
     ret = case object
     when Hash
       case object.keys.first
       when :news
-        format_news object[:news]
+        format_news object[:news], params
       end
     when String
-      format_text object
+      format_text object, params
     end
-    Rails.logger.info("Request: #{env["grape.request.params"]["xml"]}")
+    Rails.logger.info("Request: #{params}")
     Rails.logger.info("Response object: #{object.inspect}")
     Rails.logger.info("Response: \n#{ret}")
     ret
   end
 
-  def self.format_text text
-    params = env["grape.request.params"]["xml"]
+  def self.format_text text, params
     {
       ToUserName:   params["FromUserName"],
       FromUserName: params["ToUserName"],
@@ -26,8 +26,7 @@ module WeixinFormatter
     }.to_xml(root: "xml", skip_types: true)
   end
 
-  def self.format_news news
-    params = env["grape.request.params"]["xml"]
+  def self.format_news news, params
     if news.kind_of? Array
       {
         ToUserName:   params["FromUserName"],
