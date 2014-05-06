@@ -32,7 +32,7 @@ class Weixin::ApplicationController < ApplicationController
     unless current_weixin_account
       if params[:dealer_id]
         dealer = Accounts::Dealer.find(params[:dealer_id])
-        redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{dealer.weixin_app_id}&redirect_uri=#{CGI::escape(weixin_accounts_check_url)}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+        redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{dealer.weixin_app_id}&redirect_uri=#{CGI::escape(weixin_accounts_check_url)}&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
       else
         redirect_to new_weixin_account_session_path
       end

@@ -9,3 +9,7 @@
     <li class="table-view-cell"><%= link_to "消费记录", weixin_current_user_consumption_records_path, class: "navigate-right" %></li>
   </ul>
 </div>
+
+<div class="card" style="border:none">
+  <%= link_to "退出登录", destroy_weixin_account_session_path, class: "btn btn-negative btn-block" %>
+</div>
