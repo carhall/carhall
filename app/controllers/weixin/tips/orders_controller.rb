@@ -5,6 +5,7 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
   load_resource :vip_card, class: Tips::VipCard
 
   before_filter :get_source
+  before_filter :authenticate_weixin_account!, only: [:new, :create, :thank_you]
   before_filter :set_weixin_current_user, only: [:new, :create, :thank_you]
 
   def index

@@ -5,7 +5,7 @@
 <%= simple_form_for(@order, url: weixin_polymorphic_path(@source.dealer, @source, :orders, action: :thank_you)) do |f| %>
   <%= devise_error_messages! @order %>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell"><%= @source.title %></li>
       <% price = @source.try(:vip_price) || @source.try(:price) %>
       <li class="table-view-cell">
@@ -18,7 +18,7 @@
     </li></ul>
   </div>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell">
         结算信息    
       </li>
@@ -29,15 +29,15 @@
     </ul>
   </div>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell">
         支付方式       
       </li>
-    </ul>
       <li class="table-view-cell">
         到店支付
         <span class="pull-right"><input type="checkbox" checked></span>
       </li>
+    </ul>
   </div>
   <div class="card-no-border">
     <input type="hidden" name="order[count]" value="<%= @order.count %>">

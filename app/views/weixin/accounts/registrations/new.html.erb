@@ -5,7 +5,7 @@
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f| %>
   <%= devise_error_messages! %>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell input-row"><%= f.input :mobile, autofocus: true %></li>
       <li class="table-view-cell input-row"><%= f.input :password %></li>
       <li class="table-view-cell input-row"><%= f.input :password_confirmation %></li>
