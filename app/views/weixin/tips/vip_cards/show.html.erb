@@ -6,7 +6,7 @@
   <ul class="table-view">
     <li class="table-view-cell"><%= @vip_card.title %></li>
     <li class="table-view-cell">
-      会员价：<%= @vip_card.vip_price %>元 原价：<%= @vip_card.price %>元
+      会员价 <%= @vip_card.vip_price %> 元 原价 <%= @vip_card.price %> 元
       <%= link_to "购买", new_weixin_dealer_vip_card_order_path(@dealer, @vip_card), class: "btn btn-positive" %>
     </li>
   </ul>
