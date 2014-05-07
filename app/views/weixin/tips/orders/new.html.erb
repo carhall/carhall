@@ -14,8 +14,13 @@
       </li>
       <li class="table-view-cell">
         数量
-        <span class="pull-right"><span style="width:25px;" class="btn" onclick="plus()">+</span><input id="num" type="number" name="order[count]" value="1" style="width:35px;height:25px;padding:0 0 0 10px;margin:0;border:0;"><span style="width:25px;" class="btn" onclick="minus()">-</span></span>
-        </li>
+        <% case @order %>
+        <% when Tips::VipCardOrder %>
+          <span class="pull-right">1</span>
+        <% else %>
+          <span class="pull-right"><span style="width:25px;" class="btn" onclick="plus()">+</span><input id="num" type="number" name="order[count]" value="1" min="1" style="width:35px;height:25px;padding:0;margin:0;border:0;text-align:right;"><span style="width:25px;" class="btn" onclick="minus()">-</span></span>
+        <% end %>
+      </li>
       <li class="table-view-cell">
         总价
         <span id="sum" class="pull-right"><%= price %> 元</span>
@@ -39,6 +44,6 @@
   }
   function minus(){
     var n = parseInt(document.getElementById("num").value);
-    if(n > 0) set_num(n - 1);
+    if(n > 1) set_num(n - 1);
   }
 </script>
