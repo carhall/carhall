@@ -63,9 +63,7 @@ module WeixinHelper
   end
 
   def initialize_weixin_account account
-    ret = {}
-    ret[:create_menu] = create_menu account if account.weixin_app_id
-    ret
+    create_menu account if account.weixin_app_id
   end
 
   def set_account
@@ -93,11 +91,20 @@ module WeixinHelper
   end
 
   def request_weixin account, command, data
+    weixin_service_url = "https://api.weixin.qq.com/cgi-bin/#{command}?access_token=#{access_token(account)}"
     backup_escape = ActiveSupport::JSON::Encoding.escape_html_entities_in_json
-    ActiveSupport::JSON::Encoding.escape_html_entities_in_json = false
-    response = RestClient.post "https://api.weixin.qq.com/cgi-bin/#{command}?access_token=#{access_token(account)}", data.to_json
-    ActiveSupport::JSON::Encoding.escape_html_entities_in_json = backup_escape
-    response
+    
+    begin
+      ActiveSupport::JSON::Encoding.escape_html_entities_in_json = false
+      Rails.logger.info("  Requested Weixin #{command} API #{weixin_service_url}")
+      response = RestClient.post weixin_service_url, data.to_json
+      Rails.logger.info("  Result: #{response}")
+      ActiveSupport::JSON::Encoding.escape_html_entities_in_json = backup_escape
+      response
+    rescue Exception => e
+      Rails.logger.info("  Error occurred when requesting weixin api: #{e}")
+      nil
+    end
   end
 
   def generate_menu account
