@@ -1,0 +1,47 @@
+<% content_for :title do %>
+  支付订单
+<% end %>
+
+<%= simple_form_for(@order, url: weixin_polymorphic_path(@source.dealer, @source, :orders)) do |f| %>
+  <%= devise_error_messages! @order %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell"><%= @source.title %></li>
+      <% price = @source.try(:vip_price) || @source.try(:price) %>
+      <li class="table-view-cell">
+        单价
+        <span class="pull-right"><%= price %> 元</span>
+      </li>
+      <li class="table-view-cell">
+        数量
+        <span class="pull-right"><%= @order.count %> 次</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell">
+        结算信息    
+      </li>
+      <li class="table-view-cell">
+        总价
+        <span class="pull-right"><%= @order.count * price %> 元</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell">
+        支付方式       
+      </li>
+      <li class="table-view-cell">
+        到店支付
+        <span class="pull-right"><input type="checkbox" checked></span>
+      </li>
+    </ul>
+  </div>
+  <div class="card-no-border">
+    <input type="hidden" name="order[count]" value="<%= @order.count %>">
+    <button class="btn btn-positive btn-block">确认购买</button>
+  </div>
+<% end %>

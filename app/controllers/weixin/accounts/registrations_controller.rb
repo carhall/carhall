@@ -29,16 +29,16 @@ protected
   end
 
   def after_sign_up_path_for(resource)
-    { action: :show, controller: :'weixin/accounts/current_users' }
+    weixin_root_path
   end
 
   def after_update_path_for(resource)
-    { action: :show, controller: :'weixin/accounts/current_users' }
+    weixin_root_path
   end
 
   def after_inactive_sign_up_path_for resource
     if resource.confirmed?
-      { action: :show, controller: :'weixin/accounts/current_users' }
+      weixin_root_path
     else
       { action: :edit, controller: :'weixin/accounts/confirmations' }
     end

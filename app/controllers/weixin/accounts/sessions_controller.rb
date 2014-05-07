@@ -8,11 +8,11 @@ protected
   end
   
   def after_sign_in_path_for(resource)
-    { action: :show, controller: :'weixin/accounts/current_users' }
+    session["weixin_account_return_to"] || weixin_root_path
   end
 
   def after_sign_out_path_for(resource)
-    { action: :show, controller: :'weixin/accounts/current_users' }
+    weixin_root_path
   end
 
 end 

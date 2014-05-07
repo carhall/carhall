@@ -18,6 +18,9 @@ class Weixin::ApplicationController < ApplicationController
       when ActiveRecord::Base
         records << arg
         arg.class.model_name.element
+      when Array
+        records << arg[1]
+        arg[0]
       else
         arg.to_s        
       end

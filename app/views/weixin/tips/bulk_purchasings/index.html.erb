@@ -5,13 +5,9 @@
 <div class="card">
   <ul class="table-view">
     <% @bulk_purchasings.each do |bulk_purchasing| %>
-      <li class="table-view-cell">
-        <%= link_to weixin_dealer_bulk_purchasing_path(@dealer, bulk_purchasing), data: { transition: "slide-in" } do %>
-          <%= bulk_purchasing.title %>
-        <% end %>
-      </li>
       <li class="table-view-cell media">
         <%= link_to weixin_dealer_bulk_purchasing_path(@dealer, bulk_purchasing), class: "navigate-right", data: { transition: "slide-in" } do %>
+          <span><%= bulk_purchasing.title %></span>
           <%= image_tag bulk_purchasing.image.url(:thumb), class: "media-object pull-left" %>
           <div class="media-body">
             <p>已购人数：<%= bulk_purchasing.orders_count %></p>

@@ -8,7 +8,7 @@ protected
   end
   
   def after_resetting_password_path_for resource
-    { action: :show, controller: :'weixin/accounts/current_users' }
+    weixin_root_path
   end
   
   # The path used after sending reset password instructions

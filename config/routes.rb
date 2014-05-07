@@ -261,26 +261,34 @@ Carhall::Application.routes.draw do
       resources :dealers do
         resource :mending, only: [:show] do
           resources :orders, only: [:index, :new, :create] do
-            post :thank_you, on: :collection
+            post :create_confirmation, on: :collection
+            get "use/:count", action: :use_confirmation, on: :member
+            put :use, on: :member
           end
           resources :reviews, only: [:index]
         end
         resources :cleanings, only: [:show, :index] do
           resources :orders, only: [:index, :new, :create] do
-            post :thank_you, on: :collection
+            post :create_confirmation, on: :collection
+            get "use/:count", action: :use_confirmation, on: :member
+            put :use, on: :member
           end
           resources :reviews, only: [:index]
         end
         resources :activities, only: [:show, :index]
         resources :bulk_purchasings, only: [:show, :index] do
           resources :orders, only: [:index, :new, :create] do
-            post :thank_you, on: :collection
+            post :create_confirmation, on: :collection
+            get "use/:count", action: :use_confirmation, on: :member
+            put :use, on: :member
           end
           resources :reviews, only: [:index]
         end
         resources :vip_cards, only: [:show, :index] do
           resources :orders, only: [:index, :new, :create] do
-            post :thank_you, on: :collection
+            post :create_confirmation, on: :collection
+            get "use/:count", action: :use_confirmation, on: :member
+            put :use, on: :member
           end
           resources :reviews, only: [:index]
         end

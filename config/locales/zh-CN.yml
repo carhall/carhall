@@ -54,9 +54,12 @@ zh-CN:
       posts/president_candidate: 堂主申请
       posts/mechanic_candidate: 在线技师申请
       tips/mending: 保养专修
+      tips/mending_order: 保养专修订单
       tips/cleaning: 服务项目
+      tips/cleaning_order: 服务项目订单
       tips/activity: 活动
       tips/bulk_purchasing: 团购项目
+      tips/bulk_purchasing_order: 团购订单
       tips/bulk_purchasing2: 团购项目
       tips/bulk_purchasing2_order: 团购订单
       tips/purchase_requesting: 求购
