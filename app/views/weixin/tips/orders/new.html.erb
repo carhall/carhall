@@ -14,12 +14,14 @@
       </li>
       <li class="table-view-cell">
         数量
-        <% case @order %>
-        <% when Tips::VipCardOrder %>
-          <span class="pull-right">1</span>
-        <% else %>
-          <span class="pull-right"><span style="width:25px;" class="btn" onclick="plus()">+</span><input id="num" type="number" name="order[count]" value="1" min="1" style="width:35px;height:25px;padding:0;margin:0;border:0;text-align:right;"><span style="width:25px;" class="btn" onclick="minus()">-</span></span>
-        <% end %>
+        <div class="input-count pull-right">
+          <% case @order %>
+          <% when Tips::VipCardOrder %>
+            <input type="number" name="order[count]" value="1" min="1" readonly>
+          <% else %>
+            <span class="btn" onclick="plus()">+</span><input id="num" type="number" name="order[count]" value="1" min="1"><span class="btn" onclick="minus()">-</span>
+          <% end %>
+        </div>
       </li>
       <li class="table-view-cell">
         总价
