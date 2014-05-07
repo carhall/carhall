@@ -39,7 +39,7 @@ module WeixinHelper
         account.avatar, 
         "weixin/dealers/#{account.id}"
     when "mine"
-      generate_mine
+      generate_mine account
     end
   end
 
@@ -146,9 +146,9 @@ module WeixinHelper
           name: "违章查询",
           url: "http://sms100.sinaapp.com/all/"
         }, {
-          type: "view",
+          type: "click",
           name: "我的",
-          url: absolute_url("weixin/current_user/mine?dealer_id=#{account.id}")
+          key: "mine"
         }, {
           type: "view",
           name: "手机会员卡",
@@ -158,24 +158,24 @@ module WeixinHelper
     }
   end
 
-  def generate_mine
+  def generate_mine account
     {
       news: [
         {
           Title: "个人资料",
           Description: "点击查看我的详细资料",
           PicUrl: absolute_url("weixin/current_user.png"),
-          Url: absolute_url("weixin/current_user")
+          Url: absolute_url("weixin/current_user?dealer_id=#{account.id}")
         }, {
           Title: "会员卡",
           Description: "点击查看我的会员卡详细资料",
-          PicUrl: absolute_url("weixin/vip_cards.png"),
-          Url: absolute_url("weixin/current_user/vip_card_orders")
+          PicUrl: absolute_url("weixin/arrow_right.png"),
+          Url: absolute_url("weixin/current_user/vip_card_orders?dealer_id=#{account.id}")
         }, {
           Title: "消费记录",
           Description: "点击查看我的消费记录详细资料",
-          PicUrl: absolute_url("weixin/operating_records.png"),
-          Url: absolute_url("weixin/current_user/consumption_records")
+          PicUrl: absolute_url("weixin/arrow_right.png"),
+          Url: absolute_url("weixin/current_user/consumption_records?dealer_id=#{account.id}")
         }
       ]
     }
