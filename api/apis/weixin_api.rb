@@ -11,7 +11,10 @@ class WeixinAPI < Grape::API
       requires :signature, :timestamp, :nonce, :echostr
     end
     get ":id" do
-      initialize_weixin_account params[:account]
+      Thread.new do
+        sleep 5
+        initialize_weixin_account params[:account]
+      end
       params[:echostr]
     end
   end

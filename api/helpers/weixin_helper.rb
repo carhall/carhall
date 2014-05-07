@@ -63,10 +63,9 @@ module WeixinHelper
   end
 
   def initialize_weixin_account account
-    Thread.new do
-      sleep 5
-      create_menu account, WeixinMenu if account.weixin_app_id
-    end
+    ret = {}
+    ret[:create_menu] = create_menu account if account.weixin_app_id
+    ret
   end
 
   def set_account
