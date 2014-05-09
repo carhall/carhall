@@ -28,7 +28,7 @@
         <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScope.to_select, as: :check_boxes, wrapper_html: { class: "dealer" }, required: true %>
         <%= ff.input :business_scope_ids, collection: Accounts::DistributorDetail::BusinessScope.to_select, as: :check_boxes, wrapper_html: { class: "distributor" }, required: true %>
         <%= ff.input :company, input_html: { class: 'input-xlarge' }, wrapper_html: { class: "dealer provider distributor" }, required: true %>
-        <%= f.input :area_id, collection: Category::Area.to_select, wrapper_html: { class: "dealer provider distributor" }, input_html: { class: 'select2' }, required: true %>
+        <%= f.input :area_id, collection: Category::Area.to_grouped_select, as: :grouped_select, group_method: :cities, wrapper_html: { class: "dealer provider distributor" }, input_html: { class: 'select2' }, required: true %>
         <%= ff.input :address, input_html: { class: 'input-xxlarge address' }, wrapper_html: { class: "dealer distributor" }, required: true %>
         <%= ff.input :phone, wrapper_html: { class: "dealer provider distributor" }, required: true %>
         <%= ff.input :open_during, input_html: { data: { mask: '99:99 至 99:99' }}, wrapper_html: { class: "dealer" }, hint: '填数字即可，例如：09:00 至 18:00', required: true %>
@@ -62,11 +62,12 @@
     $user_type = $("#account_type")
     function prepare_detail_inputs() {
       $(".control-group").filter(".provider, .dealer, .distributor").hide()
-      if($user_type.val() == "Accounts::Provider") {
+      user_type = $user_type.val()
+      if(user_type === "Accounts::Provider") {
         $(".control-group").filter(".provider").show()
-      } else if($user_type.val() == "Accounts::Dealer") {
+      } else if(user_type === "Accounts::Dealer") {
         $(".control-group").filter(".dealer").show()
-      } else if($user_type.val() == "Accounts::Distributor") {
+      } else if(user_type === "Accounts::Distributor") {
         $(".control-group").filter(".distributor").show()
       }
     }

@@ -2,10 +2,7 @@ module Share::Detailable
   extend ActiveSupport::Concern
 
   # Fake detail
-  attr_accessor :detail
-  def detail
-    @detail ||= self.try :build_detail || OpenStruct.new
-  end
+  def detail; OpenStruct.new; end
   def detail_attributes= hash=nil; end
 
   module ClassMethods
