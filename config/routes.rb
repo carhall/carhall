@@ -244,16 +244,18 @@ Carhall::Application.routes.draw do
     end
     
     scope module: :accounts do
-      resources :dealers
-      resource :current_user do
-        get :mine
+      resources :dealers do
+        get :current_user, on: :member
       end
+      resource :current_user
     end
 
     scope module: :statistic do
-      resource :current_user do
-        resources :consumption_records, only: [:show, :index]
-        resources :sales_cases, only: [:show, :index]
+      resources :dealers do
+        resource :current_user do
+          resources :consumption_records, only: [:show, :index]
+          resources :sales_cases, only: [:show, :index]
+        end
       end
     end
 
@@ -294,8 +296,10 @@ Carhall::Application.routes.draw do
         end
       end
 
-      resource :current_user do
-        resources :vip_card_orders, only: [:show, :index]
+      resources :dealers do
+        resource :current_user do
+          resources :vip_card_orders, only: [:show, :index]
+        end
       end
     end
 

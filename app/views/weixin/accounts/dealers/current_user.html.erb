@@ -1,0 +1,15 @@
+<% content_for :title do %>
+  我的
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell"><%= link_to "我的资料", weixin_dealer_current_user_path(@dealer), class: "navigate-right" %></li>
+    <li class="table-view-cell"><%= link_to "会员卡", weixin_dealer_current_user_vip_card_orders_path(@dealer), class: "navigate-right" %></li>
+    <li class="table-view-cell"><%= link_to "消费记录", weixin_dealer_current_user_consumption_records_path(@dealer), class: "navigate-right" %></li>
+  </ul>
+</div>
+
+<div class="card-no-border">
+  <%= link_to "退出登录", destroy_weixin_account_session_path, class: "btn btn-negative btn-block" %>
+</div>

@@ -4,6 +4,7 @@ class Weixin::Statistic::SalesCasesController < Weixin::ApplicationController
 
   def index
     @sales_cases = @user.sales_cases
+      .with_dealer(params[:dealer_id])
   end
 
 end

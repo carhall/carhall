@@ -6,9 +6,6 @@ class Weixin::Accounts::CurrentUsersController < Weixin::ApplicationController
   def show
   end
 
-  def mine
-  end
-
 protected
 
   def make_friend_with_dealer

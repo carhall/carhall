@@ -93,17 +93,18 @@ module WeixinHelper
   def request_weixin account, command, data
     weixin_service_url = "https://api.weixin.qq.com/cgi-bin/#{command}?access_token=#{access_token(account)}"
     backup_escape = ActiveSupport::JSON::Encoding.escape_html_entities_in_json
-    
+    response = nil
+
     begin
       ActiveSupport::JSON::Encoding.escape_html_entities_in_json = false
       Rails.logger.info("  Requested Weixin #{command} API #{weixin_service_url}")
       response = RestClient.post weixin_service_url, data.to_json
       Rails.logger.info("  Result: #{response}")
-      ActiveSupport::JSON::Encoding.escape_html_entities_in_json = backup_escape
-      response
     rescue Exception => e
       Rails.logger.info("  Error occurred when requesting weixin api: #{e}")
-      nil
+    ensure
+      ActiveSupport::JSON::Encoding.escape_html_entities_in_json = backup_escape
+      response
     end
   end
 
@@ -140,7 +141,7 @@ module WeixinHelper
         }, {
           type: "view",
           name: "提醒服务",
-          url: absolute_url("weixin/current_user/sales_cases?dealer_id=#{account.id}")
+          url: absolute_url("weixin/dealers/#{account.id}/current_user/sales_cases")
         }, {
           type: "view",
           name: "违章查询",
@@ -165,17 +166,17 @@ module WeixinHelper
           Title: "个人资料",
           Description: "点击查看我的详细资料",
           PicUrl: absolute_url("weixin/current_user.png"),
-          Url: absolute_url("weixin/current_user?dealer_id=#{account.id}")
+          Url: absolute_url("weixin/dealers/#{account.id}/current_user")
         }, {
           Title: "会员卡",
           Description: "点击查看我的会员卡详细资料",
           PicUrl: absolute_url("weixin/arrow_right.png"),
-          Url: absolute_url("weixin/current_user/vip_card_orders?dealer_id=#{account.id}")
+          Url: absolute_url("weixin/dealers/#{account.id}/current_user/vip_card_orders")
         }, {
           Title: "消费记录",
           Description: "点击查看我的消费记录详细资料",
           PicUrl: absolute_url("weixin/arrow_right.png"),
-          Url: absolute_url("weixin/current_user/consumption_records?dealer_id=#{account.id}")
+          Url: absolute_url("weixin/dealers/#{account.id}/current_user/consumption_records")
         }
       ]
     }

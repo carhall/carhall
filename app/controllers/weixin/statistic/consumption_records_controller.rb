@@ -4,6 +4,7 @@ class Weixin::Statistic::ConsumptionRecordsController < Weixin::ApplicationContr
 
   def index
     @consumption_records = @user.consumption_records
+      .with_dealer(params[:dealer_id])
   end
 
 end
