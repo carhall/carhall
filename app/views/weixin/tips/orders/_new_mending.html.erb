@@ -11,7 +11,7 @@
   </div>
   <div class="card">
     <ul class="table-view table-view-block">
-      <li class="table-view-cell input-row"><%= f.input :arrive_at, input_html: { type: "datetime-local" } %></li>
+      <li class="table-view-cell input-row"><%= f.input :arrive_at %></li>
       <li class="table-view-cell input-row"><%= f.input :mending_type_id, collection: Tips::MendingOrderDetail::MendingType.to_select, selected: 1 %></li>
       <li class="table-view-cell input-row"><%= f.input :description %></li>
     </ul>
@@ -21,3 +21,14 @@
     <button class="btn btn-positive btn-block">确认预约</button>
   </div>
 <% end %>
+
+<%= javascript_include_tag "pikaday" %>
+<script>
+  var field = document.getElementById('order_arrive_at');
+  var timepicker = new Pikaday({
+    field: field,
+    showTime: true,
+    use24hour: true,
+    format: "yyyy-mm-dd HH:MM"
+  });
+</script>

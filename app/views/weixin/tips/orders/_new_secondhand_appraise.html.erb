@@ -3,7 +3,7 @@
   <div class="card">
     <ul class="table-view">
       <li class="table-view-cell input-row">
-        <%= f.input :purchasing_date, input_html: { type: "datetime-local" } %>
+        <%= f.input :purchasing_date %>
       </li>
       <li class="table-view-cell input-row"><%= f.input :travelling_miles %></li>
       <li class="table-view-cell input-row">
@@ -17,3 +17,12 @@
     <button class="btn btn-positive btn-block">提交评估</button>
   </div>
 <% end %>
+
+<%= javascript_include_tag "pikaday" %>
+<script>
+  var field = document.getElementById('order_purchasing_date');
+  var timepicker = new Pikaday({
+    field: field,
+    format: "yyyy-mm-dd"
+  });
+</script>
