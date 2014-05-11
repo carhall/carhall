@@ -1,15 +1,12 @@
-<% content_for :title do %>
-  消费记录
+<% if @source %>
+  <%= render "index_common" %>
+<% else %>
+  <% case params[:type] %>
+  <% when "mending" %>
+    <%= render "index_mending" %>
+  <% when "bulk_purchasing" %>
+    <%= render "index_bulk_purchasing" %>
+  <% when "vip_card" %>
+    <%= render "index_vip_card" %>
+  <% end %>
 <% end %>
-
-<div class="card">
-  <ul class="table-view">
-    <% @orders.each do |order| %>
-      <li class="table-view-cell">
-        <%= order.user.username %>
-        <p><%= order.source.title %></p>
-        <p>消费金额：<%= order.cost %>元</p>
-      </li>
-    <% end %>
-  </ul>
-</div>

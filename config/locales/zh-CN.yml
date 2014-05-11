@@ -80,7 +80,7 @@ zh-CN:
       business/client_version: 客户端
       business/ad_template: 广告模板
       business/tutorial: 在线教程
-      statistic/sales_case: 销售记录
+      statistic/sales_case: 爱车提醒
     attributes:
       statistic: &statisticable
         orders_count: 订单数
@@ -369,8 +369,8 @@ zh-CN:
         phone: 电话
         address: 地址
       statistic/sales_case:
-        description: 客户问题描述
-        solution: 推荐方案
+        title: 主题
+        description: 详细描述
         adviser: 服务顾问
   simple_form:
     labels:

@@ -1,0 +1,24 @@
+<% content_for :title do %>
+  我的会员卡
+<% end %>
+
+<% if @orders.empty? %>
+  <%= render 'share/alert', message: '您还没有购买过会员卡！' %>
+<% else %>
+  <div class="card">
+    <ul class="table-view">
+      <% @orders.each do |order| %>
+        <li class="table-view-cell media">
+          <%= link_to type_order_weixin_dealer_current_user_path(@dealer, order, type: params[:type]), class: "navigate-right", data: { transition: "slide-in" } do %>
+            <%= image_tag order.source.image.url(:thumb), class: "media-object pull-left" %>
+            <div class="media-body">
+              <%= order.title %>
+              <p>总价：<%= order.cost %>元</p>
+            </div>
+          <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+

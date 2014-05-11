@@ -1,0 +1,53 @@
+<%= simple_form_for(@order, url: weixin_dealer_vehicle_insurance_orders_path(@dealer, action: :create_confirmation), as: :order) do |f| %>
+  <%= devise_error_messages! @order %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <% insurance_types = {} %>
+      <% Tips::VehicleInsuranceOrderDetail::InsuranceType.all.each do |value, title| %>
+        <% if title[" - "] %>
+          <% title, option = title.split(" - ") %>
+          <% insurance_types[title] ||= [] %>
+          <% insurance_types[title] << [option, value] %>
+        <% else %>
+          <% insurance_types[title] ||= value %>
+        <% end %>
+      <% end %>
+
+      <% insurance_types.each do |title, value| %>
+        <% if value.kind_of? Array %>
+          <li class="table-view-cell">
+            <%= title %>
+            <%= select_tag title, options_for_select(value), class: "sub-select" %>
+            <span class="pull-right">
+              <%= f.radio_button :insurance_type_id, value[0][1], id: title %>
+            </span>
+          </li>
+        <% else %>
+          <li class="table-view-cell">
+            <%= title %>
+            <span class="pull-right">
+              <%= f.radio_button :insurance_type_id, value %>
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+      <li class="table-view-cell">
+        保险服务： <%= @order.dealer.insurance_phone %>
+      </li>
+    </ul>
+  </div>
+  <div class="card-no-border">
+    <%= f.hidden_field :count, value: 1 %>
+    <button class="btn btn-positive btn-block">提交询价</button>
+  </div>
+<% end %>
+
+<script>
+  var els = document.getElementsByClassName('sub-select');
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    el.onchange = function() {
+      document.getElementById(el.name).value = el.value;
+    }
+  }
+</script>

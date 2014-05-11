@@ -4,4 +4,7 @@ class Weixin::Accounts::DealersController < Weixin::ApplicationController
   def current_user
   end
 
+  def rescue
+  end
+
 end

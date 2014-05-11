@@ -16,6 +16,7 @@ class Accounts::User < Accounts::Account
   has_many :cleaning_orders, class_name: 'Tips::CleaningOrder'
   has_many :bulk_purchasing_orders, class_name: 'Tips::BulkPurchasingOrder'
   has_many :vip_card_orders, class_name: 'Tips::VipCardOrder'
+  has_many :vehicle_insurance_orders, class_name: 'Tips::VehicleInsuranceOrder'
 
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, source: :review, class_name: 'Tips::Review'

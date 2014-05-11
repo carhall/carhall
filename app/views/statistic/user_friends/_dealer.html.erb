@@ -46,14 +46,14 @@
       var iUserId = $(oTable.fnGetData(nTr)[1]).text(),
           aSalesCaseData = <%== Statistic::SalesCase.accessible_by(current_ability, :manage).group_by(&:user_id).to_json %>[iUserId] || [];
 
-      var sOut = '<h4>销售记录 <small><a href="/statistic/sales_cases/new?user_id='+iUserId+'">添加新的销售记录</a></small></h4>';
+      var sOut = '<h4>爱车提醒 <small><a href="/statistic/sales_cases/new?user_id='+iUserId+'">添加新的爱车提醒</a></small></h4>';
       if (aSalesCaseData.length > 0) {
         sOut += '<table class="table">';
-        sOut += '<thead><tr><th>客户问题描述</th><th>推荐方案</th><th>填表人</th><th>操作</th></tr></thead>';
+        sOut += '<thead><tr><th>主题</th><th>详细描述</th><th>填表人</th><th>操作</th></tr></thead>';
         sOut += '<tbody>';
         for (var i = aSalesCaseData.length - 1; i >= 0; i--) {
           aData = aSalesCaseData[i];
-          sOut += '<tr><td>'+truncate(aData['description'])+'</td><td>'+truncate(aData['solution'])+'</td><td>'+aData['adviser']+'</td><td class="actions"><a href="/statistic/sales_cases/'+aData['id']+'/edit"><i class="icon-pencil" rel="tooltip" title="编辑"></i></a><a href="/statistic/sales_cases/'+aData['id']+'" data-confirm="您确认要删除这条记录？" data-method="delete"><i class="icon-remove" rel="tooltip" title="删除"></i></a></td></tr>';
+          sOut += '<tr><td>'+aData['title']+'</td><td>'+truncate(aData['description'])+'</td><td>'+aData['adviser']+'</td><td class="actions"><a href="/statistic/sales_cases/'+aData['id']+'/edit"><i class="icon-pencil" rel="tooltip" title="编辑"></i></a><a href="/statistic/sales_cases/'+aData['id']+'" data-confirm="您确认要删除这条记录？" data-method="delete"><i class="icon-remove" rel="tooltip" title="删除"></i></a></td></tr>';
         };
         sOut += '</tbody>';
         sOut += '</table>';

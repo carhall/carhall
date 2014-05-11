@@ -12,7 +12,7 @@ class Statistic::SalesCase < ActiveRecord::Base
     end
   end
   
-  validates_presence_of :description, :solution, :adviser
+  validates_presence_of :title, :description, :adviser
   
   include Share::Queryable
   define_queryable_column :user_mobile, :user_plate_num

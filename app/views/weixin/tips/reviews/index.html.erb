@@ -14,3 +14,5 @@
     <% end %>
   </ul>
 </div>
+
+<%= render 'share/alert', message: '该项目还没有任何评价！' if @reviews.empty? %>

@@ -25,8 +25,8 @@ module Statistic
     params do
       requires :data do
         requires :user_id, type: Integer, desc: '客户ID'
-        requires :description, type: String, desc: '客户问题描述'
-        requires :solution, type: String, desc: '推荐方案'
+        requires :title, type: String, desc: '主题'
+        requires :description, type: String, desc: '描述'
         requires :adviser, type: String, desc: '服务顾问'
         optional :state_id, type: Integer, desc: '状态ID：1.跟踪 2.解决 3.取消', default: 1
       end
@@ -44,8 +44,8 @@ module Statistic
     params do
       requires :data do
         requires :user_id, type: Integer, desc: '客户ID'
-        requires :description, type: String, desc: '客户问题描述'
-        requires :solution, type: String, desc: '推荐方案'
+        requires :title, type: String, desc: '主题'
+        requires :description, type: String, desc: '描述'
         requires :adviser, type: String, desc: '服务顾问'
         optional :state_id, type: Integer, desc: '状态ID：1.跟踪 2.解决 3.取消', default: 1
       end

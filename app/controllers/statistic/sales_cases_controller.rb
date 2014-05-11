@@ -24,7 +24,7 @@ class Statistic::SalesCasesController < Statistic::ApplicationController
   end
 
   def statistic_sales_case_params
-    params.require(:statistic_sales_case).permit(:user_id, :description, :solution, :adviser)
+    params.require(:statistic_sales_case).permit(:user_id, :title, :description, :adviser)
   end
 
 end

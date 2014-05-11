@@ -1,0 +1,8 @@
+<% case params[:type] %>
+<% when "mending" %>
+  <%= render "show_mending" %>
+<% when "bulk_purchasing" %>
+  <%= render "show_bulk_purchasing" %>
+<% when "vip_card" %>
+  <%= render "show_vip_card" %>
+<% end %>

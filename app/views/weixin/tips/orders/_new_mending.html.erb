@@ -1,0 +1,36 @@
+<%= simple_form_for(@order, url: weixin_dealer_vehicle_insurance_orders_path(@dealer, action: :create_confirmation), as: :order) do |f| %>
+  <%= devise_error_messages! @order %>
+  <div class="card">
+    <ul class="table-view">
+      <li class="table-view-cell">预约服务订单详情</a></li>
+      <li class="table-view-cell">品牌<span class="navigate-right" style="position:absolute;right:5%;margin-left:0px;"><a style="margin-right:35px">更换别的品牌</a></span></li>
+      <div class="input-row">
+        <label>车型车系</label>
+        <input type="text" placeholder="请输入车型车系">
+      </div>
+      <div class="input-row">
+        <label>车牌号</label>
+        <input type="text" placeholder="请输入车牌号">
+      </div>
+    </ul>
+  </div>
+  <div class="card">
+    <ul class="table-view">
+      <li class="input-row">
+        <label>到店时间</label>
+        <input type="datetime" placeholder="">
+      </li>
+      <li class="table-view-cell">预约项目<span style="margin-left:10%;"><input type="checkbox"> 标准保养</span><span style="margin-left:15px;"><input type="checkbox"> 维修</span></li>
+      <div class="input-row">
+        <label>预约内容</label>
+        <input type="text" placeholder="请输入预约内容">
+      </div>
+      <li class="table-view-cell">通知服务专员<span style="position:absolute;left:90%;margin-left:0px;"><input type="checkbox" checked="true"></span></li> 
+    </ul>
+  </div>
+  <div class="card" style="border:none">
+    <button class="btn btn-positive btn-block">确认预约</button>
+  </div>
+<% end %>
+
+

@@ -8,10 +8,10 @@ class Accounts::DealerDetail < ActiveRecord::Base
   validates_presence_of :dealer_type_id, :business_scope_ids,
     :company, :address, :phone, :open_during, :authentication_image
 
-  enumerate :dealer_type, with: %w(洗车美容 专项服务 专修 4S店)
+  enumerate :dealer_type, with: %w(洗车美容 专项服务 专修 4S店 汽车销售)
 
   serialize :business_scope_ids, Array
-  enumerate :business_scopes, with: %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险), multiple: true
+  enumerate :business_scopes, with: %w(洗车 美容 轮胎 换油 改装 钣喷 空调 专修 保险 卖车), multiple: true
 
   enumerate :specific_service, with: %w(轮胎 换油 改装 钣喷 空调)
 

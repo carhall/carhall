@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506034442) do
+ActiveRecord::Schema.define(version: 20140510040445) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -717,13 +717,13 @@ ActiveRecord::Schema.define(version: 20140506034442) do
     t.integer  "user_id"
     t.integer  "dealer_id"
     t.text     "description"
-    t.text     "solution"
     t.string   "adviser"
     t.string   "user_mobile"
     t.string   "user_plate_num"
     t.integer  "state_id",       default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   add_index "sales_cases", ["dealer_id"], name: "index_sales_cases_on_dealer_id", using: :btree

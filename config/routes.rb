@@ -246,6 +246,7 @@ Carhall::Application.routes.draw do
     scope module: :accounts do
       resources :dealers do
         get :current_user, on: :member
+        get :rescue, on: :member
       end
       resource :current_user
     end
@@ -262,7 +263,7 @@ Carhall::Application.routes.draw do
     scope module: :tips do
       resources :dealers do
         resource :mending, only: [:show] do
-          resources :orders, only: [:index, :new, :create] do
+          resources :orders, only: [:index, :new, :create], type: "mending" do
             post :create_confirmation, on: :collection
             get "use/:count", action: :use_confirmation, on: :member
             put :use, on: :member
@@ -294,11 +295,19 @@ Carhall::Application.routes.draw do
           end
           resources :reviews, only: [:index]
         end
+        resource :vehicle_insurance, only: [] do
+          resources :orders, only: [:index, :new, :create], type: "vehicle_insurance" do
+            post :create_confirmation, on: :collection
+            get "use/:count", action: :use_confirmation, on: :member
+            put :use, on: :member
+          end
+        end
       end
 
       resources :dealers do
         resource :current_user do
-          resources :vip_card_orders, only: [:show, :index]
+          get ":type/orders", as: :type_orders, to: "orders#index"
+          get ":type/orders/:id", as: :type_order, to: "orders#show"
         end
       end
     end

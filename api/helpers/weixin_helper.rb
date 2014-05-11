@@ -38,6 +38,16 @@ module WeixinHelper
         account.description, 
         account.avatar, 
         "weixin/dealers/#{account.id}"
+    when "rescue"
+      format_to_news "故障救援", 
+        "一键救援，紧急联系你的专属客服", 
+        absolute_url("weixin/rescue.png"), 
+        "weixin/dealers/#{account.id}/rescue"
+    when "vehicle_insurance"
+      format_to_news "车险续保", 
+        "你不懂的可以让专业人士解答", 
+        absolute_url("weixin/vehicle_insurance.png"), 
+        "weixin/dealers/#{account.id}/vehicle_insurance/orders/new"
     when "mine"
       generate_mine account
     end
@@ -109,77 +119,173 @@ module WeixinHelper
   end
 
   def generate_menu account
-    { 
-      button: [{
-        name: "项目菜单",
-        sub_button: [{
-          type: "click",
-          name: "会员卡",
-          key: "vip_card"
-        }, {
-          type: "click",
-          name: "服务项目",
-          key: "cleaning"
-        }]
-      }, {
-        name: "发现",
-        sub_button: [{
-          type: "click",
-          name: "近期团购",
-          key: "bulk_purchasing"
-        }, {
-          type: "click",
-          name: "近期活动",
-          key: "activity"
-        }]
-      }, {
-        name: "在下",
-        sub_button: [{
-          type: "click",
-          name: "商家介绍",
-          key: "dealer_description"
-        }, {
-          type: "view",
-          name: "提醒服务",
-          url: absolute_url("weixin/dealers/#{account.id}/current_user/sales_cases")
-        }, {
-          type: "view",
-          name: "违章查询",
-          url: "http://sms100.sinaapp.com/all/"
-        }, {
-          type: "click",
-          name: "我的",
-          key: "mine"
-        }, {
-          type: "view",
-          name: "手机会员卡",
-          url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
-        }]
-      }]
-    }
+    case account
+    when Accounts::Dealer
+      case account.dealer_type
+      when "洗车美容"
+        { 
+          button: [{
+            name: "项目菜单",
+            sub_button: [{
+              type: "click",
+              name: "会员卡",
+              key: "vip_card"
+            }, {
+              type: "click",
+              name: "服务项目",
+              key: "cleaning"
+            }]
+          }, {
+            name: "发现",
+            sub_button: [{
+              type: "click",
+              name: "近期团购",
+              key: "bulk_purchasing"
+            }, {
+              type: "click",
+              name: "近期活动",
+              key: "activity"
+            }]
+          }, {
+            name: "在下",
+            sub_button: [{
+              type: "click",
+              name: "商家介绍",
+              key: "dealer_description"
+            }, {
+              type: "click",
+              name: "我的",
+              key: "mine"
+            }, {
+              type: "view",
+              name: "违章查询",
+              url: "http://sms100.sinaapp.com/all/"
+            }, {
+              type: "view",
+              name: "手机会员卡",
+              url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
+            }]
+          }]
+        }
+      when "4S店"
+        { 
+          button: [{
+            name: "项目菜单",
+            sub_button: [{
+              type: "click",
+              name: "故障救援",
+              key: "rescue"
+            }, {
+              type: "click",
+              name: "车险续保",
+              key: "vehicle_insurance"
+            }, {
+              type: "click",
+              name: "保养维修",
+              key: "mending"
+            }]
+          }, {
+            name: "发现",
+            sub_button: [{
+              type: "click",
+              name: "近期团购",
+              key: "bulk_purchasing"
+            }, {
+              type: "click",
+              name: "近期活动",
+              key: "activity"
+            }, {
+              type: "click",
+              name: "爱车估价",
+              key: "secondhand_appraise"
+            }, {
+              type: "click",
+              name: "看车试驾",
+              key: "test_drive"
+            }]
+          }, {
+            name: "在下",
+            sub_button: [{
+              type: "click",
+              name: "商家介绍",
+              key: "dealer_description"
+            }, {
+              type: "click",
+              name: "我的",
+              key: "mine"
+            }, {
+              type: "view",
+              name: "违章查询",
+              url: "http://sms100.sinaapp.com/all/"
+            }, {
+              type: "view",
+              name: "手机会员卡",
+              url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
+            }]
+          }]
+        }
+      end
+    end
   end
 
   def generate_mine account
-    {
-      news: [
+    case account
+    when Accounts::Dealer
+      case account.dealer_type
+      when "洗车美容"
         {
-          Title: "个人资料",
-          Description: "点击查看我的详细资料",
-          PicUrl: absolute_url("weixin/current_user.png"),
-          Url: absolute_url("weixin/dealers/#{account.id}/current_user")
-        }, {
-          Title: "会员卡",
-          Description: "点击查看我的会员卡详细资料",
-          PicUrl: absolute_url("weixin/arrow_right.png"),
-          Url: absolute_url("weixin/dealers/#{account.id}/current_user/vip_card_orders")
-        }, {
-          Title: "消费记录",
-          Description: "点击查看我的消费记录详细资料",
-          PicUrl: absolute_url("weixin/arrow_right.png"),
-          Url: absolute_url("weixin/dealers/#{account.id}/current_user/consumption_records")
+          news: [
+            {
+              Title: "个人资料",
+              Description: "点击查看我的详细资料",
+              PicUrl: absolute_url("weixin/current_user.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user")
+            }, {
+              Title: "会员卡",
+              Description: "点击查看我的会员卡详细资料",
+              PicUrl: absolute_url("weixin/arrow_right.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user/vip_card/orders")
+            }, {
+              Title: "消费记录",
+              Description: "点击查看我的消费记录详细资料",
+              PicUrl: absolute_url("weixin/arrow_right.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user/consumption_records")
+            }, {
+              Title: "提醒服务",
+              Description: "点击查看我的提醒服务详细资料",
+              PicUrl: absolute_url("weixin/arrow_right.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user/sales_cases")
+            }
+          ]
         }
-      ]
-    }
+      when "4S店"
+        {
+          news: [
+            {
+              Title: "个人资料",
+              Description: "点击查看我的详细资料",
+              PicUrl: absolute_url("weixin/current_user.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user")
+            }, {
+              Title: "预约订单",
+              Description: "点击查看我的会员卡详细资料",
+              PicUrl: absolute_url("weixin/arrow_right.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user/mending/orders")
+            }, {
+              Title: "团购订单",
+              Description: "点击查看我的消费记录详细资料",
+              PicUrl: absolute_url("weixin/arrow_right.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user/bulk_purchasing/records")
+            }, {
+              Title: "提醒服务",
+              Description: "点击查看我的提醒服务详细资料",
+              PicUrl: absolute_url("weixin/arrow_right.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user/sales_cases")
+            }
+          ]
+        }
+      end
+    end
   end
 
 end

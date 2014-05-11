@@ -9,7 +9,7 @@
     <%= link_to "免费注册", new_account_registration_path, class: "btn btn-large btn-success" %>
     <div id="auto-scroll">
       <h5 class="text-left">最新加入服务商：</h5>
-      <% recent_dealers = Accounts::Dealer.last(20) %>
+      <% recent_dealers = Accounts::Dealer.last(20).reverse %>
       <div class="scroll">
         <ul class="unstyled">
           <% slice = 2 %>
@@ -27,8 +27,8 @@
           <% end %>
         </ul>
       </div>
-      <hr>
-      <p>服务商体验帐号：14012345678<br>密码：ceshi123</p>
+      <!-- <hr> -->
+      <!-- <p>服务商体验帐号：14012345678<br>密码：ceshi123</p> -->
     </div>
   </div>
 </div>

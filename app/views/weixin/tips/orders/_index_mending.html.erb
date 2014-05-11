@@ -1,0 +1,18 @@
+<% content_for :title do %>
+  我的预约订单
+<% end %>
+
+<% if @orders.empty? %>
+  <%= render 'share/alert', message: '您还没有预约过保养专修！' %>
+<% else %>
+  <div class="card">
+    <ul class="table-view">
+      <% @orders.each do |order| %>
+        <li class="table-view-cell">
+          <p><%= order.title %></p>
+          <p>消费金额：<%= order.cost %>元</p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
