@@ -285,7 +285,7 @@ module WeixinHelper
               Title: "团购订单",
               Description: "点击查看我的消费记录详细资料",
               PicUrl: absolute_url("weixin/arrow_right.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user/bulk_purchasing/records")
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user/bulk_purchasing/orders")
             }, {
               Title: "提醒服务",
               Description: "点击查看我的提醒服务详细资料",
