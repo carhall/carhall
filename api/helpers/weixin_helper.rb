@@ -68,7 +68,7 @@ module WeixinHelper
       news: {
         Title: title,
         Description: description,
-        PicUrl: absolute_url(image.url(:medium)),
+        PicUrl: (absolute_url(image.url(:medium)) rescue image),
         Url: absolute_url(url)
       }
     }
