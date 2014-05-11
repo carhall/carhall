@@ -67,4 +67,12 @@ class Category::Area < ActiveEnum::Base
     end
   end
 
+  def self.to_double_select
+    all.group_by do |area|
+      area[2][:province]
+    end.map do |province, cities|
+      [province, cities.map { |city| [city[1], city[0]] }]
+    end
+  end
+
 end

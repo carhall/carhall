@@ -22,6 +22,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
       permit << {detail_attributes: [:id, :dealer_type_id, :specific_service_id, 
         :business_scope_ids, :company, :address, :phone, :open_during, 
         :authentication_image,
+        :rescue_phone, :insurance_phone, :secondhand_appraise_phone, :postsale_phone,
         {template_ids: []}, {business_scope_ids: []}]}
     when "Accounts::Distributor"
       permit << :type

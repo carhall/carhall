@@ -1,0 +1,19 @@
+<%= simple_form_for(@order, url: weixin_dealer_secondhand_appraise_orders_path(@dealer, action: :create_confirmation), as: :order) do |f| %>
+  <%= devise_error_messages! @order %>
+  <div class="card">
+    <ul class="table-view">
+      <li class="table-view-cell input-row">
+        <%= f.input :purchasing_date, input_html: { type: "datetime-local" } %>
+      </li>
+      <li class="table-view-cell input-row"><%= f.input :travelling_miles %></li>
+      <li class="table-view-cell input-row">
+        <%= f.input :brand_id, collection: Category::Brand.to_select %>
+      </li>
+      <li class="table-view-cell input-row"><%= f.input :series %></li>
+    </ul>
+  </div>
+  <div class="card-no-border">
+    <%= f.hidden_field :count, value: 1 %>
+    <button class="btn btn-positive btn-block">提交评估</button>
+  </div>
+<% end %>

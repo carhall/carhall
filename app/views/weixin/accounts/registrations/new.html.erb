@@ -15,7 +15,13 @@
     <ul class="table-view">
       <li class="table-view-cell input-row"><%= f.input :username %></li>
       <li class="table-view-cell input-row"><%= f.input :sex_id, collection: Accounts::Account::Sex.to_select, as: :radio_buttons %></li>
-      <li class="table-view-cell input-row"><%= f.input :area_id, collection: Category::Area.to_grouped_select, as: :grouped_select, group_method: :cities %></li>
+      <li class="table-view-cell input-row"><%#= f.input :area_id, collection: Category::Area.to_grouped_select, as: :grouped_select, group_method: :cities %>
+        <%= f.label "地区", required: true %>
+        <div class="controls">
+          <%= f.select :main_area_id, Category::Area::Main.to_select, {}, class: "half" %>
+          <%= f.select :area_id, [], {}, class: "half" %>
+        </div>
+      </li>
     </ul>
   </div>
   <div class="card">
@@ -33,3 +39,18 @@
     <%= f.button :submit, "注册帐号", class: 'btn-positive btn-block' %>
   </div>
 <% end %>
+
+<script>
+  var main_area_el = document.getElementById('weixin_account_main_area_id'),
+    area_el = document.getElementById('weixin_account_area_id'),
+    main_areas = <%= raw Category::Area.to_double_select.to_json %>;
+  function set_area() {
+    var area_inner = "", areas = main_areas[main_area_el.value-1][1];
+    for (var i = 0; i < areas.length; i++) {
+      area_inner += "<option value=\""+areas[i][1]+"\">"+areas[i][0]+"</option>";
+    }
+    area_el.innerHTML = area_inner;
+  }
+  set_area();
+  main_area_el.onchange = set_area;
+</script>

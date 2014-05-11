@@ -12,7 +12,7 @@ module Share::Areable
   end
 
   def main_area_id
-    (area_id||0) % 100
+    (area_id||0)/100
   end
   
   def main_area_range

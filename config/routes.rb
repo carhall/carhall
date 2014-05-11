@@ -304,6 +304,13 @@ Carhall::Application.routes.draw do
             put :use, on: :member
           end
         end
+        resource :secondhand_appraise, only: [] do
+          resources :orders, only: [:index, :new, :create], type: "secondhand_appraise" do
+            post :create_confirmation, on: :collection
+            get "use/:count", action: :use_confirmation, on: :member
+            put :use, on: :member
+          end
+        end
       end
 
       resources :dealers do

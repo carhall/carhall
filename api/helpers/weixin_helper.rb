@@ -48,6 +48,16 @@ module WeixinHelper
         "你不懂的可以让专业人士解答", 
         absolute_url("weixin/vehicle_insurance.png"), 
         "weixin/dealers/#{account.id}/vehicle_insurance/orders/new"
+    when "secondhand_appraise"
+      format_to_news "爱车评估", 
+        "专业值得信赖的机构\n想换车，先评估一下吧", 
+        absolute_url("weixin/secondhand_appraise.png"), 
+        "weixin/dealers/#{account.id}/secondhand_appraise/orders/new"
+    when "test_drive"
+      format_to_news "新车展厅", 
+        "点击可查看车型报价、参数等详细资料", 
+        absolute_url("weixin/test_drive.png"), 
+        "weixin/dealers/#{account.id}/test_drives"
     when "mine"
       generate_mine account
     end

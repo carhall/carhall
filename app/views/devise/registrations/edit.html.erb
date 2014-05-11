@@ -64,6 +64,12 @@
                   <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
                 </div>
               <% end %>
+
+              <%= ff.input :rescue_phone %>
+              <%= ff.input :insurance_phone %>
+              <%= ff.input :secondhand_appraise_phone %>
+              <%= ff.input :postsale_phone %>
+
             <% end %>
 
           <% elsif resource.user_type == :provider %>

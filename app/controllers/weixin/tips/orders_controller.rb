@@ -60,6 +60,8 @@ private
           @user.vip_card_orders
         when "vehicle_insurance"
           @user.vehicle_insurance_orders
+        when "secondhand_appraise"
+          @user.secondhand_appraise_orders
         else
           raise ActionController::RoutingError, "Unknown order type: #{params[:type]}"
         end

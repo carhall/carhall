@@ -161,6 +161,10 @@ zh-CN:
         products: 经销品牌
         brand_ids: 车型品牌配件
         brands: 车型品牌配件
+        rescue_phone: 故障救援热线
+        insurance_phone: 车险续保热线
+        secondhand_appraise_phone: 二手评估热线
+        postsale_phone: 售后服务热线
       accounts/user: 
         <<: *account
         total_cost: 总消费额
@@ -265,6 +269,16 @@ zh-CN:
       tips/vip_card_order_item:
         <<: *vip_card_item
         used_count: 已使用次数
+      tips/secondhand_appraise_order:
+        purchasing_date: 入手年份
+        travelling_miles: 行驶里程
+        brand_id: 汽车品牌
+        series: 汽车型号
+      tips/secondhand_appraise_order/detail:
+        purchasing_date: 入手年份
+        travelling_miles: 行驶里程
+        brand_id: 汽车品牌
+        series: 汽车型号
       tips/review:
         stars: 评分
         content: 评价内容
