@@ -12,7 +12,7 @@
     </ul>
   </div>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell input-row"><%= f.input :username %></li>
       <li class="table-view-cell input-row"><%= f.input :sex_id, collection: Accounts::Account::Sex.to_select, as: :radio_buttons %></li>
       <li class="table-view-cell input-row"><%#= f.input :area_id, collection: Category::Area.to_grouped_select, as: :grouped_select, group_method: :cities %>
@@ -25,13 +25,13 @@
     </ul>
   </div>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell input-row"><%= f.input :brand_id, collection: Category::Brand.to_select %></li>
       <li class="table-view-cell input-row"><%= f.input :plate_num, required: true %></li>
     </ul>
   </div>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell input-row"><%= f.input :description, label: "个性签名", input_html: { rows: 4 } %></li>
     </ul>
   </div>
