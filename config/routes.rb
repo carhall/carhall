@@ -245,7 +245,9 @@ Carhall::Application.routes.draw do
     
     scope module: :accounts do
       resources :dealers do
-        get :current_user, on: :member
+        resource :current_user do
+          get :mine, on: :member
+        end
         get :rescue, on: :member
       end
       resource :current_user
