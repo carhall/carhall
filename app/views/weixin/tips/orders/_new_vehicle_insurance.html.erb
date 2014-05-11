@@ -54,7 +54,9 @@
   for (var i = 0; i < els.length; i++) {
     var el = els[i];
     el.onchange = function() {
-      document.getElementById(el.name).value = el.value;
+      var el2 = document.getElementById(el.name);
+      el2.value = el.value;
+      el2.checked = true;
     }
   }
 </script>
