@@ -43,8 +43,8 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
 private
 
   def get_parent
-    @source = @mending || @cleaning || @bulk_purchasing || @vip_card
     @dealer = params[:dealer_id]
+    @source = @mending || @cleaning || @bulk_purchasing || @vip_card
     if @source
       @parent = @source.orders
       @parent = @parent.with_user(@user) if @user
@@ -52,6 +52,7 @@ private
       @user ||= authenticate_weixin_account!
       @parent = case params[:type]
         when "mending"
+          @mending = Tips::Mending.find_by(dealer_id: @dealer) if @dealer
           @user.mending_orders
         when "bulk_purchasing"
           @user.bulk_purchasing_orders

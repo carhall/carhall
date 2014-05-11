@@ -21,4 +21,12 @@ class Tips::MendingOrder < Tips::Order
   def use(count); finish; end
   def used?; finished?; end
   
+  after_initialize do |order|
+    if user = order.user
+      order.brand_id ||= user.brand_id
+      order.series ||= user.series
+      order.plate_num ||= user.plate_num
+    end
+  end
+
 end

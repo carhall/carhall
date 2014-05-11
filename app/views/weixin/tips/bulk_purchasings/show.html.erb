@@ -6,10 +6,12 @@
   <ul class="table-view">
     <li class="table-view-cell"><%= @bulk_purchasing.title %></li>
     <li class="table-view-cell">
-      会员价 <%= @bulk_purchasing.vip_price %> 元 原价 <%= @bulk_purchasing.price %> 元
-      <%= link_to "购买", new_weixin_dealer_bulk_purchasing_order_path(@dealer, @bulk_purchasing), class: "btn btn-positive" %>
+      会员价：<%= @bulk_purchasing.vip_price %> 元 原价：<%= @bulk_purchasing.price %> 元
     </li>
   </ul>
+</div>
+<div class="card-no-border">
+  <%= link_to "立即购买", new_weixin_dealer_bulk_purchasing_order_path(@dealer, @bulk_purchasing), class: "btn btn-positive btn-block" %>
 </div>
 <div class="card">
   <ul class="table-view">
@@ -33,3 +35,6 @@
 <%= render 'weixin/share/orders_list' %>
 <% @reviews = @bulk_purchasing.reviews.includes(order: :user).last(3) %>
 <%= render 'weixin/share/reviews_list' %>
+<div class="card-no-border">
+  <%= link_to "立即购买", new_weixin_dealer_bulk_purchasing_order_path(@dealer, @bulk_purchasing), class: "btn btn-positive btn-block" %>
+</div>

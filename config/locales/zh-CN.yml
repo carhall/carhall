@@ -229,12 +229,22 @@ zh-CN:
       tips/bulk_purchasing2_order:
         <<: *order
         dealer: 购买服务商
+      tips/mending_order:
+        <<: *order
+        brand_id: 汽车品牌
+        series: 汽车型号
+        plate_num: 车牌号
+        arrive_at: 到店时间
+        mending_type_id: 预约项目
+        description: 预约内容
       tips/mending_order/detail:
         brand: 汽车品牌
+        brand_id: 汽车品牌
         series: 汽车型号
         plate_num: 车牌号
         arrive_at: 到店时间
         mending_type: 预约项目
+        mending_type_id: 预约项目
         description: 预约内容
       tips/vip_card:
         <<: *servicalbe

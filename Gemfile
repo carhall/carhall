@@ -32,6 +32,7 @@ gem 'jasny_bootstrap_extension_rails'
 gem 'hermitage'
 
 gem 'ratchet-rails'
+gem 'pikaday-gem'
 
 # For frontend
 gem 'simple_form'

@@ -184,6 +184,8 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.0)
       mime-types
+    pikaday-gem (1.2.0)
+      railties (>= 3.1)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -331,6 +333,7 @@ DEPENDENCIES
   mini_magick
   mysql2
   paperclip
+  pikaday-gem
   pry-debugger
   pry-rails
   quiet_assets
