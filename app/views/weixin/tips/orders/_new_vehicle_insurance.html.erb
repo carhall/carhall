@@ -31,8 +31,15 @@
           </li>
         <% end %>
       <% end %>
+    </ul>
+  </div>
+  <div class="card">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell">
-        保险服务： <%= @order.dealer.insurance_phone %>
+        <span>保险服务热线</span>
+        <span class="pull-right">
+          <a href="tel:<%= @order.dealer.insurance_phone %>"><%= @order.dealer.insurance_phone %></a>
+        </span>
       </li>
     </ul>
   </div>

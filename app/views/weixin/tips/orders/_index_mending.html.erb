@@ -6,11 +6,16 @@
   <%= render 'share/alert', message: '您还没有预约过保养专修！' %>
 <% else %>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <% @orders.each do |order| %>
         <li class="table-view-cell">
-          <p><%= order.title %></p>
-          <p>消费金额：<%= order.cost %>元</p>
+          <%= order.title %>
+          <p>汽车品牌：<%= order.brand %></p>
+          <p>汽车型号：<%= order.series %></p>
+          <p>车牌号：<%= order.plate_num %></p>
+          <p>到店时间：<%= l order.arrive_at, format: :long %></p>
+          <p>预约项目：<%= order.mending_type %></p>
+          <p>预约内容：<%= order.description %></p>
         </li>
       <% end %>
     </ul>

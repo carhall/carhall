@@ -6,7 +6,7 @@
   <%= render 'share/alert', message: '该项目还没有任何消费记录！' %>
 <% else %>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <% @orders.each do |order| %>
         <li class="table-view-cell">
           <%= order.user.username %>

@@ -1,7 +1,7 @@
 <%= simple_form_for(@order, url: weixin_dealer_secondhand_appraise_orders_path(@dealer, action: :create_confirmation), as: :order) do |f| %>
   <%= devise_error_messages! @order %>
   <div class="card">
-    <ul class="table-view">
+    <ul class="table-view table-view-block">
       <li class="table-view-cell input-row">
         <%= f.input :purchasing_date %>
       </li>
@@ -10,6 +10,16 @@
         <%= f.input :brand_id, collection: Category::Brand.to_select %>
       </li>
       <li class="table-view-cell input-row"><%= f.input :series %></li>
+    </ul>
+  </div>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell input-row">
+        <span>评估热线</span>
+        <span class="pull-right">
+          <a href="tel:<%= @order.dealer.secondhand_appraise_phone %>"><%= @order.dealer.secondhand_appraise_phone %></a>
+        </span>
+      </li>
     </ul>
   </div>
   <div class="card-no-border">

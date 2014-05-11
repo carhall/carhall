@@ -31,6 +31,16 @@
     <% end %>
   </ul>
 </div>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">
+      售后服务热线
+      <span class="pull-right">
+        <a href="tel:<%= @dealer.postsale_phone %>"><%= @dealer.postsale_phone %></a>
+      </span>
+    </li>
+  </ul>
+</div>
 <div class="card-no-border">
   <%= link_to "马上预约", new_weixin_dealer_mending_order_path(@dealer), class: "btn btn-positive btn-block" %>
 </div>
