@@ -3,7 +3,7 @@
   <div class="card">
     <ul class="table-view table-view-block">
       <li class="table-view-cell input-row">
-        <%= f.input :purchasing_date %>
+        <%= f.input :purchasing_date, input_html: { readonly: true } %>
       </li>
       <li class="table-view-cell input-row"><%= f.input :travelling_miles %></li>
       <li class="table-view-cell input-row">
