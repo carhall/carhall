@@ -1,0 +1,24 @@
+<% Tips::TestDrive::Params.each do |group, titles| %>
+  <div class="nested-group">
+    <div class="control-group">
+      <label class="control-label"><strong><%= group %></strong></label>
+    </div>
+    
+    <div class="nested-fields">
+      <% titles.each do |title| %>
+        <%= f.input title, required: false %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :stylesheets do %>
+  <style type="text/css">
+    .nested-fields {
+      margin-bottom: 20px;
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+    }
+  </style>
+<% end %>

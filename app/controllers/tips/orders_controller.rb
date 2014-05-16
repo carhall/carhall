@@ -2,11 +2,12 @@ class Tips::OrdersController < Tips::ApplicationController
   before_filter :set_distributor, only: :bulk_purchasing2
   load_resource :mending, class: Tips::Mending
   load_resource :cleaning, class: Tips::Cleaning
+  load_resource :test_drive, class: Tips::TestDrive, id_param: :test_drife_id
   load_resource :bulk_purchasing, class: Tips::BulkPurchasing
   load_resource :bulk_purchasing2, class: Tips::BulkPurchasing2
   load_resource :vip_card, class: Tips::VipCard
-  set_resource_class Tips::Order, through: [:mending, :cleaning, :bulk_purchasing, :bulk_purchasing2, :vip_card], 
-    shallow: true
+  set_resource_class Tips::Order, through: [:mending, :cleaning, :test_drive, 
+    :bulk_purchasing, :bulk_purchasing2, :vip_card], shallow: true
 
   def mending
     @orders = @dealer.mending_orders
@@ -14,6 +15,10 @@ class Tips::OrdersController < Tips::ApplicationController
 
   def cleaning
     @orders = @dealer.cleaning_orders
+  end
+
+  def test_drive
+    @orders = @dealer.test_drive_orders
   end
   
   def bulk_purchasing
@@ -39,6 +44,7 @@ class Tips::OrdersController < Tips::ApplicationController
   def index
     render 'mending' if @mending
     render 'cleaning' if @cleaning
+    render 'test_drive' if @test_drive
     render 'bulk_purchasing' if @bulk_purchasing
     render 'bulk_purchasing2' if @bulk_purchasing2
     render 'vip_cards' if @vip_card

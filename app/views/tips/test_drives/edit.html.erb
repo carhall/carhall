@@ -1,0 +1,14 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>编辑看车试驾信息 <small></small></h3>
+    </div>
+
+    <%= render 'form', upload: true %>
+
+  </div>
+</div>

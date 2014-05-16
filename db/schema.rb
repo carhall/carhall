@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510040445) do
+ActiveRecord::Schema.define(version: 20140515060458) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -387,6 +387,7 @@ ActiveRecord::Schema.define(version: 20140510040445) do
     t.string   "weixin_app_id"
     t.string   "weixin_app_secret"
     t.text     "weixin_welcome"
+    t.string   "test_drive_phone"
   end
 
   add_index "dealer_details", ["dealer_type_id"], name: "index_dealer_details_on_dealer_type_id", using: :btree
@@ -749,7 +750,6 @@ ActiveRecord::Schema.define(version: 20140510040445) do
     t.integer  "dealer_id"
     t.string   "title"
     t.float    "price"
-    t.string   "phone"
     t.text     "params"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -758,9 +758,13 @@ ActiveRecord::Schema.define(version: 20140510040445) do
     t.integer  "orders_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "brand_id"
+    t.string   "series"
   end
 
+  add_index "test_drives", ["brand_id"], name: "index_test_drives_on_brand_id", using: :btree
   add_index "test_drives", ["dealer_id"], name: "index_test_drives_on_dealer_id", using: :btree
+  add_index "test_drives", ["series"], name: "index_test_drives_on_series", using: :btree
 
   create_table "traffic_reports", force: true do |t|
     t.integer  "user_id"

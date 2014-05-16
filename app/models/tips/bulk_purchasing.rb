@@ -10,8 +10,8 @@ class Tips::BulkPurchasing < ActiveRecord::Base
   validates_presence_of :dealer
   validates_presence_of :title, :bulk_purchasing_type_id, :expire_at, :price, :vip_price
 
-  enumerate :bulk_purchasing_type, with: %w(洗车美容 保养专修 汽车装饰 其他)
-
+  enumerate :bulk_purchasing_type, with: %w(洗车美容 保养维修 汽车装饰 汽车销售)
+  
   include Tips::Expiredable
   scope :ordered, -> { displayed.positioned.in_progress }
 

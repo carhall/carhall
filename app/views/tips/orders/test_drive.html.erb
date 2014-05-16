@@ -1,0 +1,28 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <% if @test_drive %>
+        <h3>服务项目 “<%= @test_drive.title %>” 订单列表 <small></small></h3>
+      <% else %>
+        <h3>服务项目订单列表 <small></small></h3>
+      <% end %>
+    </div>
+
+    <% @orders = @orders.includes(:user) %>
+
+    <%= render 'share/alert', message: '您还没有收到洗车美容订单！' if @orders.empty? %>
+
+    <%= index_for @orders, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.association :user, using: :username %>
+      <%= t.attribute :title %>
+      <%= t.attribute :cost %>
+      <%= t.attribute :state %>
+    <% end %>
+
+  </div>
+</div>

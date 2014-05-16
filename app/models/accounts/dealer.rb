@@ -9,6 +9,7 @@ class Accounts::Dealer < Accounts::PublicAccount
 
   has_one :mending, class_name: 'Tips::Mending'
   has_many :cleanings, class_name: 'Tips::Cleaning'
+  has_many :test_drives, class_name: 'Tips::TestDrive'
   has_many :activities, class_name: 'Tips::Activity'
   has_many :bulk_purchasings, class_name: 'Tips::BulkPurchasing'
   has_many :vip_cards, class_name: 'Tips::VipCard'
@@ -77,6 +78,7 @@ class Accounts::Dealer < Accounts::PublicAccount
     bulk_purchasing: 1,
     activity: 1,
     vip_card: 3,
+    test_drive: 1
   }
 
   def has_template? template

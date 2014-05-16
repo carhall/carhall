@@ -1,0 +1,27 @@
+<% content_for :title do %>
+  服务项目
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <% @test_drives.group_by{|o|o.brand}.each do |brand, test_drives| %>
+      <li class="table-view-cell"><%= brand %></li>
+      <% test_drives.group_by{|o|o.series}.each do |series, test_drives| %>
+        <li class="table-view-cell"><%= series %></li>
+        <% test_drives.each do |test_drive| %>
+          <li class="table-view-cell media">
+            <%= link_to weixin_dealer_test_drife_path(@dealer, test_drive), class: "navigate-right", data: { transition: "slide-in" } do %>
+              <div class="media-title"><%= test_drive.title %></div>
+              <%= image_tag test_drive.image.url(:thumb), class: "media-object pull-left" %>
+              <div class="media-body">
+                <p>已购人数：<%= test_drive.orders_count %></p>
+                <p>评分：<%= print_stars test_drive.stars, false %></p>
+                <p>价格：<%= test_drive.price %></p>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

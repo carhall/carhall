@@ -1,0 +1,43 @@
+<% content_for :title do %>
+  服务项目详情
+<% end %>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell media">
+      <%= image_tag @test_drive.image.url(:thumb), class: "media-object pull-left" %>
+      <div class="media-body">
+        <%= @test_drive.title %>
+        <br>
+        价格：<%= @test_drive.price %>
+      </div>
+    </li>
+    <li class="table-view-cell">
+      咨询电话：<%= @dealer.test_drive_phone %>
+    </li>
+    <li class="table-view-cell">促销政策</li>
+  </ul>
+</div>
+
+<%= simple_form_for(@test_drive.orders.new, url: weixin_dealer_test_drife_orders_path(@dealer, @test_drive, action: :create_confirmation), as: :order) do |f| %>
+  <div class="card-no-border">
+    <%= f.hidden_field :count, value: 1 %>
+    <button class="btn btn-positive btn-block">预约试驾</button>
+  </div>
+<% end %>
+
+<div class="card">
+  <table class="table-view">
+    <% @test_drive.grouped_params.each do |group, grouped_params| %>
+      <tr>
+        <th><%= group %></th>
+        <th></th>
+      </tr>
+      <% grouped_params.each do |title, param| %>
+        <tr>
+          <td><%= title %></td>
+          <td><%= param %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>

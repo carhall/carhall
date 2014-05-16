@@ -7,7 +7,7 @@ class Tips::Cleaning < ActiveRecord::Base
   
   include Share::Statisticable
 
-  enumerate :cleaning_type, with: %w(洗车 漆面养护 清洁护理 轮胎 换油 改装 钣喷)
+  enumerate :cleaning_type, with: %w(洗车 漆面养护 清洁护理 轮胎服务 保养服务 装饰改装 钣金喷漆)
   
   validates_presence_of :dealer
   validates_presence_of :title, :cleaning_type_id, :price, :vip_price

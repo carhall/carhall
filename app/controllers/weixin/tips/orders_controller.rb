@@ -1,6 +1,7 @@
 class Weixin::Tips::OrdersController < Weixin::ApplicationController
   load_resource :mending, class: Tips::Mending
   load_resource :cleaning, class: Tips::Cleaning
+  load_resource :test_drive, class: Tips::TestDrive, id_param: :test_drife_id
   load_resource :bulk_purchasing, class: Tips::BulkPurchasing
   load_resource :vip_card, class: Tips::VipCard
 
@@ -44,7 +45,7 @@ private
 
   def get_parent
     @dealer = params[:dealer_id]
-    @source = @mending || @cleaning || @bulk_purchasing || @vip_card
+    @source = @mending || @cleaning || @test_drive || @bulk_purchasing || @vip_card
     if @source
       @parent = @source.orders
       @parent = @parent.with_user(@user) if @user

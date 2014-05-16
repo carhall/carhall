@@ -97,6 +97,11 @@ Carhall::Application.routes.draw do
     end
 
     resources :vip_cards do
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
+
       put :disable, on: :member
       put :reenable, on: :member
 
@@ -106,6 +111,7 @@ Carhall::Application.routes.draw do
     resources :orders do
       get :mending, on: :collection
       get :cleaning, on: :collection
+      get :test_drive, on: :collection
       get :bulk_purchasing, on: :collection
       get :bulk_purchasing2, on: :collection
       get :vip_card, on: :collection
@@ -123,6 +129,15 @@ Carhall::Application.routes.draw do
       get :in_progress, on: :collection
       get :expired, on: :collection
 
+      resources :orders
+    end
+
+    resources :test_drives do
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
+      
       resources :orders
     end
 
@@ -306,6 +321,13 @@ Carhall::Application.routes.draw do
         end
         resource :secondhand_appraise, only: [] do
           resources :orders, only: [:index, :new, :create], type: "secondhand_appraise" do
+            post :create_confirmation, on: :collection
+            get "use/:count", action: :use_confirmation, on: :member
+            put :use, on: :member
+          end
+        end
+        resources :test_drives, only: [:show, :index] do
+          resources :orders, only: [:index, :new, :create] do
             post :create_confirmation, on: :collection
             get "use/:count", action: :use_confirmation, on: :member
             put :use, on: :member

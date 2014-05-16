@@ -23,11 +23,11 @@ class Accounts::DealerDetail < ActiveRecord::Base
   }
 
   serialize :template_ids, Array
-  enumerate :templates, with: %w(洗车美容 保养专修 团购 近期活动 会员卡), multiple: true
+  enumerate :templates, with: %w(洗车美容 保养专修 团购 近期活动 会员卡 看车试驾), multiple: true
 
   def template_syms
     ids = template_ids.map{|i|i-1}
-    %i(cleaning mending bulk_purchasing activity vip_card).values_at(*ids)
+    %i(cleaning mending bulk_purchasing activity vip_card test_drive).values_at(*ids)
   end
 
   def to_base_builder

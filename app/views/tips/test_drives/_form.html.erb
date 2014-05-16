@@ -1,0 +1,33 @@
+<%= simple_form_for(@test_drive, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @test_drive %>
+
+  <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
+  <%= f.input :image do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @test_drive.image.url(:medium) %>" /></div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+      <div>
+        <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="tips_test_drive[image]" /></span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.input :price, hint: '填数字即可，单位：元' %>
+
+  <%= f.input :brand_id, collection: Category::Brand.to_select %>
+  <%= f.input :series %>
+
+  <hr>
+  <div class="control-group">
+    <label class="control-label"><strong>车型参数信息</strong></label>
+  </div>
+
+  <div class="params">
+    <%= f.fields_for :params, OpenStruct.new(@test_drive.params) do |ff| %>
+      <%= render 'test_drive_param_fields', f: ff %>
+    <% end %>
+  </div>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>
