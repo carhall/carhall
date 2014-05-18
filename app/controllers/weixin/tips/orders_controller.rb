@@ -1,9 +1,9 @@
 class Weixin::Tips::OrdersController < Weixin::ApplicationController
   load_resource :mending, class: Tips::Mending
   load_resource :cleaning, class: Tips::Cleaning
-  load_resource :test_drive, class: Tips::TestDrive, id_param: :test_drife_id
   load_resource :bulk_purchasing, class: Tips::BulkPurchasing
   load_resource :vip_card, class: Tips::VipCard
+  before_filter :load_resource_test_drive
 
   before_filter :authenticate_weixin_account!, except: [:index]
   before_filter :set_weixin_current_user, except: [:index]
@@ -42,6 +42,10 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
   end
 
 private
+
+  def load_resource_test_drive
+    @test_drive = Tips::TestDrive.find(params[:test_drife_id]) if params[:test_drife_id]
+  end
 
   def get_parent
     @dealer = params[:dealer_id]
