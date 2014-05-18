@@ -56,7 +56,7 @@ module WeixinHelper
     when "test_drive"
       format_to_news "新车展厅", 
         "点击可查看车型报价、参数等详细资料", 
-        absolute_url("weixin/test_drive.png"), 
+        account.test_drives.first.image, 
         "weixin/dealers/#{account.id}/test_drives"
     when "mine"
       generate_mine account
@@ -227,10 +227,6 @@ module WeixinHelper
               type: "view",
               name: "违章查询",
               url: "http://sms100.sinaapp.com/all/"
-            }, {
-              type: "view",
-              name: "手机会员卡",
-              url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
             }]
           }]
         }
