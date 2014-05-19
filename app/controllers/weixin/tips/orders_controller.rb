@@ -8,6 +8,7 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
   before_filter :authenticate_weixin_account!, except: [:index]
   before_filter :set_weixin_current_user, except: [:index]
   before_filter :get_parent
+  before_filter :get_parent_with_dealer, except: [:index, :show]
 
   def index
     @orders = @parent
@@ -52,7 +53,6 @@ private
     @source = @mending || @cleaning || @test_drive || @bulk_purchasing || @vip_card
     if @source
       @parent = @source.orders
-      @parent = @parent.with_user(@user) if @user
     else
       @user ||= authenticate_weixin_account!
       @parent = case params[:type]
@@ -74,4 +74,8 @@ private
     end
   end
   
+  def get_parent_with_dealer
+    @parent = @parent.with_user(@user)
+  end
+
 end
