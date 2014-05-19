@@ -149,11 +149,11 @@ module WeixinHelper
             name: "发现",
             sub_button: [{
               type: "click",
-              name: "近期团购",
+              name: "团购",
               key: "bulk_purchasing"
             }, {
               type: "click",
-              name: "近期活动",
+              name: "活动",
               key: "activity"
             }]
           }, {
@@ -198,11 +198,11 @@ module WeixinHelper
             name: "发现",
             sub_button: [{
               type: "click",
-              name: "近期团购",
+              name: "团购",
               key: "bulk_purchasing"
             }, {
               type: "click",
-              name: "近期活动",
+              name: "活动",
               key: "activity"
             }, {
               type: "click",
@@ -212,6 +212,96 @@ module WeixinHelper
               type: "click",
               name: "看车试驾",
               key: "test_drive"
+            }]
+          }, {
+            name: "在下",
+            sub_button: [{
+              type: "click",
+              name: "商家介绍",
+              key: "dealer_description"
+            }, {
+              type: "click",
+              name: "我的",
+              key: "mine"
+            }, {
+              type: "view",
+              name: "违章查询",
+              url: "http://sms100.sinaapp.com/all/"
+            }]
+          }]
+        }
+      when "汽车销售"
+        { 
+          button: [{
+            name: "项目菜单",
+            sub_button: [{
+              type: "click",
+              name: "爱车估价",
+              key: "secondhand_appraise"
+            }, {
+              type: "click",
+              name: "看车试驾",
+              key: "test_drive"
+            }, {
+              type: "click",
+              name: "车险续保",
+              key: "vehicle_insurance"
+            }, {
+              type: "view",
+              name: "违章查询",
+              url: "http://sms100.sinaapp.com/all/"
+            }]
+          }, {
+            name: "发现",
+            sub_button: [{
+              type: "click",
+              name: "团购",
+              key: "bulk_purchasing"
+            }, {
+              type: "click",
+              name: "活动",
+              key: "activity"
+            }]
+          }, {
+            name: "在下",
+            sub_button: [{
+              type: "click",
+              name: "商家介绍",
+              key: "dealer_description"
+            }, {
+              type: "click",
+              name: "我的",
+              key: "mine"
+            }]
+          }]
+        }
+      when "专修"
+        { 
+          button: [{
+            name: "项目菜单",
+            sub_button: [{
+              type: "click",
+              name: "故障救援",
+              key: "rescue"
+            }, {
+              type: "click",
+              name: "车险续保",
+              key: "vehicle_insurance"
+            }, {
+              type: "click",
+              name: "保养维修",
+              key: "mending"
+            }]
+          }, {
+            name: "发现",
+            sub_button: [{
+              type: "click",
+              name: "团购",
+              key: "bulk_purchasing"
+            }, {
+              type: "click",
+              name: "活动",
+              key: "activity"
             }]
           }, {
             name: "在下",
