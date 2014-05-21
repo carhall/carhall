@@ -25,6 +25,7 @@ class Ability
     when :guest
       can :read, Tips::Mending
       can :read, Tips::Cleaning
+      can :read, Tips::TestDrive
       can :read, Tips::Activity
       can :read, Tips::BulkPurchasing
       can :read, Tips::VipCard
