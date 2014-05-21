@@ -354,7 +354,7 @@ module WeixinHelper
             }
           ]
         }
-      when "4S店"
+      when "4S店", "专修"
         {
           news: [
             {
@@ -372,6 +372,22 @@ module WeixinHelper
               Description: "点击查看我的消费记录详细资料",
               PicUrl: absolute_url("weixin/arrow_right.png"),
               Url: absolute_url("weixin/dealers/#{account.id}/current_user/bulk_purchasing/orders")
+            }, {
+              Title: "提醒服务",
+              Description: "点击查看我的提醒服务详细资料",
+              PicUrl: absolute_url("weixin/arrow_right.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user/sales_cases")
+            }
+          ]
+        }
+      when "汽车销售"
+        {
+          news: [
+            {
+              Title: "个人资料",
+              Description: "点击查看我的详细资料",
+              PicUrl: absolute_url("weixin/current_user.png"),
+              Url: absolute_url("weixin/dealers/#{account.id}/current_user")
             }, {
               Title: "提醒服务",
               Description: "点击查看我的提醒服务详细资料",
