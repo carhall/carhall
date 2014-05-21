@@ -33,7 +33,7 @@ zh-CN:
   rank_down_success: 成功降级 %{model} 帐号 “%{title}”。
   enable_success: 成功启用 会员卡 “%{title}”。
   mending: "%{dealer} %{brand} 保养专修"
-  vehicle_insurance: "%{dealer} %{brand} 车险续保"
+  vehicle_insurance: "%{dealer} 车险续保"
   secondhand_appraise: "%{dealer} %{brand} 二手评估"
   times:  " %{count} 份"
   to_many: 过多（最多为 %{count} 个）
@@ -200,6 +200,7 @@ zh-CN:
         brand: 汽车品牌
         brand_id: 汽车品牌
         series: 汽车型号
+        description: 促销政策
       tips/activity:
         <<: *servicalbe
       tips/bulk_purchasing:
@@ -288,6 +289,8 @@ zh-CN:
         travelling_miles: 行驶里程
         brand_id: 汽车品牌
         series: 汽车型号
+      tips/vehicle_insurance_order/detail:
+        insurance_type_ids: 保险类型
       tips/review:
         stars: 评分
         content: 评价内容

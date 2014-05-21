@@ -6,7 +6,7 @@
     
     <div class="nested-fields">
       <% titles.each do |title| %>
-        <%= f.input title, required: false %>
+        <%= f.input title, required: false, input_html: { class: "span12" } %>
       <% end %>
     </div>
   </div>

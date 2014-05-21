@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140515060458) do
+ActiveRecord::Schema.define(version: 20140521015602) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -760,6 +760,7 @@ ActiveRecord::Schema.define(version: 20140515060458) do
     t.datetime "updated_at"
     t.integer  "brand_id"
     t.string   "series"
+    t.text     "description"
   end
 
   add_index "test_drives", ["brand_id"], name: "index_test_drives_on_brand_id", using: :btree
@@ -841,11 +842,10 @@ ActiveRecord::Schema.define(version: 20140515060458) do
     t.string  "series"
     t.string  "plate_num"
     t.text    "description"
-    t.integer "insurance_type_id"
+    t.string  "insurance_type_ids"
   end
 
   add_index "vehicle_insurance_order_details", ["brand_id"], name: "index_vehicle_insurance_order_details_on_brand_id", using: :btree
-  add_index "vehicle_insurance_order_details", ["insurance_type_id"], name: "index_vehicle_insurance_order_details_on_insurance_type_id", using: :btree
 
   create_table "vip_card_items", force: true do |t|
     t.integer "vip_card_id"

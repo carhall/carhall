@@ -1,7 +1,7 @@
 class Tips::VehicleInsuranceOrderDetail < ActiveRecord::Base
   enumerate :brand, with: Category::Brand
 
-  validates_presence_of :insurance_type_id
+  validates_presence_of :insurance_type_ids
 
   InsuranceTypes = [
     "交强险",
@@ -22,5 +22,6 @@ class Tips::VehicleInsuranceOrderDetail < ActiveRecord::Base
     "第三者责任险 - 100万",
   ]
   
-  enumerate :insurance_type, with: InsuranceTypes
+  serialize :insurance_type_ids, Array
+  enumerate :insurance_types, with: InsuranceTypes, multiple: true
 end

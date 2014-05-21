@@ -12,9 +12,15 @@
       </div>
     </li>
     <li class="table-view-cell">
-      咨询电话：<%= @dealer.test_drive_phone %>
+      咨询电话：
+      <span class="pull-right">
+        <a href="tel:<%= @dealer.test_drive_phone %>"><%= @dealer.test_drive_phone %></a>
+      </span>
     </li>
-    <li class="table-view-cell">促销政策</li>
+    <li class="table-view-cell">
+      促销政策
+      <%= simple_format @test_drive.description %>
+    </li>
   </ul>
 </div>
 

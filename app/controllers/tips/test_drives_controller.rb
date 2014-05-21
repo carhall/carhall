@@ -3,7 +3,7 @@ class Tips::TestDrivesController < Tips::ApplicationController
 
   def tips_test_drive_params
     test_drive_params = params.require(:tips_test_drive).permit(:title, 
-      :brand_id, :series, :price, :image)
+      :brand_id, :series, :description, :price, :image)
     test_drive_params[:params] = params.require(:tips_test_drive).require(:params).permit!
     test_drive_params
   end

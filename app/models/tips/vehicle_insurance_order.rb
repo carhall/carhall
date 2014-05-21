@@ -5,7 +5,7 @@ class Tips::VehicleInsuranceOrder < Tips::Order
   validates_presence_of :detail, :dealer
 
   def set_title
-    I18n.t(".vehicle_insurance", dealer: dealer.username, brand: detail.insurance_type)
+    I18n.t(".vehicle_insurance", dealer: dealer.username)
   end
 
   def set_cost; 0; end

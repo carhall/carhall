@@ -18,6 +18,8 @@
   <%= f.input :brand_id, collection: Category::Brand.to_select %>
   <%= f.input :series %>
 
+  <%= f.input :description, input_html: { rows: 4, class: "input-xxlarge" } %>
+
   <hr>
   <div class="control-group">
     <label class="control-label"><strong>车型参数信息</strong></label>

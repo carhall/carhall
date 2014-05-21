@@ -12,21 +12,21 @@
           <% insurance_types[title] ||= value %>
         <% end %>
       <% end %>
-
+      <input name="order[insurance_type_ids][]" type="hidden" value="">
       <% insurance_types.each do |title, value| %>
         <% if value.kind_of? Array %>
           <li class="table-view-cell">
             <%= title %>
             <%= select_tag title, options_for_select(value), class: "sub-select" %>
             <span class="pull-right">
-              <%= f.radio_button :insurance_type_id, value[0][1], id: title %>
+              <input class="check_boxes optional" id="<%= title %>" name="order[insurance_type_ids][]" type="checkbox" value="<%= value[0][1] %>">
             </span>
           </li>
         <% else %>
           <li class="table-view-cell">
             <%= title %>
             <span class="pull-right">
-              <%= f.radio_button :insurance_type_id, value %>
+              <input class="check_boxes optional" id="<%= title %>" name="order[insurance_type_ids][]" type="checkbox" value="<%= value %>">
             </span>
           </li>
         <% end %>
