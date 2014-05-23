@@ -26,12 +26,16 @@
       <%= t.action_link :orders do |vip_card| %>
         <%= icon_link_to "浏览订单", 'icon-book', tips_vip_card_orders_path(vip_card) %>
       <% end %>
-      <%= t.actions :show, :edit %>
-      <%= t.action_link :destroy do |vip_card| %>
-        <% if vip_card.displayed? %>
-          <%= icon_link_to "作废", 'icon-remove', disable_tips_vip_card_path(vip_card), method: :put, data: { confirm: '您确认要隐藏这个项目？' } %>
-        <% else %>
-          <%= icon_link_to "重新启用", 'icon-ok', reenable_tips_vip_card_path(vip_card), method: :put, data: { confirm: '您确认要显示这个项目？' } %>
+      <% if @user.admin? %>
+        <%= t.actions :destroy %>
+      <% else %>
+        <%= t.actions :show, :edit %>
+        <%= t.action_link :destroy do |vip_card| %>
+          <% if vip_card.displayed? %>
+            <%= icon_link_to "作废", 'icon-remove', disable_tips_vip_card_path(vip_card), method: :put, data: { confirm: '您确认要隐藏这个项目？' } %>
+          <% else %>
+            <%= icon_link_to "重新启用", 'icon-ok', reenable_tips_vip_card_path(vip_card), method: :put, data: { confirm: '您确认要显示这个项目？' } %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

@@ -38,6 +38,7 @@ class Accounts::Account < ActiveRecord::Base
   end
 
   def admin?; false; end
+  def superadmin?; false; end
 
   def public?; false; end
 

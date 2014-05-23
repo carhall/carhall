@@ -15,7 +15,7 @@
       <% end %>
       <%= t.attribute :mobile %>
       <%= t.attribute :username %>
-      <%#= t.actions :destroy %>
+      <%= t.action_link :destroy if can? :destroy, Accounts::User %>
     <% end %>
 
   </div>

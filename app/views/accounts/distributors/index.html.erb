@@ -32,7 +32,7 @@
         <% end %>
       <% end %>
 
-      <%#= t.actions :destroy %>
+      <%= t.action_link :destroy if can? :destroy, Accounts::Distributor %>
 
     <% end %>
 

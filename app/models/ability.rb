@@ -16,11 +16,10 @@ class Ability
         can :manage, :all  # superadmin
         cannot [:update, :destroy, :create], Accounts::Admin
         can :update, Accounts::Admin, id: user.id
+        cannot :destroy, Accounts::Account
       end
       # no one can destroy superadmin
       cannot :destroy, Accounts::Admin, id: 1
-
-      # no one can destroy superadmin
 
     when :guest
       can :read, Tips::Mending
