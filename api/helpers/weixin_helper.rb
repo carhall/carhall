@@ -41,17 +41,17 @@ module WeixinHelper
     when "rescue"
       format_to_news "故障救援",
         "一键救援，紧急联系你的专属客服",
-        absolute_url("weixin/rescue.png"),
+        "weixin/rescue.png",
         "weixin/dealers/#{account.id}/rescue"
     when "vehicle_insurance"
       format_to_news "车险续保",
         "你不懂的可以让专业人士解答",
-        absolute_url("weixin/vehicle_insurance.png"),
+        "weixin/vehicle_insurance.png",
         "weixin/dealers/#{account.id}/vehicle_insurance/orders/new"
     when "secondhand_appraise"
       format_to_news "爱车评估",
         "专业值得信赖的机构\n想换车，先评估一下吧",
-        absolute_url("weixin/secondhand_appraise.png"),
+        "weixin/secondhand_appraise.png",
         "weixin/dealers/#{account.id}/secondhand_appraise/orders/new"
     when "test_drive"
       format_to_news "新车展厅",
@@ -68,7 +68,7 @@ module WeixinHelper
       news: {
         Title: title,
         Description: description,
-        PicUrl: (absolute_url(image.url(:medium)) rescue image),
+        PicUrl: (absolute_url(image.url(:medium)) rescue absolute_url(image)),
         Url: absolute_url(url)
       }
     }
@@ -128,241 +128,100 @@ module WeixinHelper
     end
   end
 
+  def format_to_menu account, data
+    button = []
+    data.each do |key, value|
+      sub_button = value.map do |key|
+        case key
+        when :activity
+          { type: "click", name: "活动", key: "activity" }
+        when :mending
+          { type: "click", name: "保养维修", key: "mending" }
+        when :cleaning
+          { type: "click", name: "服务项目", key: "cleaning" }
+        when :bulk_purchasing
+          { type: "click", name: "团购", key: "bulk_purchasing" }
+        when :vip_card
+          { type: "click", name: "会员卡", key: "vip_card" }
+        when :secondhand_appraise
+          { type: "click", name: "爱车估价", key: "secondhand_appraise" }
+        when :test_drive
+          { type: "click", name: "看车试驾", key: "test_drive" }
+        when :rescue
+          { type: "click", name: "故障救援", key: "rescue" }
+        when :vehicle_insurance
+          { type: "click", name: "车险续保", key: "vehicle_insurance" }
+        when :dealer_description
+          { type: "click", name: "商家介绍", key: "dealer_description" }
+        when :mine
+          { type: "click", name: "我的", key: "mine" }
+        when :traffic_violation
+          { type: "view", name: "违章查询", url: "http://sms100.sinaapp.com/all/" }
+        when :download_app
+          { type: "view", name: "手机会员卡", url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653" }
+        end
+      end
+      button << { name: key, sub_button: sub_button }
+    end
+    { button: button }
+  end
+
   def generate_menu account
     case account
     when Accounts::Dealer
       case account.dealer_type
       when "洗车美容"
-        {
-          button: [{
-            name: "项目菜单",
-            sub_button: [{
-              type: "click",
-              name: "会员卡",
-              key: "vip_card"
-            }, {
-              type: "click",
-              name: "服务项目",
-              key: "cleaning"
-            }]
-          }, {
-            name: "发现",
-            sub_button: [{
-              type: "click",
-              name: "团购",
-              key: "bulk_purchasing"
-            }, {
-              type: "click",
-              name: "活动",
-              key: "activity"
-            }]
-          }, {
-            name: "在下",
-            sub_button: [{
-              type: "click",
-              name: "商家介绍",
-              key: "dealer_description"
-            }, {
-              type: "click",
-              name: "我的",
-              key: "mine"
-            }, {
-              type: "view",
-              name: "违章查询",
-              url: "http://sms100.sinaapp.com/all/"
-            }, {
-              type: "view",
-              name: "手机会员卡",
-              url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
-            }]
-          }]
+        format_to_menu account, {
+          "项目菜单" => [:vip_card, :cleaning],
+          "发现" => [:bulk_purchasing, :activity],
+          "在下" => [:dealer_description, :mine, :traffic_violation, :download_app],
         }
       when "4S店"
-        {
-          button: [{
-            name: "项目菜单",
-            sub_button: [{
-              type: "click",
-              name: "故障救援",
-              key: "rescue"
-            }, {
-              type: "click",
-              name: "车险续保",
-              key: "vehicle_insurance"
-            }, {
-              type: "click",
-              name: "保养维修",
-              key: "mending"
-            }]
-          }, {
-            name: "发现",
-            sub_button: [{
-              type: "click",
-              name: "团购",
-              key: "bulk_purchasing"
-            }, {
-              type: "click",
-              name: "活动",
-              key: "activity"
-            }, {
-              type: "click",
-              name: "爱车估价",
-              key: "secondhand_appraise"
-            }, {
-              type: "click",
-              name: "看车试驾",
-              key: "test_drive"
-            }]
-          }, {
-            name: "在下",
-            sub_button: [{
-              type: "click",
-              name: "商家介绍",
-              key: "dealer_description"
-            }, {
-              type: "click",
-              name: "我的",
-              key: "mine"
-            }, {
-              type: "view",
-              name: "违章查询",
-              url: "http://sms100.sinaapp.com/all/"
-            }]
-          }]
+        format_to_menu account, {
+          "项目菜单" => [:rescue, :vehicle_insurance, :mending],
+          "发现" => [:bulk_purchasing, :activity, :secondhand_appraise, :test_drive],
+          "在下" => [:dealer_description, :mine, :traffic_violation],
         }
       when "汽车销售"
-        {
-          button: [{
-            name: "项目菜单",
-            sub_button: [{
-              type: "click",
-              name: "爱车估价",
-              key: "secondhand_appraise"
-            }, {
-              type: "click",
-              name: "看车试驾",
-              key: "test_drive"
-            }, {
-              type: "click",
-              name: "车险续保",
-              key: "vehicle_insurance"
-            }, {
-              type: "view",
-              name: "违章查询",
-              url: "http://sms100.sinaapp.com/all/"
-            }]
-          }, {
-            name: "发现",
-            sub_button: [{
-              type: "click",
-              name: "团购",
-              key: "bulk_purchasing"
-            }, {
-              type: "click",
-              name: "活动",
-              key: "activity"
-            }]
-          }, {
-            name: "在下",
-            sub_button: [{
-              type: "click",
-              name: "商家介绍",
-              key: "dealer_description"
-            }, {
-              type: "click",
-              name: "我的",
-              key: "mine"
-            }]
-          }]
+        format_to_menu account, {
+          "项目菜单" => [:secondhand_appraise, :test_drive, :vehicle_insurance, :traffic_violation],
+          "发现" => [:bulk_purchasing, :activity],
+          "在下" => [:dealer_description, :mine],
         }
       when "专修"
-        {
-          button: [{
-            name: "项目菜单",
-            sub_button: [{
-              type: "click",
-              name: "故障救援",
-              key: "rescue"
-            }, {
-              type: "click",
-              name: "车险续保",
-              key: "vehicle_insurance"
-            }, {
-              type: "click",
-              name: "保养维修",
-              key: "mending"
-            }]
-          }, {
-            name: "发现",
-            sub_button: [{
-              type: "click",
-              name: "团购",
-              key: "bulk_purchasing"
-            }, {
-              type: "click",
-              name: "活动",
-              key: "activity"
-            }]
-          }, {
-            name: "在下",
-            sub_button: [{
-              type: "click",
-              name: "商家介绍",
-              key: "dealer_description"
-            }, {
-              type: "click",
-              name: "我的",
-              key: "mine"
-            }, {
-              type: "view",
-              name: "违章查询",
-              url: "http://sms100.sinaapp.com/all/"
-            }]
-          }]
+        format_to_menu account, {
+          "项目菜单" => [:rescue, :vehicle_insurance, :mending],
+          "发现" => [:bulk_purchasing, :activity],
+          "在下" => [:dealer_description, :mine, :traffic_violation],
         }
       when "专项服务"
-        {
-          button: [{
-            name: "项目菜单",
-            sub_button: [{
-              type: "click",
-              name: "服务项目",
-              key: "cleaning"
-            }]
-          }, {
-            name: "发现",
-            sub_button: [{
-              type: "click",
-              name: "团购",
-              key: "bulk_purchasing"
-            }, {
-              type: "click",
-              name: "活动",
-              key: "activity"
-            }]
-          }, {
-            name: "在下",
-            sub_button: [{
-              type: "click",
-              name: "商家介绍",
-              key: "dealer_description"
-            }, {
-              type: "click",
-              name: "我的",
-              key: "mine"
-            }, {
-              type: "view",
-              name: "违章查询",
-              url: "http://sms100.sinaapp.com/all/"
-            }, {
-              type: "view",
-              name: "手机会员卡",
-              url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
-            }]
-          }]
+        format_to_menu account, {
+          "项目菜单" => [:cleaning],
+          "发现" => [:bulk_purchasing, :activity],
+          "在下" => [:dealer_description, :mine, :traffic_violation, :download_app],
         }
       end
     end
+  end
+
+  def format_to_mine account, data
+    news = data.map do |key|
+      case key
+      when :current_user
+        format_to_news "个人资料", "点击查看我的详细资料", "weixin/current_user.png",  "weixin/dealers/#{account.id}/current_user"
+      when :vip_card_order
+        format_to_news "会员卡", "点击查看我的会员卡详细资料", "weixin/arrow_right.png", "weixin/dealers/#{account.id}/current_user/vip_card/orders"
+      when :consumption_record
+        format_to_news "消费记录", "点击查看我的消费记录详细资料", "weixin/arrow_right.png", "weixin/dealers/#{account.id}/current_user/consumption_records"
+      when :sales_case
+        format_to_news "提醒服务", "点击查看我的提醒服务详细资料", "weixin/arrow_right.png", "weixin/dealers/#{account.id}/current_user/sales_cases"
+      when :mending_order
+        format_to_news "预约订单", "点击查看我的会员卡详细资料", "weixin/arrow_right.png", "weixin/dealers/#{account.id}/current_user/mending/orders"
+      when :bulk_purchasing_order
+        format_to_news "团购订单", "点击查看我的消费记录详细资料", "weixin/arrow_right.png", "weixin/dealers/#{account.id}/current_user/bulk_purchasing/orders"
+      end.fetch :news
+    end
+    { news: news }
   end
 
   def generate_mine account
@@ -370,73 +229,11 @@ module WeixinHelper
     when Accounts::Dealer
       case account.dealer_type
       when "洗车美容"
-        {
-          news: [
-            {
-              Title: "个人资料",
-              Description: "点击查看我的详细资料",
-              PicUrl: absolute_url("weixin/current_user.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user")
-            }, {
-              Title: "会员卡",
-              Description: "点击查看我的会员卡详细资料",
-              PicUrl: absolute_url("weixin/arrow_right.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user/vip_card/orders")
-            }, {
-              Title: "消费记录",
-              Description: "点击查看我的消费记录详细资料",
-              PicUrl: absolute_url("weixin/arrow_right.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user/consumption_records")
-            }, {
-              Title: "提醒服务",
-              Description: "点击查看我的提醒服务详细资料",
-              PicUrl: absolute_url("weixin/arrow_right.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user/sales_cases")
-            }
-          ]
-        }
+        format_to_mine account, [:current_user, :vip_card_order, :consumption_record, :sales_case]
       when "4S店", "专修"
-        {
-          news: [
-            {
-              Title: "个人资料",
-              Description: "点击查看我的详细资料",
-              PicUrl: absolute_url("weixin/current_user.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user")
-            }, {
-              Title: "预约订单",
-              Description: "点击查看我的会员卡详细资料",
-              PicUrl: absolute_url("weixin/arrow_right.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user/mending/orders")
-            }, {
-              Title: "团购订单",
-              Description: "点击查看我的消费记录详细资料",
-              PicUrl: absolute_url("weixin/arrow_right.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user/bulk_purchasing/orders")
-            }, {
-              Title: "提醒服务",
-              Description: "点击查看我的提醒服务详细资料",
-              PicUrl: absolute_url("weixin/arrow_right.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user/sales_cases")
-            }
-          ]
-        }
+        format_to_mine account, [:current_user, :mending_order, :bulk_purchasing_order, :sales_case]
       when "汽车销售", "专项服务"
-        {
-          news: [
-            {
-              Title: "个人资料",
-              Description: "点击查看我的详细资料",
-              PicUrl: absolute_url("weixin/current_user.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user")
-            }, {
-              Title: "提醒服务",
-              Description: "点击查看我的提醒服务详细资料",
-              PicUrl: absolute_url("weixin/arrow_right.png"),
-              Url: absolute_url("weixin/dealers/#{account.id}/current_user/sales_cases")
-            }
-          ]
-        }
+        format_to_mine account, [:current_user, :sales_case]
       end
     end
   end

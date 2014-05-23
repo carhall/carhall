@@ -27,7 +27,7 @@ class WeixinAPI < Grape::API
     before do
       error! '403 Forbidden', 403 unless check_signature
     end
-    
+
     desc 'weixin response'
     params do
       requires :signature, :timestamp, :nonce
@@ -40,10 +40,20 @@ class WeixinAPI < Grape::API
 
   class Helper < Grape::API
     content_type :txt, "application/json"
-    
+
     desc 'weixin create menu'
     get ":id/create_menu" do
       create_menu params[:account]
+    end
+
+    desc 'weixin get menu'
+    get ":id/get_menu" do
+      generate_menu params[:account]
+    end
+
+    desc 'weixin get mine'
+    get ":id/get_mine" do
+      generate_mine params[:account]
     end
   end
 
