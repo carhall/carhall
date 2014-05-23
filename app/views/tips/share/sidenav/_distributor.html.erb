@@ -7,6 +7,14 @@
 </ul>
 
 <ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>施工案例管理</strong></span></li>
+
+  <li<%= active? 'tips/construction_cases#new' %>><a href="<%= new_tips_construction_case_path %>"><i class="icon-chevron-right"></i> 发布施工案例</a></li>
+  <li<%= active? 'tips/construction_cases#index' %>><a href="<%= tips_construction_cases_path %>"><i class="icon-chevron-right"></i> 管理施工案例</a></li>
+
+</ul>
+
+<ul class="nav nav-list sidenav affix-top">
   <li><span><strong>交易管理</strong></span></li>
 
   <li<%= active? 'tips/orders#bulk_purchasing2' %>><a href="<%= bulk_purchasing2_tips_orders_path %>"><i class="icon-chevron-right"></i> 团购订单</a></li>

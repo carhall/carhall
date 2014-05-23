@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     alias_action :expose, :hide, :stick, :unstick, :to => :set_displayable
-    alias_action :mending, :cleaning, :test_drive, :bulk_purchasing, 
+    alias_action :mending, :cleaning, :test_drive, :bulk_purchasing,
       :bulk_purchasing2, :vip_card, :to => :read
 
     user ||= Accounts::User.new # guest user (not logged in)
@@ -57,7 +57,7 @@ class Ability
         can :manage, Tips::Activity, dealer: user
         can :manage, Tips::BulkPurchasing, dealer: user
         can :manage, Tips::VipCard, dealer: user
-        
+
         can :manage, Statistic::SalesCase, dealer: user
 
         can :read, Tips::Review
@@ -65,9 +65,9 @@ class Ability
 
         can :enable, Tips::Order, dealer: user
       end
-      
+
       can :manage, Tips::PurchaseRequesting, dealer: user
-      
+
       cannot :set_displayable, :all
     when :distributor
       can :manage, :setting
@@ -77,7 +77,8 @@ class Ability
       if user.accepted?
         can :manage, Tips::BulkPurchasing2, distributor: user
         can :manage, Tips::ManualImage, distributor: user
-        
+        can :manage, Tips::ConstructionCase, distributor: user
+
         can :read, Tips::Order
         can :read, Tips::BulkPurchasing2Order
       end
@@ -87,7 +88,7 @@ class Ability
         can :read, Accounts::Dealer, area_id: user.main_area_range
         can :read, Accounts::Distributor, area_id: user.main_area_range
       end
-      
+
       cannot :set_displayable, :all
     when :user
       can :read, :all
@@ -98,11 +99,11 @@ class Ability
 
       can :manage, Bcst::Exposure, user: user
       can :manage, Bcst::TrafficReport, user: user
-      
+
       can :manage, Tips::Order, user: user
-      
+
       cannot :set_displayable, :all
     end
-    
+
   end
 end

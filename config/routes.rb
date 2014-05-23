@@ -9,7 +9,7 @@ Carhall::Application.routes.draw do
     post :send_invitation
   end
   root to: 'dashboards#show'
-  
+
   # Frontend sign_in/sing_up page
   devise_for :accounts, class_name: "Accounts::Account", module: "accounts"
   devise_scope :account do
@@ -73,7 +73,7 @@ Carhall::Application.routes.draw do
 
       resources :orders
     end
-    
+
     resources :activities do
       put :expose, on: :member
       put :hide, on: :member
@@ -83,13 +83,13 @@ Carhall::Application.routes.draw do
       get :in_progress, on: :collection
       get :expired, on: :collection
     end
-    
+
     resources :bulk_purchasings do
       put :expose, on: :member
       put :hide, on: :member
       put :stick, on: :member
       put :unstick, on: :member
-      
+
       get :in_progress, on: :collection
       get :expired, on: :collection
 
@@ -137,18 +137,19 @@ Carhall::Application.routes.draw do
       put :hide, on: :member
       put :stick, on: :member
       put :unstick, on: :member
-      
+
       resources :orders
     end
 
     resources :manual_images
+    resources :construction_cases
 
   end
 
   namespace :bcst do
     resource :dashboard, only: :show
     root to: 'dashboards#show'
-    
+
 
     resources :hosts
     resources :programme_lists
@@ -245,7 +246,7 @@ Carhall::Application.routes.draw do
     resources :ad_templates do
       post :buy, on: :member
     end
-    resources :tutorials  
+    resources :tutorials
   end
 
 
@@ -254,10 +255,10 @@ Carhall::Application.routes.draw do
     devise_scope :account do
       namespace :accounts do
         resource :confirmation
-        get :check, to: "weixin/accounts/registrations#check" 
+        get :check, to: "weixin/accounts/registrations#check"
       end
     end
-    
+
     scope module: :accounts do
       resources :dealers do
         resource :current_user do
@@ -375,11 +376,11 @@ Carhall::Application.routes.draw do
         post :login, on: :collection
         post :confirm, on: :collection
         post :resend_confirm, on: :collection
-        
+
         post :password, on: :collection
         post :send_password, on: :collection
       end
-      
+
       resources :users, only: [:index, :show, :create] do
         get :detail, on: :member
 
@@ -436,7 +437,7 @@ Carhall::Application.routes.draw do
         get :friends, on: :collection
         get :top, on: :collection
         get :club, on: :collection
-        
+
         resources :comments, only: [:index, :show, :create, :destroy]
       end
 
@@ -473,11 +474,11 @@ Carhall::Application.routes.draw do
           get :favorite, on: :collection
           get :hot, on: :collection
         end
-        
+
         resources :activities, only: [:index] do
           get :nearby, on: :collection
         end
-        
+
         resources :bulk_purchasings, only: [:index] do
           get :nearby, on: :collection
           get :cheapie, on: :collection
@@ -502,7 +503,7 @@ Carhall::Application.routes.draw do
         get :nearby, on: :collection
         get :favorite, on: :collection
         get :hot, on: :collection
-  
+
         get :detail, on: :member
 
         resources :orders, only: [:index, :show, :create] do
@@ -519,9 +520,9 @@ Carhall::Application.routes.draw do
         get :cheapie, on: :collection
         get :favorite, on: :collection
         get :hot, on: :collection
-  
+
         get :followed, on: :collection
-  
+
         get :detail, on: :member
 
         resources :orders, only: [:index, :show, :create] do
@@ -533,22 +534,22 @@ Carhall::Application.routes.draw do
 
         resources :reviews, only: [:index, :show]
       end
-      
+
       resources :activities, only: [:index, :show] do
         get :nearby, on: :collection
-  
-        get :detail, on: :member        
-        
+
+        get :detail, on: :member
+
       end
-      
+
       resources :bulk_purchasings, only: [:index, :show] do
         get :nearby, on: :collection
         get :cheapie, on: :collection
         get :favorite, on: :collection
         get :hot, on: :collection
-  
+
         get :followed, on: :collection
-        
+
         get :detail, on: :member
 
         resources :orders, only: [:index, :show, :create] do
@@ -559,7 +560,7 @@ Carhall::Application.routes.draw do
 
         resources :reviews, only: [:index, :show]
       end
-        
+
       resources :vip_cards, only: [:index, :show] do
         get :detail, on: :member
 
@@ -579,13 +580,13 @@ Carhall::Application.routes.draw do
         post :review, on: :member
         delete :cancel, on: :member
       end
-      
+
       resources :mending_orders, only: [:index, :show] do
         put :finish, on: :member
         post :review, on: :member
         delete :cancel, on: :member
       end
-      
+
       resources :cleaning_orders, only: [:index, :show] do
         put :finish, on: :member
         put "use/:count", action: :use, on: :member
@@ -593,7 +594,7 @@ Carhall::Application.routes.draw do
         post :review, on: :member
         delete :cancel, on: :member
       end
-      
+
       resources :bulk_purchasing_orders, only: [:index, :show] do
         put :finish, on: :member
         post :review, on: :member
@@ -607,7 +608,7 @@ Carhall::Application.routes.draw do
         post :review, on: :member
         delete :cancel, on: :member
       end
-      
+
       resources :reviews, only: [:index, :show]
 
     end
@@ -630,7 +631,7 @@ Carhall::Application.routes.draw do
       end
       resources :programmes, only: [:index, :show] do
         get :detail, on: :member
-        
+
         resources :comments, only: [:index, :show, :create, :destroy]
       end
 

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def self.set_resource_class klass, options = {}
     respond_to :html
-    
+
     before_filter do
       method = "#{namespaced_name}_params"
       params[namespaced_name] &&= send(method) if respond_to?(method, true)
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     else
       load_resource options.reverse_merge(class: klass)
     end
-    
+
     def namespaced_name
       @namespaced_name ||= controller_path.gsub('/', '_').singularize.to_sym
     end
@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
       end
 
     else # singletion
-      
+
       define_method :index do
       end
 
@@ -119,9 +119,9 @@ class ApplicationController < ActionController::Base
 
   end
 
-  # rescue_from CanCan::AccessDenied do |exception|
-  #   flash[:error] = I18n.t(".access_denied")
-  #   redirect_to :root
-  # end
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = I18n.t(".access_denied")
+    redirect_to :root
+  end
 
 end

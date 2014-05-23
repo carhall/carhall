@@ -3,6 +3,8 @@
 
   <%= f.input :title %>
 
+  <%= f.input :category %>
+
   <%= f.input :image do %>
     <div class="fileupload fileupload-new" data-provides="fileupload">
       <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @manual_image.image.url(:medium) %>" /></div>

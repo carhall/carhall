@@ -1,9 +1,11 @@
-class Tips::ManualImage < ActiveRecord::Base
+class Tips::ConstructionCase < ActiveRecord::Base
   include Share::Distributorable
+  include Share::Dealerable
 
   has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60#" }
+  validates_presence_of :image, :brand_id
 
-  validates_presence_of :image, :category
+  enumerate :brand, with: Category::Brand
 
   before_create do
     self.title = File.basename(image_file_name, '.*').sub(/-[[:xdigit:]]{32}\z/, '').tr('-_', ' ').capitalize if self.title.blank?

@@ -1,0 +1,20 @@
+<%= simple_form_for(@construction_case, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @construction_case %>
+
+  <%= f.input :title %>
+
+  <%= f.input :brand_id, collection: Category::Brand.to_select %>
+
+  <%= f.input :image do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @construction_case.image.url(:medium) %>" /></div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+      <div>
+        <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="tips_construction_case[image]" /></span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>

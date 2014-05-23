@@ -2,7 +2,7 @@
   <div class="span3">
     <%= render "tips/share/sidenav/#{@user_type}" %>
   </div>
-  
+
   <div class="span9">
     <div class="page-header">
       <h3>图册管理 <small></small></h3>
@@ -14,10 +14,13 @@
       <% @manual_images.each do |manual_image| %>
         <li class="span3">
           <%= link_to image_tag(manual_image.image(:medium)), manual_image.image(:original), class: 'thumbnail', rel: 'hermitage' %>
-          <%= manual_image.title %>
-          <%= icon_link_to "删除", 'icon-remove', tips_manual_image_path(manual_image), method: :delete, data: { confirm: '您确认要删除这个图片？' }, class: 'delete' %>
+          <%= manual_image.title %>（<%= manual_image.category %>）
+          <div class="pull-right">
+            <%= icon_link_to "编辑", 'icon-pencil', edit_tips_manual_image_path(manual_image) %>
+            <%= icon_link_to "删除", 'icon-remove', tips_manual_image_path(manual_image), method: :delete, data: { confirm: '您确认要删除这个图片？' }, class: 'delete' %>
+          </div>
         </li>
       <% end %>
-    </ul>  
+    </ul>
   </div>
 </div>

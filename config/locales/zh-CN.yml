@@ -1,7 +1,7 @@
 zh-CN:
   exception:
     default: 服务器内部错误。
-    bad_request: 
+    bad_request:
       default: 上传参数无效。
   active_enum:
     unknown: 未知
@@ -66,6 +66,7 @@ zh-CN:
       tips/bulk_purchasing2_order: 团购订单
       tips/purchase_requesting: 求购
       tips/manual_image: 图册图片
+      tips/construction_case: 施工案例
       tips/vip_card: 会员卡
       tips/vip_card_item: 服务项目
       tips/vip_card_order: 会员卡订单
@@ -168,19 +169,19 @@ zh-CN:
         secondhand_appraise_phone: 二手评估热线
         postsale_phone: 售后服务热线
         test_drive_phone: 看车试驾服务热线
-      accounts/user: 
+      accounts/user:
         <<: *account
         total_cost: 总消费额
       accounts/user/detail:
         balance: 账户余额
         brand: 车型品牌
-      accounts/dealer: 
+      accounts/dealer:
         <<: *account
         <<: *publicable
-      accounts/provider: 
+      accounts/provider:
         <<: *account
         <<: *publicable
-      accounts/distributor: 
+      accounts/distributor:
         <<: *account
         <<: *publicable
       tips/mending:
@@ -326,10 +327,10 @@ zh-CN:
         created_at: 发表时间
         comments_count: 评论数
         user: 发帖人
-      bcst/exposure: 
+      bcst/exposure:
         <<: *post
         provider: 所属媒体
-      bcst/traffic_report: 
+      bcst/traffic_report:
         <<: *post
         provider: 所属媒体
       posts/club:
@@ -342,7 +343,7 @@ zh-CN:
       posts/club/president:
         avatar: 堂主头像
         username: 堂主
-        mobile: 堂主手机号码 
+        mobile: 堂主手机号码
       posts/president_candidate:
         id: ID
         description: 申请理由
@@ -370,8 +371,13 @@ zh-CN:
         area: 匹配区域
         brand_id: 匹配车型
         brand: 匹配车型
-      tips/manual_image: 
+      tips/manual_image:
         title: 图片标题
+        category: 图片分类
+        image: 图片
+      tips/construction_case:
+        title: 标题
+        brand_id: 品牌
         image: 图片
       business/client_version:
         id: ID
@@ -437,11 +443,3 @@ zh-CN:
             <<: *discount
       business_client_version:
         file: 客户端文件
-
-
-
-
-
-
-
-
