@@ -25,38 +25,38 @@ module WeixinHelper
     when "cleaning"
       format_resources_to_news account, account.cleanings
     when "mending"
-      format_to_news ::Tips::Mending.model_name.human, 
-        "点击查看#{::Tips::Mending.model_name.human}详细资料", 
-        account.avatar, 
+      format_to_news ::Tips::Mending.model_name.human,
+        "点击查看#{::Tips::Mending.model_name.human}详细资料",
+        account.avatar,
         "weixin/dealers/#{account.id}/mending"
     when "bulk_purchasing"
       format_resources_to_news account, account.bulk_purchasings
     when "activity"
       format_resources_to_news account, account.activities
     when "dealer_description"
-      format_to_news "商家介绍", 
-        account.description, 
-        account.avatar, 
+      format_to_news "商家介绍",
+        account.description,
+        account.avatar,
         "weixin/dealers/#{account.id}"
     when "rescue"
-      format_to_news "故障救援", 
-        "一键救援，紧急联系你的专属客服", 
-        absolute_url("weixin/rescue.png"), 
+      format_to_news "故障救援",
+        "一键救援，紧急联系你的专属客服",
+        absolute_url("weixin/rescue.png"),
         "weixin/dealers/#{account.id}/rescue"
     when "vehicle_insurance"
-      format_to_news "车险续保", 
-        "你不懂的可以让专业人士解答", 
-        absolute_url("weixin/vehicle_insurance.png"), 
+      format_to_news "车险续保",
+        "你不懂的可以让专业人士解答",
+        absolute_url("weixin/vehicle_insurance.png"),
         "weixin/dealers/#{account.id}/vehicle_insurance/orders/new"
     when "secondhand_appraise"
-      format_to_news "爱车评估", 
-        "专业值得信赖的机构\n想换车，先评估一下吧", 
-        absolute_url("weixin/secondhand_appraise.png"), 
+      format_to_news "爱车评估",
+        "专业值得信赖的机构\n想换车，先评估一下吧",
+        absolute_url("weixin/secondhand_appraise.png"),
         "weixin/dealers/#{account.id}/secondhand_appraise/orders/new"
     when "test_drive"
-      format_to_news "新车展厅", 
-        "点击可查看车型报价、参数等详细资料", 
-        account.test_drives.first.image, 
+      format_to_news "新车展厅",
+        "点击可查看车型报价、参数等详细资料",
+        account.test_drives.first.image,
         "weixin/dealers/#{account.id}/test_drives"
     when "mine"
       generate_mine account
@@ -76,9 +76,9 @@ module WeixinHelper
 
   def format_resources_to_news account, resources
     resource = resources.first
-    format_to_news resource.class.model_name.human, 
-      "点击查看#{resource.class.model_name.human}详细资料", 
-      resource.image, 
+    format_to_news resource.class.model_name.human,
+      "点击查看#{resource.class.model_name.human}详细资料",
+      resource.image,
       "weixin/dealers/#{account.id}/#{resource.class.name.demodulize.tableize}"
   end
 
@@ -105,7 +105,7 @@ module WeixinHelper
       JSON.parse(response.to_str)["access_token"]
     # end
   end
-  
+
   def create_menu account, menu=generate_menu(account)
     request_weixin account, 'menu/create', menu
   end
@@ -133,7 +133,7 @@ module WeixinHelper
     when Accounts::Dealer
       case account.dealer_type
       when "洗车美容"
-        { 
+        {
           button: [{
             name: "项目菜单",
             sub_button: [{
@@ -178,7 +178,7 @@ module WeixinHelper
           }]
         }
       when "4S店"
-        { 
+        {
           button: [{
             name: "项目菜单",
             sub_button: [{
@@ -231,7 +231,7 @@ module WeixinHelper
           }]
         }
       when "汽车销售"
-        { 
+        {
           button: [{
             name: "项目菜单",
             sub_button: [{
@@ -276,7 +276,7 @@ module WeixinHelper
           }]
         }
       when "专修"
-        { 
+        {
           button: [{
             name: "项目菜单",
             sub_button: [{
@@ -317,6 +317,47 @@ module WeixinHelper
               type: "view",
               name: "违章查询",
               url: "http://sms100.sinaapp.com/all/"
+            }]
+          }]
+        }
+      when "专项服务"
+        {
+          button: [{
+            name: "项目菜单",
+            sub_button: [{
+              type: "click",
+              name: "服务项目",
+              key: "cleaning"
+            }]
+          }, {
+            name: "发现",
+            sub_button: [{
+              type: "click",
+              name: "团购",
+              key: "bulk_purchasing"
+            }, {
+              type: "click",
+              name: "活动",
+              key: "activity"
+            }]
+          }, {
+            name: "在下",
+            sub_button: [{
+              type: "click",
+              name: "商家介绍",
+              key: "dealer_description"
+            }, {
+              type: "click",
+              name: "我的",
+              key: "mine"
+            }, {
+              type: "view",
+              name: "违章查询",
+              url: "http://sms100.sinaapp.com/all/"
+            }, {
+              type: "view",
+              name: "手机会员卡",
+              url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653"
             }]
           }]
         }
@@ -380,7 +421,7 @@ module WeixinHelper
             }
           ]
         }
-      when "汽车销售"
+      when "汽车销售", "专项服务"
         {
           news: [
             {
