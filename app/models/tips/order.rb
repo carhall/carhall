@@ -24,6 +24,11 @@ class Tips::Order < ActiveRecord::Base
     self.dealer_id ||= source.dealer_id
     self.title = set_title
     self.cost = set_cost
+
+    # make friend with dealer
+    if self.dealer and self.user
+      self.user.make_friend_with! self.dealer unless self.user.is_friend? self.dealer
+    end
   end
 
   before_save do
