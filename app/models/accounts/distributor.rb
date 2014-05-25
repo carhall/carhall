@@ -10,6 +10,7 @@ class Accounts::Distributor < Accounts::Account
   has_many :bulk_purchasing2_orders, class_name: 'Tips::BulkPurchasing2Order'
 
   has_many :manual_images, class_name: 'Tips::ManualImage'
+  has_many :construction_cases, class_name: 'Tips::ConstructionCase'
 
   scope :with_business_scope, -> (business_scope) {
     detail_ids = Accounts::DistributorDetail.with_business_scope(business_scope).pluck(:id)

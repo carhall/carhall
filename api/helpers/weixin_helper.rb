@@ -58,6 +58,16 @@ module WeixinHelper
         "点击可查看车型报价、参数等详细资料",
         account.test_drives.first.image,
         "weixin/dealers/#{account.id}/test_drives"
+    when "manual_image"
+      format_to_news "产品图册",
+        "点击可查看产品图册，及时了解新品动态",
+        account.manual_images.first.image,
+        "weixin/dealers/#{account.id}/manual_images"
+    when "construction_case"
+      format_to_news "案例展示",
+        "点击可查看别的小伙伴们都选择了么",
+        account.construction_cases.first.image,
+        "weixin/dealers/#{account.id}/construction_cases"
     when "mine"
       generate_mine account
     end
@@ -147,6 +157,10 @@ module WeixinHelper
           { type: "click", name: "爱车估价", key: "secondhand_appraise" }
         when :test_drive
           { type: "click", name: "看车试驾", key: "test_drive" }
+        when :manual_image
+          { type: "click", name: "产品图册", key: "manual_image" }
+        when :construction_case
+          { type: "click", name: "案例展示", key: "construction_case" }
         when :rescue
           { type: "click", name: "故障救援", key: "rescue" }
         when :vehicle_insurance
@@ -201,6 +215,12 @@ module WeixinHelper
           "在下" => [:dealer_description, :mine, :traffic_violation, :download_app],
         }
       end
+    when Accounts::Distributor
+      format_to_menu account, {
+        "项目菜单" => [:manual_image],
+        "发现" => [:bulk_purchasing, :construction_case],
+        "在下" => [:dealer_description],
+      }
     end
   end
 

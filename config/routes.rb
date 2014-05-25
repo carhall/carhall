@@ -334,13 +334,22 @@ Carhall::Application.routes.draw do
             put :use, on: :member
           end
         end
-      end
-
-      resources :dealers do
         resource :current_user do
           get ":type/orders", as: :type_orders, to: "orders#index"
           get ":type/orders/:id", as: :type_order, to: "orders#show"
         end
+      end
+
+      resources :distributors do
+        resources :manual_images do
+          get "category/:category", on: :collection, 
+            action: :category, as: :category
+        end
+        resources :construction_cases do
+          get "brand/:brand_id", on: :collection, 
+            action: :brand, as: :brand
+        end
+        resources :bulk_purchasings
       end
     end
 

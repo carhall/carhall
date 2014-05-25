@@ -29,21 +29,6 @@ img.media-object {
   .media-title {
     margin-bottom: 6px;
   }
-
-}
-
-.input-count {
-  .btn {
-    width: 25px;
-  }
-  input {
-    width: 35px;
-    height: 25px;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    text-align: right;
-  }
 }
 
 .table-view-block {
@@ -61,12 +46,30 @@ table.table-view {
     border-left: 1px solid #ddd;
     border-top: 1px solid #ddd;
     padding: 8px;
+    &.table-view-cell {
+      padding: 11px 65px 11px 15px;
+    }
   }
   th:first-child, td:first-child {
     border-left: none;
   }
   tr:first-child th {
     border-top: none;
+  }
+  &.table-no-header {
+    tr:first-child td {
+      border-top: none;
+    }
+  }
+  &.table-layout-fixed {
+    table-layout: fixed;
+  }
+
+  a {
+    color: inherit;
+  }
+  img {
+    width: 100%;
   }
 }
 
@@ -103,6 +106,20 @@ table.table-view {
   label.radio {
     width: 25%;
     padding: 10px 10px;
+  }
+}
+
+.input-count {
+  .btn {
+    width: 25px;
+  }
+  input {
+    width: 35px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    text-align: right;
   }
 }
 

@@ -1,0 +1,25 @@
+<% content_for :title do %>
+  图册
+<% end %>
+
+<% @manual_images = @manual_images.group(:category) %>
+
+<div class="card">
+  <table class="table-view table-no-header table-layout-fixed">
+    <% @manual_images.each_slice(3) do |manual_images| %>
+      <tr>
+        <% manual_images.each do |manual_image| %>
+          <td>
+            <%= link_to category_weixin_distributor_manual_images_path(@distributor, manual_image.category), data: { transition: "slide-in" } do %>
+              <%= image_tag manual_image.image.url(:medium) %>
+              <%= manual_image.title %>
+            <% end %>
+          </td>
+          <% (3 - manual_images.length).times do %>
+            <td></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

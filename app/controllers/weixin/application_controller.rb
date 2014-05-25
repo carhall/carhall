@@ -4,7 +4,8 @@ class Weixin::ApplicationController < ApplicationController
 
   def self.set_resource_class klass, options = {}
     load_resource :dealer, class: Accounts::Dealer
-    super klass, options.reverse_merge(no_authorize: true, through: :dealer)
+    load_resource :distributor, class: Accounts::Distributor
+    super klass, options.reverse_merge(no_authorize: true, through: [:dealer, :distributor])
   end
 
   def weixin_polymorphic_path *args

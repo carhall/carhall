@@ -1,0 +1,25 @@
+<% content_for :title do %>
+  图册
+<% end %>
+
+<% @construction_cases = @construction_cases.group(:brand_id) %>
+
+<div class="card">
+  <table class="table-view table-no-header table-layout-fixed">
+    <% @construction_cases.each_slice(3) do |construction_cases| %>
+      <tr>
+        <% construction_cases.each do |construction_case| %>
+          <td>
+            <%= link_to brand_weixin_distributor_construction_cases_path(@distributor, construction_case.brand_id), data: { transition: "slide-in" } do %>
+              <%= image_tag construction_case.image.url(:medium) %>
+              <%= construction_case.title %>
+            <% end %>
+          </td>
+          <% (3 - construction_cases.length).times do %>
+            <td></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
