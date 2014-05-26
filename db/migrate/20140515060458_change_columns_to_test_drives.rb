@@ -1,6 +1,6 @@
-class ChangeColumnsToTestDrives < ActiveRecord::Migration
+class ChangeColumnsToTestDrivings < ActiveRecord::Migration
   def change
-    change_table :test_drives do |t|
+    change_table :test_drivings do |t|
       t.integer :brand_id
       t.index   :brand_id
 

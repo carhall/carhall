@@ -1,6 +1,6 @@
-class CreateTestDrives < ActiveRecord::Migration
+class CreateTestDrivings < ActiveRecord::Migration
   def change
-    create_table :test_drives do |t|
+    create_table :test_drivings do |t|
       t.references :dealer, index: true
       
       t.string  :title

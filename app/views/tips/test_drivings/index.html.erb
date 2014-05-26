@@ -1,0 +1,46 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>看车试驾管理 <small></small></h3>
+    </div>
+
+    <%= render 'share/alert', message: '您还没有创建任何会员卡！' if @test_drivings.empty? %>
+
+    <% @test_drivings = @test_drivings.includes(:dealer) if @user.admin? %>
+
+    <%= index_for @test_drivings, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.association :dealer, using: :username if @user.admin? %>
+      <%= t.attribute :image do |image| %>
+        <%= image_tag(image.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :title %>
+      <%= t.attribute :price %>
+      <%= t.attribute :orders_count %>
+      <%= t.action_link :orders do |test_driving| %>
+        <%= icon_link_to "浏览订单", 'icon-book', tips_test_driving_orders_path(test_driving) %>
+      <% end %>
+      <% if @user.admin? %>
+        <%= t.action_link :display do |test_driving| %>
+          <% if test_driving.displayed? %>
+            <%= icon_link_to "隐藏", 'icon-eye-close', hide_tips_test_driving_path(test_driving), method: :put, data: { confirm: '您确认要隐藏这个项目？' } %>
+            <% if test_driving.sticked? %>
+              <%= icon_link_to "取消置顶", 'icon-chevron-down', unstick_tips_test_driving_path(test_driving), method: :put, data: { confirm: '您确认要取消置顶这个项目？' } %>
+            <% else %>
+              <%= icon_link_to "置顶", 'icon-chevron-up', stick_tips_test_driving_path(test_driving), method: :put, data: { confirm: '您确认要置顶这个项目？' } %>
+            <% end %>
+          <% else %>
+            <%= icon_link_to "显示", 'icon-eye-open', expose_tips_test_driving_path(test_driving), method: :put, data: { confirm: '您确认要显示这个项目？' } %>
+          <% end %>
+        <% end %>
+        <%= t.actions :destroy %>
+      <% else %>
+        <%= t.actions :all %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

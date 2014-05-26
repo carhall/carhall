@@ -4,11 +4,11 @@
 <div class="card">
   <ul class="table-view">
     <li class="table-view-cell media">
-      <%= image_tag @test_drive.image.url(:thumb), class: "media-object pull-left" %>
+      <%= image_tag @test_driving.image.url(:thumb), class: "media-object pull-left" %>
       <div class="media-body">
-        <%= @test_drive.title %>
+        <%= @test_driving.title %>
         <br>
-        价格：<%= @test_drive.price %>
+        价格：<%= @test_driving.price %>
       </div>
     </li>
     <li class="table-view-cell">
@@ -19,12 +19,12 @@
     </li>
     <li class="table-view-cell">
       促销政策
-      <%= simple_format @test_drive.description %>
+      <%= simple_format @test_driving.description %>
     </li>
   </ul>
 </div>
 
-<%= simple_form_for(@test_drive.orders.new, url: weixin_dealer_test_drife_orders_path(@dealer, @test_drive, action: :create_confirmation), as: :order) do |f| %>
+<%= simple_form_for(@test_driving.orders.new, url: weixin_dealer_test_driving_orders_path(@dealer, @test_driving, action: :create_confirmation), as: :order) do |f| %>
   <div class="card-no-border">
     <%= f.hidden_field :count, value: 1 %>
     <button class="btn btn-positive btn-block">预约试驾</button>
@@ -33,7 +33,7 @@
 
 <div class="card">
   <table class="table-view">
-    <% @test_drive.grouped_params.each do |group, grouped_params| %>
+    <% @test_driving.grouped_params.each do |group, grouped_params| %>
       <tr>
         <th><%= group %></th>
         <th></th>

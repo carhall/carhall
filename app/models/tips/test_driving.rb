@@ -1,6 +1,6 @@
-class Tips::TestDrive < ActiveRecord::Base
+class Tips::TestDriving < ActiveRecord::Base
   include Tips::Servicable
-  set_order_class Tips::TestDriveOrder
+  set_order_class Tips::TestDrivingOrder
 
   extend Share::ImageAttachments
   define_image2_method

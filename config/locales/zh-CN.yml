@@ -57,8 +57,8 @@ zh-CN:
       tips/mending_order: 保养专修订单
       tips/cleaning: 服务项目
       tips/cleaning_order: 服务项目订单
-      tips/test_drive: 看车试驾
-      tips/test_drive_order: 看车试驾订单
+      tips/test_driving: 看车试驾
+      tips/test_driving_order: 看车试驾订单
       tips/activity: 活动
       tips/bulk_purchasing: 团购项目
       tips/bulk_purchasing_order: 团购订单
@@ -195,7 +195,7 @@ zh-CN:
         <<: *statisticable
         cleaning_type_id: 类型
         cleaning_type: 类型
-      tips/test_drive:
+      tips/test_driving:
         <<: *servicalbe
         <<: *statisticable
         brand: 汽车品牌

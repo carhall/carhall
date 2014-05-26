@@ -111,7 +111,7 @@ Carhall::Application.routes.draw do
     resources :orders do
       get :mending, on: :collection
       get :cleaning, on: :collection
-      get :test_drive, on: :collection
+      get :test_driving, on: :collection
       get :bulk_purchasing, on: :collection
       get :bulk_purchasing2, on: :collection
       get :vip_card, on: :collection
@@ -132,7 +132,7 @@ Carhall::Application.routes.draw do
       resources :orders
     end
 
-    resources :test_drives do
+    resources :test_drivings do
       put :expose, on: :member
       put :hide, on: :member
       put :stick, on: :member
@@ -327,7 +327,7 @@ Carhall::Application.routes.draw do
             put :use, on: :member
           end
         end
-        resources :test_drives, only: [:show, :index] do
+        resources :test_drivings, only: [:show, :index] do
           resources :orders, only: [:index, :new, :create] do
             post :create_confirmation, on: :collection
             get "use/:count", action: :use_confirmation, on: :member

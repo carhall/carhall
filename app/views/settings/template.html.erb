@@ -31,10 +31,10 @@
                     <dd><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @dealer.has_template? :mending %>></dd>
                   </dl>
                 <% end %>
-                <% if @dealer.can_use_template? :test_drive %>
+                <% if @dealer.can_use_template? :test_driving %>
                   <dl>
                     <dt>看车试驾</dt>
-                    <dd><input class="check_boxes" id="account_detail_attributes_template_ids_6" name="account[detail_attributes][template_ids][]" type="checkbox" value="6"<%= "checked=\"checked\"" if @dealer.has_template? :test_drive %>></dd>
+                    <dd><input class="check_boxes" id="account_detail_attributes_template_ids_6" name="account[detail_attributes][template_ids][]" type="checkbox" value="6"<%= "checked=\"checked\"" if @dealer.has_template? :test_driving %>></dd>
                   </dl>
                 <% end %>
                 <dl>&nbsp;</dl>

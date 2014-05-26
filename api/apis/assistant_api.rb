@@ -37,5 +37,5 @@ class AssistantAPI < Grape::API
   mount Tips::MendingOrderAPI => '/mending_orders'
   mount Tips::VehicleInsuranceOrderAPI => '/vehicle_insurance_orders'
   mount Tips::SecondhandAppraiseOrderAPI => '/secondhand_appraise_orders'
-  mount Tips::TestDriveOrderAPI => '/test_drive_orders'
+  mount Tips::TestDrivingOrderAPI => '/test_driving_orders'
 end

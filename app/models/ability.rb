@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     alias_action :expose, :hide, :stick, :unstick, :to => :set_displayable
-    alias_action :mending, :cleaning, :test_drive, :bulk_purchasing,
+    alias_action :mending, :cleaning, :test_driving, :bulk_purchasing,
       :bulk_purchasing2, :vip_card, :to => :read
 
     user ||= Accounts::User.new # guest user (not logged in)
@@ -24,7 +24,7 @@ class Ability
     when :guest
       can :read, Tips::Mending
       can :read, Tips::Cleaning
-      can :read, Tips::TestDrive
+      can :read, Tips::TestDriving
       can :read, Tips::Activity
       can :read, Tips::BulkPurchasing
       can :read, Tips::VipCard
@@ -53,7 +53,7 @@ class Ability
       if user.accepted?
         can :manage, Tips::Mending, dealer: user
         can :manage, Tips::Cleaning, dealer: user
-        can :manage, Tips::TestDrive, dealer: user
+        can :manage, Tips::TestDriving, dealer: user
         can :manage, Tips::Activity, dealer: user
         can :manage, Tips::BulkPurchasing, dealer: user
         can :manage, Tips::VipCard, dealer: user

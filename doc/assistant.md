@@ -313,13 +313,13 @@ data[dealer_state_id] | true | Integer | 状态ID：1.跟踪 2.解决
 
 -----
 
-#### GET /assistant/test_drive_orders(.:format)  
+#### GET /assistant/test_driving_orders(.:format)  
 
 显示当前登录商户的所有试驾订单
 
 -----
 
-#### GET /assistant/test_drive_orders/:id(.:format)  
+#### GET /assistant/test_driving_orders/:id(.:format)  
 
 显示指定试驾订单详情
 
@@ -331,7 +331,7 @@ id | true |  |
 
 -----
 
-#### PUT /assistant/test_drive_orders/:id(.:format)  
+#### PUT /assistant/test_driving_orders/:id(.:format)  
 
 编辑一条试驾订单
 

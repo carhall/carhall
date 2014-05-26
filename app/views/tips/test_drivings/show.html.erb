@@ -5,15 +5,15 @@
   
   <div class="span9">
     <div class="page-header">
-      <h3><%= @test_drive.title %> <small><a href="<%= edit_tips_test_drife_path(@test_drive) %>">编辑</a></small></h3>
+      <h3><%= @test_driving.title %> <small><a href="<%= edit_tips_test_driving_path(@test_driving) %>">编辑</a></small></h3>
     </div>
 
     <div class="row-fluid">
       <div class="span3">
-        <img src="<%= @test_drive.image.url(:medium) %>">
+        <img src="<%= @test_driving.image.url(:medium) %>">
       </div>
       <div class="span9">
-        <%= show_for @test_drive do |s| %>
+        <%= show_for @test_driving do |s| %>
           <%= s.attribute :price %>
           <%= s.attribute :brand %>
           <%= s.attribute :series %>
@@ -24,7 +24,7 @@
 
     <h4>车型参数</h4>
     <div class="dl-horizontal">
-      <% @test_drive.grouped_params.each do |group, grouped_params| %>
+      <% @test_driving.grouped_params.each do |group, grouped_params| %>
         <dl class="no-border"><strong><%= group %></strong></dl>
         <div class="nested-fields">
           <% grouped_params.each do |title, param| %>

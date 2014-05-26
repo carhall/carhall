@@ -53,11 +53,11 @@ module WeixinHelper
         "专业值得信赖的机构\n想换车，先评估一下吧",
         "weixin/secondhand_appraise.png",
         "weixin/dealers/#{account.id}/secondhand_appraise/orders/new"
-    when "test_drive"
+    when "test_driving"
       format_to_news "新车展厅",
         "点击可查看车型报价、参数等详细资料",
-        account.test_drives.first.image,
-        "weixin/dealers/#{account.id}/test_drives"
+        account.test_drivings.first.image,
+        "weixin/dealers/#{account.id}/test_drivings"
     when "manual_image"
       format_to_news "产品图册",
         "点击可查看产品图册，及时了解新品动态",
@@ -155,8 +155,8 @@ module WeixinHelper
           { type: "click", name: "会员卡", key: "vip_card" }
         when :secondhand_appraise
           { type: "click", name: "爱车估价", key: "secondhand_appraise" }
-        when :test_drive
-          { type: "click", name: "看车试驾", key: "test_drive" }
+        when :test_driving
+          { type: "click", name: "看车试驾", key: "test_driving" }
         when :manual_image
           { type: "click", name: "产品图册", key: "manual_image" }
         when :construction_case
@@ -193,12 +193,12 @@ module WeixinHelper
       when "4S店"
         format_to_menu account, {
           "项目菜单" => [:rescue, :vehicle_insurance, :mending],
-          "发现" => [:bulk_purchasing, :activity, :secondhand_appraise, :test_drive],
+          "发现" => [:bulk_purchasing, :activity, :secondhand_appraise, :test_driving],
           "在下" => [:dealer_description, :mine, :traffic_violation],
         }
       when "汽车销售"
         format_to_menu account, {
-          "项目菜单" => [:secondhand_appraise, :test_drive, :vehicle_insurance, :traffic_violation],
+          "项目菜单" => [:secondhand_appraise, :test_driving, :vehicle_insurance, :traffic_violation],
           "发现" => [:bulk_purchasing, :activity],
           "在下" => [:dealer_description, :mine],
         }

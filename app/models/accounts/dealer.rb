@@ -9,7 +9,7 @@ class Accounts::Dealer < Accounts::PublicAccount
 
   has_one :mending, class_name: 'Tips::Mending'
   has_many :cleanings, class_name: 'Tips::Cleaning'
-  has_many :test_drives, class_name: 'Tips::TestDrive'
+  has_many :test_drivings, class_name: 'Tips::TestDriving'
   has_many :activities, class_name: 'Tips::Activity'
   has_many :bulk_purchasings, class_name: 'Tips::BulkPurchasing'
   has_many :vip_cards, class_name: 'Tips::VipCard'
@@ -24,7 +24,7 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :vip_card_orders, class_name: 'Tips::VipCardOrder'
   has_many :vehicle_insurance_orders, class_name: 'Tips::VehicleInsuranceOrder'
   has_many :secondhand_appraise_orders, class_name: 'Tips::SecondhandAppraiseOrder'
-  has_many :test_drive_orders, class_name: 'Tips::TestDriveOrder'
+  has_many :test_driving_orders, class_name: 'Tips::TestDrivingOrder'
 
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, source: :review, 
@@ -78,7 +78,7 @@ class Accounts::Dealer < Accounts::PublicAccount
     bulk_purchasing: 1,
     activity: 1,
     vip_card: 3,
-    test_drive: 1
+    test_driving: 1
   }
 
   def has_template? template

@@ -27,7 +27,7 @@ class Accounts::DealerDetail < ActiveRecord::Base
 
   def template_syms
     ids = template_ids.map{|i|i-1}
-    %i(cleaning mending bulk_purchasing activity vip_card test_drive).values_at(*ids)
+    %i(cleaning mending bulk_purchasing activity vip_card test_driving).values_at(*ids)
   end
 
   def to_base_builder

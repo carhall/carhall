@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523135143) do
+ActiveRecord::Schema.define(version: 20140526020900) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -761,7 +761,7 @@ ActiveRecord::Schema.define(version: 20140523135143) do
 
   add_index "secondhand_appraise_order_details", ["brand_id"], name: "index_secondhand_appraise_order_details_on_brand_id", using: :btree
 
-  create_table "test_drives", force: true do |t|
+  create_table "test_drivings", force: true do |t|
     t.integer  "dealer_id"
     t.string   "title"
     t.float    "price"
@@ -778,9 +778,9 @@ ActiveRecord::Schema.define(version: 20140523135143) do
     t.text     "description"
   end
 
-  add_index "test_drives", ["brand_id"], name: "index_test_drives_on_brand_id", using: :btree
-  add_index "test_drives", ["dealer_id"], name: "index_test_drives_on_dealer_id", using: :btree
-  add_index "test_drives", ["series"], name: "index_test_drives_on_series", using: :btree
+  add_index "test_drivings", ["brand_id"], name: "index_test_drivings_on_brand_id", using: :btree
+  add_index "test_drivings", ["dealer_id"], name: "index_test_drivings_on_dealer_id", using: :btree
+  add_index "test_drivings", ["series"], name: "index_test_drivings_on_series", using: :btree
 
   create_table "traffic_reports", force: true do |t|
     t.integer  "user_id"

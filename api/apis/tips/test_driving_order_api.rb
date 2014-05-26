@@ -1,9 +1,9 @@
 module Tips
-  class TestDriveOrderAPI < Grape::API
+  class TestDrivingOrderAPI < Grape::API
 
     helpers do
       def parent
-        current_user.test_drive_orders.includes(user: [:detail])
+        current_user.test_driving_orders.includes(user: [:detail])
       end
     end
 

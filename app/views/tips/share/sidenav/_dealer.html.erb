@@ -17,8 +17,8 @@
       <li<%= active? 'tips/orders#mending' %>><a href="<%= mending_tips_orders_path %>"><i class="icon-chevron-right"></i> 保养专修订单</a></li>
     <% end %>
 
-    <% if @dealer.has_template? :test_drive %>
-      <li<%= active? 'tips/orders#test_drive' %>><a href="<%= test_drive_tips_orders_path %>"><i class="icon-chevron-right"></i> 看车试驾订单</a></li>
+    <% if @dealer.has_template? :test_driving %>
+      <li<%= active? 'tips/orders#test_driving' %>><a href="<%= test_driving_tips_orders_path %>"><i class="icon-chevron-right"></i> 看车试驾订单</a></li>
     <% end %>
 
     <% if @dealer.has_template? :bulk_purchasing %>
@@ -40,7 +40,7 @@
   <li<%= active? 'tips/purchase_requestings#expired' %>><a href="<%= expired_tips_purchase_requestings_path %>"><i class="icon-chevron-right"></i> 已结束的求购</a></li>
 </ul>
 
-<% if @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :test_drive %>
+<% if @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :test_driving %>
   <ul class="nav nav-list sidenav">
     <li><span><strong>业务管理</strong></span></li>
     <% if @dealer.has_template? :cleaning %>
@@ -55,10 +55,10 @@
       <li<%= active? 'tips/mendings#edit_discount' %>><a href="<%= edit_discount_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理预约优惠信息</a></li>
     <% end %>
 
-    <% if @dealer.has_template? :test_drive %>
+    <% if @dealer.has_template? :test_driving %>
       <li><span>看车试驾</span></li>
-      <li<%= active? 'tips/test_drives#new' %>><a href="<%= new_tips_test_drife_path %>"><i class="icon-chevron-right"></i> 发布看车试驾</a></li>
-      <li<%= active? 'tips/test_drives#index' %>><a href="<%= tips_test_drives_path %>"><i class="icon-chevron-right"></i> 管理看车试驾</a></li>
+      <li<%= active? 'tips/test_drivings#new' %>><a href="<%= new_tips_test_driving_path %>"><i class="icon-chevron-right"></i> 发布看车试驾</a></li>
+      <li<%= active? 'tips/test_drivings#index' %>><a href="<%= tips_test_drivings_path %>"><i class="icon-chevron-right"></i> 管理看车试驾</a></li>
     <% end %>
   </ul>
 <% end %>
