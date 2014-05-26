@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  图册
+  产品图册
 <% end %>
 
 <% @manual_images = @manual_images.group(:category) %>
@@ -12,12 +12,12 @@
           <td>
             <%= link_to category_weixin_distributor_manual_images_path(@distributor, manual_image.category), data: { transition: "slide-in" } do %>
               <%= image_tag manual_image.image.url(:medium) %>
-              <%= manual_image.title %>
+              <%= manual_image.category %>
             <% end %>
           </td>
-          <% (3 - manual_images.length).times do %>
-            <td></td>
-          <% end %>
+        <% end %>
+        <% (3 - manual_images.length).times do %>
+          <td></td>
         <% end %>
       </tr>
     <% end %>

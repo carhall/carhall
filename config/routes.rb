@@ -346,8 +346,8 @@ Carhall::Application.routes.draw do
             action: :category, as: :category
         end
         resources :construction_cases do
-          get "brand/:brand_id", on: :collection, 
-            action: :brand, as: :brand
+          get "product/:product_id", on: :collection, 
+            action: :product, as: :product
         end
         resources :bulk_purchasings
       end

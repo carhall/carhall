@@ -1,0 +1,26 @@
+<% content_for :title do %>
+  施工案例
+<% end %>
+
+<% @product_id = params[:product_id].to_i %>
+<% @product = Category::Product[@product_id] %>
+<% @construction_cases = @construction_cases.where(product_id: @product_id) %>
+
+<div class="card">
+  <table class="table-view table-no-header table-layout-fixed">
+    <tr><td class="text-left table-view-cell" colspan="3"><%= @product %></td></tr>
+    <% @construction_cases.each_slice(3) do |construction_cases| %>
+      <tr>
+        <% construction_cases.each do |construction_case| %>
+          <td>
+            <%= image_tag construction_case.image.url(:medium) %>
+            <%= construction_case.title %>
+          </td>
+        <% end %>
+        <% (3 - construction_cases.length).times do %>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

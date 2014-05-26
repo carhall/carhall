@@ -72,6 +72,8 @@ module WeixinHelper
     when "mine"
       generate_mine account
     end
+  rescue Exception => e
+    "暂无数据"
   end
 
   def format_to_news title, description, image, url
