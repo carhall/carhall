@@ -62,12 +62,13 @@ module WeixinHelper
       format_to_news "产品图册",
         "点击可查看产品图册，及时了解新品动态",
         account.manual_images.first.image,
-        "weixin/dealers/#{account.id}/manual_images"
+        "weixin/distributors/#{account.id}/manual_images"
     when "construction_case"
+      account_type = account.type.demodulize.tableize
       format_to_news "案例展示",
         "点击可查看别的小伙伴们都选择了么",
         account.construction_cases.first.image,
-        "weixin/dealers/#{account.id}/construction_cases"
+        "weixin/#{account_type}/#{account.id}/construction_cases"
     when "mine"
       generate_mine account
     end
