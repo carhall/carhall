@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526020900) do
+ActiveRecord::Schema.define(version: 20140526032246) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -349,7 +349,7 @@ ActiveRecord::Schema.define(version: 20140526020900) do
     t.integer  "distributor_id"
     t.integer  "dealer_id"
     t.string   "title"
-    t.integer  "brand_id"
+    t.integer  "product_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

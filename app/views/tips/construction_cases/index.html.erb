@@ -14,7 +14,7 @@
       <% @construction_cases.each do |construction_case| %>
         <li class="span3">
           <%= link_to image_tag(construction_case.image(:medium)), construction_case.image(:original), class: 'thumbnail', rel: 'hermitage' %>
-          <%= construction_case.title %>（<%= construction_case.brand %>）
+          <%= construction_case.title %>（<%= construction_case.product %>）
           <div class="pull-right">
             <%= icon_link_to "编辑", 'icon-pencil', edit_tips_construction_case_path(construction_case) %>
             <%= icon_link_to "删除", 'icon-remove', tips_construction_case_path(construction_case), method: :delete, data: { confirm: '您确认要删除这个图片？' } %>

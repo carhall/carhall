@@ -3,7 +3,7 @@
 
   <%= f.input :title %>
 
-  <%= f.input :brand_id, collection: Category::Brand.to_select %>
+  <%= f.input :product_id, collection: Category::Product.to_select %>
 
   <%= f.input :image do %>
     <div class="fileupload fileupload-new" data-provides="fileupload">

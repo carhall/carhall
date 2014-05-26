@@ -377,7 +377,7 @@ zh-CN:
         image: 图片
       tips/construction_case:
         title: 标题
-        brand_id: 品牌
+        product_id: 产品品牌
         image: 图片
       business/client_version:
         id: ID

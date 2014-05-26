@@ -18,6 +18,7 @@
         <%= image_tag(avatar.url(:thumb)) %>
       <% end %>
       <%= t.attribute :username %>
+      <%= t.attribute :mobile %>
       <%= t.attribute :brand %>
       <%= t.attribute :created_at, format: :short %>
       <%= t.attribute :total_cost_with_dealer, args: @user.id %>
