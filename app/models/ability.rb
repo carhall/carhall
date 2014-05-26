@@ -5,7 +5,8 @@ class Ability
     # Define abilities for the passed in user here. For example:
     alias_action :expose, :hide, :stick, :unstick, :to => :set_displayable
     alias_action :mending, :cleaning, :test_driving, :bulk_purchasing,
-      :bulk_purchasing2, :vip_card, :to => :read
+      :bulk_purchasing2, :vip_card, to: :read
+    alias_action :category, :product, to: :read
 
     user ||= Accounts::User.new # guest user (not logged in)
     case user.user_type
@@ -28,6 +29,9 @@ class Ability
       can :read, Tips::Activity
       can :read, Tips::BulkPurchasing
       can :read, Tips::VipCard
+
+      can :read, Tips::ManualImage
+      can :read, Tips::ConstructionCase
 
     when :provider
       can :manage, :setting
