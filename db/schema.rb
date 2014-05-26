@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526032246) do
+ActiveRecord::Schema.define(version: 20140526041501) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -425,6 +425,9 @@ ActiveRecord::Schema.define(version: 20140526032246) do
     t.string   "rqrcode_image_content_type"
     t.integer  "rqrcode_image_file_size"
     t.datetime "rqrcode_image_updated_at"
+    t.string   "weixin_app_id"
+    t.string   "weixin_app_secret"
+    t.text     "weixin_welcome"
   end
 
   add_index "distributor_details", ["distributor_type_id"], name: "index_distributor_details_on_distributor_type_id", using: :btree
