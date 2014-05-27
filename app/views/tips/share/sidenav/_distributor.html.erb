@@ -24,7 +24,11 @@
 <ul class="nav nav-list sidenav affix-top">
   <li><span><strong>促销管理</strong></span></li>
 
+  <li><span>团购</span></li>
   <li<%= active? 'tips/bulk_purchasing2s#new' %>><a href="<%= new_tips_bulk_purchasing2_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
   <li<%= active? 'tips/bulk_purchasing2s#in_progress' %>><a href="<%= in_progress_tips_bulk_purchasing2s_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
   <li<%= active? 'tips/bulk_purchasing2s#expired' %>><a href="<%= expired_tips_bulk_purchasing2s_path %>"><i class="icon-chevron-right"></i> 已结束的团购</a></li>
+
+  <li><span>广告模板</span></li>
+  <li<%= active? 'tips/ad_templates#edit' %>><a href="<%= edit_tips_ad_template_path %>"><i class="icon-chevron-right"></i> 管理广告模板</a></li>
 </ul>

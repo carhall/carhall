@@ -143,6 +143,7 @@ Carhall::Application.routes.draw do
 
     resources :manual_images
     resources :construction_cases
+    resource :ad_template
 
   end
 

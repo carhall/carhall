@@ -184,6 +184,8 @@ zh-CN:
       accounts/distributor:
         <<: *account
         <<: *publicable
+        ad_template_ids: 广告模板
+        ad_templates: 广告模板
       tips/mending:
         <<: *servicalbe
         <<: *statisticable
