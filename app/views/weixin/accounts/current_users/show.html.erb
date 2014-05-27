@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell">
       个性签名
       <%= simple_format @user.description %>
@@ -12,7 +12,7 @@
 </div>
 
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell">
       昵称：<%= @user.username %>
     </li>
@@ -25,7 +25,7 @@
   </ul>
 </div>
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell">
       车型：<%= @user.try :brand %>
     </li>

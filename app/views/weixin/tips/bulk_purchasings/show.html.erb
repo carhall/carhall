@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell"><%= @bulk_purchasing.title %></li>
     <li class="table-view-cell">
       会员价：<%= @bulk_purchasing.vip_price %> 元 原价：<%= @bulk_purchasing.price %> 元
@@ -14,7 +14,7 @@
   <%= link_to "立即购买", new_weixin_dealer_bulk_purchasing_order_path(@dealer, @bulk_purchasing), class: "btn btn-positive btn-block" %>
 </div>
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell">评分：<span class="orangecolor"><%= print_stars @bulk_purchasing.stars, false %></span></li>
     <li class="table-view-cell redcolor">交易达成率：<%= @bulk_purchasing.goal_attainment %>%</li>
     <li class="table-view-cell"><%= @bulk_purchasing.orders_count %>个人已购买</li>
@@ -22,7 +22,7 @@
 </div>
 <%= render 'weixin/share/dealer_info' %>
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell">项目介绍</li>
     <li class="table-view-cell">
       套餐内容

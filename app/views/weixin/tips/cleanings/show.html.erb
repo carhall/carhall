@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell"><%= @cleaning.title %></li>
     <li class="table-view-cell">
       会员价：<%= @cleaning.vip_price %> 元 原价：<%= @cleaning.price %> 元
@@ -14,7 +14,7 @@
   <%= link_to "立即购买", new_weixin_dealer_cleaning_order_path(@dealer, @cleaning), class: "btn btn-positive btn-block" %>
 </div>
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell">评分：<%= print_stars @cleaning.stars, false %></li>
     <li class="table-view-cell redcolor">交易达成率：<%= @cleaning.goal_attainment %>%</li>
     <li class="table-view-cell"><%= @cleaning.orders_count %>个人已购买</li>
@@ -22,7 +22,7 @@
 </div>
 <%= render 'weixin/share/dealer_info' %>
 <div class="card">
-  <ul class="table-view">
+  <ul class="table-view table-view-block">
     <li class="table-view-cell">项目介绍</li>
     <li class="table-view-cell">
       套餐内容
