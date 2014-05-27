@@ -61,6 +61,7 @@ class Ability
         can :manage, Tips::Activity, dealer: user
         can :manage, Tips::BulkPurchasing, dealer: user
         can :manage, Tips::VipCard, dealer: user
+        can :manage, Tips::ConstructionCase, dealer: user
 
         can :manage, Statistic::SalesCase, dealer: user
 

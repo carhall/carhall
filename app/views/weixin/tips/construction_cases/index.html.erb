@@ -10,7 +10,7 @@
       <tr>
         <% construction_cases.each do |construction_case| %>
           <td>
-            <%= link_to product_weixin_distributor_construction_cases_path(@distributor, construction_case.product_id), data: { transition: "slide-in" } do %>
+            <%= link_to product_weixin_construction_cases_path(construction_case.product_id), data: { transition: "slide-in" } do %>
               <%= image_tag construction_case.image.url(:medium) %>
               <%= construction_case.product %>
             <% end %>

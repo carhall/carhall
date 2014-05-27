@@ -1,7 +1,7 @@
 class Tips::ManualImage < ActiveRecord::Base
   include Share::Distributorable
 
-  has_attached_file :image, styles: { medium: "300x200>", thumb: "60x60#" }
+  has_attached_file :image, styles: { medium: "300x200^", thumb: "60x60#" }
 
   validates_presence_of :image, :category
 

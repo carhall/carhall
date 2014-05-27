@@ -1,0 +1,21 @@
+<% content_for :title do %>
+  近期团购
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <% @bulk_purchasing2s.each do |bulk_purchasing| %>
+      <li class="table-view-cell media">
+        <%= link_to weixin_distributor_bulk_purchasing2_path(@distributor, bulk_purchasing), class: "navigate-right", data: { transition: "slide-in" } do %>
+          <div class="media-title"><%= bulk_purchasing.title %></div>
+          <%= image_tag bulk_purchasing.image.url(:thumb), class: "media-object pull-left" %>
+          <div class="media-body">
+            <p>已购人数：<%= bulk_purchasing.orders_count %></p>
+            <p>会员价：<%= bulk_purchasing.vip_price %>元</p>
+            <p>原价：<%= bulk_purchasing.price %>元</p>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

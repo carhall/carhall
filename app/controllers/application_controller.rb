@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
       params[namespaced_name] &&= send(method) if respond_to?(method, true)
     end
 
-    unless options[:no_authorize]
-      load_and_authorize_resource options.reverse_merge(class: klass)
-    else
+    if options[:no_authorize]
       load_resource options.reverse_merge(class: klass)
+    else
+      load_and_authorize_resource options.reverse_merge(class: klass)
     end
 
     def namespaced_name

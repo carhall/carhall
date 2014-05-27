@@ -14,6 +14,8 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :bulk_purchasings, class_name: 'Tips::BulkPurchasing'
   has_many :vip_cards, class_name: 'Tips::VipCard'
 
+  has_many :construction_cases, class_name: 'Tips::ConstructionCase'
+
   has_many :orders, class_name: 'Tips::Order'
   has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, 
     class_name: 'Tips::Order'
@@ -78,7 +80,8 @@ class Accounts::Dealer < Accounts::PublicAccount
     bulk_purchasing: 1,
     activity: 1,
     vip_card: 3,
-    test_driving: 1
+    test_driving: 1,
+    construction_case: 1,
   }
 
   def has_template? template

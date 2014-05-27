@@ -37,6 +37,12 @@
                     <dd><input class="check_boxes" id="account_detail_attributes_template_ids_6" name="account[detail_attributes][template_ids][]" type="checkbox" value="6"<%= "checked=\"checked\"" if @dealer.has_template? :test_driving %>></dd>
                   </dl>
                 <% end %>
+                <% if @dealer.can_use_template? :construction_case %>
+                  <dl>
+                    <dt>施工案例</dt>
+                    <dd><input class="check_boxes" id="account_detail_attributes_template_ids_7" name="account[detail_attributes][template_ids][]" type="checkbox" value="7"<%= "checked=\"checked\"" if @dealer.has_template? :construction_case %>></dd>
+                  </dl>
+                <% end %>
                 <dl>&nbsp;</dl>
               <% end %>
 

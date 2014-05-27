@@ -1,0 +1,36 @@
+<% content_for :title do %>
+  团购详情
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell"><%= @bulk_purchasing2.title %></li>
+    <li class="table-view-cell">
+      会员价：<%= @bulk_purchasing2.vip_price %> 元 原价：<%= @bulk_purchasing2.price %> 元
+    </li>
+  </ul>
+</div>
+<!-- <div class="card-no-border">
+  <%#= link_to "立即购买", new_weixin_distributor_bulk_purchasing_order_path(@distributor, @bulk_purchasing2), class: "btn btn-positive btn-block" %>
+</div> -->
+<!-- <div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell"><%= @bulk_purchasing2.orders_count %>个人已购买</li>
+  </ul>
+</div> -->
+<%= render 'weixin/share/distributor_info' %>
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">项目介绍</li>
+    <li class="table-view-cell">
+      套餐内容
+      <%= simple_format(@bulk_purchasing2.description) %>
+    </li>
+  </ul>
+</div>
+<%# @source = @bulk_purchasing %>
+<%# @orders = @bulk_purchasing.orders.includes(:user).last(3) %>
+<%#= render 'weixin/share/orders_list' %>
+<!-- <div class="card-no-border">
+  <%#= link_to "立即购买", new_weixin_distributor_bulk_purchasing_order_path(@distributor, @bulk_purchasing2), class: "btn btn-positive btn-block" %>
+</div> -->

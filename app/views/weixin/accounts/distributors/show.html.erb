@@ -1,0 +1,19 @@
+<% content_for :title do %>
+  商家介绍
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">
+    <div class="titleimg">
+      <%= image_tag @distributor.avatar.url(:medium) %>
+    </div>
+  </li>
+  <li class="table-view-cell">联系方式：<%= @distributor.phone %></li>
+  <li class="table-view-cell">地址：<%= @distributor.address %></li>
+    <li class="table-view-cell">
+      详细介绍<br>
+      <%= simple_format(@distributor.description) %>
+    </li>
+  </ul>
+</div>

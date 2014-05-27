@@ -33,11 +33,6 @@ module WeixinHelper
       format_resources_to_news account, account.bulk_purchasings
     when "activity"
       format_resources_to_news account, account.activities
-    when "dealer_description"
-      format_to_news "商家介绍",
-        account.description,
-        account.avatar,
-        "weixin/dealers/#{account.id}"
     when "rescue"
       format_to_news "故障救援",
         "一键救援，紧急联系你的专属客服",
@@ -58,6 +53,13 @@ module WeixinHelper
         "点击可查看车型报价、参数等详细资料",
         account.test_drivings.first.image,
         "weixin/dealers/#{account.id}/test_drivings"
+    when "dealer_description"
+      format_to_news "商家介绍",
+        account.description,
+        account.avatar,
+        "weixin/dealers/#{account.id}"
+    when "bulk_purchasing2"
+      format_resources_to_news account, account.bulk_purchasing2s
     when "manual_image"
       format_to_news "产品图册",
         "点击可查看产品图册，及时了解新品动态",
@@ -69,6 +71,11 @@ module WeixinHelper
         "点击可查看别的小伙伴们都选择了么",
         account.construction_cases.first.image,
         "weixin/#{account_type}/#{account.id}/construction_cases"
+    when "distributor_description"
+      format_to_news "商家介绍",
+        account.description,
+        account.avatar,
+        "weixin/distributors/#{account.id}"
     when "mine"
       generate_mine account
     end
@@ -170,6 +177,8 @@ module WeixinHelper
           { type: "click", name: "车险续保", key: "vehicle_insurance" }
         when :dealer_description
           { type: "click", name: "商家介绍", key: "dealer_description" }
+        when :distributor_description
+          { type: "click", name: "商家介绍", key: "distributor_description" }
         when :mine
           { type: "click", name: "我的", key: "mine" }
         when :traffic_violation
@@ -190,7 +199,7 @@ module WeixinHelper
       when "洗车美容"
         format_to_menu account, {
           "项目菜单" => [:vip_card, :cleaning],
-          "发现" => [:bulk_purchasing, :activity],
+          "发现" => [:bulk_purchasing, :activity, :construction_case],
           "在下" => [:dealer_description, :mine, :traffic_violation, :download_app],
         }
       when "4S店"
@@ -222,7 +231,7 @@ module WeixinHelper
       format_to_menu account, {
         "项目菜单" => [:manual_image],
         "发现" => [:bulk_purchasing, :construction_case],
-        "在下" => [:dealer_description],
+        "在下" => [:distributor_description],
       }
     end
   end
@@ -231,7 +240,7 @@ module WeixinHelper
     news = data.map do |key|
       case key
       when :current_user
-        format_to_news "个人资料", "点击查看我的详细资料", "weixin/current_user.png",  "weixin/dealers/#{account.id}/current_user"
+        format_to_news "个人资料", "点击查看我的详细资料", "weixin/current_user.png",  "weixin/current_user"
       when :vip_card_order
         format_to_news "会员卡", "点击查看我的会员卡详细资料", "weixin/arrow_right.png", "weixin/dealers/#{account.id}/current_user/vip_card/orders"
       when :consumption_record

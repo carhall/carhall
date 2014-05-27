@@ -261,11 +261,9 @@ Carhall::Application.routes.draw do
 
     scope module: :accounts do
       resources :dealers do
-        resource :current_user do
-          get :mine, on: :member
-        end
         get :rescue, on: :member
       end
+      resources :distributors
       resource :current_user
     end
 
@@ -334,6 +332,10 @@ Carhall::Application.routes.draw do
             put :use, on: :member
           end
         end
+        resources :construction_cases do
+          get "product/:product_id", on: :collection, 
+            action: :product, as: :product
+        end
         resource :current_user do
           get ":type/orders", as: :type_orders, to: "orders#index"
           get ":type/orders/:id", as: :type_order, to: "orders#show"
@@ -349,7 +351,11 @@ Carhall::Application.routes.draw do
           get "product/:product_id", on: :collection, 
             action: :product, as: :product
         end
-        resources :bulk_purchasings
+        resources :bulk_purchasing2s
+      end
+      resources :construction_cases do
+        get "product/:product_id", on: :collection, 
+          action: :product, as: :product
       end
     end
 
