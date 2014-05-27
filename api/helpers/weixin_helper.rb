@@ -230,7 +230,7 @@ module WeixinHelper
     when Accounts::Distributor
       format_to_menu account, {
         "项目菜单" => [:manual_image],
-        "发现" => [:bulk_purchasing, :construction_case],
+        "发现" => [:bulk_purchasing2, :construction_case],
         "在下" => [:distributor_description],
       }
     end
