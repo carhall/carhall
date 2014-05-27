@@ -31,12 +31,6 @@
       <%= s.attribute :phone, in: :detail %>
       <%= s.attribute :products, in: :detail, join: '、' %>
       <%= s.attribute :brands, in: :detail, join: '、' %>
-      <%= s.attribute :authentication_image, in: :detail do %>
-        <%= image_tag(@user.detail.authentication_image.url(:medium)) %>
-      <% end %>
-      <%= s.attribute :accepted, in: :detail do %>
-        <label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label>
-      <% end %>
       <%= s.attribute :description %>
     <% end %>
   </div>
