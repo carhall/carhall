@@ -3,7 +3,7 @@ def absolute_image_url image, type
 end
 
 def absolute_url url
-  "#{AbsoluteUrlPrefix}/#{url}"
+  File.join AbsoluteUrlPrefix, url
 end
 
 module Paperclip
