@@ -144,8 +144,8 @@ module WeixinHelper
       Rails.logger.info("  Error occurred when requesting weixin api: #{e}")
     ensure
       ActiveSupport::JSON::Encoding.escape_html_entities_in_json = backup_escape
-      response
     end
+    response
   end
 
   def format_to_menu account, data
