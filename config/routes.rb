@@ -114,6 +114,8 @@ Carhall::Application.routes.draw do
       get :test_driving, on: :collection
       get :bulk_purchasing, on: :collection
       get :bulk_purchasing2, on: :collection
+      get :vehicle_insurance, on: :collection
+      get :secondhand_appraise, on: :collection
       get :vip_card, on: :collection
 
       put :enable, on: :member

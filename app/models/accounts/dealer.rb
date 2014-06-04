@@ -82,6 +82,8 @@ class Accounts::Dealer < Accounts::PublicAccount
     vip_card: 3,
     test_driving: 1,
     construction_case: 1,
+    vehicle_insurance: 1,
+    secondhand_appraise: 1,
   }
 
   def has_template? template

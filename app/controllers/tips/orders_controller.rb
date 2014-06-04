@@ -24,6 +24,14 @@ class Tips::OrdersController < Tips::ApplicationController
   def bulk_purchasing
     @orders = @dealer.bulk_purchasing_orders
   end
+  
+  def vehicle_insurance
+    @orders = @dealer.vehicle_insurance_orders
+  end
+  
+  def secondhand_appraise
+    @orders = @dealer.secondhand_appraise_orders
+  end
 
   def bulk_purchasing2
     @orders = @distributor.bulk_purchasing2_orders

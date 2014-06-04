@@ -8,8 +8,16 @@
       <h3>管理广告模板 <small></small></h3>
     </div>
 
+    <p>
+      品牌：
+      <% @products = Business::AdTemplate.all.map(&:product).group_by(&:to_s).map{|k,v|[k, v.length]} %>
+      <% @products.each do |product, count| %>
+        <%= link_to "#{product}(#{count}个)", edit_tips_ad_template_path(product_id: Category::Product[product]) %>
+      <% end %>
+    </p>
+
     <%= simple_form_for(@user, url: tips_ad_template_path, html: { method: :put, class: 'no-margin' }) do |f| %>
-      <%= f.association :ad_templates, as: :check_boxes, label: false, label_method: lambda { |ad_template|
+      <%= f.association :ad_templates, as: :check_boxes, collection: if params[:product_id] then Business::AdTemplate.where(product_id: params[:product_id]) else Business::AdTemplate.all end, label: false, label_method: lambda { |ad_template|
           content_tag(:div, image_tag(ad_template.avatar.url(:medium)), class: 'thumbnail') + content_tag(:span, "#{ad_template.title}（#{ad_template.product}）")
         }, item_wrapper_class: 'span3', wrapper_class: 'thumbnails row' %>
       

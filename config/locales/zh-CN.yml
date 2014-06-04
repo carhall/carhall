@@ -286,6 +286,7 @@ zh-CN:
         purchasing_date: 入手年份
         travelling_miles: 行驶里程
         brand_id: 汽车品牌
+        brand: 汽车品牌
         series: 汽车型号
       tips/secondhand_appraise_order/detail:
         purchasing_date: 入手年份
@@ -445,3 +446,9 @@ zh-CN:
             <<: *discount
       business_client_version:
         file: 客户端文件
+  time:
+    formats:
+      default: ! '%Y年%b%d日 %A %H:%M:%S %Z'
+      long: ! '%Y年%b%d日 %H:%M'
+      short: ! '%b%d日 %H:%M'
+      date: ! '%Y年%b%d日'

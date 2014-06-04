@@ -5,7 +5,7 @@
   </div>
 <% end %>
 
-<% if @dealer.has_template? :bulk_purchasing or @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :vip_card %>
+<% if @dealer.has_template? :bulk_purchasing or @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :vip_card or @dealer.has_template? :vehicle_insurance or @dealer.has_template? :secondhand_appraise %>
   <ul class="nav nav-list sidenav affix-top">
     <li><span><strong>交易管理</strong></span></li>
 
@@ -27,6 +27,14 @@
 
     <% if @dealer.has_template? :vip_card %>
       <li<%= active? 'tips/orders#vip_card' %>><a href="<%= vip_card_tips_orders_path %>"><i class="icon-chevron-right"></i> 会员卡订单</a></li>
+    <% end %>
+
+    <% if @dealer.has_template? :vehicle_insurance %>
+      <li<%= active? 'tips/orders#vehicle_insurance' %>><a href="<%= vehicle_insurance_tips_orders_path %>"><i class="icon-chevron-right"></i> 车险续保订单</a></li>
+    <% end %>
+
+    <% if @dealer.has_template? :secondhand_appraise %>
+      <li<%= active? 'tips/orders#secondhand_appraise' %>><a href="<%= secondhand_appraise_tips_orders_path %>"><i class="icon-chevron-right"></i> 二手评估订单</a></li>
     <% end %>
   </ul>
 <% end %>
