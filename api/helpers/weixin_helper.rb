@@ -79,8 +79,8 @@ module WeixinHelper
     when "mine"
       generate_mine account
     end
-  rescue Exception => e
-    "暂无数据"
+  # rescue Exception => e
+  #   "暂无数据"
   end
 
   def format_to_news title, description, image, url
@@ -95,11 +95,12 @@ module WeixinHelper
   end
 
   def format_resources_to_news account, resources
+    account_type = account.type.demodulize.tableize
     resource = resources.first
     format_to_news resource.class.model_name.human,
       "点击查看#{resource.class.model_name.human}详细资料",
       resource.image,
-      "weixin/dealers/#{account.id}/#{resource.class.name.demodulize.tableize}"
+      "weixin/#{account_type}/#{account.id}/#{resource.class.name.demodulize.tableize}"
   end
 
   def initialize_weixin_account account
@@ -162,7 +163,7 @@ module WeixinHelper
         when :bulk_purchasing
           { type: "click", name: "团购", key: "bulk_purchasing" }
         when :bulk_purchasing2
-          { type: "click", name: "团购", key: "bulk_purchasing" }
+          { type: "click", name: "团购", key: "bulk_purchasing2" }
         when :vip_card
           { type: "click", name: "会员卡", key: "vip_card" }
         when :secondhand_appraise
