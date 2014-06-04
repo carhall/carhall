@@ -1,4 +1,4 @@
-AbsoluteUrlPrefix = ENV['CARHALL_URL_PREFIX']
+AbsoluteUrlPrefix = ENV['CARHALL_URL_PREFIX'] || "http://localhost:3000"
 
 Jbuilder.class_eval do
   def image! object, image

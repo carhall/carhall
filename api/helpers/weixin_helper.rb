@@ -161,6 +161,8 @@ module WeixinHelper
           { type: "click", name: "服务项目", key: "cleaning" }
         when :bulk_purchasing
           { type: "click", name: "团购", key: "bulk_purchasing" }
+        when :bulk_purchasing2
+          { type: "click", name: "团购", key: "bulk_purchasing" }
         when :vip_card
           { type: "click", name: "会员卡", key: "vip_card" }
         when :secondhand_appraise
