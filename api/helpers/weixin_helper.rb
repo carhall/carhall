@@ -137,7 +137,7 @@ module WeixinHelper
 
     begin
       ActiveSupport::JSON::Encoding.escape_html_entities_in_json = false
-      Rails.logger.info("  Requested Weixin #{command} API #{weixin_service_url}")
+      Rails.logger.info("  Requested Weixin #{command} API #{weixin_service_url}, with params #{data.to_json}")
       response = RestClient.post weixin_service_url, data.to_json
       Rails.logger.info("  Result: #{response}")
     rescue Exception => e
