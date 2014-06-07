@@ -44,6 +44,11 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
 
 private
 
+  def authenticate_weixin_account!
+    flash[:public_account] = true
+    super
+  end
+
   def get_parent
     @dealer = params[:dealer_id]
     if params[:type]

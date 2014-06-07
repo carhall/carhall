@@ -12,7 +12,7 @@
           <td>
             <%= link_to product_weixin_construction_cases_path(construction_case.product_id), data: { transition: "slide-in" } do %>
               <%= image_tag construction_case.image.url(:medium) %>
-              <%= l construction_case.created_at, format: :date %> <%= construction_case.product %>
+              <%= construction_case.product %>
             <% end %>
           </td>
         <% end %>

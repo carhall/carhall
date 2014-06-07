@@ -1,6 +1,20 @@
 <% content_for :title do %>
-  服务项目
+  服务项目 <%= Tips::Cleaning::CleaningType[params[:cleaning_type_id].to_i] if params[:cleaning_type_id] %>
 <% end %>
+
+<div class="card-no-border">
+  <p>
+    只看分类：
+    <% @cleaning_types = @cleanings.map(&:cleaning_type).group_by(&:to_s).map{|k,v|[k, v.length]} %>
+    <% @cleaning_types.each do |cleaning_type, count| %>
+      <%= link_to "#{cleaning_type}(#{count}个)", cleaning_type_weixin_dealer_cleanings_path(@dealer, cleaning_type_id: Tips::Cleaning::CleaningType[cleaning_type]) %>
+    <% end %>
+    <%= link_to "全部", weixin_dealer_cleanings_path(@dealer) %>
+
+  </p>
+</div>
+
+<% @cleanings = @cleanings.where(cleaning_type_id: params[:cleaning_type_id]) if params[:cleaning_type_id] %>
 
 <div class="card">
   <ul class="table-view">

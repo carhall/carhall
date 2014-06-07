@@ -1,0 +1,25 @@
+<% content_for :title do %>
+  广告模板
+<% end %>
+
+<% @ad_templates = @ad_templates.group(:product_id).order(id: :desc) %>
+
+<div class="card">
+  <table class="table-view table-no-header table-layout-fixed">
+    <% @ad_templates.each_slice(3) do |ad_templates| %>
+      <tr>
+        <% ad_templates.each do |ad_template| %>
+          <td>
+            <%= link_to product_weixin_ad_templates_path(ad_template.product_id), data: { transition: "slide-in" } do %>
+              <%= image_tag ad_template.avatar.url(:medium) %>
+              <%= ad_template.product %>
+            <% end %>
+          </td>
+        <% end %>
+        <% (3 - ad_templates.length).times do %>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

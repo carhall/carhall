@@ -25,8 +25,8 @@ module WeixinHelper
     when "cleaning"
       format_resources_to_news account, account.cleanings
     when "mending"
-      format_to_news ::Tips::Mending.model_name.human,
-        "点击查看#{::Tips::Mending.model_name.human}详细资料",
+      format_to_news "预约服务",
+        "点击查看预约服务详细资料",
         account.avatar,
         "weixin/dealers/#{account.id}/mending"
     when "bulk_purchasing"
@@ -71,6 +71,11 @@ module WeixinHelper
         "点击可查看别的小伙伴们都选择了么",
         account.construction_cases.first.image,
         "weixin/#{account_type}/#{account.id}/construction_cases"
+    when "ad_templates"
+      format_to_news "广告模板",
+        "点击查看广告模板详细资料",
+        account.construction_cases.first.image,
+        "weixin/distributors/#{account.id}/ad_templates"
     when "distributor_description"
       format_to_news "商家介绍",
         account.description,
@@ -88,7 +93,7 @@ module WeixinHelper
       news: {
         Title: title,
         Description: description,
-        PicUrl: (absolute_url(image.url(:medium)) rescue absolute_url(image)),
+        PicUrl: (absolute_url(image.url(:original)) rescue absolute_url(image)),
         Url: absolute_url(url)
       }
     }
@@ -157,7 +162,7 @@ module WeixinHelper
         when :activity
           { type: "click", name: "活动", key: "activity" }
         when :mending
-          { type: "click", name: "保养维修", key: "mending" }
+          { type: "click", name: "预约服务", key: "mending" }
         when :cleaning
           { type: "click", name: "服务项目", key: "cleaning" }
         when :bulk_purchasing

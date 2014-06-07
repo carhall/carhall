@@ -2,6 +2,10 @@ class Tips::ConstructionCase < ActiveRecord::Base
   include Share::Distributorable
   include Share::Dealerable
 
+  def owner
+    distributor || dealer
+  end
+
   has_attached_file :image, styles: { medium: "300x200#", thumb: "60x60#" }
   validates_presence_of :image, :product_id
 

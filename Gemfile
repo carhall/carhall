@@ -31,6 +31,7 @@ gem "twitter-bootstrap-rails"
 gem 'jasny_bootstrap_extension_rails'
 gem 'hermitage'
 
+gem 'zepto-rails', github: 'packetman/zepto-rails'
 gem 'ratchet-rails'
 gem 'pikaday-gem'
 

@@ -12,6 +12,8 @@ class Tips::BulkPurchasing2 < ActiveRecord::Base
     self.location_id = distributor.location_id
   end
 
+  delegate :mobile, :username, to: :dealer, prefix: true
+
   has_many :orders, class_name: Tips::BulkPurchasing2Order, foreign_key: :source_id
   has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, 
     class_name: Tips::BulkPurchasing2Order, foreign_key: :source_id

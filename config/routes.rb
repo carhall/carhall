@@ -296,6 +296,8 @@ Carhall::Application.routes.draw do
             put :use, on: :member
           end
           resources :reviews, only: [:index]
+          get "cleaning_type/:cleaning_type_id", as: :cleaning_type, 
+            action: :index, on: :collection
         end
         resources :activities, only: [:show, :index]
         resources :bulk_purchasings, only: [:show, :index] do
@@ -354,9 +356,17 @@ Carhall::Application.routes.draw do
           get "product/:product_id", on: :collection, 
             action: :product, as: :product
         end
+        resources :ad_templates do
+          get "product/:product_id", on: :collection, 
+            action: :product, as: :product
+        end
         resources :bulk_purchasing2s
       end
       resources :construction_cases do
+        get "product/:product_id", on: :collection, 
+          action: :product, as: :product
+      end
+      resources :ad_templates do
         get "product/:product_id", on: :collection, 
           action: :product, as: :product
       end

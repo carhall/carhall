@@ -18,7 +18,8 @@
 
     <%= index_for @orders, class: :datatable do |t| %>
       <%= t.attribute :id %>
-      <%= t.association :dealer, using: :username %>
+      <%= t.attribute :dealer_username %>
+      <%= t.attribute :dealer_mobile %>
       <%= t.attribute :title %>
       <%= t.attribute :count %>
       <%= t.attribute :cost %>

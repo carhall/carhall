@@ -1,0 +1,30 @@
+<% content_for :title do %>
+  施工案例
+<% end %>
+
+<% @product_id = params[:product_id].to_i %>
+<% @product = Category::Product[@product_id] %>
+<% @ad_templates = @ad_templates.where(product_id: @product_id).order(id: :desc) %>
+
+<div class="card">
+  <table class="table-view table-no-header table-layout-fixed">
+    <tr><td class="text-left table-view-cell" colspan="3"><%= @product %></td></tr>
+    <% @ad_templates.each_slice(3) do |ad_templates| %>
+      <tr>
+        <% ad_templates.each do |ad_template| %>
+          <td>
+            <%= link_to ad_template.avatar.url(:original), rel: 'hermitage', data: { transition: "slide-in" } do %>
+              <%= image_tag ad_template.avatar.url(:medium) %>
+              <%= ad_template.title %>
+            <% end %>
+          </td>
+        <% end %>
+        <% (3 - ad_templates.length).times do %>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= javascript_include_tag "gallery" %>

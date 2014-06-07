@@ -246,6 +246,8 @@ zh-CN:
       tips/bulk_purchasing2_order:
         <<: *order
         dealer: 购买服务商
+        dealer_username: 购买服务商
+        dealer_mobile: 联系电话
       tips/mending_order:
         <<: *order
         brand_id: 汽车品牌

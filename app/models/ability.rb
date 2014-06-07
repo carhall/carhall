@@ -31,9 +31,9 @@ class Ability
       can :read, Tips::BulkPurchasing
       can :read, Tips::BulkPurchasing2
       can :read, Tips::VipCard
-
       can :read, Tips::ManualImage
       can :read, Tips::ConstructionCase
+      can :read, Business::AdTemplate
 
     when :provider
       can :manage, :setting
@@ -75,6 +75,11 @@ class Ability
 
       can :manage, Tips::PurchaseRequesting, dealer: user
 
+      can :read, Tips::BulkPurchasing2
+      can :read, Tips::ManualImage
+      can :read, Tips::ConstructionCase
+      can :read, Business::AdTemplate
+
       cannot :set_displayable, :all
     when :distributor
       can :manage, :setting
@@ -85,6 +90,8 @@ class Ability
         can :manage, Tips::BulkPurchasing2, distributor: user
         can :manage, Tips::ManualImage, distributor: user
         can :manage, Tips::ConstructionCase, distributor: user
+
+        can :manage, Business::AdTemplate, distributor: user
 
         can :read, Tips::Order
         can :read, Tips::BulkPurchasing2Order

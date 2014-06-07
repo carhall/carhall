@@ -13,8 +13,10 @@
       <tr>
         <% construction_cases.each do |construction_case| %>
           <td>
-            <%= image_tag construction_case.image.url(:medium) %>
-            <%= l construction_case.created_at, format: :date %> <%= construction_case.title %>
+            <%= link_to construction_case.image.url(:original), rel: 'hermitage', data: { transition: "slide-in" } do %>
+              <%= image_tag construction_case.image.url(:medium) %>
+              <%= l construction_case.created_at, format: :date %> <%= construction_case.owner.username %> <%= construction_case.title %>
+            <% end %>
           </td>
         <% end %>
         <% (3 - construction_cases.length).times do %>
@@ -24,3 +26,5 @@
     <% end %>
   </table>
 </div>
+
+<%= javascript_include_tag "gallery" %>

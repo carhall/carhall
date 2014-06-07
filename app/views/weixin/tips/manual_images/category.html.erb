@@ -12,8 +12,10 @@
       <tr>
         <% manual_images.each do |manual_image| %>
           <td>
-            <%= image_tag manual_image.image.url(:medium) %>
-            <%= manual_image.title %>
+            <%= link_to manual_image.image.url(:original), rel: 'hermitage', data: { transition: "slide-in" } do %>
+              <%= image_tag manual_image.image.url(:medium) %>
+              <%= manual_image.title %>
+            <% end %>
           </td>
         <% end %>
         <% (3 - manual_images.length).times do %>
@@ -23,3 +25,5 @@
     <% end %>
   </table>
 </div>
+
+<%= javascript_include_tag "gallery" %>
