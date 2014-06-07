@@ -7,7 +7,7 @@ private
   def unset_dealer
     @construction_cases.where_values.delete_if do |query|
       query.left.name == 'dealer_id'
-    end
+    end if params[:distributor_id]
   end
 
 end
