@@ -74,7 +74,7 @@ module WeixinHelper
     when "ad_template"
       format_to_news "广告模板",
         "点击查看广告模板详细资料",
-        account.construction_cases.first.image,
+        account.ad_templates.first.avatar,
         "weixin/distributors/#{account.id}/ad_templates"
     when "distributor_description"
       format_to_news "商家介绍",
