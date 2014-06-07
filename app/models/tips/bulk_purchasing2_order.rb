@@ -4,6 +4,8 @@ class Tips::BulkPurchasing2Order < ActiveRecord::Base
   belongs_to :dealer, class_name: 'Accounts::Account'
   belongs_to :distributor, counter_cache: :orders_count, class_name: 'Accounts::Distributor'
 
+  delegate :mobile, :username, to: :dealer, prefix: true
+  
   belongs_to :source, counter_cache: :orders_count, class_name: 'BulkPurchasing2'
 
   validates_presence_of :count
