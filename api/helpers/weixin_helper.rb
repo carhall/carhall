@@ -71,7 +71,7 @@ module WeixinHelper
         "点击可查看别的小伙伴们都选择了么",
         account.construction_cases.first.image,
         "weixin/#{account_type}/#{account.id}/construction_cases"
-    when "ad_templates"
+    when "ad_template"
       format_to_news "广告模板",
         "点击查看广告模板详细资料",
         account.construction_cases.first.image,
@@ -183,6 +183,8 @@ module WeixinHelper
           { type: "click", name: "故障救援", key: "rescue" }
         when :vehicle_insurance
           { type: "click", name: "车险续保", key: "vehicle_insurance" }
+        when :ad_template
+          { type: "click", name: "广告模板", key: "ad_template" }
         when :dealer_description
           { type: "click", name: "商家介绍", key: "dealer_description" }
         when :distributor_description
@@ -208,38 +210,38 @@ module WeixinHelper
         format_to_menu account, {
           "项目菜单" => [:vip_card, :cleaning],
           "发现" => [:bulk_purchasing, :activity, :construction_case],
-          "在下" => [:dealer_description, :mine, :traffic_violation, :download_app],
+          "更多" => [:dealer_description, :mine, :traffic_violation, :download_app],
         }
       when "4S店"
         format_to_menu account, {
           "项目菜单" => [:rescue, :vehicle_insurance, :mending],
           "发现" => [:bulk_purchasing, :activity, :secondhand_appraise, :test_driving],
-          "在下" => [:dealer_description, :mine, :traffic_violation],
+          "更多" => [:dealer_description, :mine, :traffic_violation],
         }
       when "汽车销售"
         format_to_menu account, {
           "项目菜单" => [:secondhand_appraise, :test_driving, :vehicle_insurance, :traffic_violation],
           "发现" => [:bulk_purchasing, :activity],
-          "在下" => [:dealer_description, :mine],
+          "更多" => [:dealer_description, :mine],
         }
       when "专修"
         format_to_menu account, {
           "项目菜单" => [:rescue, :vehicle_insurance, :mending],
           "发现" => [:bulk_purchasing, :activity],
-          "在下" => [:dealer_description, :mine, :traffic_violation],
+          "更多" => [:dealer_description, :mine, :traffic_violation],
         }
       when "专项服务"
         format_to_menu account, {
           "项目菜单" => [:cleaning],
           "发现" => [:bulk_purchasing, :activity],
-          "在下" => [:dealer_description, :mine, :traffic_violation, :download_app],
+          "更多" => [:dealer_description, :mine, :traffic_violation, :download_app],
         }
       end
     when Accounts::Distributor
       format_to_menu account, {
-        "项目菜单" => [:manual_image],
+        "项目菜单" => [:manual_image, :ad_template],
         "发现" => [:bulk_purchasing2, :construction_case],
-        "在下" => [:distributor_description],
+        "更多" => [:distributor_description, :mine],
       }
     end
   end
@@ -275,6 +277,8 @@ module WeixinHelper
       when "汽车销售", "专项服务"
         format_to_mine account, [:current_user, :sales_case]
       end
+    when Accounts::Distributor
+      format_to_mine account, [:current_user]
     end
   end
 
