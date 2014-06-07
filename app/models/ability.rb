@@ -77,7 +77,6 @@ class Ability
 
       can :read, Tips::BulkPurchasing2
       can :read, Tips::ManualImage
-      can :read, Tips::ConstructionCase
       can :read, Business::AdTemplate
 
       cannot :set_displayable, :all
