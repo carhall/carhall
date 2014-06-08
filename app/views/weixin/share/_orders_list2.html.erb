@@ -1,0 +1,12 @@
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">堂友消费记录</li>
+    <% @orders.each do |order| %>
+      <li class="table-view-cell">
+        <%= order.dealer.username %>
+        <p><%= order.source.title %></p>
+      </li>
+    <% end %>
+    <li class="table-view-cell orangecolor"><%= link_to "查看全部记录", weixin_polymorphic_path(@distributor, @source, :orders), class: "navigate-right link" %></li>
+  </ul>
+</div>

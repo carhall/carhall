@@ -10,14 +10,14 @@
     </li>
   </ul>
 </div>
-<!-- <div class="card-no-border">
-  <%#= link_to "立即购买", new_weixin_distributor_bulk_purchasing_order_path(@distributor, @bulk_purchasing2), class: "btn btn-positive btn-block" %>
-</div> -->
-<!-- <div class="card">
+<div class="card-no-border">
+  <%= link_to "立即购买", new_weixin_distributor_bulk_purchasing2_order_path(@distributor, @bulk_purchasing2), class: "btn btn-positive btn-block" %>
+</div>
+<div class="card">
   <ul class="table-view">
     <li class="table-view-cell"><%= @bulk_purchasing2.orders_count %>个人已购买</li>
   </ul>
-</div> -->
+</div>
 <%= render 'weixin/share/distributor_info' %>
 <div class="card">
   <ul class="table-view table-view-block">
@@ -28,9 +28,9 @@
     </li>
   </ul>
 </div>
-<%# @source = @bulk_purchasing %>
-<%# @orders = @bulk_purchasing.orders.includes(:user).last(3) %>
-<%#= render 'weixin/share/orders_list' %>
-<!-- <div class="card-no-border">
-  <%#= link_to "立即购买", new_weixin_distributor_bulk_purchasing_order_path(@distributor, @bulk_purchasing2), class: "btn btn-positive btn-block" %>
-</div> -->
+<% @source = @bulk_purchasing2 %>
+<% @orders = @bulk_purchasing2.orders.includes(:dealer).last(3) %>
+<%= render 'weixin/share/orders_list2' %>
+<div class="card-no-border">
+  <%= link_to "立即购买", new_weixin_distributor_bulk_purchasing2_order_path(@distributor, @bulk_purchasing2), class: "btn btn-positive btn-block" %>
+</div>

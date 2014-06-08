@@ -360,7 +360,13 @@ Carhall::Application.routes.draw do
           get "product/:product_id", on: :collection, 
             action: :product, as: :product
         end
-        resources :bulk_purchasing2s
+        resources :bulk_purchasing2s do
+          resources :orders, only: [:index, :new, :create] do
+            post :create_confirmation, on: :collection
+            get "use/:count", action: :use_confirmation, on: :member
+            put :use, on: :member
+          end
+        end
       end
       resources :construction_cases do
         get "product/:product_id", on: :collection, 

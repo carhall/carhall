@@ -1,4 +1,10 @@
-<%= simple_form_for(@order, url: weixin_polymorphic_path([:dealer, @dealer], @source, :orders, action: :create_confirmation)) do |f| %>
+<% if @parent.klass == Tips::BulkPurchasing2Order %>
+  <% @owner = [:distributor, @distributor] %>
+<% else %>
+  <% @owner = [:dealer, @dealer] %>
+<% end %>
+
+<%= simple_form_for(@order, url: weixin_polymorphic_path(@owner, @source, :orders, action: :create_confirmation)) do |f| %>
   <%= devise_error_messages! @order %>
   <div class="card">
     <ul class="table-view table-view-block">

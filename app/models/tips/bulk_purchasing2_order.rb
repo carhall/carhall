@@ -1,14 +1,14 @@
 class Tips::BulkPurchasing2Order < ActiveRecord::Base
   include Tips::Statable
 
-  belongs_to :dealer, class_name: 'Accounts::Account'
-  belongs_to :distributor, counter_cache: :orders_count, class_name: 'Accounts::Distributor'
+  include Share::Dealerable
+  include Share::Distributorable
 
   delegate :mobile, :username, to: :dealer, prefix: true
   
   belongs_to :source, counter_cache: :orders_count, class_name: 'BulkPurchasing2'
 
-  validates_presence_of :count
+  validates_presence_of :count, :dealer
   
   before_create do
     self.distributor_id = source.distributor_id

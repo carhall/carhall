@@ -1,5 +1,9 @@
 <% if @source %>
-  <%= render "index_common" %>
+  <% if @parent.klass == Tips::BulkPurchasing2Order %>
+    <%= render "index_common2" %>
+  <% else %>
+    <%= render "index_common" %>
+  <% end %>
 <% else %>
   <% case params[:type] %>
   <% when "mending" %>
