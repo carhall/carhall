@@ -1,0 +1,13 @@
+<% content_for :title do %>
+  使用成功
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <li class="table-view-cell">
+      您成功使用了 <%= @count %> 次 <%= @order.title %>。
+      <br>
+      订单剩余使用次数： <%= @order.count - @order.used_count %> 次
+    </li>
+  </ul>
+</div>

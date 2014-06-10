@@ -251,6 +251,8 @@ module WeixinHelper
       case key
       when :current_user
         format_to_news "个人资料", "点击查看我的详细资料", "weixin/current_user.png",  "weixin/current_user"
+      when :current_dealer
+        format_to_news "个人资料", "点击查看我的详细资料", "weixin/current_user.png",  "weixin/current_dealer"
       when :vip_card_order
         format_to_news "会员卡", "点击查看我的会员卡详细资料", "weixin/arrow_right.png", "weixin/dealers/#{account.id}/current_user/vip_card/orders"
       when :consumption_record
@@ -278,7 +280,7 @@ module WeixinHelper
         format_to_mine account, [:current_user, :sales_case]
       end
     when Accounts::Distributor
-      format_to_mine account, [:current_user]
+      format_to_mine account, [:current_dealer]
     end
   end
 

@@ -1,0 +1,21 @@
+<% content_for :title do %>
+  汽车堂账号登陆
+<% end %>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell input-row"><%= f.input :mobile, autofocus: true %></li>
+      <li class="table-view-cell input-row"><%= f.input :password %></li>
+    </ul>
+  </div>
+  <% if devise_mapping.rememberable? -%>
+    <%= f.hidden_field :remember_me, value: true %>
+  <% end %>
+  
+  <div class="card-no-border">
+    <%= f.button :submit, "立即登录", class: 'btn-positive btn-block' %>
+  </div>
+
+<% end %>

@@ -3,7 +3,6 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
   load_resource :cleaning, class: Tips::Cleaning
   load_resource :test_driving, class: Tips::TestDriving
   load_resource :bulk_purchasing, class: Tips::BulkPurchasing
-  load_resource :bulk_purchasing2, class: Tips::BulkPurchasing2
   load_resource :vip_card, class: Tips::VipCard
 
   before_filter :authenticate_weixin_account!, except: [:index]
@@ -56,7 +55,7 @@ private
   end
 
   def get_source_parent
-    @source = @mending || @cleaning || @test_driving || @bulk_purchasing || @bulk_purchasing2 || @vip_card
+    @source = @mending || @cleaning || @test_driving || @bulk_purchasing || @vip_card
     @parent = @source.orders
   end
   
@@ -81,11 +80,7 @@ private
   end
 
   def get_parent_with_user
-    if @parent.klass == Tips::BulkPurchasing2Order
-      @parent = @parent.with_dealer(@user)
-    else
-      @parent = @parent.with_user(@user)
-    end
+    @parent = @parent.with_user(@user)
   end
 
 end

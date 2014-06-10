@@ -28,9 +28,9 @@
     </li>
   </ul>
 </div>
-<% @source = @bulk_purchasing2 %>
-<% @orders = @bulk_purchasing2.orders.includes(:dealer).last(3) %>
-<%= render 'weixin/share/orders_list2' %>
+<%# @source = @bulk_purchasing2 %>
+<%# @orders = @bulk_purchasing2.orders.includes(:dealer).last(3) %>
+<%#= render 'weixin/share/orders_list2' %>
 <div class="card-no-border">
   <%= link_to "立即购买", new_weixin_distributor_bulk_purchasing2_order_path(@distributor, @bulk_purchasing2), class: "btn btn-positive btn-block" %>
 </div>

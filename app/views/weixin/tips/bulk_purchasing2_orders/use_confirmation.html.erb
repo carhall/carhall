@@ -1,0 +1,70 @@
+<% content_for :title do %>
+  使用订单
+<% end %>
+
+<%= simple_form_for(@order, url: weixin_polymorphic_path(@source.dealer, @source, [:order, @order], action: :use), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! @order %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell">
+        项目信息
+      </li>
+      <li class="table-view-cell"><%= @source.title %></li>
+      <% price = @source.try(:vip_price) || @source.try(:price) %>
+      <li class="table-view-cell">
+        单价
+        <span class="pull-right"><%= price %> 元</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell">
+        订单信息
+      </li>
+      <li class="table-view-cell">
+        总价
+        <span class="pull-right"><%= @order.cost %> 元</span>
+      </li>
+      <li class="table-view-cell">
+        总使用次数
+        <span class="pull-right"><%= @order.count %> 次</span>
+      </li>
+      <li class="table-view-cell">
+        已使用次数
+        <span class="pull-right"><%= @order.used_count %> 次</span>
+      </li>
+      <li class="table-view-cell">
+        剩余使用次数
+        <span class="pull-right"><%= @order.count - @order.used_count %> 次</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell">
+        您将要使用
+        <span class="pull-right"><%= @count %> 次</span>
+      </li>
+      <li class="table-view-cell">
+        价值
+        <span class="pull-right"><%= @count * price %> 元</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell">
+        支付方式       
+      </li>
+      <li class="table-view-cell">
+        到店支付
+        <span class="pull-right"><input type="checkbox" checked></span>
+      </li>
+    </ul>
+  </div>
+  <div class="card-no-border">
+    <input type="hidden" name="count" value="<%= @count %>">
+    <button class="btn btn-positive btn-block">确认使用</button>
+  </div>
+<% end %>

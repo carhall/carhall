@@ -1,0 +1,36 @@
+<% content_for :title do %>
+  账号信息
+<% end %>
+
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell">
+      名称：<%= @user.username %>
+    </li>
+    <li class="table-view-cell">
+      地区：<%= @user.area %>
+    </li>
+    <li class="table-view-cell">
+      地址：<%= @user.address %>
+    </li>
+    <li class="table-view-cell">
+      电话：<%= @user.phone %>
+    </li>
+    <li class="table-view-cell">
+      营业时间：<%= @user.open_during %>
+    </li>
+  </ul>
+</div>
+
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell">
+      用户说明
+      <%= simple_format @user.description %>
+    </li>
+  </ul>
+</div>
+
+<div class="card-no-border">
+  <%= link_to "退出登录", destroy_weixin_account_session_path, class: "btn btn-negative btn-block" %>
+</div>

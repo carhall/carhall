@@ -262,12 +262,15 @@ Carhall::Application.routes.draw do
       end
     end
 
+    devise_for :dealers, class_name: "Accounts::Dealer", module: "weixin/dealers"
+
     scope module: :accounts do
       resources :dealers do
         get :rescue, on: :member
       end
       resources :distributors
       resource :current_user
+      resource :current_dealer
     end
 
     scope module: :statistic do
@@ -361,13 +364,19 @@ Carhall::Application.routes.draw do
             action: :product, as: :product
         end
         resources :bulk_purchasing2s do
-          resources :orders, only: [:index, :new, :create] do
+          resources :bulk_purchasing2_orders, as: :orders, 
+            only: [:index, :new, :create] do
             post :create_confirmation, on: :collection
             get "use/:count", action: :use_confirmation, on: :member
             put :use, on: :member
           end
         end
+        resource :current_user do
+          get ":type/orders", as: :type_orders, to: "orders#index"
+          get ":type/orders/:id", as: :type_order, to: "orders#show"
+        end
       end
+
       resources :construction_cases do
         get "product/:product_id", on: :collection, 
           action: :product, as: :product

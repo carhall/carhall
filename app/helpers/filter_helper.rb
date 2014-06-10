@@ -47,6 +47,9 @@ module FilterHelper
   def set_weixin_current_user
     @user ||= @current_user = current_weixin_account
   end
+  def set_weixin_current_dealer
+    @user ||= @current_user = current_weixin_dealer
+  end
 
   def redirect_guest
     unless @current_user

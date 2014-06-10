@@ -1,8 +1,4 @@
-set :stage, :production
-
-namespace :deploy do
-  after :finishing, 'deploy:chown'
-end
+set :stage, :buaa
 
 # Simple Role Syntax
 # ==================
@@ -19,7 +15,7 @@ end
 # definition into the server list. The second argument
 # something that quacks like a has can be used to set
 # extended properties on the server.
-server '115.28.13.212', user: 'root', roles: %w{web app db}
+server '112.23.24.153', port: 22022, user: 'root', roles: %w{web app db}
 set :rails_env, :production
 
 # you can set custom ssh options

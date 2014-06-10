@@ -1,4 +1,8 @@
-<%= simple_form_for(@order, url: weixin_polymorphic_path([:dealer, @dealer], @source, :orders, action: :create_confirmation)) do |f| %>
+<% content_for :title do %>
+  提交订单
+<% end %>
+
+<%= simple_form_for(@order, url: weixin_polymorphic_path([:distributor, @distributor], @source, :orders, action: :create_confirmation)) do |f| %>
   <%= devise_error_messages! @order %>
   <div class="card">
     <ul class="table-view table-view-block">
@@ -29,3 +33,18 @@
     <button class="btn btn-positive btn-block">提交订单</button>
   </div>
 <% end %>
+<script>
+  function set_num(n) {
+    var p = parseFloat(document.getElementById("price").innerHTML);
+    document.getElementById("num").value = n;
+    document.getElementById("sum").innerHTML = p * n + " 元";
+  }
+  function plus(){
+    var n = parseInt(document.getElementById("num").value);
+    set_num(n + 1);
+  }
+  function minus(){
+    var n = parseInt(document.getElementById("num").value);
+    if(n > 1) set_num(n - 1);
+  }
+</script>
