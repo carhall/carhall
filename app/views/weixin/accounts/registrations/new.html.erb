@@ -27,7 +27,7 @@
   <div class="card">
     <ul class="table-view table-view-block">
       <li class="table-view-cell input-row"><%= f.input :brand_id, collection: Category::Brand.to_select %></li>
-      <li class="table-view-cell input-row"><%= f.input :plate_num, required: true %></li>
+      <li class="table-view-cell input-row"><%= f.input :plate_num %></li>
     </ul>
   </div>
   <div class="card">
