@@ -8,11 +8,11 @@ protected
   end
   
   def after_sign_in_path_for(resource)
-    session["weixin_dealer_return_to"] || weixin_root_path
+    session["weixin_dealer_return_to"] || weixin_current_dealer_path
   end
 
   def after_sign_out_path_for(resource)
-    weixin_root_path
+    weixin_current_dealer_path
   end
 
-end 
+end
