@@ -69,6 +69,8 @@ class Ability
 
         can :read, Tips::Review
         can :read, Tips::Order
+        can :read, Tips::BuyingAdvice
+        can :manage, Tips::BuyingAdviceOrder, dealer: user
 
         can :enable, Tips::Order, dealer: user
       end

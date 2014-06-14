@@ -8,6 +8,8 @@
       <h3>车型名称管理 <small><%= link_to "添加", new_category_brand3_path %></small></h3>
     </div>
 
+    <% @brand3s = @brand3s.includes(:brand, :brand2) %>
+
     <%= index_for @brand3s do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :image do |image| %>

@@ -1,29 +1,25 @@
 <div class="row-fluid">
   <div class="span3">
-    <%= render "statistic/share/sidenav/#{@user_type}" %>
+    <%= render "tips/share/sidenav/#{@user_type}" %>
   </div>
   
   <div class="span9">
     <div class="page-header">
-      <h3>客户列表 <small></small></h3>
+      <h3>易卖车询价订单列表 <small></small></h3>
     </div>
 
-    <%= render 'share/alert', message: '还没有用户关注您！' if @friends.empty? %>
-    
-    <% @friends = @friends.includes(:detail, :orders, reviews: [:order]) %>
+    <% @buying_advices = @buying_advices.includes(:user) %>
 
-    <%= index_for @friends, class: :datatable do |t| %>
+    <%= render 'share/alert', message: '您还没有收到任何订单！' if @buying_advices.empty? %>
+
+    <%= index_for @buying_advices, class: :datatable do |t| %>
       <%= t.attribute :id %>
-      <%= t.attribute :avatar do |avatar| %>
-        <%= image_tag(avatar.url(:thumb)) %>
-      <% end %>
-      <%= t.attribute :username %>
-      <%= t.attribute :mobile %>
-      <%= t.attribute :brand %>
-      <%= t.attribute :created_at, format: :short %>
-      <%= t.attribute :total_cost_with_dealer, args: @user.id %>
-      <%= t.attribute :last_ordered_at_with_dealer, args: @user.id, format: :short %>
-      <%= t.attribute :last_stars_with_dealer, args: @user.id %>
+      <%= t.association :user, using: :username %>
+      <%= t.attribute :brand3 %>
+      <%= t.attribute :buying_at %>
+      <%= t.attribute :buying_pattern %>
+      <%= t.attribute :license %>
+      <%= t.attribute :state %>
     <% end %>
 
   </div>
@@ -43,17 +39,17 @@
 
     /* Formating function for row details */
     function fnFormatDetails(oTable, nTr) {
-      var iUserId = $(oTable.fnGetData(nTr)[1]).text(),
-          aSalesCaseData = <%== Statistic::SalesCase.accessible_by(current_ability, :manage).group_by(&:user_id).to_json %>[iUserId] || [];
+      var iAdviceId = $(oTable.fnGetData(nTr)[1]).text(),
+          aOrderData = <%== Tips::BuyingAdviceOrder.accessible_by(current_ability, :manage).group_by(&:buying_advice_id).to_json %>[iAdviceId] || [];
 
-      var sOut = '<h4>爱车提醒 <small><a href="/statistic/sales_cases/new?user_id='+iUserId+'">添加新的爱车提醒</a></small></h4>';
-      if (aSalesCaseData.length > 0) {
+      var sOut = '<h4>报价记录 <small><a href="/tips/buying_advices/'+iAdviceId+'/buying_advice_orders/new">添加新的报价</a></small></h4>';
+      if (aOrderData.length > 0) {
         sOut += '<table class="table">';
-        sOut += '<thead><tr><th>主题</th><th>详细描述</th><th>填表人</th><th>操作</th></tr></thead>';
+        sOut += '<thead><tr><th>价格</th><th>详细描述</th><th>销售顾问</th><th>操作</th></tr></thead>';
         sOut += '<tbody>';
-        for (var i = aSalesCaseData.length - 1; i >= 0; i--) {
-          aData = aSalesCaseData[i];
-          sOut += '<tr><td>'+aData['title']+'</td><td>'+truncate(aData['description'])+'</td><td>'+aData['adviser']+'</td><td class="actions"><a href="/statistic/sales_cases/'+aData['id']+'/edit"><i class="icon-pencil" rel="tooltip" title="编辑"></i></a><a href="/statistic/sales_cases/'+aData['id']+'" data-confirm="您确认要删除这条记录？" data-method="delete"><i class="icon-remove" rel="tooltip" title="删除"></i></a></td></tr>';
+        for (var i = aOrderData.length - 1; i >= 0; i--) {
+          aData = aOrderData[i];
+          sOut += '<tr><td>'+aData['price']+'</td><td>'+truncate(aData['description'])+'</td><td>'+aData['adviser']+'</td><td class="actions"><a href="/tips/buying_advice_orders/'+aData['id']+'/edit"><i class="icon-pencil" rel="tooltip" title="编辑"></i></a><a href="/tips/buying_advice_orders/'+aData['id']+'" data-confirm="您确认要删除这条记录？" data-method="delete"><i class="icon-remove" rel="tooltip" title="删除"></i></a></td></tr>';
         };
         sOut += '</tbody>';
         sOut += '</table>';

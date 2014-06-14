@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614004931) do
+ActiveRecord::Schema.define(version: 20140614023031) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -294,6 +294,35 @@ ActiveRecord::Schema.define(version: 20140614004931) do
   add_index "bulk_purchasings", ["stars_count"], name: "index_bulk_purchasings_on_stars_count", using: :btree
   add_index "bulk_purchasings", ["total_cost"], name: "index_bulk_purchasings_on_total_cost", using: :btree
   add_index "bulk_purchasings", ["vip_price"], name: "index_bulk_purchasings_on_vip_price", using: :btree
+
+  create_table "buying_advice_orders", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "dealer_id"
+    t.integer  "buying_advice_id"
+    t.string   "title"
+    t.float    "price"
+    t.text     "description"
+    t.string   "adviser"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "buying_advices", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "brand3_id"
+    t.integer  "buying_at_id"
+    t.integer  "buying_pattern_id"
+    t.boolean  "license"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "state_id",          default: 1
+    t.integer  "count",             default: 1
+    t.integer  "used_count",        default: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "buying_advices", ["state_id"], name: "index_buying_advices_on_state_id", using: :btree
 
   create_table "cleanings", force: true do |t|
     t.integer  "dealer_id"

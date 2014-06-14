@@ -71,6 +71,8 @@ zh-CN:
       tips/vip_card_item: 服务项目
       tips/vip_card_order: 会员卡订单
       tips/vip_card_order_item: 会员卡服务项目
+      tips/buying_advice: 询价订单
+      tips/buying_advice_order: 报价
       bcst/host: 主持人
       bcst/programme: 节目板块
       bcst/programme_list: 节目单
@@ -302,6 +304,27 @@ zh-CN:
       tips/review:
         stars: 评分
         content: 评价内容
+      tips/manual_image:
+        title: 图片标题
+        category: 图片分类
+        image: 图片
+      tips/construction_case:
+        title: 标题
+        product_id: 产品品牌
+        image: 图片
+      tips/buying_advice:
+        <<: *order
+        brand3_id: 询价车型
+        brand3: 询价车型
+        buying_at_id: 计划购车时间
+        buying_at: 计划购车时间
+        buying_pattern_id: 购车方式
+        buying_pattern: 购车方式
+        license: 牌照
+      tips/buying_advice_order:
+        price: 价格
+        description: 详细描述
+        adviser: 销售顾问
       bcst/host:
         id: ID
         avatar: 头像
@@ -390,14 +413,6 @@ zh-CN:
         area: 匹配区域
         brand_id: 匹配车型
         brand: 匹配车型
-      tips/manual_image:
-        title: 图片标题
-        category: 图片分类
-        image: 图片
-      tips/construction_case:
-        title: 标题
-        product_id: 产品品牌
-        image: 图片
       business/client_version:
         id: ID
         client_type_id: 客户端类型

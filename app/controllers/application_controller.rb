@@ -55,10 +55,14 @@ class ApplicationController < ActionController::Base
 
         if @member.update_attributes(data_params)
           flash[:success] = i18n_message(:update_success_without_title)
-          redirect_to action: :show
+          redirect_to after_update_path
         else
           render :edit
         end
+      end
+
+      define_method :after_update_path do
+        { action: :show }
       end
 
     else # singletion
@@ -76,10 +80,14 @@ class ApplicationController < ActionController::Base
         define_method :create do
           if resource_instance.save
             flash[:success] = i18n_message(:create_success)
-            redirect_to action: :index
+            redirect_to after_create_path
           else
             render :new
           end
+        end
+
+        define_method :after_create_path do
+          { action: :index }
         end
 
         define_method :edit do
@@ -88,12 +96,16 @@ class ApplicationController < ActionController::Base
         define_method :update do
           if resource_instance.update_attributes params[namespaced_name]
             flash[:success] = i18n_message(:update_success)
-            redirect_to action: :index
+            redirect_to after_update_path
           else
             render :edit
           end
         end
 
+        define_method :after_update_path do
+          { action: :index }
+        end
+        
         define_method :destroy do
           resource_instance.destroy
 

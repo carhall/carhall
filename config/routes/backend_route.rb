@@ -147,6 +147,11 @@ Carhall::Application.routes.draw do
     resources :construction_cases
     resource :ad_template
 
+    resources :buying_advices do
+      resources :buying_advice_orders
+    end
+    resources :buying_advice_orders
+
   end
 
   namespace :bcst do
