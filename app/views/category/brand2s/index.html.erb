@@ -1,0 +1,22 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "category/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>车型车系管理 <small><%= link_to "添加", new_category_brand2_path %></small></h3>
+    </div>
+
+    <%= index_for @brand2s do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :image do |image| %>
+        <%= image_tag(image.url(:thumb)) %>
+      <% end %>
+      <%= t.association :brand, using: :name %>
+      <%= t.attribute :name %>
+      <%= t.action_link :edit %>
+    <% end %>
+
+  </div>
+</div>

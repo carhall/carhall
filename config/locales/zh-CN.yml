@@ -78,6 +78,8 @@ zh-CN:
       bcst/exposure: 曝光
       bcst/traffic_report: 路况信息
       category/brand: 车型品牌
+      category/brand2: 车型车系
+      category/brand3: 车型名称
       category/product: 产品品牌
       business/advert: 广告
       business/client_version: 客户端
@@ -365,6 +367,18 @@ zh-CN:
         title: 申请车友会
       category/brand:
         <<: *categoryable
+      category/brand2:
+        <<: *categoryable
+        image: 图片
+        brand_id: 所属品牌
+        brand: 所属品牌
+      category/brand3:
+        <<: *categoryable
+        image: 图片
+        brand_id: 所属品牌
+        brand: 所属品牌
+        brand2_id: 所属车系
+        brand2: 所属车系
       category/product:
         <<: *categoryable
       business/advert:

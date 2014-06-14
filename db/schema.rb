@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603075433) do
+ActiveRecord::Schema.define(version: 20140614004931) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -178,6 +178,29 @@ ActiveRecord::Schema.define(version: 20140603075433) do
 
   add_index "blocks", ["blacklist_id"], name: "index_blocks_on_blacklist_id", using: :btree
   add_index "blocks", ["user_id"], name: "index_blocks_on_user_id", using: :btree
+
+  create_table "brand2s", force: true do |t|
+    t.integer  "brand_id"
+    t.string   "name"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "brand2s", ["name"], name: "index_brand2s_on_name", using: :btree
+
+  create_table "brand3s", force: true do |t|
+    t.integer  "brand_id"
+    t.integer  "brand2_id"
+    t.string   "name"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "brand3s", ["name"], name: "index_brand3s_on_name", using: :btree
 
   create_table "brands", force: true do |t|
     t.string "name"

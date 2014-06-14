@@ -35,5 +35,7 @@ module Carhall
     config.paths.add "api/entities", eager_load: true
     config.paths.add "api/formatters", eager_load: true
     config.paths.add "api/helpers", eager_load: true
+
+    config.paths.add "config/routes", eager_load: true
   end
 end
