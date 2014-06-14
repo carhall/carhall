@@ -8,12 +8,21 @@ class Accounts::ProviderDetail < ActiveRecord::Base
     :address, :open_during, :authentication_image
   attr_accessor :product_ids, :brand_ids
 
+  Templates = {
+    exposure: ["曝光台"],
+    traffic_report: ["路况信息"],
+  }
+
+  TemplateSymbols = Templates.keys
+  TemplateNames = Templates.values.map(&:first)
+  TemplateNameMap = Templates.map { |k, v| [k, v[0]] }.to_h
+
   serialize :template_ids, Array
-  enumerate :templates, with: %w(曝光台 路况信息), multiple: true
+  enumerate :templates, with: TemplateNames, multiple: true
 
   def template_syms
     ids = template_ids.map{|i|i-1}
-    %i(exposure traffic_report).values_at(*ids)
+    TemplateSymbols.values_at(*ids)
   end
 
   def to_base_builder

@@ -74,17 +74,13 @@ class Accounts::Dealer < Accounts::PublicAccount
 
   delegate :address, to: :detail
 
-  RankAbility = {
-    cleaning: 2,
-    mending: 4,
-    bulk_purchasing: 1,
-    activity: 1,
-    vip_card: 3,
-    test_driving: 1,
-    construction_case: 1,
-    vehicle_insurance: 1,
-    secondhand_appraise: 1,
-  }
+  RankAbility = Accounts::DealerDetail::Templates.map do |k, v|
+    [k, Rank[v[1]]]
+  end.to_h
+
+  TypeAbility = Accounts::DealerDetail::Templates.map do |k, v|
+    [k, v[2].map { |v| Accounts::DealerDetail::DealerType[v] }]
+  end.to_h
 
   def has_template? template
     return false if not detail.template_syms.include?(template)
@@ -92,8 +88,10 @@ class Accounts::Dealer < Accounts::PublicAccount
   end
 
   def can_use_template? template
+    return true unless RankAbility[template]
     return false if not accepted?
     return false if rank_id < RankAbility[template]
+    return false unless TypeAbility[template].include? dealer_type_id
     return true
   end
 

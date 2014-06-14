@@ -1,0 +1,9 @@
+<% if @user.can_use_template? type %>
+  <% klass = @user.detail.class %>
+  <% id = klass::TemplateSymbols.index(type) + 1 %>
+  <% name = klass::TemplateNameMap[type] %>
+  <dl>
+    <dt><%= name %></dt>
+    <dd><input class="check_boxes" id="account_detail_attributes_template_ids_<%= id %>" name="account[detail_attributes][template_ids][]" type="checkbox" value="<%= id %>"<%= raw "checked=\"checked\"" if @user.has_template? type %>></dd>
+  </dl>
+<% end %>

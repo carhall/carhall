@@ -18,66 +18,21 @@
           <% if @dealer %>
             <div>
               <dl><strong>业务模板管理</strong></dl>
-              <% if @dealer.can_use_template? :cleaning %>
-                <dl>
-                  <dt>服务项目</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @dealer.has_template? :cleaning %>></dd>
-                </dl>
-              <% end %>
-              <% if @dealer.can_use_template? :mending %>
-                <dl>
-                  <dt>保养专修</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @dealer.has_template? :mending %>></dd>
-                </dl>
-              <% end %>
-              <% if @dealer.can_use_template? :test_driving %>
-                <dl>
-                  <dt>看车试驾</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_6" name="account[detail_attributes][template_ids][]" type="checkbox" value="6"<%= "checked=\"checked\"" if @dealer.has_template? :test_driving %>></dd>
-                </dl>
-              <% end %>
-              <% if @dealer.can_use_template? :vehicle_insurance %>
-                <dl>
-                  <dt>车险续保</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_8" name="account[detail_attributes][template_ids][]" type="checkbox" value="8"<%= "checked=\"checked\"" if @dealer.has_template? :vehicle_insurance %>></dd>
-                </dl>
-              <% end %>
-              <% if @dealer.can_use_template? :secondhand_appraise %>
-                <dl>
-                  <dt>二手评估</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_9" name="account[detail_attributes][template_ids][]" type="checkbox" value="9"<%= "checked=\"checked\"" if @dealer.has_template? :secondhand_appraise %>></dd>
-                </dl>
-              <% end %>
+              <%= render 'template', type: :cleaning %>
+              <%= render 'template', type: :mending %>
+              <%= render 'template', type: :test_driving %>
+              <%= render 'template', type: :vehicle_insurance %>
+              <%= render 'template', type: :secondhand_appraise %>
               <dl>&nbsp;</dl>
 
               <dl class="no-border"><strong>营销模块管理</strong></dl>
-              <% if @dealer.can_use_template? :bulk_purchasing %>
-                <dl>
-                  <dt>团购</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_3" name="account[detail_attributes][template_ids][]" type="checkbox" value="3"<%= "checked=\"checked\"" if @dealer.has_template? :bulk_purchasing %>></dd>
-                </dl>
-              <% end %>
-              <% if @dealer.can_use_template? :activity %>
-                <dl>
-                  <dt>近期活动</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_4" name="account[detail_attributes][template_ids][]" type="checkbox" value="4"<%= "checked=\"checked\"" if @dealer.has_template? :activity %>></dd>
-                </dl>
-              <% end %>
-              <% if @dealer.can_use_template? :construction_case %>
-                <dl>
-                  <dt>施工案例</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_7" name="account[detail_attributes][template_ids][]" type="checkbox" value="7"<%= "checked=\"checked\"" if @dealer.has_template? :construction_case %>></dd>
-                </dl>
-              <% end %>
+              <%= render 'template', type: :bulk_purchasing %>
+              <%= render 'template', type: :activity %>
+              <%= render 'template', type: :construction_case %>
               <dl>&nbsp;</dl>
 
-              <% if @dealer.can_use_template? :vip_card %>
-                <dl class="no-border"><strong>会员卡管理</strong></dl>
-                <dl>
-                  <dt>会员卡</dt>
-                  <dd><input class="check_boxes" id="account_detail_attributes_template_ids_5" name="account[detail_attributes][template_ids][]" type="checkbox" value="5"<%= "checked=\"checked\"" if @dealer.has_template? :vip_card %>></dd>
-                </dl>
-              <% end %>
+              <%= render 'template', type: :vip_card %>
+              <%= render 'template', type: :bulk_purchasing2 %>
             </div>
 
             <input name="account[type]" type="hidden" value="Accounts::Dealer">
@@ -85,14 +40,8 @@
 
             <div>
               <dl><strong>业务模板管理</strong></dl>
-              <dl>
-                <dt>曝光台</dt>
-                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_1" name="account[detail_attributes][template_ids][]" type="checkbox" value="1"<%= "checked=\"checked\"" if @provider.detail.template_ids.include? 1 %>></dd>
-              </dl>
-              <dl>
-                <dt>路况信息</dt>
-                <dd><input class="check_boxes" id="account_detail_attributes_template_ids_2" name="account[detail_attributes][template_ids][]" type="checkbox" value="2"<%= "checked=\"checked\"" if @provider.detail.template_ids.include? 2 %>></dd>
-              </dl>
+              <%= render 'template', type: :exposure %>
+              <%= render 'template', type: :traffic_report %>
 
               <input name="account[type]" type="hidden" value="Accounts::Provider">
             </div>
@@ -100,7 +49,7 @@
           <% end %>
           <input name="account[detail_attributes][template_ids][]" type="hidden" value="">
 
-          <input class="btn btn-submit" name="commit" type="submit" value="更新业务模板">
+          <%= f.button :submit, "更新业务模板", class: 'btn-submit' %>
         <% end %>
       </div>
     </div>

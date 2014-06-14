@@ -12,6 +12,10 @@ class Accounts::Provider < Accounts::PublicAccount
     detail.template_syms.include? template
   end
 
+  def can_use_template? template
+    true
+  end
+
   def programme_list
     hash = Category::Day.names.reduce({}){|ret,name|ret[name]=[];ret} 
     programme_lists.each{|pl|hash[pl.day]<<pl}

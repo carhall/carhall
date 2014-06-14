@@ -1,105 +1,101 @@
-<% unless @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :bulk_purchasing or @dealer.has_template? :activity or @dealer.has_template? :vip_card %>
+<% if @dealer.template_ids.empty? %>
   <div class="alert alert-error fade in">
     <button class="close" data-dismiss="alert">×</button>
     您还没有添加任何业务模板，请在 <a href="<%= template_setting_path %>">业务模板管理</a> 中添加模板。
   </div>
 <% end %>
 
-<% if @dealer.has_template? :bulk_purchasing or @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :vip_card or @dealer.has_template? :vehicle_insurance or @dealer.has_template? :secondhand_appraise %>
-  <ul class="nav nav-list sidenav affix-top">
-    <li><span><strong>交易管理</strong></span></li>
-
-    <% if @dealer.has_template? :cleaning %>
-      <li<%= active? 'tips/orders#cleaning' %>><a href="<%= cleaning_tips_orders_path %>"><i class="icon-chevron-right"></i> 服务项目订单</a></li>
-    <% end %>
-    
-    <% if @dealer.has_template? :mending %>
-      <li<%= active? 'tips/orders#mending' %>><a href="<%= mending_tips_orders_path %>"><i class="icon-chevron-right"></i> 保养专修订单</a></li>
-    <% end %>
-
-    <% if @dealer.has_template? :test_driving %>
-      <li<%= active? 'tips/orders#test_driving' %>><a href="<%= test_driving_tips_orders_path %>"><i class="icon-chevron-right"></i> 看车试驾订单</a></li>
-    <% end %>
-
-    <% if @dealer.has_template? :bulk_purchasing %>
-      <li<%= active? 'tips/orders#bulk_purchasing' %>><a href="<%= bulk_purchasing_tips_orders_path %>"><i class="icon-chevron-right"></i> 团购订单</a></li>
-    <% end %>
-
-    <% if @dealer.has_template? :vip_card %>
-      <li<%= active? 'tips/orders#vip_card' %>><a href="<%= vip_card_tips_orders_path %>"><i class="icon-chevron-right"></i> 会员卡订单</a></li>
-    <% end %>
-
-    <% if @dealer.has_template? :vehicle_insurance %>
-      <li<%= active? 'tips/orders#vehicle_insurance' %>><a href="<%= vehicle_insurance_tips_orders_path %>"><i class="icon-chevron-right"></i> 车险续保订单</a></li>
-    <% end %>
-
-    <% if @dealer.has_template? :secondhand_appraise %>
-      <li<%= active? 'tips/orders#secondhand_appraise' %>><a href="<%= secondhand_appraise_tips_orders_path %>"><i class="icon-chevron-right"></i> 二手评估订单</a></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <ul class="nav nav-list sidenav affix-top">
-  <li><span><strong>货源管理</strong></span></li>
-  <li><span>限时求购</span></li>
+  <li><span><strong>交易管理</strong></span></li>
 
-  <li<%= active? 'tips/purchase_requestings#new' %>><a href="<%= new_tips_purchase_requesting_path %>"><i class="icon-chevron-right"></i> 发布求购</a></li>
-  <li<%= active? 'tips/purchase_requestings#in_progress' %>><a href="<%= in_progress_tips_purchase_requestings_path %>"><i class="icon-chevron-right"></i> 进行中的求购</a></li>
-  <li<%= active? 'tips/purchase_requestings#expired' %>><a href="<%= expired_tips_purchase_requestings_path %>"><i class="icon-chevron-right"></i> 已结束的求购</a></li>
+  <% if @dealer.has_template? :cleaning %>
+    <li<%= active? 'tips/orders#cleaning' %>><a href="<%= cleaning_tips_orders_path %>"><i class="icon-chevron-right"></i> 服务项目订单</a></li>
+  <% end %>
+  
+  <% if @dealer.has_template? :mending %>
+    <li<%= active? 'tips/orders#mending' %>><a href="<%= mending_tips_orders_path %>"><i class="icon-chevron-right"></i> 保养专修订单</a></li>
+  <% end %>
+
+  <% if @dealer.has_template? :test_driving %>
+    <li<%= active? 'tips/orders#test_driving' %>><a href="<%= test_driving_tips_orders_path %>"><i class="icon-chevron-right"></i> 看车试驾订单</a></li>
+  <% end %>
+
+  <% if @dealer.has_template? :bulk_purchasing %>
+    <li<%= active? 'tips/orders#bulk_purchasing' %>><a href="<%= bulk_purchasing_tips_orders_path %>"><i class="icon-chevron-right"></i> 团购订单</a></li>
+  <% end %>
+
+  <% if @dealer.has_template? :vip_card %>
+    <li<%= active? 'tips/orders#vip_card' %>><a href="<%= vip_card_tips_orders_path %>"><i class="icon-chevron-right"></i> 会员卡订单</a></li>
+  <% end %>
+
+  <% if @dealer.has_template? :vehicle_insurance %>
+    <li<%= active? 'tips/orders#vehicle_insurance' %>><a href="<%= vehicle_insurance_tips_orders_path %>"><i class="icon-chevron-right"></i> 车险续保订单</a></li>
+  <% end %>
+
+  <% if @dealer.has_template? :secondhand_appraise %>
+    <li<%= active? 'tips/orders#secondhand_appraise' %>><a href="<%= secondhand_appraise_tips_orders_path %>"><i class="icon-chevron-right"></i> 二手评估订单</a></li>
+  <% end %>
 </ul>
 
-<% if @dealer.has_template? :cleaning or @dealer.has_template? :mending or @dealer.has_template? :test_driving %>
-  <ul class="nav nav-list sidenav">
-    <li><span><strong>业务管理</strong></span></li>
-    <% if @dealer.has_template? :cleaning %>
-      <li><span>服务项目</span></li>
-      <li<%= active? 'tips/cleanings#new' %>><a href="<%= new_tips_cleaning_path %>"><i class="icon-chevron-right"></i> 发布服务项目</a></li>
-      <li<%= active? 'tips/cleanings#index' %>><a href="<%= tips_cleanings_path %>"><i class="icon-chevron-right"></i> 管理服务项目</a></li>
-    <% end %>
+<ul class="nav nav-list sidenav">
+  <li><span><strong>业务管理</strong></span></li>
+  <% if @dealer.has_template? :cleaning %>
+    <li><span>服务项目</span></li>
+    <li<%= active? 'tips/cleanings#new' %>><a href="<%= new_tips_cleaning_path %>"><i class="icon-chevron-right"></i> 发布服务项目</a></li>
+    <li<%= active? 'tips/cleanings#index' %>><a href="<%= tips_cleanings_path %>"><i class="icon-chevron-right"></i> 管理服务项目</a></li>
+  <% end %>
 
-    <% if @dealer.has_template? :mending %>
-      <li><span>保养专修</span></li>
-      <li<%= active? 'tips/mendings#edit_brands' %>><a href="<%= edit_brands_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理专修品牌</a></li>
-      <li<%= active? 'tips/mendings#edit_discount' %>><a href="<%= edit_discount_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理预约优惠信息</a></li>
-    <% end %>
+  <% if @dealer.has_template? :mending %>
+    <li><span>保养专修</span></li>
+    <li<%= active? 'tips/mendings#edit_brands' %>><a href="<%= edit_brands_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理专修品牌</a></li>
+    <li<%= active? 'tips/mendings#edit_discount' %>><a href="<%= edit_discount_tips_mending_path %>"><i class="icon-chevron-right"></i> 管理预约优惠信息</a></li>
+  <% end %>
 
-    <% if @dealer.has_template? :test_driving %>
-      <li><span>看车试驾</span></li>
-      <li<%= active? 'tips/test_drivings#new' %>><a href="<%= new_tips_test_driving_path %>"><i class="icon-chevron-right"></i> 发布看车试驾</a></li>
-      <li<%= active? 'tips/test_drivings#index' %>><a href="<%= tips_test_drivings_path %>"><i class="icon-chevron-right"></i> 管理看车试驾</a></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @dealer.has_template? :test_driving %>
+    <li><span>看车试驾</span></li>
+    <li<%= active? 'tips/test_drivings#new' %>><a href="<%= new_tips_test_driving_path %>"><i class="icon-chevron-right"></i> 发布看车试驾</a></li>
+    <li<%= active? 'tips/test_drivings#index' %>><a href="<%= tips_test_drivings_path %>"><i class="icon-chevron-right"></i> 管理看车试驾</a></li>
+  <% end %>
+</ul>
 
-<% if @dealer.has_template? :bulk_purchasing or @dealer.has_template? :activity or @dealer.has_template? :construction_case %>
-  <ul class="nav nav-list sidenav">
-    <li><span><strong>营销管理</strong></span></li>
-    <% if @dealer.has_template? :activity %>
-      <li><span>活动</span></li>
-      <li<%= active? 'tips/activities#new' %>><a href="<%= new_tips_activity_path %>"><i class="icon-chevron-right"></i> 发布活动</a></li>
-      <li<%= active? 'tips/activities#in_progress' %>><a href="<%= in_progress_tips_activities_path %>"><i class="icon-chevron-right"></i> 进行中的活动</a></li>
-      <li<%= active? 'tips/activities#expired' %>><a href="<%= expired_tips_activities_path %>"><i class="icon-chevron-right"></i> 已结束的活动</a></li>
-    <% end %>
+<ul class="nav nav-list sidenav">
+  <li><span><strong>营销管理</strong></span></li>
+  <% if @dealer.has_template? :activity %>
+    <li><span>活动</span></li>
+    <li<%= active? 'tips/activities#new' %>><a href="<%= new_tips_activity_path %>"><i class="icon-chevron-right"></i> 发布活动</a></li>
+    <li<%= active? 'tips/activities#in_progress' %>><a href="<%= in_progress_tips_activities_path %>"><i class="icon-chevron-right"></i> 进行中的活动</a></li>
+    <li<%= active? 'tips/activities#expired' %>><a href="<%= expired_tips_activities_path %>"><i class="icon-chevron-right"></i> 已结束的活动</a></li>
+  <% end %>
 
-    <% if @dealer.has_template? :bulk_purchasing %>
-      <li><span>团购</span></li>
-      <li<%= active? 'tips/bulk_purchasings#new' %>><a href="<%= new_tips_bulk_purchasing_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
-      <li<%= active? 'tips/bulk_purchasings#in_progress' %>><a href="<%= in_progress_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
-      <li<%= active? 'tips/bulk_purchasings#expired' %>><a href="<%= expired_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 已结束的团购</a></li>
-    <% end %>
+  <% if @dealer.has_template? :bulk_purchasing %>
+    <li><span>团购</span></li>
+    <li<%= active? 'tips/bulk_purchasings#new' %>><a href="<%= new_tips_bulk_purchasing_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
+    <li<%= active? 'tips/bulk_purchasings#in_progress' %>><a href="<%= in_progress_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
+    <li<%= active? 'tips/bulk_purchasings#expired' %>><a href="<%= expired_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 已结束的团购</a></li>
+  <% end %>
 
-    <% if @dealer.has_template? :construction_case %>
-      <li><span>施工案例</span></li>
-      <li<%= active? 'tips/construction_cases#new' %>><a href="<%= new_tips_construction_case_path %>"><i class="icon-chevron-right"></i> 发布施工案例</a></li>
-      <li<%= active? 'tips/construction_cases#index' %>><a href="<%= tips_construction_cases_path %>"><i class="icon-chevron-right"></i> 管理施工案例</a></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @dealer.has_template? :construction_case %>
+    <li><span>施工案例</span></li>
+    <li<%= active? 'tips/construction_cases#new' %>><a href="<%= new_tips_construction_case_path %>"><i class="icon-chevron-right"></i> 发布施工案例</a></li>
+    <li<%= active? 'tips/construction_cases#index' %>><a href="<%= tips_construction_cases_path %>"><i class="icon-chevron-right"></i> 管理施工案例</a></li>
+  <% end %>
+</ul>
 
 <% if @dealer.has_template? :vip_card %>
   <ul class="nav nav-list sidenav">
     <li><span><strong>会员卡管理</strong></span></li>
     <li<%= active? 'tips/vip_cards#new' %>><a href="<%= new_tips_vip_card_path %>"><i class="icon-chevron-right"></i> 设置会员卡</a></li>
     <li<%= active? 'tips/vip_cards#index' %>><a href="<%= tips_vip_cards_path %>"><i class="icon-chevron-right"></i> 管理会员卡</a></li>
+  </ul>
+<% end %>
+
+<% if @dealer.has_template? :bulk_purchasing2 %>
+  <ul class="nav nav-list sidenav affix-top">
+    <li><span><strong>货源管理</strong></span></li>
+    <li><span>限时求购</span></li>
+
+    <li<%= active? 'tips/purchase_requestings#new' %>><a href="<%= new_tips_purchase_requesting_path %>"><i class="icon-chevron-right"></i> 发布求购</a></li>
+    <li<%= active? 'tips/purchase_requestings#in_progress' %>><a href="<%= in_progress_tips_purchase_requestings_path %>"><i class="icon-chevron-right"></i> 进行中的求购</a></li>
+    <li<%= active? 'tips/purchase_requestings#expired' %>><a href="<%= expired_tips_purchase_requestings_path %>"><i class="icon-chevron-right"></i> 已结束的求购</a></li>
   </ul>
 <% end %>
