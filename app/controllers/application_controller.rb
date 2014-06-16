@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def self.set_resource_class klass, options = {}
     respond_to :html
-    options = options.reverse_merge(class: klass, autoload: true)
+    options = options.reverse_merge(class: klass, autoload: true, title: :title)
 
     before_filter do
       method = "#{namespaced_name}_params"
@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
     end # singletion
 
     define_method :i18n_title do
-      title = options[:title] || :title
+      title = options[:title]
       resource = resource_instance
       resource.send(title) if resource.respond_to? title
     end
@@ -126,8 +126,12 @@ class ApplicationController < ActionController::Base
     define_method :i18n_message do |message_type|
       model = klass.model_name.i18n_key
       i18n_options = { model: I18n.t(model, scope: 'activerecord.models') }
-      i18n_options[:title] = i18n_title
-      I18n.t(message_type, i18n_options)
+      if options[:title]
+        i18n_options[:title] = i18n_title
+        I18n.t(message_type, i18n_options)
+      else
+        I18n.t("#{message_type}_without_title", i18n_options)
+      end
     end
 
   end
