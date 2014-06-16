@@ -1,0 +1,26 @@
+<%= simple_form_for(@buying_advice, url: weixin_current_user_buying_advice_path) do |f| %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <% if params[:brand2_id] %>
+        <% brand2 = Category::Brand2.find(params[:brand2_id]) %>
+        <li class="table-view-cell">
+          <%= image_tag brand2.image.url(:medium) %>
+          <div class="text-center"><%= brand2.name %></div>
+        </li>
+      <% end %>
+      <li class="table-view-cell input-row">
+        <% brand3s = Category::Brand3.all %>
+        <% brand3s = brand3s.where(brand2_id: params[:brand2_id]) if params[:brand2_id] %>
+        <%= f.input :brand3_id, collection: brand3s.to_select %>
+      </li>
+      <li class="table-view-cell input-row"><%= f.input :buying_at_id, collection: Tips::BuyingAdvice::BuyingAt.to_select %></li>
+      <li class="table-view-cell input-row"><%= f.input :buying_pattern_id, collection: Tips::BuyingAdvice::BuyingPattern.to_select %></li>
+      <li class="table-view-cell input-row"><%= f.input :license, collection: [["有", true], ["无", false]], as: :radio_buttons %></li>
+    </ul>
+  </div>
+
+  <div class="card-no-border">
+    <button class="btn btn-positive btn-block">提交询价</button>
+  </div>
+
+<% end %>

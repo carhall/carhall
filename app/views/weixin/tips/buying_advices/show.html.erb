@@ -1,0 +1,41 @@
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell">
+      <%= image_tag @buying_advice.rbrand3.image.url(:medium) %>
+      <div class="text-center"><%= @buying_advice.brand3 %></div>
+    </li>
+  </ul>
+</div>
+
+<div class="card-no-border">
+  <%= link_to "取消询价", destroy_weixin_current_user_buying_advice_path, class: "btn btn-negative btn-block" %>
+</div>
+
+<div class="card-no-border">
+  <%= link_to "新的意向车型", edit_weixin_current_user_buying_advice_path, class: "btn btn-positive btn-block" %>
+</div>
+
+
+<div class="card">
+  <table class="table-view table-no-header">
+    <tr>
+      <td colspan="5" class="table-view-cell text-left">4S店报价</td>
+    </tr>
+    <tr>
+      <td>经销商</td>
+      <td>价格</td>
+      <td>详细描述</td>
+      <td>销售顾问</td>
+      <td>电话</td>
+    </tr>
+    <% @buying_advice.orders.includes(dealer: [:detail]).each do |order| %>
+      <tr>
+        <td><%= order.dealer.username %></td>
+        <td><%= order.price %></td>
+        <td><%= order.description %></td>
+        <td><%= order.adviser %></td>
+        <td><%= order.dealer.test_drive_phone %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -5,7 +5,7 @@ class Category::Brand3 < ActiveRecord::Base
   belongs_to :brand
 
   extend Share::ImageAttachments
-  define_image_method
+  define_image2_method
 
   validates_presence_of :brand2_id
 

@@ -13,7 +13,7 @@
     <%= index_for @brand3s do |t| %>
       <%= t.attribute :id %>
       <%= t.attribute :image do |image| %>
-        <%= image_tag(image.url(:thumb)) %>
+        <%= image_tag(image.url(:small)) %>
       <% end %>
       <%= t.association :brand, using: :name %>
       <%= t.association :brand2, using: :name %>

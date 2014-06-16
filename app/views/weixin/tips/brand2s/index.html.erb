@@ -1,0 +1,44 @@
+<%= simple_form_for(:tips_brand2, url: weixin_brand2s_path, html: { method: :get }) do |f| %>
+  <div class="card">
+    <ul class="table-view">
+      <li class="table-view-cell input-row">
+        <label>车型品牌</label>
+        <%= select_tag :brand_id, options_for_select(Category::Brand.to_select, @brand_id) %>
+      </li>
+      <li class="table-view-cell input-row">
+        <label>地区</label>
+        <%= select_tag :area_id, options_for_select(Category::Area::Main.to_select, @area_id) %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-no-border">
+    <button class="btn btn-positive btn-block">提交查询</button>
+  </div>
+
+  <% @brand2s = @brand2s.with_area_and_brand(@area_id, @brand_id) %>
+
+  <div class="card">
+    <table class="table-view table-no-header table-layout-fixed">
+      <tr>
+        <td class="text-left table-view-cell" colspan="3">热销车型</td>
+      </tr>
+      <% @brand2s.each_slice(3) do |brand2s| %>
+        <tr>
+          <% brand2s.each do |brand2| %>
+            <td>
+              <%= link_to edit_weixin_current_user_buying_advice_path(brand2_id: brand2), data: { transition: "slide-in" } do %>
+                <%= image_tag brand2.image.url(:medium) %>
+                <%= brand2.name %>
+              <% end %>
+            </td>
+          <% end %>
+          <% (3 - brand2s.length).times do %>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+<% end %>

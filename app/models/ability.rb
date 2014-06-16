@@ -121,5 +121,9 @@ class Ability
       cannot :set_displayable, :all
     end
 
+    can :read, Category::Brand
+    can :read, Category::Brand2
+    can :read, Category::Brand3
+
   end
 end

@@ -131,6 +131,13 @@ Carhall::Application.routes.draw do
         get "product/:product_id", on: :collection, 
           action: :product, as: :product
       end
+
+      resources :brand2s
+      resource :current_user do
+        resource :buying_advice do
+          get "destroy", as: :destroy
+        end
+      end
     end
 
     root to: "accounts/current_users#show"

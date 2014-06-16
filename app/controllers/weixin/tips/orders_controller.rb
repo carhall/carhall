@@ -27,7 +27,13 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
   end
 
   def create
-    @order = @parent.create(params.require(:order).permit!)
+    @order = @parent.new(params.require(:order).permit!)
+    if @order.save
+      flash[:success] = "您成功购买了 #{@order.title} 。"
+      redirect_to weixin_root_path
+    else
+      render :new
+    end
   end
 
   def use_confirmation

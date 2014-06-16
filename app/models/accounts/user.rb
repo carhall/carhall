@@ -25,6 +25,8 @@ class Accounts::User < Accounts::Account
   has_many :consumption_records, class_name: 'Statistic::ConsumptionRecord'
   has_many :sales_cases, class_name: 'Statistic::SalesCase'
 
+  has_one :buying_advice, class_name: 'Tips::BuyingAdvice'
+
 
   def self.with_query query
     sql_where_query = indexes.map{|i| "`accounts`.`#{i}` LIKE '#{query}%'" }.join(' or ')
