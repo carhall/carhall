@@ -24,5 +24,8 @@ class Category::Brand < ActiveRecord::Base
   ]
 
   include Share::Categoryable
+
+  has_many :brand2s
+  has_many :brand3s
   
 end

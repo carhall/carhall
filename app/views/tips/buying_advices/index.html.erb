@@ -8,9 +8,15 @@
       <h3>易卖车询价订单列表 <small></small></h3>
     </div>
 
-    <% @buying_advices = @buying_advices.includes(:user) %>
+    <% begin %>
+      <% brand3_ids = @dealer.selling_brand.rbrand.brand3_ids %>
+      <%= render 'share/alert', message: '您还没有收到任何订单！' if @buying_advices.empty? %>
+    <% rescue Exception => e %>
+      <%= render 'share/alert', message: "您还没有设置在售车型，请在#{ link_to "管理在售车型", edit_tips_selling_brand_path }进行设置！".html_safe, type: :error %>
+    <% end %>
 
-    <%= render 'share/alert', message: '您还没有收到任何订单！' if @buying_advices.empty? %>
+    <% @buying_advices = @buying_advices.where(brand3_id: brand3_ids) %>
+    <% @buying_advices = @buying_advices.includes(:user) %>
 
     <%= index_for @buying_advices, class: :datatable do |t| %>
       <%= t.attribute :id %>

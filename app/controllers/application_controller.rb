@@ -8,16 +8,19 @@ class ApplicationController < ActionController::Base
 
   def self.set_resource_class klass, options = {}
     respond_to :html
+    options = options.reverse_merge(class: klass, autoload: true)
 
     before_filter do
       method = "#{namespaced_name}_params"
       params[namespaced_name] &&= send(method) if respond_to?(method, true)
     end
 
-    if options[:no_authorize]
-      load_resource options.reverse_merge(class: klass)
-    else
-      load_and_authorize_resource options.reverse_merge(class: klass)
+    if options[:autoload]
+      if options[:no_authorize]
+        load_resource options
+      else
+        load_and_authorize_resource options
+      end
     end
 
     def namespaced_name
@@ -51,9 +54,7 @@ class ApplicationController < ActionController::Base
       end
 
       define_method :update do
-        @member = @parent || klass.new
-
-        if @member.update_attributes params[namespaced_name]
+        if resource_instance.update_attributes params[namespaced_name]
           flash[:success] = i18n_message(:update_success_without_title)
           redirect_to after_update_path
         else
