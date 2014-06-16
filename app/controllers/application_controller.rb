@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
       define_method :update do
         @member = @parent || klass.new
 
-        if @member.update_attributes(data_params)
+        if @member.update_attributes params[namespaced_name]
           flash[:success] = i18n_message(:update_success_without_title)
           redirect_to after_update_path
         else

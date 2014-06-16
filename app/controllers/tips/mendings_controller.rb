@@ -1,16 +1,11 @@
 class Tips::MendingsController < Tips::ApplicationController
+  before_filter :load_mending, except: :index
   set_resource_class Tips::Mending, orders: true
-
-  def edit
-    load_mending
-  end
 
   alias_method :edit_discount, :edit
   alias_method :edit_brands, :edit
 
   def update
-    load_mending
-
     if @mending.update_attributes(tips_mending_params)
       flash[:success] = i18n_message(:update_success_without_title)
       redirect_to tips_root_path
@@ -22,6 +17,8 @@ class Tips::MendingsController < Tips::ApplicationController
       end
     end
   end
+
+private
 
   def tips_mending_params
     discount = [:discount_during, :man_hours_discount, :spare_parts_discount]

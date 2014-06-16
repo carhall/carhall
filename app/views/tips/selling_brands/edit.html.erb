@@ -1,0 +1,30 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>在售车型管理 <small></small></h3>
+    </div>
+
+    <%= simple_form_for(@selling_brand, html: { class: 'form-horizontal' }) do |f| %>
+      <%= devise_error_messages! @selling_brand %>
+
+        <%= f.input :brand_id, collection: Category::Brand.to_select, as: :radio_buttons %>
+      
+
+      <%= f.button :submit, "更新在售车型", class: 'btn-submit' %>
+    <% end %>
+
+  </div>
+</div>
+
+<% content_for :stylesheets do %>
+  <style type="text/css">
+    .radio {
+      min-width: 100px;
+      float: left;
+    }
+  </style>
+<% end %>

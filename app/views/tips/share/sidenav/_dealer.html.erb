@@ -60,6 +60,11 @@
     <li<%= active? 'tips/test_drivings#new' %>><a href="<%= new_tips_test_driving_path %>"><i class="icon-chevron-right"></i> 发布看车试驾</a></li>
     <li<%= active? 'tips/test_drivings#index' %>><a href="<%= tips_test_drivings_path %>"><i class="icon-chevron-right"></i> 管理看车试驾</a></li>
   <% end %>
+
+  <% if @dealer.has_template? :test_driving %>
+    <li><span>易卖车</span></li>
+    <li<%= active? 'tips/selling_brands#edit' %>><a href="<%= edit_tips_selling_brand_path %>"><i class="icon-chevron-right"></i> 管理在售车型</a></li>
+  <% end %>
 </ul>
 
 <ul class="nav nav-list sidenav">

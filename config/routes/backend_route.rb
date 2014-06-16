@@ -152,6 +152,7 @@ Carhall::Application.routes.draw do
     end
     resources :buying_advice_orders
 
+    resource :selling_brand
   end
 
   namespace :bcst do

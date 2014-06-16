@@ -73,6 +73,7 @@ zh-CN:
       tips/vip_card_order_item: 会员卡服务项目
       tips/buying_advice: 询价订单
       tips/buying_advice_order: 报价
+      tips/selling_brand: 在售车型
       bcst/host: 主持人
       bcst/programme: 节目板块
       bcst/programme_list: 节目单
@@ -325,6 +326,9 @@ zh-CN:
         price: 价格
         description: 详细描述
         adviser: 销售顾问
+      tips/selling_brand:
+        brand_id: 车型品牌
+        brand: 车型品牌
       bcst/host:
         id: ID
         avatar: 头像

@@ -13,6 +13,7 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :activities, class_name: 'Tips::Activity'
   has_many :bulk_purchasings, class_name: 'Tips::BulkPurchasing'
   has_many :vip_cards, class_name: 'Tips::VipCard'
+  has_one :selling_brand, class_name: 'Tips::SellingBrand'
 
   has_many :construction_cases, class_name: 'Tips::ConstructionCase'
 
@@ -35,6 +36,7 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :operating_records, class_name: 'Statistic::OperatingRecord'
   has_many :sales_cases, class_name: 'Statistic::SalesCase'
   has_many :consumption_records, class_name: 'Statistic::ConsumptionRecord'
+
   
   before_save do
     if area_changed?
