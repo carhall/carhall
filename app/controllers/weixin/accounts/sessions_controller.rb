@@ -1,7 +1,13 @@
 class Weixin::Accounts::SessionsController < ::Accounts::SessionsController
   layout "weixin"
+  before_filter :logout_others, only: :new
 
 protected
+
+  def logout_others
+    sign_out :account
+    sign_out :weixin_dealer
+  end
 
   def resource_name
     :weixin_account

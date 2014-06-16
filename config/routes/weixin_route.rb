@@ -1,6 +1,4 @@
 Carhall::Application.routes.draw do
-  mount WeixinAPI => '/weixin'
-
   namespace :weixin do
     devise_for :accounts, class_name: "Accounts::Account", module: "weixin/accounts"
     devise_scope :account do
@@ -137,5 +135,7 @@ Carhall::Application.routes.draw do
 
     root to: "accounts/current_users#show"
   end
+  
+  mount WeixinAPI => '/weixin'
 
 end
