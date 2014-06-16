@@ -1,7 +1,7 @@
 <% flash.each do |type, message| %>
   <% next unless [:alert, :notice, :warning, :success].include? type %>
   <div class="alert alert-<%= { alert: :error, notice: :info }[type] || type.to_s %> fade in">
-    <button class="close" data-dismiss="alert">Ă</button>
+    <button class="close" data-dismiss="alert">×</button>
     <%= message %>
   </div>
 <% end %>
