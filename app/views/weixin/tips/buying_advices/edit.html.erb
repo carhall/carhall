@@ -3,14 +3,15 @@
     <ul class="table-view table-view-block">
       <% if params[:brand2_id] %>
         <% brand2 = Category::Brand2.find(params[:brand2_id]) %>
-        <li class="table-view-cell">
-          <%= image_tag brand2.image.url(:medium) %>
-          <div class="text-center"><%= brand2.name %></div>
-        </li>
+      <% else %>
+        <% brand2 = @buying_advice.rbrand3.brand2 %>
       <% end %>
+      <li class="table-view-cell">
+        <%= image_tag brand2.image.url(:medium) %>
+        <div class="text-center"><%= brand2.name %></div>
+      </li>
       <li class="table-view-cell input-row">
-        <% brand3s = Category::Brand3.all %>
-        <% brand3s = brand3s.where(brand2_id: params[:brand2_id]) if params[:brand2_id] %>
+        <% brand3s = Category::Brand3.where(brand2_id: brand2) %>
         <%= f.input :brand3_id, collection: brand3s.to_select %>
       </li>
       <li class="table-view-cell input-row"><%= f.input :buying_at_id, collection: Tips::BuyingAdvice::BuyingAt.to_select %></li>
@@ -18,9 +19,15 @@
       <li class="table-view-cell input-row"><%= f.input :license, collection: [["有", true], ["无", false]], as: :radio_buttons %></li>
     </ul>
   </div>
+  
+  <div class="card-no-border text-center">
+    <p>已有 <%= Tips::BuyingAdvice.where(brand3_id: brand3s).count %> 人正在汽车堂购买 <%= brand2.name %></p>
+    <p><%= Tips::SellingBrand.where(brand_id: brand2.brand_id).count %> 家 认证4S店 将竞相报价</p>
+  </div>
+
 
   <div class="card-no-border">
-    <button class="btn btn-positive btn-block">提交询价</button>
+    <button class="btn btn-positive btn-block">让经销商报价</button>
   </div>
 
 <% end %>

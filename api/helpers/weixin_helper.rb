@@ -78,7 +78,7 @@ module WeixinHelper
         "weixin/distributors/#{account.id}/ad_templates"
     when "buying_advice"
       format_to_news "会买车",
-        "点击查看广告模板详细资料",
+        "一键获得最低价，买车用我更实惠",
         "weixin/buying_advice.png",
         "weixin/current_user/buying_advice"
     when "distributor_description"
@@ -215,8 +215,8 @@ module WeixinHelper
       case account.dealer_type
       when "洗车美容"
         format_to_menu account, {
-          "项目菜单" => [:vip_card, :cleaning, :buying_advice, :traffic_violation],
-          "发现" => [:bulk_purchasing, :activity, :construction_case],
+          "项目菜单" => [:vip_card, :cleaning, :traffic_violation],
+          "发现" => [:bulk_purchasing, :activity, :construction_case, :buying_advice],
           "更多" => [:dealer_description, :mine, :download_app],
         }
       when "4S店"
@@ -239,8 +239,8 @@ module WeixinHelper
         }
       when "专项服务"
         format_to_menu account, {
-          "项目菜单" => [:cleaning, :buying_advice, :traffic_violation],
-          "发现" => [:bulk_purchasing, :activity],
+          "项目菜单" => [:cleaning, :traffic_violation],
+          "发现" => [:bulk_purchasing, :activity, :buying_advice],
           "更多" => [:dealer_description, :mine, :download_app],
         }
       end
