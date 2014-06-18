@@ -34,7 +34,7 @@ module WeixinHelper
     when "activity"
       format_resources_to_news account, account.activities
     when "rescue"
-      format_to_news "故障救援",
+      format_to_news "道路救援",
         "一键救援，紧急联系你的专属客服",
         "weixin/rescue.png",
         "weixin/dealers/#{account.id}/rescue"
@@ -186,7 +186,7 @@ module WeixinHelper
         when :construction_case
           { type: "click", name: "案例展示", key: "construction_case" }
         when :rescue
-          { type: "click", name: "故障救援", key: "rescue" }
+          { type: "click", name: "道路救援", key: "rescue" }
         when :vehicle_insurance
           { type: "click", name: "车险续保", key: "vehicle_insurance" }
         when :ad_template

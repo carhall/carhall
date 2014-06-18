@@ -1,150 +1,45 @@
-<p class="well">我们相信一碗面条可以卖“8元”，也可以卖到“15元”，也能卖到“30元”是因为你提供给消费者的增值服务（服务体验）不同。我们尊重每一个创业者，无论你是“高大上”还是“屌丝巴人”，因为你们都有一个自己的创业梦，所以你们在我们汽车堂都是平等的，受尊敬的；只有大家的努力，才能实现我们的“中国梦”。 </p>
-
-<!-- 
-<div class="page-header">
-  <h3>汽车堂服务商会员价格体系：</h3>
+<div class="well">
+  <p>我们相信一碗面条可以卖“8元”，也可以卖到“15元”，也能卖到“30元”是因为你提供给消费者的增值服务（服务体验）不同。我们尊重每一个创业者，无论你是“高大上”还是“屌丝巴人”，因为你们都有一个自己的创业梦，所以你们在我们汽车堂都是平等的，受尊敬的；只有大家的努力，才能实现我们的“中国梦”。 </p>
 </div>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th></th>
-      <th>免费会员</th>
-      <th>体验会员</th>
-      <th>普通会员</th>
-      <th>金卡会员</th>
-      <th>钻石会员</th>
+      <% Accounts::DealerDetail::Templates.each do |template| %>
+        <th><%= template[1][0] %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>查找经销商</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>查看经销商团购</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>查看在线教程</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>查看广告模板</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>发布限时求购</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>发布团购信息</td>
-      <td></td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>发布活动信息</td>
-      <td></td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>服务项目菜单</td>
-      <td></td>
-      <td></td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>会员卡功能</td>
-      <td></td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>保养专修项目</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>微信同步功能</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>微信客服转接功能</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>车型报价</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>二手车展示</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>价格（首年）/元</td>
-      <td>免费</td>
-      <td>600</td>
-      <td>800</td>
-      <td>1600</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>（次年及以后）/元</td>
-      <td>免费</td>
-      <td>365</td>
-      <td>365</td>
-      <td>365</td>
-      <td></td>
-    </tr>
+    <% Accounts::DealerDetail::DealerType.all.each do |dealer_type| %>
+      <tr>
+        <td><%= dealer_type[1] %></td>
+        <% Accounts::DealerDetail::Templates.each do |template| %>
+          <td><%= "√" if template[1][2].include? dealer_type[1] %></td>
+        <% end %>
+      </tr>
+    <% end %>
   </tbody>
 </table>
- -->
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <% Accounts::DealerDetail::Templates.each do |template| %>
+        <th><%= template[1][0] %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% Accounts::Dealer::Rank.all.each do |rank| %>
+      <tr>
+        <td><%= rank[1] %></td>
+        <% Accounts::DealerDetail::Templates.each do |template| %>
+          <td><%= "√" unless (Accounts::Dealer::Rank[template[1][1]]||0) > rank[0] %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
