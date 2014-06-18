@@ -6,6 +6,7 @@
   <div class="span9">
     <div class="page-header">
       <h3>服务商管理 <small></small></h3>
+      <%= link_to "更新微信菜单", update_weixin_accounts_dealers_path, class: "btn btn-success pull-right", method: :put, data: { confirm: '您确认要更新所有服务商微信菜单？' } %>
     </div>
 
     <%= index_for @dealers, class: :datatable do |t| %>

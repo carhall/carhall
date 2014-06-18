@@ -4,7 +4,6 @@ class SettingsController < ApplicationController
   before_filter :set_provider, only: [:template]
   before_filter :ensure_rqrcode_image
 
-  include WeixinHelper
   helper_method :initialize_weixin_account
   
   def ensure_rqrcode_image

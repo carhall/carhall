@@ -47,6 +47,21 @@ class Accounts::Dealer < Accounts::PublicAccount
     end
   end
 
+  include Accounts::Weixinable
+
+  after_validation do
+    if detail.weixin_app_id_changed? or detail.weixin_app_secret_changed? or
+      detail.dealer_type_id_changed?
+      update_weixin
+    end
+  end
+
+  before_save do
+    if self.rank_id_changed?
+      update_weixin
+    end
+  end
+
   validates_each :detail do |record, attr, value|
     if value.address.present? and value.address_changed?
       bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value.address}"

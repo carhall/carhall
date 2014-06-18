@@ -28,6 +28,14 @@ class Accounts::Distributor < Accounts::Account
     path: ":rails_root/public/system/accounts/distributors/:attachment/:id_partition/:style/:filename",
     url: "/system/accounts/distributors/:attachment/:id_partition/:style/:filename"
 
+  include Accounts::Weixinable
+
+  after_validation do
+    if detail.weixin_app_id_changed? or detail.weixin_app_secret_changed?
+      update_weixin
+    end
+  end
+
   def agent?
     false
   end

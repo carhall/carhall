@@ -181,6 +181,7 @@ Carhall::Application.routes.draw do
       put :accept, on: :member
       put :rank_up, on: :member
       put :rank_down, on: :member
+      put :update_weixin, on: :collection
     end
     resources :dealers do
       put :accept, on: :member
@@ -190,6 +191,7 @@ Carhall::Application.routes.draw do
       put :unstick, on: :member
       put :rank_up, on: :member
       put :rank_down, on: :member
+      put :update_weixin, on: :collection
     end
     resources :providers do
       put :accept, on: :member

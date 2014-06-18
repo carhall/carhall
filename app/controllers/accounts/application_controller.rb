@@ -7,6 +7,13 @@ class Accounts::ApplicationController < ApplicationController
       params[namespaced_name]
     end
 
+    if options[:weixin]
+      define_method :update_weixin do
+        klass.update_weixin
+        redirect_to :back
+      end
+    end
+
     if options[:accept]
       define_method :accept do
         account = resource_instance
