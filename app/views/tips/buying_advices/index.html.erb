@@ -24,7 +24,9 @@
       <%= t.attribute :brand3 %>
       <%= t.attribute :buying_at %>
       <%= t.attribute :buying_pattern %>
-      <%= t.attribute :license %>
+      <%= t.attribute :license do |license| %>
+        <%= license ? content_tag(:span, "有", class:"content") : content_tag(:span, "无", class:"content muted") %>
+      <% end %>
       <%= t.attribute :state %>
     <% end %>
 
