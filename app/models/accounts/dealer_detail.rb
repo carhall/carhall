@@ -27,7 +27,7 @@ class Accounts::DealerDetail < ActiveRecord::Base
     mending: ["保养专修", "金卡会员", %w(专修 4S店)],
     bulk_purchasing: ["团购", "体验会员", %w(洗车美容 专项服务 专修 4S店 汽车销售)],
     activity: ["近期活动", "体验会员", %w(洗车美容 专项服务 专修 4S店 汽车销售)],
-    vip_card: ["会员卡", "普通会员", %w(洗车美容)],
+    vip_card: ["会员卡", "体验会员", %w(洗车美容 专项服务 专修)],
     test_driving: ["看车试驾", "钻石会员", %w(4S店 汽车销售)],
     construction_case: ["施工案例", "普通会员", %w(洗车美容 专项服务)],
     vehicle_insurance: ["车险续保", "金卡会员", %w(专修 4S店 汽车销售)],

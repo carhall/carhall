@@ -216,7 +216,7 @@ module WeixinHelper
       case account.dealer_type
       when "洗车美容"
         format_to_menu account, {
-          "项目菜单" => [:vip_card, :cleaning, :traffic_violation],
+          "项目菜单" => [:cleaning, :vip_card, :traffic_violation],
           "发现" => [:bulk_purchasing, :activity, :construction_case, :buying_advice],
           "更多" => [:dealer_description, :mine, :download_app],
         }
@@ -234,13 +234,13 @@ module WeixinHelper
         }
       when "专修"
         format_to_menu account, {
-          "项目菜单" => [:rescue, :vehicle_insurance, :mending, :traffic_violation],
+          "项目菜单" => [:rescue, :vehicle_insurance, :mending, :vip_card, :traffic_violation],
           "发现" => [:bulk_purchasing, :activity],
           "更多" => [:dealer_description, :mine],
         }
       when "专项服务"
         format_to_menu account, {
-          "项目菜单" => [:cleaning, :traffic_violation],
+          "项目菜单" => [:cleaning, :vip_card, :traffic_violation],
           "发现" => [:bulk_purchasing, :activity, :buying_advice],
           "更多" => [:dealer_description, :mine, :download_app],
         }
