@@ -76,7 +76,7 @@ module WeixinHelper
         "点击查看广告模板详细资料",
         account.ad_templates.first.avatar,
         "weixin/distributors/#{account.id}/ad_templates"
-    when "buying_advice"
+    when "buying_advice2"
       format_to_news "会买车",
         "一键获得最低价，买车用我更实惠",
         "weixin/buying_advice.png",
@@ -191,8 +191,8 @@ module WeixinHelper
           { type: "click", name: "车险续保", key: "vehicle_insurance" }
         when :ad_template
           { type: "click", name: "广告模板", key: "ad_template" }
-        when :buying_advice
-          { type: "click", name: "会买车", key: "buying_advice" }
+        when :buying_advice2
+          { type: "click", name: "会买车", key: "buying_advice2" }
         when :dealer_description
           { type: "click", name: "商家介绍", key: "dealer_description" }
         when :distributor_description
@@ -216,32 +216,32 @@ module WeixinHelper
       case account.dealer_type
       when "洗车美容"
         format_to_menu account, {
-          "项目菜单" => [:cleaning, :vip_card, :traffic_violation],
-          "发现" => [:bulk_purchasing, :activity, :construction_case, :buying_advice],
+          "项目菜单" => [:traffic_violation, :cleaning, :vip_card],
+          "发现" => [:bulk_purchasing, :activity, :buying_advice2, :construction_case],
           "更多" => [:dealer_description, :mine, :download_app],
         }
       when "4S店"
         format_to_menu account, {
-          "项目菜单" => [:rescue, :vehicle_insurance, :mending, :traffic_violation],
+          "项目菜单" => [:traffic_violation, :rescue, :vehicle_insurance, :mending],
           "发现" => [:bulk_purchasing, :activity, :secondhand_appraise, :test_driving],
           "更多" => [:dealer_description, :mine],
         }
       when "汽车销售"
         format_to_menu account, {
-          "项目菜单" => [:secondhand_appraise, :test_driving, :vehicle_insurance, :traffic_violation],
-          "发现" => [:bulk_purchasing, :activity],
+          "项目菜单" => [:traffic_violation, :vehicle_insurance],
+          "发现" => [:bulk_purchasing, :activity, :secondhand_appraise, :test_driving],
           "更多" => [:dealer_description, :mine],
         }
       when "专修"
         format_to_menu account, {
-          "项目菜单" => [:rescue, :vehicle_insurance, :mending, :vip_card, :traffic_violation],
+          "项目菜单" => [:traffic_violation, :rescue, :vehicle_insurance, :mending, :vip_card],
           "发现" => [:bulk_purchasing, :activity],
           "更多" => [:dealer_description, :mine],
         }
       when "专项服务"
         format_to_menu account, {
-          "项目菜单" => [:cleaning, :vip_card, :traffic_violation],
-          "发现" => [:bulk_purchasing, :activity, :buying_advice],
+          "项目菜单" => [:traffic_violation, :cleaning, :vip_card],
+          "发现" => [:bulk_purchasing, :activity, :buying_advice2, :construction_case],
           "更多" => [:dealer_description, :mine, :download_app],
         }
       end

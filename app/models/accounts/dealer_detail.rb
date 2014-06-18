@@ -24,17 +24,25 @@ class Accounts::DealerDetail < ActiveRecord::Base
 
   Templates = {
     cleaning: ["服务项目", "普通会员", %w(洗车美容 专项服务 专修 4S店)],
-    mending: ["保养专修", "金卡会员", %w(专修 4S店)],
+    mending: ["保养专修", "银卡会员", %w(专修 4S店)],
     bulk_purchasing: ["团购", "体验会员", %w(洗车美容 专项服务 专修 4S店 汽车销售)],
     activity: ["活动", "体验会员", %w(洗车美容 专项服务 专修 4S店 汽车销售)],
-    vip_card: ["会员卡", "体验会员", %w(洗车美容 专项服务 专修)],
-    test_driving: ["看车试驾", "钻石会员", %w(4S店 汽车销售)],
+    vip_card: ["会员卡", "体验会员", %w(洗车美容 专项服务 专修 4S店)],
+    test_driving: ["看车试驾", "金卡会员", %w(4S店 汽车销售)],
     construction_case: ["施工案例", "普通会员", %w(洗车美容 专项服务)],
-    vehicle_insurance: ["车险续保", "金卡会员", %w(专修 4S店 汽车销售)],
-    secondhand_appraise: ["二手评估", "钻石会员", %w(4S店 汽车销售)],
+    vehicle_insurance: ["车险续保", "银卡会员", %w(专修 4S店 汽车销售)],
+    secondhand_appraise: ["二手评估", "金卡会员", %w(4S店 汽车销售)],
     bulk_purchasing2: ["限时求购", nil, %w(洗车美容 专项服务 专修 4S店 汽车销售)],
-    buying_advice: ["易卖车", "钻石会员", %w(4S店 汽车销售)]
+    buying_advice: ["易卖车", "白金会员", %w(4S店 汽车销售)],
   }
+
+  Ranks = [
+    ["体验会员", %w(洗车美容 专项服务)],
+    ["普通会员", %w()],
+    ["银卡会员", %w(专修)],
+    ["金卡会员", %w(汽车销售)],
+    ["白金会员", %w(4S店)],
+  ]
 
   TemplateSymbols = Templates.keys
   TemplateNames = Templates.values.map(&:first)

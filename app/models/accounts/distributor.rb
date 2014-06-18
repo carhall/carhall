@@ -4,6 +4,14 @@ class Accounts::Distributor < Accounts::Account
 
   include Share::Localizable
 
+  include Accounts::Weixinable
+
+  before_save do
+    if detail.weixin_app_id_changed? or detail.weixin_app_secret_changed?
+      update_weixin
+    end
+  end
+  
   set_detail_class Accounts::DistributorDetail
 
   has_many :bulk_purchasing2s, class_name: 'Tips::BulkPurchasing2'
@@ -27,14 +35,6 @@ class Accounts::Distributor < Accounts::Account
   has_attached_file :avatar, styles: { medium: "300x200#", thumb: "60x60#" },
     path: ":rails_root/public/system/accounts/distributors/:attachment/:id_partition/:style/:filename",
     url: "/system/accounts/distributors/:attachment/:id_partition/:style/:filename"
-
-  include Accounts::Weixinable
-
-  after_validation do
-    if detail.weixin_app_id_changed? or detail.weixin_app_secret_changed?
-      update_weixin
-    end
-  end
 
   def can_use_template? template
     true

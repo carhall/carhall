@@ -127,4 +127,4 @@
 * 服务商权限调整 2h
 * 商家合作页面 1h
 * 广告位BUG修复
-* **和永良沟通，广告位接口参数brand_id修改为advert_type_id**
+* **和永良沟通，广告位接口参数brand_id修改为advert_type_id** 1h

@@ -49,7 +49,7 @@
           <% if resource.user_type == :dealer %>
 
             <%= f.simple_fields_for :detail do |ff| %>
-              <%= ff.input :dealer_type_id, collection: Accounts::DealerDetail::DealerType.to_select %>
+              <%= ff.input :dealer_type_id, collection: resource.dealer_type_to_select %>
               <%= ff.input :specific_service_id, collection: Accounts::DealerDetail::SpecificService.to_select, wrapper_html: { class: "specific_service" }, required: true %>
               <%= ff.input :business_scope_ids, collection: Accounts::DealerDetail::BusinessScope.to_select, as: :check_boxes %>
               <%= ff.input :company, input_html: { class: 'input-xlarge' } %>

@@ -2,6 +2,30 @@ class Accounts::Dealer < Accounts::PublicAccount
   include Share::Localizable
   include Share::Statisticable
 
+  before_save do
+    if area_changed?
+      self.mending.update_attributes(area_id: self.area_id) if self.mending
+      self.cleanings.update_all(area_id: self.area_id)
+      self.activities.update_all(area_id: self.area_id)
+      self.bulk_purchasings.update_all(area_id: self.area_id)
+    end
+  end
+
+  include Accounts::Weixinable
+
+  before_save do
+    if detail.weixin_app_id_changed? or detail.weixin_app_secret_changed? or
+      detail.dealer_type_id_changed? or self.rank_id_changed?
+      update_weixin
+    end
+  end
+
+  before_save do
+    if self.accepted_at_changed?
+      self.rank_id = TypeRankMap[self.dealer_type_id]
+    end
+  end
+
   set_detail_class Accounts::DealerDetail
   delegate :dealer_type, :business_scopes, :rqrcode_image, 
     to: :detail, allow_nil: true
@@ -37,31 +61,6 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :sales_cases, class_name: 'Statistic::SalesCase'
   has_many :consumption_records, class_name: 'Statistic::ConsumptionRecord'
 
-  
-  before_save do
-    if area_changed?
-      self.mending.update_attributes(area_id: self.area_id) if self.mending
-      self.cleanings.update_all(area_id: self.area_id)
-      self.activities.update_all(area_id: self.area_id)
-      self.bulk_purchasings.update_all(area_id: self.area_id)
-    end
-  end
-
-  include Accounts::Weixinable
-
-  after_validation do
-    if detail.weixin_app_id_changed? or detail.weixin_app_secret_changed? or
-      detail.dealer_type_id_changed?
-      update_weixin
-    end
-  end
-
-  before_save do
-    if self.rank_id_changed?
-      update_weixin
-    end
-  end
-
   validates_each :detail do |record, attr, value|
     if value.address.present? and value.address_changed?
       bmap_geocoding_url = "http://api.map.baidu.com/geocoder/v2/?ak=E5072c8281660dfc534548f8fda2be11&output=json&address=#{value.address}"
@@ -91,11 +90,11 @@ class Accounts::Dealer < Accounts::PublicAccount
 
   delegate :address, to: :detail
 
-  RankAbility = Accounts::DealerDetail::Templates.map do |k, v|
+  RankTemplateAbility = Accounts::DealerDetail::Templates.map do |k, v|
     [k, Rank[v[1]]]
   end.to_h
 
-  TypeAbility = Accounts::DealerDetail::Templates.map do |k, v|
+  TypeTemplateAbility = Accounts::DealerDetail::Templates.map do |k, v|
     [k, v[2].map { |v| Accounts::DealerDetail::DealerType[v] }]
   end.to_h
 
@@ -105,11 +104,31 @@ class Accounts::Dealer < Accounts::PublicAccount
   end
 
   def can_use_template? template
-    return true unless RankAbility[template]
+    return true unless RankTemplateAbility[template]
     return false if not accepted?
-    return false if rank_id < RankAbility[template]
-    return false unless TypeAbility[template].include? dealer_type_id
+    return false if rank_id < RankTemplateAbility[template]
+    return false unless TypeTemplateAbility[template].include? dealer_type_id
     return true
+  end
+
+  dealer_type_ids = []
+  TypeRankAbility = Accounts::DealerDetail::Ranks.map do |v|
+    dealer_type_ids += v[1].map do |vv| 
+      [vv, Accounts::DealerDetail::DealerType[vv]]
+    end
+    [Rank[v[0]], dealer_type_ids]
+  end.to_h
+
+  type_ranks = []
+  Accounts::DealerDetail::Ranks.each do |v|
+    type_ranks += v[1].map do |vv|
+      [Accounts::DealerDetail::DealerType[vv], Rank[v[0]]]
+    end
+  end
+  TypeRankMap = type_ranks.to_h
+
+  def dealer_type_to_select
+    TypeRankAbility[self.rank_id]
   end
 
   scope :with_dealer_type, -> (dealer_type) {
