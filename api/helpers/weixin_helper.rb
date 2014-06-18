@@ -163,6 +163,7 @@ module WeixinHelper
     button = []
     data.each do |key, value|
       sub_button = value.map do |key|
+        next unless account.can_use_template? key
         case key
         when :activity
           { type: "click", name: "活动", key: "activity" }
@@ -203,7 +204,7 @@ module WeixinHelper
         when :download_app
           { type: "view", name: "手机会员卡", url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653" }
         end
-      end
+      end.reject(&:nil?)
       button << { name: key, sub_button: sub_button }
     end
     { button: button }

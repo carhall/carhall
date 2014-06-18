@@ -36,6 +36,10 @@ class Accounts::Distributor < Accounts::Account
     end
   end
 
+  def can_use_template? template
+    true
+  end
+  
   def agent?
     false
   end
