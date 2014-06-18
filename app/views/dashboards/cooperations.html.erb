@@ -2,12 +2,14 @@
   <p>我们相信一碗面条可以卖“8元”，也可以卖到“15元”，也能卖到“30元”是因为你提供给消费者的增值服务（服务体验）不同。我们尊重每一个创业者，无论你是“高大上”还是“屌丝巴人”，因为你们都有一个自己的创业梦，所以你们在我们汽车堂都是平等的，受尊敬的；只有大家的努力，才能实现我们的“中国梦”。 </p>
 </div>
 
+<% templates = %i(bulk_purchasing2 bulk_purchasing activity cleaning vip_card construction_case mending test_driving vehicle_insurance secondhand_appraise  buying_advice).map { |key| Accounts::DealerDetail::Templates[key] } %>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th></th>
-      <% Accounts::DealerDetail::Templates.each do |template| %>
-        <th><%= template[1][0] %></th>
+      <% templates.each do |template| %>
+        <th><%= template[0] %></th>
       <% end %>
     </tr>
   </thead>
@@ -15,8 +17,8 @@
     <% Accounts::DealerDetail::DealerType.all.each do |dealer_type| %>
       <tr>
         <td><%= dealer_type[1] %></td>
-        <% Accounts::DealerDetail::Templates.each do |template| %>
-          <td><%= "√" if template[1][2].include? dealer_type[1] %></td>
+        <% templates.each do |template| %>
+          <td><%= "√" if template[2].include? dealer_type[1] %></td>
         <% end %>
       </tr>
     <% end %>
@@ -27,8 +29,8 @@
   <thead>
     <tr>
       <th></th>
-      <% Accounts::DealerDetail::Templates.each do |template| %>
-        <th><%= template[1][0] %></th>
+      <% templates.each do |template| %>
+        <th><%= template[0] %></th>
       <% end %>
     </tr>
   </thead>
@@ -36,8 +38,8 @@
     <% Accounts::Dealer::Rank.all.each do |rank| %>
       <tr>
         <td><%= rank[1] %></td>
-        <% Accounts::DealerDetail::Templates.each do |template| %>
-          <td><%= "√" unless (Accounts::Dealer::Rank[template[1][1]]||0) > rank[0] %></td>
+        <% templates.each do |template| %>
+          <td><%= "√" unless (Accounts::Dealer::Rank[template[1]]||0) > rank[0] %></td>
         <% end %>
       </tr>
     <% end %>

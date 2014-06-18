@@ -3,11 +3,11 @@
     <ul class="table-view">
       <li class="table-view-cell input-row">
         <label>车型品牌</label>
-        <%= select_tag :brand_id, options_for_select(Category::Brand.to_select, @brand_id) %>
+        <%= select_tag :brand_id, options_for_select([["全部", 0]]+Category::Brand.to_select, @brand_id) %>
       </li>
       <li class="table-view-cell input-row">
         <label>地区</label>
-        <%= select_tag :area_id, options_for_select(Category::Area::Main.to_select, @area_id) %>
+        <%= select_tag :area_id, options_for_select([["全部", 0]]+Category::Area::Main.to_select, @area_id) %>
       </li>
     </ul>
   </div>
