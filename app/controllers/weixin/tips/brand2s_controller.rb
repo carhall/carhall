@@ -5,8 +5,8 @@ class Weixin::Tips::Brand2sController < Weixin::ApplicationController
 private
 
   def load_area_and_brand
-    @area_id = params[:area_id] || 0
-    @brand_id = params[:brand_id] || 0
+    @area_id = params[:area_id]
+    @brand_id = params[:brand_id]
   end
 
 end

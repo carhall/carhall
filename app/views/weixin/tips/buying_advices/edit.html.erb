@@ -1,11 +1,12 @@
-<%= simple_form_for(@buying_advice, url: weixin_current_user_buying_advice_path) do |f| %>
+<%= simple_form_for(@buying_advice, url: weixin_current_user_buying_advice_path(area_id: @main_area_id, brand2_id: @brand2_id)) do |f| %>
   <div class="card">
     <ul class="table-view table-view-block">
-      <% if params[:brand2_id] %>
-        <% brand2 = Category::Brand2.find(params[:brand2_id]) %>
-      <% else %>
-        <% brand2 = @buying_advice.rbrand3.brand2 %>
-      <% end %>
+      <% @main_area_id ||= @user.main_area_id %>
+      <% @main_area_id = @main_area_id.to_i %>
+      <% @area_ids = (@main_area_id*100)..(@main_area_id*100+99) %>
+      <% @brand2_id ||= @buying_advice.rbrand3.brand2_id %>
+      <% brand2 = Category::Brand2.find(@brand2_id) %>
+
       <li class="table-view-cell image-half-center">
         <%= image_tag brand2.image.url(:medium) %>
         <div class="text-center"><%= brand2.name %></div>
@@ -22,7 +23,7 @@
   
   <div class="card-no-border text-center">
     <p>已有 <%= Tips::BuyingAdvice.where(brand3_id: brand3s).count %> 人正在汽车堂购买 <%= brand2.name %></p>
-    <p><%= Tips::SellingBrand.where(brand_id: brand2.brand_id).count %> 家 认证4S店 将竞相报价</p>
+    <p><%= Tips::SellingBrand.where(brand_id: brand2.brand_id).count %> 家认证经销商将竞相报价</p>
   </div>
 
   <div class="card-no-border">

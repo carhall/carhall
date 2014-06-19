@@ -9,6 +9,7 @@ class Tips::BuyingAdvice < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :brand3_id, :buying_at_id, :buying_pattern_id
+  validates_inclusion_of :license, in: [true, false], message: "不能为空"
 
   belongs_to :brand3, class_name: 'Category::Brand3'
   alias_method :rbrand3, :brand3

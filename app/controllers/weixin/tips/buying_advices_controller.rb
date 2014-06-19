@@ -2,6 +2,7 @@ class Weixin::Tips::BuyingAdvicesController < Weixin::ApplicationController
   before_filter :authenticate_weixin_account!
   before_filter :set_weixin_current_user
   before_filter :load_buying_advice
+  before_filter :load_area_and_brand
 
   def show
     redirect_to weixin_brand2s_path unless @buying_advice
@@ -33,6 +34,11 @@ private
 
   def load_buying_advice
     @buying_advice = @user.buying_advice
+  end
+
+  def load_area_and_brand
+    @main_area_id = params[:area_id]
+    @brand2_id = params[:brand2_id]
   end
 
 end
