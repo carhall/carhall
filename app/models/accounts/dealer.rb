@@ -99,13 +99,14 @@ class Accounts::Dealer < Accounts::PublicAccount
   end.to_h
 
   def has_template? template
-    return false if not detail.template_syms.include?(template)
-    can_use_template? template
+    return true unless Accounts::DealerDetail::TemplateSymbols.include? template
+    return false unless detail.template_syms.include? template
+    return can_use_template? template
   end
 
   def can_use_template? template
     return true unless RankTemplateAbility[template]
-    return false if not accepted?
+    return false unless accepted?
     return false if rank_id < RankTemplateAbility[template]
     return false unless TypeTemplateAbility[template].include? dealer_type_id
     return true

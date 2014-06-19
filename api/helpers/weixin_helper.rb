@@ -163,7 +163,7 @@ module WeixinHelper
     button = []
     data.each do |key, value|
       sub_button = value.map do |key|
-        next unless account.can_use_template? key
+        next unless account.has_template?(key)
         case key
         when :activity
           { type: "click", name: "活动", key: "activity" }

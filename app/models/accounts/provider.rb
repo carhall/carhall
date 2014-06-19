@@ -9,12 +9,11 @@ class Accounts::Provider < Accounts::PublicAccount
   has_many :traffic_reports, class_name: 'Bcst::TrafficReport'
 
   def has_template? template
-    detail.template_syms.include? template
+    return true unless Accounts::ProviderDetail::TemplateSymbols.include? template
+    return detail.template_syms.include? template
   end
 
-  def can_use_template? template
-    true
-  end
+  def can_use_template? template; return true; end
 
   def programme_list
     hash = Category::Day.names.reduce({}){|ret,name|ret[name]=[];ret} 

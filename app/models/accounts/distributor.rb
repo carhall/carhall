@@ -36,13 +36,11 @@ class Accounts::Distributor < Accounts::Account
     path: ":rails_root/public/system/accounts/distributors/:attachment/:id_partition/:style/:filename",
     url: "/system/accounts/distributors/:attachment/:id_partition/:style/:filename"
 
-  def can_use_template? template
-    true
-  end
+  def has_template? template; true; end
+
+  def can_use_template? template; true; end
   
-  def agent?
-    false
-  end
+  def agent?; false; end
 
   def rank_up
     self.type = 'Accounts::Agent'
