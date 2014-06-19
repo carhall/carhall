@@ -3,7 +3,7 @@ module Accounts::Rankable
 
   
   included do
-    Ranks = %w(体验会员 普通会员 银卡会员 金卡会员 白金会员)
+    Ranks = %w(体验会员 普通会员 黄金会员 白金会员 钻石会员)
 
     enumerate :rank, with: Ranks
     scope :ranked, -> { order('rank_id DESC') } 
