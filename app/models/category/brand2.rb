@@ -9,19 +9,14 @@ class Category::Brand2 < ActiveRecord::Base
 
   validates_presence_of :brand_id, :image 
 
-  def self.with_area_and_brand main_area_id, brand_id
-    main_area_id = main_area_id.to_i
-    area_ids = (main_area_id*100)..(main_area_id*100+99)
-    return [] if Tips::SellingBrand.joins(:dealer)
-      .where("`accounts`.`area_id` IN (?)", area_ids)
-      .count.zero?
-    brand3_ids = Category::Brand.find(brand_id).brand3_ids
-    count = Tips::BuyingAdvice.joins(:user, :brand3)
-      .where("`accounts`.`area_id` IN (?)", area_ids)
-      .where(brand3_id: brand3_ids)
-      .group("`brand3s`.`brand2_id`")
-      .reorder("count_all")
-      .count
+  def self.with_area_and_brand area_id, brand_id
+    return [] if Tips::SellingBrand
+      .with_main_area(area_id).count.zero?
+    count = Tips::BuyingAdvice
+      .with_main_area(area_id)
+      .with_brand(brand_id)
+      .group(:brand2_id)
+      .reorder(nil).count
     where(brand_id: brand_id).sort_by do |brand2|
       count[brand2.id] || 0
     end.reverse!

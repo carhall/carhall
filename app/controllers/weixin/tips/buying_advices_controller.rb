@@ -16,7 +16,7 @@ class Weixin::Tips::BuyingAdvicesController < Weixin::ApplicationController
     @buying_advice ||= @user.create_buying_advice
 
     if @buying_advice.update_attributes params.require(:tips_buying_advice)
-      .permit(:brand3_id, :buying_at_id, :buying_pattern_id, :license)
+      .permit(:main_area_id, :brand3_id, :buying_at_id, :buying_pattern_id, :license)
       flash[:success] = "您成功设置了 询价请求 。"
       redirect_to action: :show
     else
@@ -37,7 +37,7 @@ private
   end
 
   def load_area_and_brand
-    @main_area_id = params[:area_id]
+    @area_id = params[:area_id]
     @brand2_id = params[:brand2_id]
   end
 

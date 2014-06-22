@@ -14,8 +14,17 @@ class Tips::BuyingAdvice < ActiveRecord::Base
   belongs_to :brand3, class_name: 'Category::Brand3'
   alias_method :rbrand3, :brand3
 
+  enumerate :main_area, with: Category::Area::Main
+  enumerate :brand, with: Category::Brand
+  enumerate :brand2, with: Category::Brand2
   enumerate :brand3, with: Category::Brand3
   enumerate :buying_at, with: %w(7天内到店 15天内到店 30天内到店)
   enumerate :buying_pattern, with: %w(全款买车 分期付款 置换全款 置换分期)
+
+  before_save do
+    self.main_area_id ||= user.main_area_id
+    self.brand_id = rbrand3.brand_id
+    self.brand2_id = rbrand3.brand2_id
+  end
 
 end

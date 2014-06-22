@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614035617) do
+ActiveRecord::Schema.define(version: 20140622024056) do
 
   create_table "accounts", force: true do |t|
     t.string   "encrypted_password",     default: "",    null: false
@@ -320,6 +320,9 @@ ActiveRecord::Schema.define(version: 20140614035617) do
     t.integer  "used_count",        default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "main_area_id"
+    t.integer  "brand_id"
+    t.integer  "brand2_id"
   end
 
   add_index "buying_advices", ["state_id"], name: "index_buying_advices_on_state_id", using: :btree
@@ -826,6 +829,7 @@ ActiveRecord::Schema.define(version: 20140614035617) do
   create_table "selling_brands", force: true do |t|
     t.integer "dealer_id"
     t.integer "brand_id"
+    t.integer "main_area_id"
   end
 
   create_table "test_drivings", force: true do |t|

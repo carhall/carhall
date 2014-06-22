@@ -18,6 +18,9 @@
 
   <% if @area_id and @brand_id %>
 
+    <% @area_id = @area_id.to_i %>
+    <% @brand_id = @brand_id.to_i %>
+
     <% @brand2s = @brand2s.with_area_and_brand(@area_id, @brand_id) %>
 
     <% if @brand2s.empty? %>

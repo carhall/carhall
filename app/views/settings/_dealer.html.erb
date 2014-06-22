@@ -4,7 +4,9 @@
   <%= s.attribute :rank %>
   <%= s.attribute :mobile %>
   <%= s.attribute :dealer_type, in: :detail %>
-  <%= s.attribute :specific_service, in: :detail %>
+  <% if @user.dealer_type == "专项服务" %>
+    <%= s.attribute :specific_service, in: :detail %>
+  <% end %>
   <%= s.attribute :business_scopes, in: :detail, join: '、' %>
   <%= s.attribute :company, in: :detail %>
   <%= s.attribute :area %>

@@ -9,14 +9,13 @@
     </div>
 
     <% begin %>
-      <% brand3_ids = @dealer.selling_brand.rbrand.brand3_ids %>
+      <% area_id = @dealer.main_area_id %>
+      <% brand_id = @dealer.selling_brand.brand_id %>
+      <% @buying_advices = @buying_advices.with_main_area(area_id).with_brand(brand_id).includes(:user) %>
       <%= render 'share/alert', message: '您还没有收到任何订单！' if @buying_advices.empty? %>
     <% rescue Exception => e %>
       <%= render 'share/alert', message: "您还没有设置在售车型，请在#{ link_to "管理在售车型", edit_tips_selling_brand_path }进行设置！".html_safe, type: :error %>
     <% end %>
-
-    <% @buying_advices = @buying_advices.where(brand3_id: brand3_ids) %>
-    <% @buying_advices = @buying_advices.includes(:user) %>
 
     <%= index_for @buying_advices, class: :datatable do |t| %>
       <%= t.attribute :id %>
@@ -49,8 +48,9 @@
     function fnFormatDetails(oTable, nTr) {
       var iAdviceId = $(oTable.fnGetData(nTr)[1]).text(),
           aOrderData = <%== Tips::BuyingAdviceOrder.accessible_by(current_ability, :manage).group_by(&:buying_advice_id).to_json %>[iAdviceId] || [];
+          aLowest = <%== Tips::BuyingAdviceOrder.all.group_by(&:buying_advice_id).map{|k,v|[k,v.sort_by(&:price).first.price]}.to_h.to_json %>[iAdviceId]
 
-      var sOut = '<h4>报价记录 <small><a href="/tips/buying_advices/'+iAdviceId+'/buying_advice_orders/new">添加新的报价</a></small></h4>';
+      var sOut = '<h4>报价记录 <small><a href="/tips/buying_advices/'+iAdviceId+'/buying_advice_orders/new">添加新的报价</a>'+(aLowest?'（目前最低报价：'+aLowest+'）':'')+'</small></h4>';
       if (aOrderData.length > 0) {
         sOut += '<table class="table">';
         sOut += '<thead><tr><th>价格</th><th>详细描述</th><th>销售顾问</th><th>操作</th></tr></thead>';
