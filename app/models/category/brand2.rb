@@ -11,7 +11,9 @@ class Category::Brand2 < ActiveRecord::Base
 
   def self.with_area_and_brand area_id, brand_id
     return [] if Tips::SellingBrand
-      .with_main_area(area_id).count.zero?
+      .with_main_area(area_id)
+      .with_brand(brand_id)
+      .count.zero?
     count = Tips::BuyingAdvice
       .with_main_area(area_id)
       .with_brand(brand_id)
