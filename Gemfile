@@ -96,7 +96,7 @@ group :development, :test do
   gem 'factory_girl_rails'
 
   gem 'quiet_assets'
-  gem 'pry-debugger'
+  gem 'pry-byebug'
   gem 'pry-rails'
 
   gem 'better_errors'
