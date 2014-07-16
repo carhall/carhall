@@ -38,10 +38,8 @@ gem 'pikaday-gem'
 # For frontend
 gem 'simple_form'
 gem 'cocoon'
-gem 'show_for', github: 'bbtfr/show_for'
-# gem 'show_for', path: '..'
-gem 'index_for', github: 'bbtfr/index_for'
-# gem 'index_for', path: '..'
+gem 'show_for', path: 'vendor'
+gem 'index_for', path: 'vendor'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'

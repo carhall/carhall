@@ -1,0 +1,14 @@
+script: "bundle exec rake"
+rvm:
+  - 2.0.0
+  - 1.9.3
+gemfile:
+  - gemfiles/Gemfile-rails.3.2.x
+  - Gemfile
+notifications:
+  email: false
+  campfire:
+    on_success: change
+    on_failure: always
+    rooms:
+      - secure: "1jM45T9Qz66U8toE0hD+jlFrXq6tamt28sAcCwmE5DXw/tJUMhdAcWcjjOXi\nT/u/dIvLtsuF9epXzzk4+iyywTKa4wW33+GGd5AtdA7IZZI0y37VnaaTZBF3\nz+vEmQmGAT91VxUo6BOn9Xljb4qp5mBAR+Ug8PvCnmvKNxkMJxs="
