@@ -1,3 +1,5 @@
+require 'grape-swagger'
+
 class AssistantAPI < Grape::API
   version 'v1', using: :param
   format :json
@@ -38,4 +40,5 @@ class AssistantAPI < Grape::API
   mount Tips::VehicleInsuranceOrderAPI => '/vehicle_insurance_orders'
   mount Tips::SecondhandAppraiseOrderAPI => '/secondhand_appraise_orders'
   mount Tips::TestDrivingOrderAPI => '/test_driving_orders'
+  add_swagger_documentation mount_path: "/assistant_doc"
 end

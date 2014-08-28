@@ -15,6 +15,7 @@
     <% Category::Day.all.each do |day, name| %>
       <tr>
         <% discount = OpenStruct.new @mending.discount[name] %>
+        <%next if discount.marshal_dump.keys.blank?%>
         <td>周<%= t('date.abbr_day_names')[day%7] %></td>
         <td><%= discount.discount_during %></td>
         <td><%= discount.man_hours_discount %></td>

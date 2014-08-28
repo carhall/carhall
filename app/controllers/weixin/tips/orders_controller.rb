@@ -29,7 +29,8 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
   def create
     @order = @parent.new(params.require(:order).permit!)
     if @order.save
-      flash[:success] = "您成功购买了 #{@order.title} 。"
+      msg = get_msg_from_type
+      flash[:success] = msg
       redirect_to weixin_root_path
     else
       render :new
@@ -83,6 +84,20 @@ private
         raise ActionController::RoutingError, "Unknown order type: #{params[:type]}"
       end
     @parent = @parent.with_dealer(@dealer)
+  end
+
+  def get_msg_from_type
+  	case  params[:type]
+  	when  "vehicle_insurance"
+  		return "您成功递交了 #{@order.title} 。稍后会有工作人员与您取得联系。"
+  	when "mending"
+  		return "您成功预约了 #{@order.title} 。稍后会有工作人员与您取得联系。"
+  	when  "secondhand_appraise"
+  		return "您成功递交了 #{@order.title} 。"
+  	else
+  		return "您成功购买了 #{@order.title} 。"
+  	end  		
+
   end
 
   def get_parent_with_user

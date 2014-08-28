@@ -30,9 +30,12 @@
 
 <%= javascript_include_tag "pikaday" %>
 <script>
+
+
   var field = document.getElementById('order_purchasing_date');
   var timepicker = new Pikaday({
     field: field,
+    i18n: i18n,
     format: "yyyy-mm-dd"
   });
 </script>
