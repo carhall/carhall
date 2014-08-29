@@ -94,19 +94,18 @@ private
        	return "您成功预约了 #{@order.source.try(:title)} 。稍后会有工作人员与您取得联系。"
        end
   	else
-  	case  params[:type]
-  	when  "vehicle_insurance"
-  		return "您成功递交了 #{@order.title} 。稍后会有工作人员与您取得联系。"
-  	when "mending"
-  		return "您成功预约了 #{@order.title} 。稍后会有工作人员与您取得联系。"
-  	when  "secondhand_appraise"
-  		return "您成功递交了 #{@order.title} 。"
-  	else
-  		return "您成功购买了 #{@order.title} 。"
-  	end 
+  	   case  params[:type]
+  	   when  "vehicle_insurance"
+  		  return "您成功递交了 #{@order.title} 。稍后会有工作人员与您取得联系。"
+  	   when "mending"
+  		  return "您成功预约了 #{@order.title} 。稍后会有工作人员与您取得联系。"
+  	   when  "secondhand_appraise"
+  		  return "您成功递交了 #{@order.title} 。"
+  	   else
+  		  return "您成功购买了 #{@order.title} 。"
+  	   end 
   	end 	
   	return "您成功购买了 #{@order.title} 。"	
-
   end
 
   def get_parent_with_user
