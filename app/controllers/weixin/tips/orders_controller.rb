@@ -87,6 +87,13 @@ private
   end
 
   def get_msg_from_type
+
+  	if  params[:type].blank?
+       case @order.class.to_s
+       when  "Tips::TestDrivingOrder"
+       	return "您成功预约了 #{@order.source.try(:title)} 。稍后会有工作人员与您取得联系。"
+       end
+  	else
   	case  params[:type]
   	when  "vehicle_insurance"
   		return "您成功递交了 #{@order.title} 。稍后会有工作人员与您取得联系。"
@@ -96,7 +103,9 @@ private
   		return "您成功递交了 #{@order.title} 。"
   	else
   		return "您成功购买了 #{@order.title} 。"
-  	end  		
+  	end 
+  	end 	
+  	return "您成功购买了 #{@order.title} 。"	
 
   end
 

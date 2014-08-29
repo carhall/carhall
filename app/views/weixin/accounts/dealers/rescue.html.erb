@@ -1,19 +1,17 @@
 <% content_for :title do %>
-  故障救援
+  救援
 <% end %>
 
 <div class="card">
   <ul class="table-view table-view-block">
     <div id="map" style="width:100%; height:200px"></div>
     <li class="table-view-cell">
-      故障救援热线
+      救援热线
       <span class="pull-right">
         <a href="tel:<%= @dealer.rescue_phone %>"><%= @dealer.rescue_phone %></a>
       </span>
     </li>
-    <li class="table-view-cell">
-      救援服务
-    </li>
+ 
     <li class="table-view-cell">
       联系交警
       <span class="pull-right">
