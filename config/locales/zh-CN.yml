@@ -291,13 +291,13 @@ zh-CN:
         used_count: 已使用次数
       tips/secondhand_appraise_order:
         purchasing_date: 入手年份
-        travelling_miles: 行驶里程
+        travelling_miles: 行驶里程(Km)
         brand_id: 汽车品牌
         brand: 汽车品牌
         series: 汽车型号
       tips/secondhand_appraise_order/detail:
         purchasing_date: 入手年份
-        travelling_miles: 行驶里程
+        travelling_miles: 行驶里程(Km)
         brand_id: 汽车品牌
         series: 汽车型号
       tips/vehicle_insurance_order/detail:
