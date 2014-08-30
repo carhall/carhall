@@ -2,20 +2,21 @@
   <%= devise_error_messages! @order %>
   <div class="card">
     <ul class="table-view table-view-block">
-      <li class="table-view-cell input-row">
-        <%= f.input :brand_id, collection: Category::Brand.to_select %>
-      </li>
-      <li class="table-view-cell input-row"><%= f.input :series %></li>
-      <li class="table-view-cell input-row"><%= f.input :plate_num %></li>
-    </ul>
-  </div>
-  <div class="card">
-    <ul class="table-view table-view-block">
       <li class="table-view-cell input-row"><%= f.input :arrive_at, input_html: { readonly: true } %></li>
       <li class="table-view-cell input-row"><%= f.input :mending_type_id, collection: Tips::MendingOrderDetail::MendingType.to_select, selected: 1 %></li>
       <li class="table-view-cell input-row"><%= f.input :description %></li>
     </ul>
   </div>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell input-row Category::Brand.to_select">
+        <%= f.input :brand_id, collection: (Category::Brand.find (@mending.brand_ids)).map{|b|[b.name,b.id]} } %>
+      </li>
+      <li class="table-view-cell input-row"><%= f.input :series %></li>
+      <li class="table-view-cell input-row"><%= f.input :plate_num %></li>
+    </ul>
+  </div>
+  
   <div class="card-no-border">
     <%= f.hidden_field :source_id, value: @mending.id %>
     <button class="btn btn-positive btn-block">确认预约</button>
