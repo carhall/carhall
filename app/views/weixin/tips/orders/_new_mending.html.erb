@@ -10,7 +10,8 @@
   <div class="card">
     <ul class="table-view table-view-block">
       <li class="table-view-cell input-row Category::Brand.to_select">
-        <%= f.input :brand_id, collection: (Category::Brand.find (@mending.brand_ids)).map{|b|[b.name,b.id]}%>
+      	<%collect = [[Category::Brand.last.name,Category::Brand.last.id]]+(Category::Brand.find (@mending.brand_ids)).map{|b|[b.name,b.id]}%>
+        <%= f.input :brand_id, collection: collect.uniq%>
       </li>
       <li class="table-view-cell input-row"><%= f.input :series %></li>
       <li class="table-view-cell input-row"><%= f.input :plate_num %></li>

@@ -27,7 +27,7 @@
 <h3 class="content-padded">专修品牌</h3>
 <div class="card">
   <ul class="table-view table-view-block">
-  	<%if @mending.brands.blank? %>
+  	<%unless @mending.brands.blank? %>
     <% @mending.brands.each do |brand| %>
       <li class="table-view-cell"><%= brand %></li>
     <% end %>
