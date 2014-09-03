@@ -27,7 +27,7 @@ module ApplicationHelper
   	
   	if title.match(/\((\d.*)\)/)
   	   lat,lng = $1.split(",")
-  	   url="http://api.map.baidu.com/staticimage?width=400&height=200&markers=#{lat},#{lng}&zoom=14&markerStyles=s,A,0xff0000"	
+  	   url="http://api.map.baidu.com/staticimage?width=400&height=200&markers=#{lat},#{lng}&zoom=14&markerStyles=l,A,0xff0000"	
   	   return image_tag(url)
     end
     title
