@@ -25,10 +25,12 @@ module ApplicationHelper
   def from_title_get_map(title)
   	return "暂无地点，请直接联系" if title.blank?
   	title.match(/\((\d.*)\)/)
-  	lat,lng = $1.split(",")
-  	url="http://api.map.baidu.com/staticimage?width=400&height=200&markers=#{lat},#{lng}&zoom=14&markerStyles=s,A,0xff0000"
-  	
-  	image_tag(url)
+  	if $1
+  	   lat,lng = $1.split(",")
+  	   url="http://api.map.baidu.com/staticimage?width=400&height=200&markers=#{lat},#{lng}&zoom=14&markerStyles=s,A,0xff0000"	
+  	   image_tag(url)
+    end
+    title
   #	http://api.map.baidu.com/staticimage?width=400&height=200&center=北京&markers=116.403874,39.914888&zoom=13&markerStyles=s,A,0xff0000
   end
 
