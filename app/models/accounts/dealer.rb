@@ -52,7 +52,8 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :vehicle_insurance_orders, class_name: 'Tips::VehicleInsuranceOrder'
   has_many :secondhand_appraise_orders, class_name: 'Tips::SecondhandAppraiseOrder'
   has_many :test_driving_orders, class_name: 'Tips::TestDrivingOrder'
-
+  has_many :rescue_orders, class_name: 'Tips::RescueOrder'
+  
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
   has_many :recent_reviews, through: :recent_orders, source: :review, 
     class_name: 'Tips::Review'

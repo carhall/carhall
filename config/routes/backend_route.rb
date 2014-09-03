@@ -50,6 +50,8 @@ Carhall::Application.routes.draw do
     resource :dashboard, only: :show
     root to: 'dashboards#show'
 
+
+
     resources :mendings do
       put :expose, on: :member
       put :hide, on: :member
@@ -117,6 +119,7 @@ Carhall::Application.routes.draw do
       get :vehicle_insurance, on: :collection
       get :secondhand_appraise, on: :collection
       get :vip_card, on: :collection
+      get :rescue_orders,on: :collection
 
       put :enable, on: :member
     end

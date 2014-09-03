@@ -34,6 +34,7 @@ class Accounts::DealerDetail < ActiveRecord::Base
     secondhand_appraise: ["二手评估", "白金会员", %w(4S店 汽车销售)],
     bulk_purchasing2: ["限时求购", nil, %w(洗车美容 专项服务 专修 4S店 汽车销售)],
     buying_advice: ["易卖车", "钻石会员", %w(4S店 汽车销售)],
+    rescue_orders: ["救援服务", "普通会员", %w(洗车美容 专项服务 专修 4S店)]
   }
 
   Ranks = [

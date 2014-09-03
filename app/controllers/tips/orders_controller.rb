@@ -6,8 +6,10 @@ class Tips::OrdersController < Tips::ApplicationController
   load_resource :bulk_purchasing, class: Tips::BulkPurchasing
   load_resource :bulk_purchasing2, class: Tips::BulkPurchasing2
   load_resource :vip_card, class: Tips::VipCard
+  load_resource :rescue_orders, class: Tips::RescueOrder
+
   set_resource_class Tips::Order, through: [:mending, :cleaning, :test_driving,
-    :bulk_purchasing, :bulk_purchasing2, :vip_card], shallow: true
+    :bulk_purchasing, :bulk_purchasing2, :vip_card,:rescue_oders], shallow: true
 
   def mending
     @orders = @dealer.mending_orders
@@ -40,6 +42,10 @@ class Tips::OrdersController < Tips::ApplicationController
   def vip_card
     @orders = @dealer.vip_card_orders
     render 'vip_cards'
+  end
+
+  def rescue_orders
+  	@orders = @dealer.rescue_orders
   end
 
   def enable

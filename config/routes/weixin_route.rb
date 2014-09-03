@@ -30,6 +30,11 @@ Carhall::Application.routes.draw do
 
     scope module: :tips do
       resources :dealers do
+      	resource :rescues ,:only=>[] do
+      		resources :orders, only: [:index,:create], type: "rescue" do
+                post :create_confirmation, on: :collection
+            end
+      	end 
         resource :mending, only: [:show] do
           resources :orders, only: [:index, :new, :create], type: "mending" do
             post :create_confirmation, on: :collection

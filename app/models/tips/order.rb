@@ -11,7 +11,7 @@ class Tips::Order < ActiveRecord::Base
 
   has_one :review
 
-  validates_presence_of :source, :user 
+  validates_presence_of  :user 
   
   include Share::Queryable
   define_queryable_column :user_mobile, :user_plate_num
@@ -22,7 +22,7 @@ class Tips::Order < ActiveRecord::Base
   
   before_create do
     self.dealer_id ||= source.dealer_id
-    self.title = set_title
+    self.title = set_title if title.blank?
     self.cost = set_cost
 
     # make friend with dealer
@@ -41,6 +41,7 @@ class Tips::Order < ActiveRecord::Base
   end
 
   def set_cost
+  	return false if source_id.blank?
     cost ||= source.vip_price if source.respond_to? :vip_price
     cost ||= source.price if source.respond_to? :price
     cost ||= 0

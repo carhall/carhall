@@ -5,7 +5,7 @@ class Ability
     # Define abilities for the passed in user here. For example:
     alias_action :expose, :hide, :stick, :unstick, :to => :set_displayable
     alias_action :mending, :cleaning, :test_driving, :bulk_purchasing,
-      :bulk_purchasing2, :vip_card, :vehicle_insurance, :secondhand_appraise, 
+      :bulk_purchasing2, :vip_card, :vehicle_insurance, :secondhand_appraise,:rescue_orders, 
       to: :read
     alias_action :category, :product, to: :read
 
@@ -56,7 +56,7 @@ class Ability
       can :read, Accounts::Friendship
 
       can :read, Tips
-      if user.accepted?
+     if user.accepted?
         can :manage, Tips::Mending, dealer: user
         can :manage, Tips::Cleaning, dealer: user
         can :manage, Tips::TestDriving, dealer: user
@@ -74,9 +74,10 @@ class Ability
         can :manage, Tips::BuyingAdviceOrder, dealer: user
 
         can :enable, Tips::Order, dealer: user
-      end
+     end
 
       can :manage, Tips::PurchaseRequesting, dealer: user
+      can :manage, Tips::RescueOrder, dealer: user
 
       can :read, Tips::BulkPurchasing2
       can :read, Tips::ManualImage

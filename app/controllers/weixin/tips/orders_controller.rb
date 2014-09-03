@@ -4,6 +4,7 @@ class Weixin::Tips::OrdersController < Weixin::ApplicationController
   load_resource :test_driving, class: Tips::TestDriving
   load_resource :bulk_purchasing, class: Tips::BulkPurchasing
   load_resource :vip_card, class: Tips::VipCard
+  load_resource :rescue, class: Tips::RescueOrder
 
   before_filter :authenticate_weixin_account!, except: [:index]
   before_filter :set_weixin_current_user, except: [:index]
@@ -62,7 +63,7 @@ private
   end
 
   def get_source_parent
-    @source = @mending || @cleaning || @test_driving || @bulk_purchasing || @vip_card
+    @source = @mending || @cleaning || @test_driving || @bulk_purchasing || @vip_card 
     @parent = @source.orders
   end
   
@@ -80,6 +81,8 @@ private
         @user.vehicle_insurance_orders
       when "secondhand_appraise"
         @user.secondhand_appraise_orders
+      when "rescue"
+        @user.rescue_orders 
       else
         raise ActionController::RoutingError, "Unknown order type: #{params[:type]}"
       end
@@ -101,6 +104,8 @@ private
   		  return "您成功预约了 #{@order.title} 。稍后会有工作人员与您取得联系。"
   	   when  "secondhand_appraise"
   		  return "您成功递交了 #{@order.title} 。"
+  		when "rescue"
+  		  return "您已申请救援，稍后工作人员跟你联系"
   	   else
   		  return "您成功购买了 #{@order.title} 。"
   	   end 
