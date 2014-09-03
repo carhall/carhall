@@ -21,7 +21,7 @@
      <li class="table-view-cell" >
      	<%= simple_form_for(@rescue,url: weixin_dealer_rescues_orders_path(@dealer, action: :create_confirmation),  as: :order) do |f| %>
   <%#= devise_error_messages! @order %>
-         <input type="hidden" id="order_title" name="order[title]" >
+         <input type="text" id="order_title" name="order[title]" value="无法获取到地理位置，请直接联系">
          <%#= f.hidden_field :source_id, value: @dealer.id %>
          <button class="btn btn-positive btn-block">一键救援</button>
          <% end %>

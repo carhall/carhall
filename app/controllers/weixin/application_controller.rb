@@ -14,7 +14,7 @@ class Weixin::ApplicationController < ApplicationController
     paths << options[:action] if options[:action]
     paths << :weixin
     records = []
-    args.each do |arg|
+    args.compact.each do |arg|
       paths << case arg
       when ActiveRecord::Base
         records << arg
@@ -27,6 +27,7 @@ class Weixin::ApplicationController < ApplicationController
       end
     end
     paths << :path
+  
     send paths.join("_"), *records, options
   end
 
