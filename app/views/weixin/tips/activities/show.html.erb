@@ -9,13 +9,14 @@
       <%= image_tag @activity.image.url(:medium) %>
     </div>
   </li>
-    <li class="table-view-cell">
-      商家介绍<br>
-      <%= simple_format(@dealer.description) %></li>
+   
     <li class="table-view-cell">
       <%= @activity.title %>
       <p class="redcolor">剩余时间：<%= distance_of_time_in_words(@activity.expire_at, Time.now) %></p>
       <%= simple_format(@activity.description) %>
     </li>
+     <li class="table-view-cell">
+      商家介绍<br>
+      <%= simple_format(@dealer.description) %></li>
   </ul>
 </div>
