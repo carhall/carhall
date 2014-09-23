@@ -88,6 +88,7 @@ module WeixinHelper
         "weixin/distributors/#{account.id}"
     when "mine"
     	format_to_news "进入个人中心",
+    	"点击进入个人中心，查看等多信息",
         account.avatar,
         "weixin/dealers/#{account.id}/current_user/personal_centers"
       #generate_mine account
