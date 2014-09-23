@@ -93,6 +93,7 @@ module WeixinHelper
       #generate_mine account
     end
   rescue Exception => e
+  	puts e.inspect
     "暂无数据"
   end
 

@@ -27,12 +27,12 @@ class Weixin::Statistic::PersonalCentersController < Weixin::ApplicationControll
   
   end
   def get_param_from_data_type
-  	#hash = {mobile: @user.mobile,shopuserid: params[:dealer_id],rnd: Time.now.to_i}
-  	hash = {mobile: 15020000001,shopuserid: 101,rnd: Time.now.to_i}
+  	hash = {mobile: @user.mobile,shopuserid: params[:dealer_id],rnd: Time.now.to_i}
+  	#hash = {mobile: 15020000001,shopuserid: 101,rnd: Time.now.to_i}
   	param = {}
   	case params[:data_type]
 
-  	when "mobile_card"
+  	when "mobile_card","store"
       param = {method: "queryCardInfo"}
     when "consume"
   	  param = {method: "expense_query"}
