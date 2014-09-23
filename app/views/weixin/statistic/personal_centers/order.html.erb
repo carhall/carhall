@@ -14,7 +14,13 @@
  <%if  @dealer.try(:dealer_type)=="4S店"%>
   <li class="table-view-cell text-center "><a href="/weixin/dealers/<%=@dealer.id%>/test_drivings">试驾订单</a></li>
   <%end%>
-  <li class="table-view-cell text-center "><a href="/weixin/dealers/<%=@dealer.id%>/current_user/mending/orders">预定订单</a></li>
+   <%if  @dealer.try(:dealer_type)=="洗车美容"%>
+    <li class="table-view-cell text-center "><a href="/weixin/dealers/<%=@dealer.id%>/current_user/vip_card/orders">会员卡订单</a></li>
+   <%else%>
+  
+  <li class="table-view-cell text-center "><a href="/weixin/dealers/<%=@dealer.id%>/current_user/mending/orders">预约订单</a></li>
+  <%end%>
+ 
   <li class="table-view-cell text-center "><a href="/weixin/dealers/<%=@dealer.id%>/current_user/bulk_purchasing/orders">团购订单</a></li>
   
    
