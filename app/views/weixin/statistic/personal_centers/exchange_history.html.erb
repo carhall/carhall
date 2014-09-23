@@ -1,0 +1,37 @@
+<% content_for :title do %>
+  兑换记录
+<% end %>
+
+							
+
+<div class="card">
+  <table class="table-view">
+  	<tr>
+      <th colspan=4>兑换记录</th>
+      
+    </tr>
+  	
+    <tr>
+      <th>卡名称</th>
+      <th>兑换积分</th>
+      <th>兑换礼品</th>    
+      <th>交易时间</th>
+    </tr>
+    <%if  @result.nil? ||  @result["result"]=="N"%>
+  	<tr>
+      <td colspan=8>暂无记录</td>
+    </tr>
+  	<%else%>
+  	 <%@result["data"].each do |d|%>
+    <tr>
+      <td><%=d["Cardclassifyname"]%></td>
+      <td><%=d["Score"]%></td> 
+      <td><%=d["Giftname"]%></td>
+      <td><%=d["Crtdate"]%></td>       
+    </tr>
+    <%end unless @result["data"].blank?%>
+
+
+    <%end%>
+  </table>
+</div>

@@ -1,0 +1,42 @@
+<% content_for :title do %>
+  充次记录
+<% end %>
+
+							
+
+<div class="card">
+  <table class="table-view">
+  	<tr>
+      <th colspan=5>充次记录</th>
+      
+    </tr>
+  	
+    <tr>
+      <th>卡名称</th>
+      <th>交易项目</th>
+      <th>充值金额</th>
+      <th>应收金额</th>
+  
+       <th>交易时间</th>
+    </tr>
+    <%if  @result.nil? || @result["result"]=="N"%>
+  	<tr>
+      <td colspan=5>暂无记录</td>
+    </tr>
+  	<%else%>
+  	 <%@result["data"].each do |d|%>
+    <tr>
+    	<td><%=d["Cardclassifyname"]%></td> 
+    
+      <td><%=d["ConsumeRule"]%></td> 
+      <td><%=d["Amount"]%></td>
+      <td><%=d["realAmount"]%></td>   
+      
+      <td><%=d["Crtdate"]%></td>       
+    </tr>
+    <%end unless @result["data"].blank?%>
+
+
+    <%end%>
+  </table>
+</div>

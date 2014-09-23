@@ -16,12 +16,15 @@ Carhall::Application.routes.draw do
       end
       resources :distributors
       resource :current_user
-      resource :current_dealer
+      resource :current_dealer 
     end
 
     scope module: :statistic do
       resources :dealers do
         resource :current_user do
+          resources :personal_centers ,only: [:index] do 
+             get "data/:data_type" ,action: :data_from_api,on: :collection
+          end
           resources :consumption_records, only: [:show, :index]
           resources :sales_cases, only: [:show, :index]
         end

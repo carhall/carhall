@@ -26,6 +26,8 @@ module Carhall
     # config.i18n.default_locale = :de
     config.i18n.default_locale = :'zh-CN'
 
+    config.autoload_paths += Dir["#{config.root}/lib", "#{config.root}/lib/**/"]
+
     config.action_dispatch.rescue_responses["CanCan::AccessDenied"] = :forbidden
     config.action_dispatch.rescue_responses["ActiveRecord::AssociationTypeMismatch"] = :unprocessable_entity
 

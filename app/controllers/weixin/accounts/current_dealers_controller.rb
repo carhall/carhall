@@ -8,4 +8,5 @@ class Weixin::Accounts::CurrentDealersController < Weixin::ApplicationController
   def mine
   end
 
+
 end

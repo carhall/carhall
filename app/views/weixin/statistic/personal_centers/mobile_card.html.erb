@@ -1,0 +1,36 @@
+<% content_for :title do %>
+  手机充值卡
+<% end %>
+
+
+<div class="card">
+  <table class="table-view">
+  	<%if @result.nil? || @result["result"]=="N"%>
+  	<tr>
+      <td>暂无记录</td>
+    </tr>
+  	<%else%>
+    <tr>
+      <td>卡号:<%=@result["Cardid"]%></td>
+      <td>卡名称:<%=@result["Cardclassifyname"]%></td>     
+    </tr>
+     <tr>
+      <td>积分:<%=@result["Score"]%></td>
+      <td>有效期:<%=@result["Expiredate"]%></td>     
+    </tr>
+    <tr>
+      <td colspan=2>剩余服务次数</td>
+    </tr>
+    <tr>
+      <td>项目名称</td>
+      <td>剩余次数</td>     
+    </tr>
+    <%@result["data"].each do |d|%>
+    <tr>
+      <td><%=d["ProductName"]%></td>
+      <td><%=d["Num"]%></td>     
+    </tr>
+    <%end unless @result["data"].blank?%>
+    <%end%>
+  </table>
+</div>

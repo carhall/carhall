@@ -1,0 +1,36 @@
+<% content_for :title do %>
+  爱车提醒
+<% end %>
+
+							
+
+<div class="card">
+  <table class="table-view">
+  	<tr>
+      <th colspan=4>爱车提醒</th>     
+    </tr>
+  	
+    <tr>
+      <th>主题</th>
+      <th>描述</th>
+      <th>服务顾问</th>    
+      <th>时间</th>
+    </tr>
+    <%if @result.nil? || @result["result"]=="N" %>
+  	<tr>
+      <td colspan=8>暂无记录</td>
+    </tr>
+  	<%else%>
+  	 <%@result["data"].each do |d|%>
+    <tr>
+      <td><%=d["Subject"]%></td>
+      <td><%=d["Message"]%></td> 
+      <td><%=d["Serviceadvisor"]%></td>
+      <td><%=d["Crtdate"]%></td>       
+    </tr>
+    <%end unless @result["data"].blank?%>
+
+
+    <%end%>
+  </table>
+</div>

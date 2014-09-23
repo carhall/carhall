@@ -1,0 +1,42 @@
+<% content_for :title do %>
+   消费记录
+<% end %>
+
+							
+
+<div class="card">
+  <table class="table-view">
+  	 <tr>
+      <th colspan=6>消费记录</th>     
+    </tr>
+    <tr>
+      <th>消费项目</th>
+      <th>消费金额</th>
+      <th>应收金额</th>
+       <th>支付方式</th>
+        <th>交易时间</th>
+      <th>状态</th>
+      
+    </tr>
+    <%if  @result.nil? ||  @result["result"]=="N"%>
+  	<tr>
+      <td colspan=6>暂无记录</td>
+    </tr>
+  	<%else%>
+  	 <%@result["data"].each do |d|%>
+    <tr>
+   
+      <td><%=d["ConsumeRule"]%></td> 
+      <td><%=d["Amount"]%></td>
+      <td><%=d["realAmount"]%></td>   
+      <td><%=d["Score"]%></td>
+       <td><%=d["Crtdate"]%></td>   
+       <td><%=d["State"]%></td>
+         
+    </tr>
+    <%end unless @result["data"].blank?%>
+
+
+    <%end%>
+  </table>
+</div>

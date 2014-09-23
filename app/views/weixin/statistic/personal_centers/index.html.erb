@@ -1,0 +1,43 @@
+<% content_for :title do %>
+  个人中心
+<% end %>
+<style>
+.table-view img.image{width:32px;height: 32px;}
+</style>
+<div class="card">
+  <table class="table-view">
+    
+      <tr>
+        <td>  <a href="/weixin/current_user"><img src="/weixin/info.png" class="image"/>
+<br/>个人信息</a></td>
+<td> <a href="/weixin/dealers/<%=params[:dealer_id]%>/current_user/personal_centers/data/mobile_card"> <img src="/weixin/bindMobile.png" class="image"/>
+<br/>手机会员卡</a></td>
+<td> <a href="/weixin/dealers/<%=params[:dealer_id]%>/current_user/personal_centers/data/order">  <img src="/weixin/orderRecord.png" class="image"/>
+<br/>订单查询</td>
+       
+      </tr>
+
+
+      <tr>
+        <td> <a href="/weixin/dealers/<%=params[:dealer_id]%>/current_user/personal_centers/data/consume"> <img src="/weixin/consume.png" class="image"/>
+<br/>消费记录</a></td>
+<td><a href="/weixin/dealers/<%=params[:dealer_id]%>/current_user/personal_centers/data/jifen">   <img src="/weixin/pointRecord.png" class="image"/>
+<br/>积分记录</a></td>
+<td>  <a href="/weixin/dealers/<%=params[:dealer_id]%>/current_user/personal_centers/data/store"> <img src="/weixin/valueRecord.png" class="image"/>
+<br/>储值记录</a></td>
+       
+      </tr>
+
+      <tr>
+        <td> <a href="/weixin/dealers/<%=params[:dealer_id]%>/current_user/personal_centers/data/deposit">  <img src="/weixin/countRecord.png" class="image"/>
+<br/>充次记录</a></td>
+<td> <a href="/weixin/dealers/<%=params[:dealer_id]%>/current_user/personal_centers/data/exchange_history">  <img src="/weixin/giftRecord.png" class="image"/>
+<br/>兑换记录</a></td>
+<td> <a href="/weixin/dealers/<%=params[:dealer_id]%>/current_user/personal_centers/data/message" ><img src="/weixin/feedback.png" class="image"/>
+<br/>提醒服务 </a>
+</td>
+       
+      </tr>
+
+  </table>
+</div>

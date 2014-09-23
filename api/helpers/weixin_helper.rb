@@ -87,7 +87,10 @@ module WeixinHelper
         account.avatar,
         "weixin/distributors/#{account.id}"
     when "mine"
-      generate_mine account
+    	format_to_news "进入个人中心",
+        account.avatar,
+        "weixin/dealers/#{account.id}/current_user/personal_centers"
+      #generate_mine account
     end
   rescue Exception => e
     "暂无数据"
@@ -259,6 +262,8 @@ module WeixinHelper
       case key
       when :current_user
         format_to_news "个人资料", "点击查看我的详细资料", "weixin/current_user.png",  "weixin/current_user"
+      when :personal_center
+      	 format_to_news "个人中心" , "点击查看个人中心资料", "weixin/arrow_right.png", "weixin/dealers/#{account.id}/current_user/personal_centers"
       when :current_dealer
         format_to_news "个人资料", "点击查看我的详细资料", "weixin/current_user.png",  "weixin/current_dealer"
       when :vip_card_order

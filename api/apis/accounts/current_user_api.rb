@@ -9,6 +9,7 @@ module Accounts
     get do
       present! current_user, type: :detail
     end
+
     
   end
 end
