@@ -43,7 +43,7 @@ class Weixin::Statistic::PersonalCentersController < Weixin::ApplicationControll
   	when "exchange_history"
   	  param = {method: "pointExchangeHistory"}
   	when "message"
-  	  param = {method: "userMessageList"}
+  	  param = {method: "userMessgeList"}
   	
   	end
 
