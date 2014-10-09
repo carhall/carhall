@@ -25,6 +25,7 @@
     </tr>
   	<%else%>
   	 <%@result["data"].each do |d|%>
+  	 <%next unless d["Cardclassifyname"]=~/次卡/%>
     <tr>
     	<td><%=d["Cardclassifyname"]%></td> 
     

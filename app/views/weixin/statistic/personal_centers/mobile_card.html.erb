@@ -10,9 +10,12 @@
       <td>暂无记录</td>
     </tr>
   	<%else%>
+  <!--	<tr>
+     <td colspan=2><img src="/weixin/card_background.png"/></td>
+  	</tr>-->
     <tr>
       <td>卡号:<%=@result["Cardid"]%></td>
-      <td>卡名称:<%=@result["Cardclassifyname"]%></td>     
+      <td>余额:<%=@result["Amount"]%></td>     
     </tr>
      <tr>
       <td>积分:<%=@result["Score"]%></td>

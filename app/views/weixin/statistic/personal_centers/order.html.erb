@@ -17,13 +17,12 @@ margin: 0 auto;
       <%= image_tag "/weixin/orderRecord.png"%>
     </div>
   </li>
- <%if  @dealer.try(:dealer_type)=="4S店"%>
-  <li class="table-view-cell text-center "><a href="/weixin/dealers/<%=@dealer.id%>/test_drivings">试驾订单</a></li>
+ <%if ["4S店","汽车销售"].include? @dealer.try(:dealer_type) %>
+  <li class="table-view-cell text-center "><a href="<%= test_driving_tips_orders_path %> ">试驾订单</a></li>
   <%end%>
    <%if  @dealer.try(:dealer_type)=="洗车美容"%>
     <li class="table-view-cell text-center "><a href="/weixin/dealers/<%=@dealer.id%>/current_user/vip_card/orders">会员卡订单</a></li>
-   <%else%>
-  
+   <%elsif @dealer.try(:dealer_type)!="专项服务" ||  @dealer.try(:dealer_type)!= "汽车销售"%>
   <li class="table-view-cell text-center "><a href="/weixin/dealers/<%=@dealer.id%>/current_user/mending/orders">预约订单</a></li>
   <%end%>
  
