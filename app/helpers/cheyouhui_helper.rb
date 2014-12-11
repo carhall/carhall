@@ -2,7 +2,7 @@ module CheyouhuiHelper
 
     def response_for_click(tag)
     	# binding.pry
-    	host = "http://weixin-sgd.ngrok.com/"
+    	host = "http://115.28.13.212"
     	 token = @weixin_message["FromUserName"]
     	
     	 Rails.logger.info(token)
