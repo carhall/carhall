@@ -4,30 +4,30 @@ class Weixin::Cheyouhui::BuycarsController < Weixin::Cheyouhui::ApplicationContr
   before_filter :load_buying_advice
   before_filter :load_area_and_brand
 
-  def show
-    redirect_to weixin_brand2s_path unless @buying_advice
+  def index  	
+    redirect_to weixin_cheyouhui_brand2s_path unless @buying_advice
   end
 
   def buy
-    @buying_advice ||= @user.build_buying_advice
+    @buying_advice = @user.build_buying_advice
   end
 
-  def update
+  def buy_new 
     @buying_advice ||= @user.create_buying_advice
-
     if @buying_advice.update_attributes params.require(:tips_buying_advice)
       .permit(:main_area_id, :brand3_id, :buying_at_id, :buying_pattern_id, :license)
+    
       flash[:success] = "您成功设置了 询价请求 。"
-      redirect_to action: :show
+      redirect_to action: :index
     else
-      render :edit
+      render :buy
     end
   end
-  alias_method :create, :update
+ # alias_method :create, :update
 
   def destroy
     @buying_advice.destroy
-    redirect_to action: :show
+    redirect_to action: :index
   end
 
 private

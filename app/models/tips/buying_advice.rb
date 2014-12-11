@@ -3,11 +3,13 @@ class Tips::BuyingAdvice < ActiveRecord::Base
   include Tips::Statable
 
   default_scope { order('id DESC') }
+
+  belongs_to :weixin_user, class_name: 'Accounts::Wechat', foreign_key: "user_id" 
   
   has_many :buying_advice_orders
   alias_attribute :orders, :buying_advice_orders
 
-  validates_presence_of :user
+  #validates_presence_of :user
   validates_presence_of :brand3_id, :buying_at_id, :buying_pattern_id
   validates_inclusion_of :license, in: [true, false], message: "不能为空"
 

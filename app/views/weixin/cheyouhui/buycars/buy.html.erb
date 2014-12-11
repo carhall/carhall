@@ -1,4 +1,4 @@
-<%= simple_form_for(@buying_advice, url: weixin_current_user_buying_advice_path(area_id: @area_id, brand2_id: @brand2_id)) do |f| %>
+<%= simple_form_for(@buying_advice, url: buy_new_weixin_cheyouhui_buycars_path(area_id: @area_id, brand2_id: @brand2_id)) do |f| %>
   <div class="card">
     <ul class="table-view table-view-block">
       <% @area_id ||= @user.main_area_id %>

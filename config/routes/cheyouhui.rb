@@ -20,9 +20,8 @@ Carhall::Application.routes.draw do
 			end
 			resources :brand2s
 			resources :buycars do
-
 				get :buy,on: :collection
-
+				post :buy_new,on: :collection
 			end
 			resources :my do
 			   get :orders ,on: :collection

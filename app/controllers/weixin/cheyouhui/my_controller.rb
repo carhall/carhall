@@ -8,7 +8,7 @@ class Weixin::Cheyouhui::MyController < Weixin::Cheyouhui::ApplicationController
   	when "cleaning"
       @orders = @user.cleaning_orders
   	when "mending"
-      @orders = @user.cleaning_orders
+      @orders = @user.mending_orders
   	when "groupons"
       @orders = @user.bulk_purchasing_orders
   	when "free_ticket"

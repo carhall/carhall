@@ -10,8 +10,10 @@
       <% @orders.each do |order| %>
         <li class="table-view-cell">
           <%= order.title %>
+          <p>类型: <%= order.source.try(:seat_type) %></p>
           <p>购买数量：<%= order.count %>份</p>
           <p>消费金额：<%= order.cost %>元</p>
+
         </li>
       <% end %>
     </ul>

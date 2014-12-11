@@ -39,8 +39,6 @@
   <% if @dealer.has_template? :buying_advice %>
     <li<%= active? 'tips/buying_advices' or active? 'tips/buying_advice_orders' %>><a href="<%= tips_buying_advices_path %>"><i class="icon-chevron-right"></i> 易卖车询价订单</a></li>
   <% end %>
-
-
   
     <li<%= active? 'tips/orders#rescue_orders'  %>><a href="<%= rescue_orders_tips_orders_path %>"><i class="icon-chevron-right"></i> 救援订单</a></li>
 
@@ -118,14 +116,19 @@
 
 <ul class="nav nav-list sidenav affix-top">
     <li><span><strong>车友会营销</strong></span></li>
+      <% if @dealer.has_template? :vehicle_insurance %>
+    <li<%= active? 'tips/cleanings#(is_cheyouhui: 1,type: "cleaning")' %>><a href="<%= tips_cleanings_path(is_cheyouhui: 1,type: "cleaning") %>"><i class="icon-chevron-right"></i> 车友会洗车项目里列表</a></li>
     
-   <li<%= active? 'tips/cleanings#new(is_cheyouhui: 1)' %>><a href="<%= new_tips_cleaning_path(is_cheyouhui: 1) %>"><i class="icon-chevron-right"></i> 发布车友会洗车项目</a></li>
-
+   <li<%= active? 'tips/cleanings#new(is_cheyouhui: 1)' %>><a href="<%= new_tips_cleaning_path(is_cheyouhui: 1,type: "cleaning") %>"><i class="icon-chevron-right"></i> 发布车友会洗车项目</a></li>
   <li<%= active? 'tips/free_tickets' %>><a href="<%= tips_free_tickets_path%>"><i class="icon-chevron-right"></i> 免费券列表</a></li>
 
   <li<%= active? 'tips/free_ticket#new' %>><a href="<%= new_tips_free_ticket_path%>"><i class="icon-chevron-right"></i> 发布免费券项目</a></li>
   <li<%= active? 'tips/bulk_purchasings#new' %>><a href="<%= new_tips_bulk_purchasing_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
     <li<%= active? 'tips/bulk_purchasings#in_progress' %>><a href="<%= in_progress_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
+  <%#else%>
+   <li<%= active? 'tips/cleanings#(is_cheyouhui: 1,type: 5)' %>><a href="<%= tips_cleanings_path(is_cheyouhui: 1,type: "mending") %>"><i class="icon-chevron-right"></i> 车友会保养项目里列表</a></li>
+  <li<%= active? 'tips/cleanings#new(is_cheyouhui: 1)' %>><a href="<%= new_tips_cleaning_path(is_cheyouhui: 1,type: "mending") %>"><i class="icon-chevron-right"></i> 发布保养项目</a></li>
+    <%end%>
 </ul>
 
 

@@ -3,7 +3,8 @@
 
   <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
   <%if params["is_cheyouhui"]=="1"%>
-   <%= f.input :cleaning_type_id, as: :hidden, input_html: { value: 1 } %>
+
+   <%= f.input :cleaning_type_id, as: :hidden, input_html: { value: params["type"]=="mending" ? 5 : 1 } %>
     <%= f.input :is_cheyouhui, as: :hidden, input_html: { value: true }%>
     <%= f.input :cleaning_type_id, collection: Tips::Cleaning::SeatType.to_select %>
   <%else%>

@@ -1,4 +1,4 @@
-<%= simple_form_for(:tips_brand2, url: weixin_brand2s_path, html: { method: :get }) do |f| %>
+<%= simple_form_for(:tips_brand2, url: weixin_cheyouhui_brand2s_path, html: { method: :get }) do |f| %>
   <div class="card">
     <ul class="table-view">
       <li class="table-view-cell input-row">
@@ -35,7 +35,7 @@
             <tr>
               <% brand2s.each do |brand2| %>
                 <td>
-                  <%= link_to edit_weixin_current_user_buying_advice_path(area_id: @area_id, brand2_id: brand2), data: { transition: "slide-in" } do %>
+                  <%= link_to buy_weixin_cheyouhui_buycars_path(area_id: @area_id, brand2_id: brand2), data: { transition: "slide-in" } do %>
                     <%= image_tag brand2.image.url(:medium) %>
                     <%= brand2.name %>
                   <% end %>

@@ -1,2 +1,22 @@
-<h1>Weixin::Cheyouhui::Mendings#index</h1>
-<p>Find me in app/views/weixin/cheyouhui/mendings/index.html.erb</p>
+<% content_for :title do %>
+  近期服务项目
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <% @cleanings.each do |cleaning| %>
+      <li class="table-view-cell media">
+        <%= link_to weixin_cheyouhui_cleaning_path(cleaning), class: "navigate-right", data: { transition: "slide-in" } do %>
+          <div class="media-title"><%= cleaning.title %></div>
+          <%= image_tag cleaning.image.url(:thumb), class: "media-object pull-left" %>
+          <div class="media-body">
+            <p>已购人数：<%= cleaning.orders_count %></p>
+            <p>评分：<%= print_stars cleaning.stars, false %></p>
+            <p>会员价：<%= cleaning.vip_price %>元</p>
+            <p>原价：<%= cleaning.price %>元</p>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
