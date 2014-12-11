@@ -69,7 +69,7 @@ class Accounts::ApplicationController < ApplicationController
 
     define_method :update do
       account = resource_instance
-      prev_unconfirmed_mobile = account.unconfirmed_mobile if account.respond_to?(:unconfirmed_mobile)
+      #prev_unconfirmed_mobile = account.unconfirmed_mobile if account.respond_to?(:unconfirmed_mobile)
 
       if account_params[:current_password].present?
         result = account.update_with_password(account_params)

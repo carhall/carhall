@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     alias_action :expose, :hide, :stick, :unstick, :to => :set_displayable
-    alias_action :mending, :cleaning, :test_driving, :bulk_purchasing,
+    alias_action :mending, :cleaning, :test_driving, :bulk_purchasing,:free_tickets,
       :bulk_purchasing2, :vip_card, :vehicle_insurance, :secondhand_appraise,:rescue_orders, 
       to: :read
     alias_action :category, :product, to: :read
@@ -23,12 +23,17 @@ class Ability
       # no one can destroy superadmin
       cannot :destroy, Accounts::Admin, id: 1
 
+    when :club
+    	can :read,Cheyouhui::Region
+    	can :manage,Cheyouhui::Region
+
     when :guest
       can :read, Tips::Mending
       can :read, Tips::Cleaning
       can :read, Tips::TestDriving
       can :read, Tips::Activity
       can :read, Tips::BulkPurchasing
+      can :read, Tips::FreeTicket
       can :read, Tips::BulkPurchasing2
       can :read, Tips::VipCard
       can :read, Tips::ManualImage
@@ -62,6 +67,7 @@ class Ability
         can :manage, Tips::TestDriving, dealer: user
         can :manage, Tips::Activity, dealer: user
         can :manage, Tips::BulkPurchasing, dealer: user
+        can :manage, Tips::FreeTicket, dealer: user
         can :manage, Tips::VipCard, dealer: user
         can :manage, Tips::SellingBrand, dealer: user
         can :manage, Tips::ConstructionCase, dealer: user
@@ -121,6 +127,8 @@ class Ability
 
       cannot :set_displayable, :all
     end
+
+
 
     can :read, Category::Brand
     can :read, Category::Brand2

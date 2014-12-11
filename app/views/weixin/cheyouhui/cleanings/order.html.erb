@@ -1,0 +1,55 @@
+<% content_for :title do %>
+  提交订单
+<% end %>
+<%= simple_form_for(@order,:url=>order_create_weixin_cheyouhui_cleaning_path(@source)) do |f| %>
+  <%= devise_error_messages! @order %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <li class="table-view-cell"><%= @source.title %></li>
+      <% price = @source.try(:vip_price) || @source.try(:price) %>
+      <li class="table-view-cell">
+        单价
+        <span id="price" class="pull-right"><%= price %> 元</span>
+      </li>
+      
+      <li class="table-view-cell">
+        数量
+        <div class="input-count pull-right">
+          <% case @order %>
+          <% when Tips::VipCardOrder %>
+            <input type="number" name="order[count]" value="1" min="1" readonly>
+          <% else %>
+            <span class="btn" onclick="plus()">+</span><input id="num" type="number" name="order[count]" value="1" min="1"><span class="btn" onclick="minus()">-</span>
+          <% end %>
+        </div>
+      </li>
+      <li class="table-view-cell">
+        手机号
+       <div class="pull-right"> <input type="number" name="order[user_mobile]"></div>
+      </li>
+
+      <li class="table-view-cell">
+        总价
+        <span id="sum" class="pull-right"><%= price %> 元</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card-no-border">
+    <button class="btn btn-positive btn-block">提交订单</button>
+  </div>
+<% end %>
+<script>
+  function set_num(n) {
+    var p = parseFloat(document.getElementById("price").innerHTML);
+    document.getElementById("num").value = n;
+    document.getElementById("sum").innerHTML = p * n + " 元";
+  }
+  function plus(){
+    var n = parseInt(document.getElementById("num").value);
+    set_num(n + 1);
+  }
+  function minus(){
+    var n = parseInt(document.getElementById("num").value);
+    if(n > 1) set_num(n - 1);
+  }
+</script>

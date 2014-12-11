@@ -1,8 +1,10 @@
 class Tips::Order < ActiveRecord::Base
   include Share::Userable
   belongs_to :user, counter_cache: true, class_name: 'Accounts::User'
+ # belongs_to :user, counter_cache: true, class_name: 'Accounts::User'
   include Share::Dealerable
   belongs_to :dealer, counter_cache: true, class_name: 'Accounts::Dealer'
+  belongs_to :weixin_user, counter_cache: true, class_name: 'Accounts::Wechat',foreign_key: "user_id"
   
   # For details
   include Share::Detailable
@@ -11,7 +13,7 @@ class Tips::Order < ActiveRecord::Base
 
   has_one :review
 
-  validates_presence_of  :user 
+  #validates_presence_of  :user 
   
   include Share::Queryable
   define_queryable_column :user_mobile, :user_plate_num
@@ -32,8 +34,8 @@ class Tips::Order < ActiveRecord::Base
   end
 
   before_save do
-    self.user_mobile = user.mobile
-    self.user_plate_num = user.plate_num
+    self.user_mobile = user.try(:mobile)
+    self.user_plate_num = user.try(:plate_num)
   end
 
   def set_title

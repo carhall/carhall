@@ -1,0 +1,18 @@
+<% content_for :title do %>
+  我的预约订单
+<% end %>
+
+<% if @orders.empty? %>
+  <%= render 'share/alert', message: '您还没有预约过预约服务！' %>
+<% else %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <% @orders.each do |order| %>
+        <li class="table-view-cell">
+          <%= order.title %>
+         
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

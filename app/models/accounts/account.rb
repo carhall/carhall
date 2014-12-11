@@ -27,6 +27,8 @@ class Accounts::Account < ActiveRecord::Base
   enumerate :brand, with: Category::Brand
   enumerate :sex, with: %w(男 女)
 
+  belongs_to :region,class_name: "Cheyouhui::Region"
+
   def user_type
     @user_type ||= if new_record?
       :guest
@@ -53,6 +55,7 @@ class Accounts::Account < ActiveRecord::Base
       provider: '媒体',
       distributor: '经销商',
       agent: '代理商',
+      club: '车友会'
     }[user_type]
   end
 

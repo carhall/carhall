@@ -1,0 +1,2 @@
+module Cheyouhui::SettingsHelper
+end

@@ -1,5 +1,5 @@
 <% case @user_type %>
-<% when :provider, :dealer, :distributor, :admin %>
+<% when :provider, :dealer, :distributor,:club, :admin %>
   <%= render @user_type.to_s %>
 <% else %>
   <%= render 'welcome' %>

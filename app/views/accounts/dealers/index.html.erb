@@ -20,6 +20,9 @@
       <%= t.attribute :friends_count %>
       <%= t.attribute :state %>
       <%= t.attribute :rank %>
+      <%= t.attribute :region do |reg| %>
+        <%=reg.try(:name)%>
+      <%end%>
       <%= t.action_link :accept do |dealer| %>
         <% unless dealer.accepted? %>
           <%= icon_link_to "通过验证", 'icon-ok', accept_accounts_dealer_path(dealer), method: :put, data: { confirm: '您确认要验证这个用户？' } %>
@@ -51,6 +54,12 @@
           <% end %>
         <% end %>
       <% end %>
+     <%#= simple_form_for("dealer",:url=>root_url, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+ 
+     <%#= icon_link_to "设定车友会", 'icon-eye-close', set_cheyouhui_accounts_dealer_path(dealer), method: :get %>
+      <%= t.action_link :set_cheyouhui do |dealer| %>
+         <%= icon_link_to "加入车友会", 'icon-eye-open', set_cheyouhui_accounts_dealer_path(dealer), method: :get %>
+       <%end%>
 
       <%= t.action_link :destroy if can? :destroy, Accounts::Dealer %>
 

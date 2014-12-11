@@ -1,0 +1,2 @@
+module Tips::FreeTicketsHelper
+end

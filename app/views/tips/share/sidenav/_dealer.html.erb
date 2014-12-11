@@ -52,6 +52,7 @@
   <% if @dealer.has_template? :cleaning %>
     <li><span>服务项目</span></li>
     <li<%= active? 'tips/cleanings#new' %>><a href="<%= new_tips_cleaning_path %>"><i class="icon-chevron-right"></i> 发布服务项目</a></li>
+   
     <li<%= active? 'tips/cleanings#index' %>><a href="<%= tips_cleanings_path %>"><i class="icon-chevron-right"></i> 管理服务项目</a></li>
   <% end %>
 
@@ -114,3 +115,17 @@
     <li<%= active? 'tips/purchase_requestings#expired' %>><a href="<%= expired_tips_purchase_requestings_path %>"><i class="icon-chevron-right"></i> 已结束的求购</a></li>
   </ul>
 <% end %>
+
+<ul class="nav nav-list sidenav affix-top">
+    <li><span><strong>车友会营销</strong></span></li>
+    
+   <li<%= active? 'tips/cleanings#new(is_cheyouhui: 1)' %>><a href="<%= new_tips_cleaning_path(is_cheyouhui: 1) %>"><i class="icon-chevron-right"></i> 发布车友会洗车项目</a></li>
+
+  <li<%= active? 'tips/free_tickets' %>><a href="<%= tips_free_tickets_path%>"><i class="icon-chevron-right"></i> 免费券列表</a></li>
+
+  <li<%= active? 'tips/free_ticket#new' %>><a href="<%= new_tips_free_ticket_path%>"><i class="icon-chevron-right"></i> 发布免费券项目</a></li>
+  <li<%= active? 'tips/bulk_purchasings#new' %>><a href="<%= new_tips_bulk_purchasing_path %>"><i class="icon-chevron-right"></i> 发布团购</a></li>
+    <li<%= active? 'tips/bulk_purchasings#in_progress' %>><a href="<%= in_progress_tips_bulk_purchasings_path %>"><i class="icon-chevron-right"></i> 进行中的团购</a></li>
+</ul>
+
+

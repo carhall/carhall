@@ -1,0 +1,20 @@
+<div class="row-fluid">
+  <div class="span3">
+       <%= render "/cheyouhui/shared/left_menu" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%=@user.region.name%>车友会微信用户</h3>
+    </div>
+
+   <%= index_for @users, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :username %>
+      <%= t.attribute :weixin_open_id %>     
+  
+    <% end %>
+
+
+  </div>
+</div>

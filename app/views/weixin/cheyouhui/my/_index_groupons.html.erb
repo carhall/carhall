@@ -1,0 +1,19 @@
+<% content_for :title do %>
+  我的团购订单
+<% end %>
+
+<% if @orders.empty? %>
+  <%= render 'share/alert', message: '您还没有购买过团购！' %>
+<% else %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <% @orders.each do |order| %>
+        <li class="table-view-cell">
+          <%= order.title %>
+          <p>购买数量：<%= order.count %>份</p>
+          <p>消费金额：<%= order.cost %>元</p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

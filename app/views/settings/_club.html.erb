@@ -1,0 +1,19 @@
+<%= show_for @user do |s| %>
+  <%= s.attribute :username %>
+  <%= s.attribute :user_type %>
+
+  <%= s.attribute :mobile %>
+ 
+
+  <%= s.attribute :region_id do  %>
+      <%=@user.region.name%>
+  <%end%>
+
+  <%= s.attribute :avatar do %>
+    <%= image_tag(@user.avatar.url(:medium)) %>
+  <% end %>
+  <%= s.attribute :accepted do %>
+    <label class="label label-<%= if @user.accepted? then :success else :important end %>"><%= if @user.accepted? then '已通过' else '未通过' end %></label>
+  <% end %>
+  <%= s.attribute :description %>
+<% end %>

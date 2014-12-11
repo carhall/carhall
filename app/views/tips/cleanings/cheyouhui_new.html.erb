@@ -1,0 +1,36 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>发布车友会洗车服务项目 <small></small></h3>
+    </div>
+
+    <%= simple_form_for(@cleaning, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @cleaning %>
+
+  <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
+  <%#= f.input :cleaning_type_id, collection: Tips::Cleaning::CleaningType.to_select %>
+  <%= f.input :image do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @cleaning.image.url(:medium) %>" /></div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+      <div>
+        <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="tips_cleaning[image]" /></span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+      </div>
+    </div>
+  <% end %>
+  
+  <%= f.input :vip_price %>
+  <%= f.input :price, hint: '填数字即可，单位：元' %>
+
+  <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>
+
+  </div>
+</div>

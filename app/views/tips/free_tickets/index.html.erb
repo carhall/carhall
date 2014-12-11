@@ -1,0 +1,16 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "tips/share/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>免费券管理 <small></small></h3>
+    </div>
+
+    <%= render 'share/alert', message: '您还没有创建免费券！' if @free_tickets.empty? %>
+
+    <%= render 'list' %>
+
+  </div>
+</div>

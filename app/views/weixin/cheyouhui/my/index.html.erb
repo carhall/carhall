@@ -1,0 +1,8 @@
+<% content_for :title do %>
+  订单查询
+<% end %>
+<%= link_to "洗车订单", orders_weixin_cheyouhui_my_index_path(type: "cleaning"), class: "btn btn-positive btn-block" %>
+<%= link_to "团购订单", orders_weixin_cheyouhui_my_index_path(type: "groupons"), class: "btn btn-positive btn-block" %>
+<%= link_to "保养订单", orders_weixin_cheyouhui_my_index_path(type: "mending"), class: "btn btn-positive btn-block" %>
+<%= link_to "免费券订单", orders_weixin_cheyouhui_my_index_path(type: "free_ticket"), class: "btn btn-positive btn-block" %>
+<%#= link_to "服务订单", orders_weixin_cheyouhui_my_index_path(type: "servers"), class: "btn btn-positive btn-block" %>

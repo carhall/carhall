@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def active? *name
     options = name.extract_options!
     exists = name[1..-1]

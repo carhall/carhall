@@ -1,0 +1,24 @@
+<%= simple_form_for(@free_ticket, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <%= devise_error_messages! @free_ticket %>
+
+  <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
+  <%= f.input :ticket_type_id, collection: Tips::FreeTicket::TicketType.to_select %>
+  <%= f.input :expire_at, as: :string, input_html: { data: { mask: '9999-99-99 99:99' }}, hint: '截止时间，填数字即可，例如：2013-01-01 12:00' %>
+  <%= f.input :image do %>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @free_ticket.image.url(:medium) %>" /></div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+      <div>
+        <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更换</span><input type="file" name="tips_free_ticket[image]" /></span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">删除</a>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.input :vip_price %>
+  <%= f.input :price, hint: '填数字即可，单位：元' %>
+
+  <%= f.input :description, input_html: { rows: 4, class: 'input-xxlarge' } %>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>

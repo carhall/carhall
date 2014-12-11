@@ -1,0 +1,36 @@
+<div class="row-fluid">
+  <div class="span3">
+       <%= render "/accounts/share/sidenav/admin" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>各地区车友会管理员管理 </h3>
+    </div>
+
+    <%= index_for @managers, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :avatar do |avatar| %>
+        <%= image_tag(avatar.url(:thumb)) %>
+      <% end %>
+      <%= t.attribute :mobile %>
+      <%= t.attribute :username %>
+      <%= t.attribute :area %>
+
+ 
+      <%= t.attribute :region do |reg| %>
+        <%=reg.try(:name)%>
+      <%end%>
+
+       <%= t.action_link :accept do |dealer| %>
+        <% unless dealer.accepted? %>
+          <%= icon_link_to "通过验证", 'icon-ok', accept_cheyouhui_regions_path(user_id: dealer), method: :put, data: { confirm: '您确认要验证这个用户？' } %>
+          <%else%>
+           <%= icon_link_to "拒绝该用户", 'icon-ok', accept_cheyouhui_regions_path(user_id: dealer), method: :put, data: { confirm: '您确认要验证这个用户？' } %>
+        <% end %>
+      <% end %>
+    
+    <% end %>
+
+  </div>
+</div>

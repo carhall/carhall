@@ -1,0 +1,12 @@
+class Weixin::Cheyouhui::Brand2sController < Weixin::Cheyouhui::ApplicationController
+  set_resource_class ::Category::Brand2, no_authorize: true, through: nil
+  before_filter :load_area_and_brand
+
+private
+
+  def load_area_and_brand
+    @area_id = params[:area_id]
+    @brand_id = params[:brand_id]
+  end
+
+end

@@ -27,6 +27,9 @@ class Accounts::User < Accounts::Account
   has_many :sales_cases, class_name: 'Statistic::SalesCase'
 
   has_one :buying_advice, class_name: 'Tips::BuyingAdvice'
+  
+  belongs_to :region,class_name: "Cheyouhui::Region"
+
 
 
   def self.with_query query

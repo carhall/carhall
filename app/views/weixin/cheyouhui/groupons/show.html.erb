@@ -1,0 +1,39 @@
+<% content_for :title do %>
+  团购详情
+<% end %>
+
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell"><%= @bulk_purchasing.title %></li>
+    <li class="table-view-cell">
+      会员价：<%= @bulk_purchasing.vip_price %> 元 原价：<%= @bulk_purchasing.price %> 元
+    </li>
+  </ul>
+</div>
+<div class="card-no-border">
+  <%= link_to "立即购买", order_weixin_cheyouhui_groupon_path(@bulk_purchasing), class: "btn btn-positive btn-block" %>
+</div>
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell">评分：<span class="orangecolor"><%= print_stars @bulk_purchasing.stars, false %></span></li>
+    <li class="table-view-cell redcolor">交易达成率：<%= @bulk_purchasing.goal_attainment %>%</li>
+    <li class="table-view-cell"><%= @bulk_purchasing.orders_count %>个人已购买</li>
+  </ul>
+</div>
+<%= render 'weixin/share/dealer_info' %>
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell">项目介绍</li>
+    <li class="table-view-cell">
+      套餐内容
+      <%= simple_format(@bulk_purchasing.description) %>
+    </li>
+  </ul>
+</div>
+<% @source = @bulk_purchasing %>
+<% @orders = @bulk_purchasing.orders.includes(:user).last(3) %>
+<%#= render 'weixin/share/orders_list' %>
+<% @reviews = @bulk_purchasing.reviews.includes(order: :user).last(3) %>
+<%#= render 'weixin/share/reviews_list' %>
+<div class="card-no-border">
+  <%= link_to "立即购买", order_weixin_cheyouhui_groupon_path(@bulk_purchasing), class: "btn btn-positive btn-block" %></div>

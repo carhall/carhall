@@ -1,6 +1,6 @@
 module FilterHelper
-  protected
-
+  #protected
+  
   def current_ability
     @current_ability ||= Ability.new(current_account)
   end
@@ -39,6 +39,7 @@ module FilterHelper
       current_account
     end
   end
+
 
   def set_current_user
     @user ||= @current_user = current_account

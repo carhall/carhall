@@ -10,6 +10,8 @@ Carhall::Application.routes.draw do
 
     devise_for :dealers, class_name: "Accounts::Dealer", module: "weixin/dealers"
 
+   
+
     scope module: :accounts do
       resources :dealers do
         get :rescue, on: :member

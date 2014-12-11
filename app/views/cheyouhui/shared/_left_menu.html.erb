@@ -1,0 +1,18 @@
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>系统统计</strong></span></li>
+  <li<%= active? 'cheyouhui/statistics/dealers' %>><a href="<%= cheyouhui_statistics_dealers_path %>"><i class="icon-chevron-right"></i> 服务商数据</a></li>
+  <li<%= active? 'cheyouhui/statistics/users' %>><a href="<%= cheyouhui_statistics_users_path %>"><i class="icon-chevron-right"></i> 关注用户数据统计</a></li>
+</ul>
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>业务管理</strong></span></li>
+  <li<%= active? 'accounts/agents' %>><a href="<%= accounts_agents_path %>"><i class="icon-chevron-right"></i> 代理商管理</a></li>
+  <li<%= active? 'accounts/distributors' %>><a href="<%= accounts_distributors_path %>"><i class="icon-chevron-right"></i> 经销商管理</a></li>
+  <li<%= active? 'accounts/dealers' %>><a href="<%= accounts_dealers_path %>"><i class="icon-chevron-right"></i> 服务商管理</a></li>
+  <li<%= active? 'accounts/providers' %>><a href="<%= accounts_providers_path %>"><i class="icon-chevron-right"></i> 媒体管理</a></li>
+</ul>
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>系统设置</strong></span></li>
+  <li<%= active? 'accounts/users' %>><a href="<%= accounts_users_path %>"><i class="icon-chevron-right"></i> 车主管理</a></li>
+  <li<%= active? 'accounts/candidates#president' %>><a href="<%= president_accounts_candidates_path %>"><i class="icon-chevron-right"></i> 堂主管理</a></li>
+  <li<%= active? 'accounts/candidates#mechanic' %>><a href="<%= mechanic_accounts_candidates_path %>"><i class="icon-chevron-right"></i> 在线技师管理</a></li>
+</ul>

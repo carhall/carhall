@@ -123,7 +123,7 @@ Devise.setup do |config|
   config.reconfirmable = true
 
   # Defines which key will be used when confirming an account
-  config.confirmation_keys = [ :mobile ]
+  config.confirmation_keys = [ :mobile,:weixin_open_id ]
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.

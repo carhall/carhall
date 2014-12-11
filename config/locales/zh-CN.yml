@@ -89,6 +89,7 @@ zh-CN:
       business/ad_template: 广告模板
       business/tutorial: 在线教程
       statistic/sales_case: 爱车提醒
+      cheyouhui/region: 车友会地区管理
     attributes:
       statistic: &statisticable
         orders_count: 订单数
@@ -126,6 +127,9 @@ zh-CN:
       category: &categoryable
         id: ID
         name: 名称
+      cheyouhui/region: 
+        id: ID
+        name: 地区名称
       accounts/account: &account
         id: ID
         username: 昵称
@@ -150,6 +154,8 @@ zh-CN:
         state: 账户状态
         main_area: 省份
         address: 地址
+        region: 车友会
+        region_id: 车友会地区
         <<: *statisticable
       accounts/account/detail: &detail
         plate_num: 车牌号
@@ -202,6 +208,7 @@ zh-CN:
         <<: *statisticable
         cleaning_type_id: 类型
         cleaning_type: 类型
+        is_cheyouhui: 是否属于车友会
       tips/test_driving:
         <<: *servicalbe
         <<: *statisticable

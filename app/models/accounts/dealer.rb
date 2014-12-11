@@ -42,8 +42,7 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :construction_cases, class_name: 'Tips::ConstructionCase'
 
   has_many :orders, class_name: 'Tips::Order'
-  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, 
-    class_name: 'Tips::Order'
+  has_many :recent_orders, -> { where "orders.created_at > ?", 1.month.ago }, class_name: 'Tips::Order'
 
   has_many :mending_orders, class_name: 'Tips::MendingOrder'
   has_many :cleaning_orders, class_name: 'Tips::CleaningOrder'
@@ -55,12 +54,13 @@ class Accounts::Dealer < Accounts::PublicAccount
   has_many :rescue_orders, class_name: 'Tips::RescueOrder'
   
   has_many :reviews, through: :orders, class_name: 'Tips::Review'
-  has_many :recent_reviews, through: :recent_orders, source: :review, 
-    class_name: 'Tips::Review'
+  has_many :recent_reviews, through: :recent_orders, source: :review, class_name: 'Tips::Review'
 
   has_many :operating_records, class_name: 'Statistic::OperatingRecord'
   has_many :sales_cases, class_name: 'Statistic::SalesCase'
   has_many :consumption_records, class_name: 'Statistic::ConsumptionRecord'
+
+
 
   validates_each :detail do |record, attr, value|
     if value.address.present? and value.address_changed?

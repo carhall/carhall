@@ -1,0 +1,11 @@
+<% case params[:type] %>
+<% when "mending" %>
+    <%= render "index_mending" %>
+<% when "groupons" %>
+    <%= render "index_groupons" %>
+<% when "cleaning" %>
+    <%= render "index_cleaning" %>
+<% when "free_ticket" %>
+    <%= render "index_free_ticket" %>
+
+<% end %>

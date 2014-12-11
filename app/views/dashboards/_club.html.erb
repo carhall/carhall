@@ -1,0 +1,44 @@
+<h3>你好，<%= @current_user.username %> <small>（<%= @current_user.mobile %>）</small></h3>
+
+<div class="row">
+  <div class="span3 pull-right">
+    <div class="well">
+      <h3>系统公告</h3>
+      <p class="indent">如果你在使用过程中有任何疑问或者建议，请加我们的公众账号进行咨询反馈：</p>
+      <p class="indent"><strong>汽车堂</strong></p>
+    </div>
+  </div>
+  
+  <div class="span9">
+
+    <div class="jumbotron"></div>
+
+    <!-- Example row of columns -->
+    <div class="row marketing">
+    	   <div class="span3">
+        <a href="<%=  cheyouhui_statistics_dealers_path %>">
+          <i class="icon-tag pull-left icon-5x"></i>
+          <h4>系统数据</h4>
+          <p class="muted">实时掌握车友动态。 </p>
+        </a>
+      </div>
+
+      <div class="span3">
+        <a href="<%=  cheyouhui_business_dealers_path %>">
+          <i class="icon-book pull-left icon-5x"></i>
+          <h4>业务管理</h4>
+          <p class="muted">业务，另辟蹊径。 </p>
+        </a>
+      </div>
+
+      <div class="span3">
+        <a href="<%= cheyouhui_settings_path %>">
+          <i class="icon-cog pull-left icon-5x"></i>
+          <h4>设置</h4>
+          <p class="muted">资料管理。 </p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>

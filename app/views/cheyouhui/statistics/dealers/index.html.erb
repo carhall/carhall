@@ -1,0 +1,27 @@
+<div class="row-fluid">
+  <div class="span3">
+       <%= render "/cheyouhui/shared/left_menu" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%=@user.region.name%>车友会服务商</h3>
+    </div>
+
+   <%= index_for @dealers, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.attribute :username %>
+      <%= t.attribute :total_cost %>
+      <%= t.attribute :friends_count %>
+      <%= t.attribute :adverts_balance %>
+      <%= t.attribute :commission %>
+      <%= t.attribute :income %>
+      <%= t.attribute :stars %>
+    
+     
+  
+    <% end %>
+
+
+  </div>
+</div>

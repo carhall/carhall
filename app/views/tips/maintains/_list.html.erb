@@ -1,0 +1,35 @@
+<% @free_tickets = @free_tickets.includes(:dealer) if @user.admin? %>
+
+<%= index_for @free_tickets, class: :datatable do |t| %>
+  <%= t.attribute :id %>
+  <%= t.association :dealer, using: :username if @user.admin? %>
+  <%= t.attribute :image do |image| %>
+    <%= image_tag(image.url(:small)) %>
+  <% end %>
+  <%= t.attribute :title %>
+  <%= t.attribute :ticket_type %>
+  <%= t.attribute :expire_at, format: :short %>
+  <%= t.attribute :vip_price %>
+  <%= t.attribute :state %>
+  <%= t.attribute :orders_count %>
+  <%= t.action_link :orders do |free_ticket| %>
+    <%= icon_link_to "浏览订单", 'icon-book', tips_free_ticket_orders_path(free_ticket) %>
+  <% end %>
+  <% if @user.admin? %>
+    <%= t.action_link :display do |free_ticket| %>
+      <% if free_ticket.displayed? %>
+        <%= icon_link_to "隐藏", 'icon-eye-close', hide_tips_free_ticket_path(free_ticket), method: :put, data: { confirm: '您确认要隐藏这个项目？' } %>
+        <% if free_ticket.sticked? %>
+          <%= icon_link_to "取消置顶", 'icon-chevron-down', unstick_tips_free_ticket_path(free_ticket), method: :put, data: { confirm: '您确认要取消置顶这个项目？' } %>
+        <% else %>
+          <%= icon_link_to "置顶", 'icon-chevron-up', stick_tips_free_ticket_path(free_ticket), method: :put, data: { confirm: '您确认要置顶这个项目？' } %>
+        <% end %>
+      <% else %>
+        <%= icon_link_to "显示", 'icon-eye-open', expose_tips_free_ticket_path(free_ticket), method: :put, data: { confirm: '您确认要显示这个项目？' } %>
+      <% end %>
+    <% end %>
+    <%= t.actions :destroy %>
+  <% else %>
+    <%= t.actions :all %>
+  <% end %>
+<% end %>

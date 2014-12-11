@@ -1,0 +1,2 @@
+module Cheyouhui::DealersHelper
+end

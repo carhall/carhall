@@ -2,7 +2,13 @@
   <%= devise_error_messages! @cleaning %>
 
   <%= f.input :title, autofocus: true, input_html: { class: 'input-xlarge' } %>
+  <%if params["is_cheyouhui"]=="1"%>
+   <%= f.input :cleaning_type_id, as: :hidden, input_html: { value: 1 } %>
+    <%= f.input :is_cheyouhui, as: :hidden, input_html: { value: true }%>
+    <%= f.input :cleaning_type_id, collection: Tips::Cleaning::SeatType.to_select %>
+  <%else%>
   <%= f.input :cleaning_type_id, collection: Tips::Cleaning::CleaningType.to_select %>
+  <%end%>
   <%= f.input :image do %>
     <div class="fileupload fileupload-new" data-provides="fileupload">
       <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<%= @cleaning.image.url(:medium) %>" /></div>

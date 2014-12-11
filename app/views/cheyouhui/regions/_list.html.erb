@@ -1,0 +1,8 @@
+<%= index_for enums do |t| %>
+  <%= t.attribute :id %>
+  <%= t.attribute :name %>
+  <%= t.attribute :token do |t|%>
+      <%=image_tag $cheyouhui.qr_code_url(t),width: 100,height: 100%>
+  <%end%>
+  <%= t.action_link :edit %>
+<% end %>

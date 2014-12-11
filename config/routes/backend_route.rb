@@ -61,6 +61,7 @@ Carhall::Application.routes.draw do
       resources :orders
     end
 
+
     resource :mending do
       get :orders
       get :edit_discount
@@ -72,10 +73,11 @@ Carhall::Application.routes.draw do
       put :hide, on: :member
       put :stick, on: :member
       put :unstick, on: :member
+      get :cheyouhui_new,on: :collection
 
       resources :orders
     end
-
+    
     resources :activities do
       put :expose, on: :member
       put :hide, on: :member
@@ -87,6 +89,18 @@ Carhall::Application.routes.draw do
     end
 
     resources :bulk_purchasings do
+      put :expose, on: :member
+      put :hide, on: :member
+      put :stick, on: :member
+      put :unstick, on: :member
+
+      get :in_progress, on: :collection
+      get :expired, on: :collection
+
+      resources :orders
+    end
+
+    resources :free_tickets do
       put :expose, on: :member
       put :hide, on: :member
       put :stick, on: :member
@@ -195,6 +209,8 @@ Carhall::Application.routes.draw do
       put :rank_up, on: :member
       put :rank_down, on: :member
       put :update_weixin, on: :collection
+      get :set_cheyouhui, on: :member
+      post :add_cheyouhui,on: :member
     end
     resources :providers do
       put :accept, on: :member

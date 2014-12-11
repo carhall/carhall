@@ -1,0 +1,39 @@
+<% content_for :title do %>
+  免费券详情
+<% end %>
+
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell"><%= @free_ticket.title %></li>
+    <li class="table-view-cell">
+      会员价：<%= @free_ticket.vip_price %> 元 原价：<%= @free_ticket.price %> 元
+    </li>
+  </ul>
+</div>
+<div class="card-no-border">
+  <%= link_to "立即购买", order_weixin_cheyouhui_free_ticket_path(@free_ticket), class: "btn btn-positive btn-block" %>
+</div>
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell">评分：<span class="orangecolor"><%= print_stars @free_ticket.stars, false %></span></li>
+    <li class="table-view-cell redcolor">交易达成率：<%= @free_ticket.goal_attainment %>%</li>
+    <li class="table-view-cell"><%= @free_ticket.orders_count %>个人已购买</li>
+  </ul>
+</div>
+<%= render 'weixin/share/dealer_info' %>
+<div class="card">
+  <ul class="table-view table-view-block">
+    <li class="table-view-cell">项目介绍</li>
+    <li class="table-view-cell">
+      套餐内容
+      <%= simple_format(@free_ticket.description) %>
+    </li>
+  </ul>
+</div>
+<% @source = @free_ticket %>
+<% @orders = @free_ticket.orders.includes(:user).last(3) %>
+<%#= render 'weixin/share/orders_list' %>
+<% @reviews = @free_ticket.reviews.includes(order: :user).last(3) %>
+<%#= render 'weixin/share/reviews_list' %>
+<div class="card-no-border">
+  <%= link_to "立即购买", order_weixin_cheyouhui_free_ticket_path(@free_ticket), class: "btn btn-positive btn-block" %></div>

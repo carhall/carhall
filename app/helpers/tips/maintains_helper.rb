@@ -1,0 +1,2 @@
+module Tips::MaintainsHelper
+end

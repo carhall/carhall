@@ -1,0 +1,21 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%#= render "/settings/sidenav/#{@user_type}" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>基本信息 <small><a href="<%= edit_account_registration_path %>">编辑</a></small></h3>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span3">
+        <img src="<%= @user.avatar.url(:medium) %>">
+      </div>
+      <div class="span9">
+        <%= render "/settings/#{@user_type}" %>
+      </div>
+    </div>
+  </div>
+
+</div>

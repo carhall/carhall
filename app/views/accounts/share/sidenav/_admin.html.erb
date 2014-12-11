@@ -15,3 +15,8 @@
   <li<%= active? 'accounts/candidates#president' %>><a href="<%= president_accounts_candidates_path %>"><i class="icon-chevron-right"></i> 堂主管理</a></li>
   <li<%= active? 'accounts/candidates#mechanic' %>><a href="<%= mechanic_accounts_candidates_path %>"><i class="icon-chevron-right"></i> 在线技师管理</a></li>
 </ul>
+<ul class="nav nav-list sidenav affix-top">
+  <li><span><strong>车友会管理</strong></span></li>
+  <li<%= active? 'cheyouhui/regions' %>><a href="<%= cheyouhui_regions_path %>"><i class="icon-chevron-right"></i>地区管理</a></li>
+  <li<%= active? 'cheyouhui/regions/managers' %>><a href="<%= managers_cheyouhui_regions_path %>"><i class="icon-chevron-right"></i>地区车友会管理员</a></li>
+</ul>

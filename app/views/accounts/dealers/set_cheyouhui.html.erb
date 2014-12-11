@@ -1,0 +1,21 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= render "accounts/share/sidenav/admin" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3>服务商管理 <small></small></h3>
+     
+    </div>
+    <%= simple_form_for(@dealer,url: add_cheyouhui_accounts_dealer_path(@dealer),method: "post", html: { class: 'form-horizontal' }) do |f| %>
+  <%#= devise_error_messages! @brand %>
+
+  <%= f.input :region_id, collection: Cheyouhui::Region.all.map{|r|[r.name,r.id]} ,prompt: "设置地区"%>
+
+  <%= f.button :submit, class: 'btn-submit' %>
+<% end %>
+
+  
+  </div>
+</div>

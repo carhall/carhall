@@ -1,0 +1,38 @@
+<%= simple_form_for(@buying_advice, url: weixin_current_user_buying_advice_path(area_id: @area_id, brand2_id: @brand2_id)) do |f| %>
+  <div class="card">
+    <ul class="table-view table-view-block">
+      <% @area_id ||= @user.main_area_id %>
+      <% @area_id = @area_id.to_i %>
+      <% @buying_advice.main_area_id ||= @area_id %>
+
+      <% @brand2_id ||= @buying_advice.rbrand3.brand2_id %>
+      <% @brand2_id = @brand2_id.to_i %>
+      <% @brand2 = Category::Brand2.find(@brand2_id) %>
+      <% @brand_id ||= @brand2.brand_id %>
+
+
+      <li class="table-view-cell image-half-center">
+        <%= image_tag @brand2.image.url(:medium) %>
+        <div class="text-center"><%= @brand2.name %></div>
+      </li>
+      <li class="table-view-cell input-row">
+        <% brand3s = Category::Brand3.where(brand2_id: @brand2_id) %>
+        <%= f.input :brand3_id, collection: brand3s.to_select %>
+      </li>
+      <li class="table-view-cell input-row"><%= f.input :buying_at_id, collection: Tips::BuyingAdvice::BuyingAt.to_select %></li>
+      <li class="table-view-cell input-row"><%= f.input :buying_pattern_id, collection: Tips::BuyingAdvice::BuyingPattern.to_select %></li>
+      <li class="table-view-cell input-row"><%= f.input :license, collection: [["有", true], ["无", false]], as: :radio_buttons %></li>
+    </ul>
+  </div>
+  
+  <div class="card-no-border text-center">
+    <p>已有 <%= Tips::BuyingAdvice.with_brand2(@brand2_id).count %> 人正在汽车堂购买 <%= @brand2.name %></p>
+    <p><%= Tips::SellingBrand.with_main_area(@area_id).with_brand(@brand_id).count %> 家认证经销商将竞相报价</p>
+  </div>
+
+  <div class="card-no-border">
+    <%= f.hidden_field :main_area_id %>
+    <button class="btn btn-positive btn-block">让经销商报价</button>
+  </div>
+
+<% end %>

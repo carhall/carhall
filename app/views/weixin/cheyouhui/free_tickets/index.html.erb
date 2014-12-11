@@ -1,0 +1,23 @@
+<% content_for :title do %>
+  近期团购
+<% end %>
+
+<div class="card">
+  <ul class="table-view">
+    <% @free_tickets.each do |free_ticket| %>
+      <li class="table-view-cell media">
+        <%= link_to weixin_cheyouhui_free_ticket_path(free_ticket), class: "navigate-right", data: { transition: "slide-in" } do %>
+          <div class="media-title"><%= free_ticket.title %></div>
+          <%= image_tag free_ticket.image.url(:thumb), class: "media-object pull-left" %>
+          <div class="media-body">
+            <p>已购人数：<%= free_ticket.orders_count %></p>
+            <p>类型：<%= free_ticket.ticket_type %></p>
+            <p>评分：<%= print_stars free_ticket.stars, false %></p>
+            <p>会员价：<%= free_ticket.vip_price %>元</p>
+            <p>原价：<%= free_ticket.price %>元</p>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
