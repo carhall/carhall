@@ -11,10 +11,10 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
   private
 
-    def init_user_for_wechat
+    def init_user_for_wechat(region)
     	weixin = @weixin_message["FromUserName"]
     	result = $cheyouhui.user(weixin).result
-    	hash = {:weixin_open_id=>result["openid"],:username=>result["nickname"],weixin_image: result["headimgurl"],:password=>"12345678"}
+    	hash = {:weixin_open_id=>result["openid"],:username=>result["nickname"],weixin_image: result["headimgurl"],:password=>"12345678",region_id: region.id}
         user = Accounts::Wechat.find_by(weixin_open_id: result["openid"])
         if user.nil?      	
          u=Accounts::Wechat.new(hash) 
@@ -86,12 +86,16 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       # 关注公众账号
       def handle_subscribe_event
-      	init_user_for_wechat
+        
+        key = @keyword.split("_").last
+        region = Cheyouhui::Region.find key || Cheyouhui::Region.first
+        init_user_for_wechat(region)
         if @keyword.present?
+
           # 扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送
-          return reply_text_message("扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送, keyword: #{@keyword}")
+          return reply_text_message("感谢您关注#{region.name}车友会")
         end
-        reply_text_message("关注公众账号")
+        reply_text_message("感谢您关注#{region.name}车友会")
       end
 
       # 取消关注
