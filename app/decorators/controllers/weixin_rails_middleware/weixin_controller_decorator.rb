@@ -5,7 +5,7 @@
 WeixinRailsMiddleware::WeixinController.class_eval do
   include CheyouhuiHelper
   def reply
-  	init_user_for_wechat
+  	
     render xml: send("response_#{@weixin_message.MsgType}_message", {})
   end
 
@@ -86,6 +86,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       # 关注公众账号
       def handle_subscribe_event
+      	init_user_for_wechat
         if @keyword.present?
           # 扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送
           return reply_text_message("扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送, keyword: #{@keyword}")
