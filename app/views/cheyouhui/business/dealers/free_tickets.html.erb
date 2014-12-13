@@ -1,0 +1,37 @@
+<div class="row-fluid">
+  <div class="span3">
+       <%= render "/cheyouhui/shared/left_menu" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%#=@user.region.name%>免费券</h3>
+    </div>
+
+
+
+<% @free_tickets = @free_tickets.includes(:dealer) %>
+
+<%= index_for @free_tickets, class: :datatable do |t| %>
+  <%= t.attribute :id %>
+  <%= t.association :dealer, using: :username if @user.admin? %>
+  <%= t.attribute :image do |image| %>
+    <%= image_tag(image.url(:small)) %>
+  <% end %>
+  <%= t.attribute :title %>
+  <%= t.attribute :ticket_type %>
+  <%= t.attribute :expire_at, format: :short %>
+  <%= t.attribute :vip_price %>
+  <%= t.attribute :state %>
+  <%= t.attribute :orders_count %>
+  <%= t.action_link :orders do |free_ticket| %>
+    <%= icon_link_to "浏览订单", 'icon-book', tips_free_ticket_orders_path(free_ticket) %>
+  <% end %>
+   
+<% end %>
+
+
+  </div>
+</div>
+
+

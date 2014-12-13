@@ -1,0 +1,36 @@
+<div class="row-fluid">
+  <div class="span3">
+       <%= render "/cheyouhui/shared/left_menu" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%#=@user.region.name%>团购</h3>
+    </div>
+
+
+
+<% @bulk_purchasings = @bulk_purchasings.includes(:dealer) %>
+<%= index_for @bulk_purchasings, class: :datatable do |t| %>
+  <%= t.attribute :id %>
+  <%= t.association :dealer, using: :username if @user.admin? %>
+  <%= t.attribute :image do |image| %>
+    <%= image_tag(image.url(:small)) %>
+  <% end %>
+  <%= t.attribute :title %>
+  <%= t.attribute :bulk_purchasing_type %>
+  <%= t.attribute :expire_at, format: :short %>
+  <%= t.attribute :vip_price %>
+  <%= t.attribute :state %>
+  <%= t.attribute :orders_count %>
+  <%= t.action_link :orders do |bulk_purchasing| %>
+    <%= icon_link_to "浏览订单", 'icon-book', tips_bulk_purchasing_orders_path(bulk_purchasing) %>
+  <% end %>
+ 
+<% end %>
+
+
+  </div>
+</div>
+
+

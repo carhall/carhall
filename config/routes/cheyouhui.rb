@@ -38,7 +38,9 @@ Carhall::Application.routes.draw do
        end
 
        namespace :business do 
-           resources :dealers
+           resources :dealers do
+           	  get :free_tickets,:groupons,:cleanings,:mendings,on: :collection
+           end
        end
 
        namespace :statistics do 

@@ -3,7 +3,7 @@ class Tips::CleaningsController < Tips::ApplicationController
 
   def index
 
-  	@cleanings = Tips::Cleaning.all
+  	@cleanings = @user.cleanings
     @cleanings = @cleanings.where("is_cheyouhui"=>true,cleaning_type_id: 1) if params["is_cheyouhui"]=="1" && params["type"]=="cleaning"
     @cleanings = @cleanings.where("is_cheyouhui"=>true,cleaning_type_id: 5) if params["is_cheyouhui"]=="1" && params["type"]=="mending"
  

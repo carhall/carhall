@@ -1,0 +1,33 @@
+<div class="row-fluid">
+  <div class="span3">
+       <%= render "/cheyouhui/shared/left_menu" %>
+  </div>
+  
+  <div class="span9">
+    <div class="page-header">
+      <h3><%#=@name%>服务项目列表</h3>
+    </div>
+
+    <%= render 'share/alert', message: '您还没有创建任何服务项目！' if @cleanings.empty? %>
+
+    <% @cleanings = @cleanings.includes(:dealer) if @user.admin? %>
+    
+    <%= index_for @cleanings, class: :datatable do |t| %>
+      <%= t.attribute :id %>
+      <%= t.association :dealer, using: :username if @user.admin? %>
+      <%= t.attribute :image do |image| %>
+        <%= image_tag(image.url(:small)) %>
+      <% end %>
+      <%= t.attribute :title %>
+      <%= t.attribute :cleaning_type %>
+      <%= t.attribute :vip_price %>
+      <%= t.attribute :price %>
+      <%= t.attribute :state %>
+      <%= t.attribute :orders_count %>
+      <%= t.action_link :orders do |cleaning| %>
+        <%= icon_link_to "浏览订单", 'icon-book', tips_cleaning_orders_path(cleaning) %>
+      <% end %>
+     <% end %>
+
+  </div>
+</div>
