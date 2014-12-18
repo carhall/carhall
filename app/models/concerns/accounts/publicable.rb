@@ -18,7 +18,8 @@ module Accounts::Publicable
     end
 
     validates_presence_of :detail
-    validates_presence_of :area_id, :type
+    validates_presence_of :area_id,if: Proc.new { |user| user.type !="Accounts::Club" } 
+     validates_presence_of  :type
 
     scope :followed, -> { order("friends_count DESC") }
     scope :ordered, -> { displayed.followed.positioned }
