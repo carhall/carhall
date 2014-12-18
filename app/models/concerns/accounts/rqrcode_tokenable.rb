@@ -15,7 +15,7 @@ module Accounts::RqrcodeTokenable
     #     break token
     #   end
     # end
-    detail.rqrcode_token = "qichetang:#{id}"
+    detail.rqrcode_token = "qichetang:#{id}" if type!="Accounts::Club"
   end
 
   def generate_rqrcode_image string=nil, options={}
