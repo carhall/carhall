@@ -156,6 +156,8 @@ zh-CN:
         address: 地址
         region: 车友会
         region_id: 车友会地区
+        recent_total_cost: 总成交额
+        recent_ordered_users_count: 交易用户
         <<: *statisticable
       accounts/account/detail: &detail
         plate_num: 车牌号

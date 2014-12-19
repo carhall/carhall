@@ -8,7 +8,25 @@
       <h3><%#=@name%>服务项目汇总</h3>
     </div>
 
-   
+  
+<div class="dl-horizontal dl-span9">
+  <dl><strong>车友会服务商</strong></dl>
+ 
+  <%#= @dealers.each do |dealer|%>
+
+   <%=index_for @dealers,class: "datatable" do |t|%>
+    <%= t.attribute :id %>
+    <%= t.attribute :mobile %>
+    <%= t.attribute :recent_total_cost %> 
+    <%= t.attribute :recent_ordered_users_count %> 
+  <%end%>
+  <%#end%>
+ 
+ 
+  
+</div>
+
+
 
   </div>
 </div>

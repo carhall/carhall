@@ -2,10 +2,11 @@ class Cheyouhui::Business::DealersController < ApplicationController
 	before_filter :dealers_from_region
 
   def index
-  	@free_tickets=::Tips::FreeTicket.in_progress.count("dealer_id in(?)",@dealers.map(&:id))
-  	@bulk_purchasings = ::Tips::BulkPurchasing.in_progress.count("dealer_id in(?)",@dealers.map(&:id))
-  	@cleanings = ::Tips::Cleaning.count("is_cheyouhui=1 and cleaning_type_id=1 and dealer_id in(?)",@dealers.map(&:id)) 
-  	@mendings = ::Tips::Cleaning.where("is_cheyouhui=1 and cleaning_type_id=5 and dealer_id in(?)",@dealers.map(&:id)) 
+  	#ids = @dealers.map(&:id)
+  	#@free_tickets=::Tips::FreeTicket.where("dealer_id in (?)", ids).count
+  	#@bulk_purchasings = ::Tips::BulkPurchasing.in_progress.where("dealer_id in (?)",ids).count
+  	#@cleanings = ::Tips::Cleaning.where("is_cheyouhui=1 and cleaning_type_id=1 and dealer_id in (?)",ids).count 
+  	#@mendings = ::Tips::Cleaning.where("is_cheyouhui=1 and cleaning_type_id=5 and dealer_id in (?)",ids) 
   end
 
   def  free_tickets
