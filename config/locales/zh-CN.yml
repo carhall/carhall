@@ -211,6 +211,12 @@ zh-CN:
         cleaning_type_id: 类型
         cleaning_type: 类型
         is_cheyouhui: 是否属于车友会
+      tips/free_ticket:
+        <<: *servicalbe
+        <<: *statisticable
+        ticket_type_id: 类型
+        ticket_type: 类型
+        is_cheyouhui: 是否属于车友会
       tips/test_driving:
         <<: *servicalbe
         <<: *statisticable
