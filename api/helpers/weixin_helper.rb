@@ -205,7 +205,7 @@ module WeixinHelper
         when :mine
           { type: "click", name: "我的", key: "mine" }
         when :traffic_violation
-          { type: "view", name: "违章查询", url: "http://weizhang.yiyoungo.com" }
+          { type: "view", name: "违章查询", url: "http://m.weizhang8.cn" }
         when :download_app
           { type: "view", name: "手机会员卡", url: "http://a.app.qq.com/o/simple.jsp?pkgname=com.kapp.net.carhall&g_f=991653" }
         end
