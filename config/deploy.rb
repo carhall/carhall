@@ -1,5 +1,5 @@
 set :application, 'carhall'
-set :repo_url, 'git@github.com:bbtfr/carhall.git'
+set :repo_url, 'git@github.com:carhall/carhall.git'
 set :branch, 'deploy'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -51,11 +51,11 @@ namespace :deploy do
 end
 
 namespace :logs do
-  desc "tail rails logs" 
+  desc "tail rails logs"
   task :tail_rails do
     invoke "logs:tail", fetch(:rails_env)
   end
-  
+
   task :tail, :file do |t, args|
     if args[:file]
       on roles(:app) do
