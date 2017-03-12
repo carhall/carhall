@@ -1,4 +1,4 @@
-source 'http://ruby.taobao.org'
+source 'http://gems.ruby-china.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -103,7 +103,7 @@ group :development, :test do
 
   gem 'better_errors'
   gem 'binding_of_caller'
-  
+
   gem 'rspec-rails'
 
   gem 'yaml_db', github: 'jetthoughts/yaml_db'
